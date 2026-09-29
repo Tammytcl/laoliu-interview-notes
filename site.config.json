@@ -1,0 +1,14 @@
+{
+  "title": "牢留的实习面试笔记",
+  "subtitle": "把理解写下来，把问题讲清楚。",
+  "owner": "Laoliu",
+  "description": "一个持续生长的面试知识库。记录问题，梳理思路，练习表达。",
+  "categories": [
+    { "id": "llm", "name": "大模型基础", "description": "从原理到实现" },
+    { "id": "agent", "name": "Agent 与后训练", "description": "从交互到学习" },
+    { "id": "systems", "name": "训练与推理系统", "description": "效率、并行与工程" },
+    { "id": "coding", "name": "算法与编程", "description": "思路、边界与复杂度" },
+    { "id": "projects", "name": "项目与论文", "description": "把贡献讲清楚" },
+    { "id": "behavior", "name": "综合面试", "description": "经历、沟通与复盘" }
+  ]
+}
