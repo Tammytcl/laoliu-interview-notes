@@ -7,6 +7,9 @@ affiliations: ["Google Research", "University of Southern California"]
 author_affiliations: [[1], [1], [1, 2], [1], [1], [1]]
 venue: "EMNLP 2023"
 year: 2023
+research_categories: [model-architecture, systems-optimization]
+method_figure: "./assets/papers/paper-gqa/figure-2.png"
+method_caption: "Figure 2 · Query heads 与共享 KV groups"
 direction: llm
 paper_url: "https://arxiv.org/abs/2305.13245v3"
 github_url: "https://github.com/google/flaxformer"
@@ -16,11 +19,15 @@ note_ids: [mha-gqa-mqa, kv-cache]
 tags: [Attention, KV Cache, Uptraining, Inference, T5]
 updated: 2026-09-30
 summary: "通过分组共享 K/V 与已有 checkpoint 的继续预训练，在生成质量、KV 容量和解码延迟之间建立可调折中。"
-template_version: 2
+template_version: 3
 draft: false
 ---
 
 ## 1. 背景与已有工作
+
+先从语言模型的一次生成理解问题。模型看到提示词后，要预测下一个 token；新 token 出现后，它再预测下一个。Attention 让当前位置根据相关性读取之前的位置：query 表示“现在要找什么”，key 用来计算与各位置的匹配程度，value 是匹配后要取出的信息。一个 head 是一套这样的投影与读取规则，多个 head 可以学习不同的关联。
+
+对于带因果约束的解码器，已出现 token 在各层的 K/V 可以保存起来，下次继续使用，这就是 KV cache。缓存避免反复计算过去的位置，但并不消除每一步读取历史 K/V 的开销。训练通常并行处理许多 token；decode 则往往每条序列每步只增加一个 token，算术工作较少、历史读取越来越多。因此“减少 K/V 头”主要改变缓存与带宽需求，并不等于把 query 的表达能力或所有 attention 运算等比例删掉。GQA 要研究的正是这个结构选择以及从已有模型过渡的成本。
 
 自回归生成每一步只产生少量新 token，却需要读取模型权重以及过去 token 的 key/value。序列越来越长时，KV cache 随之增长；解码的瓶颈常常是把数据从显存搬到计算单元，而不是矩阵乘法能力不足。标准 multi-head attention（MHA）给每个 query head 配置独立的 key/value head，表达能力充分，但缓存与读取成本也随头数增长。
 
@@ -85,7 +92,23 @@ $$
 
 固定其他项时，MHA→GQA 的 KV 容量比为 $G/H$。例如 $L=32,H=32,G=8,d=128,b=2,B=1$，每 token 的 KV 从 512 KiB 降到 128 KiB。这是**给定假设下的算式**，不属于本文 T5 实验，也不包含权重、激活、分片副本或 allocator 开销。真实执行应避免为方便计算而把共享 K/V 物理复制成 $H$ 份，否则可能抵消容量收益。
 
+### 核心思想：共享的是记忆，不是所有查询
+
+假设有 8 个 query head、2 个 KV head，则每 4 个 query head 共用一个 K/V 组。它们仍然有不同的 query 投影，因此面对相同的历史 keys 可以得到不同的匹配权重；共享的是可被查阅的 key/value 表示，而不是最终 attention 输出。把 K/V 头数记作 $G$，当 $G=H$ 时回到 MHA，当 $G=1$ 时就是 MQA。这个连续的结构选择允许研究质量与缓存成本的折中。
+
+但从已有 checkpoint 平均合并 K/V 投影，会改变模型已经学到的表示。原来各 query 配合独立 keys 的关系不一定在合并后成立，因此必须继续预训练来适应。论文的重要证据包括结构与 uptraining recipe 两部分；仅修改头数并观察显存下降，还不足以证明论文声称的质量恢复。后面的实验应沿“如何合并、继续训练多少、最终质量和延迟如何变化”来读。
+
+### 源码对照：先读 MHA 与 MQA 两个端点
+
+论文链接 Flaxformer 作为实现框架，但不是一个完整发布的 GQA checkpoint 转换与 uptraining 复现包。本报告核读固定 commit 的 `dense_attention.py`：`dot_product_attention` 处理独立 K/V 头，`dot_product_attention_multiquery` 展示所有 query heads 共用 K/V 的端点。这里没有将框架里的 MQA 函数冒充成论文全部 GQA recipe。
+
+多查询函数中，query 形状为 `[batch...,q_length,H,d]`，key/value 则没有独立 head 轴，形如 `[batch...,kv_length,d]`。计算权重的 einsum `...qhd,...kd->...hqk` 保留 query 的 `h`，对同一份 keys 计算每个 head 的权重，再沿历史位置 softmax 并读取 values。输出仍保留 $H$ 个 query head。沿这些轴看代码，比把 K/V 简单复制 $H$ 次更能看清共享本质：复制可以用于教学广播，但物化成完整缓存会抵消节省。
+
+`MultiQueryDotProductAttention` 负责把输入投影成这些 Q/K/V 张量并组织 decode cache；底层函数主要负责 attention 运算，两者不能混为一层。源码还说明 T5 的缩放可以折进投影初始化，因此通用公式中的 $1/\sqrt d$ 不一定以一行显式除法出现。对于 GQA 的中间情况，需要按组连接 query 与相应 K/V；本报告已有的分组伪代码用于说明这一映射，均值合并公式来自原论文，而没有声称已在此框架中定位或运行完整转换流水线。
+
 ## 3. 实验设置与算力
+
+本文使用 T5 encoder-decoder 模型：encoder 处理输入文本，decoder 自回归生成输出，实验并不是今天常见的任意 decoder-only 模型。摘要任务要求保留输入的关键信息，通常以 ROUGE 比较生成与参考摘要；翻译任务用 BLEU 评价与参考译文的匹配；TriviaQA 关注事实问答的答案匹配。作者将这些不同任务的指标作汇总，用来观察转换后的整体质量变化，但平均分不是一种天然统一的能力刻度。质量表和延迟实验必须结合各自长度、batch、模型和硬件设置阅读。
 
 以下设置按原文 §3.1 与附录 A 整理，训练与测速分开登记。
 
@@ -160,3 +183,9 @@ Table 1 使用秒作为时间单位。MHA-XXL 的时间为 1.51，平均分 47.2
 迁移到 decoder-only GPU 服务时，应重新检查 KV 分片副本、kernel 的原生 GQA 支持、prefill 与 decode 比例、上下文长度和 batch 负载。减少 cache 容量不必然改善权重占主导、排队占主导或工具等待占主导的系统。与 [PagedAttention 报告](#paper=paper-pagedattention) 一起读，可以把“模型需要多少 KV”与“KV 如何分配”两层分开；[显存账本](#q=memory-budget)用于补足权重、激活和临时工作区。
 
 **整理范围与版本。** 核对 arXiv v3（2023-12-23）的正文、附录 A、LaTeX 图表数据及 Table 1；图表为原论文 HTML 截图，版权与学术贡献归原作者。2026-09-30 更新为五模块报告，增加元数据、全图解释与实验口径。本报告未进行训练复现；页首“已核原文”表示来源核对，不表示完成了硬件复现。后续更新应补实际 checkpoint/代码 commit、语料快照和自己的性能日志，不能将待做实验登记为实测。
+
+### 参考讲解与源码版本
+
+本报告参考 [Sebastian Raschka 的 A Visual Guide to Attention Variants in Modern LLMs](https://magazine.sebastianraschka.com/p/visual-attention-variants)，吸收把不同结构沿共享维度并排比较的解释角度；本文实验结论仍只取 GQA 原论文。解释已融入问题与方法部分；数字、图表和实验口径回到固定版本原文核对。
+
+源码静态核读固定于 `399ea3a85e9807ada653fd0de1a9de627eb0acde`。核心文件：[flaxformer/components/attention/dense_attention.py](https://github.com/google/flaxformer/blob/399ea3a85e9807ada653fd0de1a9de627eb0acde/flaxformer/components/attention/dense_attention.py)。没有执行代码或重新训练。

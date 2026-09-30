@@ -3,7 +3,7 @@ import { resolve, relative, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { createHash } from 'node:crypto';
 import { parseQuestion, escapeHtml } from './content.mjs';
-import { parsePaperContent, paperDirections, validatePaperLinks } from './papers-content.mjs';
+import { parsePaperContent, paperDirections, paperCategories, validatePaperLinks } from './papers-content.mjs';
 
 const root = fileURLToPath(new URL('../', import.meta.url));
 const config = JSON.parse(await readFile(join(root, 'site.config.json'), 'utf8'));
@@ -45,6 +45,7 @@ const reports = collections.reports.filter(r => !r.draft).sort((a, b) => b.date.
 const dist = resolve(root, 'dist');
 // 图表是报告的长期资产；缓存源码不会进入发布目录。
 for (const paper of papers) {
+  if (paper.methodFigure) await access(join(root, paper.methodFigure));
   for (const [, path] of paper.body.matchAll(/!\[[^\]]*\]\((\.\/assets\/papers\/[^\s)]+)(?:\s+"[^"]*")?\)/g)) {
     if (path.includes('..')) throw new Error(`${paper.source}: 图表路径不得越界`);
     await access(join(root, path));
@@ -56,7 +57,7 @@ const katexVersion = JSON.parse(await readFile(join(root, 'node_modules/katex/pa
 const mathPath = `vendor/katex-${katexVersion}`;
 await cp(join(root, 'node_modules/katex/dist'), join(dist, mathPath), { recursive: true });
 const fingerprint = text => createHash('sha256').update(text).digest('hex').slice(0, 16);
-const data = JSON.stringify({ config, questions, papers, reports, paperDirections });
+const data = JSON.stringify({ config, questions, papers, reports, paperDirections, paperCategories });
 const dataFile = `data-${fingerprint(data)}.json`;
 const papersModule = await readFile(join(root, 'web/papers.js'), 'utf8');
 const papersModuleFile = `papers-${fingerprint(papersModule)}.js`;

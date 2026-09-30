@@ -7,6 +7,9 @@ affiliations: ["UC Berkeley", "Stanford University", "Independent Researcher", "
 author_affiliations: [[1], [1], [1], [1, 2], [1], [3], [1], [4], [1]]
 venue: "SOSP 2023"
 year: 2023
+research_categories: [systems-optimization]
+method_figure: "./assets/papers/paper-pagedattention/figure-6.png"
+method_caption: "Figure 6 · 逻辑块与物理块映射"
 direction: infra
 paper_url: "https://arxiv.org/abs/2309.06180v1"
 github_url: "https://github.com/vllm-project/vllm"
@@ -16,11 +19,15 @@ note_ids: [paged-attention-serving, prefix-cache]
 tags: [LLM Serving, PagedAttention, KV Cache, Memory Management, vLLM]
 updated: 2026-09-30
 summary: "将请求的逻辑 KV 序列映射到非连续物理块，通过按需分配、共享和写时复制提高可批处理容量。"
-template_version: 2
+template_version: 3
 draft: false
 ---
 
 ## 1. 背景与已有工作
+
+先明确系统任务：许多用户同时请求语言模型，每个请求的提示词长度、生成长度和结束时间都不同。服务端既要装下模型权重，又要为活跃请求保存 KV cache。KV 是每层 attention 中历史 token 的中间结果，它会随着生成增长；不像模型参数那样大小固定。显存留给某个请求却没有被使用时，其他请求就可能进不了 batch，即使 GPU 仍有计算余量。
+
+这里有两种容易混淆的浪费。为未知的未来输出预留一大段空间，会产生“已经保留、还没用上”的内部浪费；不同请求释放不同大小的连续区域，又可能留下零散空洞，空闲总量足够却找不到所需的大连续块。本文将序列的逻辑连续性和显存的物理连续性分开：attention 仍然读取有序历史，但这些历史可以放在许多分散的小块中。其目标是提高服务系统能同时容纳的有效请求数，并不是减少每个 token 本来必须保存的 K/V 信息。
 
 LLM 服务的输入长度差异很大，输出长度又事先未知。若给每个请求预留一段连续显存，按最大输出长度预约会造成尚未使用的空间；动态分配又可能留下无法利用的小空洞。同一 prompt 的多个采样分支还会复制相同 KV。这些浪费直接限制可以同时放入 GPU 的请求数，形成系统吞吐瓶颈。
 
@@ -57,7 +64,23 @@ $$
 
 内存不足时，原文采用 FCFS 调度、优先抢占后到请求，并比较把 KV 换到 CPU 与重新计算。共享的多序列请求作为 sequence group 一起调度。重计算能够把已生成 token 拼到 prompt，利用一次 prefill 重建缓存；是否比 swapping 更好取决于 CPU-GPU 带宽、模型和序列长度，不是分页机制本身保证的常数。
 
+### 核心思想：把分配单位改成块，再让 attention 理解映射
+
+假设一块容纳 16 个 token，一个长度为 35 的序列需要 3 块：前两块满、最后一块只用 3 个位置。随着长度增长，只在跨过块边界时增加物理块；请求结束后这些块可以归还给池。逻辑上第 0、1、2 块仍按 token 顺序排列，物理块编号却可以分别是 7、2、19。块表记录这个映射，让序列无需得到一整段连续空间。
+
+这不是只修改 Python 内存分配器就能完成的优化。Attention kernel 必须利用块表读取正确的历史 K/V，按所有块上的 token 做同一个 attention 归一化和加权求和。分页不意味着每块独立 softmax 再直接相加，也不意味着丢弃远处 token。系统节省的主要是预留与碎片，以及多输出间可共享的重复 KV；由此能增加有效 batch，吞吐才可能提升。
+
+### 核心源码：分配、共享与写时复制
+
+为避免用今天的系统解释 2023 年论文，本报告对照 vLLM `v0.2.0` 的固定 commit。`BlockSpaceManager.allocate` 为 prompt 的逻辑块取得物理块，构建 `block_table`，并让同组序列持有自己的块表列表、共享底层物理块；引用计数反映有多少序列需要该块。方法操作的是 KV 存储槽位，token ID 的逻辑块是索引依据，两者内容不能混淆。
+
+`append_slot` 检查生成后的逻辑块数量是否增长：跨界时分配新块；仍在最后一块内且引用计数为一时，直接使用现有槽位。如果最后一块被共享，则分配新块、替换当前序列的末尾映射并释放旧块的一次引用，返回 `(旧块号, 新块号)` 给后续执行器做实际复制。返回复制任务而不是在该函数里搬运 CUDA 张量，是控制逻辑与 GPU 数据操作的分工。
+
+`fork` 复制块表并增加各物理块的引用计数，不立即复制完整 KV。比如同一 prompt 生成两个回答，前缀可以共用；只有写入共享的部分填满块时才需要分离。这也解释了为什么“可以共享”不等于所有分叉都零成本：新分配、copy-on-write 和逐步分歧仍有代价。此历史实现还包含 sliding-window 分支，不应把该分支当作本文所有实验都启用的设定。源码阅读未执行吞吐复现。
+
 ## 3. 实验设置与算力
+
+这里的 benchmark 是服务负载而不是训练数据：ShareGPT 提供会话长度特征，Alpaca 提供另一种请求分布，作者据这些特征构造输入输出长度和到达过程。系统要在给定模型与 GPU 上同时处理这些请求。吞吐回答一段时间完成多少工作，延迟回答单个请求等待多久；提高 batch 往往改善前者却可能恶化后者。因此论文比较在延迟约束下能承受的请求率，而不是只看一个孤立 tokens/s。改变输出长度、并行采样数或到达密度都会改变 KV 压力，同一系统不保证在所有场景得到相同倍数提升。
 
 这是推理系统论文，**没有为验证 PagedAttention 重新预训练 LLM**。ShareGPT/Alpaca 用于构造服务负载；将它们说成本文“训练数据”会错置实验目的。
 
@@ -110,3 +133,9 @@ PagedAttention 改进的是 **KV 内存管理和可批处理容量**，不是语
 论文中的 Orca 为作者重实现，工作负载使用合成时间戳，实验版本也不是今天 vLLM main。计划复现时应记录代码 commit、模型 revision、tokenizer、精度、block size、batch token 预算、抢占策略、到达分布与并行拓扑，并重新测 TTFT、每 token 延迟及吞吐，避免与原文 normalized latency 混用。
 
 **来源与更新。** 根据 [arXiv v1 正文与实验](https://arxiv.org/html/2309.06180v1)、Table 1 和原图整理；单位按发表时列示。2026-09-30 更新为五模块报告，新增英文元数据、硬件账本与原图。图片保留原作者归属；本报告为原文核读与分析，未登记个人运行结果。[前缀缓存笔记](#q=prefix-cache)和 [推理显存专题](#report=survey-inference-memory)可继续连接模型层与服务层。
+
+### 参考讲解与源码版本
+
+本报告参考 [Woosuk Kwon 与 Zhuohan Li 的 vLLM 作者讲解](https://vllm.ai/blog/2023-06-20-vllm)，吸收用按需分配和共享解释显存节省；博客的 HF/TGI 测速与正式论文的 FT/Orca 实验没有混用。解释已融入问题与方法部分；数字、图表和实验口径回到固定版本原文核对。
+
+源码静态核读固定于 `e2fb71ec9f2c3168ba8614408fa807a5f65707c5`（vLLM v0.2.0）。核心文件：[vllm/core/block_manager.py](https://github.com/vllm-project/vllm/blob/e2fb71ec9f2c3168ba8614408fa807a5f65707c5/vllm/core/block_manager.py#L102-L169)。没有执行代码或重新训练。

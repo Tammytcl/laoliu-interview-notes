@@ -5,6 +5,10 @@ export const paperDirections = [
   { id: 'diffusion', name: 'Diffusion' }, { id: 'llm', name: 'LLM' },
   { id: 'agent', name: 'Agent' }, { id: 'infra', name: 'Infra' }
 ];
+export const paperCategories = [
+  { id: 'generative-modeling', name: '生成建模' }, { id: 'model-architecture', name: '模型结构' },
+  { id: 'reasoning-decision', name: '推理与决策' }, { id: 'systems-optimization', name: '系统优化' }
+];
 export const evidenceLevels = ['资料整理', '已核原文', '已复现'];
 const validId = value => typeof value === 'string' && /^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(value);
 const validDate = value => typeof value === 'string' && /^\d{4}-\d{2}-\d{2}$/.test(value)
@@ -23,7 +27,7 @@ export function parsePaperContent(source, file, collection) {
   if (!validDate(data.updated)) fail('updated 应为有效 YYYY-MM-DD 日期');
   if (data.draft !== undefined && typeof data.draft !== 'boolean') fail('draft 应为布尔值');
   if (!Array.isArray(data.tags) || data.tags.some(t => typeof t !== 'string' || !t.trim())) fail('tags 应为字符串数组');
-  if (data.template_version !== undefined && ![1, 2].includes(data.template_version)) fail('暂不支持此 template_version');
+  if (data.template_version !== undefined && ![1, 2, 3].includes(data.template_version)) fail('暂不支持此 template_version');
   const body = match[2].trim();
   if (!body) fail('正文不能为空');
   const result = { id: data.id, title: data.title, summary: data.summary, updated: data.updated,
@@ -49,12 +53,18 @@ export function parsePaperContent(source, file, collection) {
       try { githubUrl = new URL(data.github_url); } catch { fail('github_url 无效'); }
       if (githubUrl.protocol !== 'https:' || githubUrl.hostname !== 'github.com' || githubUrl.username || githubUrl.password) fail('github_url 应为 GitHub HTTPS 链接');
     }
-    if (data.template_version === 2 && !affiliations.length) fail('v2 报告必须注明 affiliations');
+    if (data.template_version >= 2 && !affiliations.length) fail('v2 报告必须注明 affiliations');
+    const categories = data.research_categories ?? [];
+    if (!Array.isArray(categories) || categories.some(id => !paperCategories.some(c => c.id === id)) || (data.template_version >= 3 && !categories.length)) fail('research_categories 应为有效贡献类别数组');
+    const methodFigure = data.method_figure ?? null;
+    if (methodFigure !== null && (typeof methodFigure !== 'string' || !/^\.\/assets\/papers\/[a-z0-9-]+\/[a-z0-9-]+\.(png|jpg|webp|svg)$/.test(methodFigure))) fail('method_figure 应为本地论文图片路径');
+    const methodCaption = data.method_caption ?? '';
+    if (typeof methodCaption !== 'string') fail('method_caption 应为字符串');
     const venue = data.venue ?? '';
     const codeNote = data.code_note ?? '';
     if (typeof venue !== 'string' || typeof codeNote !== 'string') fail('venue / code_note 应为字符串');
     return { ...result, direction: data.direction, paperTitle: data.paper_title, authors: data.authors,
-      affiliations, authorAffiliations, githubUrl: githubUrl?.href ?? null, venue, codeNote,
+      affiliations, authorAffiliations, categories: [...new Set(categories)], methodFigure, methodCaption, githubUrl: githubUrl?.href ?? null, venue, codeNote,
       year: data.year, paperUrl: url.href, evidence: data.evidence, noteIds: [...new Set(noteIds)] };
   }
   if (collection !== 'reports') fail('未知内容集合');

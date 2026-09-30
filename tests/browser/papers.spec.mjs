@@ -1,13 +1,18 @@
 import { test, expect } from '@playwright/test';
 
-test('论文库、方向筛选、Daily 与专题报告相互链接', async ({ page }) => {
+test('论文库、贡献类别筛选、Daily 与专题报告相互链接', async ({ page }) => {
   const errors = []; page.on('pageerror', error => errors.push(error.message));
   await page.goto('/'); await page.locator('[data-paper-nav]').click();
   const data = await (await page.request.get('/data.json')).json();
   await expect(page.locator('.paper-card')).toHaveCount(data.papers.length);
+  await expect(page.locator('.paper-method-preview img')).toHaveCount(data.papers.length);
+  await expect.poll(() => page.locator('.paper-method-preview img').evaluateAll(images => images.every(i => i.complete && i.naturalWidth > 0))).toBe(true);
+  const gqa = page.locator('.paper-card').filter({ has: page.locator('h3 a[href="#paper=paper-gqa"]') });
+  await expect(gqa.locator('.paper-category')).toHaveCount(2);
+  await expect(gqa).toHaveAttribute('data-category', 'model-architecture');
   await expect(page.locator('[data-paper-nav]')).toHaveAttribute('aria-current', 'page');
-  await page.locator('#paper-direction').selectOption('llm');
-  await expect(page.locator('.paper-card')).toHaveCount(data.papers.filter(p => p.direction === 'llm').length);
+  await page.locator('#paper-direction').selectOption('systems-optimization');
+  await expect(page.locator('.paper-card')).toHaveCount(data.papers.filter(p => p.categories.includes('systems-optimization')).length);
   await page.locator('#paper-search').fill('no-match-paper-123');
   await expect(page.locator('[data-paper-reset]')).toBeVisible();
   await page.locator('[data-paper-reset]').click();

@@ -7,6 +7,9 @@ affiliations: ["Department of Computer Science, Princeton University", "Google R
 author_affiliations: [[1], [2], [2], [2], [2], [1], [2]]
 venue: "ICLR 2023"
 year: 2023
+research_categories: [reasoning-decision]
+method_figure: "./assets/papers/paper-react/figure-1.png"
+method_caption: "Figure 1 · 推理、行动与环境反馈"
 direction: agent
 paper_url: "https://arxiv.org/abs/2210.03629v3"
 github_url: "https://github.com/ysymyth/ReAct"
@@ -16,11 +19,15 @@ note_ids: [agent-tool-design, agent-evaluation]
 tags: [Agent, Tool Use, Reasoning, Prompting, ReAct]
 updated: 2026-09-30
 summary: "把语言推理与环境动作交错组织，以外部观察修正后续行动；通过问答和交互任务检验这种闭环。"
-template_version: 2
+template_version: 3
 draft: false
 ---
 
 ## 1. 背景与已有工作
+
+可以先想一个需要两次查证的问题：“某部电影导演的出生地在哪里？”直接回答要求模型同时记住导演和出生地；只搜索整句话又可能找不到准确证据。一个可靠的过程应先确认导演是谁，再查这个人的出生信息，如果查到的是同名人物还要调整检索。任务的答案与下一步该做什么，都依赖刚获得的观察，这就是本文研究的交互式决策。
+
+在这里，语言模型负责提出推理和动作，执行器负责真正调用环境，环境返回观察。推理文字并不是已经验证的事实，也不是工具执行结果。例如“我应该查导演”只是计划，`search[...]` 才是动作，返回的网页片段才是观察。ReAct 将这些角色写进连续上下文，使模型下一轮能根据实际结果改计划；读懂这个边界，比记住一个提示词模板更有用。
 
 仅靠内部知识进行多步推理，模型可能把未核实的事实继续传递到后续结论；只调用工具又可能缺乏明确的检索目标、任务分解和进度判断。ReAct 要解决的是：**如何把模型内部的语言推理与真实环境观察放在同一条可更新的轨迹中？**
 
@@ -51,7 +58,23 @@ draft: false
 
 ReAct 与 CoT-SC 还可互补：ReAct 超过步数预算时退回 CoT-SC；CoT-SC 多数答案不足半数时转去查证。它表达的是内部知识与外部证据的条件切换，而不是“ReAct 在所有问题上比 CoT 强”。工程落地需要另外加入动作 schema、异常处理、超时、成本预算和执行日志；这些是实现设计，不是本文已完成的全部系统能力。
 
+### 核心思想：让推理随证据更新
+
+把先前动作和实际观察保留在上下文，模型就有机会发现“原计划的前提不成立”。例如第一次查询没有找到导演，下一轮应换实体名或先查电影，而不是继续在错误导演上推理。这个反馈闭环使 thought 既能规划动作，也能整理新证据；其收益依赖模型确实利用观察，并不由三种字段名自动保证。
+
+还要区分推理可见与推理可靠。读者能够检查轨迹，定位在哪一步取错证据或选错动作，但一段流畅 thought 仍可能包含错误。环境工具也可能返回不完整结果。ReAct 的实验比较的是特定模型、prompt、工具和预算下的任务完成效果，不能把可读轨迹直接视为全部推理经过验证。
+
+### 核心源码：谁生成文字，谁改变环境
+
+官方 `hotpotqa.ipynb` 的 `webthink` 先拼接 instruction、六个示例和当前问题，然后在最多七轮中生成 thought/action。模型调用设置 stop 到 `Observation i:`，防止把工具返回内容继续编造出来；解析失败时再请求 action。之后代码调用环境 `step`，把真正的 `obs` 与本轮 thought/action 一起追加到 prompt。下一轮重新输入这条扩展后的文本历史，本文的工作记忆主要体现在上下文里，而不是一个新引入的外部记忆网络。
+
+`WikiEnv.step` 接受一个动作字符串，解析 `search[...]`、`lookup[...]`、`finish[...]`。Search 更新当前页面；Lookup 按关键词建立匹配句子列表、维护游标，连续调用会返回后续结果；Finish 写入答案并把 `done` 设为真。其返回接口是 `(observation, reward, done, info)`，这使语言策略和真实环境状态分离。无效字符串返回无效动作观察，也会消耗一步；失败并不是能靠多写一段 thought 自动消除的。
+
+`webthink` 在环境结束时提前退出，预算用尽则提交空 finish，并记录调用次数、格式失败数和最终轨迹。公开 notebook 是基于 API 的演示环境，不能据此声称拿到了论文主实验 PaLM 权重，也不能把 notebook 默认模型直接写成所有原文实验的模型。这里静态解读的价值是定位反馈机制和失败分支，原文实验配置仍以下节论文为准。
+
 ## 3. 实验设置与算力
+
+HotpotQA 是多跳问答，答案往往需要连接两个页面中的事实；question-only 表示不提前送入正确支持段落，检索本身也是任务的一部分。FEVER 是事实核验，要判断一条陈述是否受到证据支持、反驳或缺少信息。ALFWorld 通过文字描述和动作接口完成家庭环境任务，WebShop 则要求根据需求搜索并选择商品。这四类任务分别考察证据连接、核验、长程动作和带约束选择，不能把同一条成功率理解为统一推理能力。HotpotQA 的 exact match 比较最终答案是否匹配，环境 success 衡量任务是否完成，可读 thought 并不单独计分。
 
 | 实验环节 | 模型 / 数据 / 配置 |
 | --- | --- |
@@ -97,3 +120,9 @@ ALFWorld 的 best ReAct trial 达到 71%，best Act 为 45%，BUTLER 为 37%；�
 对自己的 agent 工作，应将“模型生成了合理计划”“工具真的成功执行”“环境任务完成”分开评价。[工具调用笔记](#q=agent-tool-design)和 [Agent 评测](#q=agent-evaluation)可进一步拆出成功率、行动预算与错误恢复。换成今日模型时，重新跑固定环境与 prompt 对照，不能直接继承 PaLM-540B 的数值。
 
 **来源与更新。** 核对 [arXiv v3 正文](https://arxiv.org/html/2210.03629v3)、附录 B.1 的微调设置及原始图表；代码来自作者维护的 [ReAct 仓库](https://github.com/ysymyth/ReAct)。2026-09-30 更新为五模块精读，补充单位、实验数据流与原图解读。没有登记本人 GPU 训练或 API 跑分；算力未披露项保留明确缺口。图片与论文成果归原作者。
+
+### 参考讲解与源码版本
+
+本报告参考 [Shunyu Yao 与 Yuan Cao 的作者讲解](https://research.google/blog/react-synergizing-reasoning-and-acting-in-language-models/)，吸收推理驱动行动、观察反过来修改计划的双向解释；保留原文中密集与稀疏 thought 的区别。解释已融入问题与方法部分；数字、图表和实验口径回到固定版本原文核对。
+
+源码静态核读固定于 `6bdb3a1fd38b8188fc7ba4102969fe483df8fdc9`。核心文件：[hotpotqa.ipynb](https://github.com/ysymyth/ReAct/blob/6bdb3a1fd38b8188fc7ba4102969fe483df8fdc9/hotpotqa.ipynb)；[wikienv.py](https://github.com/ysymyth/ReAct/blob/6bdb3a1fd38b8188fc7ba4102969fe483df8fdc9/wikienv.py)。没有执行代码或重新训练。

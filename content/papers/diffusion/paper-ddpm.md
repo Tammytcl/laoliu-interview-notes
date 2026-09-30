@@ -7,6 +7,9 @@ affiliations: ["UC Berkeley"]
 author_affiliations: [[1], [1], [1]]
 venue: "NeurIPS 2020"
 year: 2020
+research_categories: [generative-modeling]
+method_figure: "./assets/papers/paper-ddpm/figure-2.png"
+method_caption: "Figure 2 · 正向加噪与反向生成"
 direction: diffusion
 paper_url: "https://arxiv.org/abs/2006.11239v2"
 github_url: "https://github.com/hojonathanho/diffusion"
@@ -16,11 +19,15 @@ note_ids: [ddpm-denoising, diffusion-parameterization]
 tags: [Diffusion, DDPM, Generative Modeling, Noise Prediction, U-Net]
 updated: 2026-09-30
 summary: "把逐步加噪的扩散过程与可学习的反向去噪链结合，通过噪声预测目标实现高质量图像生成。"
-template_version: 2
+template_version: 3
 draft: false
 ---
 
 ## 1. 背景与已有工作
+
+读这篇论文，先把“生成”理解为学习一个抽样规则：给模型随机数，希望它输出像训练集、却不是简单复制训练图片的新样本。我们通常只拿得到有限张真实图片，不知道所有可能图片的概率分布，因此不能直接从这个未知分布抽样。DDPM 的办法是人为建立一条容易计算的桥：真实图片逐步变成接近标准高斯的噪声；桥的终点容易抽样，学习好反方向的每一步后，就能从随机噪声走回图像分布。
+
+这里“去噪”也需要准确理解。一张严重受污染的图可以对应许多干净图，网络并不知道唯一正确的原图；它学习的是给定噪声状态后，往更清晰的数据分布移动的统计规律。训练时知道加进去的噪声，所以有监督目标；生成时没有原图，需要把学习到的规律反复应用。理解这个训练与生成的信息差，才能理解后面为什么训练只抽一个时间步，而生成需要循环很多步。
 
 图像生成模型既要覆盖复杂数据分布，又要能稳定训练、产生清晰样本。GAN 已能生成高质量图片，但优化是对抗式的；自回归模型与 flow 能提供不同的似然 / 结构优势，也各有生成和架构限制。DDPM 研究另一条路线：先定义把真实数据逐渐扰动成简单高斯分布的过程，再学习逐步逆转这些扰动。
 
@@ -77,7 +84,23 @@ optimizer_step(loss)
 
 生成时使用预测均值，加上对应方差的随机噪声，最后一步不再加入新的采样噪声。网络并不是“一次预测就把纯噪声变为完整图片”。[DDPM 基础笔记](#q=ddpm-denoising)和 [预测目标](#q=diffusion-parameterization)可继续推导 noise、$x_0$ 与其他参数化的关系。
 
+### 核心思想：为什么预测噪声能学会生成
+
+网络看到的是混合后的 $x_t$ 和噪声等级 $t$，不能直接读取训练时生成的随机 $\epsilon$。若模型只看 $t$ 或只输出零，就无法解释图中与数据结构相关的偏移。最小化平方误差会让网络学习给定 $x_t,t$ 时噪声的条件平均估计；这个估计又能转换成对干净样本的估计以及反向分布的均值。因此噪声预测是反向生成机制的参数化，不是一项与生成无关的辅助任务。
+
+同一网络覆盖很多噪声等级，需要时间编码告诉它当前是“几乎干净的细节修复”还是“几乎纯噪声的结构形成”。U-Net 的下采样路径提供更大感受野，上采样与跳连保留空间定位。时间条件进入网络，使它在不同 $t$ 下使用不同的去噪规则。每个训练 batch 随机抽样时间步就能训练这些规则；但采样必须把一个状态的输出送入下一个状态，不能把彼此无关的训练样本拼起来当生成轨迹。
+
+### 核心源码：从一次监督到完整采样
+
+官方 TensorFlow 实现的 `GaussianDiffusion.q_sample` 接收 `[B,H,W,C]` 的 `x_start` 和 `[B]` 的时间索引。`_extract` 为 batch 中各样本取出对应系数，再广播到图像维度；返回值恰好对应上面的闭式 $x_t$。源码的 `t=0` 表示已经加噪一步，而论文的干净图写作 $x_0$，阅读数组索引时要错开这一个位置。
+
+`p_losses` 调用 `q_sample` 后把带噪图和时间传给 `denoise_fn`，要求预测与图片同形状。在 `noisepred` 分支中，它比较预测和实际采样噪声，并在空间与通道维度求均值，输出每个样本一个 loss。这解释了为什么训练数据不需要人工标注噪声，也提醒我们变量名 `x_recon` 在该分支其实是噪声预测，不能看到名字就认定它是干净图。
+
+推理沿 `p_sample_loop → p_sample → p_mean_variance` 执行。最后一个函数先由噪声预测反推出干净图估计，可将其裁剪到归一化区间 `[-1,1]`，再借 `q_posterior` 计算反向均值与方差；`p_sample` 加入相应尺度的随机噪声，在索引零的最后一步关闭该随机项。外层循环从标准高斯初始化，按时间倒序更新同一张图。这是带随机性的祖先采样，不能简单把网络调用一次、直接输出它预测的噪声当图片。本文只静态核读这一实现，未重新训练。
+
 ## 3. 实验设置与算力
+
+读实验前先明确评价对象：这里生成的是无条件图片，模型没有收到文字提示。CIFAR-10 是低分辨率图像数据集，LSUN 则包含更大尺寸的特定场景图像。FID 比较真实与生成样本在特征空间中的统计距离，通常越低越好，但它依赖特征提取、样本数和预处理；Inception Score 越高通常表示分类预测更明确、类别分布更丰富，却不直接检验与真实分布的距离。似然指标关注数据概率建模，和视觉样本质量不是同一目标。因此不能把不同分辨率或不同取样数量的 FID 放在一起认定谁更好。
 
 设置依据原文 §4 与附录 B；训练数据同时是各无条件生成任务的图像来源，评价以生成样本的分布统计为主。
 
@@ -136,3 +159,9 @@ DDPM 的贡献是明确连接反向高斯链、噪声预测和去噪 score match
 下一步可对照 DDIM 怎样改变采样路径、latent diffusion 怎样降低状态维度、不同 prediction targets 怎样改变 loss 与数值行为。若做自己的小规模验证，先测试加噪公式、时间索引和采样最后一步，再记录实际模型、训练 / 测试划分、seed、FID 实现和硬件，避免只看一组漂亮样本。
 
 **来源与更新。** 核对 [arXiv v2 正文与附录 B](https://arxiv.org/html/2006.11239v2)、原图表与 [作者代码](https://github.com/hojonathanho/diffusion)。2026-09-30 更新为五模块报告，补充网络配置、训练 / 采样算力与原图解读。图表与原论文成果归作者；本报告没有登记个人复现成绩。
+
+### 参考讲解与源码版本
+
+本报告参考 [Niels Rogge 与 Kashif Rasul 的 The Annotated Diffusion Model](https://huggingface.co/blog/annotated-diffusion)，吸收训练一步与完整采样分开的讲解顺序；其 PyTorch 教学实现并非原论文全部配置。解释已融入问题与方法部分；数字、图表和实验口径回到固定版本原文核对。
+
+源码静态核读固定于 `1e0dceb3b3495bbe19116a5e1b3596cd0706c543`。核心文件：[diffusion_tf/diffusion_utils.py](https://github.com/hojonathanho/diffusion/blob/1e0dceb3b3495bbe19116a5e1b3596cd0706c543/diffusion_tf/diffusion_utils.py)。没有执行代码或重新训练。
