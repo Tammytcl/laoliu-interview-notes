@@ -1,14 +1,48 @@
 {
   "title": "牢留的实习面试笔记",
-  "subtitle": "把理解写下来，把问题讲清楚。",
+  "subtitle": "从一个问题出发，学懂 Diffusion、LLM、Agent 与 Infra。",
   "owner": "Laoliu",
-  "description": "一个持续生长的面试知识库。记录问题，梳理思路，练习表达。",
+  "description": "以问题串起原理、实验与工程取舍的中文 AI 学习笔记。",
   "categories": [
-    { "id": "llm", "name": "大模型基础", "description": "从原理到实现" },
-    { "id": "agent", "name": "Agent 与后训练", "description": "从交互到学习" },
-    { "id": "systems", "name": "训练与推理系统", "description": "效率、并行与工程" },
-    { "id": "coding", "name": "算法与编程", "description": "思路、边界与复杂度" },
-    { "id": "projects", "name": "项目与论文", "description": "把贡献讲清楚" },
-    { "id": "behavior", "name": "综合面试", "description": "经历、沟通与复盘" }
+    {
+      "id": "guide",
+      "name": "学习路线与架构",
+      "description": "四条主线、先修关系与练习闭环"
+    },
+    {
+      "id": "diffusion",
+      "name": "Diffusion · 生成模型",
+      "description": "去噪、采样、Flow Matching 与条件生成"
+    },
+    {
+      "id": "llm",
+      "name": "LLM · 模型与后训练",
+      "description": "Transformer、微调与偏好学习"
+    },
+    {
+      "id": "agent",
+      "name": "Agent · 交互与学习",
+      "description": "工具、上下文、评测与轨迹训练"
+    },
+    {
+      "id": "systems",
+      "name": "Infra · 训练与推理",
+      "description": "显存、并行、调度与性能诊断"
+    },
+    {
+      "id": "coding",
+      "name": "算法与编程",
+      "description": "思路、边界与复杂度"
+    },
+    {
+      "id": "projects",
+      "name": "项目与论文",
+      "description": "把贡献讲清楚"
+    },
+    {
+      "id": "behavior",
+      "name": "综合面试",
+      "description": "经历、沟通与复盘"
+    }
   ]
 }

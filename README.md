@@ -4,7 +4,18 @@
 
 一个内容与界面分离的中文面试准备站。浅色纸张风格、主题导航、全文搜索、题目目录、收藏与复习状态。没有后端、数据库、追踪统计或运行时 CDN 依赖，适合 GitHub Pages。
 
-> 当前提供可运行框架和 8 道示例题。示例用于演示结构，不包含私人实验、内部路径或真实面试记录；项目经历题需自行填写。
+> 当前共 38 篇笔记：Diffusion 8、LLM 8、Agent 7、Infra 8、路线/架构/资料索引 3、算法编程 2、项目与综合面试各 1。以问题带动理解、复习与小实验；真实项目经历仍由本人填写。
+
+## 从这里开始学习
+
+- [四条学习路线](content/questions/guide/learning-roadmap.md)：按先修关系阅读，P0 主干 / P1 深入不是面试频率统计。
+- [知识与项目架构](content/questions/guide/learning-architecture.md)：针对四方向并行学习设计；缺少个人项目与岗位信息的部分明确保留为建议。
+- [原始资料索引](content/questions/guide/research-sources.md)：论文、官方文档与对应笔记。
+- [来源记录](content/research/sources.json)：2026-09-30 调研访问的来源和使用位置。
+
+内容通常包含问题背景、机制/推导、例子、误区、小实验、自检及原始资料。实验是建议练习，尚未完成模型复现；正文算例不冒充硬件实测。数学式使用可直接阅读的文本/代码块。
+
+算法只增加一个与模型紧密相关的 causal attention 手撕练习，另保留 LRU；项目论文和综合面试暂不扩量。
 
 ## 内容与排版分开
 
@@ -86,9 +97,11 @@ draft: false
 
 | id | 名称 |
 |---|---|
-| `llm` | 大模型基础 |
-| `agent` | Agent 与后训练 |
-| `systems` | 训练与推理系统 |
+| `guide` | 学习路线与架构 |
+| `diffusion` | Diffusion · 生成模型 |
+| `llm` | LLM · 模型与后训练 |
+| `agent` | Agent · 交互与学习 |
+| `systems` | Infra · 训练与推理 |
 | `coding` | 算法与编程 |
 | `projects` | 项目与论文 |
 | `behavior` | 综合面试 |
@@ -132,7 +145,8 @@ draft: false
 
 ```text
 interview-notes/
-├── content/questions/       日常新增 Markdown 的位置
+├── content/questions/       学习路线与各方向笔记
+├── content/research/        来源记录与调研边界
 ├── templates/question.md    新题模板
 ├── site.config.json         站点与分类配置
 ├── web/                     统一的页面、样式和交互

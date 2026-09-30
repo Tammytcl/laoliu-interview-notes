@@ -38,3 +38,24 @@ RLVR 的关键监督来自可验证的任务结果；纯 OPD 可以不使用任�
 
 - 把“teacher 给 logprob”说成“teacher 重新生成标准答案”。
 - 把训练 loss 下降直接等同于任务得分提升。
+
+
+## 更精确地理解“学生分布”
+
+on-policy 的关键是前缀来自当前或近期学生策略，而不是只让 teacher 再生成一套答案。teacher 可在学生实际走到的状态上给分布信息；是否使用全词表 KL、何种 KL 方向、如何混合示范数据，需按实现定义。
+
+例如固定前缀上的 reverse KL 是 sum_v pi_student(v)*log(pi_student(v)/pi_teacher(v))。对学生采样 token 计算 logprob 差可用作 Monte Carlo 估计的一部分；但样本来自随参数改变的分布，对采样项做何种 stop-gradient、用何种梯度估计会改变更新。不能随意把一个 logprob 差当作完整、普适的 OPD loss。
+
+## 数据与验证检查
+
+检查 tokenizer 和词表是否相同，teacher/student 是否看到同一段真实上下文，温度缩放与概率归一化是否一致。词表不同的模型不能直接按 token ID 比较全词表概率；须另定义对齐或使用文本级方案。
+
+teacher 在失败前缀上给出的高概率不代表最终成功，因此同时看任务结果、分布差异和学生探索范围，不能只看蒸馏 loss。
+
+## 小实验与自检
+
+在只有三个 token 的玩具词表中，给出学生与 teacher 的概率，手算 forward/reverse KL；再只采样一个 token，观察估计波动。这是建议练习，未声称站内已复现。
+
+## 原始资料
+
+调研日期：2026-09-30。[On-Policy Distillation of Language Models: Learning from Self-Generated Mistakes](https://arxiv.org/abs/2306.13649) 展示学生生成样本与可选分布匹配目标。本文不把某一个 KL 或 sampled-token 实现定义为全部 OPD。关联：[后训练比较](#q=sft-dpo-rl)。
