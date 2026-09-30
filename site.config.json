@@ -35,14 +35,13 @@
       "description": "思路、边界与复杂度"
     },
     {
-      "id": "projects",
-      "name": "项目与论文",
-      "description": "把贡献讲清楚"
-    },
-    {
       "id": "behavior",
       "name": "综合面试",
       "description": "经历、沟通与复盘"
     }
-  ]
+  ],
+  "paperLibrary": {
+    "name": "论文收录",
+    "description": "按方向精读，用 Daily 与专题报告积累理解"
+  }
 }

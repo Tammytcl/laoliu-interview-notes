@@ -2,7 +2,7 @@ const $ = selector => document.querySelector(selector);
 const esc = s => String(s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 const labels = { new: '未开始', review: '复习中', mastered: '已掌握' };
 const storageKey = `interview-notes:v1:${location.pathname}`;
-let config, questions = [], progress = {}, category = '', filter = 'all', toastTimer;
+let config, questions = [], progress = {}, category = '', filter = 'all', toastTimer, paperCount = 0;
 let storageAvailable = true;
 function toast(message) {
   $('#toast').textContent = message; $('#toast').classList.add('show');
@@ -28,7 +28,8 @@ function save(id, patch) {
 }
 const categoryName = id => config.categories.find(c => c.id === id)?.name || id;
 function renderSidebar() {
-  $('#categories').innerHTML = `<button data-category="" class="nav-item ${category === '' ? 'active' : ''}" aria-pressed="${category === ''}"><span class="nav-icon">▦</span><span>全部笔记</span><small>${questions.length}</small></button>` + config.categories.map((c, i) => `<button data-category="${esc(c.id)}" class="nav-item ${category === c.id ? 'active' : ''}" aria-pressed="${category === c.id}"><span class="nav-icon">${String(i + 1).padStart(2, '0')}</span><span>${esc(c.name)}</span><small>${questions.filter(q => q.category === c.id).length}</small></button>`).join('');
+  const inPapers = isPaperRoute(new URLSearchParams(location.hash.slice(1)));
+  $('#categories').innerHTML = `<button data-category="" class="nav-item ${!inPapers && category === '' ? 'active' : ''}" aria-pressed="${!inPapers && category === ''}"><span class="nav-icon">▦</span><span>全部笔记</span><small>${questions.length}</small></button>` + config.categories.map((c, i) => `<button data-category="${esc(c.id)}" class="nav-item ${!inPapers && category === c.id ? 'active' : ''}" aria-pressed="${!inPapers && category === c.id}"><span class="nav-icon">${String(i + 1).padStart(2, '0')}</span><span>${esc(c.name)}</span><small>${questions.filter(q => q.category === c.id).length}</small></button>`).join('') + `<a href="#view=papers" data-paper-nav class="nav-item ${inPapers ? 'active' : ''}" ${inPapers ? 'aria-current="page"' : ''}><span class="nav-icon">▤</span><span>${esc(config.paperLibrary?.name || '论文收录')}</span><small>${paperCount}</small></a>`;
   const count = questions.filter(q => stateOf(q.id).status === 'mastered').length;
   $('#progress').max = Math.max(questions.length, 1); $('#progress').value = count;
   $('#progress-count').textContent = `${count} / ${questions.length}`;
@@ -66,7 +67,15 @@ function resetFilters() {
   renderSidebar(); renderList();
 }
 function route() {
-  const id = new URLSearchParams(location.hash.slice(1)).get('q');
+  const params = new URLSearchParams(location.hash.slice(1));
+  renderSidebar();
+  if (isPaperRoute(params)) {
+    $('#library').hidden = true; $('#reader').hidden = true; $('#reader').innerHTML = '';
+    document.title = `论文收录 · ${config.title}`;
+    renderPaperLibrary(params); return;
+  }
+  $('#paper-space').hidden = true; $('#paper-space').innerHTML = '';
+  const id = params.get('q');
   $('#library').hidden = !!id; $('#reader').hidden = !id;
   if (!id) { document.title = config.title; renderList(); return; }
   const q = questions.find(q => q.id === id);
@@ -79,7 +88,10 @@ function route() {
     const current = list.findIndex(x => x.id === id); location.hash = `q=${list[(current + 1) % list.length].id}`;
   });
 }
-function openGuide() { $('#guide').showModal(); }
+function openGuide() {
+  if (isPaperRoute(new URLSearchParams(location.hash.slice(1)))) location.hash = 'view=papers&tab=guide';
+  else $('#guide').showModal();
+}
 function download(name, text) {
   const url = URL.createObjectURL(new Blob([text], { type: 'application/json' }));
   const a = document.createElement('a'); a.href = url; a.download = name; a.click();
@@ -88,9 +100,12 @@ function download(name, text) {
 try {
   const response = await fetch('./__DATA_FILE__');
   if (!response.ok) throw new Error(`HTTP ${response.status}`);
-  ({ config, questions } = await response.json());
+  const data = await response.json();
+  ({ config, questions } = data);
+  paperCount = data.papers?.length || 0;
+  initPaperLibrary(data, toast);
   $('#brand-title').textContent = config.title; $('#footer-title').textContent = `${config.owner} / ${config.title}`;
-  $('.side-label span').textContent = `01 — ${String(config.categories.length).padStart(2, '0')}`;
+  $('.side-label span').textContent = `01 — ${String(config.categories.length + 1).padStart(2, '0')}`;
   $('#subtitle').textContent = config.subtitle; $('#category-help').textContent = config.categories.map(c => c.id).join('、');
   $('#tag').innerHTML += [...new Set(questions.flatMap(q => q.tags))].sort((a, b) => a.localeCompare(b, 'zh-CN')).map(t => `<option value="${esc(t)}">${esc(t)}</option>`).join('');
   renderSidebar(); renderStats(); route();
@@ -112,7 +127,7 @@ try {
     const toc = e.target.closest('[data-section]');
     if (toc) document.getElementById(toc.dataset.section)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
   });
-  window.addEventListener('hashchange', () => { route(); window.scrollTo(0, 0); $('#reader h1')?.focus({ preventScroll: true }); });
+  window.addEventListener('hashchange', () => { route(); window.scrollTo(0, 0); ($('#reader h1') || $('#paper-space h1'))?.focus({ preventScroll: true }); });
   $('#random').addEventListener('click', () => {
     const pool = filteredQuestions(); if (!pool.length) { toast('当前筛选没有题目，清除筛选后再试。'); return; }
     location.hash = `q=${pool[Math.floor(Math.random() * pool.length)].id}`;
@@ -121,8 +136,13 @@ try {
   $('#close-guide').addEventListener('click', () => $('#guide').close());
   $('#guide').addEventListener('click', e => { if (e.target === $('#guide')) { const r = $('#guide').getBoundingClientRect(); if (e.clientX < r.left || e.clientX > r.right || e.clientY < r.top || e.clientY > r.bottom) $('#guide').close(); } });
   document.addEventListener('keydown', e => {
+    if (e.key === '/' && !e.ctrlKey && !e.metaKey && !['INPUT', 'TEXTAREA', 'SELECT'].includes(document.activeElement.tagName) && !$('#guide').open && isPaperRoute(new URLSearchParams(location.hash.slice(1)))) {
+      e.preventDefault();
+      if (!$('#paper-search')) location.hash = 'view=papers';
+      setTimeout(() => $('#paper-search')?.focus(), 0); return;
+    }
     if (e.key === '/' && !e.ctrlKey && !e.metaKey && !['INPUT', 'TEXTAREA', 'SELECT'].includes(document.activeElement.tagName) && !$('#guide').open) { e.preventDefault(); if (location.hash) location.hash = ''; setTimeout(() => $('#search').focus(), 0); }
-    if (e.key === 'Escape' && !$('#guide').open && location.hash) location.hash = '';
+    if (e.key === 'Escape' && !$('#guide').open && location.hash) location.hash = $('#paper-space .back-link')?.getAttribute('href') || '';
   });
   $('#export').addEventListener('click', () => download(`interview-progress-${new Date().toISOString().slice(0, 10)}.json`, JSON.stringify({ version: 1, exportedAt: new Date().toISOString(), progress }, null, 2)));
   $('#import').addEventListener('click', () => $('#import-file').click());
@@ -142,3 +162,4 @@ try {
   $('#question-list').innerHTML = `<div class="empty"><h3>知识库暂时无法加载</h3><p>${esc(error.message)}</p><p>请运行 npm run build 和 npm run preview；不要直接双击 HTML 文件。</p><button class="button" id="retry">重新加载</button></div>`;
   $('#retry').addEventListener('click', () => location.reload());
 }
+import { initPaperLibrary, renderPaperLibrary, isPaperRoute } from './__PAPERS_MODULE__';

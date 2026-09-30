@@ -15,6 +15,7 @@ test('内容更新使用新资源地址，同一内容重复构建保持地址�
   t.after(() => rm(fixture, { recursive: true, force: true }));
   await cp(join(root, 'scripts'), join(fixture, 'scripts'), { recursive: true });
   await cp(join(root, 'web'), join(fixture, 'web'), { recursive: true });
+  await cp(join(root, 'templates'), join(fixture, 'templates'), { recursive: true });
   await symlink(join(root, 'node_modules'), join(fixture, 'node_modules'), 'dir');
   await mkdir(join(fixture, 'content/questions'), { recursive: true });
   await writeFile(join(fixture, 'site.config.json'), JSON.stringify({

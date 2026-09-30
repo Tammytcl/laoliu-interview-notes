@@ -4,6 +4,19 @@ import { parse } from 'yaml';
 const md = new MarkdownIt({ html: false, linkify: true, typographer: false });
 export const escapeHtml = s => String(s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 
+export function renderMarkdown(body) {
+  const tokens = md.parse(body, {});
+  const toc = [];
+  tokens.forEach((token, i) => {
+    if (token.type === 'heading_open') {
+      const id = `section-${toc.length + 1}`;
+      token.attrSet('id', id);
+      toc.push({ id, title: tokens[i + 1].content, level: Number(token.tag.slice(1)) });
+    }
+  });
+  return { html: md.renderer.render(tokens, md.options, {}), toc };
+}
+
 export function parseQuestion(source, file, categories) {
   const match = source.replace(/\r\n/g, '\n').match(/^---\n([\s\S]*?)\n---\n([\s\S]*)$/);
   if (!match) throw new Error(`${file}: 缺少 YAML frontmatter`);
@@ -20,19 +33,11 @@ export function parseQuestion(source, file, categories) {
   if (!Array.isArray(data.tags) || data.tags.some(t => typeof t !== 'string' || !t.trim())) throw new Error(`${file}: tags 应为字符串数组`);
   const body = match[2].trim();
   if (!body) throw new Error(`${file}: 正文不能为空`);
-  const tokens = md.parse(body, {});
-  const toc = [];
-  tokens.forEach((token, i) => {
-    if (token.type === 'heading_open') {
-      const id = `section-${toc.length + 1}`;
-      token.attrSet('id', id);
-      toc.push({ id, title: tokens[i + 1].content, level: Number(token.tag.slice(1)) });
-    }
-  });
+  const rendered = renderMarkdown(body);
   return {
     id: data.id, title: data.title, category: data.category, difficulty: data.difficulty,
     updated: data.updated, summary: data.summary, tags: [...new Set(data.tags)],
-    draft: data.draft === true, body, html: md.renderer.render(tokens, md.options, {}), toc, source: file,
+    draft: data.draft === true, body, ...rendered, source: file,
     minutes: Math.max(1, Math.ceil(body.length / 450))
   };
 }

@@ -4,7 +4,7 @@
 
 一个内容与界面分离的中文面试准备站。浅色纸张风格、主题导航、全文搜索、题目目录、收藏与复习状态。没有后端、数据库、追踪统计或运行时 CDN 依赖，适合 GitHub Pages。
 
-> 当前共 38 篇笔记：Diffusion 8、LLM 8、Agent 7、Infra 8、路线/架构/资料索引 3、算法编程 2、项目与综合面试各 1。以问题带动理解、复习与小实验；真实项目经历仍由本人填写。
+> 当前有 38 篇学习笔记、4 篇基础论文精读示例、1 份 Daily 和 1 份专题调研。论文收录独立于面试笔记；基础报告是资料整理，个人阅读状态初始为“待精读”。旧项目表达题保留在综合面试中。
 
 ## 从这里开始学习
 
@@ -17,10 +17,37 @@
 
 算法只增加一个与模型紧密相关的 causal attention 手撕练习，另保留 LRU；项目论文和综合面试暂不扩量。
 
+## 论文收录：单篇精读 + 两类积累报告
+
+[进入论文收录](https://tammytcl.github.io/laoliu-interview-notes/#view=papers) · [Daily](https://tammytcl.github.io/laoliu-interview-notes/#view=papers&tab=daily) · [专题调研](https://tammytcl.github.io/laoliu-interview-notes/#view=papers&tab=survey)
+
+- **论文库**：按 Diffusion / LLM / Agent / Infra 筛选，一篇论文一条稳定记录，正文是统一格式的精读报告。可按个人阅读状态、收藏和全文检索。
+- **Daily 报告**：每天开始工作时手动更新，记录候选筛选、收录理由、主阅读、个人理解变化及下一步。不是自动新论文抓取或定时任务。
+- **专题调研**：围绕研究问题整理范围、方法谱系、比较条件、共识/分歧、空白与持续更新。引用论文库，不重复复制单篇全文。
+
+三份可下载的模板：[单篇精读](templates/paper.md)、[Daily](templates/daily-report.md)、[专题调研](templates/survey-report.md)。[整理流程与 Agent 使用约定](docs/paper-workflow.md) 可用作后续整理任务的统一要求。
+
+```bash
+npm run new:paper -- paper-my-topic llm
+npm run new:daily                       # UTC 当天，已存在则提示继续更新
+npm run new:daily -- 2026-10-01          # 也可明确指定报告日期
+npm run new:survey -- survey-my-topic infra
+```
+
+命令生成 `draft: true` 的草稿。填写原文信息和正文，完成后改为 `false`，运行构建、提交并推送。新建论文/专题拒绝覆盖；同日 Daily 继续维护一个文件。重复 arXiv 论文（包括不同版本）、同日期重复 Daily、未发布或不存在的关联论文会让构建失败。
+
+单篇必需元数据包含 `paper_title`、`authors`、`year`、`direction`、`paper_url`、`evidence`；报告包含 `type: daily/survey`、`date`、`directions`、`paper_ids`。公共字段为 `id/title/summary/tags/updated/draft`，模板版本为 `template_version: 1`。论文用 `#paper=id` 链接、报告用 `#report=id`，学习笔记仍用 `#q=id`。日期和内容状态请按真实情况填写。
+
+**资料核验程度与个人阅读进度分开。** 报告的 `evidence` 为“资料整理 / 已核原文 / 已复现”；个人状态为“待精读 / 阅读中 / 已复述”。Agent 生成报告不自动推进你的阅读进度。页面支持读前问题、合上正文后复述、连接/待验证与复习日期；没有自己的复述文字时不能标记“已复述”。到期论文会在列表中提示。
+
+**个人阅读草稿仅保存在当前浏览器。** 用论文模块中的“导出/导入阅读记录”备份和迁移，与侧栏的面试复习进度备份相互独立；不会自动写回 Markdown。需要长期积累或公开的结论，应整理回论文正文或 Daily。它们保存在 `content/papers/` 和 `content/reports/`，通过 Git 维护。已有的复习记录和旧问题链接保留。
+
 ## 内容与排版分开
 
 ```text
-content/questions/**/*.md  你写的内容（唯一题目来源）
+content/questions/**/*.md  学习笔记
+content/papers/**/*.md     按方向存放单篇精读
+content/reports/**/*.md    Daily 与专题报告
           ↓ 统一解析 YAML 元数据 + Markdown
 scripts/build.mjs         校验字段、渲染 HTML、生成搜索数据与目录
           ↓
@@ -32,7 +59,7 @@ web/index.html + style.css + app.js
 
 不用为每道题写 HTML，不用维护目录列表，也不用每次新增题目就改 JS。Markdown 标题、列表、代码块、表格和引用采用同一套样式。
 
-页面实际加载带内容指纹的 `data-*.json`、`app-*.js` 和 `style-*.css`。内容变化会生成新地址，避免旧数据缓存导致题目数量未更新；`data.json` 保留给外部读取。GitHub Pages 首页仍可能缓存约十分钟，发布后需要立即查看时可在网址加一个新的 `?v=版本号`，无需清除复习进度。
+页面实际加载带内容指纹的 `data-*.json`、`app-*.js`、`papers-*.js` 和 `style-*.css`。内容变化会生成新地址，避免旧数据缓存导致题目数量未更新；`data.json` 保留给外部读取。GitHub Pages 首页仍可能缓存约十分钟，发布后需要立即查看时可在网址加一个新的 `?v=版本号`，无需清除复习进度。
 
 这里选择**发布时解析**，而不是让每个浏览器重新下载并解析所有 Markdown：访问时读取已经生成的 `data.json` 即可。因此只改 Markdown 后需重新构建；GitHub Actions 会自动完成。
 
@@ -105,10 +132,9 @@ draft: false
 | `agent` | Agent · 交互与学习 |
 | `systems` | Infra · 训练与推理 |
 | `coding` | 算法与编程 |
-| `projects` | 项目与论文 |
 | `behavior` | 综合面试 |
 
-新增分类只需修改 `site.config.json` 中的 `categories`，无需修改页面逻辑。站名、副标题、作者也在这里配置。跨题链接可写 `[查看相关题](#q=kv-cache)`；外部资料使用完整 HTTPS 链接。当前不处理相对 Markdown 文件链接，也不自动复制内容目录里的图片；如需本地图片支持，可后续统一增加 assets 管线。
+论文收录是独立组件，入口由 `paperLibrary` 配置；不作为题目分类。新增学习笔记分类只需修改 `site.config.json` 中的 `categories`，无需修改页面逻辑。站名、副标题、作者也在这里配置。跨题链接可写 `[查看相关题](#q=kv-cache)`；外部资料使用完整 HTTPS 链接。当前不处理相对 Markdown 文件链接，也不自动复制内容目录里的图片；如需本地图片支持，可后续统一增加 assets 管线。
 
 ## 复习功能与数据边界
 
@@ -148,7 +174,10 @@ draft: false
 ```text
 interview-notes/
 ├── content/questions/       学习路线与各方向笔记
+├── content/papers/          各方向论文精读
+├── content/reports/         Daily 与专题报告
 ├── content/research/        来源记录与调研边界
+├── docs/paper-workflow.md   后续整理与 Agent 使用约定
 ├── templates/question.md    新题模板
 ├── site.config.json         站点与分类配置
 ├── web/                     统一的页面、样式和交互

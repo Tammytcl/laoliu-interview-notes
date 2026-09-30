@@ -3,6 +3,7 @@ import { resolve, relative, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { createHash } from 'node:crypto';
 import { parseQuestion, escapeHtml } from './content.mjs';
+import { parsePaperContent, paperDirections, validatePaperLinks } from './papers-content.mjs';
 
 const root = fileURLToPath(new URL('../', import.meta.url));
 const config = JSON.parse(await readFile(join(root, 'site.config.json'), 'utf8'));
@@ -12,27 +13,44 @@ for (const c of config.categories) {
 }
 async function walk(dir) {
   const files = [];
-  for (const entry of await readdir(dir, { withFileTypes: true })) {
+  let entries;
+  try { entries = await readdir(dir, { withFileTypes: true }); }
+  catch (error) { if (error.code === 'ENOENT') return files; throw error; }
+  for (const entry of entries) {
     const p = join(dir, entry.name);
     if (entry.isDirectory()) files.push(...await walk(p));
     else if (entry.isFile() && entry.name.endsWith('.md')) files.push(p);
   }
   return files.sort();
 }
-const questions = [], seen = new Set();
+const questions = [], allQuestions = [], seen = new Set();
 for (const p of await walk(join(root, 'content/questions'))) {
   const question = parseQuestion(await readFile(p, 'utf8'), relative(root, p).split('\\').join('/'), config.categories);
   if (seen.has(question.id)) throw new Error(`重复题目 id: ${question.id}`);
   seen.add(question.id);
+  allQuestions.push(question);
   if (!question.draft) questions.push(question);
 }
 questions.sort((a, b) => b.updated.localeCompare(a.updated) || a.title.localeCompare(b.title, 'zh-CN'));
+const collections = {};
+for (const name of ['papers', 'reports']) {
+  collections[name] = [];
+  for (const p of await walk(join(root, 'content', name))) {
+    collections[name].push(parsePaperContent(await readFile(p, 'utf8'), relative(root, p).split('\\').join('/'), name));
+  }
+}
+validatePaperLinks(allQuestions, collections.papers, collections.reports);
+const papers = collections.papers.filter(p => !p.draft).sort((a, b) => b.updated.localeCompare(a.updated) || a.title.localeCompare(b.title, 'zh-CN'));
+const reports = collections.reports.filter(r => !r.draft).sort((a, b) => b.date.localeCompare(a.date) || b.updated.localeCompare(a.updated) || a.title.localeCompare(b.title, 'zh-CN'));
 const dist = resolve(root, 'dist');
 await mkdir(dist, { recursive: true });
 const fingerprint = text => createHash('sha256').update(text).digest('hex').slice(0, 16);
-const data = JSON.stringify({ config, questions });
+const data = JSON.stringify({ config, questions, papers, reports, paperDirections });
 const dataFile = `data-${fingerprint(data)}.json`;
-const app = (await readFile(join(root, 'web/app.js'), 'utf8')).replaceAll('__DATA_FILE__', dataFile);
+const papersModule = await readFile(join(root, 'web/papers.js'), 'utf8');
+const papersModuleFile = `papers-${fingerprint(papersModule)}.js`;
+await writeFile(join(dist, papersModuleFile), papersModule);
+const app = (await readFile(join(root, 'web/app.js'), 'utf8')).replaceAll('__DATA_FILE__', dataFile).replaceAll('__PAPERS_MODULE__', papersModuleFile);
 const appFile = `app-${fingerprint(app)}.js`;
 const style = await readFile(join(root, 'web/style.css'), 'utf8');
 const styleFile = `style-${fingerprint(style)}.css`;
@@ -40,9 +58,13 @@ await writeFile(join(dist, dataFile), data);
 await writeFile(join(dist, appFile), app);
 await writeFile(join(dist, styleFile), style);
 await copyFile(join(root, 'web/favicon.svg'), join(dist, 'favicon.svg'));
+await mkdir(join(dist, 'templates'), { recursive: true });
+for (const file of ['paper.md', 'daily-report.md', 'survey-report.md']) {
+  await copyFile(join(root, 'templates', file), join(dist, 'templates', file));
+}
 const template = await readFile(join(root, 'web/index.html'), 'utf8');
 await writeFile(join(dist, 'index.html'), template.replaceAll('__TITLE__', escapeHtml(config.title)).replaceAll('__DESCRIPTION__', escapeHtml(config.description)).replace('./app.js', `./${appFile}`).replace('./style.css', `./${styleFile}`));
 // 保留固定地址供外部读取；页面读取带内容指纹的文件，避免命中上一版缓存。
 await writeFile(join(dist, 'data.json'), data);
 await writeFile(join(dist, '.nojekyll'), '');
-console.log(`✓ ${questions.length} 道题目 · ${config.categories.length} 个主题 → dist/`);
+console.log(`✓ ${questions.length} 篇笔记 · ${papers.length} 篇论文 · ${reports.length} 篇报告 → dist/`);

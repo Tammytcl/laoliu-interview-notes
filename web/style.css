@@ -18,3 +18,48 @@
 .learning-paths span { font-size: 12px; line-height: 1.7; }
 @media (max-width: 1100px) { .learning-paths { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 @media (max-width: 480px) { .learning-paths a { padding: 12px; } }
+
+.paper-hub-header { padding: 12px 0 28px; }
+.paper-hub-header h1 { font-family: "Songti SC", "Noto Serif CJK SC", serif; font-size: 36px; margin-bottom: 14px; }
+.paper-hub-header > p:not(.eyebrow), .paper-zone-intro { color: var(--muted); line-height: 1.9; }
+.paper-hub-summary { display: flex; flex-wrap: wrap; gap: 12px 24px; font-size: 12px; color: var(--green); }
+.paper-tabs { display: flex; flex-wrap: wrap; gap: 10px; padding-bottom: 20px; border-bottom: 1px solid var(--line); margin-bottom: 18px; }
+.paper-backup { display: flex; justify-content: flex-end; flex-wrap: wrap; gap: 10px; margin-bottom: 24px; }
+.paper-filters { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; margin: 20px 0; }
+.paper-filters select { max-width: 100%; padding: 10px 12px; border: 1px solid var(--line); border-radius: 6px; color: var(--ink); background: white; }
+.paper-filters label { font-size: 12px; }
+.paper-results { display: grid; gap: 16px; }
+.paper-card { display: flex; align-items: flex-start; gap: 16px; border: 1px solid var(--line); border-radius: 10px; padding: 24px; background: white; }
+.paper-card .question-copy { flex: 1; min-width: 0; }
+.paper-card h3 { margin: 8px 0; font-size: 18px; line-height: 1.7; }
+.paper-card p { margin-bottom: 12px; line-height: 1.8; }
+.paper-meta { font-size: 11px; color: var(--green); }
+.paper-original-title { color: var(--muted); font-size: 12px; overflow-wrap: anywhere; }
+.paper-card-footer { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; margin-top: 18px; font-size: 11px; color: var(--muted); }
+.paper-card-footer a { color: var(--green); }
+.paper-zone-intro { font-size: 12px; }
+#paper-result-count { font-size: 12px; color: var(--muted); font-weight: 400; }
+.paper-body { min-width: 0; }
+.paper-body > summary { cursor: pointer; padding: 16px; margin-bottom: 20px; background: var(--light); border-radius: 6px; font-size: 12px; line-height: 1.8; }
+.paper-reader-grid { grid-template-columns: minmax(0, 1fr) 270px; gap: 28px; }
+.paper-reader-grid .reader-aside { position: static; }
+.reading-workbench { background: #edf1e7; padding: 20px; border-radius: 8px; }
+.reading-workbench h2 { font-size: 16px; line-height: 1.7; }
+.reading-workbench label { display: block; font-size: 12px; margin: 18px 0 8px; line-height: 1.7; }
+.reading-workbench textarea { width: 100%; min-height: 100px; padding: 10px; resize: vertical; border: 1px solid var(--line); border-radius: 6px; background: white; font: inherit; font-size: 12px; line-height: 1.8; color: var(--ink); }
+.reading-workbench input[type=date] { max-width: 100%; padding: 10px; border: 1px solid var(--line); border-radius: 6px; font: inherit; color: var(--ink); }
+.reading-workbench > .button { margin-top: 12px; }
+.reading-stages { display: flex; flex-wrap: wrap; gap: 6px; }
+.reading-stages [aria-pressed=true] { background: var(--green); color: white; }
+.reading-save-note { font-size: 11px; line-height: 1.8; color: var(--muted); margin-top: 15px; }
+.paper-related { padding: 22px 0; border-top: 1px solid var(--line); margin-top: 24px; }
+.paper-related h2 { font-size: 16px; }
+.paper-related > div { display: flex; flex-wrap: wrap; gap: 10px; }
+.paper-related p { line-height: 1.8; font-size: 12px; }
+.template-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+.paper-template { display: flex; flex-direction: column; padding: 18px; gap: 10px; background: var(--light); border-radius: 8px; font-size: 12px; line-height: 1.8; }
+.paper-guide details { margin: 25px 0; }
+.paper-guide summary { cursor: pointer; }
+@media(max-width:1150px) { .paper-reader-grid { grid-template-columns: minmax(0, 1fr) 230px; gap: 20px; } }
+@media(max-width:850px) { .paper-reader-grid { grid-template-columns: minmax(0, 1fr); } .paper-reader-grid .reader-aside { grid-row: auto; display: block; } .paper-reader-grid .toc { display: block; } }
+@media(max-width:580px) { .paper-hub-header h1 { font-size: 30px; } .paper-card { padding: 18px 14px; } .paper-tabs .button { padding: 10px 12px; gap: 8px; } .template-grid { grid-template-columns: minmax(0, 1fr); } .paper-filters { gap: 8px; } }

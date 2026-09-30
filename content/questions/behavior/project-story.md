@@ -1,7 +1,7 @@
 ---
 id: project-story
 title: "如何在三分钟内讲清楚一个研究项目？"
-category: projects
+category: behavior
 difficulty: 基础
 tags: ["项目表达","研究"]
 updated: 2026-09-30
