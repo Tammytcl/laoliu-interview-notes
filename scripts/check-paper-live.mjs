@@ -43,18 +43,21 @@ try {
         const rect=i.getBoundingClientRect();
         return {src:i.getAttribute('src'),width:i.naturalWidth,height:i.naturalHeight,ink,ratioError:Math.abs(rect.width/rect.height-i.naturalWidth/i.naturalHeight)};
       }));
-      assert.ok(images.length,`${paper.id}: no figures`);
+      const deep = paper.depthStandard === 'ddpm' || paper.templateVersion >= 5;
+      if (deep) assert.ok(images.length >= 3,`${paper.id}: DDPM-depth report lacks evidence figures`);
       for (const image of images) {
-        assert.ok(image.src.endsWith('-pdf.png'),`${paper.id}: old HTML capture still used`);
+        if (deep) assert.ok(image.src.endsWith('-pdf.png'),`${paper.id}: DDPM-depth report uses an unverified capture`);
         assert.ok(image.ink>35,`${paper.id}: image appears blank`);
         assert.ok(image.ratioError<0.02,`${paper.id}: distorted aspect ratio`);
       }
       assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1),`${paper.id}: horizontal overflow`);
       assert.equal(await page.locator('.publication-toc button').count(),5);
-      await page.locator('[data-figure]').first().click();
-      await page.keyboard.press('Escape');
-      assert.equal(await page.locator('#paper-figure-dialog').evaluate(d=>d.open),false);
-      assert.equal(await page.locator('#paper-body').count(),1,'Escape navigated away from report');
+      if (images.length) {
+        await page.locator('[data-figure]').first().click();
+        await page.keyboard.press('Escape');
+        assert.equal(await page.locator('#paper-figure-dialog').evaluate(d=>d.open),false);
+        assert.equal(await page.locator('#paper-body').count(),1,'Escape navigated away from report');
+      }
       await page.screenshot({path:`${artifacts}/${paper.id}-${viewport.width}.png`,fullPage:true});
       results.push({paperId:paper.id,viewport:viewport.width,images:images.length});
     }

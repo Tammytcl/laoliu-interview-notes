@@ -84,9 +84,10 @@ export function parsePaperContent(source, file, collection) {
     const venue = data.venue ?? '';
     const codeNote = data.code_note ?? '';
     if (typeof venue !== 'string' || typeof codeNote !== 'string') fail('venue / code_note 应为字符串');
+    if (data.depth_standard !== undefined && data.depth_standard !== 'ddpm') fail('depth_standard 当前仅支持 ddpm');
     return { ...result, direction: data.direction, paperTitle: data.paper_title, authors: data.authors,
       affiliations, authorAffiliations, categories: [...new Set(categories)], areas: [...new Set(areas)], tasks: [...new Set(tasks)], published, openalexId, methodFigure, methodCaption, githubUrl: githubUrl?.href ?? null, venue, codeNote,
-      year: data.year, paperUrl: url.href, evidence: data.evidence, noteIds: [...new Set(noteIds)] };
+      year: data.year, paperUrl: url.href, evidence: data.evidence, noteIds: [...new Set(noteIds)], depthStandard: data.depth_standard ?? null };
   }
   if (collection !== 'reports') fail('未知内容集合');
   if (!['daily', 'survey'].includes(data.type)) fail('type 应为 daily / survey');
