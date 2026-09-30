@@ -23,6 +23,7 @@ tags: [Diffusion, DDPM, Generative Modeling, Noise Prediction, U-Net]
 updated: 2026-09-30
 summary: "把逐步加噪的扩散过程与可学习的反向去噪链结合，通过噪声预测目标实现高质量图像生成。"
 template_version: 4
+depth_standard: ddpm
 draft: false
 ---
 

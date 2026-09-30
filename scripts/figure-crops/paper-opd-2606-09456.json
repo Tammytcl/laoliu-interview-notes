@@ -1,0 +1,13 @@
+{
+  "paperId": "paper-opd-2606-09456",
+  "arxivVersion": "2606.09456v1",
+  "coordinateSystem": "PDF points, top-left origin",
+  "crops": [
+    {"name": "figure-1-pdf.png", "page": 3, "box": [327, 600, 508, 730]},
+    {"name": "table-1-pdf.png", "page": 6, "box": [105, 54, 465, 252]},
+    {"name": "figure-2-pdf.png", "page": 7, "box": [265, 270, 505, 410]},
+    {"name": "figure-3-pdf.png", "page": 8, "box": [106, 198, 506, 365]},
+    {"name": "table-2-pdf.png", "page": 8, "box": [105, 115, 505, 180]},
+    {"name": "table-4-pdf.png", "page": 12, "box": [105, 120, 505, 380]}
+  ]
+}

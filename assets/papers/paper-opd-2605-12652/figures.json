@@ -1,0 +1,98 @@
+{
+  "paperId": "paper-opd-2605-12652",
+  "arxivVersion": "2605.12652v2",
+  "attribution": "Original figures and tables by the paper authors; cropped from the pinned arXiv PDF for scholarly reading.",
+  "figures": [
+    {
+      "file": "figure-2-pdf.png",
+      "sha256": "191c0c4c6256ec7ced68e32440517e055e94b7ae5910699bd71c8ac7d9b4aba8",
+      "original": "https://arxiv.org/pdf/2605.12652v2#page=4",
+      "method": "pinned-original-pdf-crop",
+      "pdfPage": 4,
+      "cropBox": [
+        70,
+        72,
+        545,
+        255
+      ],
+      "pdfSha256": "e56bac4079331cd2c68a7925623786a0742a4a774a4fd5bd4c8b968ab94f1bf6",
+      "scale": 3,
+      "explanation": "complete",
+      "visuallyVerified": true,
+      "reportSection": "2. 方法与实现机制"
+    },
+    {
+      "file": "table-1-pdf.png",
+      "sha256": "083cea8571fb683d9b64857bf15f3b26ee2cc0742743b2251d58269cd1047478",
+      "original": "https://arxiv.org/pdf/2605.12652v2#page=7",
+      "method": "pinned-original-pdf-crop",
+      "pdfPage": 7,
+      "cropBox": [
+        120,
+        100,
+        490,
+        181
+      ],
+      "pdfSha256": "e56bac4079331cd2c68a7925623786a0742a4a774a4fd5bd4c8b968ab94f1bf6",
+      "scale": 3,
+      "explanation": "complete",
+      "visuallyVerified": true,
+      "reportSection": "4. 结果与图表解读"
+    },
+    {
+      "file": "table-4-pdf.png",
+      "sha256": "a0523a147a291e734d26728ea5b295d01399bef2a0f5ba56b81fe0383aeeebef",
+      "original": "https://arxiv.org/pdf/2605.12652v2#page=7",
+      "method": "pinned-original-pdf-crop",
+      "pdfPage": 7,
+      "cropBox": [
+        278,
+        235,
+        545,
+        360
+      ],
+      "pdfSha256": "e56bac4079331cd2c68a7925623786a0742a4a774a4fd5bd4c8b968ab94f1bf6",
+      "scale": 3,
+      "explanation": "complete",
+      "visuallyVerified": true,
+      "reportSection": "4. 结果与图表解读"
+    },
+    {
+      "file": "figure-4-pdf.png",
+      "sha256": "cb8d81792afe268ae459de6da4807e85f5f0c61f60ee2e2003493a4494830d03",
+      "original": "https://arxiv.org/pdf/2605.12652v2#page=8",
+      "method": "pinned-original-pdf-crop",
+      "pdfPage": 8,
+      "cropBox": [
+        72,
+        70,
+        545,
+        340
+      ],
+      "pdfSha256": "e56bac4079331cd2c68a7925623786a0742a4a774a4fd5bd4c8b968ab94f1bf6",
+      "scale": 3,
+      "explanation": "complete",
+      "visuallyVerified": true,
+      "reportSection": "4. 结果与图表解读"
+    },
+    {
+      "file": "table-9-pdf.png",
+      "sha256": "ce4fc05f49eb92e6ff53e4ce2f1d01f2c32260fbf3d3f64b92530fe2b5498357",
+      "original": "https://arxiv.org/pdf/2605.12652v2#page=21",
+      "method": "pinned-original-pdf-crop",
+      "pdfPage": 21,
+      "cropBox": [
+        100,
+        112,
+        510,
+        188
+      ],
+      "pdfSha256": "e56bac4079331cd2c68a7925623786a0742a4a774a4fd5bd4c8b968ab94f1bf6",
+      "scale": 3,
+      "explanation": "complete",
+      "visuallyVerified": true,
+      "reportSection": "3. 实验设置与算力"
+    }
+  ],
+  "verificationNote": "Compared each crop with the pinned PDF page; labels, six plotted panels, axes, table headers and final rows were checked. Captions are in report text."
+}

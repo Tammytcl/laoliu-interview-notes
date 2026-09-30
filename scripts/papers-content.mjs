@@ -39,7 +39,7 @@ export function parsePaperContent(source, file, collection) {
   if (!validDate(data.updated)) fail('updated 应为有效 YYYY-MM-DD 日期');
   if (data.draft !== undefined && typeof data.draft !== 'boolean') fail('draft 应为布尔值');
   if (!Array.isArray(data.tags) || data.tags.some(t => typeof t !== 'string' || !t.trim())) fail('tags 应为字符串数组');
-  if (data.template_version !== undefined && ![1, 2, 3, 4].includes(data.template_version)) fail('暂不支持此 template_version');
+  if (data.template_version !== undefined && ![1, 2, 3, 4, 5].includes(data.template_version)) fail('暂不支持此 template_version');
   const body = match[2].trim();
   if (!body) fail('正文不能为空');
   const result = { id: data.id, title: data.title, summary: data.summary, updated: data.updated,

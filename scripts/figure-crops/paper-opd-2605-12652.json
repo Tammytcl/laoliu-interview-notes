@@ -1,0 +1,12 @@
+{
+  "paperId": "paper-opd-2605-12652",
+  "arxivVersion": "2605.12652v2",
+  "coordinateSystem": "PDF points, top-left origin",
+  "crops": [
+    {"name": "figure-2-pdf.png", "page": 4, "box": [70, 72, 545, 255]},
+    {"name": "table-1-pdf.png", "page": 7, "box": [120, 100, 490, 181]},
+    {"name": "table-4-pdf.png", "page": 7, "box": [278, 235, 545, 360]},
+    {"name": "figure-4-pdf.png", "page": 8, "box": [72, 70, 545, 340]},
+    {"name": "table-9-pdf.png", "page": 21, "box": [100, 112, 510, 188]}
+  ]
+}

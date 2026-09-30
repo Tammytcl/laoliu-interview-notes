@@ -9,7 +9,33 @@ import { spawn } from 'node:child_process';
 import { paperCacheStatus, cleanPaperCache } from '../scripts/paper-cache.mjs';
 import { renderMarkdown } from '../scripts/content.mjs';
 import { parsePaperContent } from '../scripts/papers-content.mjs';
+import { auditPapers } from '../scripts/paper-quality.mjs';
 const root = fileURLToPath(new URL('../', import.meta.url));
+
+test('DDPM 深度门槛覆盖新模板与标记发布的报告', async () => {
+  const template = await readFile(join(root, 'templates/paper.md'), 'utf8');
+  assert.match(template, /template_version: 5/);
+  assert.match(template, /depth_standard: ddpm/);
+  const all = await auditPapers(root);
+  assert.deepEqual(all.filter(p => p.enforcementError).map(p => p.id), []);
+  const reports = all.filter(p => p.marked && !p.draft);
+  assert.ok(reports.length >= 3);
+  assert.deepEqual(reports.flatMap(p => p.errors.map(error => `${p.id}: ${error}`)), []);
+});
+
+test('旧报告只保留冻结版本；编辑或新增必须补齐深度证据', async t => {
+  const fixture = await mkdtemp(join(tmpdir(), 'paper-depth-'));
+  t.after(() => rm(fixture, { recursive: true, force: true }));
+  await mkdir(join(fixture, 'content/papers/llm'), { recursive: true });
+  await mkdir(join(fixture, 'content/metadata'), { recursive: true });
+  const file = join(fixture, 'content/papers/llm/paper-old.md');
+  const raw = '---\nid: paper-old\ntemplate_version: 4\ndraft: false\n---\n## 1. 背景与已有工作\n历史内容\n';
+  await writeFile(file, raw);
+  await writeFile(join(fixture, 'content/metadata/paper-depth-legacy.json'), JSON.stringify({ sha256: { 'paper-old': createHash('sha256').update(raw).digest('hex') } }));
+  assert.equal((await auditPapers(fixture))[0].enforcementError, undefined);
+  await writeFile(file, raw + '新增一句。\n');
+  assert.match((await auditPapers(fixture))[0].enforcementError, /升级到 DDPM/);
+});
 
 test('正式报告保留单位与代码来源，五模块和全部 GQA 证据资产可追溯', async () => {
   for (const name of ['llm/paper-gqa', 'agent/paper-react', 'infra/paper-pagedattention', 'diffusion/paper-ddpm']) {

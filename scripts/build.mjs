@@ -4,6 +4,7 @@ import { fileURLToPath } from 'node:url';
 import { createHash } from 'node:crypto';
 import { parseQuestion, escapeHtml } from './content.mjs';
 import { parsePaperContent, paperDirections, paperCategories, paperTaxonomy, validatePaperLinks } from './papers-content.mjs';
+import { auditPapers } from './paper-quality.mjs';
 
 const root = fileURLToPath(new URL('../', import.meta.url));
 const config = JSON.parse(await readFile(join(root, 'site.config.json'), 'utf8'));
@@ -40,6 +41,8 @@ for (const name of ['papers', 'reports']) {
   }
 }
 validatePaperLinks(allQuestions, collections.papers, collections.reports);
+const qualityFailures = (await auditPapers(root)).filter(p => !p.draft && ((p.marked && p.errors.length) || p.enforcementError));
+if (qualityFailures.length) throw new Error('论文精读深度门槛未通过：\n' + qualityFailures.map(p => `${p.id}: ${[...p.errors, p.enforcementError].filter(Boolean).join('；')}`).join('\n'));
 const papers = collections.papers.filter(p => !p.draft).sort((a, b) => (b.published || `${b.year}-01-01`).localeCompare(a.published || `${a.year}-01-01`) || a.id.localeCompare(b.id));
 const reports = collections.reports.filter(r => !r.draft).sort((a, b) => b.date.localeCompare(a.date) || b.updated.localeCompare(a.updated) || a.title.localeCompare(b.title, 'zh-CN'));
 const dist = resolve(root, 'dist');

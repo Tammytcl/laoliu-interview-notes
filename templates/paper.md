@@ -21,11 +21,14 @@ note_ids: []
 tags: [Method, Task]
 updated: 2026-09-30
 summary: "用一段准确陈述概括研究问题、关键机制与适用范围。"
-template_version: 4
+template_version: 5
+depth_standard: ddpm
 draft: true
 ---
 
 ## 1. 背景与已有工作
+
+写作前打开 [DDPM 精读范例](../content/papers/diffusion/paper-ddpm.md)：本模板的五个标题只是目录，不是完成标准。发布前应达到它的解释密度、原图覆盖与实验可追溯程度，并通过 `npm run papers:quality`。
 
 写成连贯的解释：实际任务和瓶颈是什么？为什么需要解决？此前谁发现过、怎样处理？代表工作的具体差异与出处是什么？本文补上了哪个尚未解决的环节？解释必要概念，不使用只有一句话的提纲代替报告。
 
