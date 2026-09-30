@@ -30,7 +30,7 @@ for crop in config['crops']:
     role = crop.get('role')
     if role not in {'method', 'experiment-table', 'result-table', 'result-figure'}:
         raise ValueError(f'{name}: specify the evidence role in the crop plan')
-    if not re.fullmatch(r'(?:figure-\d+|table-\d+|tables-\d+-\d+)-pdf\.png', name):
+    if not re.fullmatch(r'(?:figure-\d+|table-(?:\d+|[a-z]-\d+)|tables-\d+-\d+|algorithm-\d+)-pdf\.png', name):
         raise ValueError('Invalid asset name')
     if (destination / name).exists() and not args.refresh:
         raise ValueError('Existing PDF capture: use --refresh after reviewing the crop plan')

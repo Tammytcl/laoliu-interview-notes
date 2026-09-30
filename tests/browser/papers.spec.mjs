@@ -84,6 +84,23 @@ test('OPD 专题精读展示方法图、实验结果和五模块目录', async (
   await expect.poll(() => page.locator('#figure-full').evaluate(img => img.complete && img.naturalWidth > 0)).toBe(true);
 });
 
+test('补齐的 GKD 与 MiniLLM 报告加载原文算法、表格和结果图', async ({ page }) => {
+  for (const id of ['paper-opd-2306-13649', 'paper-opd-2306-08543']) {
+    await page.goto(`/#paper=${id}`);
+    await expect(page.locator('.publication-toc button')).toHaveCount(5);
+    await expect(page.locator('.paper-figure-button')).toHaveCount(5);
+    for (const figure of await page.locator('.publication-body img').all()) {
+      await figure.scrollIntoViewIfNeeded();
+      await expect.poll(() => figure.evaluate(img => img.complete && img.naturalWidth > 0)).toBe(true);
+    }
+  }
+  await page.goto('/#view=papers');
+  for (const id of ['paper-opd-2306-13649', 'paper-opd-2306-08543']) {
+    const card = page.locator('.paper-card').filter({ has: page.locator(`h3 a[href="#paper=${id}"]`) });
+    await expect(card.locator('.paper-method-preview img')).toHaveCount(1);
+  }
+});
+
 test('工作台缓存按钮确认后请求清理，普通预览没有写接口', async ({ page }) => {
   const request = await page.request.get('/api/paper-cache'); expect(request.status()).toBe(404);
   let cleaned = false;

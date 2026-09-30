@@ -1,5 +1,7 @@
 # 论文库全量内容审查（2026-09-30）
 
+> 进展（2026-10-01）：[GKD](../content/papers/llm/paper-opd-2306-13649.md) 和 [MiniLLM](../content/papers/llm/paper-opd-2306-08543.md) 已按固定 arXiv PDF、原图原表重写；MiniLLM 补了作者源码核读。当前自动结构/证据检查为 **9/39**，尚有 **30 篇**旧 OPD 报告待补。本页以下表格保留 2026-09-30 的原始审查快照，不能把其中 GKD/MiniLLM 的旧状态当作现状。
+
 **结论：目前 39 篇已发布论文并未全部达到 DDPM 精读水平。** 以 [DDPM 报告](../content/papers/diffusion/paper-ddpm.md)为对照，7 篇较完整报告通过修正后的自动结构检查，**32 篇 OPD 仍是短报告**。自动检查通过只表示格式、基本内容量和本地图片证据满足规则；没有逐项证明解释正确、实验信息已穷尽或源码确已复现。
 
 整改采用统一的[图表证据与发布流程](./paper-evidence-workflow.md)。门槛现在核对方法图用途、原论文表格、PDF 裁剪出处与版本；`npm run papers:quality:strict` 会继续对 32 篇历史短报告报错，直到逐篇补齐。保留现有链接不等于批准这些报告的深度。
