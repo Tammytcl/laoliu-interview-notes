@@ -1,9 +1,6 @@
 {
   "note": "Frozen baseline of published reports awaiting DDPM-level upgrade. Any edit must pass the depth gate.",
   "sha256": {
-    "paper-react": "32467d903004da37c10ba3afa3008e24cda98d75846b904766a676c7baeefbb1",
-    "paper-pagedattention": "1ee064364b5080b5483c0f540d41a95f1e90dfeeac7aad0818e9c4d8af26af8d",
-    "paper-gqa": "8d69257d042f6dfed8be14d23e7fb239effef026fb71265f52ef79118f9930e0",
     "paper-opd-2306-08543": "99fb2a4612c70863944fc7678e8c6ced68d9cb27e9a99f6eed041ed5fd1f7232",
     "paper-opd-2306-13649": "ca89e034a3f6384c02143c575befa13fcabd7c55fe60d56fd0140fb9b8cc7d20",
     "paper-opd-2601-18734": "2db6676857ed57e120c48189450005fd69964c2cb8c0bc770c2ed003debe4001",

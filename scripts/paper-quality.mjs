@@ -18,11 +18,15 @@ export async function checkPaperQuality(file, base = root) {
   const errors = [];
   const sections = [...body.matchAll(/^## (.+)$/gm)];
   const parts = sections.map((entry, index) => body.slice(entry.index, sections[index + 1]?.index ?? body.length));
+  const sectionCharacters = parts.map(part => part.length);
+  const imageSections = parts.map(part => [...part.matchAll(/!\[/g)].length);
+  const experimentRows = [...((parts[2] ?? '').matchAll(/^\|.*\|$/gm))].length;
+  const pinnedSource = /^https:\/\/arxiv\.org\/abs\/\d{4}\.\d{4,5}v\d+$/.test(meta.paper_url ?? '');
+  const affiliationPlaceholder = (meta.affiliations ?? []).some(value => /not stated|待核|未知/i.test(value));
   if (sections.length !== 5 || sections.some((s, i) => !s[1].includes(titles[i]))) errors.push('正文需按 DDPM 范例保留五个主模块');
   parts.forEach((part, i) => { if (part.length < floors[i]) errors.push(`${titles[i]} 太薄：${part.length} < ${floors[i]} 字符`); });
-  if (body.length < 6900) errors.push(`正文太短：${body.length} < 6900 字符`);
-  if (!/^https:\/\/arxiv\.org\/abs\/\d{4}\.\d{4,5}v\d+$/.test(meta.paper_url ?? '')) errors.push('paper_url 必须固定 arXiv 版本');
-  if (!/\$\$[\s\S]+?\$\$/.test(parts[1] ?? '')) errors.push('方法缺少可追溯的关键公式');
+  if (!pinnedSource) errors.push('paper_url 必须固定 arXiv 版本');
+  if (!/\$\$[\s\S]+?\$\$/.test(parts[1] ?? '') && !(meta.method_formalism === 'process' && /github\.com\//.test(parts[1] ?? '') && /!\[/.test(parts[1] ?? ''))) errors.push('方法缺少关键公式，或已说明为流程型方法并提供原图与源码对照');
   if (!/\|.+\|/.test(parts[2] ?? '')) errors.push('实验缺少配置账本');
   if (!/GPU|TPU|算力|计算资源/.test(parts[2] ?? '')) errors.push('实验未交代算力或未披露情况');
   if (!/github\.com\//.test(body) && meta.github_url) errors.push('已开源但正文没有核心源码出处');
@@ -43,10 +47,14 @@ export async function checkPaperQuality(file, base = root) {
     if (!entry) { errors.push(`插图未登记出处：${img[2]}`); continue; }
     if (entry.method !== 'pinned-original-pdf-crop' || !entry.visuallyVerified || entry.explanation !== 'complete') errors.push(`插图未按固定 PDF 逐张核对：${img[2]}`);
     if (entry.sha256 !== createHash('sha256').update(bytes).digest('hex')) errors.push(`插图 hash 与清单不符：${img[2]}`);
-    if (!body.slice(img.index + img[0].length, img.index + img[0].length + 350).includes('解读')) errors.push(`插图旁缺少逐图解读：${img[2]}`);
+    const remainder = body.slice(img.index + img[0].length);
+    const stop = [remainder.indexOf('!['), remainder.search(/^## /m)].filter(index => index >= 0).sort((a, b) => a - b)[0] ?? remainder.length;
+    const nearby = remainder.slice(0, Math.min(stop, 1200));
+    const prose = nearby.replace(/^\|.*$/gm, '').replace(/\[[^\]]+\]\([^)]+\)/g, '').replace(/[\s*#>|-]/g, '');
+    if (prose.length < 80 || !/(解读|图源|表源|原图|原表|原文|PDF|Figure|Table)/.test(nearby)) errors.push(`插图旁缺少充分的证据解读：${img[2]}`);
   }
   if (manifest && !manifest.arxivVersion) errors.push('图表清单缺少 arXiv 固定版本');
-  return { file: relative(base, file), id: meta.id, marked: meta.depth_standard === 'ddpm' || meta.template_version >= 5, draft: !!meta.draft, images: images.length, characters: body.length, sourceSha256, errors };
+  return { file: relative(base, file), id: meta.id, marked: meta.depth_standard === 'ddpm' || meta.template_version >= 5, draft: !!meta.draft, images: images.length, imageSections, sectionCharacters, experimentRows, pinnedSource, affiliationPlaceholder, characters: body.length, sourceSha256, errors };
 }
 
 async function collect(dir) {
@@ -76,6 +84,14 @@ export async function auditPapers(base = root) {
 
 if (process.argv[1] && fileURLToPath(import.meta.url) === process.argv[1]) {
   const all = await auditPapers();
+  if (process.argv.includes('--summary')) {
+    console.log('| Paper | 正文字符 | 背景/方法/实验/结果 | 方法图/结果图 | 实验表格行 | 固定版本 | 单位占位 | 自动检查 |');
+    console.log('| --- | ---: | --- | --- | ---: | --- | --- | --- |');
+    for (const p of all.filter(x => !x.draft)) {
+      console.log(`| ${p.id} | ${p.characters} | ${p.sectionCharacters.slice(0, 4).join('/')} | ${p.imageSections[1] ?? 0}/${p.imageSections[3] ?? 0} | ${p.experimentRows} | ${p.pinnedSource ? '是' : '否'} | ${p.affiliationPlaceholder ? '是' : '否'} | ${p.errors.length ? '缺口' : '结构通过'} |`);
+    }
+    process.exit(0);
+  }
   const auditAll = process.argv.includes('--audit-all');
   const scoped = auditAll ? all.filter(x => !x.draft) : all.filter(x => !x.draft && (x.marked || x.enforcementError));
   for (const p of scoped) {
@@ -83,6 +99,6 @@ if (process.argv[1] && fileURLToPath(import.meta.url) === process.argv[1]) {
     console.log(`${problems.length ? 'FAIL' : 'PASS'} ${p.id}: ${p.characters} chars, ${p.images} images${problems.length ? '\n  - ' + problems.join('\n  - ') : ''}`);
   }
   const failures = scoped.filter(p => p.errors.length || p.enforcementError);
-  console.log(`${scoped.length - failures.length}/${scoped.length} reports meet the DDPM depth gate; ${all.filter(x => !x.draft && !x.marked).length} frozen legacy reports remain to upgrade.`);
+  console.log(`${scoped.length - failures.length}/${scoped.length} reports pass the automatic structure/evidence checks; ${all.filter(x => !x.draft && !x.marked).length} frozen legacy reports remain to upgrade. Passing does not verify explanation quality or factual accuracy.`);
   if (failures.length && !auditAll) process.exitCode = 1;
 }

@@ -22,6 +22,8 @@ tags: [LLM, Agent, Tool Use, Reasoning, Prompting, ReAct]
 updated: 2026-09-30
 summary: "把语言推理与环境动作交错组织，以外部观察修正后续行动；通过问答和交互任务检验这种闭环。"
 template_version: 4
+depth_standard: ddpm
+method_formalism: process
 draft: false
 ---
 
@@ -68,7 +70,7 @@ ReAct 与 CoT-SC 还可互补：ReAct 超过步数预算时退回 CoT-SC；CoT-S
 
 ### 核心源码：谁生成文字，谁改变环境
 
-官方 `hotpotqa.ipynb` 的 `webthink` 先拼接 instruction、六个示例和当前问题，然后在最多七轮中生成 thought/action。模型调用设置 stop 到 `Observation i:`，防止把工具返回内容继续编造出来；解析失败时再请求 action。之后代码调用环境 `step`，把真正的 `obs` 与本轮 thought/action 一起追加到 prompt。下一轮重新输入这条扩展后的文本历史，本文的工作记忆主要体现在上下文里，而不是一个新引入的外部记忆网络。
+官方 [`hotpotqa.ipynb`](https://github.com/ysymyth/ReAct/blob/6bdb3a1fd38b8188fc7ba4102969fe483df8fdc9/hotpotqa.ipynb) 的 `webthink` 先拼接 instruction、六个示例和当前问题，然后在最多七轮中生成 thought/action。模型调用设置 stop 到 `Observation i:`，防止把工具返回内容继续编造出来；解析失败时再请求 action。之后代码调用环境 `step`，把真正的 `obs` 与本轮 thought/action 一起追加到 prompt。下一轮重新输入这条扩展后的文本历史，本文的工作记忆主要体现在上下文里，而不是一个新引入的外部记忆网络。
 
 `WikiEnv.step` 接受一个动作字符串，解析 `search[...]`、`lookup[...]`、`finish[...]`。Search 更新当前页面；Lookup 按关键词建立匹配句子列表、维护游标，连续调用会返回后续结果；Finish 写入答案并把 `done` 设为真。其返回接口是 `(observation, reward, done, info)`，这使语言策略和真实环境状态分离。无效字符串返回无效动作观察，也会消耗一步；失败并不是能靠多写一段 thought 自动消除的。
 

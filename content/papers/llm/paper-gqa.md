@@ -23,6 +23,7 @@ tags: [LLM, Attention, KV Cache, Uptraining, Inference, T5]
 updated: 2026-09-30
 summary: "通过分组共享 K/V 与已有 checkpoint 的继续预训练，在生成质量、KV 容量和解码延迟之间建立可调折中。"
 template_version: 4
+depth_standard: ddpm
 draft: false
 ---
 

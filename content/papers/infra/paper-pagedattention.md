@@ -23,6 +23,7 @@ tags: [LLM, LLM Serving, PagedAttention, KV Cache, Memory Management, vLLM]
 updated: 2026-09-30
 summary: "将请求的逻辑 KV 序列映射到非连续物理块，通过按需分配、共享和写时复制提高可批处理容量。"
 template_version: 4
+depth_standard: ddpm
 draft: false
 ---
 
