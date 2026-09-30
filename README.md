@@ -32,6 +32,8 @@ web/index.html + style.css + app.js
 
 不用为每道题写 HTML，不用维护目录列表，也不用每次新增题目就改 JS。Markdown 标题、列表、代码块、表格和引用采用同一套样式。
 
+页面实际加载带内容指纹的 `data-*.json`、`app-*.js` 和 `style-*.css`。内容变化会生成新地址，避免旧数据缓存导致题目数量未更新；`data.json` 保留给外部读取。GitHub Pages 首页仍可能缓存约十分钟，发布后需要立即查看时可在网址加一个新的 `?v=版本号`，无需清除复习进度。
+
 这里选择**发布时解析**，而不是让每个浏览器重新下载并解析所有 Markdown：访问时读取已经生成的 `data.json` 即可。因此只改 Markdown 后需重新构建；GitHub Actions 会自动完成。
 
 ## 本地运行

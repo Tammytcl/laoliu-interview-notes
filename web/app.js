@@ -86,7 +86,7 @@ function download(name, text) {
   setTimeout(() => URL.revokeObjectURL(url), 1000);
 }
 try {
-  const response = await fetch('./data.json');
+  const response = await fetch('./__DATA_FILE__');
   if (!response.ok) throw new Error(`HTTP ${response.status}`);
   ({ config, questions } = await response.json());
   $('#brand-title').textContent = config.title; $('#footer-title').textContent = `${config.owner} / ${config.title}`;

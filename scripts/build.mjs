@@ -1,6 +1,7 @@
 import { readFile, readdir, mkdir, copyFile, writeFile } from 'node:fs/promises';
 import { resolve, relative, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { createHash } from 'node:crypto';
 import { parseQuestion, escapeHtml } from './content.mjs';
 
 const root = fileURLToPath(new URL('../', import.meta.url));
@@ -28,9 +29,20 @@ for (const p of await walk(join(root, 'content/questions'))) {
 questions.sort((a, b) => b.updated.localeCompare(a.updated) || a.title.localeCompare(b.title, 'zh-CN'));
 const dist = resolve(root, 'dist');
 await mkdir(dist, { recursive: true });
-for (const file of ['app.js', 'style.css', 'favicon.svg']) await copyFile(join(root, 'web', file), join(dist, file));
+const fingerprint = text => createHash('sha256').update(text).digest('hex').slice(0, 16);
+const data = JSON.stringify({ config, questions });
+const dataFile = `data-${fingerprint(data)}.json`;
+const app = (await readFile(join(root, 'web/app.js'), 'utf8')).replaceAll('__DATA_FILE__', dataFile);
+const appFile = `app-${fingerprint(app)}.js`;
+const style = await readFile(join(root, 'web/style.css'), 'utf8');
+const styleFile = `style-${fingerprint(style)}.css`;
+await writeFile(join(dist, dataFile), data);
+await writeFile(join(dist, appFile), app);
+await writeFile(join(dist, styleFile), style);
+await copyFile(join(root, 'web/favicon.svg'), join(dist, 'favicon.svg'));
 const template = await readFile(join(root, 'web/index.html'), 'utf8');
-await writeFile(join(dist, 'index.html'), template.replaceAll('__TITLE__', escapeHtml(config.title)).replaceAll('__DESCRIPTION__', escapeHtml(config.description)));
-await writeFile(join(dist, 'data.json'), JSON.stringify({ config, questions }));
+await writeFile(join(dist, 'index.html'), template.replaceAll('__TITLE__', escapeHtml(config.title)).replaceAll('__DESCRIPTION__', escapeHtml(config.description)).replace('./app.js', `./${appFile}`).replace('./style.css', `./${styleFile}`));
+// 保留固定地址供外部读取；页面读取带内容指纹的文件，避免命中上一版缓存。
+await writeFile(join(dist, 'data.json'), data);
 await writeFile(join(dist, '.nojekyll'), '');
 console.log(`✓ ${questions.length} 道题目 · ${config.categories.length} 个主题 → dist/`);
