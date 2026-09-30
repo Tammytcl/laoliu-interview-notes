@@ -45,6 +45,7 @@ jobs:
             git commit -m 'Update paper citation snapshots'
             git push
           fi
+      - run: npm run papers:quality
       - run: npm test
       - run: npm run build
       - uses: actions/upload-pages-artifact@v4

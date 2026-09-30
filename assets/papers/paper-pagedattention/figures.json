@@ -199,7 +199,8 @@
       "pdfSha256": "55b3b324d779a67c59dac2519445e3b07c14e6ff5c656fadb47a3d7b5997469e",
       "scale": 3,
       "explanation": "complete",
-      "visuallyVerified": true
+      "visuallyVerified": true,
+      "role": "method"
     },
     {
       "file": "figure-6-pdf.png",
@@ -216,7 +217,8 @@
       "pdfSha256": "55b3b324d779a67c59dac2519445e3b07c14e6ff5c656fadb47a3d7b5997469e",
       "scale": 3,
       "explanation": "complete",
-      "visuallyVerified": true
+      "visuallyVerified": true,
+      "role": "method"
     },
     {
       "file": "figure-12-pdf.png",
@@ -233,7 +235,8 @@
       "pdfSha256": "55b3b324d779a67c59dac2519445e3b07c14e6ff5c656fadb47a3d7b5997469e",
       "scale": 3,
       "explanation": "complete",
-      "visuallyVerified": true
+      "visuallyVerified": true,
+      "role": "result-figure"
     },
     {
       "file": "figure-13-pdf.png",
@@ -250,7 +253,8 @@
       "pdfSha256": "55b3b324d779a67c59dac2519445e3b07c14e6ff5c656fadb47a3d7b5997469e",
       "scale": 3,
       "explanation": "complete",
-      "visuallyVerified": true
+      "visuallyVerified": true,
+      "role": "result-figure"
     },
     {
       "file": "figure-15-pdf.png",
@@ -267,7 +271,8 @@
       "pdfSha256": "55b3b324d779a67c59dac2519445e3b07c14e6ff5c656fadb47a3d7b5997469e",
       "scale": 3,
       "explanation": "complete",
-      "visuallyVerified": true
+      "visuallyVerified": true,
+      "role": "result-figure"
     },
     {
       "file": "table-1-pdf.png",
@@ -284,7 +289,8 @@
       "pdfSha256": "55b3b324d779a67c59dac2519445e3b07c14e6ff5c656fadb47a3d7b5997469e",
       "scale": 3,
       "explanation": "complete",
-      "visuallyVerified": true
+      "visuallyVerified": true,
+      "role": "experiment-table"
     }
   ]
 }

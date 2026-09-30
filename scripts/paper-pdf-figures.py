@@ -27,6 +27,9 @@ scale = 3
 pages = {}
 for crop in config['crops']:
     name, number, box = crop['name'], crop['page'], crop['box']
+    role = crop.get('role')
+    if role not in {'method', 'experiment-table', 'result-table', 'result-figure'}:
+        raise ValueError(f'{name}: specify the evidence role in the crop plan')
     if not re.fullmatch(r'(?:figure-\d+|table-\d+|tables-\d+-\d+)-pdf\.png', name):
         raise ValueError('Invalid asset name')
     if (destination / name).exists() and not args.refresh:
@@ -44,13 +47,19 @@ for crop in config['crops']:
     image.save(destination / name)
     digest = hashlib.sha256((destination / name).read_bytes()).hexdigest()
     previous = next((e for e in manifest['figures'] if e.get('file') == name), None)
+    unchanged = previous is not None and previous.get('sha256') == digest and previous.get('pdfSha256') == pdf_sha
     manifest['figures'] = [e for e in manifest['figures'] if e.get('file') != name]
-    manifest['figures'].append({
+    entry = {
         'file': name, 'sha256': digest,
         'original': f"https://arxiv.org/pdf/{config['arxivVersion']}#page={number}",
         'method': 'pinned-original-pdf-crop', 'pdfPage': number, 'cropBox': box,
         'pdfSha256': pdf_sha, 'scale': scale,
-        'explanation': previous.get('explanation', 'pending') if previous else 'pending'
-    })
+        'role': role,
+        'explanation': previous.get('explanation', 'pending') if unchanged else 'pending',
+        'visuallyVerified': previous.get('visuallyVerified', False) if unchanged else False
+    }
+    if unchanged and previous.get('reportSection'):
+        entry['reportSection'] = previous['reportSection']
+    manifest['figures'].append(entry)
     print(f'{name} <- PDF page {number}')
 manifest_path.write_text(json.dumps(manifest, indent=2, ensure_ascii=False) + '\n')

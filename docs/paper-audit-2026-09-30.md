@@ -2,6 +2,8 @@
 
 **结论：目前 39 篇已发布论文并未全部达到 DDPM 精读水平。** 以 [DDPM 报告](../content/papers/diffusion/paper-ddpm.md)为对照，7 篇较完整报告通过修正后的自动结构检查，**32 篇 OPD 仍是短报告**。自动检查通过只表示格式、基本内容量和本地图片证据满足规则；没有逐项证明解释正确、实验信息已穷尽或源码确已复现。
 
+整改采用统一的[图表证据与发布流程](./paper-evidence-workflow.md)。门槛现在核对方法图用途、原论文表格、PDF 裁剪出处与版本；`npm run papers:quality:strict` 会继续对 32 篇历史短报告报错，直到逐篇补齐。保留现有链接不等于批准这些报告的深度。
+
 本次检查逐篇读取 frontmatter、五个正文模块、插图引用及本地 `figures.json`，对照仓库保留的 PDF 裁图和已抓取的 arXiv 原文结构，抽查 [GKD](https://arxiv.org/html/2306.13649)、[BPM](https://arxiv.org/html/2607.22334)、[DN-MOPD](https://arxiv.org/html/2609.35347)、[Beyond Prompt Count](https://arxiv.org/html/2609.37377)等官方原文。以下是**内容覆盖审查**，不是对 39 篇全部数值、代码与每张原图完成独立复现。`npm run papers:quality -- --summary` 可重新生成每篇的篇幅、图表与元数据清单。
 
 ## 全库可复核的缺口

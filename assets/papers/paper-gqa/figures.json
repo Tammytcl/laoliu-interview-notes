@@ -82,7 +82,8 @@
       "pdfSha256": "ba9094fe73db9bf515d47ae8b2d502fee9d8a6c7b1327e197ddb160f4c63b94a",
       "scale": 3,
       "explanation": "complete",
-      "visuallyVerified": true
+      "visuallyVerified": true,
+      "role": "method"
     },
     {
       "file": "figure-2-pdf.png",
@@ -99,7 +100,8 @@
       "pdfSha256": "ba9094fe73db9bf515d47ae8b2d502fee9d8a6c7b1327e197ddb160f4c63b94a",
       "scale": 3,
       "explanation": "complete",
-      "visuallyVerified": true
+      "visuallyVerified": true,
+      "role": "method"
     },
     {
       "file": "figure-3-pdf.png",
@@ -116,7 +118,8 @@
       "pdfSha256": "ba9094fe73db9bf515d47ae8b2d502fee9d8a6c7b1327e197ddb160f4c63b94a",
       "scale": 3,
       "explanation": "complete",
-      "visuallyVerified": true
+      "visuallyVerified": true,
+      "role": "result-figure"
     },
     {
       "file": "figure-4-pdf.png",
@@ -133,7 +136,8 @@
       "pdfSha256": "ba9094fe73db9bf515d47ae8b2d502fee9d8a6c7b1327e197ddb160f4c63b94a",
       "scale": 3,
       "explanation": "complete",
-      "visuallyVerified": true
+      "visuallyVerified": true,
+      "role": "result-figure"
     },
     {
       "file": "figure-5-pdf.png",
@@ -150,7 +154,8 @@
       "pdfSha256": "ba9094fe73db9bf515d47ae8b2d502fee9d8a6c7b1327e197ddb160f4c63b94a",
       "scale": 3,
       "explanation": "complete",
-      "visuallyVerified": true
+      "visuallyVerified": true,
+      "role": "result-figure"
     },
     {
       "file": "figure-6-pdf.png",
@@ -167,7 +172,8 @@
       "pdfSha256": "ba9094fe73db9bf515d47ae8b2d502fee9d8a6c7b1327e197ddb160f4c63b94a",
       "scale": 3,
       "explanation": "complete",
-      "visuallyVerified": true
+      "visuallyVerified": true,
+      "role": "result-figure"
     },
     {
       "file": "table-1-pdf.png",
@@ -184,7 +190,8 @@
       "pdfSha256": "ba9094fe73db9bf515d47ae8b2d502fee9d8a6c7b1327e197ddb160f4c63b94a",
       "scale": 3,
       "explanation": "complete",
-      "visuallyVerified": true
+      "visuallyVerified": true,
+      "role": "result-table"
     }
   ]
 }

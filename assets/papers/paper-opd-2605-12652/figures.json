@@ -19,7 +19,8 @@
       "scale": 3,
       "explanation": "complete",
       "visuallyVerified": true,
-      "reportSection": "2. 方法与实现机制"
+      "reportSection": "2. 方法与实现机制",
+      "role": "method"
     },
     {
       "file": "table-1-pdf.png",
@@ -37,7 +38,8 @@
       "scale": 3,
       "explanation": "complete",
       "visuallyVerified": true,
-      "reportSection": "4. 结果与图表解读"
+      "reportSection": "4. 结果与图表解读",
+      "role": "result-table"
     },
     {
       "file": "table-4-pdf.png",
@@ -55,7 +57,8 @@
       "scale": 3,
       "explanation": "complete",
       "visuallyVerified": true,
-      "reportSection": "4. 结果与图表解读"
+      "reportSection": "4. 结果与图表解读",
+      "role": "result-table"
     },
     {
       "file": "figure-4-pdf.png",
@@ -73,7 +76,8 @@
       "scale": 3,
       "explanation": "complete",
       "visuallyVerified": true,
-      "reportSection": "4. 结果与图表解读"
+      "reportSection": "4. 结果与图表解读",
+      "role": "result-figure"
     },
     {
       "file": "table-9-pdf.png",
@@ -91,7 +95,8 @@
       "scale": 3,
       "explanation": "complete",
       "visuallyVerified": true,
-      "reportSection": "3. 实验设置与算力"
+      "reportSection": "3. 实验设置与算力",
+      "role": "experiment-table"
     }
   ],
   "verificationNote": "Compared each crop with the pinned PDF page; labels, six plotted panels, axes, table headers and final rows were checked. Captions are in report text."

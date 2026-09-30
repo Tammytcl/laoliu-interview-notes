@@ -226,7 +226,8 @@
       "pdfSha256": "aee5e07a802e8dfd2a386374c94fd61d1d056cb7e1e0fec4f28e8120ff5d8505",
       "scale": 3,
       "explanation": "complete",
-      "visuallyVerified": true
+      "visuallyVerified": true,
+      "role": "method"
     },
     {
       "file": "figure-5-pdf.png",
@@ -243,7 +244,8 @@
       "pdfSha256": "aee5e07a802e8dfd2a386374c94fd61d1d056cb7e1e0fec4f28e8120ff5d8505",
       "scale": 3,
       "explanation": "complete",
-      "visuallyVerified": true
+      "visuallyVerified": true,
+      "role": "result-figure"
     },
     {
       "file": "figure-6-pdf.png",
@@ -260,7 +262,8 @@
       "pdfSha256": "aee5e07a802e8dfd2a386374c94fd61d1d056cb7e1e0fec4f28e8120ff5d8505",
       "scale": 3,
       "explanation": "complete",
-      "visuallyVerified": true
+      "visuallyVerified": true,
+      "role": "result-figure"
     },
     {
       "file": "table-1-pdf.png",
@@ -277,7 +280,8 @@
       "pdfSha256": "aee5e07a802e8dfd2a386374c94fd61d1d056cb7e1e0fec4f28e8120ff5d8505",
       "scale": 3,
       "explanation": "complete",
-      "visuallyVerified": true
+      "visuallyVerified": true,
+      "role": "result-table"
     },
     {
       "file": "table-2-pdf.png",
@@ -294,7 +298,8 @@
       "pdfSha256": "aee5e07a802e8dfd2a386374c94fd61d1d056cb7e1e0fec4f28e8120ff5d8505",
       "scale": 3,
       "explanation": "complete",
-      "visuallyVerified": true
+      "visuallyVerified": true,
+      "role": "result-table"
     }
   ]
 }

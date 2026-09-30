@@ -9,7 +9,7 @@ import { spawn } from 'node:child_process';
 import { paperCacheStatus, cleanPaperCache } from '../scripts/paper-cache.mjs';
 import { renderMarkdown } from '../scripts/content.mjs';
 import { parsePaperContent } from '../scripts/papers-content.mjs';
-import { auditPapers } from '../scripts/paper-quality.mjs';
+import { auditPapers, checkPaperQuality } from '../scripts/paper-quality.mjs';
 const root = fileURLToPath(new URL('../', import.meta.url));
 
 test('DDPM 深度门槛覆盖新模板与标记发布的报告', async () => {
@@ -21,7 +21,30 @@ test('DDPM 深度门槛覆盖新模板与标记发布的报告', async () => {
   const reports = all.filter(p => p.marked && !p.draft);
   assert.equal(reports.length, 7);
   assert.equal(all.filter(p => !p.draft && !p.marked).length, 32);
+  assert.equal(all.filter(p => !p.draft && !p.marked && p.errors.length).length, 32);
   assert.deepEqual(reports.flatMap(p => p.errors.map(error => `${p.id}: ${error}`)), []);
+});
+
+test('发布门槛拒绝把结果图当方法图，或省略论文原表', async t => {
+  const fixture = await mkdtemp(join(tmpdir(), 'paper-evidence-'));
+  t.after(() => rm(fixture, { recursive: true, force: true }));
+  const id = 'paper-opd-2606-30406';
+  const source = join('content/papers/llm', id + '.md');
+  const assets = join('assets/papers', id);
+  await mkdir(join(fixture, 'content/papers/llm'), { recursive: true });
+  await cp(join(root, source), join(fixture, source));
+  await cp(join(root, assets), join(fixture, assets), { recursive: true });
+  const file = join(fixture, source);
+  const manifestFile = join(fixture, assets, 'figures.json');
+  const manifest = JSON.parse(await readFile(manifestFile, 'utf8'));
+  assert.deepEqual((await checkPaperQuality(file, fixture)).errors, []);
+  manifest.figures.find(f => f.role === 'method').role = 'result-figure';
+  await writeFile(manifestFile, JSON.stringify(manifest));
+  assert.match((await checkPaperQuality(file, fixture)).errors.join('；'), /不能以结果图冒充方法图/);
+  manifest.figures.find(f => f.role === 'result-figure').role = 'method';
+  for (const f of manifest.figures.filter(f => f.role === 'result-table')) f.role = 'result-figure';
+  await writeFile(manifestFile, JSON.stringify(manifest));
+  assert.match((await checkPaperQuality(file, fixture)).errors.join('；'), /缺少登记用途的原论文表格截图/);
 });
 
 test('旧报告只保留冻结版本；编辑或新增必须补齐深度证据', async t => {

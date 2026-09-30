@@ -22,6 +22,7 @@
     "papers:citations": "node scripts/paper-citations.mjs",
     "papers:pdf-figures": "python scripts/paper-pdf-figures.py",
     "papers:quality": "node scripts/paper-quality.mjs",
+    "papers:quality:strict": "node scripts/paper-quality.mjs --strict",
     "papers:check-live": "node scripts/check-paper-live.mjs"
   },
   "dependencies": {

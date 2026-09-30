@@ -32,10 +32,12 @@
 
 ## 完整整理流程
 
+发布顺序以[图表证据与发布流程](./paper-evidence-workflow.md)为准：候选先在 Daily，论文草稿先锁定版本和图表用途，再裁图、写报告、核对和发布。旧版短报告的冻结名单不是精读完成凭证；全库是否完成用 `npm run papers:quality:strict` 检查。
+
 1. **检索与筛选。** Daily 记检索方向、来源、时间、候选与纳入 / 排除理由。先说明为什么与当前问题有关，不靠流行度直接收录。
 2. **建稳定记录。** 执行 `npm run new:paper -- paper-my-topic llm`，选择 diffusion / llm / agent / infra。默认 draft，不覆盖同名记录。
 3. **保存固定版本资料。** `npm run papers:fetch -- paper-my-topic 2305.13245v3` 下载 LaTeX、PDF、HTML。获取失败写入 manifest，不能暗中替换另一个版本。查看主 `.tex`、图文件、`.bib` 和附录；不自动执行不可信 LaTeX 命令。
-4. **提取证据资产。** 先对照固定版本 PDF，人工登记 `scripts/figure-crops/<id>.json` 的页码和裁剪区域，再执行 `npm run papers:pdf-figures -- paper-my-topic`。长期资产放在 `assets/papers/paper-my-topic/`，逐张核对图例、坐标、子图、表头及末行。源码中独立原图也可直接使用并登记出处；`papers:figures` 的 HTML 截图仅作辅助，必须与 PDF 对照后才能采用。工具不生成精读结论，不提交整篇 PDF。
+4. **提取证据资产。** 先对照固定版本 PDF，人工登记 `scripts/figure-crops/<id>.json` 的页码、裁剪区域和 `role`（`method` / `experiment-table` / `result-table` / `result-figure`），再执行 `npm run papers:pdf-figures -- paper-my-topic`。长期资产放在 `assets/papers/paper-my-topic/`，逐张核对图例、坐标、子图、表头及末行。源码中的独立原图与 `papers:figures` 的 HTML 截图可辅助定位，但当前发布门槛使用与固定 PDF 核对的裁图。工具不生成精读结论，不提交整篇 PDF。
 5. **建立问题和方法解释。** 先写主要瓶颈、代表前作与差异，再沿输入输出解释机制。公式注明变量与假设，代码注明原始算法或教学重述；源代码的 tensor layout 必须另核。
 6. **核对实验账本。** 把预训练、微调、prompt 示例、benchmark 和负载数据分开。逐项核对模型、数据、评测 split、指标、超参、生成设置、硬件、训练时间与代码版本。缺项写“原文未披露”，并说明对复现的影响。没有训练环节就直接写“未训练新模型”。
 7. **逐图理解。** 每张主图 / 表登记研究问题、轴 / 图例、对照、主要观察、支持结论与限制；图的插入位置服务于解释。较多附录图可以用清单登记未完成范围，不声称全部解读。完成后把 `figures.json` 对应图的 `explanation` 改成 `complete`，补 `reportSection` 与说明。
@@ -79,7 +81,7 @@ GQA 已按 v3 源码与原表核对，正文解释全部 6 张主图和 Table 1�
 
 `published` 必须写论文首次公开日期，arXiv 论文取 v1 日期；会议名称和年份独立记录。论文库按 published 降序，报告按报告日期降序，updated 只表示报告整理时间。
 
-`method_figure` 指向已核对、已保存的原论文方法图，`method_caption` 写图号与内容。方法图用于库中预览，正文仍需详细解释图；没有合适方法图时可以留 null，不生成假图。正式报告采用 template_version: 4。
+`method_figure` 指向已核对、已保存且在图表清单中标为 `method` 的原论文方法图，`method_caption` 写图号与内容。方法图用于库中预览，正文仍需详细解释图；草稿找不到合适方法图时先留 null，不生成假图或把结果图冒充方法图。新发布报告采用 `template_version: 5`，历史 v4 记录保留兼容。
 
 方法阅读同时做源码伴读。先确定官方代码是否真的发布了论文方法，再固定 commit。选择 2–4 个核心函数，沿真实调用链解释输入输出、张量形状或系统状态、重要分支、对应公式与为何有效。明确原始实现、历史 release、现代框架端点或第三方复现；一个框架链接不等于完整复现包。示例伪代码标为教学重述，不能代替核心函数链接。静态核读不写成已运行验证。下载源码可放在 .paper-cache/<id>/code 中，清理缓存不会删除报告里的解释和永久链接。
 

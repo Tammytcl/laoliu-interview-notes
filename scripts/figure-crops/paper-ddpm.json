@@ -11,7 +11,8 @@
         66,
         460,
         121
-      ]
+      ],
+      "role": "method"
     },
     {
       "name": "figure-5-pdf.png",
@@ -21,7 +22,8 @@
         180,
         505,
         287
-      ]
+      ],
+      "role": "result-figure"
     },
     {
       "name": "figure-6-pdf.png",
@@ -31,7 +33,8 @@
         409,
         487,
         484
-      ]
+      ],
+      "role": "result-figure"
     },
     {
       "name": "table-1-pdf.png",
@@ -41,7 +44,8 @@
         72,
         342,
         268
-      ]
+      ],
+      "role": "result-table"
     },
     {
       "name": "table-2-pdf.png",
@@ -51,7 +55,8 @@
         90,
         510,
         249
-      ]
+      ],
+      "role": "result-table"
     }
   ]
 }

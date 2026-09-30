@@ -19,7 +19,8 @@
       "scale": 3,
       "explanation": "complete",
       "visuallyVerified": true,
-      "reportSection": "2. 方法与实现机制"
+      "reportSection": "2. 方法与实现机制",
+      "role": "method"
     },
     {
       "file": "table-2-pdf.png",
@@ -37,7 +38,8 @@
       "scale": 3,
       "explanation": "complete",
       "visuallyVerified": true,
-      "reportSection": "4. 结果与图表解读"
+      "reportSection": "4. 结果与图表解读",
+      "role": "result-table"
     },
     {
       "file": "figure-2-pdf.png",
@@ -55,7 +57,8 @@
       "scale": 3,
       "explanation": "complete",
       "visuallyVerified": true,
-      "reportSection": "4. 结果与图表解读"
+      "reportSection": "4. 结果与图表解读",
+      "role": "result-figure"
     },
     {
       "file": "table-3-pdf.png",
@@ -73,7 +76,8 @@
       "scale": 3,
       "explanation": "complete",
       "visuallyVerified": true,
-      "reportSection": "4. 结果与图表解读"
+      "reportSection": "4. 结果与图表解读",
+      "role": "result-table"
     }
   ],
   "verificationNote": "Compared each crop with its pinned PDF page; labels, all plotted panels, axes, headers and final table rows were checked. Captions are provided by report text."
