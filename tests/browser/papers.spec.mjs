@@ -6,9 +6,12 @@ test('论文库、两行任务筛选、Daily 与专题报告相互链接', async
   const data = await (await page.request.get('/data.json')).json();
   await expect(page.locator('.paper-card')).toHaveCount(data.papers.length);
   expect(data.papers.map(p => p.published)).toEqual([...data.papers.map(p => p.published)].sort().reverse());
-  await expect(page.locator('.paper-citations')).toHaveCount(4);
-  await expect(page.locator('.paper-method-preview img')).toHaveCount(data.papers.length);
-  await expect.poll(() => page.locator('.paper-method-preview img').evaluateAll(images => images.every(i => i.complete && i.naturalWidth > 0))).toBe(true);
+  await expect(page.locator('.paper-citations')).toHaveCount(data.papers.length);
+  await expect(page.locator('.paper-method-preview img')).toHaveCount(data.papers.filter(p => p.methodFigure).length);
+  for (const preview of await page.locator('.paper-method-preview img').all()) {
+    await preview.scrollIntoViewIfNeeded();
+    await expect.poll(() => preview.evaluate(img => img.complete && img.naturalWidth > 0)).toBe(true);
+  }
   const gqa = page.locator('.paper-card').filter({ has: page.locator('h3 a[href="#paper=paper-gqa"]') });
   await expect(gqa.locator('.paper-category')).toHaveCount(1);
   await expect(gqa.locator('.paper-task')).toHaveText('文本生成');
@@ -22,7 +25,7 @@ test('论文库、两行任务筛选、Daily 与专题报告相互链接', async
   await page.reload();
   await expect(page.locator('[data-paper-task="image-generation"]')).toHaveAttribute('aria-pressed', 'true');
   await page.locator('[data-paper-area="language"]').click();
-  await expect(page.locator('.paper-card')).toHaveCount(3);
+  await expect(page.locator('.paper-card')).toHaveCount(data.papers.filter(p => p.areas.includes('language')).length);
   await expect(page.locator('[data-paper-task=""]')).toHaveAttribute('aria-pressed', 'true');
   await page.locator('#paper-search').fill('no-match-paper-123');
   await expect(page.locator('[data-paper-reset]')).toBeVisible();
@@ -62,8 +65,21 @@ test('正式报告显示英文元数据、五模块目录、数学公式与可�
   await page.reload();
   await expect(page.locator('[data-paper-star], [data-paper-stage], #paper-stage, #paper-starred, [data-reading-export], [data-reading-import]')).toHaveCount(0);
   await page.goto('/#view=papers');
-  await expect(page.locator('.paper-card')).toHaveCount(4);
+  const data = await (await page.request.get('/data.json')).json();
+  await expect(page.locator('.paper-card')).toHaveCount(data.papers.length);
   await expect(page.locator('[data-paper-star], #paper-stage, #paper-starred, .paper-backup')).toHaveCount(0);
+});
+
+test('OPD 专题精读展示方法图、实验结果和五模块目录', async ({ page }) => {
+  await page.goto('/#paper=paper-opd-2609-30837');
+  await expect(page.locator('#paper-space h1')).toHaveText('MOPD-Router: Rethinking Teacher Routing in Multi-Teacher On-Policy Distillation');
+  await expect(page.locator('.publication-toc button')).toHaveCount(5);
+  await expect(page.locator('.publication-body')).toContainText('ExpertAlign');
+  await expect(page.locator('.publication-body')).toContainText('38.58');
+  await expect(page.locator('.paper-figure-button')).toHaveCount(1);
+  await page.locator('.paper-figure-button').click();
+  await expect(page.locator('#figure-caption')).toContainText('Figure 1');
+  await expect.poll(() => page.locator('#figure-full').evaluate(img => img.complete && img.naturalWidth > 0)).toBe(true);
 });
 
 test('工作台缓存按钮确认后请求清理，普通预览没有写接口', async ({ page }) => {

@@ -26,14 +26,14 @@ draft: false
 
 **检索截止日：2026-09-30（UTC）。** 候选通过 arXiv 官方 API / 论文页面检索与作者公开 HTML 核对；检索词覆盖 `on-policy distillation`、`on-policy self-distillation`、`cross-tokenizer`、`multi-teacher`、`MOPD` 等。先筛标题/摘要，再按是否直接涉及 LLM、student-generated state 和本专题的两个重点收录；同主题的一般图像/视频 diffusion、speech-only、多模态感知及只做通用 KD 的工作不计为核心条目。为理解技术边界，保留两篇早期基线与一篇 byte-interface 相邻工作。最终 **35 篇**：2 篇奠基工作 + 33 篇 2026 年论文或综述，低于 50 篇上限。
 
-这是可更新的高相关专题集合，不声称穷尽所有 2026 预印本、会议论文、工业技术报告或尚未进入 arXiv 索引的工作。特别是 2026 年 9 月底提交的论文还很新；收录只表示它值得阅读，不等于同行评审通过或结论已经复现。所有数据配置和机构字段以对应论文页面为准；机构从作者公开 HTML 页面提取，未列出的条目明确标注未披露。每篇条目目前是统一格式的**资料整理卡片**，而不是宣称完成源码逐函数分析的精读报告。
+这是可更新的高相关专题集合，不声称穷尽所有 2026 预印本、会议论文、工业技术报告或尚未进入 arXiv 索引的工作。特别是 2026 年 9 月底提交的论文还很新；收录只表示它值得阅读，不等于同行评审通过或结论已经复现。所有数据配置和机构字段以对应论文页面为准；机构从作者公开 HTML 页面提取，未列出的条目明确标注未披露。全部 35 篇条目现已按“背景、方法、实验设置、结果、局限”组织为独立阅读报告，并分别标注能否核读官方源码。MOPD 与跨 tokenizer 核心论文补充了原文图或代码入口；尚未公开实现的论文只依据原文说明，不虚构函数级复现。
 
 ## 3. 统一方法谱系：OPD 具体“on-policy”在哪里？
 
-令提示为 $x$，student 策略为 $\pi_	heta$，teacher 为 $q_\phi$。学生生成 $y_{1:T}\sim\pi_	heta(\cdot\mid x)$。在 student 已走过的前缀 $y_{<t}$ 上，teacher 可以给完整下一 token 分布 $q_\phi(\cdot\mid x,y_{<t})$，或只给被采样 token 的 log probability、局部表示、偏好/回报。最简分布式目标可以写作：
+令提示为 $x$，student 策略为 $\pi_\theta$，teacher 为 $q_\phi$。学生生成 $y_{1:T}\sim\pi_\theta(\cdot\mid x)$。在 student 已走过的前缀 $y_{<t}$ 上，teacher 可以给完整下一 token 分布 $q_\phi(\cdot\mid x,y_{<t})$，或只给被采样 token 的 log probability、局部表示、偏好/回报。最简分布式目标可以写作：
 
 $$
-\mathcal L_{\mathrm{OPD}}=\mathbb E_{y\sim\pi_	heta}\left[\sum_{t=1}^{T} w_t\,D\!\left(q_\phi(\cdot\mid x,y_{<t}),\pi_	heta(\cdot\mid x,y_{<t})ight)ight].
+\mathcal L_{\mathrm{OPD}}=\mathbb E_{y\sim\pi_\theta}\left[\sum_{t=1}^{T}w_t D\!\left(q_\phi(\cdot\mid x,y_{<t}),\pi_\theta(\cdot\mid x,y_{<t})\right)\right].
 $$
 
 这里公式只表达共同骨架，**不规定 KL 方向、是否对所有词表求和、权重 $w_t$、序列归一化、temperature、stop token 或 rollout 策略**。这些选择会改变训练行为。另一路把 teacher/student 的 sampled-token log-ratio 视作 token reward，再做带 baseline/credit assignment 的 policy-gradient 更新；它与直接最小化完整分布 KL 在估计器、方差和支持集上都不等价。
@@ -138,7 +138,7 @@ OPD 论文常见 benchmark 包括数学推理、代码、通用指令和多轮�
 
 ## 9. 论文库收录清单与持续更新
 
-以下每条都是论文库中的独立条目，可按“语言 → 训练与适配 / 推理 / Agent”筛选；此处按问题分组，库中仍按论文发表时间从近到远排序。每条卡片都保留英文原题、作者、arXiv 页面与可核机构，详情页标明资料整理的证据范围。
+以下每条都是论文库中的独立条目，可按“语言 → 训练与适配 / 推理 / Agent”筛选；此处按问题分组，库中仍按论文发表时间从近到远排序。每条卡片都保留英文原题、作者、arXiv 页面与可核机构，详情页注明原文、图表与源码核查范围；综述和离线跨 tokenizer KD 等相邻工作也标出证据边界。
 
 ### 基础与定义
 
@@ -186,5 +186,6 @@ OPD 论文常见 benchmark 包括数学推理、代码、通用指令和多轮�
 
 **更新日志**
 
-- 2026-09-30：建立 35 篇 OPD 专题集合；核对 arXiv 官方元数据/作者页面。加入 MOPD 双重命名说明与 tokenizer 路线分层。9 月底新稿保留为待精读候选。
-- 下次更新：核实论文版本/会议状态和 GitHub 官方实现；逐篇补充模型、数据、benchmark、optimizer、硬件、训练成本与关键图；优先对 Multi-Teacher MOPD、ESCD、BPM 做完整精读。未披露项目将如实保留。
+- 2026-09-30：建立 35 篇 OPD 专题集合；核对 arXiv 官方元数据/作者页面。加入 MOPD 双重命名说明与 tokenizer 路线分层。
+- 2026-09-30：将 35 篇摘要式收录扩展为五模块阅读报告；逐篇补入方法、实验口径、关键结果与局限。优先核读 MOPD 和跨 tokenizer 的原图与部分官方源码，标明其余代码的核查范围。
+- 后续维护：论文更新版本时核对结论与表格；代码新公开后补函数级核读；硬件、训练成本及更多原图按原文披露逐项补全，未披露项继续留空。
