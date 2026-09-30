@@ -99,7 +99,7 @@ try {
       setTimeout(() => $('#paper-search')?.focus(), 0); return;
     }
     if (e.key === '/' && !e.ctrlKey && !e.metaKey && !['INPUT', 'TEXTAREA', 'SELECT'].includes(document.activeElement.tagName) && !$('#guide').open) { e.preventDefault(); if (location.hash) location.hash = ''; setTimeout(() => $('#search').focus(), 0); }
-    if (e.key === 'Escape' && !$('#guide').open && location.hash) location.hash = $('#paper-space .back-link')?.getAttribute('href') || '';
+    if (e.key === 'Escape' && !$('#guide').open && !$('#paper-figure-dialog')?.open && location.hash) location.hash = $('#paper-space .back-link')?.getAttribute('href') || '';
   });
 
 } catch (error) {

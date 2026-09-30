@@ -1,0 +1,77 @@
+{
+  "paperId": "paper-gqa",
+  "arxivVersion": "2305.13245v3",
+  "coordinateSystem": "PDF points, top-left origin",
+  "crops": [
+    {
+      "name": "figure-1-pdf.png",
+      "page": 1,
+      "box": [
+        305,
+        590,
+        527,
+        707
+      ]
+    },
+    {
+      "name": "figure-2-pdf.png",
+      "page": 2,
+      "box": [
+        70,
+        70,
+        525,
+        213
+      ]
+    },
+    {
+      "name": "figure-3-pdf.png",
+      "page": 3,
+      "box": [
+        305,
+        225,
+        527,
+        408
+      ]
+    },
+    {
+      "name": "figure-4-pdf.png",
+      "page": 4,
+      "box": [
+        70,
+        68,
+        287,
+        190
+      ]
+    },
+    {
+      "name": "figure-5-pdf.png",
+      "page": 4,
+      "box": [
+        70,
+        300,
+        288,
+        449
+      ]
+    },
+    {
+      "name": "figure-6-pdf.png",
+      "page": 4,
+      "box": [
+        305,
+        65,
+        531,
+        212
+      ]
+    },
+    {
+      "name": "table-1-pdf.png",
+      "page": 3,
+      "box": [
+        70,
+        68,
+        525,
+        154
+      ]
+    }
+  ]
+}

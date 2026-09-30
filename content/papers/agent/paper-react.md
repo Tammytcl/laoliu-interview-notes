@@ -7,8 +7,10 @@ affiliations: ["Department of Computer Science, Princeton University", "Google R
 author_affiliations: [[1], [2], [2], [2], [2], [1], [2]]
 venue: "ICLR 2023"
 year: 2023
-research_categories: [reasoning-decision]
-method_figure: "./assets/papers/paper-react/figure-1.png"
+areas: [language]
+tasks: [reasoning, agents, retrieval]
+published: 2022-10-06
+method_figure: "./assets/papers/paper-react/figure-1-pdf.png"
 method_caption: "Figure 1 · 推理、行动与环境反馈"
 direction: agent
 paper_url: "https://arxiv.org/abs/2210.03629v3"
@@ -16,10 +18,10 @@ github_url: "https://github.com/ysymyth/ReAct"
 code_note: "Author-maintained code and prompts; PaLM model access and training resources are separate."
 evidence: 已核原文
 note_ids: [agent-tool-design, agent-evaluation]
-tags: [Agent, Tool Use, Reasoning, Prompting, ReAct]
+tags: [LLM, Agent, Tool Use, Reasoning, Prompting, ReAct]
 updated: 2026-09-30
 summary: "把语言推理与环境动作交错组织，以外部观察修正后续行动；通过问答和交互任务检验这种闭环。"
-template_version: 3
+template_version: 4
 draft: false
 ---
 
@@ -50,9 +52,9 @@ draft: false
 
 这段流程是整理后的实现说明。对知识型问答，原文采用密集 thought-action-observation；对长交互任务，thought 可以稀疏出现，由模型在重要位置生成。把它实现成“每一步强制一个长 thought”会改变原文设置与成本。
 
-![Figure 1 · 推理、动作与环境观察的组织方式](./assets/papers/paper-react/figure-1.png)
+![Figure 1 · 推理、动作与环境观察的组织方式](./assets/papers/paper-react/figure-1-pdf.png)
 
-**Figure 1 解读。** 图中将 Standard、CoT、Act 与 ReAct 放在同一任务下比较：Standard 直接给答案，CoT 展开内部推理，Act 有工具动作但没有语言推理，ReAct 同时利用两者。另一部分展示交互环境中稀疏 thought 如何辅助计划。这里最需要分辨的是：Observation 来自环境，不应由语言模型自由续写成“假装工具成功”。图是行为示例，不是总体成功率统计。[图源](https://arxiv.org/html/2210.03629v3#S1.F1)。
+**Figure 1 解读。** 图中将 Standard、CoT、Act 与 ReAct 放在同一任务下比较：Standard 直接给答案，CoT 展开内部推理，Act 有工具动作但没有语言推理，ReAct 同时利用两者。另一部分展示交互环境中稀疏 thought 如何辅助计划。这里最需要分辨的是：Observation 来自环境，不应由语言模型自由续写成“假装工具成功”。图是行为示例，不是总体成功率统计。[图源](https://arxiv.org/pdf/2210.03629v3#page=2)。
 
 知识检索环境包含三个动作：`search[entity]` 返回页面前五句或相近实体；`lookup[string]` 在当前页面查找下一个含该字符串的句子；`finish[answer]` 返回答案。它比现代全文检索器弱，作者刻意用这种环境观察语言推理如何指导检索。因此检索效果、模型推理和工具设计共同影响成绩。
 
@@ -95,21 +97,21 @@ HotpotQA 用 exact match，FEVER 看事实判断准确率；ALFWorld 与 WebShop
 
 ## 4. 结果与图表解读
 
-![Table 1 · PaLM-540B 在 HotpotQA 与 FEVER 上的 prompting 结果](./assets/papers/paper-react/table-1.png)
+![Table 1 · PaLM-540B 在 HotpotQA 与 FEVER 上的 prompting 结果](./assets/papers/paper-react/table-1-pdf.png)
 
-ReAct 在 HotpotQA 的 EM 为 27.4，CoT 为 29.4；在 FEVER 为 60.9，CoT 为 56.3。它在两项任务上优于 Act，但并非在 HotpotQA 上单独胜过 CoT。原文混合策略在 HotpotQA 上达到 35.1（ReAct→CoT-SC），在 FEVER 上另一切换方向达到 64.6。比较时还应记住 CoT-SC 的多次采样成本，不把更高分直接当成单次调用更高效。[表源](https://arxiv.org/html/2210.03629v3#S3.T1)。
+ReAct 在 HotpotQA 的 EM 为 27.4，CoT 为 29.4；在 FEVER 为 60.9，CoT 为 56.3。它在两项任务上优于 Act，但并非在 HotpotQA 上单独胜过 CoT。原文混合策略在 HotpotQA 上达到 35.1（ReAct→CoT-SC），在 FEVER 上另一切换方向达到 64.6。比较时还应记住 CoT-SC 的多次采样成本，不把更高分直接当成单次调用更高效。[表源](https://arxiv.org/pdf/2210.03629v3#page=5)。
 
-![Figure 3 · prompting 与轨迹微调在不同 PaLM 规模上的结果](./assets/papers/paper-react/figure-3.png)
+![Figure 3 · prompting 与轨迹微调在不同 PaLM 规模上的结果](./assets/papers/paper-react/figure-3-pdf.png)
 
-**Figure 3 解读。** 对照模型规模及 prompting / finetuning 设置，观察加入 reasoning+action 轨迹后小模型是否获益。图支持轨迹训练能提升结果，但微调数据来自答对轨迹筛选，训练步数也随方法变化，不能把图中的差异全归因于 thought 字段本身。它与主表的 frozen-540B prompting 属于不同实验。[图源](https://arxiv.org/html/2210.03629v3#S3.F3)。
+**Figure 3 解读。** 对照模型规模及 prompting / finetuning 设置，观察加入 reasoning+action 轨迹后小模型是否获益。图支持轨迹训练能提升结果，但微调数据来自答对轨迹筛选，训练步数也随方法变化，不能把图中的差异全归因于 thought 字段本身。它与主表的 frozen-540B prompting 属于不同实验。[图源](https://arxiv.org/pdf/2210.03629v3#page=7)。
 
-![Table 3/4 · ALFWorld 与 WebShop 的交互成绩](./assets/papers/paper-react/table-4.png)
+![Table 3/4 · ALFWorld 与 WebShop 的交互成绩](./assets/papers/paper-react/tables-3-4-pdf.png)
 
 ALFWorld 的 best ReAct trial 达到 71%，best Act 为 45%，BUTLER 为 37%；这些是 best-trial 比较，并不等于所有 prompt 都达到 71%。WebShop 上 ReAct 的成功率为 40.0，Act 为 30.1，专家人类为 59.6。读表时要区分 WebShop 的 score 与 success rate；“提升约 10 个百分点”指成功率口径，不是所有任务平均提升 10%。[原文交互实验](https://arxiv.org/html/2210.03629v3#S4)。
 
-![Figure 5 · 人对 ReAct 轨迹的中途行为修正](./assets/papers/paper-react/figure-5.png)
+![Figure 5 · 人对 ReAct 轨迹的中途行为修正](./assets/papers/paper-react/figure-5-pdf.png)
 
-**Figure 5 解读。** 这是一条 ALFWorld 轨迹修正示例：人调整中间语言状态后，后续行动能随之变化。它说明显式轨迹提供干预点，并不证明模型产生的 thought 是其内部真实因果解释，也不等于所有失败都能通过改一句话解决。[图源](https://arxiv.org/html/2210.03629v3#A1.F5)。
+**Figure 5 解读。** 这是一条 ALFWorld 轨迹修正示例：人调整中间语言状态后，后续行动能随之变化。它说明显式轨迹提供干预点，并不证明模型产生的 thought 是其内部真实因果解释，也不等于所有失败都能通过改一句话解决。[图源](https://arxiv.org/pdf/2210.03629v3#page=15)。
 
 原文还人工分析 200 条成功 / 失败轨迹，发现 CoT 的事实幻觉与 ReAct 的检索失败、错误推理有不同分布。ReAct 的外部证据减少了一类问题，却引入了工具和环境依赖。此轮正文重点解释 Figure 1/3/5 与主结果表，其余图与附录轨迹在图表清单中保留待补状态。
 
@@ -126,3 +128,5 @@ ALFWorld 的 best ReAct trial 达到 71%，best Act 为 45%，BUTLER 为 37%；�
 本报告参考 [Shunyu Yao 与 Yuan Cao 的作者讲解](https://research.google/blog/react-synergizing-reasoning-and-acting-in-language-models/)，吸收推理驱动行动、观察反过来修改计划的双向解释；保留原文中密集与稀疏 thought 的区别。解释已融入问题与方法部分；数字、图表和实验口径回到固定版本原文核对。
 
 源码静态核读固定于 `6bdb3a1fd38b8188fc7ba4102969fe483df8fdc9`。核心文件：[hotpotqa.ipynb](https://github.com/ysymyth/ReAct/blob/6bdb3a1fd38b8188fc7ba4102969fe483df8fdc9/hotpotqa.ipynb)；[wikienv.py](https://github.com/ysymyth/ReAct/blob/6bdb3a1fd38b8188fc7ba4102969fe483df8fdc9/wikienv.py)。没有执行代码或重新训练。
+
+**图表来源。** 本报告使用固定版本原论文 PDF 的核对裁剪图，不重新排版原表；对应 PDF 页码、裁剪区域和文件校验值记录在 assets/papers/paper-react/figures.json。LaTeX 源码保留在本地缓存，用于核查图表及上下文。

@@ -7,19 +7,22 @@ affiliations: ["Google Research", "University of Southern California"]
 author_affiliations: [[1], [1], [1, 2], [1], [1], [1]]
 venue: "EMNLP 2023"
 year: 2023
-research_categories: [model-architecture, systems-optimization]
-method_figure: "./assets/papers/paper-gqa/figure-2.png"
+areas: [language]
+tasks: [text-generation]
+published: 2023-05-22
+method_figure: "./assets/papers/paper-gqa/figure-2-pdf.png"
 method_caption: "Figure 2 · Query heads 与共享 KV groups"
 direction: llm
+openalex_id: W4389518760
 paper_url: "https://arxiv.org/abs/2305.13245v3"
 github_url: "https://github.com/google/flaxformer"
 code_note: "Paper-linked implementation framework; not a standalone reproduction package."
 evidence: 已核原文
 note_ids: [mha-gqa-mqa, kv-cache]
-tags: [Attention, KV Cache, Uptraining, Inference, T5]
+tags: [LLM, Attention, KV Cache, Uptraining, Inference, T5]
 updated: 2026-09-30
 summary: "通过分组共享 K/V 与已有 checkpoint 的继续预训练，在生成质量、KV 容量和解码延迟之间建立可调折中。"
-template_version: 3
+template_version: 4
 draft: false
 ---
 
@@ -56,9 +59,9 @@ $$
 
 其中 $M$ 是相应任务的 mask；decoder self-attention 要遵守因果关系，cross-attention 的 K/V 来自 encoder 输出。$G=1$ 是 MQA，$G=H$ 是 MHA，中间取值才是通常讨论的 GQA。本文将改动用于 **decoder self-attention 和 cross-attention**，不改变 encoder self-attention：encoder 表示并行计算，不是同一种逐 token 带宽瓶颈。
 
-![Figure 2 · MHA、MQA 与 GQA 的 query / key / value 共享关系](./assets/papers/paper-gqa/figure-2.png)
+![Figure 2 · MHA、MQA 与 GQA 的 query / key / value 共享关系](./assets/papers/paper-gqa/figure-2-pdf.png)
 
-**Figure 2 解读。** 三幅结构图比较的是“有多少套 K/V 对应这些 query”。MHA 中每个头独立，MQA 中所有 query 汇聚到同一组 K/V，GQA 中各组内部共享。应沿连线追踪一个 query 读到哪套 K/V，而不是把图中的多个 query 当作同一个注意力分布。这张图说明结构与容量关系，本身不证明质量恢复，也不提供实测加速比。[图源：原文 Figure 2](https://arxiv.org/html/2305.13245v3#S2.F2)。
+**Figure 2 解读。** 三幅结构图比较的是“有多少套 K/V 对应这些 query”。MHA 中每个头独立，MQA 中所有 query 汇聚到同一组 K/V，GQA 中各组内部共享。应沿连线追踪一个 query 读到哪套 K/V，而不是把图中的多个 query 当作同一个注意力分布。这张图说明结构与容量关系，本身不证明质量恢复，也不提供实测加速比。[图源：原文 Figure 2](https://arxiv.org/pdf/2305.13245v3#page=2)。
 
 ### 从 MHA checkpoint 转换并继续训练
 
@@ -70,9 +73,9 @@ $$
 
 Q 投影保留；模型需要新的 K/V 参数布局。均值池化尽量保留原 checkpoint 中的信息，但它改变了模型函数，因此作者还按照原预训练配方进行 uptraining，让其他参数与新的共享结构共同适应。这里的 $\alpha=0.05$ 表示额外预训练步数约为原预训练的 5%，不是每个用户都能用“原模型总成本的 5%”完成任何结构转换。
 
-![Figure 1 · 原 MHA 的 K/V 投影均值池化，得到共享投影](./assets/papers/paper-gqa/figure-1.png)
+![Figure 1 · 原 MHA 的 K/V 投影均值池化，得到共享投影](./assets/papers/paper-gqa/figure-1-pdf.png)
 
-**Figure 1 解读。** 左右比较转换前后投影矩阵；mean pooling 发生在权重的头维度，不是对当前请求的 token 做池化。图画的是 MHA→MQA 的单组示例，推广到 GQA 时在每个组内部执行相同操作。结构转换只是第一步，后面的继续预训练不能省略为一个 reshape。[图源：原文 Figure 1](https://arxiv.org/html/2305.13245v3#S2.F1)。
+**Figure 1 解读。** 左右比较转换前后投影矩阵；mean pooling 发生在权重的头维度，不是对当前请求的 token 做池化。图画的是 MHA→MQA 的单组示例，推广到 GQA 时在每个组内部执行相同操作。结构转换只是第一步，后面的继续预训练不能省略为一个 reshape。[图源：原文 Figure 1](https://arxiv.org/pdf/2305.13245v3#page=1)。
 
 下面的伪代码解释投影的分组逻辑，**不是可直接载入 Flaxformer checkpoint 的完整转换脚本**；真实布局、分片轴和优化器状态都要单独处理。
 
@@ -148,29 +151,29 @@ $$
 
 ### 主结果：质量接近 MHA，速度接近 MQA
 
-![Table 1 · T5 模型的原始推理时间与七个任务 dev 结果](./assets/papers/paper-gqa/table-1.png)
+![Table 1 · T5 模型的原始推理时间与七个任务 dev 结果](./assets/papers/paper-gqa/table-1-pdf.png)
 
-Table 1 使用秒作为时间单位。MHA-XXL 的时间为 1.51，平均分 47.2；GQA-8-XXL 为 0.28、47.1；MQA-XXL 为 0.24、46.6。按表中取整后的数值计算，GQA 相对 MHA-XXL 的该项时间约缩短 **5.39 倍**，平均分相差 **0.1**。这两个数是本报告的算术推导；它们描述论文规定的 TPU 测量，不是今日任意服务的速度保证。[表源：原文 Table 1](https://arxiv.org/html/2305.13245v3#S3.T1)。
+Table 1 使用秒作为时间单位。MHA-XXL 的时间为 1.51，平均分 47.2；GQA-8-XXL 为 0.28、47.1；MQA-XXL 为 0.24、46.6。按表中取整后的数值计算，GQA 相对 MHA-XXL 的该项时间约缩短 **5.39 倍**，平均分相差 **0.1**。这两个数是本报告的算术推导；它们描述论文规定的 TPU 测量，不是今日任意服务的速度保证。[表源：原文 Table 1](https://arxiv.org/pdf/2305.13245v3#page=3)。
 
 逐任务看比只看 Average 更有意义：GQA 的 PubMed 与 Multi-News 分数甚至高于表中 MHA-XXL，而 CNN、arXiv 与 TriviaQA 略低；MQA 的 WMT 分数又略高。结果支持“折中较好”，不支持“每一个任务无损”。Average 把不同指标的数字放在一起汇总，不是一个具有统一量纲的泛化能力测量。
 
-![Figure 3 · 七任务平均分与推理耗时的折中](./assets/papers/paper-gqa/figure-3.png)
+![Figure 3 · 七任务平均分与推理耗时的折中](./assets/papers/paper-gqa/figure-3-pdf.png)
 
-**Figure 3 解读。** 横轴是每样本推理时间，越左越快；纵轴是汇总任务表现，越上越好。GQA-XXL 接近 MHA-XXL 的高度，却靠近 MQA-XXL 的水平位置，因此显示出有利折中。应注意原始图横轴写了 “ms”，但 Table 1 与对应数值写的是秒，源码也保留了这一不一致；本报告以 Table 1 的 **s** 口径登记，不把图中的 0.28 改称 0.28 ms。[图源：原文 Figure 3](https://arxiv.org/html/2305.13245v3#S3.F3)。
+**Figure 3 解读。** 横轴是每样本推理时间，越左越快；纵轴是汇总任务表现，越上越好。GQA-XXL 接近 MHA-XXL 的高度，却靠近 MQA-XXL 的水平位置，因此显示出有利折中。应注意原始图横轴写了 “ms”，但 Table 1 与对应数值写的是秒，源码也保留了这一不一致；本报告以 Table 1 的 **s** 口径登记，不把图中的 0.28 改称 0.28 ms。[图源：原文 Figure 3](https://arxiv.org/pdf/2305.13245v3#page=3)。
 
 ### 消融：收益来自哪些设计？
 
-![Figure 4 · Mean、First、Random 三种 checkpoint 转换方式](./assets/papers/paper-gqa/figure-4.png)
+![Figure 4 · Mean、First、Random 三种 checkpoint 转换方式](./assets/papers/paper-gqa/figure-4-pdf.png)
 
-**Figure 4 解读。** 这里比较 T5-Large→MQA，并固定 5% uptraining；横轴是转换策略，纵轴是三个代表任务的汇总表现。mean pooling 最好，选第一个头次之，随机初始化较差。对照的意义是控制继续训练条件，观察初始 K/V 权重处理的影响；它不是“任何模型里均值池化一定最佳”的证明，也不是 GQA-8-XXL 的全部主结果。[图源：原文 Figure 4](https://arxiv.org/html/2305.13245v3#S3.F4)。
+**Figure 4 解读。** 这里比较 T5-Large→MQA，并固定 5% uptraining；横轴是转换策略，纵轴是三个代表任务的汇总表现。mean pooling 最好，选第一个头次之，随机初始化较差。对照的意义是控制继续训练条件，观察初始 K/V 权重处理的影响；它不是“任何模型里均值池化一定最佳”的证明，也不是 GQA-8-XXL 的全部主结果。[图源：原文 Figure 4](https://arxiv.org/pdf/2305.13245v3#page=4)。
 
-![Figure 5 · 额外预训练比例与 MQA / GQA 的任务表现](./assets/papers/paper-gqa/figure-5.png)
+![Figure 5 · 额外预训练比例与 MQA / GQA 的任务表现](./assets/papers/paper-gqa/figure-5-pdf.png)
 
-**Figure 5 解读。** 横轴是继续预训练占原训练的比例，纵轴是代表性任务表现；比较 MQA 与 GQA-8 的恢复轨迹。GQA 在刚转换后就保留较多质量，MQA 更依赖 uptraining；从 0 增加到 5% 有明显收益，继续到 10% 的边际收益较小。它支持作者选 5% 的经验取舍，但没有覆盖所有训练规模、数据或目标组数。[图源：原文 Figure 5](https://arxiv.org/html/2305.13245v3#S3.F5)。
+**Figure 5 解读。** 横轴是继续预训练占原训练的比例，纵轴是代表性任务表现；比较 MQA 与 GQA-8 的恢复轨迹。GQA 在刚转换后就保留较多质量，MQA 更依赖 uptraining；从 0 增加到 5% 有明显收益，继续到 10% 的边际收益较小。它支持作者选 5% 的经验取舍，但没有覆盖所有训练规模、数据或目标组数。[图源：原文 Figure 5](https://arxiv.org/pdf/2305.13245v3#page=4)。
 
-![Figure 6 · KV 组数增加时的 GQA-XXL 每样本推理耗时](./assets/papers/paper-gqa/figure-6.png)
+![Figure 6 · KV 组数增加时的 GQA-XXL 每样本推理耗时](./assets/papers/paper-gqa/figure-6-pdf.png)
 
-**Figure 6 解读。** 输入长度固定 2048、输出长度固定 512，横轴是组数，纵轴是每样本时间。由 1 组增加到 8 组的额外耗时较小，接近 MHA 时成本增加更明显；8 是该实验中的较好中间点。此图只画速度，不单独回答质量，必须和前面任务结果一起读；也不能把 8 当作所有层、所有硬件的最优常数。[图源：原文 Figure 6](https://arxiv.org/html/2305.13245v3#S3.F6)。
+**Figure 6 解读。** 输入长度固定 2048、输出长度固定 512，横轴是组数，纵轴是每样本时间。由 1 组增加到 8 组的额外耗时较小，接近 MHA 时成本增加更明显；8 是该实验中的较好中间点。此图只画速度，不单独回答质量，必须和前面任务结果一起读；也不能把 8 当作所有层、所有硬件的最优常数。[图源：原文 Figure 6](https://arxiv.org/pdf/2305.13245v3#page=4)。
 
 本报告覆盖原文 **6 张主图与 1 张结果表**。结构图解释机制，转换/步数/组数消融解释选择，主结果建立特定任务与硬件上的质量—速度证据；它们共同支撑结论，而不是每张图都用来重复一句“更快”。
 
@@ -189,3 +192,5 @@ Table 1 使用秒作为时间单位。MHA-XXL 的时间为 1.51，平均分 47.2
 本报告参考 [Sebastian Raschka 的 A Visual Guide to Attention Variants in Modern LLMs](https://magazine.sebastianraschka.com/p/visual-attention-variants)，吸收把不同结构沿共享维度并排比较的解释角度；本文实验结论仍只取 GQA 原论文。解释已融入问题与方法部分；数字、图表和实验口径回到固定版本原文核对。
 
 源码静态核读固定于 `399ea3a85e9807ada653fd0de1a9de627eb0acde`。核心文件：[flaxformer/components/attention/dense_attention.py](https://github.com/google/flaxformer/blob/399ea3a85e9807ada653fd0de1a9de627eb0acde/flaxformer/components/attention/dense_attention.py)。没有执行代码或重新训练。
+
+**图表来源。** 本报告使用固定版本原论文 PDF 的核对裁剪图，不重新排版原表；对应 PDF 页码、裁剪区域和文件校验值记录在 assets/papers/paper-gqa/figures.json。LaTeX 源码保留在本地缓存，用于核查图表及上下文。

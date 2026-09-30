@@ -71,14 +71,33 @@ GQA 已按 v3 源码与原表核对，正文解释全部 6 张主图和 Table 1�
 
 页面不提供收藏、待精读、复习状态或进度操作，题目与论文均按内容组织与检索。
 
-## V3：贡献分类、源码伴读与讲解融合
+## V4：视觉 / 语言检索、源码伴读与讲解融合
 
-论文库按主要贡献使用四个粗粒度类别：`generative-modeling` 生成建模、`model-architecture` 模型结构、`reasoning-decision` 推理与决策、`systems-optimization` 系统优化。`research_categories` 允许多个值，第一个决定列表底色，所有值都可筛选。按论文实际解决的问题选择类别，不按使用了哪种模型硬分；领域标签如 Diffusion / LLM 与任务、技术标签继续放在 tags。旧 direction 只用于文件归档，不是互斥学科划分。专题和 Daily 的筛选类别来自关联论文。
+论文库一级使用 `vision` 视觉 / `language` 语言，第二行按所选领域列出任务。视觉覆盖理解、识别、检测、跟踪、分割、图像生成、视频生成；语言覆盖理解、生成、推理、Agent、检索问答、训练适配。`areas` 与 `tasks` 允许多个值，多模态论文可以同时归入两个领域。Diffusion、LLM、Attention、Infra、KV Cache 等技术或模型名称作为 tags，不再使用四个贡献类别。旧 direction 只用于文件路径兼容。Daily 和专题的筛选来自关联论文。
 
-`method_figure` 指向已核对、已保存的原论文方法图，`method_caption` 写图号与内容。方法图用于库中预览，正文仍需详细解释图；没有合适方法图时可以留 null，不生成假图。正式报告采用 template_version: 3。
+`published` 必须写论文首次公开日期，arXiv 论文取 v1 日期；会议名称和年份独立记录。论文库按 published 降序，报告按报告日期降序，updated 只表示报告整理时间。
+
+`method_figure` 指向已核对、已保存的原论文方法图，`method_caption` 写图号与内容。方法图用于库中预览，正文仍需详细解释图；没有合适方法图时可以留 null，不生成假图。正式报告采用 template_version: 4。
 
 方法阅读同时做源码伴读。先确定官方代码是否真的发布了论文方法，再固定 commit。选择 2–4 个核心函数，沿真实调用链解释输入输出、张量形状或系统状态、重要分支、对应公式与为何有效。明确原始实现、历史 release、现代框架端点或第三方复现；一个框架链接不等于完整复现包。示例伪代码标为教学重述，不能代替核心函数链接。静态核读不写成已运行验证。下载源码可放在 .paper-cache/<id>/code 中，清理缓存不会删除报告里的解释和永久链接。
 
 写背景时先定义任务和最小必要概念，再解释具体瓶颈、已有方案与本文补上的环节。方法先用连贯段落解释核心思想，再给公式、图和代码；实验前补清 benchmark 的任务及指标含义，数字必须伴随条件。不要靠增加小标题或一行要点制造篇幅。保留五个主模块，子标题只服务真实阅读转折。
 
 经典论文额外检索作者博客和优质精读。登记 URL、作者、发表时间和实际吸收的解释角度；技术事实以论文和核心实现交叉核对。不同版本、不同模型或不同 baseline 的数字不能混合。把有帮助的论证顺序、例子和观点融进自己的解释，参考资料集中放第五模块末尾；不复制长段落、图或拼贴摘要。验收时检查：新读者能否说清任务、核心机制、训练/推理差异、代码如何落地、实验究竟证明什么。
+
+
+## 引用量与自动更新
+
+`npm run papers:citations` 更新 `content/metadata/citations.json`。每周一 UTC 02:17 GitHub Actions 自动尝试更新、提交快照并发布；手动推送也检查七天内是否更新过。请求失败不覆盖上次成功计数和日期，不把缺失值写成零。卡片及报告展示数据库来源、统计日期和 Google Scholar 入口。
+
+默认使用 OpenAlex。可在论文 frontmatter 填入经过核对的 `openalex_id` 固定正式发表记录，避免预印本与会议版本分散；不相加可能重复的版本引用。程序校验完整标题与第一作者姓氏，匹配失败时不显示数字。不同数据库覆盖不同，OpenAlex 计数不是 Google Scholar 计数，也不自动据此给论文贴“经典”标签。
+
+需要 Google Scholar 统计时，在 GitHub 仓库 Settings → Secrets and variables → Actions 配置 `SERPAPI_API_KEY`；本地则使用环境变量。程序调用 SerpApi Google Scholar 搜索，以完整标题和作者核对唯一匹配，读取 cited_by.total，单独保存 Google Scholar 指标。密钥只进入服务端/Actions，不写入仓库和前端，不打印请求 URL。没有密钥时不调用该收费接口。OpenAlex 限流时可配置免费的 `OPENALEX_API_KEY`，也允许无密钥的基础查询。依据：[Google Scholar 自动访问说明](https://scholar.google.com/intl/en/scholar/help.html)、[SerpApi 接口](https://serpapi.com/google-scholar-api)、[OpenAlex 认证说明](https://help.openalex.org/api/authentication/)。
+
+## PDF 图表核对与发布后检查
+
+过去的 HTML 截图可留作历史资产，但正文现在引用核对过的 `*-pdf.png`。arXiv HTML 是实验性转换，可能改变子图布局、表格、LaTeX 条件选择或丢失文字；加载成功并不代表图内容正确。优先采用固定版本 PDF 的原始排版裁剪，LaTeX 包用于确认图文件、编号和上下文，不要求重新执行编译。
+
+安装可选裁剪依赖：`python -m pip install -r scripts/requirements-paper-images.txt`。在 `scripts/figure-crops/<id>.json` 人工登记 PDF 页码与从左上角起的 point 坐标，执行 `npm run papers:pdf-figures -- <id>`。工具校验版本、边界与空白图，记录 PDF SHA256、图 SHA256、页码和矩形；已有文件需核对后使用 --refresh。裁剪后逐张与原页对照，确认图例、坐标、所有子图、表头及末行完整，才标记 visuallyVerified。报告及卡片引用新文件名，防止缓存旧图。
+
+每次部署后 Actions 执行 `papers:check-live`，实际打开线上页面，检查桌面和手机两种宽度、所有报告图片加载与非空白、纵横比、目录、图片放大关闭与横向溢出，保存截图为 `paper-live-check` artifact。这个自动检查辅助发现排版问题，不能替代逐图人工核对。也可手动运行 `npm run papers:check-live -- https://tammytcl.github.io/laoliu-interview-notes/`。

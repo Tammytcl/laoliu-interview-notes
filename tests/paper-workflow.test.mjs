@@ -4,6 +4,7 @@ import { mkdir, mkdtemp, writeFile, readFile, rm, cp, symlink } from 'node:fs/pr
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { createHash } from 'node:crypto';
 import { spawn } from 'node:child_process';
 import { paperCacheStatus, cleanPaperCache } from '../scripts/paper-cache.mjs';
 import { renderMarkdown } from '../scripts/content.mjs';
@@ -13,16 +14,23 @@ const root = fileURLToPath(new URL('../', import.meta.url));
 test('正式报告保留单位与代码来源，五模块和全部 GQA 证据资产可追溯', async () => {
   for (const name of ['llm/paper-gqa', 'agent/paper-react', 'infra/paper-pagedattention', 'diffusion/paper-ddpm']) {
     const p = parsePaperContent(await readFile(join(root, 'content/papers', name + '.md'), 'utf8'), name, 'papers');
-    assert.equal(p.title, p.paperTitle); assert.equal(p.templateVersion, 3); assert.ok(p.affiliations.length);
+    assert.equal(p.title, p.paperTitle); assert.equal(p.templateVersion, 4); assert.ok(p.affiliations.length);
     assert.equal(p.authorAffiliations.length, p.authors.length); assert.match(p.githubUrl, /^https:\/\/github.com\//);
-    assert.ok(p.categories.length); assert.ok((await readFile(join(root, p.methodFigure))).length > 100);
+    assert.ok(p.areas.length && p.tasks.length); assert.ok((await readFile(join(root, p.methodFigure))).length > 100);
     assert.match(p.body, /核心源码|源码对照/); assert.match(p.body, /github\.com\/.+\/blob\/[a-f0-9]{40}\//);
     assert.equal(p.toc.filter(h => h.level === 2).length, 5);
     assert.doesNotMatch(p.body, /待填|这里不替你填|基础精读示例/);
-    for (const [, file] of p.body.matchAll(/!\[[^\]]*\]\((\.\/assets\/papers\/[^)]+)\)/g)) assert.ok((await readFile(join(root, file))).length > 100);
+    const manifest = JSON.parse(await readFile(join(root, 'assets/papers', p.id, 'figures.json'), 'utf8'));
+    for (const [, file] of p.body.matchAll(/!\[[^\]]*\]\((\.\/assets\/papers\/[^)]+)\)/g)) {
+      const bytes = await readFile(join(root,file)); assert.ok(bytes.length>100);
+      const entry=manifest.figures.find(f=>f.file===file.split('/').at(-1));
+      assert.equal(entry.method,'pinned-original-pdf-crop');assert.equal(entry.visuallyVerified,true);
+      assert.equal(entry.sha256,createHash('sha256').update(bytes).digest('hex'));
+    }
   }
   const manifest = JSON.parse(await readFile(join(root, 'assets/papers/paper-gqa/figures.json'), 'utf8'));
-  assert.equal(manifest.figures.length, 7); assert.ok(manifest.figures.every(f => f.explanation === 'complete'));
+  const published = manifest.figures.filter(f => f.method === 'pinned-original-pdf-crop');
+  assert.equal(published.length, 7); assert.ok(published.every(f => f.explanation === 'complete' && f.visuallyVerified));
 });
 
 test('公式渲染包含数学语义并拒绝可信 HTML / URL 注入', () => {

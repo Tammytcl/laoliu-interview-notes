@@ -1,0 +1,57 @@
+{
+  "paperId": "paper-react",
+  "arxivVersion": "2210.03629v3",
+  "coordinateSystem": "PDF points, top-left origin",
+  "crops": [
+    {
+      "name": "figure-1-pdf.png",
+      "page": 2,
+      "box": [
+        107,
+        82,
+        505,
+        410
+      ]
+    },
+    {
+      "name": "figure-3-pdf.png",
+      "page": 7,
+      "box": [
+        137,
+        75,
+        475,
+        214
+      ]
+    },
+    {
+      "name": "figure-5-pdf.png",
+      "page": 15,
+      "box": [
+        107,
+        82,
+        505,
+        243
+      ]
+    },
+    {
+      "name": "table-1-pdf.png",
+      "page": 5,
+      "box": [
+        107,
+        85,
+        274,
+        201
+      ]
+    },
+    {
+      "name": "tables-3-4-pdf.png",
+      "page": 8,
+      "box": [
+        107,
+        82,
+        505,
+        249
+      ]
+    }
+  ]
+}

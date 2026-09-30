@@ -5,6 +5,18 @@ export const paperDirections = [
   { id: 'diffusion', name: 'Diffusion' }, { id: 'llm', name: 'LLM' },
   { id: 'agent', name: 'Agent' }, { id: 'infra', name: 'Infra' }
 ];
+export const paperTaxonomy = [
+  { id: 'vision', name: '视觉', tasks: [
+    { id: 'visual-understanding', name: '视觉理解' }, { id: 'recognition', name: '图像识别' },
+    { id: 'detection', name: '目标检测' }, { id: 'tracking', name: '目标跟踪' },
+    { id: 'segmentation', name: '图像分割' }, { id: 'image-generation', name: '图像生成' },
+    { id: 'video-generation', name: '视频生成' } ] },
+  { id: 'language', name: '语言', tasks: [
+    { id: 'language-understanding', name: '语言理解' }, { id: 'text-generation', name: '文本生成' },
+    { id: 'reasoning', name: '推理' }, { id: 'agents', name: 'Agent / 工具使用' },
+    { id: 'retrieval', name: '检索与问答' }, { id: 'training-adaptation', name: '训练与适配' } ] }
+];
+// Legacy v3 reports remain readable; v4 uses areas + tasks.
 export const paperCategories = [
   { id: 'generative-modeling', name: '生成建模' }, { id: 'model-architecture', name: '模型结构' },
   { id: 'reasoning-decision', name: '推理与决策' }, { id: 'systems-optimization', name: '系统优化' }
@@ -27,7 +39,7 @@ export function parsePaperContent(source, file, collection) {
   if (!validDate(data.updated)) fail('updated 应为有效 YYYY-MM-DD 日期');
   if (data.draft !== undefined && typeof data.draft !== 'boolean') fail('draft 应为布尔值');
   if (!Array.isArray(data.tags) || data.tags.some(t => typeof t !== 'string' || !t.trim())) fail('tags 应为字符串数组');
-  if (data.template_version !== undefined && ![1, 2, 3].includes(data.template_version)) fail('暂不支持此 template_version');
+  if (data.template_version !== undefined && ![1, 2, 3, 4].includes(data.template_version)) fail('暂不支持此 template_version');
   const body = match[2].trim();
   if (!body) fail('正文不能为空');
   const result = { id: data.id, title: data.title, summary: data.summary, updated: data.updated,
@@ -55,7 +67,16 @@ export function parsePaperContent(source, file, collection) {
     }
     if (data.template_version >= 2 && !affiliations.length) fail('v2 报告必须注明 affiliations');
     const categories = data.research_categories ?? [];
-    if (!Array.isArray(categories) || categories.some(id => !paperCategories.some(c => c.id === id)) || (data.template_version >= 3 && !categories.length)) fail('research_categories 应为有效贡献类别数组');
+    if (!Array.isArray(categories) || categories.some(id => !paperCategories.some(c => c.id === id)) || (data.template_version === 3 && !categories.length)) fail('research_categories 应为有效贡献类别数组');
+    const areas = data.areas ?? [];
+    const tasks = data.tasks ?? [];
+    if (!Array.isArray(areas) || areas.some(id => !paperTaxonomy.some(a => a.id === id)) || (data.template_version >= 4 && !areas.length)) fail('areas 应包含 vision / language');
+    const allowedTasks = paperTaxonomy.filter(a => areas.includes(a.id)).flatMap(a => a.tasks.map(t => t.id));
+    if (!Array.isArray(tasks) || tasks.some(id => !allowedTasks.includes(id)) || (data.template_version >= 4 && !tasks.length)) fail('tasks 应属于所选 areas');
+    const published = data.published ?? null;
+    if ((published !== null && !validDate(published)) || (data.template_version >= 4 && published === null)) fail('published 应为论文首次公开日期 YYYY-MM-DD');
+    const openalexId = data.openalex_id ?? null;
+    if (openalexId !== null && (typeof openalexId !== 'string' || !/^W\d+$/.test(openalexId))) fail('openalex_id 应为 W 开头的数字 ID');
     const methodFigure = data.method_figure ?? null;
     if (methodFigure !== null && (typeof methodFigure !== 'string' || !/^\.\/assets\/papers\/[a-z0-9-]+\/[a-z0-9-]+\.(png|jpg|webp|svg)$/.test(methodFigure))) fail('method_figure 应为本地论文图片路径');
     const methodCaption = data.method_caption ?? '';
@@ -64,7 +85,7 @@ export function parsePaperContent(source, file, collection) {
     const codeNote = data.code_note ?? '';
     if (typeof venue !== 'string' || typeof codeNote !== 'string') fail('venue / code_note 应为字符串');
     return { ...result, direction: data.direction, paperTitle: data.paper_title, authors: data.authors,
-      affiliations, authorAffiliations, categories: [...new Set(categories)], methodFigure, methodCaption, githubUrl: githubUrl?.href ?? null, venue, codeNote,
+      affiliations, authorAffiliations, categories: [...new Set(categories)], areas: [...new Set(areas)], tasks: [...new Set(tasks)], published, openalexId, methodFigure, methodCaption, githubUrl: githubUrl?.href ?? null, venue, codeNote,
       year: data.year, paperUrl: url.href, evidence: data.evidence, noteIds: [...new Set(noteIds)] };
   }
   if (collection !== 'reports') fail('未知内容集合');

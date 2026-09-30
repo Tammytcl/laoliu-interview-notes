@@ -1,0 +1,67 @@
+{
+  "paperId": "paper-pagedattention",
+  "arxivVersion": "2309.06180v1",
+  "coordinateSystem": "PDF points, top-left origin",
+  "crops": [
+    {
+      "name": "figure-4-pdf.png",
+      "page": 5,
+      "box": [
+        54,
+        65,
+        301,
+        190
+      ]
+    },
+    {
+      "name": "figure-6-pdf.png",
+      "page": 6,
+      "box": [
+        54,
+        65,
+        301,
+        190
+      ]
+    },
+    {
+      "name": "figure-12-pdf.png",
+      "page": 10,
+      "box": [
+        53,
+        65,
+        559,
+        264
+      ]
+    },
+    {
+      "name": "figure-13-pdf.png",
+      "page": 10,
+      "box": [
+        53,
+        286,
+        297,
+        382
+      ]
+    },
+    {
+      "name": "figure-15-pdf.png",
+      "page": 11,
+      "box": [
+        317,
+        288,
+        559,
+        377
+      ]
+    },
+    {
+      "name": "table-1-pdf.png",
+      "page": 9,
+      "box": [
+        69,
+        70,
+        289,
+        165
+      ]
+    }
+  ]
+}

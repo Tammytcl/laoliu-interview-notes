@@ -73,3 +73,9 @@ test('新建命令按方向生成草稿，重复 Daily 继续更新且不覆盖�
   const survey = parsePaperContent(await readFile(join(fixture, 'content/reports/surveys/survey-example.md'), 'utf8'), 'survey', 'reports');
   assert.deepEqual(survey.directions, ['diffusion']); assert.equal(survey.draft, true);
 });
+
+test('视觉语言可交叉归属，但任务必须属于所选领域，首次公开日期有效', () => {
+  const v4 = {...paper,template_version:4,affiliations:['Institution'],areas:['vision','language'],tasks:['image-generation','text-generation'],published:'2023-05-22'};
+  const item=parse(v4,'papers');assert.deepEqual(item.areas,['vision','language']);assert.equal(item.published,'2023-05-22');
+  for (const patch of [{areas:[]},{areas:['infra']},{areas:['language'],tasks:['segmentation']},{tasks:['unknown']},{published:'2023-02-30'},{published:null}]) assert.throws(()=>parse({...v4,...patch},'papers'));
+});

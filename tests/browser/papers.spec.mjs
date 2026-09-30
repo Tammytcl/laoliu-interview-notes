@@ -1,18 +1,29 @@
 import { test, expect } from '@playwright/test';
 
-test('论文库、贡献类别筛选、Daily 与专题报告相互链接', async ({ page }) => {
+test('论文库、两行任务筛选、Daily 与专题报告相互链接', async ({ page }) => {
   const errors = []; page.on('pageerror', error => errors.push(error.message));
   await page.goto('/'); await page.locator('[data-paper-nav]').click();
   const data = await (await page.request.get('/data.json')).json();
   await expect(page.locator('.paper-card')).toHaveCount(data.papers.length);
+  expect(data.papers.map(p => p.published)).toEqual([...data.papers.map(p => p.published)].sort().reverse());
+  await expect(page.locator('.paper-citations')).toHaveCount(4);
   await expect(page.locator('.paper-method-preview img')).toHaveCount(data.papers.length);
   await expect.poll(() => page.locator('.paper-method-preview img').evaluateAll(images => images.every(i => i.complete && i.naturalWidth > 0))).toBe(true);
   const gqa = page.locator('.paper-card').filter({ has: page.locator('h3 a[href="#paper=paper-gqa"]') });
-  await expect(gqa.locator('.paper-category')).toHaveCount(2);
-  await expect(gqa).toHaveAttribute('data-category', 'model-architecture');
+  await expect(gqa.locator('.paper-category')).toHaveCount(1);
+  await expect(gqa.locator('.paper-task')).toHaveText('文本生成');
+  await expect(gqa).toHaveAttribute('data-category', 'language');
   await expect(page.locator('[data-paper-nav]')).toHaveAttribute('aria-current', 'page');
-  await page.locator('#paper-direction').selectOption('systems-optimization');
-  await expect(page.locator('.paper-card')).toHaveCount(data.papers.filter(p => p.categories.includes('systems-optimization')).length);
+  await page.locator('[data-paper-area="vision"]').click();
+  await expect(page.locator('[data-paper-task="image-generation"]')).toBeVisible();
+  await expect(page.locator('[data-paper-task="agents"]')).toHaveCount(0);
+  await page.locator('[data-paper-task="image-generation"]').click();
+  await expect(page.locator('.paper-card')).toHaveCount(1);
+  await page.reload();
+  await expect(page.locator('[data-paper-task="image-generation"]')).toHaveAttribute('aria-pressed', 'true');
+  await page.locator('[data-paper-area="language"]').click();
+  await expect(page.locator('.paper-card')).toHaveCount(3);
+  await expect(page.locator('[data-paper-task=""]')).toHaveAttribute('aria-pressed', 'true');
   await page.locator('#paper-search').fill('no-match-paper-123');
   await expect(page.locator('[data-paper-reset]')).toBeVisible();
   await page.locator('[data-paper-reset]').click();

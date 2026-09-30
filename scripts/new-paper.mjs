@@ -27,7 +27,9 @@ if (type === 'daily') {
 }
 let template = await readFile(join(root, 'templates', spec.template), 'utf8');
 template = template.replace(`id: ${spec.marker}`, `id: ${id}`).replace('updated: 2026-09-30', `updated: ${today}`);
-if (type === 'paper') template = template.replace('direction: llm', `direction: ${direction}`).replace('year: 2026', `year: ${new Date().getUTCFullYear()}`);
+if (type === 'paper') template = template.replace('direction: llm', `direction: ${direction}`).replace('published: 2026-09-30', `published: ${today}`).replace('year: 2026', `year: ${new Date().getUTCFullYear()}`);
+if (type === 'paper' && direction === 'diffusion') template = template.replace('areas: [language]', 'areas: [vision]').replace('tasks: [text-generation]', 'tasks: [image-generation]');
+if (type === 'paper' && direction === 'agent') template = template.replace('tasks: [text-generation]', 'tasks: [agents]');
 if (type === 'survey') template = template.replace('directions: [llm]', `directions: [${direction}]`).replace('date: 2026-09-30', `date: ${today}`);
 if (type === 'daily') template = template.replace('date: 2026-09-30', `date: ${reportDate}`).replace('YYYY-MM-DD', reportDate);
 await writeFile(file, template, { flag: 'wx' });

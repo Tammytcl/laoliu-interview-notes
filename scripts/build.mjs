@@ -3,7 +3,7 @@ import { resolve, relative, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { createHash } from 'node:crypto';
 import { parseQuestion, escapeHtml } from './content.mjs';
-import { parsePaperContent, paperDirections, paperCategories, validatePaperLinks } from './papers-content.mjs';
+import { parsePaperContent, paperDirections, paperCategories, paperTaxonomy, validatePaperLinks } from './papers-content.mjs';
 
 const root = fileURLToPath(new URL('../', import.meta.url));
 const config = JSON.parse(await readFile(join(root, 'site.config.json'), 'utf8'));
@@ -40,7 +40,7 @@ for (const name of ['papers', 'reports']) {
   }
 }
 validatePaperLinks(allQuestions, collections.papers, collections.reports);
-const papers = collections.papers.filter(p => !p.draft).sort((a, b) => b.updated.localeCompare(a.updated) || a.title.localeCompare(b.title, 'zh-CN'));
+const papers = collections.papers.filter(p => !p.draft).sort((a, b) => (b.published || `${b.year}-01-01`).localeCompare(a.published || `${a.year}-01-01`) || a.id.localeCompare(b.id));
 const reports = collections.reports.filter(r => !r.draft).sort((a, b) => b.date.localeCompare(a.date) || b.updated.localeCompare(a.updated) || a.title.localeCompare(b.title, 'zh-CN'));
 const dist = resolve(root, 'dist');
 // 图表是报告的长期资产；缓存源码不会进入发布目录。
@@ -57,7 +57,23 @@ const katexVersion = JSON.parse(await readFile(join(root, 'node_modules/katex/pa
 const mathPath = `vendor/katex-${katexVersion}`;
 await cp(join(root, 'node_modules/katex/dist'), join(dist, mathPath), { recursive: true });
 const fingerprint = text => createHash('sha256').update(text).digest('hex').slice(0, 16);
-const data = JSON.stringify({ config, questions, papers, reports, paperDirections, paperCategories });
+let citations = {};
+try { citations = JSON.parse(await readFile(join(root, 'content/metadata/citations.json'), 'utf8')); }
+catch (error) { if (error.code !== 'ENOENT') throw error; }
+for (const paper of papers) {
+  const entry = citations[paper.id];
+  if (entry) {
+    for (const provider of ['openalex', 'google-scholar']) {
+      const metric = entry[provider];
+      if (!metric) continue;
+      if (!Number.isInteger(metric.count) || metric.count < 0 || !/^\d{4}-\d{2}-\d{2}T/.test(metric.fetchedAt)) throw new Error(`Invalid citation metric: ${paper.id}`);
+      const url = new URL(metric.url);
+      if (url.protocol !== 'https:' || !['openalex.org','scholar.google.com'].includes(url.hostname) || url.username || url.password) throw new Error('Invalid citation link');
+    }
+    paper.citations = entry;
+  }
+}
+const data = JSON.stringify({ config, questions, papers, reports, paperDirections, paperCategories, paperTaxonomy });
 const dataFile = `data-${fingerprint(data)}.json`;
 const papersModule = await readFile(join(root, 'web/papers.js'), 'utf8');
 const papersModuleFile = `papers-${fingerprint(papersModule)}.js`;

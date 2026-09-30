@@ -18,7 +18,10 @@
     "papers:fetch": "python scripts/paper-assets.py",
     "papers:figures": "node scripts/paper-figures.mjs",
     "papers:workbench": "npm run build && PAPER_WORKBENCH=1 node scripts/serve.mjs",
-    "papers:clean": "node scripts/paper-cache.mjs --clean"
+    "papers:clean": "node scripts/paper-cache.mjs --clean",
+    "papers:citations": "node scripts/paper-citations.mjs",
+    "papers:pdf-figures": "python scripts/paper-pdf-figures.py",
+    "papers:check-live": "node scripts/check-paper-live.mjs"
   },
   "dependencies": {
     "katex": "^0.16.22",

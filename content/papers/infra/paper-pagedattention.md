@@ -7,19 +7,22 @@ affiliations: ["UC Berkeley", "Stanford University", "Independent Researcher", "
 author_affiliations: [[1], [1], [1], [1, 2], [1], [3], [1], [4], [1]]
 venue: "SOSP 2023"
 year: 2023
-research_categories: [systems-optimization]
-method_figure: "./assets/papers/paper-pagedattention/figure-6.png"
+areas: [language]
+tasks: [text-generation]
+published: 2023-09-12
+method_figure: "./assets/papers/paper-pagedattention/figure-6-pdf.png"
 method_caption: "Figure 6 · 逻辑块与物理块映射"
 direction: infra
+openalex_id: W4387321091
 paper_url: "https://arxiv.org/abs/2309.06180v1"
 github_url: "https://github.com/vllm-project/vllm"
 code_note: "Official vLLM repository; current main is not the 2023 experimental revision."
 evidence: 已核原文
 note_ids: [paged-attention-serving, prefix-cache]
-tags: [LLM Serving, PagedAttention, KV Cache, Memory Management, vLLM]
+tags: [LLM, LLM Serving, PagedAttention, KV Cache, Memory Management, vLLM]
 updated: 2026-09-30
 summary: "将请求的逻辑 KV 序列映射到非连续物理块，通过按需分配、共享和写时复制提高可批处理容量。"
-template_version: 3
+template_version: 4
 draft: false
 ---
 
@@ -52,15 +55,15 @@ $$
 
 这是一种索引推导，不是论文给出的逐字伪代码。PagedAttention kernel 读取 block table 后，在对应物理块中计算 attention；它仍然要读需要的历史 K/V。不能把“Paged”理解成稀疏注意力或只读当前页。
 
-![Figure 6 · 逻辑 token 块到物理 KV 块的映射](./assets/papers/paper-pagedattention/figure-6.png)
+![Figure 6 · 逻辑 token 块到物理 KV 块的映射](./assets/papers/paper-pagedattention/figure-6-pdf.png)
 
-**Figure 6 解读。** 图左侧是请求的逻辑序列，右侧是可以散布在不同位置的物理块，中间表格负责翻译。沿一个逻辑块的指针追到物理块，可以看到 token 顺序并未因存储不连续而改变。示例块大小用于画图，不能直接替代实验 block size。[图源：原文 Figure 6](https://arxiv.org/html/2309.06180v1#S4.F6)。
+**Figure 6 解读。** 图左侧是请求的逻辑序列，右侧是可以散布在不同位置的物理块，中间表格负责翻译。沿一个逻辑块的指针追到物理块，可以看到 token 顺序并未因存储不连续而改变。示例块大小用于画图，不能直接替代实验 block size。[图源：原文 Figure 6](https://arxiv.org/pdf/2309.06180v1#page=6)。
 
 多个采样分支可以共享完整 prompt blocks，并用 reference count 追踪使用者。如果分支要写入仍被别人使用的最后一个块，就先复制该块再追加，这就是 copy-on-write。共享并不意味所有生成后缀永久共用；不同 token 导致的分支仍需要各自状态。beam search 的状态继承也可以用映射与引用更新表示。
 
-![Figure 4 · vLLM 的调度器、块管理器与 GPU 执行器](./assets/papers/paper-pagedattention/figure-4.png)
+![Figure 4 · vLLM 的调度器、块管理器与 GPU 执行器](./assets/papers/paper-pagedattention/figure-4-pdf.png)
 
-**Figure 4 解读。** 这是一张系统边界图：中心调度器管理请求与 block tables，GPU worker 根据 token 与映射执行模型。多 GPU 情况下，worker 处理自己的 attention heads，管理器维持一致的逻辑映射。图里的控制流不等于每张 GPU 保存完整 KV；张量并行下实际数据是分片的。[图源：原文 Figure 4](https://arxiv.org/html/2309.06180v1#S4.F4)。
+**Figure 4 解读。** 这是一张系统边界图：中心调度器管理请求与 block tables，GPU worker 根据 token 与映射执行模型。多 GPU 情况下，worker 处理自己的 attention heads，管理器维持一致的逻辑映射。图里的控制流不等于每张 GPU 保存完整 KV；张量并行下实际数据是分片的。[图源：原文 Figure 4](https://arxiv.org/pdf/2309.06180v1#page=5)。
 
 内存不足时，原文采用 FCFS 调度、优先抢占后到请求，并比较把 KV 换到 CPU 与重新计算。共享的多序列请求作为 sequence group 一起调度。重计算能够把已生成 token 拼到 prompt，利用一次 prefill 重建缓存；是否比 swapping 更好取决于 CPU-GPU 带宽、模型和序列长度，不是分页机制本身保证的常数。
 
@@ -96,7 +99,7 @@ $$
 | Baselines | FasterTransformer + 作者实现的 dynamic batch scheduler；作者重实现的 Orca Oracle / Pow2 / Max variants |
 | 解码场景 | 单样本生成、parallel sampling、beam search 与共享前缀；不同图使用各自配置 |
 
-![Table 1 · 论文模型规模与 GPU 显存配置](./assets/papers/paper-pagedattention/table-1.png)
+![Table 1 · 论文模型规模与 GPU 显存配置](./assets/papers/paper-pagedattention/table-1-pdf.png)
 
 | 模型规模 | GPU 配置 | 总显存 | 表中 KV 预算 |
 | --- | --- | --- | --- |
@@ -104,25 +107,25 @@ $$
 | 66B | 4 × A100 40 GB | 160 GB | 21 GB |
 | 175B | 8 × A100 80 GB | 640 GB | 264 GB |
 
-这些数字来自原文 Table 1，属于原模型与执行配置，不是今日所有 vLLM 模型的最低显存要求。[表源](https://arxiv.org/html/2309.06180v1#S5.T1)。精度、权重体积和运行时开销要随实际 checkpoint 重新核对；也不能直接用参数数乘以 2 bytes 就把余下显存全部分配给 KV。
+这些数字来自原文 Table 1，属于原模型与执行配置，不是今日所有 vLLM 模型的最低显存要求。[表源](https://arxiv.org/pdf/2309.06180v1#page=9)。精度、权重体积和运行时开销要随实际 checkpoint 重新核对；也不能直接用参数数乘以 2 bytes 就把余下显存全部分配给 KV。
 
 Orca 原实现未公开，作者自行实现三种预留策略：Oracle 预先知道最终输出长度，Pow2 按 2 的幂扩容，Max 按上限预留。这是对照实验的重要限制。不同策略不是三个独立公开服务产品，更不能把某个最差预留基线的最高加速比当作对所有系统的收益。
 
 ## 4. 结果与图表解读
 
-![Figure 12 · 单序列生成的请求率与延迟曲线](./assets/papers/paper-pagedattention/figure-12.png)
+![Figure 12 · 单序列生成的请求率与延迟曲线](./assets/papers/paper-pagedattention/figure-12-pdf.png)
 
-**Figure 12 解读。** 横轴是提供给服务的 request rate，纵轴是 normalized latency。曲线在低负载下缓慢上升，接近系统处理能力后突然抬升，表示排队积累，而不是某个 attention kernel 突然变慢。比较时应在近似延迟水平看哪条曲线能承受更高请求率，并核对模型、GPU 数量和上 / 下两行的负载数据。[图源](https://arxiv.org/html/2309.06180v1#S5.F12)。
+**Figure 12 解读。** 横轴是提供给服务的 request rate，纵轴是 normalized latency。曲线在低负载下缓慢上升，接近系统处理能力后突然抬升，表示排队积累，而不是某个 attention kernel 突然变慢。比较时应在近似延迟水平看哪条曲线能承受更高请求率，并核对模型、GPU 数量和上 / 下两行的负载数据。[图源](https://arxiv.org/pdf/2309.06180v1#page=10)。
 
 在 ShareGPT 基础单样本负载上，原文报告 vLLM 相对 Orca Oracle 支持约 1.7–2.7 倍请求率，相对 Orca Max 约 2.7–8 倍；这些范围比“普遍快若干倍”更准确。FasterTransformer 对照还同时缺少细粒度调度，因此其较大差距不能全归因于 block table。OPT-175B + 较短 Alpaca 序列时，Orca 某些策略也能容纳较大 batch，系统更接近 compute-bound，vLLM 优势缩小。这个反例正好验证：内存管理收益依赖真实瓶颈。
 
-![Figure 13 · 同时批处理的请求数](./assets/papers/paper-pagedattention/figure-13.png)
+![Figure 13 · 同时批处理的请求数](./assets/papers/paper-pagedattention/figure-13-pdf.png)
 
-**Figure 13 解读。** 横轴是运行时间，纵轴是 batch 中的请求数；ShareGPT 子图对应 OPT-13B、2 requests/s，Alpaca 对应 30 requests/s。它补足 Figure 12 的因果链：更少 KV 浪费让更多请求共存，批处理容量提高，负载拐点向右移动。单看 batch 大小不能保证延迟低，还要与排队和请求长度一起判断。[图源](https://arxiv.org/html/2309.06180v1#S5.F13)。
+**Figure 13 解读。** 横轴是运行时间，纵轴是 batch 中的请求数；ShareGPT 子图对应 OPT-13B、2 requests/s，Alpaca 对应 30 requests/s。它补足 Figure 12 的因果链：更少 KV 浪费让更多请求共存，批处理容量提高，负载拐点向右移动。单看 batch 大小不能保证延迟低，还要与排队和请求长度一起判断。[图源](https://arxiv.org/pdf/2309.06180v1#page=10)。
 
-![Figure 15 · 并行采样和 beam search 的 KV 共享节省](./assets/papers/paper-pagedattention/figure-15.png)
+![Figure 15 · 并行采样和 beam search 的 KV 共享节省](./assets/papers/paper-pagedattention/figure-15-pdf.png)
 
-**Figure 15 解读。** 两幅图分别看 parallel sampling 与 beam search，改变输出分支数量，比较共享 KV 带来的内存节省。prompt 越能复用，复制同一前缀越浪费；beam search 还可共享部分生成路径。图里的收益与前缀长度、分支数和分歧位置有关，并不代表不同内容的任意请求都能共享缓存。[图源](https://arxiv.org/html/2309.06180v1#S6.F15)。
+**Figure 15 解读。** 两幅图分别看 parallel sampling 与 beam search，改变输出分支数量，比较共享 KV 带来的内存节省。prompt 越能复用，复制同一前缀越浪费；beam search 还可共享部分生成路径。图里的收益与前缀长度、分支数和分歧位置有关，并不代表不同内容的任意请求都能共享缓存。[图源](https://arxiv.org/pdf/2309.06180v1#page=11)。
 
 图表核读范围本轮包括系统图 Figure 4、映射图 Figure 6、硬件 Table 1、主吞吐 Figure 12/13 与共享 Figure 15。其余图表已放入资产清单并列出待核项，后续可补充 block size、kernel 开销、swapping/recomputation 与混合负载的更细证据；本报告不把尚未解释的图标为已完成。
 
@@ -139,3 +142,5 @@ PagedAttention 改进的是 **KV 内存管理和可批处理容量**，不是语
 本报告参考 [Woosuk Kwon 与 Zhuohan Li 的 vLLM 作者讲解](https://vllm.ai/blog/2023-06-20-vllm)，吸收用按需分配和共享解释显存节省；博客的 HF/TGI 测速与正式论文的 FT/Orca 实验没有混用。解释已融入问题与方法部分；数字、图表和实验口径回到固定版本原文核对。
 
 源码静态核读固定于 `e2fb71ec9f2c3168ba8614408fa807a5f65707c5`（vLLM v0.2.0）。核心文件：[vllm/core/block_manager.py](https://github.com/vllm-project/vllm/blob/e2fb71ec9f2c3168ba8614408fa807a5f65707c5/vllm/core/block_manager.py#L102-L169)。没有执行代码或重新训练。
+
+**图表来源。** 本报告使用固定版本原论文 PDF 的核对裁剪图，不重新排版原表；对应 PDF 页码、裁剪区域和文件校验值记录在 assets/papers/paper-pagedattention/figures.json。LaTeX 源码保留在本地缓存，用于核查图表及上下文。

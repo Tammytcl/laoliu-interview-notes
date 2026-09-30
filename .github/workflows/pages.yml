@@ -4,6 +4,8 @@ on:
     branches: [main]
   pull_request:
     branches: [main]
+  schedule:
+    - cron: '17 2 * * 1'
   workflow_dispatch:
 permissions:
   contents: read
@@ -13,6 +15,8 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     steps:
       - uses: actions/checkout@v6
       - uses: actions/setup-node@v4
@@ -20,6 +24,27 @@ jobs:
           node-version: '22'
           cache: npm
       - run: npm ci
+      - name: Refresh citation snapshots
+        if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
+        env:
+          OPENALEX_API_KEY: ${{ secrets.OPENALEX_API_KEY }}
+          SERPAPI_API_KEY: ${{ secrets.SERPAPI_API_KEY }}
+        run: |
+          if [ "${{ github.event_name }}" = 'push' ]; then
+            npm run papers:citations
+          else
+            npm run papers:citations -- --force
+          fi
+      - name: Save citation snapshots
+        if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
+        run: |
+          git add content/metadata/citations.json
+          if ! git diff --cached --quiet; then
+            git config user.name 'github-actions[bot]'
+            git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+            git commit -m 'Update paper citation snapshots'
+            git push
+          fi
       - run: npm test
       - run: npm run build
       - uses: actions/upload-pages-artifact@v4
@@ -30,6 +55,7 @@ jobs:
     needs: build
     runs-on: ubuntu-latest
     permissions:
+      contents: read
       pages: write
       id-token: write
     environment:
@@ -39,3 +65,17 @@ jobs:
       - uses: actions/configure-pages@v5
       - id: deployment
         uses: actions/deploy-pages@v4
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+      - run: npm ci
+      - run: npx playwright install --with-deps chromium
+      - name: Verify deployed paper figures and layout
+        run: npm run papers:check-live -- "${{ steps.deployment.outputs.page_url }}"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: paper-live-check
+          path: test-results/paper-live

@@ -1,0 +1,53 @@
+{
+  "paper-react": {
+    "attempts": {
+      "openalex": {
+        "checkedAt": "2026-09-30T10:45:54.308Z",
+        "status": "failed",
+        "reason": "title-mismatch"
+      }
+    }
+  },
+  "paper-ddpm": {
+    "openalex": {
+      "count": 5610,
+      "url": "https://openalex.org/W3036167779",
+      "matchedTitle": "Denoising Diffusion Probabilistic Models",
+      "fetchedAt": "2026-09-30T10:45:54.308Z"
+    },
+    "attempts": {
+      "openalex": {
+        "checkedAt": "2026-09-30T10:45:54.308Z",
+        "status": "ok"
+      }
+    }
+  },
+  "paper-pagedattention": {
+    "openalex": {
+      "count": 1592,
+      "url": "https://openalex.org/W4387321091",
+      "matchedTitle": "Efficient Memory Management for Large Language Model Serving with PagedAttention",
+      "fetchedAt": "2026-09-30T10:45:54.308Z"
+    },
+    "attempts": {
+      "openalex": {
+        "checkedAt": "2026-09-30T10:45:54.308Z",
+        "status": "ok"
+      }
+    }
+  },
+  "paper-gqa": {
+    "openalex": {
+      "count": 395,
+      "url": "https://openalex.org/W4389518760",
+      "matchedTitle": "GQA: Training Generalized Multi-Query Transformer Models from Multi-Head Checkpoints",
+      "fetchedAt": "2026-09-30T10:45:54.308Z"
+    },
+    "attempts": {
+      "openalex": {
+        "checkedAt": "2026-09-30T10:45:54.308Z",
+        "status": "ok"
+      }
+    }
+  }
+}

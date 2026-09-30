@@ -8,7 +8,9 @@ author_affiliations: [[1]]
 venue: "Conference / Journal / Preprint"
 year: 2026
 direction: llm
-research_categories: [model-architecture]
+areas: [language]
+tasks: [text-generation]
+published: 2026-09-30
 method_figure: null
 method_caption: "完成方法图核对后填写"
 paper_url: "https://arxiv.org/abs/0000.00000v1"
@@ -19,7 +21,7 @@ note_ids: []
 tags: [Method, Task]
 updated: 2026-09-30
 summary: "用一段准确陈述概括研究问题、关键机制与适用范围。"
-template_version: 3
+template_version: 4
 draft: true
 ---
 

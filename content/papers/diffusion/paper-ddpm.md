@@ -7,10 +7,13 @@ affiliations: ["UC Berkeley"]
 author_affiliations: [[1], [1], [1]]
 venue: "NeurIPS 2020"
 year: 2020
-research_categories: [generative-modeling]
-method_figure: "./assets/papers/paper-ddpm/figure-2.png"
+areas: [vision]
+tasks: [image-generation]
+published: 2020-06-19
+method_figure: "./assets/papers/paper-ddpm/figure-2-pdf.png"
 method_caption: "Figure 2 · 正向加噪与反向生成"
 direction: diffusion
+openalex_id: W3036167779
 paper_url: "https://arxiv.org/abs/2006.11239v2"
 github_url: "https://github.com/hojonathanho/diffusion"
 code_note: "Official TensorFlow implementation; the original experiments used TPU v3-8."
@@ -19,7 +22,7 @@ note_ids: [ddpm-denoising, diffusion-parameterization]
 tags: [Diffusion, DDPM, Generative Modeling, Noise Prediction, U-Net]
 updated: 2026-09-30
 summary: "把逐步加噪的扩散过程与可学习的反向去噪链结合，通过噪声预测目标实现高质量图像生成。"
-template_version: 3
+template_version: 4
 draft: false
 ---
 
@@ -51,9 +54,9 @@ $$
 x_t=\sqrt{\bar\alpha_t}x_0+\sqrt{1-\bar\alpha_t}\epsilon,\qquad \epsilon\sim\mathcal N(0,I).
 $$
 
-![Figure 2 · 固定正向扩散与可学习反向链的图模型](./assets/papers/paper-ddpm/figure-2.png)
+![Figure 2 · 固定正向扩散与可学习反向链的图模型](./assets/papers/paper-ddpm/figure-2-pdf.png)
 
-**Figure 2 解读。** 一条方向对应 $q$ 的加噪，反方向对应 $p_\theta$ 的生成。节点是与原图同维度的潜变量，不是缩小到低维空间的 VAE latent。箭头体现 Markov 依赖；训练时可以直接构造 $x_t$，生成时则需要按照反向链逐步执行。[图源：原文 Figure 2](https://arxiv.org/html/2006.11239v2#S2.F2)。
+**Figure 2 解读。** 一条方向对应 $q$ 的加噪，反方向对应 $p_\theta$ 的生成。节点是与原图同维度的潜变量，不是缩小到低维空间的 VAE latent。箭头体现 Markov 依赖；训练时可以直接构造 $x_t$，生成时则需要按照反向链逐步执行。[图源：原文 Figure 2](https://arxiv.org/pdf/2006.11239v2#page=2)。
 
 ### 反向去噪与噪声预测
 
@@ -134,21 +137,21 @@ CIFAR10 和 CelebA-HQ 来自 TensorFlow Datasets，LSUN 按 StyleGAN 数据准�
 
 ## 4. 结果与图表解读
 
-![Table 1 · CIFAR10 的样本质量与似然比较](./assets/papers/paper-ddpm/table-1.png)
+![Table 1 · CIFAR10 的样本质量与似然比较](./assets/papers/paper-ddpm/table-1-pdf.png)
 
-**Table 1 解读。** 本文 $L_{simple}$ 模型达到 IS 9.46、FID 3.17，是论文重点的无条件 CIFAR10 样本质量结果。各行同时列不同类型生成模型，需要分别看 FID、IS 与 NLL，不能把“某项最优”说成所有目标都最好。尤其本文强调样本质量，likelihood 并非全面领先。[表源：原文 Table 1](https://arxiv.org/html/2006.11239v2#S4.T1)。
+**Table 1 解读。** 本文 $L_{simple}$ 模型达到 IS 9.46、FID 3.17，是论文重点的无条件 CIFAR10 样本质量结果。各行同时列不同类型生成模型，需要分别看 FID、IS 与 NLL，不能把“某项最优”说成所有目标都最好。尤其本文强调样本质量，likelihood 并非全面领先。[表源：原文 Table 1](https://arxiv.org/pdf/2006.11239v2#page=5)。
 
-![Table 2 · 反向均值参数化与目标函数消融](./assets/papers/paper-ddpm/table-2.png)
+![Table 2 · 反向均值参数化与目标函数消融](./assets/papers/paper-ddpm/table-2-pdf.png)
 
-**Table 2 解读。** 行列组合对照均值 / noise 预测参数化与训练目标。它回答的不是“加噪步数越多越好”，而是网络预测什么、训练给各项怎样的权重影响生成。空白格来自训练不稳定、样本分数超出范围，不能当作零分，也不能只挑最佳格忽略失败。该实验支撑选择 noise prediction 与简化目标。[表源：原文 Table 2](https://arxiv.org/html/2006.11239v2#S4.T2)。
+**Table 2 解读。** 行列组合对照均值 / noise 预测参数化与训练目标。它回答的不是“加噪步数越多越好”，而是网络预测什么、训练给各项怎样的权重影响生成。空白格来自训练不稳定、样本分数超出范围，不能当作零分，也不能只挑最佳格忽略失败。该实验支撑选择 noise prediction 与简化目标。[表源：原文 Table 2](https://arxiv.org/pdf/2006.11239v2#page=5)。
 
-![Figure 5 · CIFAR10 的 rate-distortion 与反向过程时间](./assets/papers/paper-ddpm/figure-5.png)
+![Figure 5 · CIFAR10 的 rate-distortion 与反向过程时间](./assets/papers/paper-ddpm/figure-5-pdf.png)
 
-**Figure 5 解读。** 曲线把变分项解释为随反向过程逐步补充信息的代价，distortion 使用 [0,255] 图像尺度上的 RMSE。它展示高层结构与细节在信息量和视觉误差上的不同作用；它不是实际文件压缩器的端到端 benchmark。原文明确 compression 只是 proof of concept，所需高维随机编码过程并不实用。[图源](https://arxiv.org/html/2006.11239v2#S4.F5)。
+**Figure 5 解读。** 曲线把变分项解释为随反向过程逐步补充信息的代价，distortion 使用 [0,255] 图像尺度上的 RMSE。它展示高层结构与细节在信息量和视觉误差上的不同作用；它不是实际文件压缩器的端到端 benchmark。原文明确 compression 只是 proof of concept，所需高维随机编码过程并不实用。[图源](https://arxiv.org/pdf/2006.11239v2#page=7)。
 
-![Figure 6 · 从中间噪声状态预测的图像逐渐细化](./assets/papers/paper-ddpm/figure-6.png)
+![Figure 6 · 从中间噪声状态预测的图像逐渐细化](./assets/papers/paper-ddpm/figure-6-pdf.png)
 
-**Figure 6 解读。** 从左到右观察估计的 $\hat x_0$，先形成粗略结构，再补细节。展示的是不同噪声阶段下的原图估计，不能误认成所有格子都是直接显示原始 $x_t$。这张可视化支持 coarse-to-fine 的解释，但不单独证明 FID 改善。[图源](https://arxiv.org/html/2006.11239v2#S4.F6)。
+**Figure 6 解读。** 从左到右观察估计的 $\hat x_0$，先形成粗略结构，再补细节。展示的是不同噪声阶段下的原图估计，不能误认成所有格子都是直接显示原始 $x_t$。这张可视化支持 coarse-to-fine 的解释，但不单独证明 FID 改善。[图源](https://arxiv.org/pdf/2006.11239v2#page=7)。
 
 在 LSUN，常规 Bedroom FID 为 6.36，大模型为 4.90，Church 为 7.89，Cat 为 19.75；不同类别的效果差异说明“能生成高质量图像”不等于所有数据集都优于所有 GAN。此轮重点解释 Figure 2/5/6 和 Tables 1/2，其余样本、插值及邻居检查图保留为后续核读范围。
 
@@ -165,3 +168,5 @@ DDPM 的贡献是明确连接反向高斯链、噪声预测和去噪 score match
 本报告参考 [Niels Rogge 与 Kashif Rasul 的 The Annotated Diffusion Model](https://huggingface.co/blog/annotated-diffusion)，吸收训练一步与完整采样分开的讲解顺序；其 PyTorch 教学实现并非原论文全部配置。解释已融入问题与方法部分；数字、图表和实验口径回到固定版本原文核对。
 
 源码静态核读固定于 `1e0dceb3b3495bbe19116a5e1b3596cd0706c543`。核心文件：[diffusion_tf/diffusion_utils.py](https://github.com/hojonathanho/diffusion/blob/1e0dceb3b3495bbe19116a5e1b3596cd0706c543/diffusion_tf/diffusion_utils.py)。没有执行代码或重新训练。
+
+**图表来源。** 本报告使用固定版本原论文 PDF 的核对裁剪图，不重新排版原表；对应 PDF 页码、裁剪区域和文件校验值记录在 assets/papers/paper-ddpm/figures.json。LaTeX 源码保留在本地缓存，用于核查图表及上下文。

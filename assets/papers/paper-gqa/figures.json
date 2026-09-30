@@ -66,6 +66,125 @@
       "method": "original-html-screenshot",
       "explanation": "complete",
       "reportSection": "See the figure-specific discussion in the report."
+    },
+    {
+      "file": "figure-1-pdf.png",
+      "sha256": "22b45e944104201ca73111866e2697e1a344b3f5fc3e1b68cd02931aed8d7e93",
+      "original": "https://arxiv.org/pdf/2305.13245v3#page=1",
+      "method": "pinned-original-pdf-crop",
+      "pdfPage": 1,
+      "cropBox": [
+        305,
+        590,
+        527,
+        707
+      ],
+      "pdfSha256": "ba9094fe73db9bf515d47ae8b2d502fee9d8a6c7b1327e197ddb160f4c63b94a",
+      "scale": 3,
+      "explanation": "complete",
+      "visuallyVerified": true
+    },
+    {
+      "file": "figure-2-pdf.png",
+      "sha256": "8a6e3b793e1d9c7a8e84919a23287fbf40df2ff51b05ae921f2517315cb55bc8",
+      "original": "https://arxiv.org/pdf/2305.13245v3#page=2",
+      "method": "pinned-original-pdf-crop",
+      "pdfPage": 2,
+      "cropBox": [
+        70,
+        70,
+        525,
+        213
+      ],
+      "pdfSha256": "ba9094fe73db9bf515d47ae8b2d502fee9d8a6c7b1327e197ddb160f4c63b94a",
+      "scale": 3,
+      "explanation": "complete",
+      "visuallyVerified": true
+    },
+    {
+      "file": "figure-3-pdf.png",
+      "sha256": "b61bef9059deeb558f3c1eee88d9f9b9ce0d0380767c771968e1971e01fc86af",
+      "original": "https://arxiv.org/pdf/2305.13245v3#page=3",
+      "method": "pinned-original-pdf-crop",
+      "pdfPage": 3,
+      "cropBox": [
+        305,
+        225,
+        527,
+        408
+      ],
+      "pdfSha256": "ba9094fe73db9bf515d47ae8b2d502fee9d8a6c7b1327e197ddb160f4c63b94a",
+      "scale": 3,
+      "explanation": "complete",
+      "visuallyVerified": true
+    },
+    {
+      "file": "figure-4-pdf.png",
+      "sha256": "20fd7195834dc80f897e21e1e7f1e874c7e11ae8b852064ccb45d0ee395bf6d3",
+      "original": "https://arxiv.org/pdf/2305.13245v3#page=4",
+      "method": "pinned-original-pdf-crop",
+      "pdfPage": 4,
+      "cropBox": [
+        70,
+        68,
+        287,
+        190
+      ],
+      "pdfSha256": "ba9094fe73db9bf515d47ae8b2d502fee9d8a6c7b1327e197ddb160f4c63b94a",
+      "scale": 3,
+      "explanation": "complete",
+      "visuallyVerified": true
+    },
+    {
+      "file": "figure-5-pdf.png",
+      "sha256": "493137cdf156d0115bccf32a0ea4ab5f9acd8974418354d8f1dbe1644031ea79",
+      "original": "https://arxiv.org/pdf/2305.13245v3#page=4",
+      "method": "pinned-original-pdf-crop",
+      "pdfPage": 4,
+      "cropBox": [
+        70,
+        300,
+        288,
+        449
+      ],
+      "pdfSha256": "ba9094fe73db9bf515d47ae8b2d502fee9d8a6c7b1327e197ddb160f4c63b94a",
+      "scale": 3,
+      "explanation": "complete",
+      "visuallyVerified": true
+    },
+    {
+      "file": "figure-6-pdf.png",
+      "sha256": "1a9c5b3314efb828b8e612b35f06c20f8273fc237c615fbcdc70c2f64d944162",
+      "original": "https://arxiv.org/pdf/2305.13245v3#page=4",
+      "method": "pinned-original-pdf-crop",
+      "pdfPage": 4,
+      "cropBox": [
+        305,
+        65,
+        531,
+        212
+      ],
+      "pdfSha256": "ba9094fe73db9bf515d47ae8b2d502fee9d8a6c7b1327e197ddb160f4c63b94a",
+      "scale": 3,
+      "explanation": "complete",
+      "visuallyVerified": true
+    },
+    {
+      "file": "table-1-pdf.png",
+      "sha256": "8246528a44db038f55f1f5ab3b83f161fa3d08c514212b1907d22d4e2f13001d",
+      "original": "https://arxiv.org/pdf/2305.13245v3#page=3",
+      "method": "pinned-original-pdf-crop",
+      "pdfPage": 3,
+      "cropBox": [
+        70,
+        68,
+        525,
+        154
+      ],
+      "pdfSha256": "ba9094fe73db9bf515d47ae8b2d502fee9d8a6c7b1327e197ddb160f4c63b94a",
+      "scale": 3,
+      "explanation": "complete",
+      "visuallyVerified": true
     }
   ]
 }

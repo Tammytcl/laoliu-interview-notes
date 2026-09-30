@@ -210,6 +210,91 @@
       "method": "cached-original-html-screenshot",
       "explanation": "pending",
       "reason": "Not yet included in the current reading scope."
+    },
+    {
+      "file": "figure-2-pdf.png",
+      "sha256": "4a5b1130597b5961c74ba658360781ec023ff26fbb272172261115520f0faf31",
+      "original": "https://arxiv.org/pdf/2006.11239v2#page=2",
+      "method": "pinned-original-pdf-crop",
+      "pdfPage": 2,
+      "cropBox": [
+        153,
+        66,
+        460,
+        121
+      ],
+      "pdfSha256": "aee5e07a802e8dfd2a386374c94fd61d1d056cb7e1e0fec4f28e8120ff5d8505",
+      "scale": 3,
+      "explanation": "complete",
+      "visuallyVerified": true
+    },
+    {
+      "file": "figure-5-pdf.png",
+      "sha256": "3076b6dc8dbaae8d761a7fe8103857ad45caddbad025f62a042dc1dfb7218443",
+      "original": "https://arxiv.org/pdf/2006.11239v2#page=7",
+      "method": "pinned-original-pdf-crop",
+      "pdfPage": 7,
+      "cropBox": [
+        108,
+        180,
+        505,
+        287
+      ],
+      "pdfSha256": "aee5e07a802e8dfd2a386374c94fd61d1d056cb7e1e0fec4f28e8120ff5d8505",
+      "scale": 3,
+      "explanation": "complete",
+      "visuallyVerified": true
+    },
+    {
+      "file": "figure-6-pdf.png",
+      "sha256": "09130db64d62b97d729be20bede775e757e83e98d9055220fe551d5ef41668e6",
+      "original": "https://arxiv.org/pdf/2006.11239v2#page=7",
+      "method": "pinned-original-pdf-crop",
+      "pdfPage": 7,
+      "cropBox": [
+        125,
+        409,
+        487,
+        484
+      ],
+      "pdfSha256": "aee5e07a802e8dfd2a386374c94fd61d1d056cb7e1e0fec4f28e8120ff5d8505",
+      "scale": 3,
+      "explanation": "complete",
+      "visuallyVerified": true
+    },
+    {
+      "file": "table-1-pdf.png",
+      "sha256": "b5195d4d4e7f6e00180189ff283235c1eeff06648bd832098a39eba88ac84bf4",
+      "original": "https://arxiv.org/pdf/2006.11239v2#page=5",
+      "method": "pinned-original-pdf-crop",
+      "pdfPage": 5,
+      "cropBox": [
+        108,
+        72,
+        342,
+        268
+      ],
+      "pdfSha256": "aee5e07a802e8dfd2a386374c94fd61d1d056cb7e1e0fec4f28e8120ff5d8505",
+      "scale": 3,
+      "explanation": "complete",
+      "visuallyVerified": true
+    },
+    {
+      "file": "table-2-pdf.png",
+      "sha256": "f662f04ffceb4048434ffa3d20d577bc75f91e4ea0e7e2548d1e51884b53d3c5",
+      "original": "https://arxiv.org/pdf/2006.11239v2#page=5",
+      "method": "pinned-original-pdf-crop",
+      "pdfPage": 5,
+      "cropBox": [
+        342,
+        90,
+        510,
+        249
+      ],
+      "pdfSha256": "aee5e07a802e8dfd2a386374c94fd61d1d056cb7e1e0fec4f28e8120ff5d8505",
+      "scale": 3,
+      "explanation": "complete",
+      "visuallyVerified": true
     }
   ]
 }
