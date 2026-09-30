@@ -71,6 +71,8 @@ test('正式报告显示英文元数据、五模块目录、数学公式与可�
 });
 
 test('OPD 专题精读展示方法图、实验结果和五模块目录', async ({ page }) => {
+  const data = await (await page.request.get('/data.json')).json();
+  expect(data.papers.filter(p => p.id.startsWith('paper-opd-')).every(p => p.toc.length === 5)).toBe(true);
   await page.goto('/#paper=paper-opd-2609-30837');
   await expect(page.locator('#paper-space h1')).toHaveText('MOPD-Router: Rethinking Teacher Routing in Multi-Teacher On-Policy Distillation');
   await expect(page.locator('.publication-toc button')).toHaveCount(5);
