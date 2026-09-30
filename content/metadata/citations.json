@@ -49,5 +49,480 @@
         "status": "ok"
       }
     }
+  },
+  "paper-opd-2306-08543": {
+    "openalex": {
+      "count": 32,
+      "url": "https://openalex.org/W4380993498",
+      "matchedTitle": "MiniLLM: On-Policy Distillation of Large Language Models",
+      "fetchedAt": "2026-09-30T12:03:35.217Z"
+    },
+    "attempts": {
+      "openalex": {
+        "checkedAt": "2026-09-30T12:03:35.217Z",
+        "status": "ok"
+      }
+    }
+  },
+  "paper-opd-2306-13649": {
+    "openalex": {
+      "count": 3,
+      "url": "https://openalex.org/W4382173266",
+      "matchedTitle": "On-Policy Distillation of Language Models: Learning from Self-Generated Mistakes",
+      "fetchedAt": "2026-09-30T12:03:35.217Z"
+    },
+    "attempts": {
+      "openalex": {
+        "checkedAt": "2026-09-30T12:03:35.217Z",
+        "status": "ok"
+      }
+    }
+  },
+  "paper-opd-2601-18734": {
+    "openalex": {
+      "count": 0,
+      "url": "https://openalex.org/W7125861034",
+      "matchedTitle": "Self-Distilled Reasoner: On-Policy Self-Distillation for Large Language Models",
+      "fetchedAt": "2026-09-30T12:03:35.217Z"
+    },
+    "attempts": {
+      "openalex": {
+        "checkedAt": "2026-09-30T12:03:35.217Z",
+        "status": "ok"
+      }
+    }
+  },
+  "paper-opd-2602-12275": {
+    "openalex": {
+      "count": 0,
+      "url": "https://openalex.org/W7128814765",
+      "matchedTitle": "On-Policy Context Distillation for Language Models",
+      "fetchedAt": "2026-09-30T12:03:35.217Z"
+    },
+    "attempts": {
+      "openalex": {
+        "checkedAt": "2026-09-30T12:03:35.217Z",
+        "status": "ok"
+      }
+    }
+  },
+  "paper-opd-2603-07079": {
+    "openalex": {
+      "count": 0,
+      "url": "https://openalex.org/W7134813685",
+      "matchedTitle": "Entropy-Aware On-Policy Distillation of Language Models",
+      "fetchedAt": "2026-09-30T12:03:35.217Z"
+    },
+    "attempts": {
+      "openalex": {
+        "checkedAt": "2026-09-30T12:03:35.217Z",
+        "status": "ok"
+      }
+    }
+  },
+  "paper-opd-2603-11137": {
+    "openalex": {
+      "count": 0,
+      "url": "https://openalex.org/W7135174508",
+      "matchedTitle": "Scaling Reasoning Efficiently via Relaxed On-Policy Distillation",
+      "fetchedAt": "2026-09-30T12:03:35.217Z"
+    },
+    "attempts": {
+      "openalex": {
+        "checkedAt": "2026-09-30T12:03:35.217Z",
+        "status": "ok"
+      }
+    }
+  },
+  "paper-opd-2603-24472": {
+    "openalex": {
+      "count": 0,
+      "url": "https://openalex.org/W7140517510",
+      "matchedTitle": "Why Does Self-Distillation (Sometimes) Degrade the Reasoning Capability of LLMs?",
+      "fetchedAt": "2026-09-30T12:03:35.217Z"
+    },
+    "attempts": {
+      "openalex": {
+        "checkedAt": "2026-09-30T12:03:35.217Z",
+        "status": "ok"
+      }
+    }
+  },
+  "paper-opd-2604-00626": {
+    "openalex": {
+      "count": 0,
+      "url": "https://openalex.org/W7148454362",
+      "matchedTitle": "A Survey of On-Policy Distillation for Large Language Models",
+      "fetchedAt": "2026-09-30T12:03:35.217Z"
+    },
+    "attempts": {
+      "openalex": {
+        "checkedAt": "2026-09-30T12:03:35.217Z",
+        "status": "ok"
+      }
+    }
+  },
+  "paper-opd-2604-07466": {
+    "openalex": {
+      "count": 0,
+      "url": "https://openalex.org/W7153091404",
+      "matchedTitle": "Cross-Tokenizer LLM Distillation through a Byte-Level Interface",
+      "fetchedAt": "2026-09-30T12:03:35.217Z"
+    },
+    "attempts": {
+      "openalex": {
+        "checkedAt": "2026-09-30T12:03:35.217Z",
+        "status": "ok"
+      }
+    }
+  },
+  "paper-opd-2604-13016": {
+    "openalex": {
+      "count": 0,
+      "url": "https://openalex.org/W7154505894",
+      "matchedTitle": "Rethinking On-Policy Distillation of Large Language Models: Phenomenology, Mechanism, and Recipe",
+      "fetchedAt": "2026-09-30T12:03:35.217Z"
+    },
+    "attempts": {
+      "openalex": {
+        "checkedAt": "2026-09-30T12:03:35.217Z",
+        "status": "ok"
+      }
+    }
+  },
+  "paper-opd-2605-07711": {
+    "openalex": {
+      "count": 0,
+      "url": "https://openalex.org/W7160849202",
+      "matchedTitle": "SimCT: Recovering Lost Supervision for Cross-Tokenizer On-Policy Distillation",
+      "fetchedAt": "2026-09-30T12:03:35.217Z"
+    },
+    "attempts": {
+      "openalex": {
+        "checkedAt": "2026-09-30T12:03:35.217Z",
+        "status": "ok"
+      }
+    }
+  },
+  "paper-opd-2605-10889": {
+    "openalex": {
+      "count": 0,
+      "url": "https://openalex.org/W7160898890",
+      "matchedTitle": "Unmasking On-Policy Distillation: Where It Helps, Where It Hurts, and Why",
+      "fetchedAt": "2026-09-30T12:03:35.217Z"
+    },
+    "attempts": {
+      "openalex": {
+        "checkedAt": "2026-09-30T12:03:35.217Z",
+        "status": "ok"
+      }
+    }
+  },
+  "paper-opd-2605-12652": {
+    "openalex": {
+      "count": 0,
+      "url": "https://openalex.org/W7161162008",
+      "matchedTitle": "Multi-Rollout On-Policy Distillation via Peer Successes and Failures",
+      "fetchedAt": "2026-09-30T12:03:35.217Z"
+    },
+    "attempts": {
+      "openalex": {
+        "checkedAt": "2026-09-30T12:03:35.217Z",
+        "status": "ok"
+      }
+    }
+  },
+  "paper-opd-2606-01249": {
+    "openalex": {
+      "count": 0,
+      "url": "https://openalex.org/W7163131677",
+      "matchedTitle": "Trust Region On-Policy Distillation",
+      "fetchedAt": "2026-09-30T12:03:35.217Z"
+    },
+    "attempts": {
+      "openalex": {
+        "checkedAt": "2026-09-30T12:03:35.217Z",
+        "status": "ok"
+      }
+    }
+  },
+  "paper-opd-2606-06021": {
+    "openalex": {
+      "count": 0,
+      "url": "https://openalex.org/W7163655682",
+      "matchedTitle": "OPRD: On-Policy Representation Distillation",
+      "fetchedAt": "2026-09-30T12:03:35.217Z"
+    },
+    "attempts": {
+      "openalex": {
+        "checkedAt": "2026-09-30T12:03:35.217Z",
+        "status": "ok"
+      }
+    }
+  },
+  "paper-opd-2606-09456": {
+    "openalex": {
+      "count": 0,
+      "url": "https://openalex.org/W7164013384",
+      "matchedTitle": "Breaking the Tokenizer Barrier: On-Policy Distillation across Model Families",
+      "fetchedAt": "2026-09-30T12:03:35.217Z"
+    },
+    "attempts": {
+      "openalex": {
+        "checkedAt": "2026-09-30T12:03:35.217Z",
+        "status": "ok"
+      }
+    }
+  },
+  "paper-opd-2606-22793": {
+    "openalex": {
+      "count": 0,
+      "url": "https://openalex.org/W7165634569",
+      "matchedTitle": "A Formula-Driven Survey and Research Agenda for On-Policy Distillation",
+      "fetchedAt": "2026-09-30T12:03:35.217Z"
+    },
+    "attempts": {
+      "openalex": {
+        "checkedAt": "2026-09-30T12:03:35.217Z",
+        "status": "ok"
+      }
+    }
+  },
+  "paper-opd-2606-30406": {
+    "openalex": {
+      "count": 0,
+      "url": "https://openalex.org/W7166701728",
+      "matchedTitle": "MOPD: Multi-Teacher On-Policy Distillation for Capability Integration in LLM Post-Training",
+      "fetchedAt": "2026-09-30T12:03:35.217Z"
+    },
+    "attempts": {
+      "openalex": {
+        "checkedAt": "2026-09-30T12:03:35.217Z",
+        "status": "ok"
+      }
+    }
+  },
+  "paper-opd-2607-05184": {
+    "openalex": {
+      "count": 0,
+      "url": "https://openalex.org/W7167642481",
+      "matchedTitle": "Rethinking On-Policy Self-Distillation for Thinking Models",
+      "fetchedAt": "2026-09-30T12:03:35.217Z"
+    },
+    "attempts": {
+      "openalex": {
+        "checkedAt": "2026-09-30T12:03:35.217Z",
+        "status": "ok"
+      }
+    }
+  },
+  "paper-opd-2607-13399": {
+    "openalex": {
+      "count": 0,
+      "url": "https://openalex.org/W7168964786",
+      "matchedTitle": "Demystifying On-Policy Distillation: Roles, Pathologies, and Regulations",
+      "fetchedAt": "2026-09-30T12:03:35.217Z"
+    },
+    "attempts": {
+      "openalex": {
+        "checkedAt": "2026-09-30T12:03:35.217Z",
+        "status": "ok"
+      }
+    }
+  },
+  "paper-opd-2607-22334": {
+    "openalex": {
+      "count": 0,
+      "url": "https://openalex.org/W7171395983",
+      "matchedTitle": "Cross-Tokenizer On-Policy Distillation via Byte-Prefix Marginalization",
+      "fetchedAt": "2026-09-30T12:03:35.217Z"
+    },
+    "attempts": {
+      "openalex": {
+        "checkedAt": "2026-09-30T12:03:35.217Z",
+        "status": "ok"
+      }
+    }
+  },
+  "paper-opd-2608-06296": {
+    "openalex": {
+      "count": 0,
+      "url": "https://openalex.org/W7201842969",
+      "matchedTitle": "On-Policy Self-Distillation without Any Supervision",
+      "fetchedAt": "2026-09-30T12:03:35.217Z"
+    },
+    "attempts": {
+      "openalex": {
+        "checkedAt": "2026-09-30T12:03:35.217Z",
+        "status": "ok"
+      }
+    }
+  },
+  "paper-opd-2608-11829": {
+    "openalex": {
+      "count": 0,
+      "url": "https://openalex.org/W7202369261",
+      "matchedTitle": "Towards Understanding On-Policy Distillation through the Lens of Test-Time Scaling",
+      "fetchedAt": "2026-09-30T12:03:35.217Z"
+    },
+    "attempts": {
+      "openalex": {
+        "checkedAt": "2026-09-30T12:03:35.217Z",
+        "status": "ok"
+      }
+    }
+  },
+  "paper-opd-2608-24696": {
+    "openalex": {
+      "count": 0,
+      "url": "https://openalex.org/W7204222579",
+      "matchedTitle": "On-policy Distillation with Verifiable Reward",
+      "fetchedAt": "2026-09-30T12:03:35.217Z"
+    },
+    "attempts": {
+      "openalex": {
+        "checkedAt": "2026-09-30T12:03:35.217Z",
+        "status": "ok"
+      }
+    }
+  },
+  "paper-opd-2608-29662": {
+    "openalex": {
+      "count": 0,
+      "url": "https://openalex.org/W7204879293",
+      "matchedTitle": "ACTD: Anchor-Based Cross-Tokenizer Distillation with Residual Regularization",
+      "fetchedAt": "2026-09-30T12:03:35.217Z"
+    },
+    "attempts": {
+      "openalex": {
+        "checkedAt": "2026-09-30T12:03:35.217Z",
+        "status": "ok"
+      }
+    }
+  },
+  "paper-opd-2609-10154": {
+    "openalex": {
+      "count": 0,
+      "url": "https://openalex.org/W7212110297",
+      "matchedTitle": "CompassOPD: Cross-Family On-Policy Distillation via Within-Family Likelihood Shifts",
+      "fetchedAt": "2026-09-30T12:03:35.217Z"
+    },
+    "attempts": {
+      "openalex": {
+        "checkedAt": "2026-09-30T12:03:35.217Z",
+        "status": "ok"
+      }
+    }
+  },
+  "paper-opd-2609-20511": {
+    "openalex": {
+      "count": 0,
+      "url": "https://openalex.org/W7213609244",
+      "matchedTitle": "When EOS Tokens Disagree: Understanding Length Inflation in On-Policy Distillation",
+      "fetchedAt": "2026-09-30T12:03:35.217Z"
+    },
+    "attempts": {
+      "openalex": {
+        "checkedAt": "2026-09-30T12:03:35.217Z",
+        "status": "ok"
+      }
+    }
+  },
+  "paper-opd-2609-22254": {
+    "openalex": {
+      "count": 0,
+      "url": "https://openalex.org/W7213997239",
+      "matchedTitle": "Teacher Should Think Ahead: Adaptive Continuations for Reliable On-Policy Distillation",
+      "fetchedAt": "2026-09-30T12:03:35.217Z"
+    },
+    "attempts": {
+      "openalex": {
+        "checkedAt": "2026-09-30T12:03:35.217Z",
+        "status": "ok"
+      }
+    }
+  },
+  "paper-opd-2609-30837": {
+    "openalex": {
+      "count": 0,
+      "url": "https://openalex.org/W7214617925",
+      "matchedTitle": "MOPD-Router: Rethinking Teacher Routing in Multi-Teacher On-Policy Distillation",
+      "fetchedAt": "2026-09-30T12:03:35.217Z"
+    },
+    "attempts": {
+      "openalex": {
+        "checkedAt": "2026-09-30T12:03:35.217Z",
+        "status": "ok"
+      }
+    }
+  },
+  "paper-opd-2609-34738": {
+    "openalex": {
+      "count": 0,
+      "url": "https://openalex.org/W7214699424",
+      "matchedTitle": "Beyond Token Alignment: Event Completion for Cross-Tokenizer On-Policy Distillation",
+      "fetchedAt": "2026-09-30T12:03:35.217Z"
+    },
+    "attempts": {
+      "openalex": {
+        "checkedAt": "2026-09-30T12:03:35.217Z",
+        "status": "ok"
+      }
+    }
+  },
+  "paper-opd-2609-35347": {
+    "openalex": {
+      "count": 0,
+      "url": "https://openalex.org/W7214759893",
+      "matchedTitle": "Beyond Teacher Assignment: Domain-Normalized Multi-Teacher On-Policy Distillation",
+      "fetchedAt": "2026-09-30T12:03:35.217Z"
+    },
+    "attempts": {
+      "openalex": {
+        "checkedAt": "2026-09-30T12:03:35.217Z",
+        "status": "ok"
+      }
+    }
+  },
+  "paper-opd-2609-35505": {
+    "openalex": {
+      "count": 0,
+      "url": "https://openalex.org/W7214709239",
+      "matchedTitle": "An RL View of OPD: Least Square Policy Distillation for Sample-Efficient LLM Reasoning",
+      "fetchedAt": "2026-09-30T12:03:35.217Z"
+    },
+    "attempts": {
+      "openalex": {
+        "checkedAt": "2026-09-30T12:03:35.217Z",
+        "status": "ok"
+      }
+    }
+  },
+  "paper-opd-2609-37326": {
+    "attempts": {
+      "openalex": {
+        "checkedAt": "2026-09-30T12:03:35.217Z",
+        "status": "failed",
+        "reason": "http-404"
+      }
+    }
+  },
+  "paper-opd-2609-37377": {
+    "attempts": {
+      "openalex": {
+        "checkedAt": "2026-09-30T12:03:35.217Z",
+        "status": "failed",
+        "reason": "http-404"
+      }
+    }
+  },
+  "paper-opd-2609-38025": {
+    "attempts": {
+      "openalex": {
+        "checkedAt": "2026-09-30T12:03:35.217Z",
+        "status": "failed",
+        "reason": "http-404"
+      }
+    }
   }
 }
