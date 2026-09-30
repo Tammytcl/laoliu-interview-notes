@@ -1,76 +1,99 @@
 ---
-id: "paper-react"
-title: "ReAct：让推理与行动通过环境反馈连接"
+id: paper-react
+title: "ReAct: Synergizing Reasoning and Acting in Language Models"
 paper_title: "ReAct: Synergizing Reasoning and Acting in Language Models"
 authors: ["Shunyu Yao", "Jeffrey Zhao", "Dian Yu", "Nan Du", "Izhak Shafran", "Karthik Narasimhan", "Yuan Cao"]
+affiliations: ["Department of Computer Science, Princeton University", "Google Research, Brain team"]
+author_affiliations: [[1], [2], [2], [2], [2], [1], [2]]
+venue: "ICLR 2023"
 year: 2023
-direction: "agent"
+direction: agent
 paper_url: "https://arxiv.org/abs/2210.03629v3"
-evidence: "资料整理"
-note_ids: ["agent-workflow", "agent-tool-design", "agent-evaluation"]
-tags: ["基础论文", "agent"]
-updated: "2026-09-30"
-summary: "从 thought/action/observation 读交互机制，区分轨迹可解释性与最终任务验证。"
-template_version: 1
+github_url: "https://github.com/ysymyth/ReAct"
+code_note: "Author-maintained code and prompts; PaLM model access and training resources are separate."
+evidence: 已核原文
+note_ids: [agent-tool-design, agent-evaluation]
+tags: [Agent, Tool Use, Reasoning, Prompting, ReAct]
+updated: 2026-09-30
+summary: "把语言推理与环境动作交错组织，以外部观察修正后续行动；通过问答和交互任务检验这种闭环。"
+template_version: 2
 draft: false
 ---
 
-## 1. 收录动机与阅读目标
+## 1. 背景与已有工作
 
-作为 Agent 交互的基础论文。读前问题：“环境反馈在哪一步改变了后续决策？只增加文字推理为什么不够？”
+仅靠内部知识进行多步推理，模型可能把未核实的事实继续传递到后续结论；只调用工具又可能缺乏明确的检索目标、任务分解和进度判断。ReAct 要解决的是：**如何把模型内部的语言推理与真实环境观察放在同一条可更新的轨迹中？**
 
-## 2. 原文信息与核验范围
+这个问题已有两条相关路线。Chain-of-Thought 将中间推理写出来，但未必接触外部证据；WebGPT、交互式决策与模仿学习等路线让模型执行动作，却可能把计划和状态维护隐含在策略中。ReAct 将 thought、action、observation 显式交错，用推理决定下一个动作，再用动作返回的信息修正推理。它不只是一个后来框架里的 API 名称，也不要求先训练一个新的通用 agent 模型。
 
-[原文 v3](https://arxiv.org/abs/2210.03629v3)。首次预印本为 2022，当前记录采用 ICLR 2023 年份。核对方法、知识密集任务与交互任务段落，并查看轨迹/提示示例；未独立重跑基准或全量审核数据。
+原文最早预印本发表于 2022 年，正式收录于 ICLR 2023；本报告固定 arXiv v3。作者单位按原论文列示，Shunyu Yao 的工作在 Google internship 期间完成，不应据此把所有作者单位简化成同一家机构。
 
-## 3. 研究问题与先修知识
+## 2. 方法与实现机制
 
-先区分 [workflow 与 Agent](#q=agent-workflow) 和 [工具接口](#q=agent-tool-design)。问题是如何交替使用内部任务分析和外部观察，使决策能被新证据修正。
-
-## 4. 一句话核心贡献
-
-将语言推理与任务行动交错组织，让外部环境的信息进入下一步决策条件。
-
-## 5. 方法与关键推导
+设已有上下文包含问题、示例与之前的交互轨迹。模型根据上下文生成语言 thought 或领域 action；只有 action 被环境执行，observation 才由工具或环境返回。语言 thought 用于分解任务、摘取证据、发现异常或决定切换目标，不直接改变外部环境。
 
 ```text
-当前任务/观察 → thought → action → 环境执行 → observation → 下一轮
+输入问题与 few-shot 轨迹示例
+  → 生成 Thought：当前需要查证什么 / 下一步怎样推进
+  → 生成 Action：search、lookup 或环境操作
+  → 执行器验证并执行 Action
+  → 将真实 Observation 追加到上下文
+  → 再次决策，直到 finish 或达到预算
 ```
 
-这是学习性示意；不同任务的轨迹与提示设置以原文为准。工具输出不是模型自己写出的事实，也不会因为模型说“验证通过”就成立。一个可复盘系统要保存实际 action、结果和停止原因。
+这段流程是整理后的实现说明。对知识型问答，原文采用密集 thought-action-observation；对长交互任务，thought 可以稀疏出现，由模型在重要位置生成。把它实现成“每一步强制一个长 thought”会改变原文设置与成本。
 
-## 6. 关键图表与证据
+![Figure 1 · 推理、动作与环境观察的组织方式](./assets/papers/paper-react/figure-1.png)
 
-| 原文位置 | 阅读问题 | 比较时需核对 | 边界 |
-|---|---|---|---|
-| 知识密集任务段落 | 外部检索如何影响回答？ | HotpotQA/FEVER 的工具与评价 | 可检索信息和工具条件受限 |
-| 交互决策段落 | 观察怎样改变后续行动？ | ALFWorld/WebShop 的提示与基线 | 不直接代表所有现实 Agent |
-| 轨迹与 Appendix C | 失败能否定位到某一步？ | 实际 action/observation 示例 | 流畅推理文字不是正确性证据 |
+**Figure 1 解读。** 图中将 Standard、CoT、Act 与 ReAct 放在同一任务下比较：Standard 直接给答案，CoT 展开内部推理，Act 有工具动作但没有语言推理，ReAct 同时利用两者。另一部分展示交互环境中稀疏 thought 如何辅助计划。这里最需要分辨的是：Observation 来自环境，不应由语言模型自由续写成“假装工具成功”。图是行为示例，不是总体成功率统计。[图源](https://arxiv.org/html/2210.03629v3#S1.F1)。
 
-未搬运尚未审核的基准得分。
+知识检索环境包含三个动作：`search[entity]` 返回页面前五句或相近实体；`lookup[string]` 在当前页面查找下一个含该字符串的句子；`finish[answer]` 返回答案。它比现代全文检索器弱，作者刻意用这种环境观察语言推理如何指导检索。因此检索效果、模型推理和工具设计共同影响成绩。
 
-## 7. 作者结论与我的判断
+ReAct 与 CoT-SC 还可互补：ReAct 超过步数预算时退回 CoT-SC；CoT-SC 多数答案不足半数时转去查证。它表达的是内部知识与外部证据的条件切换，而不是“ReAct 在所有问题上比 CoT 强”。工程落地需要另外加入动作 schema、异常处理、超时、成本预算和执行日志；这些是实现设计，不是本文已完成的全部系统能力。
 
-作者通过任务实验讨论推理和行动的互补。整理者的判断：借鉴闭环时，重点保留反馈和完成判据，不能只模仿“思考→工具”外观；这是设计建议。
+## 3. 实验设置与算力
 
-## 8. 局限、反例与失败条件
+| 实验环节 | 模型 / 数据 / 配置 |
+| --- | --- |
+| 主 prompting 模型 | 冻结的 PaLM-540B；附录另给 GPT-3 结果 |
+| QA / verification | HotpotQA 与 FEVER，question-only：不提前提供 supporting paragraphs |
+| Few-shot 例子 | HotpotQA 6 个、FEVER 3 个训练集实例，人工写 thought/action/observation 轨迹 |
+| CoT-SC 对照 | temperature 0.7，采样 21 条轨迹，用多数答案 |
+| 回退预算 | HotpotQA 7 步、FEVER 5 步，用于原文的 ReAct→CoT-SC 切换 |
+| 交互任务 | ALFWorld 与 WebShop；少量人写交互示例，任务 action space 不同 |
+| 额外微调 | 用 3,000 条答对的模型生成轨迹微调 PaLM-8B / 62B，不是重新预训练 540B |
+| 微调 batch | 64；ReAct / Act 在 8B 与 62B 上均为 4,000 steps |
+| 其他微调对照 | Standard / CoT：8B 为 2,000 steps，62B 为 1,000 steps；不能称训练预算完全相同 |
+| GPU / TPU 数量与总成本 | 原文没有给出足以复现的完整硬件清单与 accelerator-hours；不填推测卡数 |
 
-错误检索、工具不可用、冗长循环和错误停止都可能破坏成功率。更多轮数不保证更好，也会增加成本。公开轨迹的推理文本不能当作模型内部机制的完整证明。
+模型原始预训练语料不是 ReAct 在本文构造的训练数据。需要分开记录：PaLM 已有预训练、few-shot 示例、生成轨迹微调集与评测集。原论文没有逐项重印 PaLM 的预训练配方，也没有给出 PaLM-540B 的本地 GPU 复现方案；作者仓库的 prompt 与 environment code 不等于模型权重、服务访问和完整硬件资源。
 
-## 9. 和已有知识的连接
+HotpotQA 用 exact match，FEVER 看事实判断准确率；ALFWorld 与 WebShop 看任务成功率，WebShop 另给 score。这些分数分别来自知识检索和交互行为，不能算成一个统一“agent 智力分”。原文各场景的提示例数和工具不同，自己的实验应记录模型版本、prompt、环境快照、temperature、步数上限、随机种子和调用费用。
 
-[Agent 评测](#q=agent-evaluation) 把最后回答与环境产物区分；[多轮训练](#q=agent-gradient) 是后续延伸，不是说原始 ReAct 采用同一种 RL 训练。
+## 4. 结果与图表解读
 
-最小练习：用固定文档构造两轮查证，比较有/无观察更新，并标注错误发生位置；尚未执行。
+![Table 1 · PaLM-540B 在 HotpotQA 与 FEVER 上的 prompting 结果](./assets/papers/paper-react/table-1.png)
 
-## 10. 不看报告的复述问题
+ReAct 在 HotpotQA 的 EM 为 27.4，CoT 为 29.4；在 FEVER 为 60.9，CoT 为 56.3。它在两项任务上优于 Act，但并非在 HotpotQA 上单独胜过 CoT。原文混合策略在 HotpotQA 上达到 35.1（ReAct→CoT-SC），在 FEVER 上另一切换方向达到 64.6。比较时还应记住 CoT-SC 的多次采样成本，不把更高分直接当成单次调用更高效。[表源](https://arxiv.org/html/2210.03629v3#S3.T1)。
 
-先在个人阅读记录中写一个读前问题；读后收起正文，用自己的话回答：本文改变了哪个环节？为什么合理？最关键的证据是什么？哪里仍不确定？这里不替你填“我的理解”。
+![Figure 3 · prompting 与轨迹微调在不同 PaLM 规模上的结果](./assets/papers/paper-react/figure-3.png)
 
-## 11. 待验证与下一步
+**Figure 3 解读。** 对照模型规模及 prompting / finetuning 设置，观察加入 reasoning+action 轨迹后小模型是否获益。图支持轨迹训练能提升结果，但微调数据来自答对轨迹筛选，训练步数也随方法变化，不能把图中的差异全归因于 thought 字段本身。它与主表的 frozen-540B prompting 属于不同实验。[图源](https://arxiv.org/html/2210.03629v3#S3.F3)。
 
-本人模型实验尚未执行。先核读正文标出的机制与图表，再完成一项有明确对照的最小练习；把真实配置、结果和失败样本写回记录。个人阅读进度从“待精读”开始，不由报告生成自动推进。
+![Table 3/4 · ALFWorld 与 WebShop 的交互成绩](./assets/papers/paper-react/table-4.png)
 
-## 12. 更新记录与来源
+ALFWorld 的 best ReAct trial 达到 71%，best Act 为 45%，BUTLER 为 37%；这些是 best-trial 比较，并不等于所有 prompt 都达到 71%。WebShop 上 ReAct 的成功率为 40.0，Act 为 30.1，专家人类为 59.6。读表时要区分 WebShop 的 score 与 success rate；“提升约 10 个百分点”指成功率口径，不是所有任务平均提升 10%。[原文交互实验](https://arxiv.org/html/2210.03629v3#S4)。
 
-2026-09-30：作为论文收录组件的基础精读示例整理，原文重点位置列于第 2/6 节；尚未进行本人复现。正文中的阅读建议和学习推演不当作原论文实验结论。
+![Figure 5 · 人对 ReAct 轨迹的中途行为修正](./assets/papers/paper-react/figure-5.png)
+
+**Figure 5 解读。** 这是一条 ALFWorld 轨迹修正示例：人调整中间语言状态后，后续行动能随之变化。它说明显式轨迹提供干预点，并不证明模型产生的 thought 是其内部真实因果解释，也不等于所有失败都能通过改一句话解决。[图源](https://arxiv.org/html/2210.03629v3#A1.F5)。
+
+原文还人工分析 200 条成功 / 失败轨迹，发现 CoT 的事实幻觉与 ReAct 的检索失败、错误推理有不同分布。ReAct 的外部证据减少了一类问题，却引入了工具和环境依赖。此轮正文重点解释 Figure 1/3/5 与主结果表，其余图与附录轨迹在图表清单中保留待补状态。
+
+## 5. 局限、结论与后续阅读
+
+本文建立的是一种把推理与行动共同放进上下文的范式，以及若干具体任务上的实验支持。关键机制是外部观察能够改变接下来的决策；观察缺失、检索返回空结果、上下文越来越长、错误动作反复发生时，闭环仍会失败。Thought 可读不等于可靠，日志可见也不等于执行安全。
+
+对自己的 agent 工作，应将“模型生成了合理计划”“工具真的成功执行”“环境任务完成”分开评价。[工具调用笔记](#q=agent-tool-design)和 [Agent 评测](#q=agent-evaluation)可进一步拆出成功率、行动预算与错误恢复。换成今日模型时，重新跑固定环境与 prompt 对照，不能直接继承 PaLM-540B 的数值。
+
+**来源与更新。** 核对 [arXiv v3 正文](https://arxiv.org/html/2210.03629v3)、附录 B.1 的微调设置及原始图表；代码来自作者维护的 [ReAct 仓库](https://github.com/ysymyth/ReAct)。2026-09-30 更新为五模块精读，补充单位、实验数据流与原图解读。没有登记本人 GPU 训练或 API 跑分；算力未披露项保留明确缺口。图片与论文成果归原作者。

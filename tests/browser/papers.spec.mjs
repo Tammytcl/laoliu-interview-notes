@@ -1,5 +1,4 @@
 import { test, expect } from '@playwright/test';
-import { readFile } from 'node:fs/promises';
 
 test('论文库、方向筛选、Daily 与专题报告相互链接', async ({ page }) => {
   const errors = []; page.on('pageerror', error => errors.push(error.message));
@@ -27,37 +26,43 @@ test('论文库、方向筛选、Daily 与专题报告相互链接', async ({ pa
   expect(errors).toEqual([]);
 });
 
-test('个人复述、复习日期、收藏持久化，并可导出导入', async ({ page }) => {
+test('正式报告显示英文元数据、五模块目录、数学公式与可放大原图', async ({ page }) => {
   await page.goto('/#paper=paper-gqa');
-  await page.locator('[data-paper-stage="recalled"]').click();
-  await expect(page.locator('#toast')).toContainText('先写一段自己的复述');
-  await expect(page.locator('[data-paper-stage="recalled"]')).toHaveAttribute('aria-pressed', 'false');
-  await page.locator('#reading-question').fill('共享 KV 是否减少 query 头？');
-  await page.locator('[data-close-paper]').click();
-  await expect(page.locator('#paper-body')).not.toHaveAttribute('open', '');
-  await page.locator('#reading-recall').fill('query 仍独立，组内共享 KV；容量减少不等于端到端速度等比例提升。');
-  await page.locator('#reading-connection').fill('连接 PagedAttention 的放置策略。');
-  await page.locator('#reading-next-review').fill('2020-01-01');
-  await page.locator('[data-paper-stage="recalled"]').click();
-  await page.locator('[data-paper-star]').click();
-  await expect(page.locator('#paper-body')).not.toHaveAttribute('open', '');
+  await expect(page.locator('#paper-space h1')).toHaveText('GQA: Training Generalized Multi-Query Transformer Models from Multi-Head Checkpoints');
+  await expect(page.locator('.publication-authors')).toContainText('Joshua Ainslie');
+  await expect(page.locator('.publication-affiliations')).toContainText('University of Southern California');
+  await expect(page.locator('.publication-actions a', { hasText: 'arXiv' })).toHaveAttribute('href', 'https://arxiv.org/abs/2305.13245v3');
+  await expect(page.locator('.publication-actions a', { hasText: 'GitHub' })).toHaveAttribute('href', 'https://github.com/google/flaxformer');
+  await expect(page.locator('.reader-aside textarea')).toHaveCount(0);
+  await expect(page.locator('.publication-toc button')).toHaveCount(5);
+  await expect(page.locator('.publication-body .katex').first()).toBeVisible();
+  await expect(page.locator('.paper-figure-button')).toHaveCount(7);
+  await page.locator('.paper-figure-button').first().click();
+  await expect(page.locator('#paper-figure-dialog')).toBeVisible();
+  await expect(page.locator('#figure-caption')).toContainText('Figure 2');
+  await expect.poll(() => page.locator('#figure-full').evaluate(img => img.complete && img.naturalWidth > 0)).toBe(true);
+  await page.locator('[data-close-figure]').click();
+  await expect(page.locator('#paper-figure-dialog')).not.toBeVisible();
   await page.reload();
-  await expect(page.locator('#reading-question')).toHaveValue('共享 KV 是否减少 query 头？');
-  await expect(page.locator('[data-paper-stage="recalled"]')).toHaveAttribute('aria-pressed', 'true');
-  await expect(page.locator('[data-paper-star]')).toHaveAttribute('aria-pressed', 'true');
-  const downloading = page.waitForEvent('download'); await page.locator('[data-reading-export]').click();
-  const download = await downloading;
-  const backup = JSON.parse(await readFile(await download.path(), 'utf8'));
-  expect(backup.reading['paper-gqa'].stage).toBe('recalled');
-  expect(backup.reading['paper-gqa'].recall).toContain('query');
-  await page.evaluate(() => localStorage.clear()); await page.goto('/#view=papers');
-  page.on('dialog', dialog => dialog.accept());
-  await page.locator('#reading-import-file').setInputFiles({ name: 'reading.json', mimeType: 'application/json', buffer: Buffer.from(JSON.stringify(backup)) });
-  await page.locator('#paper-stage').selectOption('recalled');
-  await expect(page.locator('.paper-card')).toHaveCount(1);
-  await expect(page.locator('.paper-card')).toContainText('到期复习');
-  await page.locator('.paper-card h3 a').click();
-  await expect(page.locator('#reading-connection')).toHaveValue('连接 PagedAttention 的放置策略。');
+  await expect(page.locator('[data-paper-star], [data-paper-stage], #paper-stage, #paper-starred, [data-reading-export], [data-reading-import]')).toHaveCount(0);
+  await page.goto('/#view=papers');
+  await expect(page.locator('.paper-card')).toHaveCount(4);
+  await expect(page.locator('[data-paper-star], #paper-stage, #paper-starred, .paper-backup')).toHaveCount(0);
+});
+
+test('工作台缓存按钮确认后请求清理，普通预览没有写接口', async ({ page }) => {
+  const request = await page.request.get('/api/paper-cache'); expect(request.status()).toBe(404);
+  let cleaned = false;
+  await page.route('**/api/paper-cache', route => route.fulfill({ json: { files: cleaned ? 0 : 3, bytes: 4096, token: 'session-token' } }));
+  await page.route('**/api/paper-cache/clean', async route => {
+    expect(route.request().method()).toBe('POST'); expect(route.request().headers()['x-paper-cache-token']).toBe('session-token');
+    cleaned = true; await route.fulfill({ json: { deletedFiles: 3, freedBytes: 4096, preserved: ['content/papers', 'assets/papers'] } });
+  });
+  await page.goto('/#view=papers&tab=guide');
+  await expect(page.locator('#paper-cache-status')).toContainText('3 个缓存文件');
+  page.once('dialog', dialog => dialog.dismiss()); await page.locator('[data-cache-clean]').click(); expect(cleaned).toBe(false);
+  page.once('dialog', dialog => dialog.accept()); await page.locator('[data-cache-clean]').click();
+  await expect(page.locator('#paper-cache-status')).toContainText('0 个缓存文件'); await expect(page.locator('[data-cache-clean]')).toBeDisabled();
 });
 
 test('三份模板可下载，手机与仓库子路径的论文路由可直接刷新', async ({ page }) => {

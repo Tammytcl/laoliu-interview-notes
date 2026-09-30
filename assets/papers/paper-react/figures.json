@@ -1,0 +1,80 @@
+{
+  "paperId": "paper-react",
+  "arxivVersion": "2210.03629v3",
+  "originalUrl": "https://arxiv.org/html/2210.03629v3",
+  "attribution": "Original figures and tables by the paper authors. Captured for scholarly reading; explanations are in the report.",
+  "figures": [
+    {
+      "sourceId": "S1.F1",
+      "file": "figure-1.png",
+      "sha256": "c1c37df9acc03caac2f291949f849600bbc262729ba5246b35f68006e25c8933",
+      "original": "https://arxiv.org/html/2210.03629v3#S1.F1",
+      "method": "cached-original-html-screenshot",
+      "explanation": "complete",
+      "reportSection": "See the figure-specific discussion in the report."
+    },
+    {
+      "sourceId": "S3.T1",
+      "file": "table-1.png",
+      "sha256": "e338e7cd6dfb7e11a71a07004c490917290e6c4e18f291cb0d1d4fafd6354e40",
+      "original": "https://arxiv.org/html/2210.03629v3#S3.T1",
+      "method": "cached-original-html-screenshot",
+      "explanation": "complete",
+      "reportSection": "See the figure-specific discussion in the report."
+    },
+    {
+      "sourceId": "S3.T1.fig2",
+      "file": "figure-2.png",
+      "sha256": "27f431418e36b5c066716c66b6680116ce4d72252f00380474ec7f784f46cc8c",
+      "original": "https://arxiv.org/html/2210.03629v3#S3.T1.fig2",
+      "method": "cached-original-html-screenshot",
+      "explanation": "pending",
+      "reason": "Not yet included in the current reading scope."
+    },
+    {
+      "sourceId": "S3.F3",
+      "file": "figure-3.png",
+      "sha256": "da57c0afc85ce59fbaa504b330fa86377d4a41c9d52088822f20b57b0160a42d",
+      "original": "https://arxiv.org/html/2210.03629v3#S3.F3",
+      "method": "cached-original-html-screenshot",
+      "explanation": "complete",
+      "reportSection": "See the figure-specific discussion in the report."
+    },
+    {
+      "sourceId": "S4.T4",
+      "file": "table-4.png",
+      "sha256": "ee1fa39296e9797e2cc7058787c7a96fe88277855531f119ca0d7678cf70ec01",
+      "original": "https://arxiv.org/html/2210.03629v3#S4.T4",
+      "method": "cached-original-html-screenshot",
+      "explanation": "complete",
+      "reportSection": "See the figure-specific discussion in the report."
+    },
+    {
+      "sourceId": "A1.T5",
+      "file": "table-5.png",
+      "sha256": "eb7dc668f571530f2036a66b3d753222ade0b659355343646ff8d335b668f122",
+      "original": "https://arxiv.org/html/2210.03629v3#A1.T5",
+      "method": "cached-original-html-screenshot",
+      "explanation": "pending",
+      "reason": "Not yet included in the current reading scope."
+    },
+    {
+      "sourceId": "A1.F4",
+      "file": "figure-4.png",
+      "sha256": "ed795706d7f9ef21cd05a07996f5c65c162e94733682c4294b18134fb4375da2",
+      "original": "https://arxiv.org/html/2210.03629v3#A1.F4",
+      "method": "cached-original-html-screenshot",
+      "explanation": "pending",
+      "reason": "Not yet included in the current reading scope."
+    },
+    {
+      "sourceId": "A1.F5",
+      "file": "figure-5.png",
+      "sha256": "bbab52caa69037ecc6dfcba59ac9cd5adb7765b7c66005c3d839b30db0f0af77",
+      "original": "https://arxiv.org/html/2210.03629v3#A1.F5",
+      "method": "cached-original-html-screenshot",
+      "explanation": "complete",
+      "reportSection": "See the figure-specific discussion in the report."
+    }
+  ]
+}

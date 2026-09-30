@@ -1,7 +1,36 @@
 import MarkdownIt from 'markdown-it';
 import { parse } from 'yaml';
+import katex from 'katex';
 
 const md = new MarkdownIt({ html: false, linkify: true, typographer: false });
+const mathHtml = (source, displayMode) => katex.renderToString(source, { displayMode, throwOnError: false, trust: false, strict: 'ignore', maxExpand: 1000 });
+md.inline.ruler.before('escape', 'math_inline', (state, silent) => {
+  const start = state.pos;
+  if (state.src[start] !== '$' || state.src[start + 1] === '$' || /\s/.test(state.src[start + 1] || ' ')) return false;
+  let end = start + 1;
+  while ((end = state.src.indexOf('$', end)) !== -1 && state.src[end - 1] === '\\') end++;
+  if (end < 0 || /\s/.test(state.src[end - 1]) || state.src.slice(start, end).includes('\n')) return false;
+  if (!silent) { const token = state.push('math_inline', '', 0); token.content = state.src.slice(start + 1, end); }
+  state.pos = end + 1; return true;
+});
+md.block.ruler.before('fence', 'math_block', (state, start, end, silent) => {
+  const line = state.src.slice(state.bMarks[start] + state.tShift[start], state.eMarks[start]).trim();
+  if (line !== '$$') return false;
+  let next = start + 1;
+  while (next < end && state.src.slice(state.bMarks[next] + state.tShift[next], state.eMarks[next]).trim() !== '$$') next++;
+  if (next === end) return false;
+  if (silent) return true;
+  const token = state.push('math_block', '', 0); token.block = true;
+  token.content = state.getLines(start + 1, next, 0, false); token.map = [start, next + 1];
+  state.line = next + 1; return true;
+});
+md.renderer.rules.math_inline = (tokens, i) => mathHtml(tokens[i].content, false);
+md.renderer.rules.math_block = (tokens, i) => `<div class="math-block">${mathHtml(tokens[i].content, true)}</div>\n`;
+const imageRule = md.renderer.rules.image;
+md.renderer.rules.image = (tokens, i, options, env, renderer) => {
+  tokens[i].attrSet('loading', 'lazy'); tokens[i].attrSet('decoding', 'async');
+  return imageRule(tokens, i, options, env, renderer);
+};
 export const escapeHtml = s => String(s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 
 export function renderMarkdown(body) {

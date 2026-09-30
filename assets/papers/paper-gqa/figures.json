@@ -1,0 +1,71 @@
+{
+  "paperId": "paper-gqa",
+  "arxivVersion": "2305.13245v3",
+  "originalUrl": "https://arxiv.org/html/2305.13245v3",
+  "attribution": "Original figures and tables by the paper authors. Captured for scholarly reading; explanations are in the report.",
+  "figures": [
+    {
+      "sourceId": "S2.F1",
+      "file": "figure-1.png",
+      "sha256": "c695a4cee8e2a5f32914032fda043d08bb5a2fc4b3cd7d77006670ea3aaf0f75",
+      "original": "https://arxiv.org/html/2305.13245v3#S2.F1",
+      "method": "original-html-screenshot",
+      "explanation": "complete",
+      "reportSection": "See the figure-specific discussion in the report."
+    },
+    {
+      "sourceId": "S2.F2",
+      "file": "figure-2.png",
+      "sha256": "16c1b142ef85be4250f518b5264c76f9e6f10889a43be0ae91d5c3029aa1cd38",
+      "original": "https://arxiv.org/html/2305.13245v3#S2.F2",
+      "method": "original-html-screenshot",
+      "explanation": "complete",
+      "reportSection": "See the figure-specific discussion in the report."
+    },
+    {
+      "sourceId": "S3.T1",
+      "file": "table-1.png",
+      "sha256": "01c833019c9601043b3785bdfe3d9244661765ff5d6d537d4d18a36cfbbc5c71",
+      "original": "https://arxiv.org/html/2305.13245v3#S3.T1",
+      "method": "original-html-screenshot",
+      "explanation": "complete",
+      "reportSection": "See the figure-specific discussion in the report."
+    },
+    {
+      "sourceId": "S3.F3",
+      "file": "figure-3.png",
+      "sha256": "98ba7b1fe0b58393c43559833e02e39ed53537ee6f069879f9a5ec4f2ebb8879",
+      "original": "https://arxiv.org/html/2305.13245v3#S3.F3",
+      "method": "original-html-screenshot",
+      "explanation": "complete",
+      "reportSection": "See the figure-specific discussion in the report."
+    },
+    {
+      "sourceId": "S3.F4",
+      "file": "figure-4.png",
+      "sha256": "a91b2a1ee57e2579806fb2cd076c97f8d86df23194fbc0f018bb0c3a54165e19",
+      "original": "https://arxiv.org/html/2305.13245v3#S3.F4",
+      "method": "original-html-screenshot",
+      "explanation": "complete",
+      "reportSection": "See the figure-specific discussion in the report."
+    },
+    {
+      "sourceId": "S3.F5",
+      "file": "figure-5.png",
+      "sha256": "37e0833e94fd06f1fa4d568a46937419867b21cf73a1d7af2c19b218f440cde1",
+      "original": "https://arxiv.org/html/2305.13245v3#S3.F5",
+      "method": "original-html-screenshot",
+      "explanation": "complete",
+      "reportSection": "See the figure-specific discussion in the report."
+    },
+    {
+      "sourceId": "S3.F6",
+      "file": "figure-6.png",
+      "sha256": "89399540932a77a0cd96b2ed33155f5d1e97e895c17993940f7cc01b52e6d7cf",
+      "original": "https://arxiv.org/html/2305.13245v3#S3.F6",
+      "method": "original-html-screenshot",
+      "explanation": "complete",
+      "reportSection": "See the figure-specific discussion in the report."
+    }
+  ]
+}

@@ -14,9 +14,14 @@
     "preview": "node scripts/serve.mjs",
     "new:paper": "node scripts/new-paper.mjs paper",
     "new:daily": "node scripts/new-paper.mjs daily",
-    "new:survey": "node scripts/new-paper.mjs survey"
+    "new:survey": "node scripts/new-paper.mjs survey",
+    "papers:fetch": "python scripts/paper-assets.py",
+    "papers:figures": "node scripts/paper-figures.mjs",
+    "papers:workbench": "npm run build && PAPER_WORKBENCH=1 node scripts/serve.mjs",
+    "papers:clean": "node scripts/paper-cache.mjs --clean"
   },
   "dependencies": {
+    "katex": "^0.16.22",
     "markdown-it": "15.0.2",
     "yaml": "2.9.1"
   },

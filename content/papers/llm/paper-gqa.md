@@ -1,80 +1,162 @@
 ---
-id: "paper-gqa"
-title: "GQA：用多少 KV 头换取质量与速度？"
+id: paper-gqa
+title: "GQA: Training Generalized Multi-Query Transformer Models from Multi-Head Checkpoints"
 paper_title: "GQA: Training Generalized Multi-Query Transformer Models from Multi-Head Checkpoints"
 authors: ["Joshua Ainslie", "James Lee-Thorp", "Michiel de Jong", "Yury Zemlyanskiy", "Federico Lebrón", "Sumit Sanghai"]
+affiliations: ["Google Research", "University of Southern California"]
+author_affiliations: [[1], [1], [1, 2], [1], [1], [1]]
+venue: "EMNLP 2023"
 year: 2023
-direction: "llm"
+direction: llm
 paper_url: "https://arxiv.org/abs/2305.13245v3"
-evidence: "资料整理"
-note_ids: ["mha-gqa-mqa", "kv-cache"]
-tags: ["基础论文", "llm"]
-updated: "2026-09-30"
-summary: "读清模型结构、checkpoint 转换与 uptraining，避免把结构节省当成质量无损。"
-template_version: 1
+github_url: "https://github.com/google/flaxformer"
+code_note: "Paper-linked implementation framework; not a standalone reproduction package."
+evidence: 已核原文
+note_ids: [mha-gqa-mqa, kv-cache]
+tags: [Attention, KV Cache, Uptraining, Inference, T5]
+updated: 2026-09-30
+summary: "通过分组共享 K/V 与已有 checkpoint 的继续预训练，在生成质量、KV 容量和解码延迟之间建立可调折中。"
+template_version: 2
 draft: false
 ---
 
-## 1. 收录动机与阅读目标
+## 1. 背景与已有工作
 
-连接模型结构和推理容量。主问题：“减少 K/V 头后省了什么，质量为什么需要再训练来验证？”
+自回归生成每一步只产生少量新 token，却需要读取模型权重以及过去 token 的 key/value。序列越来越长时，KV cache 随之增长；解码的瓶颈常常是把数据从显存搬到计算单元，而不是矩阵乘法能力不足。标准 multi-head attention（MHA）给每个 query head 配置独立的 key/value head，表达能力充分，但缓存与读取成本也随头数增长。
 
-## 2. 原文信息与核验范围
+这个问题并非 GQA 首次发现。[Shazeer 的 MQA 论文（2019）](https://arxiv.org/abs/1911.02150)已经提出：保留多个 query head，让它们共用一组 key/value。这样可以显著减少 KV 存储和读取，但更强的共享约束可能损害质量；已有 MHA checkpoint 也不能直接无损变成 MQA。GQA 论文还讨论了 [Efficiently Scaling Transformer Inference](https://arxiv.org/abs/2211.05102) 对推理带宽和并行的分析，以及 [FiDO](https://arxiv.org/abs/2212.08153) 对 encoder-decoder 推理的优化。
 
-[原文 v3](https://arxiv.org/abs/2305.13245v3)。核对第 2 节方法、Figure 2、Table 1 与第 3.3 节消融；未做本人 uptraining 或硬件复现。这是资料整理，不把 T5/TPU 实验直接外推到任意 decoder/GPU 服务。
+本文面对的是两个相互关联的问题：**能否利用已经训练好的 MHA 模型，付出较少的额外训练成本得到较快的模型？能否不把全部 K/V 压到一个头，而是在速度和质量之间保留可调空间？** 前者对应 checkpoint conversion + uptraining，后者对应 grouped-query attention。论文也承认 Markus Rabe 独立实现了 GQA；阅读时不应将“首次发现 KV 瓶颈”“首次提出所有分组思想”和本文的实验证明混为一谈。
 
-## 3. 研究问题与先修知识
+| 路线 | 改动对象 | 解决的成本 | 与 GQA 的关系 |
+| --- | --- | --- | --- |
+| MQA | 所有 query 共用一组 K/V | KV 缓存与带宽 | GQA 的单组极端 |
+| FlashAttention | 注意力计算与内存访问方式 | 中间注意力矩阵的 IO | 可与 GQA 组合，不等同于减少 KV 头 |
+| KV / 权重量化 | 数值表示的位宽 | 每个元素的存储和读取 | 可叠加，但另有精度误差 |
+| PagedAttention | KV 的分配、索引与共享 | 碎片和重复占用 | 不修改模型的 query/KV 头结构 |
 
-先会 [KV 容量公式](#q=kv-cache) 与 [MHA/GQA/MQA](#q=mha-gqa-mqa)。瓶颈是自回归服务中 KV 的存储/读取；减少 query 头与共享 KV 头不是同一种结构改变。
+必要的先修是 [MHA/GQA/MQA 的维度关系](#q=mha-gqa-mqa) 和 [KV cache 的容量计算](#q=kv-cache)。这里的关键区分是：GQA 减少的是 **K/V 头数**，并不是将全部 query 头合并，也没有把 token 间的稠密注意力改为稀疏注意力。
 
-## 4. 一句话核心贡献
+## 2. 方法与实现机制
 
-在 MHA 与 MQA 之间以分组共享 KV 做折中，并研究已有多头 checkpoint 的转换及继续预训练。
+### 分组共享的结构
 
-## 5. 方法与关键推导
+设 query 头数为 $H$，KV 组数为 $G$，每组包含 $H/G$ 个 query head，单头维度为 $d$。同组 query 使用共同的 $K_g,V_g$，但每个 query 仍然计算独立的注意力权重。对第 $h$ 个 query head，可以写成：
 
-同组 query 使用共同 K/V，各 query 仍产生自己的注意力权重。论文的转换把组内原 K/V 投影做均值池化，再 uptrain。不能只改 reshape 就视为训练完成。
+$$
+g(h)=\left\lfloor\frac{h}{H/G}\right\rfloor,\qquad O_h=\operatorname{softmax}\left(\frac{Q_hK_{g(h)}^{\mathsf T}}{\sqrt d}+M\right)V_{g(h)}.
+$$
 
-下面是教学容量算例，并非论文实测：
+其中 $M$ 是相应任务的 mask；decoder self-attention 要遵守因果关系，cross-attention 的 K/V 来自 encoder 输出。$G=1$ 是 MQA，$G=H$ 是 MHA，中间取值才是通常讨论的 GQA。本文将改动用于 **decoder self-attention 和 cross-attention**，不改变 encoder self-attention：encoder 表示并行计算，不是同一种逐 token 带宽瓶颈。
 
-```text
-32 层、head_dim=128、2 bytes/元素
-KV 每 token = 2*32*H_kv*128*2 bytes
-H_kv=32：512 KiB；H_kv=8：128 KiB
+![Figure 2 · MHA、MQA 与 GQA 的 query / key / value 共享关系](./assets/papers/paper-gqa/figure-2.png)
+
+**Figure 2 解读。** 三幅结构图比较的是“有多少套 K/V 对应这些 query”。MHA 中每个头独立，MQA 中所有 query 汇聚到同一组 K/V，GQA 中各组内部共享。应沿连线追踪一个 query 读到哪套 K/V，而不是把图中的多个 query 当作同一个注意力分布。这张图说明结构与容量关系，本身不证明质量恢复，也不提供实测加速比。[图源：原文 Figure 2](https://arxiv.org/html/2305.13245v3#S2.F2)。
+
+### 从 MHA checkpoint 转换并继续训练
+
+转换时，不随机新建一套 K/V，也不是保留组内第一个头。作者把同组原有投影做 mean pooling。若组内原 key 投影为 $W^K_h$，则新的组投影为：
+
+$$
+\widetilde W^K_g=\frac{1}{|\mathcal H_g|}\sum_{h\in\mathcal H_g}W^K_h,\qquad \widetilde W^V_g=\frac{1}{|\mathcal H_g|}\sum_{h\in\mathcal H_g}W^V_h.
+$$
+
+Q 投影保留；模型需要新的 K/V 参数布局。均值池化尽量保留原 checkpoint 中的信息，但它改变了模型函数，因此作者还按照原预训练配方进行 uptraining，让其他参数与新的共享结构共同适应。这里的 $\alpha=0.05$ 表示额外预训练步数约为原预训练的 5%，不是每个用户都能用“原模型总成本的 5%”完成任何结构转换。
+
+![Figure 1 · 原 MHA 的 K/V 投影均值池化，得到共享投影](./assets/papers/paper-gqa/figure-1.png)
+
+**Figure 1 解读。** 左右比较转换前后投影矩阵；mean pooling 发生在权重的头维度，不是对当前请求的 token 做池化。图画的是 MHA→MQA 的单组示例，推广到 GQA 时在每个组内部执行相同操作。结构转换只是第一步，后面的继续预训练不能省略为一个 reshape。[图源：原文 Figure 1](https://arxiv.org/html/2305.13245v3#S2.F1)。
+
+下面的伪代码解释投影的分组逻辑，**不是可直接载入 Flaxformer checkpoint 的完整转换脚本**；真实布局、分片轴和优化器状态都要单独处理。
+
+```python
+# 教学假设：W_k / W_v 的轴为 [d_model, H, head_dim]
+assert H % G == 0
+W_k_grouped = W_k.reshape(d_model, G, H // G, head_dim).mean(axis=2)
+W_v_grouped = W_v.reshape(d_model, G, H // G, head_dim).mean(axis=2)
+# W_q 保留；加载新的 attention 结构，继续原预训练任务。
 ```
 
-固定上述假设时 KV 容量缩至 1/4；总延迟、权重显存和任务质量都不能据此换算。
+对于普通 decoder-only KV cache，若 batch 为 $B$、层数为 $L$、缓存长度为 $S$、每元素占 $b$ bytes，容量的教学推导为：
 
-## 6. 关键图表与证据
+$$
+\operatorname{KVBytes}=2BLSGdb.
+$$
 
-| 位置 | 比较问题 | 设置与观察 | 边界 |
-|---|---|---|---|
-| Figure 2 | GQA 处于哪两个极端之间？ | query 与 KV 共享结构 | 不消除稠密 token 对计算 |
-| Table 1 | 质量与推理耗时怎样折中？ | T5 变体、指定任务与 TPU 测量 | 不直接当作现代 GPU 服务速度 |
-| 第 3.3 节 | 转换、继续训练和组数各有什么影响？ | 读对应消融曲线 | 不能归因给一个单独参数 |
+固定其他项时，MHA→GQA 的 KV 容量比为 $G/H$。例如 $L=32,H=32,G=8,d=128,b=2,B=1$，每 token 的 KV 从 512 KiB 降到 128 KiB。这是**给定假设下的算式**，不属于本文 T5 实验，也不包含权重、激活、分片副本或 allocator 开销。真实执行应避免为方便计算而把共享 K/V 物理复制成 $H$ 份，否则可能抵消容量收益。
 
-## 7. 作者结论与我的判断
+## 3. 实验设置与算力
 
-作者在所测配置中报告 GQA 的折中收益。整理者的判断：设计容量时先看 KV 头，选型时再看实际任务和 kernel；这是有条件的工程推演，不是本人验证。
+以下设置按原文 §3.1 与附录 A 整理，训练与测速分开登记。
 
-## 8. 局限、反例与失败条件
+| 项目 | 原文设置 / 披露范围 |
+| --- | --- |
+| 基础模型 | 公共 T5.1.1 Large 与 XXL checkpoint；主比较包括 MHA-Large、MHA-XXL、MQA-XXL、GQA-8-XXL |
+| 模型范式 | encoder-decoder；GQA/MQA 用于 decoder self-attention 与 cross-attention |
+| 实现框架 | JAX、Flax、Flaxformer；页首 GitHub 是论文引用的框架，不是完整、锁定版本的复现包 |
+| Uptraining 数据 | 继续原 T5 预训练设置与数据；T5.1.1 公共配方使用 C4，不能把下游摘要数据说成此次继续预训练语料 |
+| 优化器与 schedule | Adafactor，沿用 T5 超参与学习率 schedule；GQA 正文没有完整重印所有预训练配置 |
+| 主实验转换 | K/V mean pooling，uptraining 比例 $\alpha=0.05$ |
+| 微调超参 | 恒定学习率 0.001，batch size 128，dropout 0.1 |
+| 模型选择 | 训练至收敛，选择 dev 表现最高的 checkpoint |
+| 生成 | greedy decoding；不能与 beam search 或多采样服务直接比较 |
 
-多头 checkpoint 的转换需要兼容结构和训练。减少 KV 容量不一定解决权重、工具等待或队列瓶颈；硬件并行与内核也会影响收益。
+[T5 checkpoint 官方说明](https://github.com/google-research/text-to-text-transfer-transformer/blob/main/released_checkpoints.md)是核查模型与预训练配方的补充来源。GQA 本身没有逐条披露本次语料快照、数据过滤版本、随机种子和精确预训练 token 总数；这些项复现时必须再补，不能用常见 T5 参数值填充成“本文设置”。
 
-## 9. 和已有知识的连接
+| 下游任务 / benchmark | 输入长度 | 输出长度 | Table 1 指标 |
+| --- | --- | --- | --- |
+| CNN/Daily Mail 摘要 | 512 | 256 | ROUGE-1 |
+| arXiv、PubMed、MediaSum、Multi-News 摘要 | 2048 | 512 | ROUGE-1 |
+| WMT 2014 English→German | 512 | 256 | BLEU |
+| TriviaQA | 2048 | 32 | F1 |
 
-[KV cache](#q=kv-cache)、[显存账本](#q=memory-budget)，以及 [PagedAttention 精读](#paper=paper-pagedattention)：前者改模型所需 KV，后者改这些 KV 如何放置和共享。
+这些 benchmark 是下游微调与评价任务，**不是都拿来做原始预训练**。消融只用 CNN/Daily Mail、Multi-News 和 TriviaQA 的代表性子集；不能把三任务消融平均分误认成 Table 1 七任务平均分。结果表报告 dev 表现，未提供面向今天通用对话、编码或长上下文检索的统一结论。
 
-最小练习：不先训练大模型，先打印 grouped attention 的头维布局，并手算不同 H_kv 的容量；尚未执行。
+| 算力环节 | 原文披露 | 正确理解 |
+| --- | --- | --- |
+| 5% uptraining | 约 600 TPUv3 chip-days | 累计芯片时间；正文未给出可直接还原本次运行的卡数与墙钟时间组合 |
+| 推理测速 | 8 个 TPU，报告每 sample、每 TPUv4 chip 的时间，用 xprof 测量 | 不等于单张 GPU 端到端服务延迟 |
+| 测速 batch | 能放入的最大 batch，每 TPU 最多 32 | 各模型分别优化并行设置，非统一固定 batch 的纯算子比较 |
+| GPU 数量 / GPU-hours | 原文未提供 | 不能将 TPUv3 chip-days 换写成 A100 卡数或训练时长 |
 
-## 10. 不看报告的复述问题
+若只做教学验证，可用小模型比较共享头形状、KV 理论容量与输出差异；若要复现 Table 1，则必须有兼容的 T5 checkpoint、训练数据与分片配置，且需重新建立自己的硬件测速口径。本文没有给出“最低几张消费级 GPU 就能复现”的证据。
 
-先在个人阅读记录中写一个读前问题；读后收起正文，用自己的话回答：本文改变了哪个环节？为什么合理？最关键的证据是什么？哪里仍不确定？这里不替你填“我的理解”。
+## 4. 结果与图表解读
 
-## 11. 待验证与下一步
+### 主结果：质量接近 MHA，速度接近 MQA
 
-本人模型实验尚未执行。先核读正文标出的机制与图表，再完成一项有明确对照的最小练习；把真实配置、结果和失败样本写回记录。个人阅读进度从“待精读”开始，不由报告生成自动推进。
+![Table 1 · T5 模型的原始推理时间与七个任务 dev 结果](./assets/papers/paper-gqa/table-1.png)
 
-## 12. 更新记录与来源
+Table 1 使用秒作为时间单位。MHA-XXL 的时间为 1.51，平均分 47.2；GQA-8-XXL 为 0.28、47.1；MQA-XXL 为 0.24、46.6。按表中取整后的数值计算，GQA 相对 MHA-XXL 的该项时间约缩短 **5.39 倍**，平均分相差 **0.1**。这两个数是本报告的算术推导；它们描述论文规定的 TPU 测量，不是今日任意服务的速度保证。[表源：原文 Table 1](https://arxiv.org/html/2305.13245v3#S3.T1)。
 
-2026-09-30：作为论文收录组件的基础精读示例整理，原文重点位置列于第 2/6 节；尚未进行本人复现。正文中的阅读建议和学习推演不当作原论文实验结论。
+逐任务看比只看 Average 更有意义：GQA 的 PubMed 与 Multi-News 分数甚至高于表中 MHA-XXL，而 CNN、arXiv 与 TriviaQA 略低；MQA 的 WMT 分数又略高。结果支持“折中较好”，不支持“每一个任务无损”。Average 把不同指标的数字放在一起汇总，不是一个具有统一量纲的泛化能力测量。
+
+![Figure 3 · 七任务平均分与推理耗时的折中](./assets/papers/paper-gqa/figure-3.png)
+
+**Figure 3 解读。** 横轴是每样本推理时间，越左越快；纵轴是汇总任务表现，越上越好。GQA-XXL 接近 MHA-XXL 的高度，却靠近 MQA-XXL 的水平位置，因此显示出有利折中。应注意原始图横轴写了 “ms”，但 Table 1 与对应数值写的是秒，源码也保留了这一不一致；本报告以 Table 1 的 **s** 口径登记，不把图中的 0.28 改称 0.28 ms。[图源：原文 Figure 3](https://arxiv.org/html/2305.13245v3#S3.F3)。
+
+### 消融：收益来自哪些设计？
+
+![Figure 4 · Mean、First、Random 三种 checkpoint 转换方式](./assets/papers/paper-gqa/figure-4.png)
+
+**Figure 4 解读。** 这里比较 T5-Large→MQA，并固定 5% uptraining；横轴是转换策略，纵轴是三个代表任务的汇总表现。mean pooling 最好，选第一个头次之，随机初始化较差。对照的意义是控制继续训练条件，观察初始 K/V 权重处理的影响；它不是“任何模型里均值池化一定最佳”的证明，也不是 GQA-8-XXL 的全部主结果。[图源：原文 Figure 4](https://arxiv.org/html/2305.13245v3#S3.F4)。
+
+![Figure 5 · 额外预训练比例与 MQA / GQA 的任务表现](./assets/papers/paper-gqa/figure-5.png)
+
+**Figure 5 解读。** 横轴是继续预训练占原训练的比例，纵轴是代表性任务表现；比较 MQA 与 GQA-8 的恢复轨迹。GQA 在刚转换后就保留较多质量，MQA 更依赖 uptraining；从 0 增加到 5% 有明显收益，继续到 10% 的边际收益较小。它支持作者选 5% 的经验取舍，但没有覆盖所有训练规模、数据或目标组数。[图源：原文 Figure 5](https://arxiv.org/html/2305.13245v3#S3.F5)。
+
+![Figure 6 · KV 组数增加时的 GQA-XXL 每样本推理耗时](./assets/papers/paper-gqa/figure-6.png)
+
+**Figure 6 解读。** 输入长度固定 2048、输出长度固定 512，横轴是组数，纵轴是每样本时间。由 1 组增加到 8 组的额外耗时较小，接近 MHA 时成本增加更明显；8 是该实验中的较好中间点。此图只画速度，不单独回答质量，必须和前面任务结果一起读；也不能把 8 当作所有层、所有硬件的最优常数。[图源：原文 Figure 6](https://arxiv.org/html/2305.13245v3#S3.F6)。
+
+本报告覆盖原文 **6 张主图与 1 张结果表**。结构图解释机制，转换/步数/组数消融解释选择，主结果建立特定任务与硬件上的质量—速度证据；它们共同支撑结论，而不是每张图都用来重复一句“更快”。
+
+## 5. 局限、结论与后续阅读
+
+本文最可靠的结论是：对测试的 T5 encoder-decoder 模型，K/V 组内共享配合已有 checkpoint 的继续预训练，可以用少量额外预训练获得比 MQA 更好的质量折中。它同时给出一种可迁移的工程分析方式：**先明确减少了什么状态，再分别验证模型质量和执行效率。**
+
+作者没有比较 GQA-XXL uptraining 与同规模从零训练的完整对照；ROUGE 也不足以全面评价长文本生成。附录 A 记录 MQA 的预训练 loss spike 与长输入微调不稳定，部分不稳定任务的 MQA 结果取三次微调平均；GQA 显示较稳定，但论文并未完整追溯根因。因此“质量接近”应限定到原文的任务、指标与训练方式。
+
+迁移到 decoder-only GPU 服务时，应重新检查 KV 分片副本、kernel 的原生 GQA 支持、prefill 与 decode 比例、上下文长度和 batch 负载。减少 cache 容量不必然改善权重占主导、排队占主导或工具等待占主导的系统。与 [PagedAttention 报告](#paper=paper-pagedattention) 一起读，可以把“模型需要多少 KV”与“KV 如何分配”两层分开；[显存账本](#q=memory-budget)用于补足权重、激活和临时工作区。
+
+**整理范围与版本。** 核对 arXiv v3（2023-12-23）的正文、附录 A、LaTeX 图表数据及 Table 1；图表为原论文 HTML 截图，版权与学术贡献归原作者。2026-09-30 更新为五模块报告，增加元数据、全图解释与实验口径。本报告未进行训练复现；页首“已核原文”表示来源核对，不表示完成了硬件复现。后续更新应补实际 checkpoint/代码 commit、语料快照和自己的性能日志，不能将待做实验登记为实测。

@@ -1,78 +1,138 @@
 ---
-id: "paper-ddpm"
-title: "DDPM：为什么噪声预测能够生成图像？"
+id: paper-ddpm
+title: "Denoising Diffusion Probabilistic Models"
 paper_title: "Denoising Diffusion Probabilistic Models"
 authors: ["Jonathan Ho", "Ajay Jain", "Pieter Abbeel"]
+affiliations: ["UC Berkeley"]
+author_affiliations: [[1], [1], [1]]
+venue: "NeurIPS 2020"
 year: 2020
-direction: "diffusion"
+direction: diffusion
 paper_url: "https://arxiv.org/abs/2006.11239v2"
-evidence: "资料整理"
-note_ids: ["ddpm-denoising", "diffusion-parameterization"]
-tags: ["基础论文", "diffusion"]
-updated: "2026-09-30"
-summary: "从前向扰动与反向参数化读 DDPM，重点区分目标、采样和证据。"
-template_version: 1
+github_url: "https://github.com/hojonathanho/diffusion"
+code_note: "Official TensorFlow implementation; the original experiments used TPU v3-8."
+evidence: 已核原文
+note_ids: [ddpm-denoising, diffusion-parameterization]
+tags: [Diffusion, DDPM, Generative Modeling, Noise Prediction, U-Net]
+updated: 2026-09-30
+summary: "把逐步加噪的扩散过程与可学习的反向去噪链结合，通过噪声预测目标实现高质量图像生成。"
+template_version: 2
 draft: false
 ---
 
-## 1. 收录动机与阅读目标
+## 1. 背景与已有工作
 
-作为 Diffusion 主线的基础读物。带着问题读：“训练时只是噪声 MSE，采样时为什么可以逐步得到数据？”把答案从术语落到变量和条件分布。
+图像生成模型既要覆盖复杂数据分布，又要能稳定训练、产生清晰样本。GAN 已能生成高质量图片，但优化是对抗式的；自回归模型与 flow 能提供不同的似然 / 结构优势，也各有生成和架构限制。DDPM 研究另一条路线：先定义把真实数据逐渐扰动成简单高斯分布的过程，再学习逐步逆转这些扰动。
 
-## 2. 原文信息与核验范围
+这个方向不是 2020 年才出现。Sohl-Dickstein 等人的 [Deep Unsupervised Learning using Nonequilibrium Thermodynamics（2015）](https://arxiv.org/abs/1503.03585)已经建立扩散式生成与变分训练框架；Song 与 Ermon 的 [Generative Modeling by Estimating Gradients of the Data Distribution（2019）](https://arxiv.org/abs/1907.05600)用多噪声等级 score matching 和退火 Langevin 采样生成图像。本文连接这两类思想，重点证明：适当参数化反向过程与调整训练权重后，扩散模型也能得到高质量样本。
 
-[原文 v2](https://arxiv.org/abs/2006.11239v2)；本轮核对第 2 节概率过程、第 3.2/3.4 节参数化与目标，以及第 4.2 节消融的讨论。该记录是 Agent 辅助资料整理，未完成个人逐页精读与复现，也未独立审核全部实验设置。
+因此，核心问题不是“能不能给图片加噪声”，而是：**怎样定义可训练的反向高斯链，怎样选择网络预测目标，为什么优化噪声预测可以改善最终样本？** 论文的高质量样本证据与其压缩 / 潜变量解释，应分开理解。本文是像素空间无条件生成，不是后来 Stable Diffusion 的潜空间文本条件训练。
 
-## 3. 研究问题与先修知识
+## 2. 方法与实现机制
 
-任务是学习数据生成分布。先理解高斯扰动、条件概率和 MSE 的条件均值解释；可先读 [噪声监督笔记](#q=ddpm-denoising)。不要把反向过程理解成对某个训练样本的准确逆运算。
+### 正向扩散与可直接采样的训练输入
 
-## 4. 一句话核心贡献
+正向过程固定而不训练。每步将图像缩放后加入少量高斯噪声：
 
-通过反向去噪参数化把扩散生成与去噪学习联系起来，并用实验比较参数化和训练目标。
+$$
+q(x_t\mid x_{t-1})=\mathcal N(\sqrt{1-\beta_t}x_{t-1},\beta_t I),\qquad \bar\alpha_t=\prod_{s=1}^{t}(1-\beta_s).
+$$
 
-## 5. 方法与关键推导
+由高斯递推可以直接得到任意时刻的训练输入，不需要为每张训练图片跑完前面所有步：
 
-以下为学习性展开，x_0 是数据，时间增加表示噪声增多：
+$$
+x_t=\sqrt{\bar\alpha_t}x_0+\sqrt{1-\bar\alpha_t}\epsilon,\qquad \epsilon\sim\mathcal N(0,I).
+$$
 
-```text
-alpha_t = 1-beta_t，alpha_bar_t = product(alpha_1 ... alpha_t)
-x_t = sqrt(alpha_bar_t)*x_0 + sqrt(1-alpha_bar_t)*epsilon
-x0_hat = (x_t-sqrt(1-alpha_bar_t)*epsilon_hat)/sqrt(alpha_bar_t)
+![Figure 2 · 固定正向扩散与可学习反向链的图模型](./assets/papers/paper-ddpm/figure-2.png)
+
+**Figure 2 解读。** 一条方向对应 $q$ 的加噪，反方向对应 $p_\theta$ 的生成。节点是与原图同维度的潜变量，不是缩小到低维空间的 VAE latent。箭头体现 Markov 依赖；训练时可以直接构造 $x_t$，生成时则需要按照反向链逐步执行。[图源：原文 Figure 2](https://arxiv.org/html/2006.11239v2#S2.F2)。
+
+### 反向去噪与噪声预测
+
+网络 $\epsilon_\theta(x_t,t)$ 输入当前噪声图及时间步，预测此次正向构造中的噪声。作者用这一预测参数化反向高斯分布的均值：
+
+$$
+\mu_\theta(x_t,t)=\frac{1}{\sqrt{\alpha_t}}\left(x_t-\frac{\beta_t}{\sqrt{1-\bar\alpha_t}}\epsilon_\theta(x_t,t)\right).
+$$
+
+简化训练目标是：
+
+$$
+L_{\mathrm{simple}}=\mathbb E_{t,x_0,\epsilon}\left[\|\epsilon-\epsilon_\theta(\sqrt{\bar\alpha_t}x_0+\sqrt{1-\bar\alpha_t}\epsilon,t)\|^2\right].
+$$
+
+这不是原始变分下界逐项权重完全不变的重写，而是作者选择的简化 / 重加权目标。某些目标可能得到更好的 likelihood，却不一定有更好的 FID；需要用实验判断优化目的。
+
+```python
+# 教学重述：训练一步，不包含网络、数据管线和 EMA 实现
+x0 = next_batch()
+t = uniform_integer(1, T, size=batch_size)
+eps = standard_normal_like(x0)
+xt = sqrt(alpha_bar[t]) * x0 + sqrt(1 - alpha_bar[t]) * eps
+loss = mean_squared_error(model(xt, t), eps)
+optimizer_step(loss)
+# 生成从 x_T ~ N(0, I) 开始，依次执行反向高斯步骤。
 ```
 
-先从第二式推第三式，再问：模型预测的是每次随机噪声的精确值，还是在这个 x_t 上的条件统计估计？训练不必先模拟全部前向步骤，采样则要用网络输出组织反向更新。
+生成时使用预测均值，加上对应方差的随机噪声，最后一步不再加入新的采样噪声。网络并不是“一次预测就把纯噪声变为完整图片”。[DDPM 基础笔记](#q=ddpm-denoising)和 [预测目标](#q=diffusion-parameterization)可继续推导 noise、$x_0$ 与其他参数化的关系。
 
-## 6. 关键图表与证据
+## 3. 实验设置与算力
 
-| 位置 | 阅读问题 | 核对要点 | 解释边界 |
-|---|---|---|---|
-| 第 3.2 节 | 输出参数化怎样影响反向均值？ | 把输出量代入更新式 | 参数化与网络骨干不是一回事 |
-| 第 3.4 节 | 简化目标改了什么？ | 权重、时间采样和监督量 | 简单 MSE 不直接等于原变分目标 |
-| 第 4.2 节、Table 2 | 参数化和目标如何消融？ | 保持设置可比再读质量指标 | 不从单项 loss 推出无条件生成质量 |
+设置依据原文 §4 与附录 B；训练数据同时是各无条件生成任务的图像来源，评价以生成样本的分布统计为主。
 
-不搬未审核的性能数字；阅读时应把表格、评价协议和模型设置一起看。
+| 项目 | CIFAR10 | LSUN / CelebA-HQ 256×256 |
+| --- | --- | --- |
+| 网络 | U-Net / Wide ResNet backbone，35.7M 参数 | 常规 114M；LSUN Bedroom 大模型约 256M |
+| 分辨率层级 | 32×32 至 4×4，共四个层级 | 六个分辨率层级 |
+| Block | 每层级两个卷积 residual blocks，16×16 处 self-attention | 同类结构、不同宽度 / 层级 |
+| 时间条件 | sinusoidal embedding 加入 residual blocks | 同上 |
+| Diffusion | 1000 步，线性 beta 从 1e-4 到 0.02 | 同上 |
+| 优化器 / LR | Adam，2e-4 | Adam，2e-5 |
+| Batch | 128 | 64 |
+| Dropout | 0.1 | 0 |
+| EMA | decay 0.9999 | decay 0.9999 |
+| 数据增强 | 随机水平翻转 | 除 LSUN Bedroom 外使用水平翻转 |
 
-## 7. 作者结论与我的判断
+CIFAR10 和 CelebA-HQ 来自 TensorFlow Datasets，LSUN 按 StyleGAN 数据准备方式处理。作者先主要在 CIFAR10 上选择超参，再迁移设置到其他数据集；不能说每个数据集都进行了同样规模的独立 sweep。
 
-作者把参数化、目标选择与实验样本质量联系起来。整理者的学习判断是：读懂一次代数替换，比记住“预测噪声”更有用；这是阅读建议，不是新增实验结果。你的判断应在核读后补充。
+| 训练 / 采样成本 | 原文披露 |
+| --- | --- |
+| 硬件 | 所有实验使用 TPU v3-8；作者将它粗略类比 8 V100，但并非实际 GPU 实验 |
+| CIFAR10 训练 | 21 steps/s，800k steps，约 10.6 小时 |
+| CIFAR10 采样 | batch 256 图片约 17 秒 |
+| 256×256 常规模型 | 2.2 steps/s；batch 128 采样约 300 秒 |
+| 256×256 训练步数 | CelebA-HQ 0.5M；LSUN Bedroom 2.4M；Cat 1.8M；Church 1.2M |
+| Bedroom 大模型 | 1.15M steps；不能将常规模型吞吐未经验证套用到大模型 |
 
-## 8. 局限、反例与失败条件
+论文没有给出今天消费级 GPU 的最低复现卡数。上述 TPU 时间只在原配置下成立；逐步生成的采样成本也不能与后来的 DDIM、蒸馏或 latent diffusion 混用。
 
-生成成本还受采样步数影响；去噪估计误差会在采样中积累。需要讨论采样器和日程，不能仅凭训练 loss 选模型。原论文设置也不直接代表后续 latent 或 flow 模型。
+主要指标为 FID（越低越好）、Inception Score（越高越好）、NLL bits/dim（越低越好）。CIFAR10 的 FID / IS 基于 50,000 个生成样本，LSUN FID 也基于 50,000 个；评价实现分别来自当时指定仓库。作者报告训练过程中最低 FID 对应的结果，最终实验训练一次，没有把多 seed 均值与方差完整报告出来。复现应记录同样的特征提取器、参考统计与模型选择口径。
 
-## 9. 和已有知识的连接
+## 4. 结果与图表解读
 
-[预测参数化](#q=diffusion-parameterization) 解释相同状态的不同目标；[DDIM](#q=ddim-sampling) 回答采样如何提速。学习练习：在二维双峰分布上比较不同时间的条件去噪；尚未执行。
+![Table 1 · CIFAR10 的样本质量与似然比较](./assets/papers/paper-ddpm/table-1.png)
 
-## 10. 不看报告的复述问题
+**Table 1 解读。** 本文 $L_{simple}$ 模型达到 IS 9.46、FID 3.17，是论文重点的无条件 CIFAR10 样本质量结果。各行同时列不同类型生成模型，需要分别看 FID、IS 与 NLL，不能把“某项最优”说成所有目标都最好。尤其本文强调样本质量，likelihood 并非全面领先。[表源：原文 Table 1](https://arxiv.org/html/2006.11239v2#S4.T1)。
 
-先在个人阅读记录中写一个读前问题；读后收起正文，用自己的话回答：本文改变了哪个环节？为什么合理？最关键的证据是什么？哪里仍不确定？这里不替你填“我的理解”。
+![Table 2 · 反向均值参数化与目标函数消融](./assets/papers/paper-ddpm/table-2.png)
 
-## 11. 待验证与下一步
+**Table 2 解读。** 行列组合对照均值 / noise 预测参数化与训练目标。它回答的不是“加噪步数越多越好”，而是网络预测什么、训练给各项怎样的权重影响生成。空白格来自训练不稳定、样本分数超出范围，不能当作零分，也不能只挑最佳格忽略失败。该实验支撑选择 noise prediction 与简化目标。[表源：原文 Table 2](https://arxiv.org/html/2006.11239v2#S4.T2)。
 
-本人模型实验尚未执行。先核读正文标出的机制与图表，再完成一项有明确对照的最小练习；把真实配置、结果和失败样本写回记录。个人阅读进度从“待精读”开始，不由报告生成自动推进。
+![Figure 5 · CIFAR10 的 rate-distortion 与反向过程时间](./assets/papers/paper-ddpm/figure-5.png)
 
-## 12. 更新记录与来源
+**Figure 5 解读。** 曲线把变分项解释为随反向过程逐步补充信息的代价，distortion 使用 [0,255] 图像尺度上的 RMSE。它展示高层结构与细节在信息量和视觉误差上的不同作用；它不是实际文件压缩器的端到端 benchmark。原文明确 compression 只是 proof of concept，所需高维随机编码过程并不实用。[图源](https://arxiv.org/html/2006.11239v2#S4.F5)。
 
-2026-09-30：作为论文收录组件的基础精读示例整理，原文重点位置列于第 2/6 节；尚未进行本人复现。正文中的阅读建议和学习推演不当作原论文实验结论。
+![Figure 6 · 从中间噪声状态预测的图像逐渐细化](./assets/papers/paper-ddpm/figure-6.png)
+
+**Figure 6 解读。** 从左到右观察估计的 $\hat x_0$，先形成粗略结构，再补细节。展示的是不同噪声阶段下的原图估计，不能误认成所有格子都是直接显示原始 $x_t$。这张可视化支持 coarse-to-fine 的解释，但不单独证明 FID 改善。[图源](https://arxiv.org/html/2006.11239v2#S4.F6)。
+
+在 LSUN，常规 Bedroom FID 为 6.36，大模型为 4.90，Church 为 7.89，Cat 为 19.75；不同类别的效果差异说明“能生成高质量图像”不等于所有数据集都优于所有 GAN。此轮重点解释 Figure 2/5/6 和 Tables 1/2，其余样本、插值及邻居检查图保留为后续核读范围。
+
+## 5. 局限、结论与后续阅读
+
+DDPM 的贡献是明确连接反向高斯链、噪声预测和去噪 score matching，并用样本质量实验说明这一路线可行。它的采样需要多次网络执行；优化 likelihood、感知质量与采样时间并非同一个目标。像素空间的无条件结果也不能直接外推到文本生成、条件编辑或今天的大规模图文训练。
+
+下一步可对照 DDIM 怎样改变采样路径、latent diffusion 怎样降低状态维度、不同 prediction targets 怎样改变 loss 与数值行为。若做自己的小规模验证，先测试加噪公式、时间索引和采样最后一步，再记录实际模型、训练 / 测试划分、seed、FID 实现和硬件，避免只看一组漂亮样本。
+
+**来源与更新。** 核对 [arXiv v2 正文与附录 B](https://arxiv.org/html/2006.11239v2)、原图表与 [作者代码](https://github.com/hojonathanho/diffusion)。2026-09-30 更新为五模块报告，补充网络配置、训练 / 采样算力与原图解读。图表与原论文成果归作者；本报告没有登记个人复现成绩。

@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="description" content="__DESCRIPTION__"><meta name="theme-color" content="#214d40">
-  <title>__TITLE__</title><link rel="icon" href="./favicon.svg"><link rel="stylesheet" href="./style.css">
+  <title>__TITLE__</title><link rel="icon" href="./favicon.svg"><link rel="stylesheet" href="./style.css"><link rel="stylesheet" href="__MATH_CSS__">
 </head>
 <body>
   <a class="skip-link" href="#main">跳到主要内容</a>
@@ -11,28 +11,22 @@
     <a class="brand" href="#"><img src="./favicon.svg" alt="" width="38" height="38"><span><strong id="brand-title">__TITLE__</strong><small>LAOLIU'S NOTEBOOK</small></span></a>
     <div class="side-label">我的知识库 <span>01 — 06</span></div>
     <nav id="categories" aria-label="主题分类"></nav>
-    <div class="sidebar-bottom">
-      <div class="progress-label"><span>准备，是一个积累的过程</span><strong id="progress-count">0 / 0</strong></div>
-      <progress id="progress" max="1" value="0" aria-label="已掌握题目比例"></progress>
-      <p>复习状态仅保存在当前浏览器。<br>换设备前，记得导出备份。</p>
-      <div class="backup-actions"><button id="export">导出进度 ↗</button><button id="import">导入进度</button></div>
-      <input type="file" id="import-file" accept="application/json,.json" hidden>
-    </div>
+    <div class="sidebar-bottom"><p>从问题到原理，<br>从论文到证据。</p></div>
   </aside>
   <div class="workspace">
-    <header class="topbar"><span class="breadcrumb">个人知识库 <span>/</span> <b id="breadcrumb">全部笔记</b></span><div class="top-actions"><span class="local-badge"><i></i> 本地复习记录</span><button id="add" class="button small">＋ 添加内容</button></div></header>
+    <header class="topbar"><span class="breadcrumb">个人知识库 <span>/</span> <b id="breadcrumb">全部笔记</b></span><div class="top-actions"><span class="local-badge"><i></i> Markdown 知识库</span><button id="add" class="button small">＋ 添加内容</button></div></header>
     <main id="main">
       <section id="library">
-        <section class="hero"><div><p class="eyebrow">A LITTLE BETTER, EVERY DAY</p><h1>从一个问题，<br>学懂一个知识点<span>。</span></h1><p id="subtitle">从问题出发，连起原理、实验与工程。</p><div class="hero-actions"><a class="button primary" href="#q=learning-roadmap">从学习路线开始 ↗</a><button id="random" class="button">随机复习 ↗</button></div></div><div class="hero-note"><span class="note-index">FIELD NOTES / 001</span><div class="note-line"></div><p>理解原理<br>梳理思路<br><em>练习表达</em></p><span class="note-footer">PREPARE WITH INTENTION</span><span class="note-star" aria-hidden="true">✳</span></div></section>
+        <section class="hero"><div><p class="eyebrow">A LITTLE BETTER, EVERY DAY</p><h1>从一个问题，<br>学懂一个知识点<span>。</span></h1><p id="subtitle">从问题出发，连起原理、实验与工程。</p><div class="hero-actions"><a class="button primary" href="#q=learning-roadmap">从学习路线开始 ↗</a><button id="random" class="button">随机阅读 ↗</button></div></div><div class="hero-note"><span class="note-index">FIELD NOTES / 001</span><div class="note-line"></div><p>理解原理<br>梳理思路<br><em>练习表达</em></p><span class="note-footer">PREPARE WITH INTENTION</span><span class="note-star" aria-hidden="true">✳</span></div></section>
         <nav class="learning-paths" aria-label="四条学习主线">
           <a href="#q=ddpm-denoising"><strong>01 / Diffusion</strong><span>从噪声监督到 Flow Matching</span></a>
           <a href="#q=causal-lm-training"><strong>02 / LLM</strong><span>从自回归训练到偏好学习</span></a>
           <a href="#q=agent-workflow"><strong>03 / Agent</strong><span>从工具闭环到轨迹训练</span></a>
           <a href="#q=memory-budget"><strong>04 / Infra</strong><span>从显存账本到调度与性能</span></a>
         </nav>
-        <section class="stats" aria-label="知识库统计"><div><span>学习笔记</span><strong id="stat-total">—</strong><small>持续积累的知识</small></div><div><span>正在复习</span><strong id="stat-review">—</strong><small>再讲一遍，加深理解</small></div><div><span>已经掌握</span><strong id="stat-mastered">—</strong><small>能独立、清晰地回答</small></div><div><span>我的收藏</span><strong id="stat-starred">—</strong><small>值得多看一次的问题</small></div></section>
+        <section class="stats" aria-label="知识库统计"><div><span>学习笔记</span><strong id="stat-total">—</strong><small>从问题理解知识</small></div><div><span>笔记主题</span><strong id="stat-categories">—</strong><small>按方向组织内容</small></div><div><span>收录论文</span><strong id="stat-papers">—</strong><small>原文证据与精读报告</small></div><div><span>研究报告</span><strong id="stat-reports">—</strong><small>Daily 与专题调研</small></div></section>
         <section class="question-section"><div class="section-heading"><div><p class="eyebrow">YOUR KNOWLEDGE, ORGANIZED</p><h2 id="list-title">全部笔记 <span id="result-count"></span></h2></div><label class="search"><span aria-hidden="true">⌕</span><input id="search" type="search" placeholder="搜索问题、概念或标签…" aria-label="全文搜索"><kbd>/</kbd></label></div>
-          <div class="filter-row"><div id="status-tabs" class="tabs" role="group" aria-label="复习状态"><button data-filter="all" class="active">全部</button><button data-filter="new">未开始</button><button data-filter="review">复习中</button><button data-filter="mastered">已掌握</button><button data-filter="starred">已收藏</button></div><div class="selects"><select id="difficulty" aria-label="难度"><option value="">所有难度</option><option>基础</option><option>进阶</option><option>深入</option></select><select id="tag" aria-label="标签"><option value="">所有标签</option></select></div></div>
+          <div class="filter-row"><span class="filter-hint">按主题、难度与标签检索</span><div class="selects"><select id="difficulty" aria-label="难度"><option value="">所有难度</option><option>基础</option><option>进阶</option><option>深入</option></select><select id="tag" aria-label="标签"><option value="">所有标签</option></select></div></div>
           <div id="question-list" class="question-list" aria-live="polite"><p class="empty">正在载入知识库…</p></div>
         </section>
         <section class="bottom-note"><span>✧</span><div><strong>这里记录的，不只是答案。</strong><p>也记录你如何理解一个问题，以及下一次可以讲得更好的地方。</p></div><button id="writing-guide">如何整理一个知识点 →</button></section>
@@ -42,9 +36,9 @@
       <footer><span id="footer-title">面试备忘录</span><span>Markdown 驱动 · 内容属于你 · 一点点积累</span></footer>
     </main>
   </div>
-  <dialog id="guide"><button class="dialog-close" id="close-guide" aria-label="关闭">×</button><p class="eyebrow">WRITE ONCE, KEEP LEARNING</p><h2>新增一篇学习笔记，只需 Markdown。</h2><p>在项目中执行以下命令，填写生成的草稿，再将 <code>draft</code> 改为 <code>false</code>。</p><pre>npm run new -- my-question llm</pre><p>分类可选：<span id="category-help"></span>。推送到 GitHub 后，页面会自动重新构建。</p><h3>建议的学习结构</h3><ol><li>从问题出发：现象、背景和先修知识。</li><li>核心机制：推导、例子和工程取舍。</li><li>常见误区：说明概念的边界。</li><li>小实验与自检：区分建议练习与真实结果。</li><li>面试表达与原始资料：讲清机制并保留来源。</li></ol><p class="notice">这是静态网页，不能直接修改仓库。复习标记只保存在浏览器；题目内容通过 Markdown + Git 管理。发布前请移除公司内部信息、密钥和未授权面试材料。</p></dialog>
+  <dialog id="guide"><button class="dialog-close" id="close-guide" aria-label="关闭">×</button><p class="eyebrow">WRITE ONCE, KEEP LEARNING</p><h2>新增一篇学习笔记，只需 Markdown。</h2><p>在项目中执行以下命令，填写生成的草稿，再将 <code>draft</code> 改为 <code>false</code>。</p><pre>npm run new -- my-question llm</pre><p>分类可选：<span id="category-help"></span>。推送到 GitHub 后，页面会自动重新构建。</p><h3>建议的学习结构</h3><ol><li>从问题出发：现象、背景和先修知识。</li><li>核心机制：推导、例子和工程取舍。</li><li>常见误区：说明概念的边界。</li><li>小实验与自检：区分建议练习与真实结果。</li><li>面试表达与原始资料：讲清机制并保留来源。</li></ol><p class="notice">这是静态网页，不能直接修改仓库。题目和论文报告通过 Markdown + Git 管理。发布前请移除公司内部信息、密钥和未授权面试材料。</p></dialog>
   <div id="toast" role="status" aria-live="polite"></div>
-  <noscript><p>请启用 JavaScript 以使用搜索和复习功能。原始题目可在仓库 content/questions 中阅读。</p></noscript>
+  <noscript><p>请启用 JavaScript 以使用搜索和阅读功能。原始题目可在仓库 content/questions 中阅读。</p></noscript>
   <script type="module" src="./app.js"></script>
 </body>
 </html>

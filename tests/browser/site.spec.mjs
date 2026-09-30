@@ -1,5 +1,4 @@
 import { test, expect } from '@playwright/test';
-import { readFile } from 'node:fs/promises';
 
 test('加载、全文搜索、筛选和空结果', async ({ page }) => {
   const errors = []; page.on('pageerror', error => errors.push(error.message));
@@ -15,28 +14,23 @@ test('加载、全文搜索、筛选和空结果', async ({ page }) => {
   await expect(page.locator('.question-card')).toHaveCount(data.questions.filter(q => q.category === data.questions[0].category).length);
   expect(errors).toEqual([]);
 });
-test('详情路由、目录、收藏和复习状态持久化', async ({ page }) => {
+test('详情路由与目录保留，题目不再包含收藏或进度操作', async ({ page }) => {
   await page.goto('/'); await page.locator('.question-copy h3 a').first().click();
   await expect(page.locator('.prose')).toBeVisible();
-  await page.locator('[data-status="mastered"]').click();
-  await page.locator('#reader [data-star]').click(); await page.reload();
-  await expect(page.locator('[data-status="mastered"]')).toHaveAttribute('aria-pressed', 'true');
-  await expect(page.locator('#reader [data-star]')).toHaveAttribute('aria-pressed', 'true');
-  await page.locator('.toc button').first().click();
-  await expect(page.locator('#reader')).toBeVisible();
-  await page.locator('.back-link').click(); await page.locator('[data-filter="mastered"]').click();
-  await expect(page.locator('.question-card')).toHaveCount(1);
+  await expect(page.locator('[data-status], [data-star], #progress, #export, #import, #status-tabs')).toHaveCount(0);
+  await page.reload(); await expect(page.locator('.prose')).toBeVisible();
+  await page.locator('.toc button').first().click(); await expect(page.locator('#reader')).toBeVisible();
+  await page.locator('.back-link').click(); await expect(page.locator('.question-card').first()).toBeVisible();
 });
-test('进度导出与导入', async ({ page }) => {
-  await page.goto('/'); await page.locator('.question-copy h3 a').first().click();
-  await page.locator('[data-status="review"]').click();
-  const download = page.waitForEvent('download'); await page.locator('#export').click();
-  const file = await download; const backup = JSON.parse(await readFile(await file.path(), 'utf8'));
-  expect(backup.version).toBe(1); expect(Object.keys(backup.progress)).toHaveLength(1);
-  await page.evaluate(() => localStorage.clear()); await page.reload();
-  page.on('dialog', dialog => dialog.accept());
-  await page.locator('#import-file').setInputFiles({ name: 'progress.json', mimeType: 'application/json', buffer: Buffer.from(JSON.stringify(backup)) });
-  await expect(page.locator('[data-status="review"]')).toHaveAttribute('aria-pressed', 'true');
+test('旧浏览器进度不影响内容检索，页面只显示内容统计', async ({ page }) => {
+  await page.goto('/');
+  await page.evaluate(() => localStorage.setItem(`interview-notes:v1:${location.pathname}`, JSON.stringify({ 'ddpm-denoising': { status: 'mastered', starred: true } })));
+  await page.reload();
+  const data = await (await page.request.get('/data.json')).json();
+  await expect(page.locator('.question-card')).toHaveCount(data.questions.length);
+  await expect(page.locator('#stat-total')).toHaveText(String(data.questions.length).padStart(2, '0'));
+  await expect(page.locator('#stat-papers')).toHaveText(String(data.papers.length).padStart(2, '0'));
+  await expect(page.locator('[data-star], [data-status]')).toHaveCount(0);
 });
 test('新增内容说明和未知链接', async ({ page }) => {
   await page.goto('/'); await expect(page.locator('.question-card').first()).toBeVisible();

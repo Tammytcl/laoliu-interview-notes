@@ -25,7 +25,8 @@ test('论文保留原文与方向元数据，正文安全渲染', () => {
 });
 test('拒绝错误的原文地址、方向、日期、证据与版本', () => {
   for (const patch of [{ paper_url: 'javascript:alert(1)' }, { paper_url: 'https://user:password@example.com' },
-    { direction: 'systems' }, { authors: [] }, { year: '2023' }, { updated: '2026-02-30' }, { evidence: '已读懂' }, { template_version: 2 }]) {
+    { github_url: 'https://evil.example/code' }, { affiliations: [''] }, { author_affiliations: [[3]] },
+    { direction: 'systems' }, { authors: [] }, { year: '2023' }, { updated: '2026-02-30' }, { evidence: '已读懂' }, { template_version: 3 }]) {
     assert.throws(() => parse({ ...paper, ...patch }, 'papers'));
   }
   for (const patch of [{ type: 'weekly' }, { date: '2026-02-30' }, { directions: [] }, { paper_ids: 'paper-test' }]) {

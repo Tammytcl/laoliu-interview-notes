@@ -40,6 +40,8 @@ FlashAttention 用作注意力中间量/IO 的边界参照，其单篇精读仍�
 
 不在不兼容任务、模型和预算之间用单一加速倍数排名。
 
+本次补充的实验口径进一步限制直接横向排名：GQA 使用 T5 encoder-decoder 与 TPU，PagedAttention 使用 OPT / LLaMA 和 A100 服务 traces。前者 Table 1 是任务质量与每样本推理时间，后者主图是请求率与 normalized latency。GQA 的约 600 TPUv3 chip-days 是继续预训练成本，PagedAttention 的 1 / 4 / 8 张 A100 是不同规模推理配置，两者不是同一维度的算力投入。
+
 ## 5. 共识、分歧与证据强度
 
 学习性推演：三条路线作用在不同开销上，因此存在组合空间。它们的原实验不构成对同一现代服务负载的头对头比较；“组合后是否更好”仍需要对照实验。
@@ -63,3 +65,5 @@ FlashAttention 用作注意力中间量/IO 的边界参照，其单篇精读仍�
 2026-09-30：建立两篇精读的分层对照，并明确未覆盖路线。未来每次更新注明新增证据改变哪条判断。
 
 原始来源：[GQA v3](https://arxiv.org/abs/2305.13245v3)、[PagedAttention v1](https://arxiv.org/abs/2309.06180v1)、[FlashAttention](https://arxiv.org/abs/2205.14135)。证据位置见单篇记录；场景建议是整理者推演。
+
+2026-09-30：依据 v2 单篇报告补充训练 / 推理算力与测量口径差异，保持机制分层比较，不合并不兼容的加速数字。

@@ -23,7 +23,7 @@ export function parsePaperContent(source, file, collection) {
   if (!validDate(data.updated)) fail('updated 应为有效 YYYY-MM-DD 日期');
   if (data.draft !== undefined && typeof data.draft !== 'boolean') fail('draft 应为布尔值');
   if (!Array.isArray(data.tags) || data.tags.some(t => typeof t !== 'string' || !t.trim())) fail('tags 应为字符串数组');
-  if (data.template_version !== undefined && data.template_version !== 1) fail('暂不支持此 template_version');
+  if (data.template_version !== undefined && ![1, 2].includes(data.template_version)) fail('暂不支持此 template_version');
   const body = match[2].trim();
   if (!body) fail('正文不能为空');
   const result = { id: data.id, title: data.title, summary: data.summary, updated: data.updated,
@@ -40,7 +40,21 @@ export function parsePaperContent(source, file, collection) {
     if (!evidenceLevels.includes(data.evidence)) fail('evidence 应为资料整理 / 已核原文 / 已复现');
     const noteIds = data.note_ids ?? [];
     if (!Array.isArray(noteIds) || noteIds.some(id => !validId(id))) fail('note_ids 应为笔记 id 数组');
+    const affiliations = data.affiliations ?? [];
+    if (!Array.isArray(affiliations) || affiliations.some(a => typeof a !== 'string' || !a.trim())) fail('affiliations 应为英文单位数组');
+    const authorAffiliations = data.author_affiliations ?? [];
+    if (!Array.isArray(authorAffiliations) || authorAffiliations.some(a => !Array.isArray(a) || a.some(i => !Number.isInteger(i) || i < 1 || i > affiliations.length)) || (authorAffiliations.length && authorAffiliations.length !== data.authors.length)) fail('author_affiliations 应逐作者列出单位编号');
+    let githubUrl = null;
+    if (data.github_url) {
+      try { githubUrl = new URL(data.github_url); } catch { fail('github_url 无效'); }
+      if (githubUrl.protocol !== 'https:' || githubUrl.hostname !== 'github.com' || githubUrl.username || githubUrl.password) fail('github_url 应为 GitHub HTTPS 链接');
+    }
+    if (data.template_version === 2 && !affiliations.length) fail('v2 报告必须注明 affiliations');
+    const venue = data.venue ?? '';
+    const codeNote = data.code_note ?? '';
+    if (typeof venue !== 'string' || typeof codeNote !== 'string') fail('venue / code_note 应为字符串');
     return { ...result, direction: data.direction, paperTitle: data.paper_title, authors: data.authors,
+      affiliations, authorAffiliations, githubUrl: githubUrl?.href ?? null, venue, codeNote,
       year: data.year, paperUrl: url.href, evidence: data.evidence, noteIds: [...new Set(noteIds)] };
   }
   if (collection !== 'reports') fail('未知内容集合');

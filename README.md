@@ -2,9 +2,9 @@
 
 [在线阅读](https://tammytcl.github.io/laoliu-interview-notes/) · [GitHub 仓库](https://github.com/Tammytcl/laoliu-interview-notes)
 
-一个内容与界面分离的中文面试准备站。浅色纸张风格、主题导航、全文搜索、题目目录、收藏与复习状态。没有后端、数据库、追踪统计或运行时 CDN 依赖，适合 GitHub Pages。
+一个内容与界面分离的中文面试准备站。浅色纸张风格、主题导航、全文搜索、题目目录与正式论文报告。发布站点无数据库、追踪统计或运行时 CDN 依赖，适合 GitHub Pages；可选本地工作台提供源码缓存清理。
 
-> 当前有 38 篇学习笔记、4 篇基础论文精读示例、1 份 Daily 和 1 份专题调研。论文收录独立于面试笔记；基础报告是资料整理，个人阅读状态初始为“待精读”。旧项目表达题保留在综合面试中。
+> 当前有 38 篇学习笔记、4 篇基础论文精读示例、1 份 Daily 和 1 份专题调研。论文收录独立于面试笔记；报告按原文核读范围说明证据，未登记个人复现。旧项目表达题保留在综合面试中。
 
 ## 从这里开始学习
 
@@ -13,7 +13,7 @@
 - [原始资料索引](content/questions/guide/research-sources.md)：论文、官方文档与对应笔记。
 - [来源记录](content/research/sources.json)：2026-09-30 调研访问的来源和使用位置。
 
-内容通常包含问题背景、机制/推导、例子、误区、小实验、自检及原始资料。实验是建议练习，尚未完成模型复现；正文算例不冒充硬件实测。数学式使用可直接阅读的文本/代码块。
+内容通常包含问题背景、机制/推导、例子、误区、小实验、自检及原始资料。实验是建议练习，尚未完成模型复现；正文算例不冒充硬件实测。Markdown 支持本地 KaTeX 数学公式与代码块。
 
 算法只增加一个与模型紧密相关的 causal attention 手撕练习，另保留 LRU；项目论文和综合面试暂不扩量。
 
@@ -21,7 +21,7 @@
 
 [进入论文收录](https://tammytcl.github.io/laoliu-interview-notes/#view=papers) · [Daily](https://tammytcl.github.io/laoliu-interview-notes/#view=papers&tab=daily) · [专题调研](https://tammytcl.github.io/laoliu-interview-notes/#view=papers&tab=survey)
 
-- **论文库**：按 Diffusion / LLM / Agent / Infra 筛选，一篇论文一条稳定记录，正文是统一格式的精读报告。可按个人阅读状态、收藏和全文检索。
+- **论文库**：按 Diffusion / LLM / Agent / Infra 筛选，一篇论文一条稳定记录，正文是统一格式的精读报告。可按方向和全文检索。
 - **Daily 报告**：每天开始工作时手动更新，记录候选筛选、收录理由、主阅读、个人理解变化及下一步。不是自动新论文抓取或定时任务。
 - **专题调研**：围绕研究问题整理范围、方法谱系、比较条件、共识/分歧、空白与持续更新。引用论文库，不重复复制单篇全文。
 
@@ -36,11 +36,20 @@ npm run new:survey -- survey-my-topic infra
 
 命令生成 `draft: true` 的草稿。填写原文信息和正文，完成后改为 `false`，运行构建、提交并推送。新建论文/专题拒绝覆盖；同日 Daily 继续维护一个文件。重复 arXiv 论文（包括不同版本）、同日期重复 Daily、未发布或不存在的关联论文会让构建失败。
 
-单篇必需元数据包含 `paper_title`、`authors`、`year`、`direction`、`paper_url`、`evidence`；报告包含 `type: daily/survey`、`date`、`directions`、`paper_ids`。公共字段为 `id/title/summary/tags/updated/draft`，模板版本为 `template_version: 1`。论文用 `#paper=id` 链接、报告用 `#report=id`，学习笔记仍用 `#q=id`。日期和内容状态请按真实情况填写。
+单篇必需元数据包含 `paper_title`、`authors`、`year`、`direction`、`paper_url`、`evidence`；报告包含 `type: daily/survey`、`date`、`directions`、`paper_ids`。公共字段为 `id/title/summary/tags/updated/draft`，单篇 v2 模板增加 `affiliations`、`author_affiliations`、`venue`、`github_url` 和 `code_note`，使用 `template_version: 2`；Daily / 专题仍使用 v1。论文用 `#paper=id` 链接、报告用 `#report=id`，学习笔记仍用 `#q=id`。日期和内容状态请按真实情况填写。
 
-**资料核验程度与个人阅读进度分开。** 报告的 `evidence` 为“资料整理 / 已核原文 / 已复现”；个人状态为“待精读 / 阅读中 / 已复述”。Agent 生成报告不自动推进你的阅读进度。页面支持读前问题、合上正文后复述、连接/待验证与复习日期；没有自己的复述文字时不能标记“已复述”。到期论文会在列表中提示。
+**正式精读报告。** 英文全名、作者与单位作为页首，正文按背景与已有工作、方法与实现、实验与算力、结果与图表、局限与结论五个模块组织。右侧仅目录，图表可放大，公式本地渲染，可打印 PDF。GQA 已解释全部 6 张主图和 Table 1；其余报告注明本轮图表范围。
 
-**个人阅读草稿仅保存在当前浏览器。** 用论文模块中的“导出/导入阅读记录”备份和迁移，与侧栏的面试复习进度备份相互独立；不会自动写回 Markdown。需要长期积累或公开的结论，应整理回论文正文或 Daily。它们保存在 `content/papers/` 和 `content/reports/`，通过 Git 维护。已有的复习记录和旧问题链接保留。
+```bash
+npm run papers:fetch -- paper-my-topic 2305.13245v3  # 固定版本源码 / PDF / HTML
+npm run papers:figures -- paper-my-topic             # 原图表资产，不生成报告
+npm run papers:workbench                            # 本地工作台与清理按钮
+npm run papers:clean                                # 清理源码缓存，保留报告 / 插图
+```
+
+源码保留在被忽略的 `.paper-cache/`，报告图表保存在 `assets/papers/` 并发布。构建校验本地插图是否存在。工作台仅监听本机，缓存清理需要同源会话 token；普通 preview / GitHub Pages 没有清理写接口。完整流程、字段和验收标准见 [工作流文档](docs/paper-workflow.md)。
+
+题目与论文页面只组织内容，不提供收藏、待精读、复习状态或进度操作。公开正文通过 Git 管理，原文核对与实验复现作为报告的来源说明。
 
 ## 内容与排版分开
 
@@ -111,7 +120,7 @@ draft: false
 - 哪些条件下会有不同的实现？
 ```
 
-- `id`：唯一、稳定的小写英文标识。用于题目链接和复习状态，重命名文件不受影响；不要随意修改 id。
+- `id`：唯一、稳定的小写英文标识。用于题目链接，重命名文件不受影响；不要随意修改 id。
 - `category`：使用下方已配置的分类 id。
 - `difficulty`：`基础` / `进阶` / `深入`。
 - `tags`：字符串数组，自动加入筛选器。
@@ -134,19 +143,16 @@ draft: false
 | `coding` | 算法与编程 |
 | `behavior` | 综合面试 |
 
-论文收录是独立组件，入口由 `paperLibrary` 配置；不作为题目分类。新增学习笔记分类只需修改 `site.config.json` 中的 `categories`，无需修改页面逻辑。站名、副标题、作者也在这里配置。跨题链接可写 `[查看相关题](#q=kv-cache)`；外部资料使用完整 HTTPS 链接。当前不处理相对 Markdown 文件链接，也不自动复制内容目录里的图片；如需本地图片支持，可后续统一增加 assets 管线。
+论文收录是独立组件，入口由 `paperLibrary` 配置；不作为题目分类。新增学习笔记分类只需修改 `site.config.json` 中的 `categories`，无需修改页面逻辑。站名、副标题、作者也在这里配置。跨题链接可写 `[查看相关题](#q=kv-cache)`；外部资料使用完整 HTTPS 链接。相对 Markdown 文件链接请改为稳定 hash 链接；本地插图使用 `./assets/papers/<id>/<file>`，构建会复制资产目录。
 
-## 复习功能与数据边界
+## 阅读与检索
 
 - 全文搜索覆盖标题、摘要、标签和 Markdown 正文。
-- 主题、标签、难度、复习状态可以组合筛选。
-- 点击随机复习，从当前筛选结果中选题。
-- 题目详情可标记「未开始 / 复习中 / 已掌握」，也可收藏。
-- `/` 快捷键聚焦搜索；详情页按 `Esc` 返回列表。
-- 进度保存在 `localStorage`，**不会写回 Markdown，也不会自动同步到 GitHub或其他设备**。
-- 使用侧栏「导出进度 / 导入进度」迁移。导入会合并，冲突 id 以备份为准，并先征求确认。
-- 清理浏览器数据、换域名或更换项目 URL 都可能看不到原进度，请先导出。
-- 此站没有登录或访问控制；不要把公司机密、账号密钥、未授权面试材料放到公开仓库或网页。
+- 笔记按主题、标签与难度筛选，论文按方向筛选。
+- 首页统计只展示笔记、主题、论文与研究报告数量。
+- 详情页保留目录；论文支持原图放大与打印 PDF。
+- `/` 聚焦搜索，`Esc` 返回列表，随机阅读从当前筛选中选择笔记。
+- 网站不提供收藏、复习 / 精读状态或进度导入导出，也不依赖浏览器本地记录。
 
 ## 发布到 GitHub Pages
 
@@ -176,6 +182,8 @@ interview-notes/
 ├── content/questions/       学习路线与各方向笔记
 ├── content/papers/          各方向论文精读
 ├── content/reports/         Daily 与专题报告
+├── assets/papers/           原论文图表与出处清单
+├── .paper-cache/             本地源码缓存（忽略、不发布）
 ├── content/research/        来源记录与调研边界
 ├── docs/paper-workflow.md   后续整理与 Agent 使用约定
 ├── templates/question.md    新题模板
@@ -196,6 +204,6 @@ npx playwright install chromium
 npm run test:browser
 ```
 
-测试覆盖搜索筛选、详情刷新、收藏与状态持久化、进度导入导出、手机宽度和 GitHub Pages 子路径。服务器若缺少中文字体，自动截图可能显示方框；用户浏览器使用系统中文字体，不依赖在线字体服务。
+测试覆盖搜索筛选、详情刷新、无收藏 / 状态控件、图表放大、源码清理边界、手机宽度和 GitHub Pages 子路径。服务器若缺少中文字体，自动截图可能显示方框；用户浏览器使用系统中文字体，不依赖在线字体服务。
 
-先维护内容，不急着增加复杂基础设施。以后可以统一增加数学公式渲染、代码高亮、个人笔记、间隔复习、面试路线图和本地图片复制；不需要改变「Markdown 内容 + 统一页面」这个基本结构。当前数学公式可用文本或代码块表达，尚未接入 LaTeX 渲染。
+先维护内容，不急着增加复杂基础设施。以后可以继续增加代码高亮、间隔复习与面试路线图；不需要改变「Markdown 内容 + 统一页面」这个基本结构。当前公式用 `$...$` / 独立行 `$$` 渲染，静态发布包含 KaTeX CSS 与字体。

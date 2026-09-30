@@ -1,4 +1,4 @@
-import { readFile, readdir, mkdir, copyFile, writeFile } from 'node:fs/promises';
+import { readFile, readdir, mkdir, copyFile, writeFile, cp, access } from 'node:fs/promises';
 import { resolve, relative, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { createHash } from 'node:crypto';
@@ -43,7 +43,18 @@ validatePaperLinks(allQuestions, collections.papers, collections.reports);
 const papers = collections.papers.filter(p => !p.draft).sort((a, b) => b.updated.localeCompare(a.updated) || a.title.localeCompare(b.title, 'zh-CN'));
 const reports = collections.reports.filter(r => !r.draft).sort((a, b) => b.date.localeCompare(a.date) || b.updated.localeCompare(a.updated) || a.title.localeCompare(b.title, 'zh-CN'));
 const dist = resolve(root, 'dist');
+// 图表是报告的长期资产；缓存源码不会进入发布目录。
+for (const paper of papers) {
+  for (const [, path] of paper.body.matchAll(/!\[[^\]]*\]\((\.\/assets\/papers\/[^\s)]+)(?:\s+"[^"]*")?\)/g)) {
+    if (path.includes('..')) throw new Error(`${paper.source}: 图表路径不得越界`);
+    await access(join(root, path));
+  }
+}
 await mkdir(dist, { recursive: true });
+try { await cp(join(root, 'assets'), join(dist, 'assets'), { recursive: true }); } catch (error) { if (error.code !== 'ENOENT') throw error; }
+const katexVersion = JSON.parse(await readFile(join(root, 'node_modules/katex/package.json'), 'utf8')).version;
+const mathPath = `vendor/katex-${katexVersion}`;
+await cp(join(root, 'node_modules/katex/dist'), join(dist, mathPath), { recursive: true });
 const fingerprint = text => createHash('sha256').update(text).digest('hex').slice(0, 16);
 const data = JSON.stringify({ config, questions, papers, reports, paperDirections });
 const dataFile = `data-${fingerprint(data)}.json`;
@@ -63,7 +74,7 @@ for (const file of ['paper.md', 'daily-report.md', 'survey-report.md']) {
   await copyFile(join(root, 'templates', file), join(dist, 'templates', file));
 }
 const template = await readFile(join(root, 'web/index.html'), 'utf8');
-await writeFile(join(dist, 'index.html'), template.replaceAll('__TITLE__', escapeHtml(config.title)).replaceAll('__DESCRIPTION__', escapeHtml(config.description)).replace('./app.js', `./${appFile}`).replace('./style.css', `./${styleFile}`));
+await writeFile(join(dist, 'index.html'), template.replaceAll('__TITLE__', escapeHtml(config.title)).replaceAll('__DESCRIPTION__', escapeHtml(config.description)).replaceAll('__MATH_CSS__', `./${mathPath}/katex.min.css`).replace('./app.js', `./${appFile}`).replace('./style.css', `./${styleFile}`));
 // 保留固定地址供外部读取；页面读取带内容指纹的文件，避免命中上一版缓存。
 await writeFile(join(dist, 'data.json'), data);
 await writeFile(join(dist, '.nojekyll'), '');
