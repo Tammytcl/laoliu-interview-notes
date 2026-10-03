@@ -4,7 +4,7 @@ title: "从哪里开始？Diffusion、LLM、Agent、Infra 四条学习路线"
 category: guide
 difficulty: 基础
 tags: ["P0", "学习路线", "开始这里"]
-updated: 2026-09-30
+updated: 2026-10-03
 summary: "按先修关系安排学习，每个问题都落到解释、推导或可验证练习。"
 draft: false
 ---
@@ -53,14 +53,15 @@ P0 表示第一轮应掌握的主干，P1 表示主干后再深入。这是本�
 4. [多轮梯度与 mask](#q=agent-gradient)。产出：保存每轮真实训练条件。
 5. [GRPO/RLVR](#q=grpo-rlvr) → [OPD](#q=opd-vs-sft)。产出：说清采样者、监督来源与概率目标。
 
-## Infra：从容量到系统瓶颈
+## Infra：从框架地图到系统瓶颈
 
-1. [显存账本](#q=memory-budget)。产出：估算训练和推理各项。
-2. [分布式并行](#q=distributed-training) → [激活重算](#q=activation-checkpointing)。产出：按瓶颈选切分与重算。
-3. [FlashAttention](#q=flash-attention)。产出：推导在线 softmax。
-4. [PagedAttention/continuous batching](#q=paged-attention-serving) → [prefix cache](#q=prefix-cache)。产出：解释容量管理、调度和复用。
-5. [GPU 诊断](#q=gpu-utilization)。产出：用阶段时间线找等待与计算瓶颈。
-6. P1：[rollout 系统](#q=rollout-systems)。产出：解释长尾和策略 lag。
+先读 [训推框架梳理：Megatron、FSDP、vLLM、SGLang、verl 与 slime](#q=training-inference-frameworks)，按三次学习组织：
+
+1. 第 2—5 节：辨认框架所在层，算显存，理解并行、prefill / decode 与 KV 管理。
+2. 第 6—9 节：画 RL 数据流，比较 slime / verl，解释权重同步、共置与异步。
+3. 第 10—12 节：完成排障场景、60 道面试练习与最小验证计划。
+
+产出：一张职责地图、一份资源账本、一段 30 秒框架对比和一个可验证的排障方案。
 
 ## 可重复的复习循环
 

@@ -1,6 +1,6 @@
 const $ = selector => document.querySelector(selector);
 const esc = s => String(s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
-let config, questions = [], category = '', toastTimer, paperCount = 0, reportCount = 0;
+let noteRedirects = {}, config, questions = [], category = '', toastTimer, paperCount = 0, reportCount = 0;
 function toast(message) {
   $('#toast').textContent = message; $('#toast').classList.add('show');
   clearTimeout(toastTimer); toastTimer = setTimeout(() => $('#toast').classList.remove('show'), 3500);
@@ -46,13 +46,24 @@ function route() {
     renderPaperLibrary(params); return;
   }
   $('#paper-space').hidden = true; $('#paper-space').innerHTML = '';
-  const id = params.get('q');
+  const requestedId = params.get('q');
+  const id = noteRedirects[requestedId] || requestedId;
+  if (id && id !== requestedId) { params.set('q', id); history.replaceState(null, '', '#' + params.toString()); }
   $('#library').hidden = !!id; $('#reader').hidden = !id;
   if (!id) { document.title = config.title; renderList(); return; }
   const q = questions.find(q => q.id === id);
   if (!q) { $('#reader').innerHTML = '<div class="empty"><h1>这道题暂时不存在</h1><p>它可能仍是草稿，或链接中的 id 已发生变化。</p><a href="#" class="button">返回题库</a></div>'; return; }
   document.title = `${q.title} · ${config.title}`; $('#breadcrumb').textContent = categoryName(q.category);
-  $('#reader').innerHTML = `<a href="#" class="back-link">← 返回问题列表</a><header class="reader-header"><p class="eyebrow">${esc(categoryName(q.category))} / ${esc(q.difficulty)}</p><h1 tabindex="-1">${esc(q.title)}</h1><p>${esc(q.summary)}</p><div class="reader-meta"><span>更新于 ${esc(q.updated)} · 约 ${q.minutes} 分钟</span></div></header><div class="reader-grid"><article class="prose">${q.html}</article><aside class="reader-aside"><nav class="toc" aria-label="文章目录"><span class="eyebrow">本文目录</span>${q.toc.map(t => `<button data-section="${t.id}" class="level-${t.level}">${esc(t.title)}</button>`).join('')}</nav></aside></div><div class="reader-end"><span>能不用看笔记，再讲一遍吗？</span><button id="next-question" class="button">下一道问题 →</button></div>`;
+  const readerToc = q.toc.length > 24 ? q.toc.filter(item => item.level === 2) : q.toc;
+  $('#reader').innerHTML = `<a href="#" class="back-link">← 返回问题列表</a><header class="reader-header"><p class="eyebrow">${esc(categoryName(q.category))} / ${esc(q.difficulty)}</p><h1 tabindex="-1">${esc(q.title)}</h1><p>${esc(q.summary)}</p><div class="reader-meta"><span>更新于 ${esc(q.updated)} · 约 ${q.minutes} 分钟</span></div></header><div class="reader-grid"><article class="prose ${q.toc.length > 24 ? 'topic-prose' : ''}">${q.html}</article><aside class="reader-aside"><nav class="toc" aria-label="文章目录"><span class="eyebrow">本文目录</span>${readerToc.map(t => `<button data-section="${t.id}" class="level-${t.level}">${esc(t.title)}</button>`).join('')}</nav></aside></div><div class="reader-end"><span>能不用看笔记，再讲一遍吗？</span><button id="next-question" class="button">下一道问题 →</button></div>`;
+  $('#reader .prose').querySelectorAll('img').forEach(image => {
+    if (image.parentElement.tagName === 'A') return;
+    const link = document.createElement('a'); link.href = image.src;
+    link.target = '_blank'; link.rel = 'noopener noreferrer'; link.title = '点击查看原尺寸';
+    image.replaceWith(link); link.append(image);
+  });
+  const section = params.get('section');
+  if (section && q.toc.some(item => item.id === section)) requestAnimationFrame(() => document.getElementById(section)?.scrollIntoView());
   $('#next-question').addEventListener('click', () => {
     const pool = filteredQuestions(); const list = pool.length ? pool : questions;
     const current = list.findIndex(x => x.id === id); location.hash = `q=${list[(current + 1) % list.length].id}`;
@@ -66,7 +77,7 @@ try {
   const response = await fetch('./__DATA_FILE__');
   if (!response.ok) throw new Error(`HTTP ${response.status}`);
   const data = await response.json();
-  ({ config, questions } = data);
+  ({ config, questions, noteRedirects = {} } = data);
   paperCount = data.papers?.length || 0; reportCount = data.reports?.length || 0;
   initPaperLibrary(data, toast);
   $('#brand-title').textContent = config.title; $('#footer-title').textContent = `${config.owner} / ${config.title}`;

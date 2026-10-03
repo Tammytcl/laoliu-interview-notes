@@ -27,7 +27,7 @@
     {
       "id": "systems",
       "name": "Infra · 训练与推理",
-      "description": "显存、并行、调度与性能诊断"
+      "description": "训推框架地图、基础知识、RL 系统与面试问答"
     },
     {
       "id": "coding",

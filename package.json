@@ -24,7 +24,10 @@
     "papers:source-figures": "python scripts/paper-source-figures.py",
     "papers:quality": "node scripts/paper-quality.mjs",
     "papers:quality:strict": "node scripts/paper-quality.mjs --strict",
-    "papers:check-live": "node scripts/check-paper-live.mjs"
+    "papers:check-live": "node scripts/check-paper-live.mjs",
+    "topics:quality": "node scripts/topic-quality.mjs",
+    "topics:watch": "node scripts/topic-sources.mjs",
+    "topics:check-live": "node scripts/check-topic-live.mjs"
   },
   "dependencies": {
     "katex": "^0.16.22",

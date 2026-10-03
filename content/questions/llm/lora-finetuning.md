@@ -46,7 +46,7 @@ A: r×d_in，B: d_out×r
 
 ## 面试表达
 
-先写增量分解与参数公式，再明确节省的是训练状态的一部分；OOM 要回到 [显存账本](#q=memory-budget)。
+先写增量分解与参数公式，再明确节省的是训练状态的一部分；OOM 要回到 [显存账本](#q=training-inference-frameworks)。
 
 ## 原始资料与阅读提示
 

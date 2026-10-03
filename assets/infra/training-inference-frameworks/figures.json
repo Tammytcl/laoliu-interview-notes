@@ -1,0 +1,38 @@
+{
+  "version": 1,
+  "figures": [
+    {
+      "file": "slime-architecture.png",
+      "origin": "https://www.lmsys.org/images/blog/slime/slime-arch.png",
+      "sourcePage": "https://www.lmsys.org/blog/2025-07-09-slime/",
+      "credit": "The slime Team",
+      "retrievedAt": "2026-10-03",
+      "sha256": "83f7bf608d739a96f053bf4685218772bdc871914f66b19ee11989b0bd6b0e8d",
+      "visuallyVerified": true,
+      "role": "architecture",
+      "explanation": "complete"
+    },
+    {
+      "file": "verl-driver-workers.png",
+      "origin": "https://raw.githubusercontent.com/eric-haibin-lin/verl-community/main/docs/driver_worker.png",
+      "sourcePage": "https://verl.readthedocs.io/en/latest/hybrid_flow.html",
+      "credit": "verl / HybridFlow documentation contributors",
+      "retrievedAt": "2026-10-03",
+      "sha256": "f714faeaf95e0987b6938b95b48c65c993fe0e95d295b43a1eabf52cdc567b10",
+      "visuallyVerified": true,
+      "role": "architecture",
+      "explanation": "complete"
+    },
+    {
+      "file": "radix-attention.jpg",
+      "origin": "https://www.lmsys.org/images/blog/sglang/radix_attn.jpg",
+      "sourcePage": "https://www.lmsys.org/blog/2024-01-17-sglang/",
+      "credit": "SGLang authors",
+      "retrievedAt": "2026-10-03",
+      "sha256": "6fdab756a9ebc87cd88c13ce172f15a83fc72acc5ea22e8ab5f8e1d0b183e354",
+      "visuallyVerified": true,
+      "role": "architecture",
+      "explanation": "complete"
+    }
+  ]
+}

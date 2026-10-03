@@ -5,6 +5,7 @@ import { createHash } from 'node:crypto';
 import { parseQuestion, escapeHtml } from './content.mjs';
 import { parsePaperContent, paperDirections, paperCategories, paperTaxonomy, validatePaperLinks } from './papers-content.mjs';
 import { auditPapers } from './paper-quality.mjs';
+import { auditTopics } from './topic-quality.mjs';
 
 const root = fileURLToPath(new URL('../', import.meta.url));
 const config = JSON.parse(await readFile(join(root, 'site.config.json'), 'utf8'));
@@ -41,6 +42,8 @@ for (const name of ['papers', 'reports']) {
   }
 }
 validatePaperLinks(allQuestions, collections.papers, collections.reports);
+const topicErrors = await auditTopics(root, allQuestions);
+if (topicErrors.length) throw new Error(topicErrors.join("\n"));
 const qualityResults = await auditPapers(root);
 const qualityFailures = qualityResults.filter(p => !p.draft && ((p.marked && p.errors.length) || p.enforcementError));
 if (qualityFailures.length) throw new Error('论文精读深度门槛未通过：\n' + qualityFailures.map(p => `${p.id}: ${[...p.errors, p.enforcementError].filter(Boolean).join('；')}`).join('\n'));
@@ -83,7 +86,13 @@ for (const paper of papers) {
     paper.citations = entry;
   }
 }
-const data = JSON.stringify({ config, questions, papers, reports, paperDirections, paperCategories, paperTaxonomy });
+let noteRedirects = {};
+try { noteRedirects = JSON.parse(await readFile(join(root, 'content/metadata/note-redirects.json'), 'utf8')); }
+catch (error) { if (error.code !== 'ENOENT') throw error; }
+for (const [oldId, target] of Object.entries(noteRedirects)) {
+  if (questions.some(q => q.id === oldId) || !questions.some(q => q.id === target)) throw new Error(`Invalid note redirect: ${oldId}`);
+}
+const data = JSON.stringify({ config, questions, papers, reports, paperDirections, paperCategories, paperTaxonomy, noteRedirects });
 const dataFile = `data-${fingerprint(data)}.json`;
 const papersModule = await readFile(join(root, 'web/papers.js'), 'utf8');
 const papersModuleFile = `papers-${fingerprint(papersModule)}.js`;
@@ -97,8 +106,16 @@ await writeFile(join(dist, appFile), app);
 await writeFile(join(dist, styleFile), style);
 await copyFile(join(root, 'web/favicon.svg'), join(dist, 'favicon.svg'));
 await mkdir(join(dist, 'templates'), { recursive: true });
-for (const file of ['paper.md', 'daily-report.md', 'survey-report.md']) {
+for (const file of ['paper.md', 'daily-report.md', 'survey-report.md', 'topic.md']) {
   await copyFile(join(root, 'templates', file), join(dist, 'templates', file));
+}
+await mkdir(join(dist, 'docs'), { recursive: true });
+try { await copyFile(join(root, 'docs/topic-workflow.md'), join(dist, 'docs/topic-workflow.md')); }
+catch (error) { if (error.code !== 'ENOENT') throw error; }
+await mkdir(join(dist, 'research'), { recursive: true });
+for (const file of ['framework-sources.json', 'training-inference-frameworks-observations.json', 'training-inference-frameworks-pending.md']) {
+  try { await copyFile(join(root, 'content/research', file), join(dist, 'research', file)); }
+  catch (error) { if (error.code !== 'ENOENT') throw error; }
 }
 const template = await readFile(join(root, 'web/index.html'), 'utf8');
 await writeFile(join(dist, 'index.html'), template.replaceAll('__TITLE__', escapeHtml(config.title)).replaceAll('__DESCRIPTION__', escapeHtml(config.description)).replaceAll('__MATH_CSS__', `./${mathPath}/katex.min.css`).replace('./app.js', `./${appFile}`).replace('./style.css', `./${styleFile}`));

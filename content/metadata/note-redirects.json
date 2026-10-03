@@ -1,0 +1,10 @@
+{
+  "activation-checkpointing": "training-inference-frameworks",
+  "distributed-training": "training-inference-frameworks",
+  "flash-attention": "training-inference-frameworks",
+  "memory-budget": "training-inference-frameworks",
+  "paged-attention-serving": "training-inference-frameworks",
+  "prefix-cache": "training-inference-frameworks",
+  "rollout-systems": "training-inference-frameworks",
+  "gpu-utilization": "training-inference-frameworks"
+}

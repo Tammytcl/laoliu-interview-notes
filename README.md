@@ -209,3 +209,9 @@ npm run test:browser
 先维护内容，不急着增加复杂基础设施。以后可以继续增加代码高亮、间隔复习与面试路线图；不需要改变「Markdown 内容 + 统一页面」这个基本结构。当前公式用 `$...$` / 独立行 `$$` 渲染，静态发布包含 KaTeX CSS 与字体。
 
 论文精读 V4 使用“视觉 / 语言 → 具体任务”两行筛选，技术作为标签，论文按首次公开日期降序排列。卡片展示有来源和统计日期的引用量，每周自动更新；Google Scholar 数值需配置 SerpApi 密钥。正文 23 张原图表改用核对过的固定版本 PDF 裁剪，部署后自动检查线上桌面与手机页面。后续按 [工作流](docs/paper-workflow.md) 与 [模板](templates/paper.md) 统一更新。
+
+## Infra 训推框架样稿与专题整理
+
+[训推框架总览](content/questions/systems/training-inference-frameworks.md) 覆盖训练 / 生成基础、slime / verl 对比、三张来源图和 60 道面试练习。旧 Infra 8 篇已移入 `archive/questions/systems/2026-10-03/`，网页只保留总览，旧 URL 自动跳转。
+
+后续专题遵循 [整理工作流](docs/topic-workflow.md) 和 [模板](templates/topic.md)。`npm run topics:quality` 检查来源、固定版本、插图、公式和站内链接；`npm run topics:watch` 观察核心来源，记录待核对变化。每周一 UTC 02:17 自动更新观察快照、检查、推送与部署；正文语义更新需读取差异后核对，不自动改写事实。`npm run topics:check-live -- <站点地址>` 验证线上样稿与手机布局。
