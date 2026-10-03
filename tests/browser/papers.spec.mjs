@@ -83,10 +83,10 @@ test('OPD 专题精读展示方法图、实验结果和五模块目录', async (
   await expect(page.locator('.publication-toc button')).toHaveCount(5);
   await expect(page.locator('.publication-body')).toContainText('ExpertAlign');
   await expect(page.locator('.publication-body')).toContainText('38.58');
-  await expect(page.locator('.publication-header .paper-quality')).toHaveText('升级中');
-  await expect(page.locator('.paper-quality-notice')).toContainText('尚未通过 DDPM 级结构与图表证据初筛');
-  await expect(page.locator('.paper-figure-button')).toHaveCount(1);
-  await page.locator('.paper-figure-button').click();
+  await expect(page.locator('.publication-header .paper-quality')).toHaveText('DDPM 级精读');
+  await expect(page.locator('.paper-quality-notice')).toHaveCount(0);
+  await expect(page.locator('.paper-figure-button')).toHaveCount(5);
+  await page.locator('.paper-figure-button').first().click();
   await expect(page.locator('#figure-caption')).toContainText('Figure 1');
   await expect.poll(() => page.locator('#figure-full').evaluate(img => img.complete && img.naturalWidth > 0)).toBe(true);
 });

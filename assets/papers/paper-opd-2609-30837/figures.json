@@ -1,0 +1,101 @@
+{
+  "paperId": "paper-opd-2609-30837",
+  "arxivVersion": "2609.30837v2",
+  "figures": [
+    {
+      "file": "figure-1-pdf.png",
+      "sha256": "d3e04ebfa5eb0a4014b2d411093698595fac4d7ed99340f2a6b1547218285ce4",
+      "original": "https://arxiv.org/pdf/2609.30837v2#page=1",
+      "method": "pinned-original-pdf-crop",
+      "pdfPage": 1,
+      "cropBox": [
+        70,
+        463,
+        545,
+        735
+      ],
+      "pdfSha256": "37fced4d135066ebb4bf465f8a00c024619857da895fc10a9f89e249317c636d",
+      "scale": 3,
+      "role": "method",
+      "explanation": "complete",
+      "visuallyVerified": true,
+      "reportSection": "方法与实现机制"
+    },
+    {
+      "file": "table-1-pdf.png",
+      "sha256": "0b4e7ba744678688a2f630a3aa644c71aacbbdf554281c72908d25b5d95792e3",
+      "original": "https://arxiv.org/pdf/2609.30837v2#page=6",
+      "method": "pinned-original-pdf-crop",
+      "pdfPage": 6,
+      "cropBox": [
+        70,
+        55,
+        545,
+        460
+      ],
+      "pdfSha256": "37fced4d135066ebb4bf465f8a00c024619857da895fc10a9f89e249317c636d",
+      "scale": 3,
+      "role": "result-table",
+      "explanation": "complete",
+      "visuallyVerified": true,
+      "reportSection": "结果与图表解读"
+    },
+    {
+      "file": "table-3-pdf.png",
+      "sha256": "ab0c1612318ed0ec55cdd1239471c71132363034879d0c5934aeaaa5303a8cc0",
+      "original": "https://arxiv.org/pdf/2609.30837v2#page=8",
+      "method": "pinned-original-pdf-crop",
+      "pdfPage": 8,
+      "cropBox": [
+        120,
+        108,
+        490,
+        250
+      ],
+      "pdfSha256": "37fced4d135066ebb4bf465f8a00c024619857da895fc10a9f89e249317c636d",
+      "scale": 3,
+      "role": "result-table",
+      "explanation": "complete",
+      "visuallyVerified": true,
+      "reportSection": "结果与图表解读"
+    },
+    {
+      "file": "figure-2-pdf.png",
+      "sha256": "e2964d642a3f6293f82667bb77927e904a3d0cb8cf1f629647a37e83f3205010",
+      "original": "https://arxiv.org/pdf/2609.30837v2#page=9",
+      "method": "pinned-original-pdf-crop",
+      "pdfPage": 9,
+      "cropBox": [
+        45,
+        65,
+        540,
+        250
+      ],
+      "pdfSha256": "37fced4d135066ebb4bf465f8a00c024619857da895fc10a9f89e249317c636d",
+      "scale": 3,
+      "role": "result-figure",
+      "explanation": "complete",
+      "visuallyVerified": true,
+      "reportSection": "结果与图表解读"
+    },
+    {
+      "file": "table-6-pdf.png",
+      "sha256": "6c22223d25c792b4e4911d33d54522228e9ec495827e3954113fc132c0b962b7",
+      "original": "https://arxiv.org/pdf/2609.30837v2#page=13",
+      "method": "pinned-original-pdf-crop",
+      "pdfPage": 13,
+      "cropBox": [
+        70,
+        315,
+        485,
+        710
+      ],
+      "pdfSha256": "37fced4d135066ebb4bf465f8a00c024619857da895fc10a9f89e249317c636d",
+      "scale": 3,
+      "role": "experiment-table",
+      "explanation": "complete",
+      "visuallyVerified": true,
+      "reportSection": "实验设置与算力"
+    }
+  ]
+}

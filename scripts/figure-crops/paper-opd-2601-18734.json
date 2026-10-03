@@ -1,0 +1,11 @@
+{
+  "paperId": "paper-opd-2601-18734",
+  "arxivVersion": "2601.18734v1",
+  "coordinateSystem": "PDF points, top-left origin",
+  "crops": [
+    {"name": "figure-1-pdf.png", "page": 2, "box": [50, 75, 555, 275], "role": "method"},
+    {"name": "table-2-pdf.png", "page": 6, "box": [55, 45, 540, 335], "role": "result-table"},
+    {"name": "figure-3-pdf.png", "page": 7, "box": [55, 60, 555, 260], "role": "result-figure"},
+    {"name": "table-6-pdf.png", "page": 13, "box": [140, 335, 470, 560], "role": "experiment-table"}
+  ]
+}

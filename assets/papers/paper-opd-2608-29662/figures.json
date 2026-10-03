@@ -1,0 +1,82 @@
+{
+  "paperId": "paper-opd-2608-29662",
+  "arxivVersion": "2608.29662v1",
+  "figures": [
+    {
+      "file": "figure-1-pdf.png",
+      "sha256": "294c84233c7d7e590a384f50a9b07577e32391832c134927b5f5899349ceb32d",
+      "original": "https://arxiv.org/pdf/2608.29662v1#page=1",
+      "method": "pinned-original-pdf-crop",
+      "pdfPage": 1,
+      "cropBox": [
+        40,
+        40,
+        572,
+        742
+      ],
+      "pdfSha256": "08be45c6f9859dfa26dde068f36eae214aac230fcc6893914b1f13fb24b03c58",
+      "scale": 3,
+      "role": "method",
+      "explanation": "complete",
+      "visuallyVerified": true,
+      "reportSection": "方法与实现机制"
+    },
+    {
+      "file": "table-2-pdf.png",
+      "sha256": "34b70881dd8d884782c7b4a8b275ebbdc311561f80416997750e5f369f211c55",
+      "original": "https://arxiv.org/pdf/2608.29662v1#page=14",
+      "method": "pinned-original-pdf-crop",
+      "pdfPage": 14,
+      "cropBox": [
+        40,
+        40,
+        572,
+        742
+      ],
+      "pdfSha256": "08be45c6f9859dfa26dde068f36eae214aac230fcc6893914b1f13fb24b03c58",
+      "scale": 3,
+      "role": "experiment-table",
+      "explanation": "complete",
+      "visuallyVerified": true,
+      "reportSection": "实验设置与算力"
+    },
+    {
+      "file": "table-1-pdf.png",
+      "sha256": "a103399a24a3ca521019c3e80fe0e3d8b98dee5322fd2fa51268b4419231fc5c",
+      "original": "https://arxiv.org/pdf/2608.29662v1#page=6",
+      "method": "pinned-original-pdf-crop",
+      "pdfPage": 6,
+      "cropBox": [
+        40,
+        40,
+        572,
+        742
+      ],
+      "pdfSha256": "08be45c6f9859dfa26dde068f36eae214aac230fcc6893914b1f13fb24b03c58",
+      "scale": 3,
+      "role": "result-table",
+      "explanation": "complete",
+      "visuallyVerified": true,
+      "reportSection": "结果与图表解读"
+    },
+    {
+      "file": "figure-2-pdf.png",
+      "sha256": "808ca78e1f6fde8c5e64e5c6ca3f66834414783c205e4e0bd4331c2fb21af437",
+      "original": "https://arxiv.org/pdf/2608.29662v1#page=7",
+      "method": "pinned-original-pdf-crop",
+      "pdfPage": 7,
+      "cropBox": [
+        40,
+        40,
+        572,
+        742
+      ],
+      "pdfSha256": "08be45c6f9859dfa26dde068f36eae214aac230fcc6893914b1f13fb24b03c58",
+      "scale": 3,
+      "role": "result-figure",
+      "explanation": "complete",
+      "visuallyVerified": true,
+      "reportSection": "结果与图表解读"
+    }
+  ]
+}
