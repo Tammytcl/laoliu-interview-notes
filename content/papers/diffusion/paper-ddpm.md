@@ -10,7 +10,7 @@ year: 2020
 areas: [vision]
 tasks: [image-generation]
 published: 2020-06-19
-method_figure: "./assets/papers/paper-ddpm/figure-2-pdf.png"
+method_figure: "./assets/papers/paper-ddpm/figure-2-source.png"
 method_caption: "Figure 2 · 正向加噪与反向生成"
 direction: diffusion
 openalex_id: W3036167779
@@ -55,7 +55,9 @@ $$
 x_t=\sqrt{\bar\alpha_t}x_0+\sqrt{1-\bar\alpha_t}\epsilon,\qquad \epsilon\sim\mathcal N(0,I).
 $$
 
-![Figure 2 · 固定正向扩散与可学习反向链的图模型](./assets/papers/paper-ddpm/figure-2-pdf.png)
+![Figure 2 · 固定正向扩散与可学习反向链的图模型](./assets/papers/paper-ddpm/figure-2-source.png)
+
+图源：[arXiv 2006.11239v2 LaTeX 源码](https://arxiv.org/src/2006.11239v2)，`images/pgm_diagram_xarrow_small.pdf`。
 
 **Figure 2 解读。** 一条方向对应 $q$ 的加噪，反方向对应 $p_\theta$ 的生成。节点是与原图同维度的潜变量，不是缩小到低维空间的 VAE latent。箭头体现 Markov 依赖；训练时可以直接构造 $x_t$，生成时则需要按照反向链逐步执行。[图源：原文 Figure 2](https://arxiv.org/pdf/2006.11239v2#page=2)。
 
@@ -150,7 +152,9 @@ CIFAR10 和 CelebA-HQ 来自 TensorFlow Datasets，LSUN 按 StyleGAN 数据准�
 
 **Figure 5 解读。** 曲线把变分项解释为随反向过程逐步补充信息的代价，distortion 使用 [0,255] 图像尺度上的 RMSE。它展示高层结构与细节在信息量和视觉误差上的不同作用；它不是实际文件压缩器的端到端 benchmark。原文明确 compression 只是 proof of concept，所需高维随机编码过程并不实用。[图源](https://arxiv.org/pdf/2006.11239v2#page=7)。
 
-![Figure 6 · 从中间噪声状态预测的图像逐渐细化](./assets/papers/paper-ddpm/figure-6-pdf.png)
+![Figure 6 · 从中间噪声状态预测的图像逐渐细化](./assets/papers/paper-ddpm/figure-6-source.png)
+
+图源：[arXiv 2006.11239v2 LaTeX 源码](https://arxiv.org/src/2006.11239v2)，`images/cifar10_eps-fixedlarge-mse_20_progressive.jpg`。
 
 **Figure 6 解读。** 从左到右观察估计的 $\hat x_0$，先形成粗略结构，再补细节。展示的是不同噪声阶段下的原图估计，不能误认成所有格子都是直接显示原始 $x_t$。这张可视化支持 coarse-to-fine 的解释，但不单独证明 FID 改善。[图源](https://arxiv.org/pdf/2006.11239v2#page=7)。
 
@@ -170,4 +174,4 @@ DDPM 的贡献是明确连接反向高斯链、噪声预测和去噪 score match
 
 源码静态核读固定于 `1e0dceb3b3495bbe19116a5e1b3596cd0706c543`。核心文件：[diffusion_tf/diffusion_utils.py](https://github.com/hojonathanho/diffusion/blob/1e0dceb3b3495bbe19116a5e1b3596cd0706c543/diffusion_tf/diffusion_utils.py)。没有执行代码或重新训练。
 
-**图表来源。** 本报告使用固定版本原论文 PDF 的核对裁剪图，不重新排版原表；对应 PDF 页码、裁剪区域和文件校验值记录在 assets/papers/paper-ddpm/figures.json。LaTeX 源码保留在本地缓存，用于核查图表及上下文。
+**图表来源。** 本报告优先提取固定版本 LaTeX 源码中的原始图片；表格及没有独立图片的 TeX 绘图使用局部 PDF 裁图，不截整页。源码文件、版本、校验值或 PDF 裁剪区域记录在图表证据清单 figures.json。

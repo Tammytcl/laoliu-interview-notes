@@ -1,1 +1,46 @@
-{"paperId":"paper-opd-2604-13016","arxivVersion":"2604.13016v1","coordinateSystem":"PDF points, top-left origin","crops":[{"name":"figure-1-pdf.png","page":2,"box":[40,40,572,742],"role":"method"},{"name":"table-2-pdf.png","page":28,"box":[40,40,572,742],"role":"experiment-table"},{"name":"table-1-pdf.png","page":23,"box":[40,40,572,742],"role":"result-table"},{"name":"figure-2-pdf.png","page":24,"box":[40,40,572,742],"role":"result-figure"}]}
+{
+  "paperId": "paper-opd-2604-13016",
+  "arxivVersion": "2604.13016v1",
+  "coordinateSystem": "PDF points, top-left origin",
+  "crops": [
+    {
+      "name": "study-design-pdf.png",
+      "page": 2,
+      "box": [
+        62,
+        251,
+        534,
+        389
+      ],
+      "role": "method",
+      "sourceUnavailableReason": "Source uses inline TeX/TikZ/PGF typesetting, no standalone image"
+    },
+    {
+      "name": "table-2-config-pdf.png",
+      "page": 24,
+      "box": [
+        60,
+        81,
+        401,
+        301
+      ],
+      "role": "experiment-table"
+    }
+  ],
+  "sourceAssets": [
+    {
+      "name": "results-source.png",
+      "path": "Figures/5.1/5_1_combined.pdf",
+      "tex": "Sections/4_Exp.tex",
+      "label": "fig:alignment_main",
+      "role": "result-figure"
+    },
+    {
+      "name": "teacher-compatibility-source.png",
+      "path": "Figures/3.1/3_1_metrics.pdf",
+      "tex": "Sections/3_Exp.tex",
+      "label": "fig:thinking_pattern_compatibility",
+      "role": "result-figure"
+    }
+  ]
+}

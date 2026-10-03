@@ -1,1 +1,41 @@
-{"paperId":"paper-opd-2609-20511","arxivVersion":"2609.20511v1","coordinateSystem":"PDF points, top-left origin","crops":[{"name":"figure-1-pdf.png","page":2,"box":[40,40,572,742],"role":"method"},{"name":"table-2-pdf.png","page":17,"box":[40,40,572,742],"role":"experiment-table"},{"name":"table-1-pdf.png","page":6,"box":[40,40,572,742],"role":"result-table"},{"name":"figure-2-pdf.png","page":7,"box":[40,40,572,742],"role":"result-figure"}]}
+{
+  "paperId": "paper-opd-2609-20511",
+  "arxivVersion": "2609.20511v1",
+  "coordinateSystem": "PDF points, top-left origin",
+  "crops": [
+    {
+      "name": "table-2-config-pdf.png",
+      "page": 17,
+      "box": [
+        59,
+        53,
+        406,
+        236
+      ],
+      "role": "experiment-table"
+    }
+  ],
+  "sourceAssets": [
+    {
+      "name": "eos-diagnostic-source.png",
+      "path": "fig/eos_prob.png",
+      "tex": "Section3.tex",
+      "label": "fig:eos_prob",
+      "role": "method"
+    },
+    {
+      "name": "eos-corrections-source.png",
+      "path": "fig/fixed_cmp.png",
+      "tex": "Section3.tex",
+      "label": "fig:eos_correction_across_families",
+      "role": "result-figure"
+    },
+    {
+      "name": "template-evaluation-source.png",
+      "path": "fig/baseline_eval.png",
+      "tex": "Section3.tex",
+      "label": "fig:baseline_eval",
+      "role": "result-figure"
+    }
+  ]
+}

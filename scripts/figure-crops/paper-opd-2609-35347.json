@@ -4,34 +4,49 @@
   "coordinateSystem": "PDF points, top-left origin",
   "crops": [
     {
-      "name": "figure-2-pdf.png",
-      "page": 3,
-      "box": [55, 80, 545, 310],
-      "role": "method"
-    },
-    {
       "name": "table-1-pdf.png",
       "page": 5,
-      "box": [55, 60, 545, 380],
+      "box": [
+        57,
+        82,
+        539,
+        377
+      ],
       "role": "result-table"
-    },
-    {
-      "name": "figure-3-pdf.png",
-      "page": 7,
-      "box": [55, 95, 560, 275],
-      "role": "result-figure"
-    },
-    {
-      "name": "figure-4-pdf.png",
-      "page": 8,
-      "box": [55, 255, 545, 540],
-      "role": "result-figure"
     },
     {
       "name": "tables-4-5-pdf.png",
       "page": 9,
-      "box": [55, 55, 545, 555],
+      "box": [
+        57,
+        82,
+        539,
+        555
+      ],
       "role": "experiment-table"
+    }
+  ],
+  "sourceAssets": [
+    {
+      "name": "figure-2-source.png",
+      "tex": "body.tex",
+      "label": "fig:2",
+      "role": "method",
+      "path": "figures/method.pdf"
+    },
+    {
+      "name": "figure-3-source.png",
+      "tex": "body.tex",
+      "label": "fig:3",
+      "role": "result-figure",
+      "path": "figures/q35_expert_profiles_v2.pdf"
+    },
+    {
+      "name": "figure-4-source.png",
+      "tex": "body.tex",
+      "label": "fig:4",
+      "role": "result-figure",
+      "path": "figures/q35_mechanism_domain.pdf"
     }
   ]
 }

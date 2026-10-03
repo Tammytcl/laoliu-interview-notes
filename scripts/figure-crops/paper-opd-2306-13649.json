@@ -3,10 +3,51 @@
   "arxivVersion": "2306.13649v3",
   "coordinateSystem": "PDF points, top-left origin",
   "crops": [
-    {"name": "algorithm-1-pdf.png", "page": 4, "box": [105, 75, 507, 225], "role": "method"},
-    {"name": "table-a-1-pdf.png", "page": 15, "box": [170, 205, 440, 385], "role": "experiment-table"},
-    {"name": "figure-1-pdf.png", "page": 1, "box": [105, 445, 507, 672], "role": "result-figure"},
-    {"name": "figure-4-pdf.png", "page": 6, "box": [105, 242, 507, 455], "role": "result-figure"},
-    {"name": "figure-10-pdf.png", "page": 9, "box": [105, 75, 507, 302], "role": "result-figure"}
+    {
+      "name": "algorithm-1-pdf.png",
+      "page": 4,
+      "box": [
+        105,
+        75,
+        507,
+        225
+      ],
+      "role": "method",
+      "sourceUnavailableReason": "LaTeX algorithm typesetting, no standalone image"
+    },
+    {
+      "name": "table-a-1-pdf.png",
+      "page": 15,
+      "box": [
+        170,
+        205,
+        440,
+        385
+      ],
+      "role": "experiment-table"
+    }
+  ],
+  "sourceAssets": [
+    {
+      "name": "figure-1-source.png",
+      "tex": "main.tex",
+      "label": "fig:intro_figure",
+      "role": "result-figure",
+      "path": "figures_new/intro_fig_gkd.pdf"
+    },
+    {
+      "name": "figure-4-source.png",
+      "tex": "main.tex",
+      "label": "fig:xsum_tradeoff",
+      "role": "result-figure",
+      "path": "figures_new/diversity_vs_performance_long.pdf"
+    },
+    {
+      "name": "figure-10-source.png",
+      "tex": "main.tex",
+      "label": "fig:flan_agnostic",
+      "role": "result-figure",
+      "path": "figures_new/appendix_figures/mmlu_bbh_delta_app.pdf"
+    }
   ]
 }

@@ -10,7 +10,7 @@ year: 2023
 areas: [language]
 tasks: [text-generation]
 published: 2023-09-12
-method_figure: "./assets/papers/paper-pagedattention/figure-6-pdf.png"
+method_figure: "./assets/papers/paper-pagedattention/figure-6-source.png"
 method_caption: "Figure 6 · 逻辑块与物理块映射"
 direction: infra
 openalex_id: W4387321091
@@ -56,13 +56,17 @@ $$
 
 这是一种索引推导，不是论文给出的逐字伪代码。PagedAttention kernel 读取 block table 后，在对应物理块中计算 attention；它仍然要读需要的历史 K/V。不能把“Paged”理解成稀疏注意力或只读当前页。
 
-![Figure 6 · 逻辑 token 块到物理 KV 块的映射](./assets/papers/paper-pagedattention/figure-6-pdf.png)
+![Figure 6 · 逻辑 token 块到物理 KV 块的映射](./assets/papers/paper-pagedattention/figure-6-source.png)
+
+图源：[arXiv 2309.06180v1 LaTeX 源码](https://arxiv.org/src/2309.06180v1)，`figures/multi-sequence-block-mapping.pdf`。
 
 **Figure 6 解读。** 图左侧是请求的逻辑序列，右侧是可以散布在不同位置的物理块，中间表格负责翻译。沿一个逻辑块的指针追到物理块，可以看到 token 顺序并未因存储不连续而改变。示例块大小用于画图，不能直接替代实验 block size。[图源：原文 Figure 6](https://arxiv.org/pdf/2309.06180v1#page=6)。
 
 多个采样分支可以共享完整 prompt blocks，并用 reference count 追踪使用者。如果分支要写入仍被别人使用的最后一个块，就先复制该块再追加，这就是 copy-on-write。共享并不意味所有生成后缀永久共用；不同 token 导致的分支仍需要各自状态。beam search 的状态继承也可以用映射与引用更新表示。
 
-![Figure 4 · vLLM 的调度器、块管理器与 GPU 执行器](./assets/papers/paper-pagedattention/figure-4-pdf.png)
+![Figure 4 · vLLM 的调度器、块管理器与 GPU 执行器](./assets/papers/paper-pagedattention/figure-4-source.png)
+
+图源：[arXiv 2309.06180v1 LaTeX 源码](https://arxiv.org/src/2309.06180v1)，`figures/pagedattention.pdf`。
 
 **Figure 4 解读。** 这是一张系统边界图：中心调度器管理请求与 block tables，GPU worker 根据 token 与映射执行模型。多 GPU 情况下，worker 处理自己的 attention heads，管理器维持一致的逻辑映射。图里的控制流不等于每张 GPU 保存完整 KV；张量并行下实际数据是分片的。[图源：原文 Figure 4](https://arxiv.org/pdf/2309.06180v1#page=5)。
 
@@ -114,17 +118,23 @@ Orca 原实现未公开，作者自行实现三种预留策略：Oracle 预先�
 
 ## 4. 结果与图表解读
 
-![Figure 12 · 单序列生成的请求率与延迟曲线](./assets/papers/paper-pagedattention/figure-12-pdf.png)
+![Figure 12 · 单序列生成的请求率与延迟曲线](./assets/papers/paper-pagedattention/figure-12-source.png)
+
+图源：[arXiv 2309.06180v1 LaTeX 源码](https://arxiv.org/src/2309.06180v1)，`figures/experiments/n1-sharegpt.pdf`、`figures/experiments/n1-alpaca.pdf`；按原图顺序排列源码子图，不重新绘制数据。
 
 **Figure 12 解读。** 横轴是提供给服务的 request rate，纵轴是 normalized latency。曲线在低负载下缓慢上升，接近系统处理能力后突然抬升，表示排队积累，而不是某个 attention kernel 突然变慢。比较时应在近似延迟水平看哪条曲线能承受更高请求率，并核对模型、GPU 数量和上 / 下两行的负载数据。[图源](https://arxiv.org/pdf/2309.06180v1#page=10)。
 
 在 ShareGPT 基础单样本负载上，原文报告 vLLM 相对 Orca Oracle 支持约 1.7–2.7 倍请求率，相对 Orca Max 约 2.7–8 倍；这些范围比“普遍快若干倍”更准确。FasterTransformer 对照还同时缺少细粒度调度，因此其较大差距不能全归因于 block table。OPT-175B + 较短 Alpaca 序列时，Orca 某些策略也能容纳较大 batch，系统更接近 compute-bound，vLLM 优势缩小。这个反例正好验证：内存管理收益依赖真实瓶颈。
 
-![Figure 13 · 同时批处理的请求数](./assets/papers/paper-pagedattention/figure-13-pdf.png)
+![Figure 13 · 同时批处理的请求数](./assets/papers/paper-pagedattention/figure-13-source.png)
+
+图源：[arXiv 2309.06180v1 LaTeX 源码](https://arxiv.org/src/2309.06180v1)，`figures/experiments/batched_requests_sharegpt.pdf`、`figures/experiments/batched_requests_alpaca.pdf`；按原图顺序排列源码子图，不重新绘制数据。
 
 **Figure 13 解读。** 横轴是运行时间，纵轴是 batch 中的请求数；ShareGPT 子图对应 OPT-13B、2 requests/s，Alpaca 对应 30 requests/s。它补足 Figure 12 的因果链：更少 KV 浪费让更多请求共存，批处理容量提高，负载拐点向右移动。单看 batch 大小不能保证延迟低，还要与排队和请求长度一起判断。[图源](https://arxiv.org/pdf/2309.06180v1#page=10)。
 
-![Figure 15 · 并行采样和 beam search 的 KV 共享节省](./assets/papers/paper-pagedattention/figure-15-pdf.png)
+![Figure 15 · 并行采样和 beam search 的 KV 共享节省](./assets/papers/paper-pagedattention/figure-15-source.png)
+
+图源：[arXiv 2309.06180v1 LaTeX 源码](https://arxiv.org/src/2309.06180v1)，`figures/experiments/mem_saving_parallel_gen.pdf`、`figures/experiments/mem_saving_beam.pdf`；按原图顺序排列源码子图，不重新绘制数据。
 
 **Figure 15 解读。** 两幅图分别看 parallel sampling 与 beam search，改变输出分支数量，比较共享 KV 带来的内存节省。prompt 越能复用，复制同一前缀越浪费；beam search 还可共享部分生成路径。图里的收益与前缀长度、分支数和分歧位置有关，并不代表不同内容的任意请求都能共享缓存。[图源](https://arxiv.org/pdf/2309.06180v1#page=11)。
 
@@ -144,4 +154,4 @@ PagedAttention 改进的是 **KV 内存管理和可批处理容量**，不是语
 
 源码静态核读固定于 `e2fb71ec9f2c3168ba8614408fa807a5f65707c5`（vLLM v0.2.0）。核心文件：[vllm/core/block_manager.py](https://github.com/vllm-project/vllm/blob/e2fb71ec9f2c3168ba8614408fa807a5f65707c5/vllm/core/block_manager.py#L102-L169)。没有执行代码或重新训练。
 
-**图表来源。** 本报告使用固定版本原论文 PDF 的核对裁剪图，不重新排版原表；对应 PDF 页码、裁剪区域和文件校验值记录在 assets/papers/paper-pagedattention/figures.json。LaTeX 源码保留在本地缓存，用于核查图表及上下文。
+**图表来源。** 本报告优先提取固定版本 LaTeX 源码中的原始图片；表格及没有独立图片的 TeX 绘图使用局部 PDF 裁图，不截整页。源码文件、版本、校验值或 PDF 裁剪区域记录在图表证据清单 figures.json。

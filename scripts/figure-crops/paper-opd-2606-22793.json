@@ -1,1 +1,45 @@
-{"paperId":"paper-opd-2606-22793","arxivVersion":"2606.22793v1","coordinateSystem":"PDF points, top-left origin","crops":[{"name":"figure-1-pdf.png","page":4,"box":[40,40,572,742],"role":"method"},{"name":"table-2-pdf.png","page":43,"box":[40,40,572,742],"role":"experiment-table"},{"name":"table-1-pdf.png","page":3,"box":[40,40,572,742],"role":"result-table"},{"name":"figure-2-pdf.png","page":5,"box":[40,40,572,742],"role":"result-figure"}]}
+{
+  "paperId": "paper-opd-2606-22793",
+  "arxivVersion": "2606.22793v1",
+  "coordinateSystem": "PDF points, top-left origin",
+  "crops": [
+    {
+      "name": "table-9-reporting-pdf.png",
+      "page": 28,
+      "box": [
+        67,
+        480,
+        294,
+        704
+      ],
+      "role": "experiment-table"
+    },
+    {
+      "name": "table-5-routes-pdf.png",
+      "page": 12,
+      "box": [
+        67,
+        67,
+        529,
+        368
+      ],
+      "role": "result-table"
+    }
+  ],
+  "sourceAssets": [
+    {
+      "name": "method-source.png",
+      "path": "figures/fig_update_pipeline.png",
+      "tex": "sections/03_formula_taxonomy.tex",
+      "label": "fig:update-pipeline",
+      "role": "method"
+    },
+    {
+      "name": "credit-routing-source.png",
+      "path": "figures/fig_credit_routing.png",
+      "tex": "sections/04_credit_routing.tex",
+      "label": "fig:credit-routing",
+      "role": "result-figure"
+    }
+  ]
+}

@@ -21,6 +21,7 @@ try {
   assert.ok(dataPath,'Fingerprint for deployed content missing');
   const data = await (await page.request.get(new URL(dataPath,base).href)).json();
   assert.equal(await page.locator('.paper-card').count(),data.papers.length);
+  assert.equal(await page.locator('.paper-quality, [data-paper-quality]').count(), 0);
   assert.equal(await page.locator('[data-paper-area]').count(),3);
   assert.deepEqual(data.papers.map(p=>p.published),[...data.papers.map(p=>p.published)].sort().reverse());
   for (const viewport of [{width:1440,height:1000},{width:390,height:844}]) {
@@ -46,12 +47,14 @@ try {
       const deep = paper.depthStandard === 'ddpm' || paper.templateVersion >= 5;
       if (deep) assert.ok(images.length >= 3,`${paper.id}: DDPM-depth report lacks evidence figures`);
       for (const image of images) {
-        if (deep) assert.ok(image.src.endsWith('-pdf.png'),`${paper.id}: DDPM-depth report uses an unverified capture`);
+        if (deep) assert.ok(/-(?:pdf|source)\.png$/.test(image.src),`${paper.id}: unexpected evidence image type`);
         assert.ok(image.ink>35,`${paper.id}: image appears blank`);
         assert.ok(image.ratioError<0.02,`${paper.id}: distorted aspect ratio`);
       }
       assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1),`${paper.id}: horizontal overflow`);
       assert.equal(await page.locator('.publication-toc button').count(),5);
+      assert.equal(await page.locator('#paper-body .katex-error').count(), 0, `${paper.id}: invalid formula`);
+      assert.ok(!await page.locator('#paper-body').innerText().then(text => text.includes('$$')), `${paper.id}: unrendered display math`);
       if (images.length) {
         await page.locator('[data-figure]').first().click();
         await page.keyboard.press('Escape');

@@ -42,7 +42,7 @@ $$
 O=\operatorname{softmax}(QK^{\mathsf T}/\sqrt d)V.
 $$
 
-公式要有变量解释与适用条件；伪代码标明是原文算法还是教学重述。先在 PDF 裁剪计划中给方法原图标 `role: method`，逐张核对后才把真实路径填入 `method_figure` 和正文。使用以下格式（完成图表提取后再填写真实文件路径）：
+公式要有变量解释与适用条件；伪代码标明是原文算法还是教学重述。方法原图优先从固定版本 LaTeX 源码提取：在 `sourceAssets` 记录原资产路径、引用 TeX 与图号，标 `role: method`。表格只裁 PDF 中表体与必要表注；无独立图片的 TikZ/PGF 图须记录理由后局部裁取，禁止整页截图。逐张核对后才填写 `method_figure` 和正文路径。使用以下格式：
 
 ```markdown
 ![Figure N · 简洁的中文说明](./assets/papers/paper-id/figure-N.png)

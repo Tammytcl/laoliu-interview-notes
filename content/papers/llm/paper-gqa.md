@@ -10,7 +10,7 @@ year: 2023
 areas: [language]
 tasks: [text-generation]
 published: 2023-05-22
-method_figure: "./assets/papers/paper-gqa/figure-2-pdf.png"
+method_figure: "./assets/papers/paper-gqa/figure-2-source.png"
 method_caption: "Figure 2 · Query heads 与共享 KV groups"
 direction: llm
 openalex_id: W4389518760
@@ -60,7 +60,9 @@ $$
 
 其中 $M$ 是相应任务的 mask；decoder self-attention 要遵守因果关系，cross-attention 的 K/V 来自 encoder 输出。$G=1$ 是 MQA，$G=H$ 是 MHA，中间取值才是通常讨论的 GQA。本文将改动用于 **decoder self-attention 和 cross-attention**，不改变 encoder self-attention：encoder 表示并行计算，不是同一种逐 token 带宽瓶颈。
 
-![Figure 2 · MHA、MQA 与 GQA 的 query / key / value 共享关系](./assets/papers/paper-gqa/figure-2-pdf.png)
+![Figure 2 · MHA、MQA 与 GQA 的 query / key / value 共享关系](./assets/papers/paper-gqa/figure-2-source.png)
+
+图源：[arXiv 2305.13245v3 LaTeX 源码](https://arxiv.org/src/2305.13245v3)，`images/recycling.png`。
 
 **Figure 2 解读。** 三幅结构图比较的是“有多少套 K/V 对应这些 query”。MHA 中每个头独立，MQA 中所有 query 汇聚到同一组 K/V，GQA 中各组内部共享。应沿连线追踪一个 query 读到哪套 K/V，而不是把图中的多个 query 当作同一个注意力分布。这张图说明结构与容量关系，本身不证明质量恢复，也不提供实测加速比。[图源：原文 Figure 2](https://arxiv.org/pdf/2305.13245v3#page=2)。
 
@@ -74,7 +76,9 @@ $$
 
 Q 投影保留；模型需要新的 K/V 参数布局。均值池化尽量保留原 checkpoint 中的信息，但它改变了模型函数，因此作者还按照原预训练配方进行 uptraining，让其他参数与新的共享结构共同适应。这里的 $\alpha=0.05$ 表示额外预训练步数约为原预训练的 5%，不是每个用户都能用“原模型总成本的 5%”完成任何结构转换。
 
-![Figure 1 · 原 MHA 的 K/V 投影均值池化，得到共享投影](./assets/papers/paper-gqa/figure-1-pdf.png)
+![Figure 1 · 原 MHA 的 K/V 投影均值池化，得到共享投影](./assets/papers/paper-gqa/figure-1-source.png)
+
+图源：[arXiv 2305.13245v3 LaTeX 源码](https://arxiv.org/src/2305.13245v3)，`images/gmq_architecture.png`。
 
 **Figure 1 解读。** 左右比较转换前后投影矩阵；mean pooling 发生在权重的头维度，不是对当前请求的 token 做池化。图画的是 MHA→MQA 的单组示例，推广到 GQA 时在每个组内部执行相同操作。结构转换只是第一步，后面的继续预训练不能省略为一个 reshape。[图源：原文 Figure 1](https://arxiv.org/pdf/2305.13245v3#page=1)。
 
@@ -194,4 +198,4 @@ Table 1 使用秒作为时间单位。MHA-XXL 的时间为 1.51，平均分 47.2
 
 源码静态核读固定于 `399ea3a85e9807ada653fd0de1a9de627eb0acde`。核心文件：[flaxformer/components/attention/dense_attention.py](https://github.com/google/flaxformer/blob/399ea3a85e9807ada653fd0de1a9de627eb0acde/flaxformer/components/attention/dense_attention.py)。没有执行代码或重新训练。
 
-**图表来源。** 本报告使用固定版本原论文 PDF 的核对裁剪图，不重新排版原表；对应 PDF 页码、裁剪区域和文件校验值记录在 assets/papers/paper-gqa/figures.json。LaTeX 源码保留在本地缓存，用于核查图表及上下文。
+**图表来源。** 本报告优先提取固定版本 LaTeX 源码中的原始图片；表格及没有独立图片的 TeX 绘图使用局部 PDF 裁图，不截整页。源码文件、版本、校验值或 PDF 裁剪区域记录在图表证据清单 figures.json。

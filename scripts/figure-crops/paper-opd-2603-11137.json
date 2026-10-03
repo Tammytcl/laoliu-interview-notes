@@ -1,1 +1,45 @@
-{"paperId":"paper-opd-2603-11137","arxivVersion":"2603.11137v1","coordinateSystem":"PDF points, top-left origin","crops":[{"name":"figure-2-pdf.png","page":2,"box":[55,45,555,235],"role":"method"},{"name":"table-8-pdf.png","page":18,"box":[245,65,555,205],"role":"experiment-table"},{"name":"table-1-pdf.png","page":7,"box":[55,40,555,345],"role":"result-table"},{"name":"figure-3-pdf.png","page":3,"box":[55,45,555,245],"role":"result-figure"}]}
+{
+  "paperId": "paper-opd-2603-11137",
+  "arxivVersion": "2603.11137v1",
+  "coordinateSystem": "PDF points, top-left origin",
+  "crops": [
+    {
+      "name": "table-8-pdf.png",
+      "page": 18,
+      "box": [
+        245,
+        84,
+        547,
+        185
+      ],
+      "role": "experiment-table"
+    },
+    {
+      "name": "table-1-pdf.png",
+      "page": 7,
+      "box": [
+        51,
+        63,
+        547,
+        314
+      ],
+      "role": "result-table"
+    }
+  ],
+  "sourceAssets": [
+    {
+      "name": "figure-2-source.png",
+      "tex": "figures/figure_intro.tex",
+      "label": "fig:overview",
+      "role": "method",
+      "path": "sources/Illustration_v0.3.pdf"
+    },
+    {
+      "name": "figure-3-source.png",
+      "tex": "figures/motivation.tex",
+      "label": "fig:stop-gradient",
+      "role": "result-figure",
+      "path": "sources/training_dynamics.pdf"
+    }
+  ]
+}

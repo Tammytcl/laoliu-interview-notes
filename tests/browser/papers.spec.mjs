@@ -7,11 +7,8 @@ test('论文库、两行任务筛选、Daily 与专题报告相互链接', async
   await expect(page.locator('.paper-card')).toHaveCount(data.papers.length);
   expect(data.papers.map(p => p.published)).toEqual([...data.papers.map(p => p.published)].sort().reverse());
   await expect(page.locator('.paper-citations')).toHaveCount(data.papers.length);
-  await expect(page.locator('.paper-quality')).toHaveCount(data.papers.length);
-  await page.locator('[data-paper-quality="complete"]').click();
-  await expect(page.locator('.paper-card')).toHaveCount(data.papers.filter(p => p.qualityStatus === 'complete').length);
-  await page.locator('[data-paper-quality=""]').click();
-  await expect(page.locator('.paper-card')).toHaveCount(data.papers.length);
+  await expect(page.locator('.paper-quality, [data-paper-quality]')).toHaveCount(0);
+  await expect(page.locator('#paper-space')).not.toContainText('DDPM 级精读');
   await expect(page.locator('.paper-method-preview img')).toHaveCount(data.papers.filter(p => p.methodFigure).length);
   for (const preview of await page.locator('.paper-method-preview img').all()) {
     await preview.scrollIntoViewIfNeeded();
@@ -83,7 +80,7 @@ test('OPD 专题精读展示方法图、实验结果和五模块目录', async (
   await expect(page.locator('.publication-toc button')).toHaveCount(5);
   await expect(page.locator('.publication-body')).toContainText('ExpertAlign');
   await expect(page.locator('.publication-body')).toContainText('38.58');
-  await expect(page.locator('.publication-header .paper-quality')).toHaveText('DDPM 级精读');
+  await expect(page.locator('.publication-header .paper-quality')).toHaveCount(0);
   await expect(page.locator('.paper-quality-notice')).toHaveCount(0);
   await expect(page.locator('.paper-figure-button')).toHaveCount(5);
   await page.locator('.paper-figure-button').first().click();

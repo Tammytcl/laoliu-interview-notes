@@ -3,80 +3,103 @@
   "arxivVersion": "2609.20511v1",
   "figures": [
     {
-      "file": "figure-1-pdf.png",
-      "sha256": "3f97336717fa0637fc4d22694697299b7d1d8c08c6b75b5477d332ffbf8012d3",
-      "original": "https://arxiv.org/pdf/2609.20511v1#page=2",
-      "method": "pinned-original-pdf-crop",
-      "pdfPage": 2,
-      "cropBox": [
-        40,
-        40,
-        572,
-        742
+      "file": "eos-diagnostic-source.png",
+      "sha256": "07f6eb4c2aa662693f7411d78ac1e58fcdf22f90350efec30d0acfae88a194ce",
+      "original": "https://arxiv.org/src/2609.20511v1",
+      "method": "pinned-latex-asset",
+      "sourceArchiveSha256": "8fc06abb52c28910f7a775dc203593419e2c08bb04746a87fa4faa37df49b527",
+      "sourcePath": "fig/eos_prob.png",
+      "sourceSha256": "b91a37a40f5447e428e2c657b9d16bd9c22cbe062be3f10321e1cbd73f8bd263",
+      "sourceFiles": [
+        {
+          "path": "fig/eos_prob.png",
+          "sha256": "b91a37a40f5447e428e2c657b9d16bd9c22cbe062be3f10321e1cbd73f8bd263"
+        }
       ],
-      "pdfSha256": "01e605ee5ba96be5ee84690bedcd60ce6d19e9a97ecdb30c6c03d423a4332548",
-      "scale": 3,
+      "texFile": "Section3.tex",
+      "texSha256": "043789963f01576339a6da6549e234f90dd038107609cc2cdb83e48ba097441c",
+      "figureLabel": "fig:eos_prob",
       "role": "method",
       "explanation": "complete",
       "visuallyVerified": true,
+      "reviewedAt": "2026-10-03",
+      "reviewScope": "Source/PDF identity, axes/legends/table edges, caption and evidence role; no training reproduction",
       "reportSection": "方法与实现机制"
     },
     {
-      "file": "table-2-pdf.png",
-      "sha256": "91119de0cd1b350a4fe3906ea2db7dc4865e6e03342ff62bb2567dccd532b954",
+      "file": "eos-corrections-source.png",
+      "sha256": "2ceb15e91d997e9b3ee9b8c68946d320b254fa25f18f499ec98c778d9aff5bfb",
+      "original": "https://arxiv.org/src/2609.20511v1",
+      "method": "pinned-latex-asset",
+      "sourceArchiveSha256": "8fc06abb52c28910f7a775dc203593419e2c08bb04746a87fa4faa37df49b527",
+      "sourcePath": "fig/fixed_cmp.png",
+      "sourceSha256": "4b5d5473a9cd426eb432a6af3a3066ce0d13a72afbe21aee180beafe445963b5",
+      "sourceFiles": [
+        {
+          "path": "fig/fixed_cmp.png",
+          "sha256": "4b5d5473a9cd426eb432a6af3a3066ce0d13a72afbe21aee180beafe445963b5"
+        }
+      ],
+      "texFile": "Section3.tex",
+      "texSha256": "043789963f01576339a6da6549e234f90dd038107609cc2cdb83e48ba097441c",
+      "figureLabel": "fig:eos_correction_across_families",
+      "role": "result-figure",
+      "explanation": "complete",
+      "visuallyVerified": true,
+      "reviewedAt": "2026-10-03",
+      "reviewScope": "Source/PDF identity, axes/legends/table edges, caption and evidence role; no training reproduction",
+      "reportSection": "结果与图表解读"
+    },
+    {
+      "file": "template-evaluation-source.png",
+      "sha256": "e17285fb38582af95fc68f455ce115bd2deded548de0589d78da02485d985d7c",
+      "original": "https://arxiv.org/src/2609.20511v1",
+      "method": "pinned-latex-asset",
+      "sourceArchiveSha256": "8fc06abb52c28910f7a775dc203593419e2c08bb04746a87fa4faa37df49b527",
+      "sourcePath": "fig/baseline_eval.png",
+      "sourceSha256": "702798d3d1a51037775f129da3da47d86558081bdd8fb30dbf7354169d5be9bd",
+      "sourceFiles": [
+        {
+          "path": "fig/baseline_eval.png",
+          "sha256": "702798d3d1a51037775f129da3da47d86558081bdd8fb30dbf7354169d5be9bd"
+        }
+      ],
+      "texFile": "Section3.tex",
+      "texSha256": "043789963f01576339a6da6549e234f90dd038107609cc2cdb83e48ba097441c",
+      "figureLabel": "fig:baseline_eval",
+      "role": "result-figure",
+      "explanation": "complete",
+      "visuallyVerified": true,
+      "reviewedAt": "2026-10-03",
+      "reviewScope": "Source/PDF identity, axes/legends/table edges, caption and evidence role; no training reproduction",
+      "reportSection": "结果与图表解读"
+    },
+    {
+      "file": "table-2-config-pdf.png",
+      "sha256": "fe124e41b6f817b1bfdd801869b026eff407c4d6355f803e3c74d493217309be",
       "original": "https://arxiv.org/pdf/2609.20511v1#page=17",
       "method": "pinned-original-pdf-crop",
       "pdfPage": 17,
       "cropBox": [
-        40,
-        40,
-        572,
-        742
+        59,
+        53,
+        406,
+        236
       ],
       "pdfSha256": "01e605ee5ba96be5ee84690bedcd60ce6d19e9a97ecdb30c6c03d423a4332548",
       "scale": 3,
+      "pdfPageSize": [
+        612,
+        792
+      ],
+      "sourceUnavailableReason": "LaTeX table/algorithm typesetting; crop the compiled PDF",
       "role": "experiment-table",
       "explanation": "complete",
       "visuallyVerified": true,
+      "reviewedAt": "2026-10-03",
+      "reviewScope": "Source/PDF identity, axes/legends/table edges, caption and evidence role; no training reproduction",
       "reportSection": "实验设置与算力"
-    },
-    {
-      "file": "table-1-pdf.png",
-      "sha256": "19a1e1906da72d4972c059b02f7a855c1537c0fb9975730727a4c0c06ceac31c",
-      "original": "https://arxiv.org/pdf/2609.20511v1#page=6",
-      "method": "pinned-original-pdf-crop",
-      "pdfPage": 6,
-      "cropBox": [
-        40,
-        40,
-        572,
-        742
-      ],
-      "pdfSha256": "01e605ee5ba96be5ee84690bedcd60ce6d19e9a97ecdb30c6c03d423a4332548",
-      "scale": 3,
-      "role": "result-table",
-      "explanation": "complete",
-      "visuallyVerified": true,
-      "reportSection": "结果与图表解读"
-    },
-    {
-      "file": "figure-2-pdf.png",
-      "sha256": "baeea07f42000a0c55b0c43135e149c07acc4b9acac6629e112324936e22cb3e",
-      "original": "https://arxiv.org/pdf/2609.20511v1#page=7",
-      "method": "pinned-original-pdf-crop",
-      "pdfPage": 7,
-      "cropBox": [
-        40,
-        40,
-        572,
-        742
-      ],
-      "pdfSha256": "01e605ee5ba96be5ee84690bedcd60ce6d19e9a97ecdb30c6c03d423a4332548",
-      "scale": 3,
-      "role": "result-figure",
-      "explanation": "complete",
-      "visuallyVerified": true,
-      "reportSection": "结果与图表解读"
     }
-  ]
+  ],
+  "attribution": "Original figures/tables by the paper authors; source assets or tightly cropped PDF typesetting, with report commentary."
 }

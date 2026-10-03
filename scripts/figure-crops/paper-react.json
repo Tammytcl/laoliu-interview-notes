@@ -4,39 +4,6 @@
   "coordinateSystem": "PDF points, top-left origin",
   "crops": [
     {
-      "name": "figure-1-pdf.png",
-      "page": 2,
-      "box": [
-        107,
-        82,
-        505,
-        410
-      ],
-      "role": "method"
-    },
-    {
-      "name": "figure-3-pdf.png",
-      "page": 7,
-      "box": [
-        137,
-        75,
-        475,
-        214
-      ],
-      "role": "result-figure"
-    },
-    {
-      "name": "figure-5-pdf.png",
-      "page": 15,
-      "box": [
-        107,
-        82,
-        505,
-        243
-      ],
-      "role": "result-figure"
-    },
-    {
       "name": "table-1-pdf.png",
       "page": 5,
       "box": [
@@ -57,6 +24,29 @@
         249
       ],
       "role": "result-table"
+    }
+  ],
+  "sourceAssets": [
+    {
+      "name": "figure-1-source.png",
+      "tex": "iclr2023/figuretext/teaser.tex",
+      "label": "fig:teaser",
+      "role": "method",
+      "path": "iclr2023/figure/teaser-new.pdf"
+    },
+    {
+      "name": "figure-3-source.png",
+      "tex": "iclr2023/figuretext/finetune.tex",
+      "label": "fig:finetune",
+      "role": "result-figure",
+      "path": "iclr2023/figure/hotpot_finetune.pdf"
+    },
+    {
+      "name": "figure-5-source.png",
+      "tex": "iclr2023/figuretext/edit.tex",
+      "label": "fig:edit",
+      "role": "result-figure",
+      "path": "iclr2023/figure/human_edit.pdf"
     }
   ]
 }

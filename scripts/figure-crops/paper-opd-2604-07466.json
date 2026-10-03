@@ -1,1 +1,49 @@
-{"paperId":"paper-opd-2604-07466","arxivVersion":"2604.07466v1","coordinateSystem":"PDF points, top-left origin","crops":[{"name":"figure-1-pdf.png","page":5,"box":[40,40,572,742],"role":"method"},{"name":"table-2-pdf.png","page":12,"box":[40,40,572,742],"role":"experiment-table"},{"name":"table-1-pdf.png","page":6,"box":[40,40,572,742],"role":"result-table"},{"name":"figure-2-pdf.png","page":7,"box":[40,40,572,742],"role":"result-figure"}]}
+{
+  "paperId": "paper-opd-2604-07466",
+  "arxivVersion": "2604.07466v1",
+  "coordinateSystem": "PDF points, top-left origin",
+  "crops": [
+    {
+      "name": "table-4-pdf.png",
+      "page": 12,
+      "box": [
+        67,
+        67,
+        529,
+        531
+      ],
+      "role": "experiment-table"
+    },
+    {
+      "name": "table-1-results-pdf.png",
+      "page": 7,
+      "box": [
+        67,
+        67,
+        529,
+        214
+      ],
+      "role": "result-table"
+    },
+    {
+      "name": "table-2-results-pdf.png",
+      "page": 7,
+      "box": [
+        67,
+        214,
+        529,
+        360
+      ],
+      "role": "result-table"
+    }
+  ],
+  "sourceAssets": [
+    {
+      "name": "method-source.png",
+      "path": "figures/bt_tower_paper_drawings.pdf",
+      "tex": "acl_latex.tex",
+      "label": "fig:our_method",
+      "role": "method"
+    }
+  ]
+}

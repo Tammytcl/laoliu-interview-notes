@@ -4,17 +4,6 @@
   "coordinateSystem": "PDF points, top-left origin",
   "crops": [
     {
-      "name": "figure-2-pdf.png",
-      "page": 2,
-      "box": [
-        153,
-        66,
-        460,
-        121
-      ],
-      "role": "method"
-    },
-    {
       "name": "figure-5-pdf.png",
       "page": 7,
       "box": [
@@ -23,18 +12,8 @@
         505,
         287
       ],
-      "role": "result-figure"
-    },
-    {
-      "name": "figure-6-pdf.png",
-      "page": 7,
-      "box": [
-        125,
-        409,
-        487,
-        484
-      ],
-      "role": "result-figure"
+      "role": "result-figure",
+      "sourceUnavailableReason": "Figure is drawn inline with TikZ/PGF in the pinned LaTeX source, no standalone image"
     },
     {
       "name": "table-1-pdf.png",
@@ -57,6 +36,29 @@
         249
       ],
       "role": "result-table"
+    }
+  ],
+  "sourceAssets": [
+    {
+      "name": "figure-2-source.png",
+      "tex": "main.tex",
+      "label": "fig:pgm",
+      "role": "method",
+      "path": "images/pgm_diagram_xarrow_small.pdf"
+    },
+    {
+      "name": "figure-6-source.png",
+      "tex": "main.tex",
+      "label": "fig:cropped_cifar10_progressive_samples",
+      "role": "result-figure",
+      "path": "images/cifar10_eps-fixedlarge-mse_20_progressive.jpg",
+      "sourcePixelBox": [
+        0,
+        0,
+        678,
+        135
+      ],
+      "trimReason": "main.tex uses trim=0cm 19.15cm 0cm 0cm on a 678x678 image at 72dpi; keep the same top strip as Figure 6"
     }
   ]
 }

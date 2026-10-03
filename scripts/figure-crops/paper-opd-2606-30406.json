@@ -4,17 +4,6 @@
   "coordinateSystem": "PDF points, top-left origin",
   "crops": [
     {
-      "name": "figure-1-pdf.png",
-      "page": 4,
-      "box": [
-        72,
-        85,
-        525,
-        270
-      ],
-      "role": "method"
-    },
-    {
       "name": "table-2-pdf.png",
       "page": 7,
       "box": [
@@ -26,17 +15,6 @@
       "role": "result-table"
     },
     {
-      "name": "figure-2-pdf.png",
-      "page": 7,
-      "box": [
-        72,
-        330,
-        525,
-        468
-      ],
-      "role": "result-figure"
-    },
-    {
       "name": "table-3-pdf.png",
       "page": 8,
       "box": [
@@ -46,6 +24,22 @@
         185
       ],
       "role": "result-table"
+    }
+  ],
+  "sourceAssets": [
+    {
+      "name": "figure-1-source.png",
+      "tex": "latex_fig/fig_overview.tex",
+      "label": "fig:overview",
+      "role": "method",
+      "path": "fig/mopd_orange.pdf"
+    },
+    {
+      "name": "figure-2-source.png",
+      "tex": "latex_fig/fig_training_curves.tex",
+      "label": "fig:training-curves",
+      "role": "result-figure",
+      "path": "fig/training_curves.pdf"
     }
   ]
 }

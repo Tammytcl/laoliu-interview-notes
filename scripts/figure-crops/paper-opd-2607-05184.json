@@ -1,1 +1,45 @@
-{"paperId":"paper-opd-2607-05184","arxivVersion":"2607.05184v1","coordinateSystem":"PDF points, top-left origin","crops":[{"name":"figure-1-pdf.png","page":28,"box":[40,40,572,742],"role":"method"},{"name":"table-2-pdf.png","page":19,"box":[40,40,572,742],"role":"experiment-table"},{"name":"table-1-pdf.png","page":3,"box":[40,40,572,742],"role":"result-table"},{"name":"figure-2-pdf.png","page":4,"box":[40,40,572,742],"role":"result-figure"}]}
+{
+  "paperId": "paper-opd-2607-05184",
+  "arxivVersion": "2607.05184v1",
+  "coordinateSystem": "PDF points, top-left origin",
+  "crops": [
+    {
+      "name": "table-9-config-pdf.png",
+      "page": 19,
+      "box": [
+        107,
+        143,
+        505,
+        380
+      ],
+      "role": "experiment-table"
+    },
+    {
+      "name": "table-1-results-pdf.png",
+      "page": 3,
+      "box": [
+        104,
+        74,
+        510,
+        295
+      ],
+      "role": "result-table"
+    }
+  ],
+  "sourceAssets": [
+    {
+      "name": "method-source.png",
+      "path": "figures/fig_privilege_flips_self_correction.pdf",
+      "tex": "figures/privilege_flips_self_correction.tex",
+      "label": "fig:privilege-flips",
+      "role": "method"
+    },
+    {
+      "name": "budget-curves-source.png",
+      "path": "figures/avg_pass_budget_curves_thinking5_fs_ao.pdf",
+      "tex": "figures/openthoughts_budget_pass_rates_thinking5_fs_ao.tex",
+      "label": "fig:openthoughts_budget_pass_rates_thinking5_fs_ao",
+      "role": "result-figure"
+    }
+  ]
+}

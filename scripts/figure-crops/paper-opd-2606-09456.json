@@ -4,48 +4,15 @@
   "coordinateSystem": "PDF points, top-left origin",
   "crops": [
     {
-      "name": "figure-1-pdf.png",
-      "page": 3,
-      "box": [
-        327,
-        600,
-        508,
-        730
-      ],
-      "role": "method"
-    },
-    {
       "name": "table-1-pdf.png",
       "page": 6,
       "box": [
-        105,
-        54,
-        465,
-        252
+        104,
+        68,
+        509,
+        255
       ],
       "role": "result-table"
-    },
-    {
-      "name": "figure-2-pdf.png",
-      "page": 7,
-      "box": [
-        265,
-        270,
-        505,
-        410
-      ],
-      "role": "result-figure"
-    },
-    {
-      "name": "figure-3-pdf.png",
-      "page": 8,
-      "box": [
-        106,
-        198,
-        506,
-        365
-      ],
-      "role": "method"
     },
     {
       "name": "table-2-pdf.png",
@@ -68,6 +35,29 @@
         380
       ],
       "role": "experiment-table"
+    }
+  ],
+  "sourceAssets": [
+    {
+      "name": "figure-1-source.png",
+      "tex": "paper_2026.tex",
+      "label": "def:sync_point",
+      "role": "method",
+      "path": "picture/OPD.pdf"
+    },
+    {
+      "name": "figure-2-source.png",
+      "tex": "paper_2026.tex",
+      "label": "fig:compute_frontier",
+      "role": "result-figure",
+      "path": "picture/aime24_compute_frontier.png"
+    },
+    {
+      "name": "figure-3-source.png",
+      "tex": "paper_2026.tex",
+      "label": "fig:chunk_alignment",
+      "role": "method",
+      "path": "picture/Alignment_chunk.png"
     }
   ]
 }

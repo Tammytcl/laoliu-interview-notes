@@ -10,7 +10,7 @@ year: 2023
 areas: [language]
 tasks: [reasoning, agents, retrieval]
 published: 2022-10-06
-method_figure: "./assets/papers/paper-react/figure-1-pdf.png"
+method_figure: "./assets/papers/paper-react/figure-1-source.png"
 method_caption: "Figure 1 · 推理、行动与环境反馈"
 direction: agent
 paper_url: "https://arxiv.org/abs/2210.03629v3"
@@ -54,7 +54,9 @@ draft: false
 
 这段流程是整理后的实现说明。对知识型问答，原文采用密集 thought-action-observation；对长交互任务，thought 可以稀疏出现，由模型在重要位置生成。把它实现成“每一步强制一个长 thought”会改变原文设置与成本。
 
-![Figure 1 · 推理、动作与环境观察的组织方式](./assets/papers/paper-react/figure-1-pdf.png)
+![Figure 1 · 推理、动作与环境观察的组织方式](./assets/papers/paper-react/figure-1-source.png)
+
+图源：[arXiv 2210.03629v3 LaTeX 源码](https://arxiv.org/src/2210.03629v3)，`iclr2023/figure/teaser-new.pdf`。
 
 **Figure 1 解读。** 图中将 Standard、CoT、Act 与 ReAct 放在同一任务下比较：Standard 直接给答案，CoT 展开内部推理，Act 有工具动作但没有语言推理，ReAct 同时利用两者。另一部分展示交互环境中稀疏 thought 如何辅助计划。这里最需要分辨的是：Observation 来自环境，不应由语言模型自由续写成“假装工具成功”。图是行为示例，不是总体成功率统计。[图源](https://arxiv.org/pdf/2210.03629v3#page=2)。
 
@@ -103,7 +105,9 @@ HotpotQA 用 exact match，FEVER 看事实判断准确率；ALFWorld 与 WebShop
 
 ReAct 在 HotpotQA 的 EM 为 27.4，CoT 为 29.4；在 FEVER 为 60.9，CoT 为 56.3。它在两项任务上优于 Act，但并非在 HotpotQA 上单独胜过 CoT。原文混合策略在 HotpotQA 上达到 35.1（ReAct→CoT-SC），在 FEVER 上另一切换方向达到 64.6。比较时还应记住 CoT-SC 的多次采样成本，不把更高分直接当成单次调用更高效。[表源](https://arxiv.org/pdf/2210.03629v3#page=5)。
 
-![Figure 3 · prompting 与轨迹微调在不同 PaLM 规模上的结果](./assets/papers/paper-react/figure-3-pdf.png)
+![Figure 3 · prompting 与轨迹微调在不同 PaLM 规模上的结果](./assets/papers/paper-react/figure-3-source.png)
+
+图源：[arXiv 2210.03629v3 LaTeX 源码](https://arxiv.org/src/2210.03629v3)，`iclr2023/figure/hotpot_finetune.pdf`。
 
 **Figure 3 解读。** 对照模型规模及 prompting / finetuning 设置，观察加入 reasoning+action 轨迹后小模型是否获益。图支持轨迹训练能提升结果，但微调数据来自答对轨迹筛选，训练步数也随方法变化，不能把图中的差异全归因于 thought 字段本身。它与主表的 frozen-540B prompting 属于不同实验。[图源](https://arxiv.org/pdf/2210.03629v3#page=7)。
 
@@ -111,7 +115,9 @@ ReAct 在 HotpotQA 的 EM 为 27.4，CoT 为 29.4；在 FEVER 为 60.9，CoT 为
 
 ALFWorld 的 best ReAct trial 达到 71%，best Act 为 45%，BUTLER 为 37%；这些是 best-trial 比较，并不等于所有 prompt 都达到 71%。WebShop 上 ReAct 的成功率为 40.0，Act 为 30.1，专家人类为 59.6。读表时要区分 WebShop 的 score 与 success rate；“提升约 10 个百分点”指成功率口径，不是所有任务平均提升 10%。[原文交互实验](https://arxiv.org/html/2210.03629v3#S4)。
 
-![Figure 5 · 人对 ReAct 轨迹的中途行为修正](./assets/papers/paper-react/figure-5-pdf.png)
+![Figure 5 · 人对 ReAct 轨迹的中途行为修正](./assets/papers/paper-react/figure-5-source.png)
+
+图源：[arXiv 2210.03629v3 LaTeX 源码](https://arxiv.org/src/2210.03629v3)，`iclr2023/figure/human_edit.pdf`。
 
 **Figure 5 解读。** 这是一条 ALFWorld 轨迹修正示例：人调整中间语言状态后，后续行动能随之变化。它说明显式轨迹提供干预点，并不证明模型产生的 thought 是其内部真实因果解释，也不等于所有失败都能通过改一句话解决。[图源](https://arxiv.org/pdf/2210.03629v3#page=15)。
 
@@ -131,4 +137,4 @@ ALFWorld 的 best ReAct trial 达到 71%，best Act 为 45%，BUTLER 为 37%；�
 
 源码静态核读固定于 `6bdb3a1fd38b8188fc7ba4102969fe483df8fdc9`。核心文件：[hotpotqa.ipynb](https://github.com/ysymyth/ReAct/blob/6bdb3a1fd38b8188fc7ba4102969fe483df8fdc9/hotpotqa.ipynb)；[wikienv.py](https://github.com/ysymyth/ReAct/blob/6bdb3a1fd38b8188fc7ba4102969fe483df8fdc9/wikienv.py)。没有执行代码或重新训练。
 
-**图表来源。** 本报告使用固定版本原论文 PDF 的核对裁剪图，不重新排版原表；对应 PDF 页码、裁剪区域和文件校验值记录在 assets/papers/paper-react/figures.json。LaTeX 源码保留在本地缓存，用于核查图表及上下文。
+**图表来源。** 本报告优先提取固定版本 LaTeX 源码中的原始图片；表格及没有独立图片的 TeX 绘图使用局部 PDF 裁图，不截整页。源码文件、版本、校验值或 PDF 裁剪区域记录在图表证据清单 figures.json。

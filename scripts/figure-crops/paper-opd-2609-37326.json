@@ -1,1 +1,54 @@
-{"paperId":"paper-opd-2609-37326","arxivVersion":"2609.37326v1","coordinateSystem":"PDF points, top-left origin","crops":[{"name":"figure-1-pdf.png","page":2,"box":[40,40,572,742],"role":"method"},{"name":"table-2-pdf.png","page":10,"box":[40,40,572,742],"role":"experiment-table"},{"name":"table-1-pdf.png","page":5,"box":[40,40,572,742],"role":"result-table"},{"name":"figure-2-pdf.png","page":6,"box":[40,40,572,742],"role":"result-figure"}]}
+{
+  "paperId": "paper-opd-2609-37326",
+  "arxivVersion": "2609.37326v1",
+  "coordinateSystem": "PDF points, top-left origin",
+  "crops": [
+    {
+      "name": "study-runs-pdf.png",
+      "page": 14,
+      "box": [
+        104,
+        78,
+        508,
+        354
+      ],
+      "role": "method",
+      "sourceUnavailableReason": "LaTeX table/algorithm typesetting, no standalone image"
+    },
+    {
+      "name": "table-4-config-pdf.png",
+      "page": 14,
+      "box": [
+        104,
+        359,
+        508,
+        665
+      ],
+      "role": "experiment-table"
+    },
+    {
+      "name": "table-1-results-pdf.png",
+      "page": 5,
+      "box": [
+        104,
+        78,
+        508,
+        283
+      ],
+      "role": "result-table"
+    },
+    {
+      "name": "figure-6-closure-pdf.png",
+      "page": 6,
+      "box": [
+        108,
+        399,
+        508,
+        586
+      ],
+      "role": "result-figure",
+      "sourceUnavailableReason": "Source uses inline TeX/TikZ/PGF typesetting, no standalone image"
+    }
+  ],
+  "sourceAssets": []
+}

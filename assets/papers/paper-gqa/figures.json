@@ -2,107 +2,8 @@
   "paperId": "paper-gqa",
   "arxivVersion": "2305.13245v3",
   "originalUrl": "https://arxiv.org/html/2305.13245v3",
-  "attribution": "Original figures and tables by the paper authors. Captured for scholarly reading; explanations are in the report.",
+  "attribution": "Original figures/tables by the paper authors; source assets or tightly cropped PDF typesetting, with report commentary.",
   "figures": [
-    {
-      "sourceId": "S2.F1",
-      "file": "figure-1.png",
-      "sha256": "c695a4cee8e2a5f32914032fda043d08bb5a2fc4b3cd7d77006670ea3aaf0f75",
-      "original": "https://arxiv.org/html/2305.13245v3#S2.F1",
-      "method": "original-html-screenshot",
-      "explanation": "complete",
-      "reportSection": "See the figure-specific discussion in the report."
-    },
-    {
-      "sourceId": "S2.F2",
-      "file": "figure-2.png",
-      "sha256": "16c1b142ef85be4250f518b5264c76f9e6f10889a43be0ae91d5c3029aa1cd38",
-      "original": "https://arxiv.org/html/2305.13245v3#S2.F2",
-      "method": "original-html-screenshot",
-      "explanation": "complete",
-      "reportSection": "See the figure-specific discussion in the report."
-    },
-    {
-      "sourceId": "S3.T1",
-      "file": "table-1.png",
-      "sha256": "01c833019c9601043b3785bdfe3d9244661765ff5d6d537d4d18a36cfbbc5c71",
-      "original": "https://arxiv.org/html/2305.13245v3#S3.T1",
-      "method": "original-html-screenshot",
-      "explanation": "complete",
-      "reportSection": "See the figure-specific discussion in the report."
-    },
-    {
-      "sourceId": "S3.F3",
-      "file": "figure-3.png",
-      "sha256": "98ba7b1fe0b58393c43559833e02e39ed53537ee6f069879f9a5ec4f2ebb8879",
-      "original": "https://arxiv.org/html/2305.13245v3#S3.F3",
-      "method": "original-html-screenshot",
-      "explanation": "complete",
-      "reportSection": "See the figure-specific discussion in the report."
-    },
-    {
-      "sourceId": "S3.F4",
-      "file": "figure-4.png",
-      "sha256": "a91b2a1ee57e2579806fb2cd076c97f8d86df23194fbc0f018bb0c3a54165e19",
-      "original": "https://arxiv.org/html/2305.13245v3#S3.F4",
-      "method": "original-html-screenshot",
-      "explanation": "complete",
-      "reportSection": "See the figure-specific discussion in the report."
-    },
-    {
-      "sourceId": "S3.F5",
-      "file": "figure-5.png",
-      "sha256": "37e0833e94fd06f1fa4d568a46937419867b21cf73a1d7af2c19b218f440cde1",
-      "original": "https://arxiv.org/html/2305.13245v3#S3.F5",
-      "method": "original-html-screenshot",
-      "explanation": "complete",
-      "reportSection": "See the figure-specific discussion in the report."
-    },
-    {
-      "sourceId": "S3.F6",
-      "file": "figure-6.png",
-      "sha256": "89399540932a77a0cd96b2ed33155f5d1e97e895c17993940f7cc01b52e6d7cf",
-      "original": "https://arxiv.org/html/2305.13245v3#S3.F6",
-      "method": "original-html-screenshot",
-      "explanation": "complete",
-      "reportSection": "See the figure-specific discussion in the report."
-    },
-    {
-      "file": "figure-1-pdf.png",
-      "sha256": "22b45e944104201ca73111866e2697e1a344b3f5fc3e1b68cd02931aed8d7e93",
-      "original": "https://arxiv.org/pdf/2305.13245v3#page=1",
-      "method": "pinned-original-pdf-crop",
-      "pdfPage": 1,
-      "cropBox": [
-        305,
-        590,
-        527,
-        707
-      ],
-      "pdfSha256": "ba9094fe73db9bf515d47ae8b2d502fee9d8a6c7b1327e197ddb160f4c63b94a",
-      "scale": 3,
-      "explanation": "complete",
-      "visuallyVerified": true,
-      "role": "method"
-    },
-    {
-      "file": "figure-2-pdf.png",
-      "sha256": "8a6e3b793e1d9c7a8e84919a23287fbf40df2ff51b05ae921f2517315cb55bc8",
-      "original": "https://arxiv.org/pdf/2305.13245v3#page=2",
-      "method": "pinned-original-pdf-crop",
-      "pdfPage": 2,
-      "cropBox": [
-        70,
-        70,
-        525,
-        213
-      ],
-      "pdfSha256": "ba9094fe73db9bf515d47ae8b2d502fee9d8a6c7b1327e197ddb160f4c63b94a",
-      "scale": 3,
-      "explanation": "complete",
-      "visuallyVerified": true,
-      "role": "method"
-    },
     {
       "file": "figure-3-pdf.png",
       "sha256": "b61bef9059deeb558f3c1eee88d9f9b9ce0d0380767c771968e1971e01fc86af",
@@ -117,9 +18,17 @@
       ],
       "pdfSha256": "ba9094fe73db9bf515d47ae8b2d502fee9d8a6c7b1327e197ddb160f4c63b94a",
       "scale": 3,
+      "pdfPageSize": [
+        595.2760009765625,
+        841.8900146484375
+      ],
+      "sourceUnavailableReason": "Figure is drawn inline with TikZ/PGF in the pinned LaTeX source, no standalone image",
+      "role": "result-figure",
       "explanation": "complete",
       "visuallyVerified": true,
-      "role": "result-figure"
+      "reviewedAt": "2026-10-03",
+      "reviewScope": "Source/PDF identity, axes/legends/table edges, caption and evidence role; no training reproduction",
+      "reportSection": "结果与图表解读"
     },
     {
       "file": "figure-4-pdf.png",
@@ -135,9 +44,17 @@
       ],
       "pdfSha256": "ba9094fe73db9bf515d47ae8b2d502fee9d8a6c7b1327e197ddb160f4c63b94a",
       "scale": 3,
+      "pdfPageSize": [
+        595.2760009765625,
+        841.8900146484375
+      ],
+      "sourceUnavailableReason": "Figure is drawn inline with TikZ/PGF in the pinned LaTeX source, no standalone image",
+      "role": "result-figure",
       "explanation": "complete",
       "visuallyVerified": true,
-      "role": "result-figure"
+      "reviewedAt": "2026-10-03",
+      "reviewScope": "Source/PDF identity, axes/legends/table edges, caption and evidence role; no training reproduction",
+      "reportSection": "结果与图表解读"
     },
     {
       "file": "figure-5-pdf.png",
@@ -153,9 +70,17 @@
       ],
       "pdfSha256": "ba9094fe73db9bf515d47ae8b2d502fee9d8a6c7b1327e197ddb160f4c63b94a",
       "scale": 3,
+      "pdfPageSize": [
+        595.2760009765625,
+        841.8900146484375
+      ],
+      "sourceUnavailableReason": "Figure is drawn inline with TikZ/PGF in the pinned LaTeX source, no standalone image",
+      "role": "result-figure",
       "explanation": "complete",
       "visuallyVerified": true,
-      "role": "result-figure"
+      "reviewedAt": "2026-10-03",
+      "reviewScope": "Source/PDF identity, axes/legends/table edges, caption and evidence role; no training reproduction",
+      "reportSection": "结果与图表解读"
     },
     {
       "file": "figure-6-pdf.png",
@@ -171,9 +96,17 @@
       ],
       "pdfSha256": "ba9094fe73db9bf515d47ae8b2d502fee9d8a6c7b1327e197ddb160f4c63b94a",
       "scale": 3,
+      "pdfPageSize": [
+        595.2760009765625,
+        841.8900146484375
+      ],
+      "sourceUnavailableReason": "Figure is drawn inline with TikZ/PGF in the pinned LaTeX source, no standalone image",
+      "role": "result-figure",
       "explanation": "complete",
       "visuallyVerified": true,
-      "role": "result-figure"
+      "reviewedAt": "2026-10-03",
+      "reviewScope": "Source/PDF identity, axes/legends/table edges, caption and evidence role; no training reproduction",
+      "reportSection": "结果与图表解读"
     },
     {
       "file": "table-1-pdf.png",
@@ -189,9 +122,65 @@
       ],
       "pdfSha256": "ba9094fe73db9bf515d47ae8b2d502fee9d8a6c7b1327e197ddb160f4c63b94a",
       "scale": 3,
+      "pdfPageSize": [
+        595.2760009765625,
+        841.8900146484375
+      ],
+      "sourceUnavailableReason": "LaTeX table/algorithm typesetting; crop the compiled PDF",
+      "role": "result-table",
       "explanation": "complete",
       "visuallyVerified": true,
-      "role": "result-table"
+      "reviewedAt": "2026-10-03",
+      "reviewScope": "Source/PDF identity, axes/legends/table edges, caption and evidence role; no training reproduction",
+      "reportSection": "结果与图表解读"
+    },
+    {
+      "file": "figure-1-source.png",
+      "sha256": "81dae5085420e103803553cb8f737746da1232d27c19396ce02f3cb3343d50dc",
+      "original": "https://arxiv.org/src/2305.13245v3",
+      "method": "pinned-latex-asset",
+      "sourceArchiveSha256": "c510090218fadf0df595a302d23714d8190315388bf134fed56c7ebd04376f05",
+      "sourcePath": "images/gmq_architecture.png",
+      "sourceSha256": "02c3d00ec9f339211daae34392aeed850b013457b64f8088f1c5c054a5e94ab6",
+      "sourceFiles": [
+        {
+          "path": "images/gmq_architecture.png",
+          "sha256": "02c3d00ec9f339211daae34392aeed850b013457b64f8088f1c5c054a5e94ab6"
+        }
+      ],
+      "texFile": "figures/gmq_architecture.tex",
+      "texSha256": "738fe369d0a965f01d4eb9a7b03a7d4f7d6ba576eaa307f9be266000bd71cd57",
+      "figureLabel": "fig:gmq_architecture",
+      "role": "method",
+      "explanation": "complete",
+      "visuallyVerified": true,
+      "reviewedAt": "2026-10-03",
+      "reviewScope": "Source/PDF identity, axes/legends/table edges, caption and evidence role; no training reproduction",
+      "reportSection": "方法与实现机制"
+    },
+    {
+      "file": "figure-2-source.png",
+      "sha256": "de286f8b0b709fe4ea8bef370a6d00a26798ebac2beb753e73f9fc520546c510",
+      "original": "https://arxiv.org/src/2305.13245v3",
+      "method": "pinned-latex-asset",
+      "sourceArchiveSha256": "c510090218fadf0df595a302d23714d8190315388bf134fed56c7ebd04376f05",
+      "sourcePath": "images/recycling.png",
+      "sourceSha256": "96869d5f7e013dc55093c0581b9fee75e3a7d27ed5a9da34136a6d3ffb5f1933",
+      "sourceFiles": [
+        {
+          "path": "images/recycling.png",
+          "sha256": "96869d5f7e013dc55093c0581b9fee75e3a7d27ed5a9da34136a6d3ffb5f1933"
+        }
+      ],
+      "texFile": "figures/reycling.tex",
+      "texSha256": "a76489ef5994123ec81266386ee306c60a200be89fd99eee7f4758f7a3ddca55",
+      "figureLabel": "fig:recycling",
+      "role": "method",
+      "explanation": "complete",
+      "visuallyVerified": true,
+      "reviewedAt": "2026-10-03",
+      "reviewScope": "Source/PDF identity, axes/legends/table edges, caption and evidence role; no training reproduction",
+      "reportSection": "方法与实现机制"
     }
   ]
 }

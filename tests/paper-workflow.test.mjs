@@ -47,6 +47,32 @@ test('发布门槛拒绝把结果图当方法图，或省略论文原表', async
   assert.match((await checkPaperQuality(file, fixture)).errors.join('；'), /缺少登记用途的原论文表格截图/);
 });
 
+test('图源门槛拒绝整页截图、缺失源码出处和未说明原因的 PDF 插图', async t => {
+  const fixture = await mkdtemp(join(tmpdir(), 'paper-source-evidence-'));
+  t.after(() => rm(fixture, { recursive: true, force: true }));
+  const id = 'paper-opd-2606-30406';
+  const source = join('content/papers/llm', id + '.md');
+  const assets = join('assets/papers', id);
+  await mkdir(join(fixture, 'content/papers/llm'), { recursive: true });
+  await cp(join(root, source), join(fixture, source));
+  await cp(join(root, assets), join(fixture, assets), { recursive: true });
+  const file = join(fixture, source);
+  const manifestFile = join(fixture, assets, 'figures.json');
+  const manifest = JSON.parse(await readFile(manifestFile, 'utf8'));
+  const original = structuredClone(manifest);
+  const table = manifest.figures.find(f => f.method === 'pinned-original-pdf-crop');
+  table.cropBox = [0, 0, ...table.pdfPageSize];
+  await writeFile(manifestFile, JSON.stringify(manifest));
+  assert.match((await checkPaperQuality(file, fixture)).errors.join('；'), /禁止整页/);
+  const sourceFigure = original.figures.find(f => f.method === 'pinned-latex-asset');
+  delete sourceFigure.sourceArchiveSha256;
+  await writeFile(manifestFile, JSON.stringify(original));
+  assert.match((await checkPaperQuality(file, fixture)).errors.join('；'), /缺少 LaTeX 压缩包/);
+  sourceFigure.method = 'pinned-original-pdf-crop';
+  await writeFile(manifestFile, JSON.stringify(original));
+  assert.match((await checkPaperQuality(file, fixture)).errors.join('；'), /PDF 图需记录没有独立图片的原因/);
+});
+
 test('旧报告只保留冻结版本；编辑或新增必须补齐深度证据', async t => {
   const fixture = await mkdtemp(join(tmpdir(), 'paper-depth-'));
   t.after(() => rm(fixture, { recursive: true, force: true }));
@@ -74,12 +100,12 @@ test('正式报告保留单位与代码来源，五模块和全部 GQA 证据资
     for (const [, file] of p.body.matchAll(/!\[[^\]]*\]\((\.\/assets\/papers\/[^)]+)\)/g)) {
       const bytes = await readFile(join(root,file)); assert.ok(bytes.length>100);
       const entry=manifest.figures.find(f=>f.file===file.split('/').at(-1));
-      assert.equal(entry.method,'pinned-original-pdf-crop');assert.equal(entry.visuallyVerified,true);
+      assert.ok(['pinned-original-pdf-crop', 'pinned-latex-asset'].includes(entry.method));assert.equal(entry.visuallyVerified,true);
       assert.equal(entry.sha256,createHash('sha256').update(bytes).digest('hex'));
     }
   }
   const manifest = JSON.parse(await readFile(join(root, 'assets/papers/paper-gqa/figures.json'), 'utf8'));
-  const published = manifest.figures.filter(f => f.method === 'pinned-original-pdf-crop');
+  const published = manifest.figures.filter(f => ['pinned-original-pdf-crop', 'pinned-latex-asset'].includes(f.method));
   assert.equal(published.length, 7); assert.ok(published.every(f => f.explanation === 'complete' && f.visuallyVerified));
 });
 
@@ -88,6 +114,28 @@ test('公式渲染包含数学语义并拒绝可信 HTML / URL 注入', () => {
   assert.match(rendered.html, /class="katex"/); assert.match(rendered.html, /<math/);
   assert.match(rendered.html, /math-block/); assert.equal(rendered.toc.length, 1);
   assert.doesNotMatch(rendered.html, /<script>|href="javascript:/);
+});
+
+test('同一行和多行块公式均渲染，代码中的美元符号保持字面量', () => {
+  const source = String.raw`## 方法
+
+$$\mathcal{L}(\theta)=\mathbb{E}_{y\sim\pi_\theta}\left[\sum_t D_{\mathrm{KL}}(\pi_\theta\|\pi_T)\right]$$
+
+$$
+\alpha_t=\frac{1}{1+e^{-t}}
+$$
+
+行内 $x_{t-1}$ 与转义 \$5。
+
+\`\`\`text
+$$not math$$
+\`\`\`
+`.replaceAll('\\`', '`');
+  const { html } = renderMarkdown(source);
+  assert.equal((html.match(/class="math-block"/g) ?? []).length, 2);
+  assert.doesNotMatch(html, /katex-error/);
+  assert.match(html, /<code class="language-text">\$\$not math\$\$/);
+  assert.match(html, /转义 \$5/);
 });
 
 test('源码清理只删除缓存，报告 / 插图保留且拒绝符号链接', async t => {

@@ -1,1 +1,50 @@
-{"paperId":"paper-opd-2609-37377","arxivVersion":"2609.37377v1","coordinateSystem":"PDF points, top-left origin","crops":[{"name":"figure-1-pdf.png","page":1,"box":[40,40,572,742],"role":"method"},{"name":"table-2-pdf.png","page":17,"box":[40,40,572,742],"role":"experiment-table"},{"name":"table-1-pdf.png","page":3,"box":[40,40,572,742],"role":"result-table"},{"name":"figure-2-pdf.png","page":4,"box":[40,40,572,742],"role":"result-figure"}]}
+{
+  "paperId": "paper-opd-2609-37377",
+  "arxivVersion": "2609.37377v1",
+  "coordinateSystem": "PDF points, top-left origin",
+  "crops": [
+    {
+      "name": "study-pairs-pdf.png",
+      "page": 3,
+      "box": [
+        104,
+        75,
+        508,
+        387
+      ],
+      "role": "method",
+      "sourceUnavailableReason": "LaTeX table/algorithm typesetting, no standalone image"
+    },
+    {
+      "name": "table-10-config-pdf.png",
+      "page": 17,
+      "box": [
+        104,
+        325,
+        302,
+        511
+      ],
+      "role": "experiment-table"
+    },
+    {
+      "name": "table-3-results-pdf.png",
+      "page": 6,
+      "box": [
+        104,
+        75,
+        508,
+        248
+      ],
+      "role": "result-table"
+    }
+  ],
+  "sourceAssets": [
+    {
+      "name": "functional-alignment-source.png",
+      "path": "figures/fig4_functional_changes.pdf",
+      "tex": "sections/figure_functional_changes.tex",
+      "label": "fig:functional-changes",
+      "role": "result-figure"
+    }
+  ]
+}

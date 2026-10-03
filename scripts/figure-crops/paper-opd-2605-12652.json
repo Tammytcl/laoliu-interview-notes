@@ -4,17 +4,6 @@
   "coordinateSystem": "PDF points, top-left origin",
   "crops": [
     {
-      "name": "figure-2-pdf.png",
-      "page": 4,
-      "box": [
-        70,
-        72,
-        545,
-        255
-      ],
-      "role": "method"
-    },
-    {
       "name": "table-1-pdf.png",
       "page": 7,
       "box": [
@@ -37,17 +26,6 @@
       "role": "result-table"
     },
     {
-      "name": "figure-4-pdf.png",
-      "page": 8,
-      "box": [
-        72,
-        70,
-        545,
-        340
-      ],
-      "role": "result-figure"
-    },
-    {
       "name": "table-9-pdf.png",
       "page": 21,
       "box": [
@@ -57,6 +35,22 @@
         188
       ],
       "role": "experiment-table"
+    }
+  ],
+  "sourceAssets": [
+    {
+      "name": "figure-2-source.png",
+      "tex": "text/method.tex",
+      "label": "fig:pipe",
+      "role": "method",
+      "path": "figs/pipeline.pdf"
+    },
+    {
+      "name": "figure-4-source.png",
+      "tex": "text/exp.tex",
+      "label": "fig:ana",
+      "role": "result-figure",
+      "path": "figs/teacher_metrics_main_v2.pdf"
     }
   ]
 }

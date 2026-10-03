@@ -1,83 +1,33 @@
 {
   "paperId": "paper-opd-2606-09456",
   "arxivVersion": "2606.09456v1",
-  "attribution": "Original figures and tables by the paper authors; cropped from the pinned arXiv PDF for scholarly reading.",
+  "attribution": "Original figures/tables by the paper authors; source assets or tightly cropped PDF typesetting, with report commentary.",
   "figures": [
     {
-      "file": "figure-1-pdf.png",
-      "sha256": "f8e6173d69dfbacf20bc7cb97d88adb57339b12e2ebedd63fc20ff0ba67f8de1",
-      "original": "https://arxiv.org/pdf/2606.09456v1#page=3",
-      "method": "pinned-original-pdf-crop",
-      "pdfPage": 3,
-      "cropBox": [
-        327,
-        600,
-        508,
-        730
-      ],
-      "pdfSha256": "d9d361add05fbeb9fd338966ecd0f99282033a3160eb7f4d35e6940402d2e18f",
-      "scale": 3,
-      "explanation": "complete",
-      "visuallyVerified": true,
-      "reportSection": "2. 方法与实现机制",
-      "role": "method"
-    },
-    {
       "file": "table-1-pdf.png",
-      "sha256": "b3b258006ab9934cf8e6a8a7892198adcce1ba6ee3441c6e845a96a4ea5ec2e3",
+      "sha256": "665f42089c6e7ea68afe075b517c844aaa0babbc408e938b9615cadd5bd131be",
       "original": "https://arxiv.org/pdf/2606.09456v1#page=6",
       "method": "pinned-original-pdf-crop",
       "pdfPage": 6,
       "cropBox": [
-        105,
-        54,
-        465,
-        252
+        104,
+        68,
+        509,
+        255
       ],
       "pdfSha256": "d9d361add05fbeb9fd338966ecd0f99282033a3160eb7f4d35e6940402d2e18f",
       "scale": 3,
-      "explanation": "complete",
-      "visuallyVerified": true,
-      "reportSection": "4. 结果与图表解读",
-      "role": "result-table"
-    },
-    {
-      "file": "figure-2-pdf.png",
-      "sha256": "bcccab0825bb97bc435bb619bd2f1ac72c3fe39ca8804030ac2665cb0ef760e1",
-      "original": "https://arxiv.org/pdf/2606.09456v1#page=7",
-      "method": "pinned-original-pdf-crop",
-      "pdfPage": 7,
-      "cropBox": [
-        265,
-        270,
-        505,
-        410
+      "pdfPageSize": [
+        612,
+        792
       ],
-      "pdfSha256": "d9d361add05fbeb9fd338966ecd0f99282033a3160eb7f4d35e6940402d2e18f",
-      "scale": 3,
+      "sourceUnavailableReason": "LaTeX table/algorithm typesetting; crop the compiled PDF",
+      "role": "result-table",
       "explanation": "complete",
       "visuallyVerified": true,
-      "reportSection": "4. 结果与图表解读",
-      "role": "result-figure"
-    },
-    {
-      "file": "figure-3-pdf.png",
-      "sha256": "1f8fa785198aafaaea6aa1c12f3239ed774956a2a34288b628900e281638925f",
-      "original": "https://arxiv.org/pdf/2606.09456v1#page=8",
-      "method": "pinned-original-pdf-crop",
-      "pdfPage": 8,
-      "cropBox": [
-        106,
-        198,
-        506,
-        365
-      ],
-      "pdfSha256": "d9d361add05fbeb9fd338966ecd0f99282033a3160eb7f4d35e6940402d2e18f",
-      "scale": 3,
-      "explanation": "complete",
-      "visuallyVerified": true,
-      "reportSection": "2. 方法与实现机制",
-      "role": "method"
+      "reviewedAt": "2026-10-03",
+      "reviewScope": "Source/PDF identity, axes/legends/table edges, caption and evidence role; no training reproduction",
+      "reportSection": "结果与图表解读"
     },
     {
       "file": "table-2-pdf.png",
@@ -93,10 +43,17 @@
       ],
       "pdfSha256": "d9d361add05fbeb9fd338966ecd0f99282033a3160eb7f4d35e6940402d2e18f",
       "scale": 3,
+      "pdfPageSize": [
+        612,
+        792
+      ],
+      "sourceUnavailableReason": "LaTeX table/algorithm typesetting; crop the compiled PDF",
+      "role": "result-table",
       "explanation": "complete",
       "visuallyVerified": true,
-      "reportSection": "4. 结果与图表解读",
-      "role": "result-table"
+      "reportSection": "结果与图表解读",
+      "reviewedAt": "2026-10-03",
+      "reviewScope": "Source/PDF identity, axes/legends/table edges, caption and evidence role; no training reproduction"
     },
     {
       "file": "table-4-pdf.png",
@@ -112,10 +69,89 @@
       ],
       "pdfSha256": "d9d361add05fbeb9fd338966ecd0f99282033a3160eb7f4d35e6940402d2e18f",
       "scale": 3,
+      "pdfPageSize": [
+        612,
+        792
+      ],
+      "sourceUnavailableReason": "LaTeX table/algorithm typesetting; crop the compiled PDF",
+      "role": "experiment-table",
       "explanation": "complete",
       "visuallyVerified": true,
-      "reportSection": "3. 实验设置与算力",
-      "role": "experiment-table"
+      "reportSection": "实验设置与算力",
+      "reviewedAt": "2026-10-03",
+      "reviewScope": "Source/PDF identity, axes/legends/table edges, caption and evidence role; no training reproduction"
+    },
+    {
+      "file": "figure-1-source.png",
+      "sha256": "72a696a2a85b8b6ba94fabd2c3fd098b26df68f3792c885518d5f934738c4b5f",
+      "original": "https://arxiv.org/src/2606.09456v1",
+      "method": "pinned-latex-asset",
+      "sourceArchiveSha256": "e8cad10911c32eeedee4ffff88291201b02e5d11f419ee1058d7f19ed929edcc",
+      "sourcePath": "picture/OPD.pdf",
+      "sourceSha256": "fe33903723d886c5c63936c9b3b0e69bcdcabb57c78e9ec8a9f19081d7cee70d",
+      "sourceFiles": [
+        {
+          "path": "picture/OPD.pdf",
+          "sha256": "fe33903723d886c5c63936c9b3b0e69bcdcabb57c78e9ec8a9f19081d7cee70d"
+        }
+      ],
+      "texFile": "paper_2026.tex",
+      "texSha256": "5ce3d333864470fccbc38588b1c3f7f5b07edf36341e342fe22ffba541f76647",
+      "figureLabel": "def:sync_point",
+      "role": "method",
+      "explanation": "complete",
+      "visuallyVerified": true,
+      "reviewedAt": "2026-10-03",
+      "reviewScope": "Source/PDF identity, axes/legends/table edges, caption and evidence role; no training reproduction",
+      "reportSection": "方法与实现机制"
+    },
+    {
+      "file": "figure-2-source.png",
+      "sha256": "395f0c4b173b3cae7d0f9739d6b5060951851a010770339ba715f51e8990297a",
+      "original": "https://arxiv.org/src/2606.09456v1",
+      "method": "pinned-latex-asset",
+      "sourceArchiveSha256": "e8cad10911c32eeedee4ffff88291201b02e5d11f419ee1058d7f19ed929edcc",
+      "sourcePath": "picture/aime24_compute_frontier.png",
+      "sourceSha256": "e85006193516070e461fb97b12a8b928ac2c6cfbe41785a23a0cb0fca5029711",
+      "sourceFiles": [
+        {
+          "path": "picture/aime24_compute_frontier.png",
+          "sha256": "e85006193516070e461fb97b12a8b928ac2c6cfbe41785a23a0cb0fca5029711"
+        }
+      ],
+      "texFile": "paper_2026.tex",
+      "texSha256": "5ce3d333864470fccbc38588b1c3f7f5b07edf36341e342fe22ffba541f76647",
+      "figureLabel": "fig:compute_frontier",
+      "role": "result-figure",
+      "explanation": "complete",
+      "visuallyVerified": true,
+      "reviewedAt": "2026-10-03",
+      "reviewScope": "Source/PDF identity, axes/legends/table edges, caption and evidence role; no training reproduction",
+      "reportSection": "结果与图表解读"
+    },
+    {
+      "file": "figure-3-source.png",
+      "sha256": "ad8eecd793d126308271bcb8ef64d5620eecca75205570f0d9d3a936f425917e",
+      "original": "https://arxiv.org/src/2606.09456v1",
+      "method": "pinned-latex-asset",
+      "sourceArchiveSha256": "e8cad10911c32eeedee4ffff88291201b02e5d11f419ee1058d7f19ed929edcc",
+      "sourcePath": "picture/Alignment_chunk.png",
+      "sourceSha256": "c51cb89beccfe37898262fb349e78d092c47743dff2a35d5e2a617489bfceb85",
+      "sourceFiles": [
+        {
+          "path": "picture/Alignment_chunk.png",
+          "sha256": "c51cb89beccfe37898262fb349e78d092c47743dff2a35d5e2a617489bfceb85"
+        }
+      ],
+      "texFile": "paper_2026.tex",
+      "texSha256": "5ce3d333864470fccbc38588b1c3f7f5b07edf36341e342fe22ffba541f76647",
+      "figureLabel": "fig:chunk_alignment",
+      "role": "method",
+      "explanation": "complete",
+      "visuallyVerified": true,
+      "reviewedAt": "2026-10-03",
+      "reviewScope": "Source/PDF identity, axes/legends/table edges, caption and evidence role; no training reproduction",
+      "reportSection": "方法与实现机制"
     }
   ],
   "verificationNote": "Compared each crop with its pinned PDF page; labels, all plotted panels, axes, headers and final table rows were checked. Captions are provided by report text."

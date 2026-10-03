@@ -3,80 +3,105 @@
   "arxivVersion": "2607.05184v1",
   "figures": [
     {
-      "file": "figure-1-pdf.png",
-      "sha256": "9016799b01f51836a69159924e82630eecd2fbd27df19c523d74c82ae1805248",
-      "original": "https://arxiv.org/pdf/2607.05184v1#page=28",
-      "method": "pinned-original-pdf-crop",
-      "pdfPage": 28,
-      "cropBox": [
-        40,
-        40,
-        572,
-        742
+      "file": "method-source.png",
+      "sha256": "7603cb4440e987b09f0ef9fd24755da9706d6ab1224170ca92f3306e92d5df09",
+      "original": "https://arxiv.org/src/2607.05184v1",
+      "method": "pinned-latex-asset",
+      "sourceArchiveSha256": "8833ecf85a2788f79e1c0efc8eae8560774dde0f4c970b90c312503cc4c56236",
+      "sourcePath": "figures/fig_privilege_flips_self_correction.pdf",
+      "sourceSha256": "60bf13bcfe141885707799e55eedaf0dbc3ad1b0c20e322c33f6a551e885ea02",
+      "sourceFiles": [
+        {
+          "path": "figures/fig_privilege_flips_self_correction.pdf",
+          "sha256": "60bf13bcfe141885707799e55eedaf0dbc3ad1b0c20e322c33f6a551e885ea02"
+        }
       ],
-      "pdfSha256": "1d033d088bb63e4266b98df5ddbfb37993ba6bd5bed77952d47b3a062a32a2d1",
-      "scale": 3,
+      "texFile": "figures/privilege_flips_self_correction.tex",
+      "texSha256": "5ac8646632cef73600acfaee8127bff3686b03f2bd9c8c743e0c60cecd98c89e",
+      "figureLabel": "fig:privilege-flips",
       "role": "method",
       "explanation": "complete",
       "visuallyVerified": true,
+      "reviewedAt": "2026-10-03",
+      "reviewScope": "Source/PDF identity, axes/legends/table edges, caption and evidence role; no training reproduction",
       "reportSection": "方法与实现机制"
     },
     {
-      "file": "table-2-pdf.png",
-      "sha256": "85afbdf02ed622f87244cae604001a131e4c2ffbe73166481e59716d35bd9c71",
+      "file": "budget-curves-source.png",
+      "sha256": "51dcd1321b1576ee1d3542a58816cf154076869083497bf352d5cdf5177b7298",
+      "original": "https://arxiv.org/src/2607.05184v1",
+      "method": "pinned-latex-asset",
+      "sourceArchiveSha256": "8833ecf85a2788f79e1c0efc8eae8560774dde0f4c970b90c312503cc4c56236",
+      "sourcePath": "figures/avg_pass_budget_curves_thinking5_fs_ao.pdf",
+      "sourceSha256": "8d3dd105930fe96a449ea3f01545e62040b11ef7afd88ad23bcf7814cd12a303",
+      "sourceFiles": [
+        {
+          "path": "figures/avg_pass_budget_curves_thinking5_fs_ao.pdf",
+          "sha256": "8d3dd105930fe96a449ea3f01545e62040b11ef7afd88ad23bcf7814cd12a303"
+        }
+      ],
+      "texFile": "figures/openthoughts_budget_pass_rates_thinking5_fs_ao.tex",
+      "texSha256": "1d07057037d17b43e1d1422054c5b278ce1dcfa6743c80f1a9626cf0839dc4fd",
+      "figureLabel": "fig:openthoughts_budget_pass_rates_thinking5_fs_ao",
+      "role": "result-figure",
+      "explanation": "complete",
+      "visuallyVerified": true,
+      "reviewedAt": "2026-10-03",
+      "reviewScope": "Source/PDF identity, axes/legends/table edges, caption and evidence role; no training reproduction",
+      "reportSection": "结果与图表解读"
+    },
+    {
+      "file": "table-9-config-pdf.png",
+      "sha256": "1f92c08975e4fc5a087580c92f464550535cc8d304c7cc4b3fcd2507fca970e0",
       "original": "https://arxiv.org/pdf/2607.05184v1#page=19",
       "method": "pinned-original-pdf-crop",
       "pdfPage": 19,
       "cropBox": [
-        40,
-        40,
-        572,
-        742
+        107,
+        143,
+        505,
+        380
       ],
       "pdfSha256": "1d033d088bb63e4266b98df5ddbfb37993ba6bd5bed77952d47b3a062a32a2d1",
       "scale": 3,
+      "pdfPageSize": [
+        612,
+        792
+      ],
+      "sourceUnavailableReason": "LaTeX table/algorithm typesetting; crop the compiled PDF",
       "role": "experiment-table",
       "explanation": "complete",
       "visuallyVerified": true,
+      "reviewedAt": "2026-10-03",
+      "reviewScope": "Source/PDF identity, axes/legends/table edges, caption and evidence role; no training reproduction",
       "reportSection": "实验设置与算力"
     },
     {
-      "file": "table-1-pdf.png",
-      "sha256": "a735d68194775a39cdd1390dfa3368f53b1495e73201b19a002a98eeb6f79fd5",
+      "file": "table-1-results-pdf.png",
+      "sha256": "9d3f242ec1d258641901633f81e1dad0c76a5c50e5a71d29e5d952e84bec43b8",
       "original": "https://arxiv.org/pdf/2607.05184v1#page=3",
       "method": "pinned-original-pdf-crop",
       "pdfPage": 3,
       "cropBox": [
-        40,
-        40,
-        572,
-        742
+        104,
+        74,
+        510,
+        295
       ],
       "pdfSha256": "1d033d088bb63e4266b98df5ddbfb37993ba6bd5bed77952d47b3a062a32a2d1",
       "scale": 3,
+      "pdfPageSize": [
+        612,
+        792
+      ],
+      "sourceUnavailableReason": "LaTeX table/algorithm typesetting; crop the compiled PDF",
       "role": "result-table",
       "explanation": "complete",
       "visuallyVerified": true,
-      "reportSection": "结果与图表解读"
-    },
-    {
-      "file": "figure-2-pdf.png",
-      "sha256": "d89b5fe4dcd69dca1486ba2aae4cd367d63135ffff7460a5d93889a348b9455b",
-      "original": "https://arxiv.org/pdf/2607.05184v1#page=4",
-      "method": "pinned-original-pdf-crop",
-      "pdfPage": 4,
-      "cropBox": [
-        40,
-        40,
-        572,
-        742
-      ],
-      "pdfSha256": "1d033d088bb63e4266b98df5ddbfb37993ba6bd5bed77952d47b3a062a32a2d1",
-      "scale": 3,
-      "role": "result-figure",
-      "explanation": "complete",
-      "visuallyVerified": true,
+      "reviewedAt": "2026-10-03",
+      "reviewScope": "Source/PDF identity, axes/legends/table edges, caption and evidence role; no training reproduction",
       "reportSection": "结果与图表解读"
     }
-  ]
+  ],
+  "attribution": "Original figures/tables by the paper authors; source assets or tightly cropped PDF typesetting, with report commentary."
 }

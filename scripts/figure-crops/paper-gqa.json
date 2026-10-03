@@ -4,28 +4,6 @@
   "coordinateSystem": "PDF points, top-left origin",
   "crops": [
     {
-      "name": "figure-1-pdf.png",
-      "page": 1,
-      "box": [
-        305,
-        590,
-        527,
-        707
-      ],
-      "role": "method"
-    },
-    {
-      "name": "figure-2-pdf.png",
-      "page": 2,
-      "box": [
-        70,
-        70,
-        525,
-        213
-      ],
-      "role": "method"
-    },
-    {
       "name": "figure-3-pdf.png",
       "page": 3,
       "box": [
@@ -34,7 +12,8 @@
         527,
         408
       ],
-      "role": "result-figure"
+      "role": "result-figure",
+      "sourceUnavailableReason": "Figure is drawn inline with TikZ/PGF in the pinned LaTeX source, no standalone image"
     },
     {
       "name": "figure-4-pdf.png",
@@ -45,7 +24,8 @@
         287,
         190
       ],
-      "role": "result-figure"
+      "role": "result-figure",
+      "sourceUnavailableReason": "Figure is drawn inline with TikZ/PGF in the pinned LaTeX source, no standalone image"
     },
     {
       "name": "figure-5-pdf.png",
@@ -56,7 +36,8 @@
         288,
         449
       ],
-      "role": "result-figure"
+      "role": "result-figure",
+      "sourceUnavailableReason": "Figure is drawn inline with TikZ/PGF in the pinned LaTeX source, no standalone image"
     },
     {
       "name": "figure-6-pdf.png",
@@ -67,7 +48,8 @@
         531,
         212
       ],
-      "role": "result-figure"
+      "role": "result-figure",
+      "sourceUnavailableReason": "Figure is drawn inline with TikZ/PGF in the pinned LaTeX source, no standalone image"
     },
     {
       "name": "table-1-pdf.png",
@@ -79,6 +61,22 @@
         154
       ],
       "role": "result-table"
+    }
+  ],
+  "sourceAssets": [
+    {
+      "name": "figure-1-source.png",
+      "tex": "figures/gmq_architecture.tex",
+      "label": "fig:gmq_architecture",
+      "role": "method",
+      "path": "images/gmq_architecture.png"
+    },
+    {
+      "name": "figure-2-source.png",
+      "tex": "figures/reycling.tex",
+      "label": "fig:recycling",
+      "role": "method",
+      "path": "images/recycling.png"
     }
   ]
 }

@@ -1,1 +1,34 @@
-{"paperId":"paper-opd-2607-13399","arxivVersion":"2607.13399v1","coordinateSystem":"PDF points, top-left origin","crops":[{"name":"figure-1-pdf.png","page":2,"box":[40,40,572,742],"role":"method"},{"name":"table-2-pdf.png","page":9,"box":[40,40,572,742],"role":"experiment-table"},{"name":"table-1-pdf.png","page":7,"box":[40,40,572,742],"role":"result-table"},{"name":"figure-2-pdf.png","page":8,"box":[40,40,572,742],"role":"result-figure"}]}
+{
+  "paperId": "paper-opd-2607-13399",
+  "arxivVersion": "2607.13399v1",
+  "coordinateSystem": "PDF points, top-left origin",
+  "crops": [
+    {
+      "name": "table-1-results-pdf.png",
+      "page": 7,
+      "box": [
+        67,
+        67,
+        529,
+        367
+      ],
+      "role": "result-table"
+    }
+  ],
+  "sourceAssets": [
+    {
+      "name": "method-source.png",
+      "path": "figs/signal_regulation_v4.pdf",
+      "tex": "acl_latex.tex",
+      "label": "fig:signal-regulation",
+      "role": "method"
+    },
+    {
+      "name": "passk-source.png",
+      "path": "figs/passk.png",
+      "tex": "acl_latex.tex",
+      "label": "fig:explore-ceiling",
+      "role": "result-figure"
+    }
+  ]
+}

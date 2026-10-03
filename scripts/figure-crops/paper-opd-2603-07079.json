@@ -1,1 +1,63 @@
-{"paperId":"paper-opd-2603-07079","arxivVersion":"2603.07079v1","coordinateSystem":"PDF points, top-left origin","crops":[{"name":"figure-6-pdf.png","page":13,"box":[55,185,555,525],"role":"method"},{"name":"table-8-pdf.png","page":12,"box":[120,385,500,625],"role":"experiment-table"},{"name":"table-2-pdf.png","page":6,"box":[55,40,555,265],"role":"result-table"},{"name":"figure-2-pdf.png","page":6,"box":[55,260,555,395],"role":"result-figure"}]}
+{
+  "paperId": "paper-opd-2603-07079",
+  "arxivVersion": "2603.07079v1",
+  "coordinateSystem": "PDF points, top-left origin",
+  "crops": [
+    {
+      "name": "table-8-pdf.png",
+      "page": 12,
+      "box": [
+        120,
+        385,
+        500,
+        576
+      ],
+      "role": "experiment-table"
+    },
+    {
+      "name": "table-2-pdf.png",
+      "page": 6,
+      "box": [
+        51,
+        63,
+        547,
+        243
+      ],
+      "role": "result-table"
+    }
+  ],
+  "sourceAssets": [
+    {
+      "name": "figure-6-source.png",
+      "tex": "appendix/B_toy.tex",
+      "label": "fig:toy_vis",
+      "role": "method",
+      "paths": [
+        "figure/toy_low.pdf",
+        "figure/toy_high.pdf"
+      ],
+      "columns": 2,
+      "panelWidths": [
+        1000,
+        1000
+      ]
+    },
+    {
+      "name": "figure-2-source.png",
+      "tex": "sections/05_Experiments.tex",
+      "label": "fig:pass_main",
+      "role": "result-figure",
+      "paths": [
+        "figure/pass_1.7B_AIME24.pdf",
+        "figure/pass_1.7B_AIME25.pdf",
+        "figure/pass_1.7B_AMC23.pdf"
+      ],
+      "columns": 3,
+      "panelWidths": [
+        1000,
+        1000,
+        1000
+      ]
+    }
+  ]
+}

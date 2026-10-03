@@ -1,1 +1,34 @@
-{"paperId":"paper-opd-2609-22254","arxivVersion":"2609.22254v1","coordinateSystem":"PDF points, top-left origin","crops":[{"name":"figure-1-pdf.png","page":1,"box":[40,40,572,742],"role":"method"},{"name":"table-2-pdf.png","page":8,"box":[40,40,572,742],"role":"experiment-table"},{"name":"table-1-pdf.png","page":6,"box":[40,40,572,742],"role":"result-table"},{"name":"figure-2-pdf.png","page":7,"box":[40,40,572,742],"role":"result-figure"}]}
+{
+  "paperId": "paper-opd-2609-22254",
+  "arxivVersion": "2609.22254v1",
+  "coordinateSystem": "PDF points, top-left origin",
+  "crops": [
+    {
+      "name": "table-1-results-pdf.png",
+      "page": 6,
+      "box": [
+        50,
+        50,
+        562,
+        284
+      ],
+      "role": "result-table"
+    }
+  ],
+  "sourceAssets": [
+    {
+      "name": "method-source.png",
+      "path": "figures/haopd_overview_1.pdf",
+      "tex": "main.tex",
+      "label": "fig:overview",
+      "role": "method"
+    },
+    {
+      "name": "horizon-ablation-source.png",
+      "path": "figures/code_fixed_horizon_ablation.pdf",
+      "tex": "main.tex",
+      "label": "fig:fixed_horizon_main",
+      "role": "result-figure"
+    }
+  ]
+}

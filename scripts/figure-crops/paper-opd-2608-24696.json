@@ -1,1 +1,45 @@
-{"paperId":"paper-opd-2608-24696","arxivVersion":"2608.24696v1","coordinateSystem":"PDF points, top-left origin","crops":[{"name":"figure-1-pdf.png","page":3,"box":[40,40,572,742],"role":"method"},{"name":"table-2-pdf.png","page":17,"box":[40,40,572,742],"role":"experiment-table"},{"name":"table-1-pdf.png","page":9,"box":[40,40,572,742],"role":"result-table"},{"name":"figure-2-pdf.png","page":10,"box":[40,40,572,742],"role":"result-figure"}]}
+{
+  "paperId": "paper-opd-2608-24696",
+  "arxivVersion": "2608.24696v1",
+  "coordinateSystem": "PDF points, top-left origin",
+  "crops": [
+    {
+      "name": "table-5-config-pdf.png",
+      "page": 17,
+      "box": [
+        207,
+        63,
+        389,
+        217
+      ],
+      "role": "experiment-table"
+    },
+    {
+      "name": "table-1-results-pdf.png",
+      "page": 9,
+      "box": [
+        51,
+        63,
+        546,
+        184
+      ],
+      "role": "result-table"
+    }
+  ],
+  "sourceAssets": [
+    {
+      "name": "method-source.png",
+      "path": "figs/pipeline.pdf",
+      "tex": "main.tex",
+      "label": "fig:pipeline",
+      "role": "method"
+    },
+    {
+      "name": "gating-ablation-source.png",
+      "path": "figs/ablation_inverse_true_reward.pdf",
+      "tex": "main.tex",
+      "label": "fig:ablation_reward",
+      "role": "result-figure"
+    }
+  ]
+}

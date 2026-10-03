@@ -37,7 +37,7 @@
 1. **检索与筛选。** Daily 记检索方向、来源、时间、候选与纳入 / 排除理由。先说明为什么与当前问题有关，不靠流行度直接收录。
 2. **建稳定记录。** 执行 `npm run new:paper -- paper-my-topic llm`，选择 diffusion / llm / agent / infra。默认 draft，不覆盖同名记录。
 3. **保存固定版本资料。** `npm run papers:fetch -- paper-my-topic 2305.13245v3` 下载 LaTeX、PDF、HTML。获取失败写入 manifest，不能暗中替换另一个版本。查看主 `.tex`、图文件、`.bib` 和附录；不自动执行不可信 LaTeX 命令。
-4. **提取证据资产。** 先对照固定版本 PDF，人工登记 `scripts/figure-crops/<id>.json` 的页码、裁剪区域和 `role`（`method` / `experiment-table` / `result-table` / `result-figure`），再执行 `npm run papers:pdf-figures -- paper-my-topic`。长期资产放在 `assets/papers/paper-my-topic/`，逐张核对图例、坐标、子图、表头及末行。源码中的独立原图与 `papers:figures` 的 HTML 截图可辅助定位，但当前发布门槛使用与固定 PDF 核对的裁图。工具不生成精读结论，不提交整篇 PDF。
+4. **提取证据资产。** 必须优先沿 LaTeX 的 `includegraphics` 找原图，在 `scripts/figure-crops/<id>.json` 的 `sourceAssets` 登记资产路径、TeX 引用、图号与 `role`，执行 `npm run papers:source-figures -- paper-my-topic`。表格则在 `crops` 登记 PDF 页码与局部矩形，执行 `npm run papers:pdf-figures -- paper-my-topic`。只有源码内联绘图而无独立图片时，记录理由后才裁图本身。长期资产放在 `assets/papers/paper-my-topic/`，逐张核对图例、坐标、子图、表头及末行。不使用整页截图，不包含无关正文或参考文献；工具不自动批准图表，不提交整篇 PDF。
 5. **建立问题和方法解释。** 先写主要瓶颈、代表前作与差异，再沿输入输出解释机制。公式注明变量与假设，代码注明原始算法或教学重述；源代码的 tensor layout 必须另核。
 6. **核对实验账本。** 把预训练、微调、prompt 示例、benchmark 和负载数据分开。逐项核对模型、数据、评测 split、指标、超参、生成设置、硬件、训练时间与代码版本。缺项写“原文未披露”，并说明对复现的影响。没有训练环节就直接写“未训练新模型”。
 7. **逐图理解。** 每张主图 / 表登记研究问题、轴 / 图例、对照、主要观察、支持结论与限制；图的插入位置服务于解释。较多附录图可以用清单登记未完成范围，不声称全部解读。完成后把 `figures.json` 对应图的 `explanation` 改成 `complete`，补 `reportSection` 与说明。
@@ -100,8 +100,8 @@ GQA 已按 v3 源码与原表核对，正文解释全部 6 张主图和 Table 1�
 
 ## PDF 图表核对与发布后检查
 
-过去的 HTML 截图可留作历史资产，但正文现在引用核对过的 `*-pdf.png`。arXiv HTML 是实验性转换，可能改变子图布局、表格、LaTeX 条件选择或丢失文字；加载成功并不代表图内容正确。优先采用固定版本 PDF 的原始排版裁剪，LaTeX 包用于确认图文件、编号和上下文，不要求重新执行编译。
+正文图片采用核对过的 `*-source.png`（源码原资产）和 `*-pdf.png`（局部原表或内联绘图）。arXiv HTML 是实验性转换，可能改变子图布局、表格、LaTeX 条件选择或丢失文字；加载成功并不代表图内容正确。固定版本 PDF 用于核对原图语义和裁取表格，不能替代从 LaTeX 包寻找独立图片。无需也不自动执行源码中的编译命令。
 
-安装可选裁剪依赖：`python -m pip install -r scripts/requirements-paper-images.txt`。在 `scripts/figure-crops/<id>.json` 人工登记 PDF 页码与从左上角起的 point 坐标，执行 `npm run papers:pdf-figures -- <id>`。工具校验版本、边界与空白图，记录 PDF SHA256、图 SHA256、页码和矩形；已有文件需核对后使用 --refresh。裁剪后逐张与原页对照，确认图例、坐标、所有子图、表头及末行完整，才标记 visuallyVerified。报告及卡片引用新文件名，防止缓存旧图。
+安装可选图表依赖：`python -m pip install -r scripts/requirements-paper-images.txt`。源码提取器记录压缩包、原资产与引用 TeX 的 SHA256，多面板必须按原文顺序排列。裁剪器使用左上角为原点的 PDF point 坐标，校验版本、边界、空白和近整页面积；记录原 PDF、图文件 hash、页尺寸和矩形。已有裁图需使用 `--refresh`。逐张放大核对后才标记 `visuallyVerified`；改变来源或图文件会重置状态。仅写状态字段不能代替审查。
 
 每次部署后 Actions 执行 `papers:check-live`，实际打开线上页面，检查桌面和手机两种宽度、所有报告图片加载与非空白、纵横比、目录、图片放大关闭与横向溢出，保存截图为 `paper-live-check` artifact。这个自动检查辅助发现排版问题，不能替代逐图人工核对。也可手动运行 `npm run papers:check-live -- https://tammytcl.github.io/laoliu-interview-notes/`。

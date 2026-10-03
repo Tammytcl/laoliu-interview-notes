@@ -3,80 +3,79 @@
   "arxivVersion": "2608.06296v1",
   "figures": [
     {
-      "file": "figure-1-pdf.png",
-      "sha256": "66e0d4bed99896db8062b9fc7fbf46ca9b45dae6cd5c6955630fa67c65602112",
-      "original": "https://arxiv.org/pdf/2608.06296v1#page=3",
-      "method": "pinned-original-pdf-crop",
-      "pdfPage": 3,
-      "cropBox": [
-        40,
-        40,
-        572,
-        742
+      "file": "method-source.png",
+      "sha256": "0aa316eba8ede373ca414df3f485596e90d0244f469dc9ada8a3eebd1c33a8aa",
+      "original": "https://arxiv.org/src/2608.06296v1",
+      "method": "pinned-latex-asset",
+      "sourceArchiveSha256": "174bdc5de556163052a33366b43bf6ce001c666246feb1d1dbf3fda0e262d29a",
+      "sourcePath": "figs/uopsd_figure_v7_p1.pdf",
+      "sourceSha256": "f7437906c01e5982075aa6546f3c7e132b23b1666be1db438539aacbbecc8ce5",
+      "sourceFiles": [
+        {
+          "path": "figs/uopsd_figure_v7_p1.pdf",
+          "sha256": "f7437906c01e5982075aa6546f3c7e132b23b1666be1db438539aacbbecc8ce5"
+        }
       ],
-      "pdfSha256": "11341ccc51ae0e36eb01203c13419052fb1f7b66bed3eafd6e525a82bacbd0e2",
-      "scale": 3,
+      "texFile": "neurips_2026__1_.tex",
+      "texSha256": "3dd3d8126829f61cfcd16906ca9787d608e79fb4f11554fed6f20055c5a97bf1",
+      "figureLabel": "fig:overview",
       "role": "method",
       "explanation": "complete",
       "visuallyVerified": true,
+      "reviewedAt": "2026-10-03",
+      "reviewScope": "Source/PDF identity, axes/legends/table edges, caption and evidence role; no training reproduction",
       "reportSection": "方法与实现机制"
     },
     {
-      "file": "table-2-pdf.png",
-      "sha256": "2dcf6a3aab4c9a829715094a018be55ed5e7791c9fa69f23abf92dfd611c9eb8",
-      "original": "https://arxiv.org/pdf/2608.06296v1#page=17",
-      "method": "pinned-original-pdf-crop",
-      "pdfPage": 17,
-      "cropBox": [
-        40,
-        40,
-        572,
-        742
+      "file": "training-curves-source.png",
+      "sha256": "1a2e1919929cba0ae7e1e30fc475747c22e8c4536330e525c37f616d93504039",
+      "original": "https://arxiv.org/src/2608.06296v1",
+      "method": "pinned-latex-asset",
+      "sourceArchiveSha256": "174bdc5de556163052a33366b43bf6ce001c666246feb1d1dbf3fda0e262d29a",
+      "sourcePath": "figs/uopsd_curves_4b_merged.pdf",
+      "sourceSha256": "1d73c0039f8ad42cf140813c586f8e3de63fc955fbcdac0424a9e7eedfc1b79e",
+      "sourceFiles": [
+        {
+          "path": "figs/uopsd_curves_4b_merged.pdf",
+          "sha256": "1d73c0039f8ad42cf140813c586f8e3de63fc955fbcdac0424a9e7eedfc1b79e"
+        }
       ],
-      "pdfSha256": "11341ccc51ae0e36eb01203c13419052fb1f7b66bed3eafd6e525a82bacbd0e2",
-      "scale": 3,
-      "role": "experiment-table",
+      "texFile": "neurips_2026__1_.tex",
+      "texSha256": "3dd3d8126829f61cfcd16906ca9787d608e79fb4f11554fed6f20055c5a97bf1",
+      "figureLabel": "fig:curves",
+      "role": "result-figure",
       "explanation": "complete",
       "visuallyVerified": true,
-      "reportSection": "实验设置与算力"
+      "reviewedAt": "2026-10-03",
+      "reviewScope": "Source/PDF identity, axes/legends/table edges, caption and evidence role; no training reproduction",
+      "reportSection": "结果与图表解读"
     },
     {
-      "file": "table-1-pdf.png",
-      "sha256": "41b2ab124c92fc038085709a06b625dfb2e4f5f7f3b4724edea933a9e1bd79e0",
+      "file": "table-1-results-pdf.png",
+      "sha256": "7035aa2ed570976a84074bb0056fffd6601455d35b8992974b921f2e856e0766",
       "original": "https://arxiv.org/pdf/2608.06296v1#page=7",
       "method": "pinned-original-pdf-crop",
       "pdfPage": 7,
       "cropBox": [
-        40,
-        40,
-        572,
-        742
+        104,
+        350,
+        510,
+        602
       ],
       "pdfSha256": "11341ccc51ae0e36eb01203c13419052fb1f7b66bed3eafd6e525a82bacbd0e2",
       "scale": 3,
+      "pdfPageSize": [
+        612,
+        792
+      ],
+      "sourceUnavailableReason": "LaTeX table/algorithm typesetting; crop the compiled PDF",
       "role": "result-table",
       "explanation": "complete",
       "visuallyVerified": true,
-      "reportSection": "结果与图表解读"
-    },
-    {
-      "file": "figure-2-pdf.png",
-      "sha256": "c2624737b58f3f528b906d8f8f67143ab97354c21a291b14ead81a852f6d8d88",
-      "original": "https://arxiv.org/pdf/2608.06296v1#page=8",
-      "method": "pinned-original-pdf-crop",
-      "pdfPage": 8,
-      "cropBox": [
-        40,
-        40,
-        572,
-        742
-      ],
-      "pdfSha256": "11341ccc51ae0e36eb01203c13419052fb1f7b66bed3eafd6e525a82bacbd0e2",
-      "scale": 3,
-      "role": "result-figure",
-      "explanation": "complete",
-      "visuallyVerified": true,
+      "reviewedAt": "2026-10-03",
+      "reviewScope": "Source/PDF identity, axes/legends/table edges, caption and evidence role; no training reproduction",
       "reportSection": "结果与图表解读"
     }
-  ]
+  ],
+  "attribution": "Original figures/tables by the paper authors; source assets or tightly cropped PDF typesetting, with report commentary."
 }

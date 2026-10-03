@@ -11,7 +11,7 @@ def download(url, target):
     target.write_bytes(payload)
     return payload
 
-def fetch(paper_id, version):
+def fetch(paper_id, version, source_only=False):
     if not re.fullmatch(r'[a-z0-9]+(?:-[a-z0-9]+)*',paper_id): raise ValueError('无效论文 id')
     if not re.fullmatch(r'\d{4}\.\d{4,5}v\d+|[a-z-]+(?:\.[A-Z]{2})?/\d{7}v\d+',version): raise ValueError('请指定带版本的 arXiv id，如 2305.13245v3')
     cache=ROOT/'.paper-cache'/paper_id
@@ -21,7 +21,11 @@ def fetch(paper_id, version):
     if previous.exists() and json.loads(previous.read_text())['arxivVersion']!=version:
         raise ValueError('已有不同版本缓存，请先检查并移走该论文缓存，避免混用来源')
     manifest={'paperId':paper_id,'arxivVersion':version,'originalUrl':'https://arxiv.org/abs/'+version,'files':{},'errors':{}}
-    for name,kind in [('source.tar','src'),('paper.pdf','pdf'),('paper.html','html')]:
+    if source_only and previous.exists():
+        manifest = json.loads(previous.read_text())
+        manifest.setdefault('files', {})
+        manifest.setdefault('errors', {})
+    for name,kind in ([('source.tar','src')] if source_only else [('source.tar','src'),('paper.pdf','pdf'),('paper.html','html')]):
         url=f'https://arxiv.org/{kind}/{version}'
         try:
             data=download(url,cache/name)
@@ -47,7 +51,7 @@ def fetch(paper_id, version):
             if len(data)>500_000_000: raise ValueError('源码过大')
             (destination/'main.tex').write_bytes(data)
         except Exception as error: manifest['errors']['extraction']=str(error); print(f'未解压: {error}')
-    if 'paper.html' in manifest['files']:
+    if not source_only and 'paper.html' in manifest['files']:
         images=cache/'html-images'; images.mkdir(exist_ok=True)
         manifest['files']['html-images']={}
         for source in dict.fromkeys(re.findall(r'<(?:img[^>]+src|object[^>]+data)="([^"]+)"',(cache/'paper.html').read_text())):
@@ -64,4 +68,5 @@ def fetch(paper_id, version):
 if __name__=='__main__':
     parser=argparse.ArgumentParser(description='保存 arXiv 源码、PDF、HTML 到本地缓存，不生成精读正文、不执行 LaTeX。')
     parser.add_argument('paper_id'); parser.add_argument('arxiv_version')
-    args=parser.parse_args(); fetch(args.paper_id,args.arxiv_version)
+    parser.add_argument('--source-only', action='store_true', help='只下载并安全解压固定版本 LaTeX 源码')
+    args=parser.parse_args(); fetch(args.paper_id,args.arxiv_version,args.source_only)

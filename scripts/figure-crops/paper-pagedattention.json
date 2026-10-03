@@ -4,61 +4,6 @@
   "coordinateSystem": "PDF points, top-left origin",
   "crops": [
     {
-      "name": "figure-4-pdf.png",
-      "page": 5,
-      "box": [
-        54,
-        65,
-        301,
-        190
-      ],
-      "role": "method"
-    },
-    {
-      "name": "figure-6-pdf.png",
-      "page": 6,
-      "box": [
-        54,
-        65,
-        301,
-        190
-      ],
-      "role": "method"
-    },
-    {
-      "name": "figure-12-pdf.png",
-      "page": 10,
-      "box": [
-        53,
-        65,
-        559,
-        264
-      ],
-      "role": "result-figure"
-    },
-    {
-      "name": "figure-13-pdf.png",
-      "page": 10,
-      "box": [
-        53,
-        286,
-        297,
-        382
-      ],
-      "role": "result-figure"
-    },
-    {
-      "name": "figure-15-pdf.png",
-      "page": 11,
-      "box": [
-        317,
-        288,
-        559,
-        377
-      ],
-      "role": "result-figure"
-    },
-    {
       "name": "table-1-pdf.png",
       "page": 9,
       "box": [
@@ -68,6 +13,67 @@
         165
       ],
       "role": "experiment-table"
+    }
+  ],
+  "sourceAssets": [
+    {
+      "name": "figure-4-source.png",
+      "tex": "main.tex",
+      "label": "fig:pagedattention",
+      "role": "method",
+      "path": "figures/pagedattention.pdf"
+    },
+    {
+      "name": "figure-6-source.png",
+      "tex": "main.tex",
+      "label": "fig:multi-sequence-blocks",
+      "role": "method",
+      "path": "figures/multi-sequence-block-mapping.pdf"
+    },
+    {
+      "name": "figure-12-source.png",
+      "tex": "eval.tex",
+      "label": "fig:single-sequence",
+      "role": "result-figure",
+      "paths": [
+        "figures/experiments/n1-sharegpt.pdf",
+        "figures/experiments/n1-alpaca.pdf"
+      ],
+      "columns": 1,
+      "panelWidths": [
+        1000,
+        1000
+      ]
+    },
+    {
+      "name": "figure-13-source.png",
+      "tex": "eval.tex",
+      "label": "fig:batch-alpaca",
+      "role": "result-figure",
+      "paths": [
+        "figures/experiments/batched_requests_sharegpt.pdf",
+        "figures/experiments/batched_requests_alpaca.pdf"
+      ],
+      "columns": 2,
+      "panelWidths": [
+        1000,
+        1000
+      ]
+    },
+    {
+      "name": "figure-15-source.png",
+      "tex": "eval.tex",
+      "label": "fig:memory-saving-sharing",
+      "role": "result-figure",
+      "paths": [
+        "figures/experiments/mem_saving_parallel_gen.pdf",
+        "figures/experiments/mem_saving_beam.pdf"
+      ],
+      "columns": 2,
+      "panelWidths": [
+        1000,
+        1000
+      ]
     }
   ]
 }

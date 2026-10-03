@@ -4,34 +4,53 @@
   "coordinateSystem": "PDF points, top-left origin",
   "crops": [
     {
-      "name": "figure-2-pdf.png",
-      "page": 4,
-      "box": [70, 70, 545, 350],
-      "role": "method"
-    },
-    {
       "name": "table-1-pdf.png",
       "page": 7,
-      "box": [70, 65, 545, 405],
+      "box": [
+        67,
+        65,
+        546,
+        424
+      ],
       "role": "result-table"
     },
     {
       "name": "table-2-pdf.png",
       "page": 8,
-      "box": [70, 65, 330, 285],
+      "box": [
+        67,
+        65,
+        334,
+        304
+      ],
       "role": "result-table"
-    },
-    {
-      "name": "figure-3-pdf.png",
-      "page": 9,
-      "box": [70, 65, 545, 285],
-      "role": "result-figure"
     },
     {
       "name": "table-f-1-pdf.png",
       "page": 19,
-      "box": [70, 255, 545, 520],
+      "box": [
+        67,
+        255,
+        546,
+        482
+      ],
       "role": "experiment-table"
+    }
+  ],
+  "sourceAssets": [
+    {
+      "name": "figure-2-source.png",
+      "tex": "sections/method.tex",
+      "label": "fig:overview",
+      "role": "method",
+      "path": "figures/overview.pdf"
+    },
+    {
+      "name": "figure-3-source.png",
+      "tex": "sections/results.tex",
+      "label": "fig:collapse",
+      "role": "result-figure",
+      "path": "figures/collapse.pdf"
     }
   ]
 }

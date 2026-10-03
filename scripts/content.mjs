@@ -15,6 +15,13 @@ md.inline.ruler.before('escape', 'math_inline', (state, silent) => {
 });
 md.block.ruler.before('fence', 'math_block', (state, start, end, silent) => {
   const line = state.src.slice(state.bMarks[start] + state.tShift[start], state.eMarks[start]).trim();
+  if (!line.startsWith('$$')) return false;
+  if (line.length > 4 && line.endsWith('$$')) {
+    if (silent) return true;
+    const token = state.push('math_block', '', 0); token.block = true;
+    token.content = line.slice(2, -2).trim(); token.map = [start, start + 1];
+    state.line = start + 1; return true;
+  }
   if (line !== '$$') return false;
   let next = start + 1;
   while (next < end && state.src.slice(state.bMarks[next] + state.tShift[next], state.eMarks[next]).trim() !== '$$') next++;
