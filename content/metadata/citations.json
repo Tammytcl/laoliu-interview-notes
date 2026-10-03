@@ -524,5 +524,95 @@
         "reason": "http-404"
       }
     }
+  },
+  "paper-april": {
+    "attempts": {
+      "openalex": {
+        "checkedAt": "2026-10-03T16:44:03.908Z",
+        "status": "failed",
+        "reason": "http-429"
+      }
+    }
+  },
+  "paper-areal": {
+    "attempts": {
+      "openalex": {
+        "checkedAt": "2026-10-03T16:44:03.908Z",
+        "status": "failed",
+        "reason": "http-429"
+      }
+    }
+  },
+  "paper-asyncopd": {
+    "attempts": {
+      "openalex": {
+        "checkedAt": "2026-10-03T16:44:03.908Z",
+        "status": "failed",
+        "reason": "http-429"
+      }
+    }
+  },
+  "paper-flexmarl": {
+    "attempts": {
+      "openalex": {
+        "checkedAt": "2026-10-03T16:44:03.908Z",
+        "status": "failed",
+        "reason": "http-429"
+      }
+    }
+  },
+  "paper-heddle": {
+    "attempts": {
+      "openalex": {
+        "checkedAt": "2026-10-03T16:44:03.908Z",
+        "status": "failed",
+        "reason": "http-429"
+      }
+    }
+  },
+  "paper-pipelinerl": {
+    "attempts": {
+      "openalex": {
+        "checkedAt": "2026-10-03T16:44:03.908Z",
+        "status": "failed",
+        "reason": "http-429"
+      }
+    }
+  },
+  "paper-rolloutpipe": {
+    "attempts": {
+      "openalex": {
+        "checkedAt": "2026-10-03T16:44:03.908Z",
+        "status": "failed",
+        "reason": "http-429"
+      }
+    }
+  },
+  "paper-sao": {
+    "attempts": {
+      "openalex": {
+        "checkedAt": "2026-10-03T16:44:03.908Z",
+        "status": "failed",
+        "reason": "http-429"
+      }
+    }
+  },
+  "paper-stride": {
+    "attempts": {
+      "openalex": {
+        "checkedAt": "2026-10-03T16:44:03.908Z",
+        "status": "failed",
+        "reason": "http-429"
+      }
+    }
+  },
+  "paper-tiderl": {
+    "attempts": {
+      "openalex": {
+        "checkedAt": "2026-10-03T16:44:03.908Z",
+        "status": "failed",
+        "reason": "http-429"
+      }
+    }
   }
 }
