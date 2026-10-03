@@ -41,9 +41,16 @@ for (const name of ['papers', 'reports']) {
   }
 }
 validatePaperLinks(allQuestions, collections.papers, collections.reports);
-const qualityFailures = (await auditPapers(root)).filter(p => !p.draft && ((p.marked && p.errors.length) || p.enforcementError));
+const qualityResults = await auditPapers(root);
+const qualityFailures = qualityResults.filter(p => !p.draft && ((p.marked && p.errors.length) || p.enforcementError));
 if (qualityFailures.length) throw new Error('论文精读深度门槛未通过：\n' + qualityFailures.map(p => `${p.id}: ${[...p.errors, p.enforcementError].filter(Boolean).join('；')}`).join('\n'));
 const papers = collections.papers.filter(p => !p.draft).sort((a, b) => (b.published || `${b.year}-01-01`).localeCompare(a.published || `${a.year}-01-01`) || a.id.localeCompare(b.id));
+const qualityById = new Map(qualityResults.map(result => [result.id, result]));
+for (const paper of papers) {
+  const quality = qualityById.get(paper.id);
+  paper.qualityStatus = quality && quality.errors.length === 0 ? 'complete' : 'upgrading';
+  paper.qualitySummary = quality ? { characters: quality.characters, images: quality.images } : { characters: 0, images: 0 };
+}
 const reports = collections.reports.filter(r => !r.draft).sort((a, b) => b.date.localeCompare(a.date) || b.updated.localeCompare(a.updated) || a.title.localeCompare(b.title, 'zh-CN'));
 const dist = resolve(root, 'dist');
 // 图表是报告的长期资产；缓存源码不会进入发布目录。

@@ -19,9 +19,9 @@ test('DDPM 深度门槛覆盖新模板与标记发布的报告', async () => {
   const all = await auditPapers(root);
   assert.deepEqual(all.filter(p => p.enforcementError).map(p => p.id), []);
   const reports = all.filter(p => p.marked && !p.draft);
-  assert.equal(reports.length, 9);
-  assert.equal(all.filter(p => !p.draft && !p.marked).length, 30);
-  assert.equal(all.filter(p => !p.draft && !p.marked && p.errors.length).length, 30);
+  assert.equal(reports.length, 10);
+  assert.equal(all.filter(p => !p.draft && !p.marked).length, 29);
+  assert.equal(all.filter(p => !p.draft && !p.marked && p.errors.length).length, 29);
   assert.deepEqual(reports.flatMap(p => p.errors.map(error => `${p.id}: ${error}`)), []);
 });
 

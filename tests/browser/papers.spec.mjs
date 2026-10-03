@@ -7,6 +7,11 @@ test('论文库、两行任务筛选、Daily 与专题报告相互链接', async
   await expect(page.locator('.paper-card')).toHaveCount(data.papers.length);
   expect(data.papers.map(p => p.published)).toEqual([...data.papers.map(p => p.published)].sort().reverse());
   await expect(page.locator('.paper-citations')).toHaveCount(data.papers.length);
+  await expect(page.locator('.paper-quality')).toHaveCount(data.papers.length);
+  await page.locator('[data-paper-quality="complete"]').click();
+  await expect(page.locator('.paper-card')).toHaveCount(data.papers.filter(p => p.qualityStatus === 'complete').length);
+  await page.locator('[data-paper-quality=""]').click();
+  await expect(page.locator('.paper-card')).toHaveCount(data.papers.length);
   await expect(page.locator('.paper-method-preview img')).toHaveCount(data.papers.filter(p => p.methodFigure).length);
   for (const preview of await page.locator('.paper-method-preview img').all()) {
     await preview.scrollIntoViewIfNeeded();
@@ -72,20 +77,22 @@ test('正式报告显示英文元数据、五模块目录、数学公式与可�
 
 test('OPD 专题精读展示方法图、实验结果和五模块目录', async ({ page }) => {
   const data = await (await page.request.get('/data.json')).json();
-  expect(data.papers.filter(p => p.id.startsWith('paper-opd-')).every(p => p.toc.length === 5)).toBe(true);
+  expect(data.papers.filter(p => p.id.startsWith('paper-opd-')).every(p => p.toc.filter(item => item.level === 2).length === 5)).toBe(true);
   await page.goto('/#paper=paper-opd-2609-30837');
   await expect(page.locator('#paper-space h1')).toHaveText('MOPD-Router: Rethinking Teacher Routing in Multi-Teacher On-Policy Distillation');
   await expect(page.locator('.publication-toc button')).toHaveCount(5);
   await expect(page.locator('.publication-body')).toContainText('ExpertAlign');
   await expect(page.locator('.publication-body')).toContainText('38.58');
+  await expect(page.locator('.publication-header .paper-quality')).toHaveText('升级中');
+  await expect(page.locator('.paper-quality-notice')).toContainText('尚未通过 DDPM 级结构与图表证据初筛');
   await expect(page.locator('.paper-figure-button')).toHaveCount(1);
   await page.locator('.paper-figure-button').click();
   await expect(page.locator('#figure-caption')).toContainText('Figure 1');
   await expect.poll(() => page.locator('#figure-full').evaluate(img => img.complete && img.naturalWidth > 0)).toBe(true);
 });
 
-test('补齐的 GKD 与 MiniLLM 报告加载原文算法、表格和结果图', async ({ page }) => {
-  for (const id of ['paper-opd-2306-13649', 'paper-opd-2306-08543']) {
+test('补齐的 GKD、MiniLLM 与 SimCT 报告加载原文算法、表格和结果图', async ({ page }) => {
+  for (const id of ['paper-opd-2306-13649', 'paper-opd-2306-08543', 'paper-opd-2605-07711']) {
     await page.goto(`/#paper=${id}`);
     await expect(page.locator('.publication-toc button')).toHaveCount(5);
     await expect(page.locator('.paper-figure-button')).toHaveCount(5);
@@ -95,7 +102,7 @@ test('补齐的 GKD 与 MiniLLM 报告加载原文算法、表格和结果图', 
     }
   }
   await page.goto('/#view=papers');
-  for (const id of ['paper-opd-2306-13649', 'paper-opd-2306-08543']) {
+  for (const id of ['paper-opd-2306-13649', 'paper-opd-2306-08543', 'paper-opd-2605-07711']) {
     const card = page.locator('.paper-card').filter({ has: page.locator(`h3 a[href="#paper=${id}"]`) });
     await expect(card.locator('.paper-method-preview img')).toHaveCount(1);
   }
