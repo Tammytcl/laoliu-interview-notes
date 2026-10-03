@@ -1,0 +1,102 @@
+{
+  "paperId": "paper-tiderl",
+  "arxivVersion": "2608.10402v1",
+  "originalUrl": "https://arxiv.org/abs/2608.10402v1",
+  "attribution": "Original figures/tables by the paper authors; pinned LaTeX assets and tightly cropped PDF typesetting with report commentary.",
+  "figures": [
+    {
+      "file": "method-source.png",
+      "sha256": "5751143ccf218878d69dc4ac60164e85764b37931c50a7e37a2256c40d4ac943",
+      "original": "https://arxiv.org/src/2608.10402v1",
+      "method": "pinned-latex-asset",
+      "sourceArchiveSha256": "822ae7a04f15f5e51f4322b0e4a7d6b4e1d260692564a3c00a20b551085ec809",
+      "sourcePath": "figs/sys_arch.png",
+      "sourceSha256": "507a949145e929c9540725fbcd3aa5ca91c6cb7c366960d940a0a0641efbbd84",
+      "sourceFiles": [
+        {
+          "path": "figs/sys_arch.png",
+          "sha256": "507a949145e929c9540725fbcd3aa5ca91c6cb7c366960d940a0a0641efbbd84"
+        }
+      ],
+      "texFile": "sections/3.overview.tex",
+      "texSha256": "6abb3bac8831e7b74183874b82f223986df756b04c67d83630f61b274d62da42",
+      "figureLabel": "fig:sys_architecture",
+      "role": "method",
+      "explanation": "complete",
+      "visuallyVerified": true,
+      "reviewedAt": "2026-10-04",
+      "reportSection": "2. 方法与实现机制"
+    },
+    {
+      "file": "text-throughput-source.png",
+      "sha256": "87180905e2e59ca477f85f9825245eabe2cf845650fc18947530ac50adcfa411",
+      "original": "https://arxiv.org/src/2608.10402v1",
+      "method": "pinned-latex-asset",
+      "sourceArchiveSha256": "822ae7a04f15f5e51f4322b0e4a7d6b4e1d260692564a3c00a20b551085ec809",
+      "sourcePath": "figs/thrp_text.png",
+      "sourceSha256": "0fd794b494ff7dcc0318dc7eeab5a8907f26aa2165e7afbb74a331d9226e51e7",
+      "sourceFiles": [
+        {
+          "path": "figs/thrp_text.png",
+          "sha256": "0fd794b494ff7dcc0318dc7eeab5a8907f26aa2165e7afbb74a331d9226e51e7"
+        }
+      ],
+      "texFile": "sections/5.eval.tex",
+      "texSha256": "b105c48e1233423c20a83466ea1193a9b1a287b8c27065ff7d61e5dc6020cdcd",
+      "figureLabel": "fig:throughput_text",
+      "role": "result-figure",
+      "explanation": "complete",
+      "visuallyVerified": true,
+      "reviewedAt": "2026-10-04",
+      "reportSection": "4. 结果与图表解读"
+    },
+    {
+      "file": "multimodal-throughput-source.png",
+      "sha256": "2c2c94205d553d77b9966f781e1b1bf0ee40297a74d7fa49b0a0a31741bb2b6d",
+      "original": "https://arxiv.org/src/2608.10402v1",
+      "method": "pinned-latex-asset",
+      "sourceArchiveSha256": "822ae7a04f15f5e51f4322b0e4a7d6b4e1d260692564a3c00a20b551085ec809",
+      "sourcePath": "figs/thrp_mm.png",
+      "sourceSha256": "e71de734cac2b8a910eeaeac2e306d6aa3fac80cae061e296da917daa1a265a1",
+      "sourceFiles": [
+        {
+          "path": "figs/thrp_mm.png",
+          "sha256": "e71de734cac2b8a910eeaeac2e306d6aa3fac80cae061e296da917daa1a265a1"
+        }
+      ],
+      "texFile": "sections/5.eval.tex",
+      "texSha256": "b105c48e1233423c20a83466ea1193a9b1a287b8c27065ff7d61e5dc6020cdcd",
+      "figureLabel": "fig:throughput_mm",
+      "role": "result-figure",
+      "explanation": "complete",
+      "visuallyVerified": true,
+      "reviewedAt": "2026-10-04",
+      "reportSection": "4. 结果与图表解读"
+    },
+    {
+      "file": "table-2-pdf.png",
+      "sha256": "c8fba90dae80869e6f07797d49ff775ddd023bd67e94d173552058d37107984b",
+      "original": "https://arxiv.org/pdf/2608.10402v1#page=11",
+      "method": "pinned-original-pdf-crop",
+      "pdfPage": 11,
+      "cropBox": [
+        51,
+        238,
+        296,
+        331
+      ],
+      "pdfSha256": "71e5b879bd6c3f0b22dcea152db6b2704d84aab8b22183358c0c6c37b47a5369",
+      "scale": 3,
+      "pdfPageSize": [
+        612.0,
+        792.0
+      ],
+      "sourceUnavailableReason": "LaTeX table/algorithm typesetting; crop the compiled PDF",
+      "role": "result-table",
+      "explanation": "complete",
+      "visuallyVerified": true,
+      "reviewedAt": "2026-10-04",
+      "reportSection": "4. 结果与图表解读"
+    }
+  ]
+}

@@ -1,0 +1,34 @@
+{
+  "paperId": "paper-stride",
+  "arxivVersion": "2609.14636v1",
+  "coordinateSystem": "PDF points, top-left origin",
+  "sourceAssets": [
+    {
+      "name": "method-source.png",
+      "tex": "main.tex",
+      "label": "fig:overview",
+      "role": "method",
+      "path": "figures/fig_overview.pdf"
+    },
+    {
+      "name": "wall-clock-source.png",
+      "tex": "main.tex",
+      "label": "fig:single-wall",
+      "role": "result-figure",
+      "path": "figures/fig_single_wall.pdf"
+    }
+  ],
+  "crops": [
+    {
+      "name": "table-1-pdf.png",
+      "page": 9,
+      "box": [
+        68,
+        59,
+        469,
+        290
+      ],
+      "role": "result-table"
+    }
+  ]
+}

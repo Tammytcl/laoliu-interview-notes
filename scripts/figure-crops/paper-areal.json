@@ -1,0 +1,34 @@
+{
+  "paperId": "paper-areal",
+  "arxivVersion": "2505.24298v1",
+  "coordinateSystem": "PDF points, top-left origin",
+  "sourceAssets": [
+    {
+      "name": "method-source.png",
+      "tex": "content/3-arch.tex",
+      "label": "fig:overview",
+      "role": "method",
+      "path": "figures/overview.pdf"
+    },
+    {
+      "name": "scaling-source.png",
+      "tex": "content/6-experiment.tex",
+      "label": "fig:scaling",
+      "role": "result-figure",
+      "path": "figures/scaling_trend_vs_verl.pdf"
+    }
+  ],
+  "crops": [
+    {
+      "name": "table-1-pdf.png",
+      "page": 7,
+      "box": [
+        106,
+        491,
+        506,
+        727
+      ],
+      "role": "result-table"
+    }
+  ]
+}

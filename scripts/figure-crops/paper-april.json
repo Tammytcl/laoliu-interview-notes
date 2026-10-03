@@ -1,0 +1,69 @@
+{
+  "paperId": "paper-april",
+  "arxivVersion": "2509.18521v1",
+  "coordinateSystem": "PDF points, top-left origin",
+  "sourceAssets": [
+    {
+      "name": "method-source.png",
+      "tex": "sections/method.tex",
+      "label": "fig:method",
+      "role": "method",
+      "path": "figs/method.png"
+    },
+    {
+      "name": "throughput-source.png",
+      "tex": "sections/experiments.tex",
+      "label": "fig:throughput",
+      "role": "result-figure",
+      "paths": [
+        "figs/4B/throughput_dapo_qwen.png",
+        "figs/4B/throughput_deepscaler_qwen.png",
+        "figs/4B/throughput_deepmath_qwen.png",
+        "figs/4B/dapo/throughput_dapo_qwen.png",
+        "figs/4B/dapo/throughput_deepscaler_qwen.png",
+        "figs/4B/dapo/throughput_deepmath_qwen.png",
+        "figs/8B/throughput_dapo_qwen.png",
+        "figs/8B/throughput_deepscaler_qwen.png",
+        "figs/8B/throughput_deepmath_qwen.png",
+        "figs/8B/dapo/throughput_dapo_qwen.png",
+        "figs/8B/dapo/throughput_deepscaler_qwen.png",
+        "figs/8B/dapo/throughput_deepmath_qwen.png"
+      ],
+      "columns": 3,
+      "panelWidths": [
+        700,
+        700,
+        700,
+        700,
+        700,
+        700,
+        700,
+        700,
+        700,
+        700,
+        700,
+        700
+      ]
+    },
+    {
+      "name": "off-policy-source.png",
+      "tex": "sections/experiments.tex",
+      "label": "fig:off-policy",
+      "role": "result-figure",
+      "path": "figs/off-policy.png"
+    }
+  ],
+  "crops": [
+    {
+      "name": "table-1-pdf.png",
+      "page": 5,
+      "box": [
+        105,
+        70,
+        506,
+        270
+      ],
+      "role": "experiment-table"
+    }
+  ]
+}

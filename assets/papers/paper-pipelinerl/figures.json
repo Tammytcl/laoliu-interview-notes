@@ -1,0 +1,93 @@
+{
+  "paperId": "paper-pipelinerl",
+  "arxivVersion": "2509.19128v1",
+  "originalUrl": "https://arxiv.org/abs/2509.19128v1",
+  "attribution": "Original figures/tables by the paper authors; pinned LaTeX assets and tightly cropped PDF typesetting with report commentary.",
+  "figures": [
+    {
+      "file": "method-source.png",
+      "sha256": "2e7ecf8817660a891b83a38d9c86cfe905ba30c8a4572d9412ca4bb653e89da8",
+      "original": "https://arxiv.org/src/2509.19128v1",
+      "method": "pinned-latex-asset",
+      "sourceArchiveSha256": "0145b6138bb84b888a34bb5eaf93950700fa42e6c64dfea34ed413f753d608a8",
+      "sourcePath": "figures/inflight_wide.jpg",
+      "sourceSha256": "83a5c26d625cf4b402b30f72cc1dfb386146a663d22bb7d09aa272ff17288d3b",
+      "sourceFiles": [
+        {
+          "path": "figures/inflight_wide.jpg",
+          "sha256": "83a5c26d625cf4b402b30f72cc1dfb386146a663d22bb7d09aa272ff17288d3b"
+        }
+      ],
+      "texFile": "main.tex",
+      "texSha256": "435c4c68766b17bc6f031f8716f4ca2677a1c37703fcfcd36cd387e410f63310",
+      "figureLabel": "fig:inflight",
+      "role": "method",
+      "explanation": "complete",
+      "visuallyVerified": true,
+      "reviewedAt": "2026-10-04",
+      "reportSection": "2. 方法与实现机制"
+    },
+    {
+      "file": "training-curves-source.png",
+      "sha256": "51f97450212e897c9f1ef52370897d1586929e60346d50683e4ceac8887a7761",
+      "original": "https://arxiv.org/src/2509.19128v1",
+      "method": "pinned-latex-asset",
+      "sourceArchiveSha256": "0145b6138bb84b888a34bb5eaf93950700fa42e6c64dfea34ed413f753d608a8",
+      "sourcePath": null,
+      "sourceSha256": "48ffabba3321b77e8ca8a116367b46ee4fde96013620475058105972751b1712",
+      "sourceFiles": [
+        {
+          "path": "figures/reward_per_time_square.png",
+          "sha256": "48ffabba3321b77e8ca8a116367b46ee4fde96013620475058105972751b1712"
+        },
+        {
+          "path": "figures/reward_per_samples_square.png",
+          "sha256": "737c6771e10b3732b27adfeecadafd5ba549dc9b30a6ecf6e2d31207ac4c200e"
+        },
+        {
+          "path": "figures/samples_per_time_square.png",
+          "sha256": "31b7f570b720ae2e68b35b3ddfae8b87ffd745b89781dd9052a6ba5f51caf62c"
+        }
+      ],
+      "texFile": "main.tex",
+      "texSha256": "435c4c68766b17bc6f031f8716f4ca2677a1c37703fcfcd36cd387e410f63310",
+      "figureLabel": "fig:ess_and_rewards",
+      "role": "result-figure",
+      "explanation": "complete",
+      "visuallyVerified": true,
+      "columns": 3,
+      "panelWidths": [
+        700,
+        700,
+        700
+      ],
+      "reviewedAt": "2026-10-04",
+      "reportSection": "4. 结果与图表解读"
+    },
+    {
+      "file": "table-1-pdf.png",
+      "sha256": "e6c2fe53551080bc3ece46014bb4a5486256f843b87c0ffdb06c9d3a1537d877",
+      "original": "https://arxiv.org/pdf/2509.19128v1#page=9",
+      "method": "pinned-original-pdf-crop",
+      "pdfPage": 9,
+      "cropBox": [
+        92,
+        78,
+        516,
+        224
+      ],
+      "pdfSha256": "80a8453aa2bd1a52d1344cab3a20c213cd2a1b5e787f7811ea7b83a22089ff56",
+      "scale": 3,
+      "pdfPageSize": [
+        612.0,
+        792.0
+      ],
+      "sourceUnavailableReason": "LaTeX table/algorithm typesetting; crop the compiled PDF",
+      "role": "result-table",
+      "explanation": "complete",
+      "visuallyVerified": true,
+      "reviewedAt": "2026-10-04",
+      "reportSection": "4. 结果与图表解读"
+    }
+  ]
+}

@@ -1,0 +1,102 @@
+{
+  "paperId": "paper-rolloutpipe",
+  "arxivVersion": "2606.26997v1",
+  "originalUrl": "https://arxiv.org/abs/2606.26997v1",
+  "attribution": "Original figures/tables by paper authors; pinned source assets and tightly cropped PDF tables.",
+  "figures": [
+    {
+      "file": "method-source.png",
+      "sha256": "f36daa43c4baa4c8a68a1d373547c912929c53abd8b4014426996b31d5d2ddb4",
+      "original": "https://arxiv.org/src/2606.26997v1",
+      "method": "pinned-latex-asset",
+      "sourceArchiveSha256": "d201d44ea04986b199f1cdd0843b553f54891ec6e1629fd74737cbf9f3efc406",
+      "sourcePath": "figures/output/architecture_fig1.pdf",
+      "sourceSha256": "df4a2002eb80bb0f15b11eaa886bbad97f8a5f98bff4e53d7f1727307668b3ce",
+      "sourceFiles": [
+        {
+          "path": "figures/output/architecture_fig1.pdf",
+          "sha256": "df4a2002eb80bb0f15b11eaa886bbad97f8a5f98bff4e53d7f1727307668b3ce"
+        }
+      ],
+      "texFile": "main_en.tex",
+      "texSha256": "ebd085eef47951e0dc27fed773e94bf64c870190a00a68e486984cbf6c385274",
+      "figureLabel": "fig:rolloutpipe-architecture",
+      "role": "method",
+      "explanation": "complete",
+      "visuallyVerified": true,
+      "reviewedAt": "2026-10-04",
+      "reportSection": "2. 方法与实现机制"
+    },
+    {
+      "file": "timeline-source.png",
+      "sha256": "1617265cdc87eda21d170eb859a042b1618584417fda1c2db82be05701f857da",
+      "original": "https://arxiv.org/src/2606.26997v1",
+      "method": "pinned-latex-asset",
+      "sourceArchiveSha256": "d201d44ea04986b199f1cdd0843b553f54891ec6e1629fd74737cbf9f3efc406",
+      "sourcePath": "figures/output/rolloutpipe_timeline_fig2.pdf",
+      "sourceSha256": "c4268423792b749be130b6ff016b715b561a7aa2ac8be0d8c400401dc0e5c634",
+      "sourceFiles": [
+        {
+          "path": "figures/output/rolloutpipe_timeline_fig2.pdf",
+          "sha256": "c4268423792b749be130b6ff016b715b561a7aa2ac8be0d8c400401dc0e5c634"
+        }
+      ],
+      "texFile": "main_en.tex",
+      "texSha256": "ebd085eef47951e0dc27fed773e94bf64c870190a00a68e486984cbf6c385274",
+      "figureLabel": "fig:rolloutpipe-timeline",
+      "role": "method",
+      "explanation": "complete",
+      "visuallyVerified": true,
+      "reviewedAt": "2026-10-04",
+      "reportSection": "2. 方法与实现机制"
+    },
+    {
+      "file": "training-time-source.png",
+      "sha256": "91d060975e179068bda5878c15a7999af26a7b776bd4c7b9ca956f07a7ebe1ff",
+      "original": "https://arxiv.org/src/2606.26997v1",
+      "method": "pinned-latex-asset",
+      "sourceArchiveSha256": "d201d44ea04986b199f1cdd0843b553f54891ec6e1629fd74737cbf9f3efc406",
+      "sourcePath": "figures/output/rolloutpipe_main_window_combined.pdf",
+      "sourceSha256": "d3d4a57aac1792a2163cec6fd3f6947f8fac1c6576095bfe75443ba1e90c1b99",
+      "sourceFiles": [
+        {
+          "path": "figures/output/rolloutpipe_main_window_combined.pdf",
+          "sha256": "d3d4a57aac1792a2163cec6fd3f6947f8fac1c6576095bfe75443ba1e90c1b99"
+        }
+      ],
+      "texFile": "main_en.tex",
+      "texSha256": "ebd085eef47951e0dc27fed773e94bf64c870190a00a68e486984cbf6c385274",
+      "figureLabel": "fig:rolloutpipe-main-window",
+      "role": "result-figure",
+      "explanation": "complete",
+      "visuallyVerified": true,
+      "reviewedAt": "2026-10-04",
+      "reportSection": "4. 结果与图表解读"
+    },
+    {
+      "file": "table-1-pdf.png",
+      "sha256": "dae29169c44442a879086e85e644628cac7d47e4e43f10ac5b3ea742662b38c7",
+      "original": "https://arxiv.org/pdf/2606.26997v1#page=13",
+      "method": "pinned-original-pdf-crop",
+      "pdfPage": 13,
+      "cropBox": [
+        132,
+        110,
+        482,
+        255
+      ],
+      "pdfSha256": "ae96789b43b4ff8f01cf64deec2e98ce2bc8f16acd76b7caed40c7c6a97e8d9b",
+      "scale": 3,
+      "pdfPageSize": [
+        612.0,
+        792.0
+      ],
+      "sourceUnavailableReason": "LaTeX table/algorithm typesetting; crop the compiled PDF",
+      "role": "result-table",
+      "explanation": "complete",
+      "visuallyVerified": true,
+      "reviewedAt": "2026-10-04",
+      "reportSection": "4. 结果与图表解读"
+    }
+  ]
+}

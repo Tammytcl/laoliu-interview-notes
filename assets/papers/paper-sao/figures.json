@@ -1,0 +1,118 @@
+{
+  "paperId": "paper-sao",
+  "arxivVersion": "2607.07508v1",
+  "originalUrl": "https://arxiv.org/abs/2607.07508v1",
+  "attribution": "Original figures/tables by the paper authors; pinned LaTeX assets and tightly cropped PDF typesetting with report commentary.",
+  "figures": [
+    {
+      "file": "method-source.png",
+      "sha256": "f383e8a45b69b4c59e7fbe59ec9464d1fd18538c978bda7efbae542cafc950ac",
+      "original": "https://arxiv.org/src/2607.07508v1",
+      "method": "pinned-latex-asset",
+      "sourceArchiveSha256": "5c38f36f30d0c83079b0132748de5964a00ff4a0f4e6ce535b8335ec61625df2",
+      "sourcePath": "figures/overview.pdf",
+      "sourceSha256": "5d1a05926f55843c366344abfde2a571184e478b3ab2f44d3edef385cc007da0",
+      "sourceFiles": [
+        {
+          "path": "figures/overview.pdf",
+          "sha256": "5d1a05926f55843c366344abfde2a571184e478b3ab2f44d3edef385cc007da0"
+        }
+      ],
+      "texFile": "4.method.tex",
+      "texSha256": "3dfcb3cda7326bfd27979aef60957455a4f98c606e6541cab89e00e110285643",
+      "figureLabel": "fig:overview",
+      "role": "method",
+      "explanation": "complete",
+      "visuallyVerified": true,
+      "reviewedAt": "2026-10-04",
+      "reportSection": "2. 方法与实现机制"
+    },
+    {
+      "file": "training-curves-source.png",
+      "sha256": "0cf6b93909650f1266dbbda09a45fda6beaf011f348b0fea4e6cbf99056c9a19",
+      "original": "https://arxiv.org/src/2607.07508v1",
+      "method": "pinned-latex-asset",
+      "sourceArchiveSha256": "5c38f36f30d0c83079b0132748de5964a00ff4a0f4e6ce535b8335ec61625df2",
+      "sourcePath": null,
+      "sourceSha256": "34cb24f9276ce6ad4e589741ab05f1c61e03c7437d277d9beebf6365e2be92b3",
+      "sourceFiles": [
+        {
+          "path": "figures/main_result_aime.pdf",
+          "sha256": "34cb24f9276ce6ad4e589741ab05f1c61e03c7437d277d9beebf6365e2be92b3"
+        },
+        {
+          "path": "figures/main_result_beyondaime.pdf",
+          "sha256": "4812f6e679ddf46b7d2a7a3275db1b1ccf8d7c1497a419c4860ecc37ea27acf0"
+        },
+        {
+          "path": "figures/main_result_hmmtnov.pdf",
+          "sha256": "b24bda45a11930b789042896cb0cea601769285101060b2f8e13c6f6669cff8d"
+        }
+      ],
+      "texFile": "5.experiment.tex",
+      "texSha256": "21510060b6196e790f1f7e2ab7232e333e41f6b4a59fa8bc128451644bc49493",
+      "figureLabel": "fig:main_results",
+      "role": "result-figure",
+      "explanation": "complete",
+      "visuallyVerified": true,
+      "columns": 3,
+      "panelWidths": [
+        700,
+        700,
+        700
+      ],
+      "reviewedAt": "2026-10-04",
+      "reportSection": "4. 结果与图表解读"
+    },
+    {
+      "file": "table-1-pdf.png",
+      "sha256": "0826212860106467babcf37ce9716d7ce3030be9b90ff06fd503438f8ecc89cc",
+      "original": "https://arxiv.org/pdf/2607.07508v1#page=5",
+      "method": "pinned-original-pdf-crop",
+      "pdfPage": 5,
+      "cropBox": [
+        116,
+        70,
+        492,
+        269
+      ],
+      "pdfSha256": "44c695be0428c666d06c914ba76c037e3ac77eeb5db0a81bbe239719c21bda48",
+      "scale": 3,
+      "pdfPageSize": [
+        612.0,
+        792.0
+      ],
+      "sourceUnavailableReason": "LaTeX table/algorithm typesetting; crop the compiled PDF",
+      "role": "result-table",
+      "explanation": "complete",
+      "visuallyVerified": true,
+      "reviewedAt": "2026-10-04",
+      "reportSection": "4. 结果与图表解读"
+    },
+    {
+      "file": "table-2-pdf.png",
+      "sha256": "0a037f66e1060d69d7495f96abc49781921964d351fc12e4ab2ca682c4b16a27",
+      "original": "https://arxiv.org/pdf/2607.07508v1#page=6",
+      "method": "pinned-original-pdf-crop",
+      "pdfPage": 6,
+      "cropBox": [
+        164,
+        70,
+        448,
+        146
+      ],
+      "pdfSha256": "44c695be0428c666d06c914ba76c037e3ac77eeb5db0a81bbe239719c21bda48",
+      "scale": 3,
+      "pdfPageSize": [
+        612.0,
+        792.0
+      ],
+      "sourceUnavailableReason": "LaTeX table/algorithm typesetting; crop the compiled PDF",
+      "role": "result-table",
+      "explanation": "complete",
+      "visuallyVerified": true,
+      "reviewedAt": "2026-10-04",
+      "reportSection": "4. 结果与图表解读"
+    }
+  ]
+}

@@ -1,0 +1,91 @@
+{
+  "paperId": "paper-dora",
+  "arxivVersion": "2604.26256v1",
+  "originalUrl": "https://arxiv.org/abs/2604.26256v1",
+  "attribution": "Original figures/tables by the paper authors; pinned LaTeX assets and tightly cropped PDF typesetting with report commentary.",
+  "figures": [
+    {
+      "file": "method-source.png",
+      "sha256": "d8ce11b58bcd4802b39255c238adcb7494f0c2ff2213ab5b263c5e8dfdc5380a",
+      "original": "https://arxiv.org/src/2604.26256v1",
+      "method": "pinned-latex-asset",
+      "sourceArchiveSha256": "8e16fd76aeed7416a060a36f01702397dc8a2fb9003e037b768c6e5f0d02ce4e",
+      "sourcePath": "design/arch_0331.pdf",
+      "sourceSha256": "34ae3cf739447a6b70b74378eabf92e6fa0a1a75eb3ed3c1ced2c8b390f79138",
+      "sourceFiles": [
+        {
+          "path": "design/arch_0331.pdf",
+          "sha256": "34ae3cf739447a6b70b74378eabf92e6fa0a1a75eb3ed3c1ced2c8b390f79138"
+        }
+      ],
+      "texFile": "sections/methods.tex",
+      "texSha256": "02fedc5562f8dfb96ed1786c98a6bd35d94d1175334efe26d525f011dc72d2dc",
+      "figureLabel": "fig:dora_workflow",
+      "role": "method",
+      "explanation": "complete",
+      "visuallyVerified": true,
+      "reviewedAt": "2026-10-04",
+      "reportSection": "2. 方法与实现机制"
+    },
+    {
+      "file": "throughput-source.png",
+      "sha256": "71eecd204c20bf5d82e76dcbb7daf6c8ef5f8a8fa642fcc34cd17eafce59c18d",
+      "original": "https://arxiv.org/src/2604.26256v1",
+      "method": "pinned-latex-asset",
+      "sourceArchiveSha256": "8e16fd76aeed7416a060a36f01702397dc8a2fb9003e037b768c6e5f0d02ce4e",
+      "sourcePath": null,
+      "sourceSha256": "62180bbeed9feaadb7c2e4e5490846fa0ee86f40e225f808b6e3160f2e78cb84",
+      "sourceFiles": [
+        {
+          "path": "exps/step_time_new.pdf",
+          "sha256": "62180bbeed9feaadb7c2e4e5490846fa0ee86f40e225f808b6e3160f2e78cb84"
+        },
+        {
+          "path": "exps/throughput.pdf",
+          "sha256": "93bed9e1d513691183d51f8842a379af2bdb92f93e9ca9415cff8b8bdc08ed00"
+        },
+        {
+          "path": "exps/moe_pic.pdf",
+          "sha256": "c11e31ca09b2e58ff85337c591e673bdb91c3b87a8f4046e63ab9ad10d7260f8"
+        }
+      ],
+      "texFile": "sections/experiments.tex",
+      "texSha256": "2062b10f1dd555ec9230eb3972110261fee34a5e2a1b81e8ad8d3524b3896992",
+      "figureLabel": "fig:moe3b",
+      "role": "result-figure",
+      "explanation": "complete",
+      "visuallyVerified": true,
+      "columns": 3,
+      "panelWidths": [
+        700,
+        700,
+        700
+      ],
+      "reviewedAt": "2026-10-04",
+      "reportSection": "4. 结果与图表解读"
+    },
+    {
+      "file": "convergence-source.png",
+      "sha256": "16b3b3482f6451e3f3a52973cf55a7975b6af2f22acf9bda1e2215987a13fbf6",
+      "original": "https://arxiv.org/src/2604.26256v1",
+      "method": "pinned-latex-asset",
+      "sourceArchiveSha256": "8e16fd76aeed7416a060a36f01702397dc8a2fb9003e037b768c6e5f0d02ce4e",
+      "sourcePath": "design/convergence.pdf",
+      "sourceSha256": "989d7d1ab731d62a497aa16b146ff9ca33e84be096ee3eb5baaf4b60d7aac81e",
+      "sourceFiles": [
+        {
+          "path": "design/convergence.pdf",
+          "sha256": "989d7d1ab731d62a497aa16b146ff9ca33e84be096ee3eb5baaf4b60d7aac81e"
+        }
+      ],
+      "texFile": "sections/experiments.tex",
+      "texSha256": "2062b10f1dd555ec9230eb3972110261fee34a5e2a1b81e8ad8d3524b3896992",
+      "figureLabel": "fig:convergence",
+      "role": "result-figure",
+      "explanation": "complete",
+      "visuallyVerified": true,
+      "reviewedAt": "2026-10-04",
+      "reportSection": "4. 结果与图表解读"
+    }
+  ]
+}

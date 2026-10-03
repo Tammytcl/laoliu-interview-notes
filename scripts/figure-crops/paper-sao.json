@@ -1,0 +1,55 @@
+{
+  "paperId": "paper-sao",
+  "arxivVersion": "2607.07508v1",
+  "coordinateSystem": "PDF points, top-left origin",
+  "sourceAssets": [
+    {
+      "name": "method-source.png",
+      "tex": "4.method.tex",
+      "label": "fig:overview",
+      "role": "method",
+      "path": "figures/overview.pdf"
+    },
+    {
+      "name": "training-curves-source.png",
+      "tex": "5.experiment.tex",
+      "label": "fig:main_results",
+      "role": "result-figure",
+      "paths": [
+        "figures/main_result_aime.pdf",
+        "figures/main_result_beyondaime.pdf",
+        "figures/main_result_hmmtnov.pdf"
+      ],
+      "columns": 3,
+      "panelWidths": [
+        700,
+        700,
+        700
+      ]
+    }
+  ],
+  "crops": [
+    {
+      "name": "table-1-pdf.png",
+      "page": 5,
+      "box": [
+        116,
+        70,
+        492,
+        269
+      ],
+      "role": "result-table"
+    },
+    {
+      "name": "table-2-pdf.png",
+      "page": 6,
+      "box": [
+        164,
+        70,
+        448,
+        146
+      ],
+      "role": "result-table"
+    }
+  ]
+}

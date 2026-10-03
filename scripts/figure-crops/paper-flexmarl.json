@@ -1,0 +1,52 @@
+{
+  "paperId": "paper-flexmarl",
+  "arxivVersion": "2602.09578v1",
+  "sourceAssets": [
+    {
+      "name": "method-source.png",
+      "tex": "overview.tex",
+      "label": "fig:overview",
+      "role": "method",
+      "path": "figures/overview.png"
+    },
+    {
+      "name": "microbatch-source.png",
+      "tex": "orchestrator.tex",
+      "label": "fig:asyn_mechanism",
+      "role": "method",
+      "paths": [
+        "figures/onestep.png",
+        "figures/microbatch.png"
+      ],
+      "columns": 2,
+      "panelWidths": [
+        700,
+        700
+      ]
+    }
+  ],
+  "crops": [
+    {
+      "name": "table-2-pdf.png",
+      "page": 9,
+      "box": [
+        51,
+        82,
+        297,
+        240
+      ],
+      "role": "result-table"
+    },
+    {
+      "name": "table-3-pdf.png",
+      "page": 11,
+      "box": [
+        51,
+        82,
+        297,
+        215
+      ],
+      "role": "result-table"
+    }
+  ]
+}

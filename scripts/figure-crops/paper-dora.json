@@ -1,0 +1,39 @@
+{
+  "paperId": "paper-dora",
+  "arxivVersion": "2604.26256v1",
+  "coordinateSystem": "PDF points, top-left origin",
+  "sourceAssets": [
+    {
+      "name": "method-source.png",
+      "tex": "sections/methods.tex",
+      "label": "fig:dora_workflow",
+      "role": "method",
+      "path": "design/arch_0331.pdf"
+    },
+    {
+      "name": "throughput-source.png",
+      "tex": "sections/experiments.tex",
+      "label": "fig:moe3b",
+      "role": "result-figure",
+      "paths": [
+        "exps/step_time_new.pdf",
+        "exps/throughput.pdf",
+        "exps/moe_pic.pdf"
+      ],
+      "columns": 3,
+      "panelWidths": [
+        700,
+        700,
+        700
+      ]
+    },
+    {
+      "name": "convergence-source.png",
+      "tex": "sections/experiments.tex",
+      "label": "fig:convergence",
+      "role": "result-figure",
+      "path": "design/convergence.pdf"
+    }
+  ],
+  "crops": []
+}

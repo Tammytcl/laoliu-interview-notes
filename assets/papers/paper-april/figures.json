@@ -1,0 +1,161 @@
+{
+  "paperId": "paper-april",
+  "arxivVersion": "2509.18521v1",
+  "originalUrl": "https://arxiv.org/abs/2509.18521v1",
+  "attribution": "Original figures/tables by the paper authors; pinned LaTeX assets and tightly cropped PDF typesetting with report commentary.",
+  "figures": [
+    {
+      "file": "method-source.png",
+      "sha256": "eace34bc43d65a0cd01efdb5bea1534d23e41bd33a1276feb4a604c1b3ce4ff9",
+      "original": "https://arxiv.org/src/2509.18521v1",
+      "method": "pinned-latex-asset",
+      "sourceArchiveSha256": "68855cd2c38e3aab214b474762fa33e5bf4faba75d9a1fadfeb37ce9fda135e3",
+      "sourcePath": "figs/method.png",
+      "sourceSha256": "29759616e89e8123bbdb1f8f65f5d85208449535c38fefe9851ae5c9f6943283",
+      "sourceFiles": [
+        {
+          "path": "figs/method.png",
+          "sha256": "29759616e89e8123bbdb1f8f65f5d85208449535c38fefe9851ae5c9f6943283"
+        }
+      ],
+      "texFile": "sections/method.tex",
+      "texSha256": "e0bcb5044b3ab14c070efeee9df632fbc1310237c47cb7e4795948ddba42623b",
+      "figureLabel": "fig:method",
+      "role": "method",
+      "explanation": "complete",
+      "visuallyVerified": true,
+      "reviewedAt": "2026-10-04",
+      "reportSection": "2. 方法与实现机制"
+    },
+    {
+      "file": "throughput-source.png",
+      "sha256": "ce4dbb7fa3c7f9ce4b567174fbd1dc4229c4ad922e2545ade9cbfe6588aca9b8",
+      "original": "https://arxiv.org/src/2509.18521v1",
+      "method": "pinned-latex-asset",
+      "sourceArchiveSha256": "68855cd2c38e3aab214b474762fa33e5bf4faba75d9a1fadfeb37ce9fda135e3",
+      "sourcePath": null,
+      "sourceSha256": "d10b246de59e86eb41c317d70427e1860bdb2e685a27a0b4ad155f84f68073e8",
+      "sourceFiles": [
+        {
+          "path": "figs/4B/throughput_dapo_qwen.png",
+          "sha256": "d10b246de59e86eb41c317d70427e1860bdb2e685a27a0b4ad155f84f68073e8"
+        },
+        {
+          "path": "figs/4B/throughput_deepscaler_qwen.png",
+          "sha256": "0cefb4aaa6fe8297e6fec0b575c3a1ac3b02ec0abf396bf601ab5e4962fee769"
+        },
+        {
+          "path": "figs/4B/throughput_deepmath_qwen.png",
+          "sha256": "cfa676672e8730f8570e81746cda85107b002a3f3930fdec6dc93410337c777d"
+        },
+        {
+          "path": "figs/4B/dapo/throughput_dapo_qwen.png",
+          "sha256": "af7a3185e840300bdb88f250c91a466538062c185c7e620fe26e40e28fca36e9"
+        },
+        {
+          "path": "figs/4B/dapo/throughput_deepscaler_qwen.png",
+          "sha256": "6a769c0fcc9af35258b151b1a49bc09ccdeee9292b783e64e20d33fb1c3a9e99"
+        },
+        {
+          "path": "figs/4B/dapo/throughput_deepmath_qwen.png",
+          "sha256": "4674b262dd2e356558a2e0ae0e6407abcc73c35d3d11efef5a58cae3d92c80a3"
+        },
+        {
+          "path": "figs/8B/throughput_dapo_qwen.png",
+          "sha256": "bf928a75517b84c2a55586c662ca3dd24c5046164d95a8f16912da08a640f77d"
+        },
+        {
+          "path": "figs/8B/throughput_deepscaler_qwen.png",
+          "sha256": "57bba91c5a3a298aeff460dfff2e835e3d462add4716239d700ff76ced316c4a"
+        },
+        {
+          "path": "figs/8B/throughput_deepmath_qwen.png",
+          "sha256": "b4ee21f48bb52e9e5b6208b0fbed24ebed90f7ba9cd120d9457ab08dc0036b86"
+        },
+        {
+          "path": "figs/8B/dapo/throughput_dapo_qwen.png",
+          "sha256": "8c837aeb34168331a074145d1629453f4fb3b7a6203d9e3a9a2d869c9ec565d1"
+        },
+        {
+          "path": "figs/8B/dapo/throughput_deepscaler_qwen.png",
+          "sha256": "752f31c44c059eb17281c208fe876fd6c94c9eebe31364345352946bf9aa916d"
+        },
+        {
+          "path": "figs/8B/dapo/throughput_deepmath_qwen.png",
+          "sha256": "2a5ca8ce2d0adb41fec005e88e07af048a423526856d85be968c5456d551f4ee"
+        }
+      ],
+      "texFile": "sections/experiments.tex",
+      "texSha256": "ef9a31f1cd3e6fff6014bfeabc51605db632d24d6ec451e671bcea8e617f0ab4",
+      "figureLabel": "fig:throughput",
+      "role": "result-figure",
+      "explanation": "complete",
+      "visuallyVerified": true,
+      "columns": 3,
+      "panelWidths": [
+        700,
+        700,
+        700,
+        700,
+        700,
+        700,
+        700,
+        700,
+        700,
+        700,
+        700,
+        700
+      ],
+      "reviewedAt": "2026-10-04",
+      "reportSection": "4. 结果与图表解读"
+    },
+    {
+      "file": "off-policy-source.png",
+      "sha256": "5726e94c10efd8231750d86e09edaff7a5f06c74ce4d63f9e1bb6005f709901c",
+      "original": "https://arxiv.org/src/2509.18521v1",
+      "method": "pinned-latex-asset",
+      "sourceArchiveSha256": "68855cd2c38e3aab214b474762fa33e5bf4faba75d9a1fadfeb37ce9fda135e3",
+      "sourcePath": "figs/off-policy.png",
+      "sourceSha256": "cf17ed101249e732202311e7a7d9915af340577b68e11c033f2ad6e1640442ce",
+      "sourceFiles": [
+        {
+          "path": "figs/off-policy.png",
+          "sha256": "cf17ed101249e732202311e7a7d9915af340577b68e11c033f2ad6e1640442ce"
+        }
+      ],
+      "texFile": "sections/experiments.tex",
+      "texSha256": "ef9a31f1cd3e6fff6014bfeabc51605db632d24d6ec451e671bcea8e617f0ab4",
+      "figureLabel": "fig:off-policy",
+      "role": "result-figure",
+      "explanation": "complete",
+      "visuallyVerified": true,
+      "reviewedAt": "2026-10-04",
+      "reportSection": "4. 结果与图表解读"
+    },
+    {
+      "file": "table-1-pdf.png",
+      "sha256": "4f10a47bfc450ccdf9cfcd9dc54f63c543256c6fc7128e728ccdf28ce6b3daa2",
+      "original": "https://arxiv.org/pdf/2509.18521v1#page=5",
+      "method": "pinned-original-pdf-crop",
+      "pdfPage": 5,
+      "cropBox": [
+        105,
+        70,
+        506,
+        270
+      ],
+      "pdfSha256": "1c0e68ee6d0ed02f4da57295e6122235d4e56739950ce1c27e2d09d1ccb3d426",
+      "scale": 3,
+      "pdfPageSize": [
+        612.0,
+        792.0
+      ],
+      "sourceUnavailableReason": "LaTeX table/algorithm typesetting; crop the compiled PDF",
+      "role": "experiment-table",
+      "explanation": "complete",
+      "visuallyVerified": true,
+      "reviewedAt": "2026-10-04",
+      "reportSection": "3. 实验设置与算力"
+    }
+  ]
+}

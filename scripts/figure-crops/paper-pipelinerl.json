@@ -1,0 +1,44 @@
+{
+  "paperId": "paper-pipelinerl",
+  "arxivVersion": "2509.19128v1",
+  "coordinateSystem": "PDF points, top-left origin",
+  "sourceAssets": [
+    {
+      "name": "method-source.png",
+      "tex": "main.tex",
+      "label": "fig:inflight",
+      "role": "method",
+      "path": "figures/inflight_wide.jpg"
+    },
+    {
+      "name": "training-curves-source.png",
+      "tex": "main.tex",
+      "label": "fig:ess_and_rewards",
+      "role": "result-figure",
+      "paths": [
+        "figures/reward_per_time_square.png",
+        "figures/reward_per_samples_square.png",
+        "figures/samples_per_time_square.png"
+      ],
+      "columns": 3,
+      "panelWidths": [
+        700,
+        700,
+        700
+      ]
+    }
+  ],
+  "crops": [
+    {
+      "name": "table-1-pdf.png",
+      "page": 9,
+      "box": [
+        92,
+        78,
+        516,
+        224
+      ],
+      "role": "result-table"
+    }
+  ]
+}

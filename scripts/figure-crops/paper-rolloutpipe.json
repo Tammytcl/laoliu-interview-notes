@@ -1,0 +1,40 @@
+{
+  "paperId": "paper-rolloutpipe",
+  "arxivVersion": "2606.26997v1",
+  "sourceAssets": [
+    {
+      "name": "method-source.png",
+      "tex": "main_en.tex",
+      "label": "fig:rolloutpipe-architecture",
+      "role": "method",
+      "path": "figures/output/architecture_fig1.pdf"
+    },
+    {
+      "name": "timeline-source.png",
+      "tex": "main_en.tex",
+      "label": "fig:rolloutpipe-timeline",
+      "role": "method",
+      "path": "figures/output/rolloutpipe_timeline_fig2.pdf"
+    },
+    {
+      "name": "training-time-source.png",
+      "tex": "main_en.tex",
+      "label": "fig:rolloutpipe-main-window",
+      "role": "result-figure",
+      "path": "figures/output/rolloutpipe_main_window_combined.pdf"
+    }
+  ],
+  "crops": [
+    {
+      "name": "table-1-pdf.png",
+      "page": 13,
+      "box": [
+        132,
+        110,
+        482,
+        255
+      ],
+      "role": "result-table"
+    }
+  ]
+}

@@ -1,0 +1,57 @@
+{
+  "paperId": "paper-asyncopd",
+  "arxivVersion": "2606.24143v1",
+  "coordinateSystem": "PDF points, top-left origin",
+  "sourceAssets": [
+    {
+      "name": "method-source.png",
+      "tex": "figures/asyncopd_scheduler_timeline_figure.tex",
+      "label": "fig:asyncopd-scheduler-timeline",
+      "role": "method",
+      "path": "figures/asyncopd_scheduler_timeline.pdf"
+    },
+    {
+      "name": "kl-comparison-source.png",
+      "tex": "figures/aime24_reverse_ppo_vs_forward_kl_figure.tex",
+      "label": "fig:aime24-reverse-ppo-vs-forward-kl",
+      "role": "result-figure",
+      "paths": [
+        "figures/mean_reverse_ppo_vs_forward_kl_final.pdf",
+        "figures/aime24_reverse_ppo_vs_forward_kl_final.pdf",
+        "figures/aime25_reverse_ppo_vs_forward_kl_final.pdf",
+        "figures/amc_reverse_ppo_vs_forward_kl_final.pdf"
+      ],
+      "columns": 4,
+      "panelWidths": [
+        700,
+        700,
+        700,
+        700
+      ]
+    }
+  ],
+  "crops": [
+    {
+      "name": "table-2-pdf.png",
+      "page": 9,
+      "box": [
+        106,
+        194,
+        506,
+        378
+      ],
+      "role": "result-table"
+    },
+    {
+      "name": "table-7-pdf.png",
+      "page": 18,
+      "box": [
+        106,
+        77,
+        506,
+        277
+      ],
+      "role": "result-table"
+    }
+  ]
+}

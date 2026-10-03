@@ -1,0 +1,41 @@
+{
+  "paperId": "paper-tiderl",
+  "arxivVersion": "2608.10402v1",
+  "coordinateSystem": "PDF points, top-left origin",
+  "sourceAssets": [
+    {
+      "name": "method-source.png",
+      "tex": "sections/3.overview.tex",
+      "label": "fig:sys_architecture",
+      "role": "method",
+      "path": "figs/sys_arch.png"
+    },
+    {
+      "name": "text-throughput-source.png",
+      "tex": "sections/5.eval.tex",
+      "label": "fig:throughput_text",
+      "role": "result-figure",
+      "path": "figs/thrp_text.png"
+    },
+    {
+      "name": "multimodal-throughput-source.png",
+      "tex": "sections/5.eval.tex",
+      "label": "fig:throughput_mm",
+      "role": "result-figure",
+      "path": "figs/thrp_mm.png"
+    }
+  ],
+  "crops": [
+    {
+      "name": "table-2-pdf.png",
+      "page": 11,
+      "box": [
+        51,
+        238,
+        296,
+        331
+      ],
+      "role": "result-table"
+    }
+  ]
+}

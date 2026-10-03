@@ -1,0 +1,34 @@
+{
+  "paperId": "paper-heddle",
+  "arxivVersion": "2603.28101v1",
+  "coordinateSystem": "PDF points, top-left origin",
+  "sourceAssets": [
+    {
+      "name": "method-source.png",
+      "tex": "sections/overview.tex",
+      "label": "fig:overview:overview",
+      "role": "method",
+      "path": "figures/design/arch.pdf"
+    },
+    {
+      "name": "throughput-source.png",
+      "tex": "sections/evaluation.tex",
+      "label": "fig:eval:overall",
+      "role": "result-figure",
+      "path": "figures/eval/files/overall_new_.pdf"
+    }
+  ],
+  "crops": [
+    {
+      "name": "table-1-pdf.png",
+      "page": 12,
+      "box": [
+        82,
+        78,
+        277,
+        198
+      ],
+      "role": "result-table"
+    }
+  ]
+}

@@ -1,0 +1,113 @@
+{
+  "paperId": "paper-flexmarl",
+  "arxivVersion": "2602.09578v1",
+  "originalUrl": "https://arxiv.org/abs/2602.09578v1",
+  "attribution": "Original figures/tables by paper authors; pinned source assets and tightly cropped PDF tables.",
+  "figures": [
+    {
+      "file": "method-source.png",
+      "sha256": "3d9dba6659422eeb4763cf47715a4f07034a13be8e0ff13bd4c76d0e7083bf49",
+      "original": "https://arxiv.org/src/2602.09578v1",
+      "method": "pinned-latex-asset",
+      "sourceArchiveSha256": "8c49a4c0cef805c91219eb523a150661f390055313bf9298ae382e82ff881009",
+      "sourcePath": "figures/overview.png",
+      "sourceSha256": "62ec9844f0224a2426ad69d4c19c75346b9100e91643a0bfa04af51a5a114492",
+      "sourceFiles": [
+        {
+          "path": "figures/overview.png",
+          "sha256": "62ec9844f0224a2426ad69d4c19c75346b9100e91643a0bfa04af51a5a114492"
+        }
+      ],
+      "texFile": "overview.tex",
+      "texSha256": "55933c702537ade7ee790773dd145e0e108a750f60e21d445a7f16838d762dc0",
+      "figureLabel": "fig:overview",
+      "role": "method",
+      "explanation": "complete",
+      "visuallyVerified": true,
+      "reviewedAt": "2026-10-04",
+      "reportSection": "2. 方法与实现机制"
+    },
+    {
+      "file": "microbatch-source.png",
+      "sha256": "334c10b67824b7c47aaeaa89e1ee9c58e1832ec19b998244f7adbe97010c7422",
+      "original": "https://arxiv.org/src/2602.09578v1",
+      "method": "pinned-latex-asset",
+      "sourceArchiveSha256": "8c49a4c0cef805c91219eb523a150661f390055313bf9298ae382e82ff881009",
+      "sourcePath": null,
+      "sourceSha256": "e0c7fdb9789c86e69369bd6f7219f03cfefb7c8b0a55bc71ddd94b5f5a067ffa",
+      "sourceFiles": [
+        {
+          "path": "figures/onestep.png",
+          "sha256": "e0c7fdb9789c86e69369bd6f7219f03cfefb7c8b0a55bc71ddd94b5f5a067ffa"
+        },
+        {
+          "path": "figures/microbatch.png",
+          "sha256": "358206b7e76298b0c46676e046a2c8b022fa2a328c48b4b7f008ee806aff815a"
+        }
+      ],
+      "texFile": "orchestrator.tex",
+      "texSha256": "4bef2c9b396a48c1fb80917b19df86e596c7287a3619cd14cf42023438f222fa",
+      "figureLabel": "fig:asyn_mechanism",
+      "role": "method",
+      "explanation": "complete",
+      "visuallyVerified": true,
+      "columns": 2,
+      "panelWidths": [
+        700,
+        700
+      ],
+      "reviewedAt": "2026-10-04",
+      "reportSection": "2. 方法与实现机制"
+    },
+    {
+      "file": "table-2-pdf.png",
+      "sha256": "64874287570c1ff4a5e3fb9195b7478cd5a8cfa4552b380fc6891c2cf405efbf",
+      "original": "https://arxiv.org/pdf/2602.09578v1#page=9",
+      "method": "pinned-original-pdf-crop",
+      "pdfPage": 9,
+      "cropBox": [
+        51,
+        82,
+        297,
+        240
+      ],
+      "pdfSha256": "a934d80837f7026e45d516f113c107d540dd7d6d05021e10503d0909821521b5",
+      "scale": 3,
+      "pdfPageSize": [
+        612.0,
+        792.0
+      ],
+      "sourceUnavailableReason": "LaTeX table/algorithm typesetting; crop the compiled PDF",
+      "role": "result-table",
+      "explanation": "complete",
+      "visuallyVerified": true,
+      "reviewedAt": "2026-10-04",
+      "reportSection": "4. 结果与图表解读"
+    },
+    {
+      "file": "table-3-pdf.png",
+      "sha256": "3cad0be0b588c92adcfd89284ace1df36a0afc3c731dd45b6e1c7afde192f0cf",
+      "original": "https://arxiv.org/pdf/2602.09578v1#page=11",
+      "method": "pinned-original-pdf-crop",
+      "pdfPage": 11,
+      "cropBox": [
+        51,
+        82,
+        297,
+        215
+      ],
+      "pdfSha256": "a934d80837f7026e45d516f113c107d540dd7d6d05021e10503d0909821521b5",
+      "scale": 3,
+      "pdfPageSize": [
+        612.0,
+        792.0
+      ],
+      "sourceUnavailableReason": "LaTeX table/algorithm typesetting; crop the compiled PDF",
+      "role": "result-table",
+      "explanation": "complete",
+      "visuallyVerified": true,
+      "reviewedAt": "2026-10-04",
+      "reportSection": "4. 结果与图表解读"
+    }
+  ]
+}

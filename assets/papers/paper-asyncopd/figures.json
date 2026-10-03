@@ -1,0 +1,123 @@
+{
+  "paperId": "paper-asyncopd",
+  "arxivVersion": "2606.24143v1",
+  "originalUrl": "https://arxiv.org/abs/2606.24143v1",
+  "attribution": "Original figures/tables by the paper authors; pinned LaTeX assets and tightly cropped PDF typesetting with report commentary.",
+  "figures": [
+    {
+      "file": "method-source.png",
+      "sha256": "6a3f99ef66250da1f167fb2db6b2876e7f42c8c3b0cd01ccb5791db0eac2fb2b",
+      "original": "https://arxiv.org/src/2606.24143v1",
+      "method": "pinned-latex-asset",
+      "sourceArchiveSha256": "87d4382debb64eddfcda2a5a2beecd819a34e39948266c4e8e8d0adf1b19af26",
+      "sourcePath": "figures/asyncopd_scheduler_timeline.pdf",
+      "sourceSha256": "27379cf044249836279658f258c6e3da9009be37456e3c0a3461b5a6f70abd47",
+      "sourceFiles": [
+        {
+          "path": "figures/asyncopd_scheduler_timeline.pdf",
+          "sha256": "27379cf044249836279658f258c6e3da9009be37456e3c0a3461b5a6f70abd47"
+        }
+      ],
+      "texFile": "figures/asyncopd_scheduler_timeline_figure.tex",
+      "texSha256": "38b05c2f0fbae6a4228279f0c344656339b9c583879b375d14270a8be99d2e64",
+      "figureLabel": "fig:asyncopd-scheduler-timeline",
+      "role": "method",
+      "explanation": "complete",
+      "visuallyVerified": true,
+      "reviewedAt": "2026-10-04",
+      "reportSection": "2. 方法与实现机制"
+    },
+    {
+      "file": "kl-comparison-source.png",
+      "sha256": "7988f08e947b7e02390180d5ab20548959fd2730f0c45a72350f541af3782284",
+      "original": "https://arxiv.org/src/2606.24143v1",
+      "method": "pinned-latex-asset",
+      "sourceArchiveSha256": "87d4382debb64eddfcda2a5a2beecd819a34e39948266c4e8e8d0adf1b19af26",
+      "sourcePath": null,
+      "sourceSha256": "467a45c2f8149e56d6620c49fb578edc52f5164506cb86846ece35e0ee9bfdc8",
+      "sourceFiles": [
+        {
+          "path": "figures/mean_reverse_ppo_vs_forward_kl_final.pdf",
+          "sha256": "467a45c2f8149e56d6620c49fb578edc52f5164506cb86846ece35e0ee9bfdc8"
+        },
+        {
+          "path": "figures/aime24_reverse_ppo_vs_forward_kl_final.pdf",
+          "sha256": "7f5151169daeb167bfd28ef498c8378128a24144551243aa9dbafc0fc0e17509"
+        },
+        {
+          "path": "figures/aime25_reverse_ppo_vs_forward_kl_final.pdf",
+          "sha256": "21711b792cef9cc1e6744b3c8a202a181b17f67274b1ffe0a698a0096292c105"
+        },
+        {
+          "path": "figures/amc_reverse_ppo_vs_forward_kl_final.pdf",
+          "sha256": "bc07cfb0614222b345d83709e2ff6c2eb70f659823e373a966ae7e30a5409082"
+        }
+      ],
+      "texFile": "figures/aime24_reverse_ppo_vs_forward_kl_figure.tex",
+      "texSha256": "1d597d15061c3e13599f68cdcb8d4470f63648fa7f49d1b2719f72211caf76e9",
+      "figureLabel": "fig:aime24-reverse-ppo-vs-forward-kl",
+      "role": "result-figure",
+      "explanation": "complete",
+      "visuallyVerified": true,
+      "columns": 4,
+      "panelWidths": [
+        700,
+        700,
+        700,
+        700
+      ],
+      "reviewedAt": "2026-10-04",
+      "reportSection": "4. 结果与图表解读"
+    },
+    {
+      "file": "table-2-pdf.png",
+      "sha256": "36264fd4d26929b1ad5a79dd8f5c44bd2db5d3bc79d2f3802f055b16fe56819a",
+      "original": "https://arxiv.org/pdf/2606.24143v1#page=9",
+      "method": "pinned-original-pdf-crop",
+      "pdfPage": 9,
+      "cropBox": [
+        106,
+        194,
+        506,
+        378
+      ],
+      "pdfSha256": "33243254ecb041a8c0ae9557fb8d60912fba08752aa32ccce981d59cd3055a2a",
+      "scale": 3,
+      "pdfPageSize": [
+        612.0,
+        792.0
+      ],
+      "sourceUnavailableReason": "LaTeX table/algorithm typesetting; crop the compiled PDF",
+      "role": "result-table",
+      "explanation": "complete",
+      "visuallyVerified": true,
+      "reviewedAt": "2026-10-04",
+      "reportSection": "4. 结果与图表解读"
+    },
+    {
+      "file": "table-7-pdf.png",
+      "sha256": "38fc99c5d550ecd700facbc1119cfab84a13aa833c9576f16db2e980cbd74743",
+      "original": "https://arxiv.org/pdf/2606.24143v1#page=18",
+      "method": "pinned-original-pdf-crop",
+      "pdfPage": 18,
+      "cropBox": [
+        106,
+        77,
+        506,
+        277
+      ],
+      "pdfSha256": "33243254ecb041a8c0ae9557fb8d60912fba08752aa32ccce981d59cd3055a2a",
+      "scale": 3,
+      "pdfPageSize": [
+        612.0,
+        792.0
+      ],
+      "sourceUnavailableReason": "LaTeX table/algorithm typesetting; crop the compiled PDF",
+      "role": "result-table",
+      "explanation": "complete",
+      "visuallyVerified": true,
+      "reviewedAt": "2026-10-04",
+      "reportSection": "4. 结果与图表解读"
+    }
+  ]
+}

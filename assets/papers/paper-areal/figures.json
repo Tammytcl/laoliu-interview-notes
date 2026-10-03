@@ -1,0 +1,79 @@
+{
+  "paperId": "paper-areal",
+  "arxivVersion": "2505.24298v1",
+  "originalUrl": "https://arxiv.org/abs/2505.24298v1",
+  "attribution": "Original figures/tables by the paper authors; pinned LaTeX assets and tightly cropped PDF typesetting with report commentary.",
+  "figures": [
+    {
+      "file": "method-source.png",
+      "sha256": "4fe67583c879fc10d83ee32f52021332a9f90ff879c1d38c4cacccf5dada8340",
+      "original": "https://arxiv.org/src/2505.24298v1",
+      "method": "pinned-latex-asset",
+      "sourceArchiveSha256": "6932c6010f9fbecbf9e7e35a8543dd74e3a8eedeb9724e1d74a1b3d440d6c5a9",
+      "sourcePath": "figures/overview.pdf",
+      "sourceSha256": "a48358ee6103e484535f42e06a5b080e616ce23cbbefa33b4f7c5f8e444b8093",
+      "sourceFiles": [
+        {
+          "path": "figures/overview.pdf",
+          "sha256": "a48358ee6103e484535f42e06a5b080e616ce23cbbefa33b4f7c5f8e444b8093"
+        }
+      ],
+      "texFile": "content/3-arch.tex",
+      "texSha256": "2e0b5a30241f217ec9bb2e6a775599b04e221f9e0d1634a5e1fae387dc57c6b8",
+      "figureLabel": "fig:overview",
+      "role": "method",
+      "explanation": "complete",
+      "visuallyVerified": true,
+      "reviewedAt": "2026-10-04",
+      "reportSection": "2. 方法与实现机制"
+    },
+    {
+      "file": "scaling-source.png",
+      "sha256": "39b6c3610f5cb7aea0ffd81d15b56c9a1f161f908c9f3b9be7884f4c8aef0131",
+      "original": "https://arxiv.org/src/2505.24298v1",
+      "method": "pinned-latex-asset",
+      "sourceArchiveSha256": "6932c6010f9fbecbf9e7e35a8543dd74e3a8eedeb9724e1d74a1b3d440d6c5a9",
+      "sourcePath": "figures/scaling_trend_vs_verl.pdf",
+      "sourceSha256": "fc4c54a16109da83b2eddfb263ab557a52ac8e97c4ab52f9735730be14a099e3",
+      "sourceFiles": [
+        {
+          "path": "figures/scaling_trend_vs_verl.pdf",
+          "sha256": "fc4c54a16109da83b2eddfb263ab557a52ac8e97c4ab52f9735730be14a099e3"
+        }
+      ],
+      "texFile": "content/6-experiment.tex",
+      "texSha256": "4ca6bc4909bb8f0bf9ad39d75f92780ec4bfe13890b59638dc1a8386e3bd6bbd",
+      "figureLabel": "fig:scaling",
+      "role": "result-figure",
+      "explanation": "complete",
+      "visuallyVerified": true,
+      "reviewedAt": "2026-10-04",
+      "reportSection": "4. 结果与图表解读"
+    },
+    {
+      "file": "table-1-pdf.png",
+      "sha256": "43d5f91ff524e37049f26e42e90b862502c5b1971be4d6fd922007dcb1972500",
+      "original": "https://arxiv.org/pdf/2505.24298v1#page=7",
+      "method": "pinned-original-pdf-crop",
+      "pdfPage": 7,
+      "cropBox": [
+        106,
+        491,
+        506,
+        727
+      ],
+      "pdfSha256": "943c1fe1e37ef360f400505757835cbb69d28308f8087b208fd4b9ed0c0bd5c2",
+      "scale": 3,
+      "pdfPageSize": [
+        612.0,
+        792.0
+      ],
+      "sourceUnavailableReason": "LaTeX table/algorithm typesetting; crop the compiled PDF",
+      "role": "result-table",
+      "explanation": "complete",
+      "visuallyVerified": true,
+      "reviewedAt": "2026-10-04",
+      "reportSection": "4. 结果与图表解读"
+    }
+  ]
+}

@@ -137,6 +137,13 @@ function renderDetail(params) {
     image.replaceWith(button); button.append(image);
     const caption = document.createElement('span'); caption.className = 'paper-figure-caption'; caption.textContent = image.alt; button.append(caption);
   }
+  for (const table of document.querySelectorAll('.publication-body table')) {
+    const wrapper = document.createElement('div'); wrapper.className = 'publication-table-scroll';
+    wrapper.tabIndex = 0; wrapper.setAttribute('role', 'region'); wrapper.setAttribute('aria-label', '表格，可横向滚动');
+    const columns = [...(table.rows[0]?.cells || [])].reduce((count, cell) => count + cell.colSpan, 0);
+    table.style.setProperty('--table-min-width', `${Math.max(360, columns * 150)}px`);
+    table.replaceWith(wrapper); wrapper.append(table);
+  }
 }
 export function renderPaperLibrary(params) {
   if (!isPaperRoute(params)) return false;
