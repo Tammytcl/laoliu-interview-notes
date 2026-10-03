@@ -188,7 +188,7 @@ Table 1 使用秒作为时间单位。MHA-XXL 的时间为 1.51，平均分 47.2
 
 作者没有比较 GQA-XXL uptraining 与同规模从零训练的完整对照；ROUGE 也不足以全面评价长文本生成。附录 A 记录 MQA 的预训练 loss spike 与长输入微调不稳定，部分不稳定任务的 MQA 结果取三次微调平均；GQA 显示较稳定，但论文并未完整追溯根因。因此“质量接近”应限定到原文的任务、指标与训练方式。
 
-迁移到 decoder-only GPU 服务时，应重新检查 KV 分片副本、kernel 的原生 GQA 支持、prefill 与 decode 比例、上下文长度和 batch 负载。减少 cache 容量不必然改善权重占主导、排队占主导或工具等待占主导的系统。与 [PagedAttention 报告](#paper=paper-pagedattention) 一起读，可以把“模型需要多少 KV”与“KV 如何分配”两层分开；[显存账本](#q=training-inference-frameworks)用于补足权重、激活和临时工作区。
+迁移到 decoder-only GPU 服务时，应重新检查 KV 分片副本、kernel 的原生 GQA 支持、prefill 与 decode 比例、上下文长度和 batch 负载。减少 cache 容量不必然改善权重占主导、排队占主导或工具等待占主导的系统。与 [PagedAttention 报告](#paper=paper-pagedattention) 一起读，可以把“模型需要多少 KV”与“KV 如何分配”两层分开；显存账本用于补足权重、激活和临时工作区。
 
 **整理范围与版本。** 核对 arXiv v3（2023-12-23）的正文、附录 A、LaTeX 图表数据及 Table 1；图表为原论文 HTML 截图，版权与学术贡献归原作者。2026-09-30 更新为五模块报告，增加元数据、全图解释与实验口径。本报告未进行训练复现；页首“已核原文”表示来源核对，不表示完成了硬件复现。后续更新应补实际 checkpoint/代码 commit、语料快照和自己的性能日志，不能将待做实验登记为实测。
 

@@ -18,7 +18,7 @@ paper_url: "https://arxiv.org/abs/2309.06180v1"
 github_url: "https://github.com/vllm-project/vllm"
 code_note: "Official vLLM repository; current main is not the 2023 experimental revision."
 evidence: 已核原文
-note_ids: [training-inference-frameworks]
+note_ids: [kv-cache]
 tags: [LLM, LLM Serving, PagedAttention, KV Cache, Memory Management, vLLM]
 updated: 2026-09-30
 summary: "将请求的逻辑 KV 序列映射到非连续物理块，通过按需分配、共享和写时复制提高可批处理容量。"
@@ -44,7 +44,7 @@ LLM 服务的输入长度差异很大，输出长度又事先未知。若给每�
 | 连续 KV 预留 | 地址计算直接 | 未知输出长度带来保留浪费与碎片 |
 | 为分支复制 prompt KV | 易于实现独立序列 | 多采样、beam search 重复占用 |
 
-本文要证明的不是“注意力公式更准确”，而是：**保持模型计算语义，通过更高效地管理请求状态，让更多请求同批执行，在相近延迟下承受更高负载。** [KV cache](#q=kv-cache) 和 [PagedAttention 基础笔记](#q=training-inference-frameworks)提供先修。
+本文要证明的不是“注意力公式更准确”，而是：**保持模型计算语义，通过更高效地管理请求状态，让更多请求同批执行，在相近延迟下承受更高负载。** [KV cache](#q=kv-cache) 提供先修。
 
 ## 2. 方法与实现机制
 
@@ -146,7 +146,7 @@ PagedAttention 改进的是 **KV 内存管理和可批处理容量**，不是语
 
 论文中的 Orca 为作者重实现，工作负载使用合成时间戳，实验版本也不是今天 vLLM main。计划复现时应记录代码 commit、模型 revision、tokenizer、精度、block size、batch token 预算、抢占策略、到达分布与并行拓扑，并重新测 TTFT、每 token 延迟及吞吐，避免与原文 normalized latency 混用。
 
-**来源与更新。** 根据 [arXiv v1 正文与实验](https://arxiv.org/html/2309.06180v1)、Table 1 和原图整理；单位按发表时列示。2026-09-30 更新为五模块报告，新增英文元数据、硬件账本与原图。图片保留原作者归属；本报告为原文核读与分析，未登记个人运行结果。[前缀缓存笔记](#q=training-inference-frameworks)和 [推理显存专题](#report=survey-inference-memory)可继续连接模型层与服务层。
+**来源与更新。** 根据 [arXiv v1 正文与实验](https://arxiv.org/html/2309.06180v1)、Table 1 和原图整理；单位按发表时列示。2026-09-30 更新为五模块报告，新增英文元数据、硬件账本与原图。图片保留原作者归属；本报告为原文核读与分析，未登记个人运行结果。[前缀缓存笔记](https://docs.vllm.ai/en/latest/features/automatic_prefix_caching/)和 [推理显存专题](#report=survey-inference-memory)可继续连接模型层与服务层。
 
 ### 参考讲解与源码版本
 

@@ -212,6 +212,6 @@ npm run test:browser
 
 ## Infra 训推框架样稿与专题整理
 
-[训推框架总览](content/questions/systems/training-inference-frameworks.md) 覆盖训练 / 生成基础、slime / verl 对比、三张来源图和 60 道面试练习。旧 Infra 8 篇已移入 `archive/questions/systems/2026-10-03/`，网页只保留总览，旧 URL 自动跳转。
+[训练框架对比与使用](content/questions/systems/training-inference-frameworks.md) 以 verl / slime 为主线，解释后端区别、实际接入、配置和选型，保留两张架构图及八个框架相关问答。旧 Infra 8 篇已移入 `archive/questions/systems/2026-10-03/`，网页只保留本轮框架专题，旧 URL 自动跳转。
 
 后续专题遵循 [整理工作流](docs/topic-workflow.md) 和 [模板](templates/topic.md)。`npm run topics:quality` 检查来源、固定版本、插图、公式和站内链接；`npm run topics:watch` 观察核心来源，记录待核对变化。每周一 UTC 02:17 自动更新观察快照、检查、推送与部署；正文语义更新需读取差异后核对，不自动改写事实。`npm run topics:check-live -- <站点地址>` 验证线上样稿与手机布局。

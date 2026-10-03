@@ -4,20 +4,15 @@
     "sources": "content/research/framework-sources.json",
     "figures": "assets/infra/training-inference-frameworks/figures.json",
     "requiredSections": [
-      "阅读路线",
-      "框架地图",
-      "基础知识",
-      "训练框架",
-      "推理框架",
-      "RL Infra",
-      "slime：",
+      "比较对象",
+      "训练后端",
       "verl：",
-      "横向对比",
-      "排障与系统设计",
-      "面试练习",
-      "验证路线",
+      "slime：",
+      "横向对比与选型",
+      "换框架",
+      "其他候选",
+      "框架选择与使用的问答",
       "来源"
-    ],
-    "minimumQuestions": 60
+    ]
   }
 ]

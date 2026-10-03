@@ -26,7 +26,7 @@ FlashAttention 用作注意力中间量/IO 的边界参照，其单篇精读仍�
 
 - [GQA](#paper=paper-gqa)：模型结构层，减少每 token 所需 KV 头。
 - [PagedAttention](#paper=paper-pagedattention)：服务内存层，管理逻辑/物理块与共享。
-- [FlashAttention 笔记](#q=training-inference-frameworks)：算子 IO 层，减少 attention 中间量的实体化和读写；不直接等于跨请求 KV 管理。
+- [FlashAttention 笔记](https://arxiv.org/abs/2205.14135)：算子 IO 层，减少 attention 中间量的实体化和读写；不直接等于跨请求 KV 管理。
 
 先按瓶颈分层，再决定下一篇要补哪条路线。
 
@@ -46,7 +46,7 @@ FlashAttention 用作注意力中间量/IO 的边界参照，其单篇精读仍�
 
 学习性推演：三条路线作用在不同开销上，因此存在组合空间。它们的原实验不构成对同一现代服务负载的头对头比较；“组合后是否更好”仍需要对照实验。
 
-先拆 [显存账本](#q=training-inference-frameworks)，看权重、KV、激活/workspace 的占比；再用阶段时间线找计算、带宽和等待。本文没有提供本人硬件实测。
+先拆 显存账本，看权重、KV、激活/workspace 的占比；再用阶段时间线找计算、带宽和等待。本文没有提供本人硬件实测。
 
 ## 6. 场景化结论与选型
 

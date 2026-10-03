@@ -50,7 +50,7 @@ Prefill 处理一段输入；使用 KV cache 的逐 token decode 只计算新 qu
 
 固定 D 比 N=128/512/2048 的 attention 项与线性层项；然后固定 N 增大 D。画张量形状，说明哪种场景更受序列长度影响。实验为建议练习，未提供硬件实测数值。
 
-自检：FlashAttention 不保存 N×N 矩阵，为何仍计算稠密的 token 对？读 [FlashAttention 推导](#q=training-inference-frameworks) 或练习 [手撕 causal attention](#q=causal-attention-coding)。
+自检：FlashAttention 不保存 N×N 矩阵，为何仍计算稠密的 token 对？读 [FlashAttention 推导](https://arxiv.org/abs/2205.14135) 或练习 [手撕 causal attention](#q=causal-attention-coding)。
 
 ## 原始资料
 

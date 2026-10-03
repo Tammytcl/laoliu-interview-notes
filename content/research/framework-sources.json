@@ -1,12 +1,20 @@
 {
   "version": 1,
   "topicId": "training-inference-frameworks",
-  "note": "reviewedAt/revision 是正文核对基线；自动观察不得覆盖这些字段。",
+  "note": "核对基线用于训练框架区别与使用；自动观察不覆盖已核版本。",
   "sources": [
     {
       "id": "source-01",
       "title": "PyTorch FSDP2",
       "url": "https://docs.pytorch.org/tutorials/intermediate/FSDP_tutorial.html",
+      "kind": "official-docs",
+      "reviewedAt": "2026-10-03",
+      "purpose": "正文技术解释的原始出处"
+    },
+    {
+      "id": "source-17",
+      "title": "DeepSpeed 文档",
+      "url": "https://www.deepspeed.ai/",
       "kind": "official-docs",
       "reviewedAt": "2026-10-03",
       "purpose": "正文技术解释的原始出处"
@@ -21,14 +29,6 @@
       "repository": "NVIDIA/Megatron-LM",
       "revision": "b1a6f076993662664f824d1cb8e81e51cf572b8b",
       "pinnedUrl": "https://github.com/NVIDIA/Megatron-LM/tree/b1a6f076993662664f824d1cb8e81e51cf572b8b"
-    },
-    {
-      "id": "source-03",
-      "title": "TRL",
-      "url": "https://huggingface.co/docs/trl/index",
-      "kind": "official-docs",
-      "reviewedAt": "2026-10-03",
-      "purpose": "正文技术解释的原始出处"
     },
     {
       "id": "source-04",
@@ -53,33 +53,25 @@
       "pinnedUrl": "https://github.com/THUDM/slime/tree/8c17b676cb57af1d17ee4402e91e9209af84b60b"
     },
     {
-      "id": "source-06",
-      "title": "DPO 论文",
-      "url": "https://arxiv.org/abs/2305.18290",
-      "kind": "paper",
-      "reviewedAt": "2026-10-03",
-      "purpose": "正文技术解释的原始出处"
-    },
-    {
-      "id": "source-07",
-      "title": "DeepSeekMath",
-      "url": "https://arxiv.org/abs/2402.03300",
-      "kind": "paper",
-      "reviewedAt": "2026-10-03",
-      "purpose": "正文技术解释的原始出处"
-    },
-    {
-      "id": "source-08",
-      "title": "TRL GRPO 文档",
-      "url": "https://huggingface.co/docs/trl/grpo_trainer",
+      "id": "source-03",
+      "title": "TRL",
+      "url": "https://huggingface.co/docs/trl/index",
       "kind": "official-docs",
       "reviewedAt": "2026-10-03",
       "purpose": "正文技术解释的原始出处"
     },
     {
-      "id": "source-09",
-      "title": "vLLM 优化文档",
-      "url": "https://docs.vllm.ai/en/latest/configuration/optimization/",
+      "id": "framework-ref-07",
+      "title": "DeepSpeed 入门",
+      "url": "https://www.deepspeed.ai/getting-started/",
+      "kind": "official-docs",
+      "reviewedAt": "2026-10-03",
+      "purpose": "训练框架接入、配置与使用路线"
+    },
+    {
+      "id": "source-18",
+      "title": "Megatron Core 官方文档",
+      "url": "https://docs.nvidia.com/megatron-core/developer-guide/latest/index.html",
       "kind": "official-docs",
       "reviewedAt": "2026-10-03",
       "purpose": "正文技术解释的原始出处"
@@ -93,150 +85,12 @@
       "purpose": "正文技术解释的原始出处"
     },
     {
-      "id": "source-11",
-      "title": "PagedAttention 论文",
-      "url": "https://arxiv.org/abs/2309.06180",
+      "id": "source-41",
+      "title": "HybridFlow 论文",
+      "url": "https://arxiv.org/abs/2409.19256",
       "kind": "paper",
       "reviewedAt": "2026-10-03",
       "purpose": "正文技术解释的原始出处"
-    },
-    {
-      "id": "source-12",
-      "title": "PEFT LoRA",
-      "url": "https://huggingface.co/docs/peft/conceptual_guides/lora",
-      "kind": "official-docs",
-      "reviewedAt": "2026-10-03",
-      "purpose": "正文技术解释的原始出处"
-    },
-    {
-      "id": "source-13",
-      "title": "量化概览",
-      "url": "https://huggingface.co/docs/transformers/quantization/overview",
-      "kind": "official-docs",
-      "reviewedAt": "2026-10-03",
-      "purpose": "正文技术解释的原始出处"
-    },
-    {
-      "id": "source-14",
-      "title": "PyTorch checkpoint",
-      "url": "https://docs.pytorch.org/docs/2.14/checkpoint.html",
-      "kind": "official-docs",
-      "reviewedAt": "2026-10-03",
-      "purpose": "正文技术解释的原始出处"
-    },
-    {
-      "id": "source-15",
-      "title": "Megatron 并行文档",
-      "url": "https://docs.nvidia.com/megatron-core/developer-guide/latest/apidocs/core/core.tensor_parallel.html",
-      "kind": "official-docs",
-      "reviewedAt": "2026-10-03",
-      "purpose": "正文技术解释的原始出处"
-    },
-    {
-      "id": "source-16",
-      "title": "ZeRO 论文",
-      "url": "https://arxiv.org/abs/1910.02054",
-      "kind": "paper",
-      "reviewedAt": "2026-10-03",
-      "purpose": "正文技术解释的原始出处"
-    },
-    {
-      "id": "source-17",
-      "title": "DeepSpeed 文档",
-      "url": "https://www.deepspeed.ai/",
-      "kind": "official-docs",
-      "reviewedAt": "2026-10-03",
-      "purpose": "正文技术解释的原始出处"
-    },
-    {
-      "id": "source-18",
-      "title": "Megatron Core 官方文档",
-      "url": "https://docs.nvidia.com/megatron-core/developer-guide/latest/index.html",
-      "kind": "official-docs",
-      "reviewedAt": "2026-10-03",
-      "purpose": "正文技术解释的原始出处"
-    },
-    {
-      "id": "source-19",
-      "title": "NCCL collectives",
-      "url": "https://docs.nvidia.com/deeplearning/nccl/user-guide/docs/usage/collectives.html",
-      "kind": "official-docs",
-      "reviewedAt": "2026-10-03",
-      "purpose": "正文技术解释的原始出处"
-    },
-    {
-      "id": "source-20",
-      "title": "vLLM 官方仓库",
-      "url": "https://github.com/vllm-project/vllm",
-      "kind": "official-code",
-      "reviewedAt": "2026-10-03",
-      "purpose": "正文技术解释的原始出处",
-      "repository": "vllm-project/vllm",
-      "revision": "e319f86f15f3bf72d9016d5324500730a1f16e25",
-      "pinnedUrl": "https://github.com/vllm-project/vllm/tree/e319f86f15f3bf72d9016d5324500730a1f16e25",
-      "reviewNote": "2026-10-03 核对新增 per-row prompt candidate logprob 提交；本文框架定位、KV 和选型说明不受影响。"
-    },
-    {
-      "id": "source-21",
-      "title": "FlashAttention 论文",
-      "url": "https://arxiv.org/abs/2205.14135",
-      "kind": "paper",
-      "reviewedAt": "2026-10-03",
-      "purpose": "正文技术解释的原始出处"
-    },
-    {
-      "id": "source-22",
-      "title": "SGLang 作者博客",
-      "url": "https://www.lmsys.org/blog/2024-01-17-sglang/",
-      "kind": "author-blog",
-      "reviewedAt": "2026-10-03",
-      "purpose": "正文技术解释的原始出处"
-    },
-    {
-      "id": "source-23",
-      "title": "vLLM APC 文档",
-      "url": "https://docs.vllm.ai/en/latest/features/automatic_prefix_caching/",
-      "kind": "official-docs",
-      "reviewedAt": "2026-10-03",
-      "purpose": "正文技术解释的原始出处"
-    },
-    {
-      "id": "source-24",
-      "title": "SGLang 官方文档",
-      "url": "https://docs.sglang.io/",
-      "kind": "official-docs",
-      "reviewedAt": "2026-10-03",
-      "purpose": "正文技术解释的原始出处"
-    },
-    {
-      "id": "source-25",
-      "title": "SGLang PD 文档",
-      "url": "https://docs.sglang.io/docs/advanced_features/pd_disaggregation",
-      "kind": "official-docs",
-      "reviewedAt": "2026-10-03",
-      "purpose": "正文技术解释的原始出处"
-    },
-    {
-      "id": "source-26",
-      "title": "TensorRT-LLM",
-      "url": "https://github.com/NVIDIA/TensorRT-LLM",
-      "kind": "official-code",
-      "reviewedAt": "2026-10-03",
-      "purpose": "正文技术解释的原始出处",
-      "repository": "NVIDIA/TensorRT-LLM",
-      "revision": "78dac6256b82eeffc06cd5ef9bfe6571dffaa5b9",
-      "pinnedUrl": "https://github.com/NVIDIA/TensorRT-LLM/tree/78dac6256b82eeffc06cd5ef9bfe6571dffaa5b9"
-    },
-    {
-      "id": "source-27",
-      "title": "llama.cpp",
-      "url": "https://github.com/ggml-org/llama.cpp",
-      "kind": "official-code",
-      "reviewedAt": "2026-10-03",
-      "purpose": "正文技术解释的原始出处",
-      "repository": "ggml-org/llama.cpp",
-      "revision": "edd6e2bbdad5930899a93db8fa73c3b61c7b9bcc",
-      "pinnedUrl": "https://github.com/ggml-org/llama.cpp/tree/edd6e2bbdad5930899a93db8fa73c3b61c7b9bcc"
     },
     {
       "id": "source-28",
@@ -247,82 +101,34 @@
       "purpose": "正文技术解释的原始出处"
     },
     {
-      "id": "source-29",
-      "title": "OpenRLHF 论文",
-      "url": "https://arxiv.org/abs/2405.11143",
-      "kind": "paper",
-      "reviewedAt": "2026-10-03",
-      "purpose": "正文技术解释的原始出处"
-    },
-    {
-      "id": "source-30",
-      "title": "verl Agent Loop",
-      "url": "https://verl.readthedocs.io/en/latest/advance/agent_loop.html",
+      "id": "framework-ref-12",
+      "title": "Quickstart",
+      "url": "https://verl.readthedocs.io/en/latest/start/quickstart.html",
       "kind": "official-docs",
       "reviewedAt": "2026-10-03",
-      "purpose": "正文技术解释的原始出处"
+      "purpose": "训练框架接入、配置与使用路线"
     },
     {
-      "id": "source-31",
-      "title": "slime Agentic RL Guide",
-      "url": "https://thudm.github.io/slime/get_started/agent.html",
-      "kind": "official-docs",
-      "reviewedAt": "2026-10-03",
-      "purpose": "正文技术解释的原始出处"
-    },
-    {
-      "id": "source-32",
-      "title": "SGLang 确定性博客",
-      "url": "https://www.lmsys.org/blog/2025-09-22-sglang-deterministic/",
-      "kind": "author-blog",
-      "reviewedAt": "2026-10-03",
-      "purpose": "正文技术解释的原始出处"
-    },
-    {
-      "id": "source-33",
-      "title": "verl Rollout Correction",
-      "url": "https://verl.readthedocs.io/en/latest/algo/rollout_corr.html",
-      "kind": "official-docs",
-      "reviewedAt": "2026-10-03",
-      "purpose": "正文技术解释的原始出处"
-    },
-    {
-      "id": "source-34",
-      "title": "verl Fully Async",
-      "url": "https://verl.readthedocs.io/en/latest/advance/fully_async.html",
-      "kind": "official-docs",
-      "reviewedAt": "2026-10-03",
-      "purpose": "正文技术解释的原始出处"
-    },
-    {
-      "id": "source-35",
-      "title": "slime fully_async 示例",
-      "url": "https://github.com/THUDM/slime/tree/main/examples/fully_async",
+      "id": "framework-ref-13",
+      "title": "示例目录",
+      "url": "https://github.com/verl-project/verl/tree/main/examples",
       "kind": "official-code",
       "reviewedAt": "2026-10-03",
-      "purpose": "正文技术解释的原始出处",
-      "repository": "THUDM/slime",
-      "revision": "8c17b676cb57af1d17ee4402e91e9209af84b60b",
-      "pinnedUrl": "https://github.com/THUDM/slime/tree/8c17b676cb57af1d17ee4402e91e9209af84b60b/examples/fully_async"
+      "purpose": "训练框架接入、配置与使用路线",
+      "repository": "verl-project/verl",
+      "revision": "8718ca30a3f002f93b7c4fd99b9b2506718681bc",
+      "pinnedUrl": "https://github.com/verl-project/verl/tree/8718ca30a3f002f93b7c4fd99b9b2506718681bc/examples"
     },
     {
-      "id": "source-36",
-      "title": "AReaL 论文",
-      "url": "https://arxiv.org/abs/2505.24298",
-      "kind": "paper",
-      "reviewedAt": "2026-10-03",
-      "purpose": "正文技术解释的原始出处"
-    },
-    {
-      "id": "source-37",
-      "title": "slime 权重同步实现入口",
-      "url": "https://github.com/THUDM/slime/tree/main/slime/backends/megatron_utils/update_weight",
+      "id": "framework-ref-14",
+      "title": "Qwen 数学 GRPO 示例",
+      "url": "https://github.com/verl-project/verl/blob/8718ca30a3f002f93b7c4fd99b9b2506718681bc/examples/grpo_trainer/run_qwen2-7b_math_megatron_fsdp.sh",
       "kind": "official-code",
       "reviewedAt": "2026-10-03",
-      "purpose": "正文技术解释的原始出处",
-      "repository": "THUDM/slime",
-      "revision": "8c17b676cb57af1d17ee4402e91e9209af84b60b",
-      "pinnedUrl": "https://github.com/THUDM/slime/tree/8c17b676cb57af1d17ee4402e91e9209af84b60b/slime/backends/megatron_utils/update_weight"
+      "purpose": "训练框架接入、配置与使用路线",
+      "repository": "verl-project/verl",
+      "revision": "8718ca30a3f002f93b7c4fd99b9b2506718681bc",
+      "pinnedUrl": "https://github.com/verl-project/verl/blob/8718ca30a3f002f93b7c4fd99b9b2506718681bc/examples/grpo_trainer/run_qwen2-7b_math_megatron_fsdp.sh"
     },
     {
       "id": "source-38",
@@ -341,28 +147,36 @@
       "purpose": "正文技术解释的原始出处"
     },
     {
-      "id": "source-40",
-      "title": "slime 官方代码阅读路线",
-      "url": "https://github.com/THUDM/slime#code-reading-path",
+      "id": "framework-ref-17",
+      "title": "Qwen3-4B 启动脚本",
+      "url": "https://github.com/THUDM/slime/blob/8c17b676cb57af1d17ee4402e91e9209af84b60b/scripts/run-qwen3-4B.sh",
       "kind": "official-code",
       "reviewedAt": "2026-10-03",
-      "purpose": "正文技术解释的原始出处",
+      "purpose": "训练框架接入、配置与使用路线",
       "repository": "THUDM/slime",
       "revision": "8c17b676cb57af1d17ee4402e91e9209af84b60b",
-      "pinnedUrl": "https://github.com/THUDM/slime/tree/8c17b676cb57af1d17ee4402e91e9209af84b60b"
+      "pinnedUrl": "https://github.com/THUDM/slime/blob/8c17b676cb57af1d17ee4402e91e9209af84b60b/scripts/run-qwen3-4B.sh"
     },
     {
-      "id": "source-41",
-      "title": "HybridFlow 论文",
-      "url": "https://arxiv.org/abs/2409.19256",
-      "kind": "paper",
+      "id": "source-31",
+      "title": "slime Agentic RL Guide",
+      "url": "https://thudm.github.io/slime/get_started/agent.html",
+      "kind": "official-docs",
       "reviewedAt": "2026-10-03",
       "purpose": "正文技术解释的原始出处"
     },
     {
-      "id": "source-42",
-      "title": "verl 官方文档",
-      "url": "https://verl.readthedocs.io/en/latest/",
+      "id": "source-30",
+      "title": "verl Agent Loop",
+      "url": "https://verl.readthedocs.io/en/latest/advance/agent_loop.html",
+      "kind": "official-docs",
+      "reviewedAt": "2026-10-03",
+      "purpose": "正文技术解释的原始出处"
+    },
+    {
+      "id": "source-34",
+      "title": "verl Fully Async",
+      "url": "https://verl.readthedocs.io/en/latest/advance/fully_async.html",
       "kind": "official-docs",
       "reviewedAt": "2026-10-03",
       "purpose": "正文技术解释的原始出处"
@@ -390,139 +204,15 @@
       "pinnedUrl": "https://github.com/areal-project/AReaL/tree/2fad2d0e308fe631e70e971b97188ad5c5cc03cb"
     },
     {
-      "id": "source-45",
-      "title": "PyTorch Profiler",
-      "url": "https://docs.pytorch.org/tutorials/recipes/recipes/profiler_recipe.html",
-      "kind": "official-docs",
-      "reviewedAt": "2026-10-03",
-      "purpose": "正文技术解释的原始出处"
-    },
-    {
-      "id": "source-46",
-      "title": "NCCL troubleshooting",
-      "url": "https://docs.nvidia.com/deeplearning/nccl/user-guide/docs/troubleshooting.html",
-      "kind": "official-docs",
-      "reviewedAt": "2026-10-03",
-      "purpose": "正文技术解释的原始出处"
-    },
-    {
-      "id": "source-47",
-      "title": "PyTorch Distributed Checkpoint",
-      "url": "https://docs.pytorch.org/docs/2.14/distributed.checkpoint.html",
-      "kind": "official-docs",
-      "reviewedAt": "2026-10-03",
-      "purpose": "正文技术解释的原始出处"
-    },
-    {
-      "id": "source-48",
-      "title": "slime Fault Tolerance",
-      "url": "https://thudm.github.io/slime/advanced/fault-tolerance.html",
-      "kind": "official-docs",
-      "reviewedAt": "2026-10-03",
-      "purpose": "正文技术解释的原始出处"
-    },
-    {
-      "id": "source-49",
-      "title": "LLM Training Infra 公开题库",
-      "url": "https://github.com/XFWang522/llm-rl-infra-interview",
-      "kind": "community",
-      "reviewedAt": "2026-10-03",
-      "purpose": "面试主题线索，未经独立核实的公司/频率声明不采纳",
-      "repository": "XFWang522/llm-rl-infra-interview",
-      "revision": "897c7d2082b2875c22e2798bda3708cf8431cdee",
-      "pinnedUrl": "https://github.com/XFWang522/llm-rl-infra-interview/tree/897c7d2082b2875c22e2798bda3708cf8431cdee"
-    },
-    {
-      "id": "source-50",
-      "title": "AIInfraGuide",
-      "url": "https://github.com/caomaolufei/AIInfraGuide",
-      "kind": "community",
-      "reviewedAt": "2026-10-03",
-      "purpose": "面试主题线索，未经独立核实的公司/频率声明不采纳",
-      "repository": "caomaolufei/AIInfraGuide",
-      "revision": "a3b63eeb81d6d36a3c42c8cfc5a1bdd96e36bab1",
-      "pinnedUrl": "https://github.com/caomaolufei/AIInfraGuide/tree/a3b63eeb81d6d36a3c42c8cfc5a1bdd96e36bab1"
-    },
-    {
-      "id": "source-51",
-      "title": "DDP 文档",
-      "url": "https://docs.pytorch.org/docs/2.14/generated/torch.nn.parallel.DistributedDataParallel.html",
-      "kind": "official-docs",
-      "reviewedAt": "2026-10-03",
-      "purpose": "正文技术解释的原始出处"
-    },
-    {
-      "id": "source-52",
-      "title": "Transformer Engine",
-      "url": "https://docs.nvidia.com/deeplearning/transformer-engine-releases/release-2.15/user-guide/features/low_precision_training/introduction/introduction.html",
-      "kind": "official-docs",
-      "reviewedAt": "2026-10-03",
-      "purpose": "正文技术解释的原始出处"
-    },
-    {
-      "id": "source-53",
-      "title": "PyTorch Pipeline",
-      "url": "https://docs.pytorch.org/docs/2.14/distributed.pipelining.html",
-      "kind": "official-docs",
-      "reviewedAt": "2026-10-03",
-      "purpose": "正文技术解释的原始出处"
-    },
-    {
-      "id": "source-54",
-      "title": "Megatron CP",
-      "url": "https://docs.nvidia.com/megatron-core/developer-guide/latest/user-guide/features/context_parallel.html",
-      "kind": "official-docs",
-      "reviewedAt": "2026-10-03",
-      "purpose": "正文技术解释的原始出处"
-    },
-    {
-      "id": "source-55",
-      "title": "Megatron MoE",
-      "url": "https://docs.nvidia.com/megatron-core/developer-guide/latest/user-guide/parallelism-guide.html",
-      "kind": "official-docs",
-      "reviewedAt": "2026-10-03",
-      "purpose": "正文技术解释的原始出处"
-    },
-    {
-      "id": "source-56",
-      "title": "CUDA Graph",
-      "url": "https://docs.nvidia.com/cuda/cuda-programming-guide/04-special-topics/cuda-graphs.html",
-      "kind": "official-docs",
-      "reviewedAt": "2026-10-03",
-      "purpose": "正文技术解释的原始出处"
-    },
-    {
-      "id": "source-57",
-      "title": "Ray Placement Groups",
-      "url": "https://docs.ray.io/en/latest/ray-core/scheduling/placement-group.html",
-      "kind": "official-docs",
-      "reviewedAt": "2026-10-03",
-      "purpose": "正文技术解释的原始出处"
-    },
-    {
-      "id": "source-58",
-      "title": "SGLang 仓库",
-      "url": "https://github.com/sgl-project/sglang",
+      "id": "source-35",
+      "title": "slime fully_async 示例",
+      "url": "https://github.com/THUDM/slime/tree/main/examples/fully_async",
       "kind": "official-code",
       "reviewedAt": "2026-10-03",
       "purpose": "正文技术解释的原始出处",
-      "repository": "sgl-project/sglang",
-      "revision": "5b5d72123935dc2a3fb341790796ec1a987d31ce",
-      "pinnedUrl": "https://github.com/sgl-project/sglang/tree/5b5d72123935dc2a3fb341790796ec1a987d31ce"
-    },
-    {
-      "id": "verl-rollout-correction",
-      "title": "verl-rollout-correction",
-      "url": "https://github.com/verl-project/verl/blob/main/docs/algo/rollout_corr.md",
-      "kind": "official-code",
-      "reviewedAt": "2026-10-03",
-      "repository": "verl-project/verl",
-      "revision": "8718ca30a3f002f93b7c4fd99b9b2506718681bc",
-      "pinnedUrl": "https://github.com/verl-project/verl/blob/8718ca30a3f002f93b7c4fd99b9b2506718681bc/docs/algo/rollout_corr.md",
-      "watchUrl": "https://raw.githubusercontent.com/verl-project/verl/main/docs/algo/rollout_corr.md",
-      "reviewedSha256": "9eee81b6f088dca56c1589179e44d89cba4e3b7917b456752ed60c2e39e62b7b",
-      "purpose": "核心能力与算法文档的固定版本来源",
-      "watchPath": "docs/algo/rollout_corr.md"
+      "repository": "THUDM/slime",
+      "revision": "8c17b676cb57af1d17ee4402e91e9209af84b60b",
+      "pinnedUrl": "https://github.com/THUDM/slime/tree/8c17b676cb57af1d17ee4402e91e9209af84b60b/examples/fully_async"
     },
     {
       "id": "verl-fully-async",

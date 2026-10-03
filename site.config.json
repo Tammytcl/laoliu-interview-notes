@@ -27,7 +27,7 @@
     {
       "id": "systems",
       "name": "Infra · 训练与推理",
-      "description": "训推框架地图、基础知识、RL 系统与面试问答"
+      "description": "训练框架的区别、选型与使用；其他主题逐轮补充"
     },
     {
       "id": "coding",

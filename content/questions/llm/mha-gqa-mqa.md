@@ -33,7 +33,7 @@ draft: false
 改成 32 KV 头，同样长度约 4 GiB
 ```
 
-这只是容量估算，不是实测；真实服务还要放权重、激活、workspace 和多个请求。见 [显存预算](#q=training-inference-frameworks)。
+这只是容量估算，不是实测；真实服务还要放权重、激活、workspace 和多个请求。见 显存预算。
 
 ## 速度与模型能力
 
@@ -49,7 +49,7 @@ draft: false
 
 从 KV cache 的线性容量公式讲起，再说明结构共享与质量、带宽之间的取舍。
 
-关联：[PagedAttention](#q=training-inference-frameworks)。
+关联：[PagedAttention](#paper=paper-pagedattention)。
 
 ## 原始资料与阅读提示
 

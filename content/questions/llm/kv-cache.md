@@ -52,7 +52,7 @@ KV cache 减少重复计算，但不会让注意力访问历史的成本消失�
 
 用小模型对同一前缀比较“每步完整重算”和“增量 KV”得到的 logits，固定 eval 模式与输入格式，允许浮点误差；再测随上下文增长的缓存容量。这里是练习方案，未声称完成实测。
 
-继续读 [GQA](#q=mha-gqa-mqa)、[显存账本](#q=training-inference-frameworks) 与 [prefix caching](#q=training-inference-frameworks)，分别理解结构、容量和跨请求复用。
+继续读 [GQA](#q=mha-gqa-mqa)、显存账本 与 [prefix caching](https://docs.vllm.ai/en/latest/features/automatic_prefix_caching/)，分别理解结构、容量和跨请求复用。
 
 ## 原始资料
 

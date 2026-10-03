@@ -53,7 +53,7 @@ CPU 检查记录（2026-09-30）：本篇代码已通过 N=1、未来 K/V 不影
 
 ## 追问到哪里就够
 
-多头要增加 head 维；decode 的 query 长度可为 1、KV 长度更大，不能直接套用这里的同长度 mask；[FlashAttention](#q=training-inference-frameworks) 避免实体化大矩阵，但数学目标相同。
+多头要增加 head 维；decode 的 query 长度可为 1、KV 长度更大，不能直接套用这里的同长度 mask；[FlashAttention](https://arxiv.org/abs/2205.14135) 避免实体化大矩阵，但数学目标相同。
 
 面试时先写形状，再写 mask 和 softmax，最后讲复杂度与边界。其余算法暂只保留已有 [LRU](#q=lru-cache)。
 
