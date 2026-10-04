@@ -1,0 +1,17 @@
+{
+  "topicId": "infra-rl-pipeline",
+  "figures": [
+    {
+      "file": "rl-pipeline.svg",
+      "origin": "authored-concept-diagram",
+      "sourcePage": "https://tammytcl.github.io/laoliu-interview-notes/#q=infra-rl-pipeline",
+      "credit": "Laoliu interview notes · 本文概念示意，非实测曲线",
+      "retrievedAt": "2026-10-05",
+      "sha256": "2e21148228eeb9d7a230ee2dc9618a100448e11e5e3dae13158ffb5117676a8d",
+      "visuallyVerified": true,
+      "role": "concept",
+      "explanation": "complete",
+      "reviewedAt": "2026-10-05"
+    }
+  ]
+}

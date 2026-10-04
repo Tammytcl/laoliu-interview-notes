@@ -1,0 +1,120 @@
+{
+  "version": 1,
+  "topicId": "infra-distributed-parallelism",
+  "note": "技术结论采用论文/官方资料；作者博客与面试讨论用于机制表达和问题设计。未执行GPU训练或性能复现。动态文档reviewedAt为核对日。",
+  "sources": [
+    {
+      "id": "infra-distributed-parallelism-source-01",
+      "title": "PyTorch DDP API",
+      "url": "https://docs.pytorch.org/docs/2.14/generated/torch.nn.parallel.DistributedDataParallel.html",
+      "kind": "official-docs",
+      "reviewedAt": "2026-10-05",
+      "purpose": "2. DDP：复制完整模型、拆分训练数据：核对机制、边界或阅读入口"
+    },
+    {
+      "id": "infra-distributed-parallelism-source-02",
+      "title": "ZeRO 原论文",
+      "url": "https://arxiv.org/abs/1910.02054v3",
+      "kind": "paper",
+      "reviewedAt": "2026-10-05",
+      "purpose": "3. ZeRO与FSDP：把模型状态分开存：核对机制、边界或阅读入口"
+    },
+    {
+      "id": "infra-distributed-parallelism-source-03",
+      "title": "官方 ZeRO 教程",
+      "url": "https://www.deepspeed.ai/tutorials/zero/",
+      "kind": "official-docs",
+      "reviewedAt": "2026-10-05",
+      "purpose": "3. ZeRO与FSDP：把模型状态分开存：核对机制、边界或阅读入口"
+    },
+    {
+      "id": "infra-distributed-parallelism-source-04",
+      "title": "FSDP2 教程",
+      "url": "https://docs.pytorch.org/tutorials/intermediate/FSDP_tutorial.html",
+      "kind": "official-docs",
+      "reviewedAt": "2026-10-05",
+      "purpose": "3. ZeRO与FSDP：把模型状态分开存：核对机制、边界或阅读入口"
+    },
+    {
+      "id": "infra-distributed-parallelism-source-05",
+      "title": "Megatron-LM 大规模训练论文",
+      "url": "https://arxiv.org/abs/2104.04473v5",
+      "kind": "paper",
+      "reviewedAt": "2026-10-05",
+      "purpose": "4. TP：多个rank共同计算同一层：核对机制、边界或阅读入口"
+    },
+    {
+      "id": "infra-distributed-parallelism-source-06",
+      "title": "GPipe",
+      "url": "https://arxiv.org/abs/1811.06965v5",
+      "kind": "paper",
+      "reviewedAt": "2026-10-05",
+      "purpose": "5. PP：把层放到不同stage，用microbatch填流水线：核对机制、边界或阅读入口"
+    },
+    {
+      "id": "infra-distributed-parallelism-source-07",
+      "title": "PipeDream",
+      "url": "https://arxiv.org/abs/1806.03377v1",
+      "kind": "paper",
+      "reviewedAt": "2026-10-05",
+      "purpose": "5. PP：把层放到不同stage，用microbatch填流水线：核对机制、边界或阅读入口"
+    },
+    {
+      "id": "infra-distributed-parallelism-source-08",
+      "title": "Megatron 并行指南",
+      "url": "https://docs.nvidia.com/megatron-core/developer-guide/latest/user-guide/parallelism-guide.html",
+      "kind": "official-docs",
+      "reviewedAt": "2026-10-05",
+      "purpose": "6. SP、CP、EP：不要把所有并行度相乘：核对机制、边界或阅读入口"
+    },
+    {
+      "id": "infra-distributed-parallelism-source-09",
+      "title": "Megatron parallel_state",
+      "url": "https://docs.nvidia.com/megatron-core/developer-guide/latest/apidocs/core/core.parallel_state.html",
+      "kind": "official-docs",
+      "reviewedAt": "2026-10-05",
+      "purpose": "6. SP、CP、EP：不要把所有并行度相乘：核对机制、边界或阅读入口"
+    },
+    {
+      "id": "infra-distributed-parallelism-source-10",
+      "title": "verl固定代码树",
+      "url": "https://github.com/verl-project/verl/tree/8718ca30a3f002f93b7c4fd99b9b2506718681bc",
+      "kind": "official-code",
+      "reviewedAt": "2026-10-05",
+      "purpose": "7. 一套16卡布局怎样推到框架配置？：核对机制、边界或阅读入口",
+      "repository": "verl-project/verl",
+      "revision": "8718ca30a3f002f93b7c4fd99b9b2506718681bc",
+      "pinnedUrl": "https://github.com/verl-project/verl/tree/8718ca30a3f002f93b7c4fd99b9b2506718681bc"
+    },
+    {
+      "id": "infra-distributed-parallelism-source-11",
+      "title": "slime固定代码树",
+      "url": "https://github.com/THUDM/slime/tree/8c17b676cb57af1d17ee4402e91e9209af84b60b",
+      "kind": "official-code",
+      "reviewedAt": "2026-10-05",
+      "purpose": "7. 一套16卡布局怎样推到框架配置？：核对机制、边界或阅读入口",
+      "repository": "THUDM/slime",
+      "revision": "8c17b676cb57af1d17ee4402e91e9209af84b60b",
+      "pinnedUrl": "https://github.com/THUDM/slime/tree/8c17b676cb57af1d17ee4402e91e9209af84b60b"
+    },
+    {
+      "id": "infra-distributed-parallelism-source-12",
+      "title": "Megatron固定代码树",
+      "url": "https://github.com/NVIDIA/Megatron-LM/tree/ef8cd10b8e34a94c9ad7452e7851f58337f353a0",
+      "kind": "official-code",
+      "reviewedAt": "2026-10-05",
+      "purpose": "7. 一套16卡布局怎样推到框架配置？：核对机制、边界或阅读入口",
+      "repository": "NVIDIA/Megatron-LM",
+      "revision": "ef8cd10b8e34a94c9ad7452e7851f58337f353a0",
+      "pinnedUrl": "https://github.com/NVIDIA/Megatron-LM/tree/ef8cd10b8e34a94c9ad7452e7851f58337f353a0"
+    },
+    {
+      "id": "infra-distributed-parallelism-source-13",
+      "title": "PyTorch Distributed Checkpoint",
+      "url": "https://docs.pytorch.org/docs/2.14/distributed.checkpoint.html",
+      "kind": "official-docs",
+      "reviewedAt": "2026-10-05",
+      "purpose": "7. 一套16卡布局怎样推到框架配置？：核对机制、边界或阅读入口"
+    }
+  ]
+}

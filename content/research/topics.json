@@ -14,5 +14,93 @@
       "框架选择与使用的问答",
       "来源"
     ]
+  },
+  {
+    "id": "infra-training-step",
+    "sources": "content/research/infra-training-step-sources.json",
+    "figures": "assets/infra/infra-training-step/figures.json",
+    "requiredSections": [
+      "主问题",
+      "训练一步",
+      "Batch",
+      "显存账本",
+      "混合精度",
+      "使用与排障",
+      "面试问答",
+      "来源"
+    ],
+    "minimumQuestions": 8,
+    "minimumCharacters": 6000
+  },
+  {
+    "id": "infra-gpu-performance",
+    "sources": "content/research/infra-gpu-performance-sources.json",
+    "figures": "assets/infra/infra-gpu-performance/figures.json",
+    "requiredSections": [
+      "主问题",
+      "硬件与运算",
+      "Roofline",
+      "通信基础",
+      "重叠与计时",
+      "Profiling",
+      "面试问答",
+      "来源"
+    ],
+    "minimumQuestions": 8,
+    "minimumCharacters": 6000
+  },
+  {
+    "id": "infra-distributed-parallelism",
+    "sources": "content/research/infra-distributed-parallelism-sources.json",
+    "figures": "assets/infra/infra-distributed-parallelism/figures.json",
+    "requiredSections": [
+      "主问题",
+      "DDP",
+      "ZeRO",
+      "TP：",
+      "PP：",
+      "SP、CP、EP",
+      "16卡",
+      "面试问答",
+      "来源"
+    ],
+    "minimumQuestions": 8,
+    "minimumCharacters": 6000
+  },
+  {
+    "id": "infra-inference-engine",
+    "sources": "content/research/infra-inference-engine-sources.json",
+    "figures": "assets/infra/infra-inference-engine/figures.json",
+    "requiredSections": [
+      "主问题",
+      "请求生命周期",
+      "KV容量",
+      "Attention kernel",
+      "调度与缓存",
+      "连接vLLM",
+      "面试问答",
+      "来源"
+    ],
+    "minimumQuestions": 8,
+    "minimumCharacters": 6000
+  },
+  {
+    "id": "infra-rl-pipeline",
+    "sources": "content/research/infra-rl-pipeline-sources.json",
+    "figures": "assets/infra/infra-rl-pipeline/figures.json",
+    "requiredSections": [
+      "主问题",
+      "同步闭环",
+      "数据契约",
+      "概率一致性",
+      "四个边界",
+      "有界队列",
+      "低利用率",
+      "最小baseline",
+      "面试问答",
+      "来源"
+    ],
+    "minimumQuestions": 10,
+    "minimumCharacters": 6000
   }
 ]

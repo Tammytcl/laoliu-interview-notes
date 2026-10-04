@@ -1,0 +1,17 @@
+{
+  "topicId": "infra-training-step",
+  "figures": [
+    {
+      "file": "training-lifecycle.svg",
+      "origin": "authored-concept-diagram",
+      "sourcePage": "https://tammytcl.github.io/laoliu-interview-notes/#q=infra-training-step",
+      "credit": "Laoliu interview notes · 本文概念示意，非实测曲线",
+      "retrievedAt": "2026-10-05",
+      "sha256": "9127779874daaeea0e7c544cd4c19611bb9767aa867ced880867cf479c957dd3",
+      "visuallyVerified": true,
+      "role": "concept",
+      "explanation": "complete",
+      "reviewedAt": "2026-10-05"
+    }
+  ]
+}

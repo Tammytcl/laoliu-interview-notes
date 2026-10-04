@@ -4,7 +4,7 @@ title: "从哪里开始？Diffusion、LLM、Agent、Infra 四条学习路线"
 category: guide
 difficulty: 基础
 tags: ["P0", "学习路线", "开始这里"]
-updated: 2026-10-03
+updated: 2026-10-05
 summary: "按先修关系安排学习，每个问题都落到解释、推导或可验证练习。"
 draft: false
 ---
@@ -53,15 +53,17 @@ P0 表示第一轮应掌握的主干，P1 表示主干后再深入。这是本�
 4. [多轮梯度与 mask](#q=agent-gradient)。产出：保存每轮真实训练条件。
 5. [GRPO/RLVR](#q=grpo-rlvr) → [OPD](#q=opd-vs-sft)。产出：说清采样者、监督来源与概率目标。
 
-## Infra：先比较训练框架，再逐轮补充系统知识
+## Infra：从训练基础到框架与训推闭环
 
-本轮先读 [训练框架怎么选、怎么用？以 verl 与 slime 为主线](#q=training-inference-frameworks)。
+已有框架经验时可先读 [verl/slime 框架选择与使用](#q=training-inference-frameworks)，定位自己缺的机制；从基础复习则按以下五篇阅读。每篇有算例、排障、面试直答与追问，GPU练习明确为待实施。
 
-1. 第 1—2 节：区分训练后端与后训练框架，理解 FSDP、DeepSpeed、Megatron 的接入方式。
-2. 第 3—6 节：读 verl / slime 的架构、配置与官方示例，说明同一任务换框架需要改哪里。
-3. 第 7—8 节：比较其他候选，练习回答框架选择和实际使用的问题。
+1. [训练一步与显存](#q=infra-training-step)：画forward/backward/step，填写dtype账本，验证不等长microbatch归一化。
+2. [GPU性能与通信](#q=infra-gpu-performance)：算FLOPs/byte下界，区分GPU busy、通信、工具等待，设计正确计时。
+3. [多卡并行](#q=infra-distributed-parallelism)：按“存什么、算什么、搬什么”解释DP/分片/TP/PP/CP，画16卡布局。
+4. [推理引擎](#q=infra-inference-engine)：算KV容量，区别Flash/Paged/批处理/缓存，定义TTFT、ITL与goodput。
+5. [RL/OPD训推流水线](#q=infra-rl-pipeline)：追踪一条多轮样本，标出概率和版本，写最小baseline与低利用率调查方案。
 
-产出：一张框架职责表、一份针对具体任务的选型说明、一页可解释的使用配置。显存、并行通信、推理优化和系统排障后续分别整理。
+最后回到框架文章：说明FSDP/Megatron后端、vLLM/SGLang生成、算法角色分别怎样连接，以及同任务换框架要改哪里。产出是容量账本、性能假设、rank布局、调度图、样本契约及一份约束明确的框架选择说明。可下载并运行基础链中的CPU数值练习，不把读完文章等同于完成GPU实验。
 
 ## 可重复的复习循环
 

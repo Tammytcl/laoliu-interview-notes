@@ -1,0 +1,17 @@
+{
+  "topicId": "infra-distributed-parallelism",
+  "figures": [
+    {
+      "file": "parallel-layout.svg",
+      "origin": "authored-concept-diagram",
+      "sourcePage": "https://tammytcl.github.io/laoliu-interview-notes/#q=infra-distributed-parallelism",
+      "credit": "Laoliu interview notes · 本文概念示意，非实测曲线",
+      "retrievedAt": "2026-10-05",
+      "sha256": "251d2f93904790e07be3ec7e1a420450c7c16565b4d6ad2c844d97b3a52525f6",
+      "visuallyVerified": true,
+      "role": "concept",
+      "explanation": "complete",
+      "reviewedAt": "2026-10-05"
+    }
+  ]
+}

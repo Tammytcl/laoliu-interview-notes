@@ -1,0 +1,17 @@
+{
+  "topicId": "infra-gpu-performance",
+  "figures": [
+    {
+      "file": "roofline.svg",
+      "origin": "authored-concept-diagram",
+      "sourcePage": "https://tammytcl.github.io/laoliu-interview-notes/#q=infra-gpu-performance",
+      "credit": "Laoliu interview notes · 本文概念示意，非实测曲线",
+      "retrievedAt": "2026-10-05",
+      "sha256": "adc54964a26853cf71497d0d9bc4f77c44470dbab0d953c953bb5c6c7462b161",
+      "visuallyVerified": true,
+      "role": "concept",
+      "explanation": "complete",
+      "reviewedAt": "2026-10-05"
+    }
+  ]
+}

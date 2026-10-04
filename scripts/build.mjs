@@ -113,8 +113,19 @@ await mkdir(join(dist, 'docs'), { recursive: true });
 try { await copyFile(join(root, 'docs/topic-workflow.md'), join(dist, 'docs/topic-workflow.md')); }
 catch (error) { if (error.code !== 'ENOENT') throw error; }
 await mkdir(join(dist, 'research'), { recursive: true });
-for (const file of ['framework-sources.json', 'training-inference-frameworks-observations.json', 'training-inference-frameworks-pending.md']) {
-  try { await copyFile(join(root, 'content/research', file), join(dist, 'research', file)); }
+let registeredTopics = [];
+try { registeredTopics = JSON.parse(await readFile(join(root, 'content/research/topics.json'), 'utf8')); }
+catch (error) { if (error.code !== 'ENOENT') throw error; }
+const researchDownloads = new Map(['framework-sources.json', 'training-inference-frameworks-observations.json', 'training-inference-frameworks-pending.md', 'topics.json'].map(file => [file, join(root, 'content/research', file)]));
+for (const topic of registeredTopics) {
+  researchDownloads.set(topic.sources.split('/').at(-1), join(root, topic.sources));
+  for (const suffix of ['observations.json', 'pending.md']) {
+    const file = `${topic.id}-${suffix}`;
+    researchDownloads.set(file, join(root, 'content/research', file));
+  }
+}
+for (const [file, source] of researchDownloads) {
+  try { await copyFile(source, join(dist, 'research', file)); }
   catch (error) { if (error.code !== 'ENOENT') throw error; }
 }
 const template = await readFile(join(root, 'web/index.html'), 'utf8');

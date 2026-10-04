@@ -32,6 +32,7 @@ export async function auditTopics(root, questions) {
     const sources = new Set(manifest.sources.map(s => s.url));
     for (const [, url] of q.body.matchAll(/\]\((https:\/\/[^\s)]+)\)/g)) if (!sources.has(url)) errors.push(`${q.id}: citation not registered: ${url}`);
     for (const section of topic.requiredSections || []) if (!q.toc.some(s => s.title.includes(section))) errors.push(`${q.id}: missing section ${section}`);
+    if (topic.minimumCharacters && q.body.length < topic.minimumCharacters) errors.push(`${q.id}: incomplete topic depth`);
     const numbers = [...q.body.matchAll(/\*\*Q(\d{2}) /g)].map(m => m[1]);
     if (topic.minimumQuestions && (numbers.length < topic.minimumQuestions || new Set(numbers).size !== numbers.length)) errors.push(`${q.id}: missing or duplicate numbered questions`);
     if (q.html.includes('katex-error')) errors.push(`${q.id}: invalid formula`);

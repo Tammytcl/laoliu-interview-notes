@@ -1,0 +1,85 @@
+{
+  "scope": "CPU arithmetic, finite differences and algebraic equivalence; no GPU training or performance benchmark",
+  "gradient": {
+    "full": -22.5,
+    "weighted": -22.5,
+    "mean_of_means": -31.0,
+    "finite_difference": -22.500000000036376
+  },
+  "memory": {
+    "state_GB": 112.0,
+    "state_GiB": 104.3081283569336,
+    "zero_GB": [
+      112,
+      38.5,
+      26.25,
+      14.0
+    ],
+    "kv_GiB": 8.0
+  },
+  "roofline": [
+    {
+      "batch": 1,
+      "flops": 33554432,
+      "bytes": 33570816,
+      "intensity": 0.9995119570522206,
+      "compute_us": 0.33554432,
+      "memory_us": 33.570816
+    },
+    {
+      "batch": 128,
+      "flops": 4294967296,
+      "bytes": 35651584,
+      "intensity": 120.47058823529412,
+      "compute_us": 42.94967296,
+      "memory_us": 35.651584
+    }
+  ],
+  "ring": {
+    "send_GiB": 1.75,
+    "transmission_ms": 75.16192768
+  },
+  "online_softmax": {
+    "full": 6.510162675192582,
+    "blockwise": 6.510162675192582,
+    "absolute_error": 0.0
+  },
+  "tensor_parallel": {
+    "full": [
+      [
+        0.027500000000000004,
+        0.08,
+        0.1325,
+        0.185
+      ],
+      [
+        0.08100000000000002,
+        0.195,
+        0.309,
+        0.42300000000000004
+      ]
+    ],
+    "partitioned": [
+      [
+        0.027500000000000004,
+        0.08,
+        0.1325,
+        0.185
+      ],
+      [
+        0.08100000000000002,
+        0.195,
+        0.309,
+        0.42300000000000004
+      ]
+    ]
+  },
+  "pipeline_bubble": {
+    "p4_m4": 0.42857142857142855,
+    "p4_m16": 0.15789473684210525
+  },
+  "queue": {
+    "unbounded_backlog_at_300s": 1200,
+    "stable_ready_wait_s": 10.0
+  }
+}

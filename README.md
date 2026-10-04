@@ -4,7 +4,7 @@
 
 一个内容与界面分离的中文面试准备站。浅色纸张风格、主题导航、全文搜索、题目目录与正式论文报告。发布站点无数据库、追踪统计或运行时 CDN 依赖，适合 GitHub Pages；可选本地工作台提供源码缓存清理。
 
-> 当前有 31 篇学习笔记、49 篇论文精读报告、2 份 Daily 和 3 份专题调研。论文收录独立于面试笔记；报告按原文核读范围说明证据，未登记个人复现。旧项目表达题保留在综合面试中。
+> 当前有 36 篇学习笔记、49 篇论文精读报告、2 份 Daily 和 3 份专题调研。论文收录独立于面试笔记；报告按原文核读范围说明证据，未登记个人复现。旧项目表达题保留在综合面试中。
 
 ## 从这里开始学习
 
@@ -212,6 +212,16 @@ npm run test:browser
 
 ## Infra 训推框架样稿与专题整理
 
-[训练框架对比与使用](content/questions/systems/training-inference-frameworks.md) 以 verl / slime 为主线，解释后端区别、实际接入、配置和选型，保留两张架构图及八个框架相关问答。旧 Infra 8 篇已移入 `archive/questions/systems/2026-10-03/`，网页只保留本轮框架专题，旧 URL 自动跳转。
+[训练框架对比与使用](content/questions/systems/training-inference-frameworks.md) 以 verl / slime 为主线，解释后端区别、实际接入、配置和选型，保留两张架构图及八个框架相关问答。旧 Infra 8 篇已移入 `archive/questions/systems/2026-10-03/`，旧 URL 自动跳转到框架专题；本轮新增五篇独立的基础复习内容，不把外围知识混入框架选型。
 
-后续专题遵循 [整理工作流](docs/topic-workflow.md) 和 [模板](templates/topic.md)。`npm run topics:quality` 检查来源、固定版本、插图、公式和站内链接；`npm run topics:watch` 观察核心来源，记录待核对变化。每周一 UTC 02:17 自动更新观察快照、检查、推送与部署；正文语义更新需读取差异后核对，不自动改写事实。`npm run topics:check-live -- <站点地址>` 验证线上样稿与手机布局。
+后续专题遵循 [整理工作流](docs/topic-workflow.md) 和 [模板](templates/topic.md)。`npm run topics:quality` 检查来源、固定版本、插图、公式和站内链接；`npm run topics:watch` 观察核心来源，记录待核对变化。每周一 UTC 02:17 自动更新观察快照、检查、推送与部署；正文语义更新需读取差异后核对，不自动改写事实。`npm run topics:check-live -- <站点地址>` 根据专题注册表验证全部六篇的正文、来源下载、公式、图片、目录与手机布局。
+
+### Infra 基础复习五篇 · 2026-10-05
+
+1. [训练一步与显存](content/questions/systems/infra-training-step.md)
+2. [GPU性能、通信与profiling](content/questions/systems/infra-gpu-performance.md)
+3. [分布式并行](content/questions/systems/infra-distributed-parallelism.md)
+4. [推理引擎与KV调度](content/questions/systems/infra-inference-engine.md)
+5. [RL/OPD训推闭环](content/questions/systems/infra-rl-pipeline.md)
+
+五篇共42道本文整理问答、5张概念示意和1张固定原论文图。每篇保留独立主问题、推导、算例、误区、排障、练习与来源；[审阅记录](docs/infra-foundations-audit-2026-10-05.md)区分CPU数值验算、资料核对与尚未执行的GPU实验。

@@ -1,0 +1,87 @@
+{
+  "version": 1,
+  "topicId": "infra-training-step",
+  "note": "技术结论采用论文/官方资料；作者博客与面试讨论用于机制表达和问题设计。未执行GPU训练或性能复现。动态文档reviewedAt为核对日。",
+  "sources": [
+    {
+      "id": "infra-training-step-source-01",
+      "title": "PyTorch Autograd mechanics",
+      "url": "https://docs.pytorch.org/docs/2.14/notes/autograd.html",
+      "kind": "official-docs",
+      "reviewedAt": "2026-10-05",
+      "purpose": "2. 训练一步：forward、backward、optimizer step 分别改变什么？：核对机制、边界或阅读入口"
+    },
+    {
+      "id": "infra-training-step-source-02",
+      "title": "Adam 原论文",
+      "url": "https://arxiv.org/abs/1412.6980v9",
+      "kind": "paper",
+      "reviewedAt": "2026-10-05",
+      "purpose": "2. 训练一步：forward、backward、optimizer step 分别改变什么？：核对机制、边界或阅读入口"
+    },
+    {
+      "id": "infra-training-step-source-03",
+      "title": "PyTorch AMP 累积示例",
+      "url": "https://docs.pytorch.org/docs/2.14/notes/amp_examples.html",
+      "kind": "official-docs",
+      "reviewedAt": "2026-10-05",
+      "purpose": "3. Batch 与梯度累积：样本数、token 数、更新频率：核对机制、边界或阅读入口"
+    },
+    {
+      "id": "infra-training-step-source-04",
+      "title": "DDP 官方 API",
+      "url": "https://docs.pytorch.org/docs/2.14/generated/torch.nn.parallel.DistributedDataParallel.html",
+      "kind": "official-docs",
+      "reviewedAt": "2026-10-05",
+      "purpose": "3. Batch 与梯度累积：样本数、token 数、更新频率：核对机制、边界或阅读入口"
+    },
+    {
+      "id": "infra-training-step-source-05",
+      "title": "HF GPU memory anatomy",
+      "url": "https://huggingface.co/docs/transformers/en/model_memory_anatomy",
+      "kind": "official-docs",
+      "reviewedAt": "2026-10-05",
+      "purpose": "4. 显存账本：从参数字节数到实际峰值：核对机制、边界或阅读入口"
+    },
+    {
+      "id": "infra-training-step-source-06",
+      "title": "ZeRO 教程",
+      "url": "https://www.deepspeed.ai/tutorials/zero/",
+      "kind": "official-docs",
+      "reviewedAt": "2026-10-05",
+      "purpose": "4. 显存账本：从参数字节数到实际峰值：核对机制、边界或阅读入口"
+    },
+    {
+      "id": "infra-training-step-source-07",
+      "title": "PyTorch 重算技术分享",
+      "url": "https://pytorch.org/blog/activation-checkpointing-techniques/",
+      "kind": "author-blog",
+      "reviewedAt": "2026-10-05",
+      "purpose": "4. 显存账本：从参数字节数到实际峰值：核对机制、边界或阅读入口"
+    },
+    {
+      "id": "infra-training-step-source-08",
+      "title": "PyTorch CUDA 内存",
+      "url": "https://docs.pytorch.org/docs/2.14/notes/cuda.html",
+      "kind": "official-docs",
+      "reviewedAt": "2026-10-05",
+      "purpose": "6. 使用与排障：一个最小训练循环怎样看？：核对机制、边界或阅读入口"
+    },
+    {
+      "id": "infra-training-step-source-09",
+      "title": "CUDA memory snapshot",
+      "url": "https://docs.pytorch.org/docs/stable/torch_cuda_memory",
+      "kind": "official-docs",
+      "reviewedAt": "2026-10-05",
+      "purpose": "6. 使用与排障：一个最小训练循环怎样看？：核对机制、边界或阅读入口"
+    },
+    {
+      "id": "infra-training-step-source-10",
+      "title": "作者的系统面试讨论",
+      "url": "https://huyenchip.com/machine-learning-systems-design/research-vs-production.html",
+      "kind": "author-blog",
+      "reviewedAt": "2026-10-05",
+      "purpose": "7. 面试问答：从30秒回答走到可验证追问：核对机制、边界或阅读入口"
+    }
+  ]
+}

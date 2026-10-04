@@ -1,0 +1,32 @@
+{
+  "topicId": "infra-inference-engine",
+  "figures": [
+    {
+      "file": "request-lifecycle.svg",
+      "origin": "authored-concept-diagram",
+      "sourcePage": "https://tammytcl.github.io/laoliu-interview-notes/#q=infra-inference-engine",
+      "credit": "Laoliu interview notes · 本文概念示意，非实测曲线",
+      "retrievedAt": "2026-10-05",
+      "sha256": "fd600a4e1b4156bd6c4f87de51d7110b82987eb73175da1769b28423f4ca3389",
+      "visuallyVerified": true,
+      "role": "concept",
+      "explanation": "complete",
+      "reviewedAt": "2026-10-05"
+    },
+    {
+      "file": "pagedattention-source.png",
+      "origin": "original-paper-asset",
+      "sourcePage": "https://arxiv.org/abs/2309.06180v1",
+      "credit": "Kwon et al., PagedAttention v1 Figure 6",
+      "retrievedAt": "2026-10-05",
+      "sha256": "f43f730bbef4191bf1b1e5aeb3996bd4f4d4ab77fa2454827f5a826a3dd5942e",
+      "visuallyVerified": true,
+      "role": "concept",
+      "explanation": "complete",
+      "reviewedAt": "2026-10-05",
+      "sourcePath": "figures/multi-sequence-block-mapping.pdf",
+      "evidenceManifest": "assets/papers/paper-pagedattention/figures.json",
+      "reuse": "fixed-v1-source-asset"
+    }
+  ]
+}

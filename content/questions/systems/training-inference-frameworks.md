@@ -4,7 +4,7 @@ title: "训练框架怎么选、怎么用？以 verl 与 slime 为主线"
 category: systems
 difficulty: 进阶
 tags: ["P0", "训练框架", "slime", "verl", "框架对比", "框架使用"]
-updated: 2026-10-03
+updated: 2026-10-05
 summary: "围绕训练框架的职责、区别和实际使用，重点比较 verl 与 slime，再说明 Megatron、DeepSpeed、FSDP 以及其他后训练工具的位置。"
 draft: false
 ---
@@ -253,5 +253,7 @@ slime 的启动脚本常把参数分成几组 shell 数组，传给训练入口�
 两份脚本链接固定到本次核对 commit；完整记录见 [来源与版本清单](./research/framework-sources.json)。本文提供阅读与接入路线，GPU 运行结果需在实际使用后另行记录。
 
 **本轮更新：** 文章收窄为训练框架的区别、选型与使用；仅保留两张直接解释框架架构的原图，以及八个框架相关问答。通用基础、推理优化、排障和原 60 题版本已移出正文，保存在仓库归档，留待后续分主题整理。
+
+**2026-10-05 基础复习补充：** 已独立整理 [训练一步与显存](#q=infra-training-step)、[GPU性能与通信](#q=infra-gpu-performance)、[分布式并行](#q=infra-distributed-parallelism)、[推理引擎](#q=infra-inference-engine)、[RL/OPD训推闭环](#q=infra-rl-pipeline)。可以按此顺序补机制，再回来解释框架配置；本篇继续集中回答框架区别与使用。
 
 后续整理沿用 [专题工作流](./docs/topic-workflow.md) 与 [模板](./templates/topic.md)，每一轮先确定一个主问题；基础知识按当前问题的需要补充，避免把相关内容全部塞进一篇。来源观察的候选变化见 [更新记录](./research/training-inference-frameworks-pending.md)。
