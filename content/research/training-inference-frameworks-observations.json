@@ -1,91 +1,91 @@
 {
   "version": 1,
   "topicId": "training-inference-frameworks",
-  "checkedAt": "2026-10-05T06:42:01.180Z",
+  "checkedAt": "2026-10-05T09:03:53.178Z",
   "observations": {
     "source-02": {
-      "checkedAt": "2026-10-05T06:42:01.180Z",
-      "lastSuccessAt": "2026-10-05T06:42:01.180Z",
+      "checkedAt": "2026-10-05T09:03:53.178Z",
+      "lastSuccessAt": "2026-10-05T09:03:53.178Z",
       "status": "ok",
       "revision": "ef8cd10b8e34a94c9ad7452e7851f58337f353a0",
       "pendingReview": true
     },
     "source-05": {
-      "checkedAt": "2026-10-05T06:42:01.180Z",
-      "lastSuccessAt": "2026-10-05T06:42:01.180Z",
+      "checkedAt": "2026-10-05T09:03:53.178Z",
+      "lastSuccessAt": "2026-10-05T09:03:53.178Z",
       "status": "ok",
       "revision": "8c17b676cb57af1d17ee4402e91e9209af84b60b",
       "pendingReview": false
     },
     "source-04": {
-      "checkedAt": "2026-10-05T06:42:01.180Z",
-      "lastSuccessAt": "2026-10-05T06:42:01.180Z",
+      "checkedAt": "2026-10-05T09:03:53.178Z",
+      "lastSuccessAt": "2026-10-05T09:03:53.178Z",
       "status": "ok",
       "revision": "8718ca30a3f002f93b7c4fd99b9b2506718681bc",
       "pendingReview": false
     },
     "source-35": {
-      "checkedAt": "2026-10-05T06:42:01.180Z",
-      "lastSuccessAt": "2026-10-05T06:42:01.180Z",
+      "checkedAt": "2026-10-05T09:03:53.178Z",
+      "lastSuccessAt": "2026-10-05T09:03:53.178Z",
       "status": "ok",
       "revision": "8c17b676cb57af1d17ee4402e91e9209af84b60b",
       "pendingReview": false
     },
     "source-43": {
-      "checkedAt": "2026-10-05T06:42:01.180Z",
-      "lastSuccessAt": "2026-10-05T06:42:01.180Z",
+      "checkedAt": "2026-10-05T09:03:53.178Z",
+      "lastSuccessAt": "2026-10-05T09:03:53.178Z",
       "status": "ok",
       "revision": "dc2a7ad326f619fc5a47737ea47d1920ce2c0b53",
       "pendingReview": false
     },
     "source-44": {
-      "checkedAt": "2026-10-05T06:42:01.180Z",
-      "lastSuccessAt": "2026-10-05T06:42:01.180Z",
+      "checkedAt": "2026-10-05T09:03:53.178Z",
+      "lastSuccessAt": "2026-10-05T09:03:53.178Z",
       "status": "ok",
       "revision": "2fad2d0e308fe631e70e971b97188ad5c5cc03cb",
       "pendingReview": false
     },
     "verl-fully-async": {
-      "checkedAt": "2026-10-05T06:42:01.180Z",
-      "lastSuccessAt": "2026-10-05T06:42:01.180Z",
+      "checkedAt": "2026-10-05T09:03:53.178Z",
+      "lastSuccessAt": "2026-10-05T09:03:53.178Z",
       "status": "ok",
       "revision": "8718ca30a3f002f93b7c4fd99b9b2506718681bc",
       "sha256": "61676351b33d69f0f3406ac21a5cdfba3c5ebc1f92083710fd825e070777aec3",
       "pendingReview": false
     },
     "verl-hybrid-flow": {
-      "checkedAt": "2026-10-05T06:42:01.180Z",
-      "lastSuccessAt": "2026-10-05T06:42:01.180Z",
+      "checkedAt": "2026-10-05T09:03:53.178Z",
+      "lastSuccessAt": "2026-10-05T09:03:53.178Z",
       "status": "ok",
       "revision": "8718ca30a3f002f93b7c4fd99b9b2506718681bc",
       "sha256": "e6328517392492c7b945d2fc895705e4b635d9a5558453e980da028e251e7acc",
       "pendingReview": false
     },
     "slime-agent-guide": {
-      "checkedAt": "2026-10-05T06:42:01.180Z",
-      "lastSuccessAt": "2026-10-05T06:42:01.180Z",
+      "checkedAt": "2026-10-05T09:03:53.178Z",
+      "lastSuccessAt": "2026-10-05T09:03:53.178Z",
       "status": "ok",
       "revision": "8c17b676cb57af1d17ee4402e91e9209af84b60b",
       "sha256": "33f669e24bf7f013eb1dd15fdc1e47f37460eba9a129719f81e14d006f4979fc",
       "pendingReview": false
     },
     "framework-ref-13": {
-      "checkedAt": "2026-10-05T06:42:01.180Z",
-      "lastSuccessAt": "2026-10-05T06:42:01.180Z",
+      "checkedAt": "2026-10-05T09:03:53.178Z",
+      "lastSuccessAt": "2026-10-05T09:03:53.178Z",
       "status": "ok",
       "revision": "8718ca30a3f002f93b7c4fd99b9b2506718681bc",
       "pendingReview": false
     },
     "framework-ref-14": {
-      "checkedAt": "2026-10-05T06:42:01.180Z",
-      "lastSuccessAt": "2026-10-05T06:42:01.180Z",
+      "checkedAt": "2026-10-05T09:03:53.178Z",
+      "lastSuccessAt": "2026-10-05T09:03:53.178Z",
       "status": "ok",
       "revision": "8718ca30a3f002f93b7c4fd99b9b2506718681bc",
       "pendingReview": false
     },
     "framework-ref-17": {
-      "checkedAt": "2026-10-05T06:42:01.180Z",
-      "lastSuccessAt": "2026-10-05T06:42:01.180Z",
+      "checkedAt": "2026-10-05T09:03:53.178Z",
+      "lastSuccessAt": "2026-10-05T09:03:53.178Z",
       "status": "ok",
       "revision": "8c17b676cb57af1d17ee4402e91e9209af84b60b",
       "pendingReview": false
