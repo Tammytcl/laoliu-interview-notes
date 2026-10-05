@@ -1,0 +1,17 @@
+{
+  "topicId": "infra-training-backends",
+  "figures": [
+    {
+      "file": "backend-layers.svg",
+      "origin": "authored-concept-diagram",
+      "sourcePage": "https://tammytcl.github.io/laoliu-interview-notes/#q=infra-training-backends",
+      "credit": "Laoliu interview notes · 本文概念示意，非实测性能",
+      "retrievedAt": "2026-10-05",
+      "reviewedAt": "2026-10-05",
+      "sha256": "69fe587edf095c05247a9fab549ca27526a1996c1948f7fe6de35ff1f2217ea6",
+      "visuallyVerified": true,
+      "role": "concept",
+      "explanation": "complete"
+    }
+  ]
+}

@@ -49,7 +49,7 @@ npm run test:browser
 npm run topics:check-live -- https://tammytcl.github.io/laoliu-interview-notes/
 ```
 
-当前线上检查按 `content/research/topics.json` 验证已注册的六篇专题：Infra 列表、旧链接跳转、正文与核对源文件一致、问答、来源下载内容、图片hash与显示比例、目录定位、直接刷新和手机布局。扩展专题时登记清单和必要模块；不再修改检查器中的单篇白名单。
+当前线上检查按 `content/research/topics.json` 验证已注册的九篇专题：Infra 列表、旧链接跳转、正文与核对源文件一致、问答、来源下载内容、图片hash与显示比例、目录定位、直接刷新和手机布局。扩展专题时登记清单和必要模块；不再修改检查器中的单篇白名单。
 
 ## 6. 持续更新与自动化边界
 
@@ -92,3 +92,9 @@ npm run topics:watch
 数值解释先验算再发布。本轮的 `assets/infra/infra-foundations-check.py` 只用Python标准库，检查有限差分梯度、切分后的加权平均、GB/GiB、状态分片、Roofline、KV、TP代数与分块softmax。结果保存在同目录JSON。计算验证不等于GPU训练、通信、服务性能复现。
 
 内容审阅两轮：第一轮核查术语、公式假设与同层比较；第二轮独立复算、逐图查看、核对链接与当前实现边界。本轮修正了PagedAttention图号与映射描述，确认slime固定版ABORTED resume缺口，区分DP副本数与总GPU数、常驻分片与聚合峰值、采样概率与原始logprob。后续优先按真实排障/实验缺口修订对应主文，再重新运行检查和部署核验。
+
+## 10. 权重、容量与后端深入 · 2026-10-05
+
+新增三篇维持独立主问题：权重/分片/恢复与1T容量；ZeRO状态生命周期、通信和offload；DeepSpeed/Lightning/FSDP职责与接入。容量解释先标P、dtype、单位、对象、共享/重复和放置，再计算，不将常驻状态当峰值，也不将纯权重下界当可部署配置。
+
+框架资料抓取遇到JavaScript壳时，回查固定官方源码/RST，不据搜索片段推断能力。这里按固定源码区分Lightning FSDPStrategy和FSDP2组合路径。CPU格式/恢复实验单独记录实际版本与范围；DCP DTensor重分片不等于已验证DeepSpeed/Lightning多GPU恢复。下载检查根据正文自动发现练习脚本/JSON，核对线上字节与仓库一致。

@@ -171,3 +171,5 @@ Speculative decoding先用较廉价draft提议多个token，再由target批量�
 [本篇来源清单](./research/infra-inference-engine-sources.json)。最后一篇将这些阶段组织成可训练、可恢复、可测量的闭环。
 
 **数值练习下载：** [CPU验算脚本（仅Python标准库）](./assets/infra/infra-foundations-check.py) · [本次验算输出](./assets/infra/infra-foundations-check-results.json)。覆盖梯度有限差分、状态/KV字节、Roofline、TP与分块softmax；不包含GPU训练或测速。
+
+容量延伸：[1T不同精度占多少磁盘与推理显存](#q=infra-checkpoint-formats)，同时区分纯权重、KV、量化metadata和offload。

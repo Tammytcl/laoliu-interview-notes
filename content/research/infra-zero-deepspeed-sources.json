@@ -1,0 +1,82 @@
+{
+  "version": 1,
+  "topicId": "infra-zero-deepspeed",
+  "note": "固定源码用于核查保存/后端边界；动态文档按reviewedAt核对。CPU实验不代表GPU/1T部署复现。",
+  "sources": [
+    {
+      "id": "infra-zero-deepspeed-source-01",
+      "title": "ZeRO v3论文",
+      "url": "https://arxiv.org/abs/1910.02054v3",
+      "kind": "paper",
+      "reviewedAt": "2026-10-05",
+      "purpose": "1. 主问题：同一模型为什么每张卡都存了重复状态？：核对机制、接口、文件内容或版本边界"
+    },
+    {
+      "id": "infra-zero-deepspeed-source-02",
+      "title": "DeepSpeed ZeRO教程",
+      "url": "https://www.deepspeed.ai/tutorials/zero/",
+      "kind": "official-docs",
+      "reviewedAt": "2026-10-05",
+      "purpose": "3. 三阶段怎样执行一次训练更新？：核对机制、接口、文件内容或版本边界"
+    },
+    {
+      "id": "infra-zero-deepspeed-source-03",
+      "title": "DeepSpeed配置schema",
+      "url": "https://deepspeed.readthedocs.io/en/latest/zero3.html",
+      "kind": "official-docs",
+      "reviewedAt": "2026-10-05",
+      "purpose": "6. bucket、预取与持久参数：从配置名推到内存对象：核对机制、接口、文件内容或版本边界"
+    },
+    {
+      "id": "infra-zero-deepspeed-source-04",
+      "title": "配置说明",
+      "url": "https://www.deepspeed.ai/docs/config-json/",
+      "kind": "official-docs",
+      "reviewedAt": "2026-10-05",
+      "purpose": "6. bucket、预取与持久参数：从配置名推到内存对象：核对机制、接口、文件内容或版本边界"
+    },
+    {
+      "id": "infra-zero-deepspeed-source-05",
+      "title": "ZeRO-Offload教程",
+      "url": "https://www.deepspeed.ai/tutorials/zero-offload/",
+      "kind": "official-docs",
+      "reviewedAt": "2026-10-05",
+      "purpose": "7. Offload：从GPU换到CPU/NVMe，状态没有消失：核对机制、接口、文件内容或版本边界"
+    },
+    {
+      "id": "infra-zero-deepspeed-source-06",
+      "title": "ZeRO-Infinity v1",
+      "url": "https://arxiv.org/abs/2104.07857v1",
+      "kind": "paper",
+      "reviewedAt": "2026-10-05",
+      "purpose": "7. Offload：从GPU换到CPU/NVMe，状态没有消失：核对机制、接口、文件内容或版本边界"
+    },
+    {
+      "id": "infra-zero-deepspeed-source-07",
+      "title": "DeepSpeed入门",
+      "url": "https://www.deepspeed.ai/getting-started/",
+      "kind": "official-docs",
+      "reviewedAt": "2026-10-05",
+      "purpose": "8. DeepSpeed配置与训练循环：谁负责累积与step？：核对机制、接口、文件内容或版本边界"
+    },
+    {
+      "id": "infra-zero-deepspeed-source-08",
+      "title": "固定engine保存说明",
+      "url": "https://github.com/deepspeedai/DeepSpeed/blob/a77aeb676507beb9fe0604bc31c2bf075daf7c46/deepspeed/runtime/engine.py",
+      "kind": "official-code",
+      "reviewedAt": "2026-10-05",
+      "purpose": "9. 保存与恢复：checkpoint分区不能当部署权重：核对机制、接口、文件内容或版本边界",
+      "repository": "deepspeedai/DeepSpeed",
+      "revision": "a77aeb676507beb9fe0604bc31c2bf075daf7c46",
+      "pinnedUrl": "https://github.com/deepspeedai/DeepSpeed/blob/a77aeb676507beb9fe0604bc31c2bf075daf7c46/deepspeed/runtime/engine.py"
+    },
+    {
+      "id": "infra-zero-deepspeed-source-09",
+      "title": "checkpoint转换文档",
+      "url": "https://deepspeed.readthedocs.io/en/latest/model-checkpointing.html",
+      "kind": "official-docs",
+      "reviewedAt": "2026-10-05",
+      "purpose": "9. 保存与恢复：checkpoint分区不能当部署权重：核对机制、接口、文件内容或版本边界"
+    }
+  ]
+}

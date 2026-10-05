@@ -1,0 +1,121 @@
+{
+  "version": 1,
+  "topicId": "infra-training-backends",
+  "note": "固定源码用于核查保存/后端边界；动态文档按reviewedAt核对。CPU实验不代表GPU/1T部署复现。",
+  "sources": [
+    {
+      "id": "infra-training-backends-source-01",
+      "title": "FSDP2教程",
+      "url": "https://docs.pytorch.org/tutorials/intermediate/FSDP_tutorial.html",
+      "kind": "official-docs",
+      "reviewedAt": "2026-10-05",
+      "purpose": "3. 原生PyTorch与FSDP：保留训练循环，改变状态生命周期：核对机制、接口、文件内容或版本边界"
+    },
+    {
+      "id": "infra-training-backends-source-02",
+      "title": "fully_shard API",
+      "url": "https://docs.pytorch.org/docs/2.14/distributed.fsdp.fully_shard.html",
+      "kind": "official-docs",
+      "reviewedAt": "2026-10-05",
+      "purpose": "3. 原生PyTorch与FSDP：保留训练循环，改变状态生命周期：核对机制、接口、文件内容或版本边界"
+    },
+    {
+      "id": "infra-training-backends-source-03",
+      "title": "DeepSpeed入门",
+      "url": "https://www.deepspeed.ai/getting-started/",
+      "kind": "official-docs",
+      "reviewedAt": "2026-10-05",
+      "purpose": "4. DeepSpeed：engine包住计算、配置描述策略：核对机制、接口、文件内容或版本边界"
+    },
+    {
+      "id": "infra-training-backends-source-04",
+      "title": "配置文档",
+      "url": "https://www.deepspeed.ai/docs/config-json/",
+      "kind": "official-docs",
+      "reviewedAt": "2026-10-05",
+      "purpose": "4. DeepSpeed：engine包住计算、配置描述策略：核对机制、接口、文件内容或版本边界"
+    },
+    {
+      "id": "infra-training-backends-source-05",
+      "title": "Lightning固定官方代码树",
+      "url": "https://github.com/Lightning-AI/pytorch-lightning/tree/84df182f50ab34301aabb3c0eb4031815bfb413d",
+      "kind": "official-code",
+      "reviewedAt": "2026-10-05",
+      "purpose": "5. Lightning：把训练组织交给Trainer，后端通过strategy选择：核对机制、接口、文件内容或版本边界",
+      "repository": "Lightning-AI/pytorch-lightning",
+      "revision": "84df182f50ab34301aabb3c0eb4031815bfb413d",
+      "pinnedUrl": "https://github.com/Lightning-AI/pytorch-lightning/tree/84df182f50ab34301aabb3c0eb4031815bfb413d"
+    },
+    {
+      "id": "infra-training-backends-source-06",
+      "title": "Fabric固定代码入口",
+      "url": "https://github.com/Lightning-AI/pytorch-lightning/tree/84df182f50ab34301aabb3c0eb4031815bfb413d/src/lightning/fabric",
+      "kind": "official-code",
+      "reviewedAt": "2026-10-05",
+      "purpose": "5. Lightning：把训练组织交给Trainer，后端通过strategy选择：核对机制、接口、文件内容或版本边界",
+      "repository": "Lightning-AI/pytorch-lightning",
+      "revision": "84df182f50ab34301aabb3c0eb4031815bfb413d",
+      "pinnedUrl": "https://github.com/Lightning-AI/pytorch-lightning/tree/84df182f50ab34301aabb3c0eb4031815bfb413d/src/lightning/fabric"
+    },
+    {
+      "id": "infra-training-backends-source-07",
+      "title": "Lightning固定DeepSpeed教程",
+      "url": "https://github.com/Lightning-AI/pytorch-lightning/blob/84df182f50ab34301aabb3c0eb4031815bfb413d/docs/source-pytorch/advanced/model_parallel/deepspeed.rst",
+      "kind": "official-code",
+      "reviewedAt": "2026-10-05",
+      "purpose": "5. Lightning：把训练组织交给Trainer，后端通过strategy选择：核对机制、接口、文件内容或版本边界",
+      "repository": "Lightning-AI/pytorch-lightning",
+      "revision": "84df182f50ab34301aabb3c0eb4031815bfb413d",
+      "pinnedUrl": "https://github.com/Lightning-AI/pytorch-lightning/blob/84df182f50ab34301aabb3c0eb4031815bfb413d/docs/source-pytorch/advanced/model_parallel/deepspeed.rst"
+    },
+    {
+      "id": "infra-training-backends-source-08",
+      "title": "固定strategy源码",
+      "url": "https://github.com/Lightning-AI/pytorch-lightning/blob/84df182f50ab34301aabb3c0eb4031815bfb413d/src/lightning/pytorch/strategies/fsdp.py",
+      "kind": "official-code",
+      "reviewedAt": "2026-10-05",
+      "purpose": "5. Lightning：把训练组织交给Trainer，后端通过strategy选择：核对机制、接口、文件内容或版本边界",
+      "repository": "Lightning-AI/pytorch-lightning",
+      "revision": "84df182f50ab34301aabb3c0eb4031815bfb413d",
+      "pinnedUrl": "https://github.com/Lightning-AI/pytorch-lightning/blob/84df182f50ab34301aabb3c0eb4031815bfb413d/src/lightning/pytorch/strategies/fsdp.py"
+    },
+    {
+      "id": "infra-training-backends-source-09",
+      "title": "Lightning固定TP/FSDP教程",
+      "url": "https://github.com/Lightning-AI/pytorch-lightning/blob/84df182f50ab34301aabb3c0eb4031815bfb413d/docs/source-pytorch/advanced/model_parallel/tp_fsdp.rst",
+      "kind": "official-code",
+      "reviewedAt": "2026-10-05",
+      "purpose": "5. Lightning：把训练组织交给Trainer，后端通过strategy选择：核对机制、接口、文件内容或版本边界",
+      "repository": "Lightning-AI/pytorch-lightning",
+      "revision": "84df182f50ab34301aabb3c0eb4031815bfb413d",
+      "pinnedUrl": "https://github.com/Lightning-AI/pytorch-lightning/blob/84df182f50ab34301aabb3c0eb4031815bfb413d/docs/source-pytorch/advanced/model_parallel/tp_fsdp.rst"
+    },
+    {
+      "id": "infra-training-backends-source-10",
+      "title": "固定checkpoint教程",
+      "url": "https://github.com/Lightning-AI/pytorch-lightning/blob/84df182f50ab34301aabb3c0eb4031815bfb413d/docs/source-pytorch/common/checkpointing_basic.rst",
+      "kind": "official-code",
+      "reviewedAt": "2026-10-05",
+      "purpose": "7. 保存恢复与1T模型：上层封装不能消除物理容量：核对机制、接口、文件内容或版本边界",
+      "repository": "Lightning-AI/pytorch-lightning",
+      "revision": "84df182f50ab34301aabb3c0eb4031815bfb413d",
+      "pinnedUrl": "https://github.com/Lightning-AI/pytorch-lightning/blob/84df182f50ab34301aabb3c0eb4031815bfb413d/docs/source-pytorch/common/checkpointing_basic.rst"
+    },
+    {
+      "id": "infra-training-backends-source-11",
+      "title": "DCP恢复与重分片",
+      "url": "https://docs.pytorch.org/docs/2.14/distributed.checkpoint.html",
+      "kind": "official-docs",
+      "reviewedAt": "2026-10-05",
+      "purpose": "7. 保存恢复与1T模型：上层封装不能消除物理容量：核对机制、接口、文件内容或版本边界"
+    },
+    {
+      "id": "infra-training-backends-source-12",
+      "title": "DeepSpeed保存",
+      "url": "https://deepspeed.readthedocs.io/en/latest/model-checkpointing.html",
+      "kind": "official-docs",
+      "reviewedAt": "2026-10-05",
+      "purpose": "7. 保存恢复与1T模型：上层封装不能消除物理容量：核对机制、接口、文件内容或版本边界"
+    }
+  ]
+}

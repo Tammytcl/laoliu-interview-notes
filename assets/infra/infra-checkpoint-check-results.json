@@ -1,0 +1,108 @@
+{
+  "scope": "Tiny CPU serialization/Adam recovery and CPU Gloo DTensor 2-to-1 reshard only; no GPU training or actual 1T model",
+  "torch_version": "2.11.0+cu129",
+  "safetensors_version": "0.7.0",
+  "serialization": {
+    "unique_parameters": 8,
+    "tensor_payload_bytes": 32,
+    "file_bytes": {
+      "weights.pt": 1893,
+      "training.ckpt": 9048,
+      "weights.safetensors": 160
+    },
+    "header_bytes": 120,
+    "header": {
+      "bias": {
+        "dtype": "F32",
+        "shape": [
+          2
+        ],
+        "data_offsets": [
+          0,
+          8
+        ]
+      },
+      "weight": {
+        "dtype": "F32",
+        "shape": [
+          2,
+          3
+        ],
+        "data_offsets": [
+          8,
+          32
+        ]
+      }
+    }
+  },
+  "hf_style_index": {
+    "metadata": {
+      "total_size": 32
+    },
+    "weight_map": {
+      "weight": "model-00001-of-00002.safetensors",
+      "bias": "model-00002-of-00002.safetensors"
+    }
+  },
+  "adam_resume": {
+    "next_loss": 0.20318153500556946,
+    "max_parameter_error": 0.0,
+    "optimizer_states_equal": true
+  },
+  "dcp_reshard": {
+    "saved_world_size": 2,
+    "loaded_world_size": 1,
+    "shape": [
+      4,
+      4
+    ],
+    "max_error": 0.0,
+    "files": [
+      ".metadata",
+      "__0_0.distcp",
+      "__1_0.distcp"
+    ]
+  },
+  "capacity_1T": [
+    {
+      "encoding": "FP32",
+      "bytes": 4000000000000,
+      "TB": 4.0,
+      "TiB": 3.637978807091713,
+      "weight_only_gpus_80GB": 50,
+      "weight_only_gpus_64GB": 63
+    },
+    {
+      "encoding": "BF16/FP16",
+      "bytes": 2000000000000,
+      "TB": 2.0,
+      "TiB": 1.8189894035458565,
+      "weight_only_gpus_80GB": 25,
+      "weight_only_gpus_64GB": 32
+    },
+    {
+      "encoding": "8-bit payload",
+      "bytes": 1000000000000,
+      "TB": 1.0,
+      "TiB": 0.9094947017729282,
+      "weight_only_gpus_80GB": 13,
+      "weight_only_gpus_64GB": 16
+    },
+    {
+      "encoding": "packed 4-bit payload",
+      "bytes": 500000000000,
+      "TB": 0.5,
+      "TiB": 0.4547473508864641,
+      "weight_only_gpus_80GB": 7,
+      "weight_only_gpus_64GB": 8
+    }
+  ],
+  "int4_group128_scale_zero_4bytes_GB": 531.25,
+  "kv_example_GiB": 128.0,
+  "BF16_plus_KV_uniform_capacity_gpus_64GB": 34,
+  "storage_examples_TB": {
+    "FP32_params_plus_FP32_Adam": 12,
+    "BF16_plus_master_plus_Adam": 14,
+    "three_12TB_checkpoints_plus_2TB_export": 38
+  }
+}

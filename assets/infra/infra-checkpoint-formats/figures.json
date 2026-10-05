@@ -1,0 +1,17 @@
+{
+  "topicId": "infra-checkpoint-formats",
+  "figures": [
+    {
+      "file": "checkpoint-layers.svg",
+      "origin": "authored-concept-diagram",
+      "sourcePage": "https://tammytcl.github.io/laoliu-interview-notes/#q=infra-checkpoint-formats",
+      "credit": "Laoliu interview notes · 本文概念示意，非实测性能",
+      "retrievedAt": "2026-10-05",
+      "reviewedAt": "2026-10-05",
+      "sha256": "c8fee4fc011f904768d7c8212bfb31356124a2162abf45057c3b4ef6c29818fd",
+      "visuallyVerified": true,
+      "role": "concept",
+      "explanation": "complete"
+    }
+  ]
+}

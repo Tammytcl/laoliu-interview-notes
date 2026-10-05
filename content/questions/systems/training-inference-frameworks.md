@@ -257,3 +257,5 @@ slime 的启动脚本常把参数分成几组 shell 数组，传给训练入口�
 **2026-10-05 基础复习补充：** 已独立整理 [训练一步与显存](#q=infra-training-step)、[GPU性能与通信](#q=infra-gpu-performance)、[分布式并行](#q=infra-distributed-parallelism)、[推理引擎](#q=infra-inference-engine)、[RL/OPD训推闭环](#q=infra-rl-pipeline)。可以按此顺序补机制，再回来解释框架配置；本篇继续集中回答框架区别与使用。
 
 后续整理沿用 [专题工作流](./docs/topic-workflow.md) 与 [模板](./templates/topic.md)，每一轮先确定一个主问题；基础知识按当前问题的需要补充，避免把相关内容全部塞进一篇。来源观察的候选变化见 [更新记录](./research/training-inference-frameworks-pending.md)。
+
+**框架后端与保存深入：** [DeepSpeed/Lightning/FSDP的职责与接入](#q=infra-training-backends)单独比较训练循环和分片后端；[ZeRO详解](#q=infra-zero-deepspeed)讲阶段数据流与offload；[权重格式与1T容量](#q=infra-checkpoint-formats)区分文件分卷、分布式状态和推理峰值。本篇保持verl/slime选型主线。

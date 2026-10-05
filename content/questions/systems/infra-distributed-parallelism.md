@@ -172,3 +172,5 @@ PP在容量不足、层数多时很有价值，但首尾stage可能承担embeddi
 [本篇来源清单](./research/infra-distributed-parallelism-sources.json)还记录了三个固定代码入口。下一篇从推理角度重算容量和调度，解释为什么训练布局不能直接作为推理最优布局。
 
 **数值练习下载：** [CPU验算脚本（仅Python标准库）](./assets/infra/infra-foundations-check.py) · [本次验算输出](./assets/infra/infra-foundations-check-results.json)。覆盖梯度有限差分、状态/KV字节、Roofline、TP与分块softmax；不包含GPU训练或测速。
+
+进一步阅读：[ZeRO三阶段完整机制](#q=infra-zero-deepspeed) · [DeepSpeed/Lightning/FSDP怎样接入](#q=infra-training-backends) · [分片格式、恢复与1T容量](#q=infra-checkpoint-formats)。

@@ -1,0 +1,109 @@
+{
+  "version": 1,
+  "topicId": "infra-checkpoint-formats",
+  "note": "固定源码用于核查保存/后端边界；动态文档按reviewedAt核对。CPU实验不代表GPU/1T部署复现。",
+  "sources": [
+    {
+      "id": "infra-checkpoint-formats-source-01",
+      "title": "PyTorch serialization",
+      "url": "https://docs.pytorch.org/docs/2.14/notes/serialization.html",
+      "kind": "official-docs",
+      "reviewedAt": "2026-10-05",
+      "purpose": "2. 四个维度：后缀、内容、编码与分片不是同一件事：核对机制、接口、文件内容或版本边界"
+    },
+    {
+      "id": "infra-checkpoint-formats-source-02",
+      "title": "官方load说明",
+      "url": "https://docs.pytorch.org/docs/2.14/generated/torch.load.html",
+      "kind": "official-docs",
+      "reviewedAt": "2026-10-05",
+      "purpose": "2. 四个维度：后缀、内容、编码与分片不是同一件事：核对机制、接口、文件内容或版本边界"
+    },
+    {
+      "id": "infra-checkpoint-formats-source-03",
+      "title": "固定格式说明",
+      "url": "https://github.com/safetensors/safetensors/blob/e246a2560645b7525f5775669ed816eb57c5bcc8/README.md",
+      "kind": "official-code",
+      "reviewedAt": "2026-10-05",
+      "purpose": "3. safetensors：张量容器、header与共享权重：核对机制、接口、文件内容或版本边界",
+      "repository": "safetensors/safetensors",
+      "revision": "e246a2560645b7525f5775669ed816eb57c5bcc8",
+      "pinnedUrl": "https://github.com/safetensors/safetensors/blob/e246a2560645b7525f5775669ed816eb57c5bcc8/README.md"
+    },
+    {
+      "id": "infra-checkpoint-formats-source-04",
+      "title": "Safetensors API",
+      "url": "https://huggingface.co/docs/safetensors/api/torch",
+      "kind": "official-docs",
+      "reviewedAt": "2026-10-05",
+      "purpose": "3. safetensors：张量容器、header与共享权重：核对机制、接口、文件内容或版本边界"
+    },
+    {
+      "id": "infra-checkpoint-formats-source-05",
+      "title": "共享张量说明",
+      "url": "https://huggingface.co/docs/safetensors/torch_shared_tensors",
+      "kind": "official-docs",
+      "reviewedAt": "2026-10-05",
+      "purpose": "3. safetensors：张量容器、header与共享权重：核对机制、接口、文件内容或版本边界"
+    },
+    {
+      "id": "infra-checkpoint-formats-source-06",
+      "title": "HF大模型加载教程",
+      "url": "https://huggingface.co/docs/transformers/main/big_models",
+      "kind": "official-docs",
+      "reviewedAt": "2026-10-05",
+      "purpose": "4. 分片格式：HF文件分卷、ZeRO分区、TP切片与DCP：核对机制、接口、文件内容或版本边界"
+    },
+    {
+      "id": "infra-checkpoint-formats-source-07",
+      "title": "DCP教程",
+      "url": "https://docs.pytorch.org/tutorials/recipes/distributed_checkpoint_recipe.html",
+      "kind": "official-docs",
+      "reviewedAt": "2026-10-05",
+      "purpose": "4. 分片格式：HF文件分卷、ZeRO分区、TP切片与DCP：核对机制、接口、文件内容或版本边界"
+    },
+    {
+      "id": "infra-checkpoint-formats-source-08",
+      "title": "DCP API",
+      "url": "https://docs.pytorch.org/docs/2.14/distributed.checkpoint.html",
+      "kind": "official-docs",
+      "reviewedAt": "2026-10-05",
+      "purpose": "4. 分片格式：HF文件分卷、ZeRO分区、TP切片与DCP：核对机制、接口、文件内容或版本边界"
+    },
+    {
+      "id": "infra-checkpoint-formats-source-09",
+      "title": "量化概念教程",
+      "url": "https://huggingface.co/docs/transformers/main/quantization/concept_guide",
+      "kind": "official-docs",
+      "reviewedAt": "2026-10-05",
+      "purpose": "5. 参数量与磁盘：1T模型怎么算？：核对机制、接口、文件内容或版本边界"
+    },
+    {
+      "id": "infra-checkpoint-formats-source-10",
+      "title": "DeepSpeed checkpoint文档",
+      "url": "https://deepspeed.readthedocs.io/en/latest/model-checkpointing.html",
+      "kind": "official-docs",
+      "reviewedAt": "2026-10-05",
+      "purpose": "6. 训练checkpoint磁盘：为何和训练显存账本不同？：核对机制、接口、文件内容或版本边界"
+    },
+    {
+      "id": "infra-checkpoint-formats-source-11",
+      "title": "ZeRO-Inference官方介绍",
+      "url": "https://www.deepspeed.ai/2022/09/09/zero-inference.html",
+      "kind": "author-blog",
+      "reviewedAt": "2026-10-05",
+      "purpose": "7. 1T推理显存：权重是下界，KV不能从参数量直接推得：核对机制、接口、文件内容或版本边界"
+    },
+    {
+      "id": "infra-checkpoint-formats-source-12",
+      "title": "Lightning固定checkpoint教程",
+      "url": "https://github.com/Lightning-AI/pytorch-lightning/blob/84df182f50ab34301aabb3c0eb4031815bfb413d/docs/source-pytorch/common/checkpointing_basic.rst",
+      "kind": "official-code",
+      "reviewedAt": "2026-10-05",
+      "purpose": "8. 转换与加载：先恢复逻辑权重，再改容器：核对机制、接口、文件内容或版本边界",
+      "repository": "Lightning-AI/pytorch-lightning",
+      "revision": "84df182f50ab34301aabb3c0eb4031815bfb413d",
+      "pinnedUrl": "https://github.com/Lightning-AI/pytorch-lightning/blob/84df182f50ab34301aabb3c0eb4031815bfb413d/docs/source-pytorch/common/checkpointing_basic.rst"
+    }
+  ]
+}

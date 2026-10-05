@@ -63,6 +63,8 @@ P0 表示第一轮应掌握的主干，P1 表示主干后再深入。这是本�
 4. [推理引擎](#q=infra-inference-engine)：算KV容量，区别Flash/Paged/批处理/缓存，定义TTFT、ITL与goodput。
 5. [RL/OPD训推流水线](#q=infra-rl-pipeline)：追踪一条多轮样本，标出概率和版本，写最小baseline与低利用率调查方案。
 
+进一步补课按三篇展开：[权重格式、checkpoint与1T存储/推理显存](#q=infra-checkpoint-formats) → [ZeRO三阶段、通信与offload](#q=infra-zero-deepspeed) → [DeepSpeed/Lightning/FSDP接入与恢复](#q=infra-training-backends)。先会计算容量，再解释分片和框架怎样实现。
+
 最后回到框架文章：说明FSDP/Megatron后端、vLLM/SGLang生成、算法角色分别怎样连接，以及同任务换框架要改哪里。产出是容量账本、性能假设、rank布局、调度图、样本契约及一份约束明确的框架选择说明。可下载并运行基础链中的CPU数值练习，不把读完文章等同于完成GPU实验。
 
 ## 可重复的复习循环

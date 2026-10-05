@@ -1,0 +1,17 @@
+{
+  "topicId": "infra-zero-deepspeed",
+  "figures": [
+    {
+      "file": "zero-stages.svg",
+      "origin": "authored-concept-diagram",
+      "sourcePage": "https://tammytcl.github.io/laoliu-interview-notes/#q=infra-zero-deepspeed",
+      "credit": "Laoliu interview notes · 本文概念示意，非实测性能",
+      "retrievedAt": "2026-10-05",
+      "reviewedAt": "2026-10-05",
+      "sha256": "9ab11b8118f4831af53d8a491967fb629f4563861903c0c3128d0b9edf651648",
+      "visuallyVerified": true,
+      "role": "concept",
+      "explanation": "complete"
+    }
+  ]
+}

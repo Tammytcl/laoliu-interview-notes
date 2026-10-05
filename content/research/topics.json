@@ -102,5 +102,64 @@
     ],
     "minimumQuestions": 10,
     "minimumCharacters": 6000
+  },
+  {
+    "id": "infra-checkpoint-formats",
+    "sources": "content/research/infra-checkpoint-formats-sources.json",
+    "figures": "assets/infra/infra-checkpoint-formats/figures.json",
+    "requiredSections": [
+      "主问题",
+      "四个维度",
+      "safetensors：",
+      "分片格式",
+      "参数量与磁盘",
+      "训练checkpoint磁盘",
+      "1T推理显存",
+      "转换与加载",
+      "恢复与导出验收",
+      "面试问答",
+      "来源"
+    ],
+    "minimumQuestions": 10,
+    "minimumCharacters": 6000
+  },
+  {
+    "id": "infra-zero-deepspeed",
+    "sources": "content/research/infra-zero-deepspeed-sources.json",
+    "figures": "assets/infra/infra-zero-deepspeed/figures.json",
+    "requiredSections": [
+      "主问题",
+      "状态所有权",
+      "三阶段",
+      "状态容量",
+      "通信代价",
+      "bucket",
+      "Offload",
+      "配置与训练循环",
+      "保存与恢复",
+      "排障",
+      "面试问答"
+    ],
+    "minimumQuestions": 8,
+    "minimumCharacters": 6000
+  },
+  {
+    "id": "infra-training-backends",
+    "sources": "content/research/infra-training-backends-sources.json",
+    "figures": "assets/infra/infra-training-backends/figures.json",
+    "requiredSections": [
+      "主问题",
+      "职责层次",
+      "原生PyTorch与FSDP",
+      "DeepSpeed：",
+      "Lightning：",
+      "同一个任务",
+      "保存恢复与1T",
+      "回到verl",
+      "面试问答",
+      "来源"
+    ],
+    "minimumQuestions": 10,
+    "minimumCharacters": 6000
   }
 ]

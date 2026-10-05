@@ -1,0 +1,49 @@
+{
+  "version": 1,
+  "topicId": "infra-training-backends",
+  "checkedAt": "2026-10-05T06:42:05.275Z",
+  "observations": {
+    "infra-training-backends-source-05": {
+      "checkedAt": "2026-10-05T06:42:05.275Z",
+      "lastSuccessAt": "2026-10-05T06:42:05.275Z",
+      "status": "ok",
+      "revision": "84df182f50ab34301aabb3c0eb4031815bfb413d",
+      "pendingReview": false
+    },
+    "infra-training-backends-source-06": {
+      "checkedAt": "2026-10-05T06:42:05.275Z",
+      "lastSuccessAt": "2026-10-05T06:42:05.275Z",
+      "status": "ok",
+      "revision": "84df182f50ab34301aabb3c0eb4031815bfb413d",
+      "pendingReview": false
+    },
+    "infra-training-backends-source-07": {
+      "checkedAt": "2026-10-05T06:42:05.275Z",
+      "lastSuccessAt": "2026-10-05T06:42:05.275Z",
+      "status": "ok",
+      "revision": "84df182f50ab34301aabb3c0eb4031815bfb413d",
+      "pendingReview": false
+    },
+    "infra-training-backends-source-08": {
+      "checkedAt": "2026-10-05T06:42:05.275Z",
+      "lastSuccessAt": "2026-10-05T06:42:05.275Z",
+      "status": "ok",
+      "revision": "84df182f50ab34301aabb3c0eb4031815bfb413d",
+      "pendingReview": false
+    },
+    "infra-training-backends-source-09": {
+      "checkedAt": "2026-10-05T06:42:05.275Z",
+      "lastSuccessAt": "2026-10-05T06:42:05.275Z",
+      "status": "ok",
+      "revision": "84df182f50ab34301aabb3c0eb4031815bfb413d",
+      "pendingReview": false
+    },
+    "infra-training-backends-source-10": {
+      "checkedAt": "2026-10-05T06:42:05.275Z",
+      "lastSuccessAt": "2026-10-05T06:42:05.275Z",
+      "status": "ok",
+      "revision": "84df182f50ab34301aabb3c0eb4031815bfb413d",
+      "pendingReview": false
+    }
+  }
+}
