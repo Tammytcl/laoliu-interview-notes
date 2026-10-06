@@ -4,7 +4,7 @@ title: "02 · GPU 为什么没跑满？从 Roofline、通信到正确 profiling"
 category: systems
 difficulty: 基础
 tags: ["P0", "Infra基础", "GPU", "Roofline", "NCCL", "Profiling"]
-updated: 2026-10-05
+updated: 2026-10-06
 summary: "拆开算力、显存带宽、启动开销与通信等待，用矩阵算例建立性能下界，再学习计时、collective、重叠与端到端排障。"
 draft: false
 ---
@@ -174,3 +174,5 @@ bucket太小会增加通信次数；太大要等更多梯度ready，暴露尾部
 [本篇来源清单](./research/infra-gpu-performance-sources.json)。下一篇把“存什么、搬什么”用于解释各类并行机制，最后再回到框架配置。
 
 **数值练习下载：** [CPU验算脚本（仅Python标准库）](./assets/infra/infra-foundations-check.py) · [本次验算输出](./assets/infra/infra-foundations-check-results.json)。覆盖梯度有限差分、状态/KV字节、Roofline、TP与分块softmax；不包含GPU训练或测速。
+
+硬件实例：[A100/H100/H200/B200的架构、带宽与训练区别](#q=infra-ai-accelerators)，将这里的Roofline与通信模型应用到具体SKU；保留厂商峰值与实测的区别。

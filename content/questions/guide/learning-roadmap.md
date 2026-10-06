@@ -4,7 +4,7 @@ title: "从哪里开始？Diffusion、LLM、Agent、Infra 四条学习路线"
 category: guide
 difficulty: 基础
 tags: ["P0", "学习路线", "开始这里"]
-updated: 2026-10-05
+updated: 2026-10-06
 summary: "按先修关系安排学习，每个问题都落到解释、推导或可验证练习。"
 draft: false
 ---
@@ -82,3 +82,5 @@ P0 表示第一轮应掌握的主干，P1 表示主干后再深入。这是本�
 调研日期：2026-09-30。以下为论文或官方文档；正文是学习性整理，小实验是建议练习，未声称已复现。
 
 - [Attention Is All You Need](https://arxiv.org/abs/1706.03762)：作为生成与系统的共同基础；路线排序是本笔记的整理建议。
+
+硬件复习：[A100、H100/H200、B200/GB200与其他AI算力卡](#q=infra-ai-accelerators)。建议在GPU性能和显存账本后读，先明确SKU、精度与拓扑，再解释全参训练、长上下文和rollout为何有不同需求。

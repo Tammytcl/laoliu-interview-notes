@@ -1,0 +1,31 @@
+{
+  "topicId": "infra-ai-accelerators",
+  "figures": [
+    {
+      "file": "training-limits.svg",
+      "origin": "authored-concept-diagram",
+      "sourcePage": "https://tammytcl.github.io/laoliu-interview-notes/#q=infra-ai-accelerators",
+      "credit": "Laoliu interview notes · 本文概念示意，非性能测量",
+      "retrievedAt": "2026-10-06",
+      "reviewedAt": "2026-10-06",
+      "sha256": "d4c43aa3c736c40163258deb6237940598c8ffd43282479171b96832267a89b3",
+      "visuallyVerified": true,
+      "role": "concept",
+      "explanation": "complete"
+    },
+    {
+      "file": "h100-full-chip-original.png",
+      "origin": "author-original-architecture",
+      "sourcePage": "https://developer.nvidia.com/blog/nvidia-hopper-architecture-in-depth/",
+      "credit": "NVIDIA · Hopper Architecture In-Depth (2022), Figure 3, full GH100 diagram",
+      "retrievedAt": "2026-10-06",
+      "reviewedAt": "2026-10-06",
+      "sha256": "7df1ff29256dca70ab93eb2fce75b9a9b734e5b47bc62c2e5d99905641fabd20",
+      "visuallyVerified": true,
+      "role": "architecture",
+      "explanation": "complete",
+      "originUrl": "https://developer-blogs.nvidia.com/wp-content/uploads/2022/03/Full-H100-GPU-with-144-SMs.png",
+      "historicalScope": "Full GH100144SMs; shipping SKU enabled units differ"
+    }
+  ]
+}

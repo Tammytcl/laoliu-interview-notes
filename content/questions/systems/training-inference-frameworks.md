@@ -4,7 +4,7 @@ title: "训练框架怎么选、怎么用？以 verl 与 slime 为主线"
 category: systems
 difficulty: 进阶
 tags: ["P0", "训练框架", "slime", "verl", "框架对比", "框架使用"]
-updated: 2026-10-05
+updated: 2026-10-06
 summary: "围绕训练框架的职责、区别和实际使用，重点比较 verl 与 slime，再说明 Megatron、DeepSpeed、FSDP 以及其他后训练工具的位置。"
 draft: false
 ---
@@ -259,3 +259,5 @@ slime 的启动脚本常把参数分成几组 shell 数组，传给训练入口�
 后续整理沿用 [专题工作流](./docs/topic-workflow.md) 与 [模板](./templates/topic.md)，每一轮先确定一个主问题；基础知识按当前问题的需要补充，避免把相关内容全部塞进一篇。来源观察的候选变化见 [更新记录](./research/training-inference-frameworks-pending.md)。
 
 **框架后端与保存深入：** [DeepSpeed/Lightning/FSDP的职责与接入](#q=infra-training-backends)单独比较训练循环和分片后端；[ZeRO详解](#q=infra-zero-deepspeed)讲阶段数据流与offload；[权重格式与1T容量](#q=infra-checkpoint-formats)区分文件分卷、分布式状态和推理峰值。本篇保持verl/slime选型主线。
+
+硬件选型补充：[A/H/B与其他AI算力卡](#q=infra-ai-accelerators)介绍架构、规格口径、软件兼容与训练场景；选择verl/slime后端时可据此核查GPU/设备支持。

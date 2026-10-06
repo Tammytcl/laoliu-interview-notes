@@ -1,6 +1,6 @@
 # training-inference-frameworks 来源观察记录
 
-自动检测时间：2026-10-05T06:42:01.180Z
+自动检测时间：2026-10-06T04:11:51.540Z
 
 这是来源变化的候选账本。正文核对日期、固定版本和结论不会由检测脚本覆盖。仓库 commit 更新可能与本文无关；需要阅读差异后再判断。
 
@@ -8,7 +8,7 @@
 
 ## 待核对变化
 
-- [Megatron-LM](https://github.com/NVIDIA/Megatron-LM/compare/b1a6f076993662664f824d1cb8e81e51cf572b8b...ef8cd10b8e34a94c9ad7452e7851f58337f353a0)：与正文核对基线有差异；核查受影响段落、支持组合、源码入口和示例。
+- [Megatron-LM](https://github.com/NVIDIA/Megatron-LM/compare/b1a6f076993662664f824d1cb8e81e51cf572b8b...54348550d4133a43f6b6c9e7392f5c31c7360aae)：与正文核对基线有差异；核查受影响段落、支持组合、源码入口和示例。
 
 ## 抓取失败
 

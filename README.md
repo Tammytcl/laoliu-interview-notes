@@ -4,7 +4,7 @@
 
 一个内容与界面分离的中文面试准备站。浅色纸张风格、主题导航、全文搜索、题目目录与正式论文报告。发布站点无数据库、追踪统计或运行时 CDN 依赖，适合 GitHub Pages；可选本地工作台提供源码缓存清理。
 
-> 当前有 39 篇学习笔记、49 篇论文精读报告、2 份 Daily 和 3 份专题调研。论文收录独立于面试笔记；报告按原文核读范围说明证据，未登记个人复现。旧项目表达题保留在综合面试中。
+> 当前有 40 篇学习笔记、49 篇论文精读报告、2 份 Daily 和 3 份专题调研。论文收录独立于面试笔记；报告按原文核读范围说明证据，未登记个人复现。旧项目表达题保留在综合面试中。
 
 ## 从这里开始学习
 
@@ -214,7 +214,7 @@ npm run test:browser
 
 [训练框架对比与使用](content/questions/systems/training-inference-frameworks.md) 以 verl / slime 为主线，解释后端区别、实际接入、配置和选型，保留两张架构图及八个框架相关问答。旧 Infra 8 篇已移入 `archive/questions/systems/2026-10-03/`，旧 URL 自动跳转到框架专题；本轮新增五篇独立的基础复习内容，不把外围知识混入框架选型。
 
-后续专题遵循 [整理工作流](docs/topic-workflow.md) 和 [模板](templates/topic.md)。`npm run topics:quality` 检查来源、固定版本、插图、公式和站内链接；`npm run topics:watch` 观察核心来源，记录待核对变化。每周一 UTC 02:17 自动更新观察快照、检查、推送与部署；正文语义更新需读取差异后核对，不自动改写事实。`npm run topics:check-live -- <站点地址>` 根据专题注册表验证全部九篇的正文、来源下载、公式、图片、目录与手机布局。
+后续专题遵循 [整理工作流](docs/topic-workflow.md) 和 [模板](templates/topic.md)。`npm run topics:quality` 检查来源、固定版本、插图、公式和站内链接；`npm run topics:watch` 观察核心来源，记录待核对变化。每周一 UTC 02:17 自动更新观察快照、检查、推送与部署；正文语义更新需读取差异后核对，不自动改写事实。`npm run topics:check-live -- <站点地址>` 根据专题注册表验证全部十篇的正文、来源下载、公式、图片、目录与手机布局。
 
 ### Infra 基础复习五篇 · 2026-10-05
 
@@ -233,3 +233,7 @@ npm run test:browser
 8. [DeepSpeed/Lightning/FSDP的职责与接入](content/questions/systems/infra-training-backends.md)
 
 本轮追加约3.5万字符、28道整理问答和3张概念图。纯权重、训练checkpoint、转换临时量与推理KV分别核算；[小模型CPU实验](assets/infra/infra-checkpoint-check.py)实际检查safetensors/pt往返、Adam恢复后一步和DCP的2→1重分片。[调研审阅记录](docs/infra-storage-audit-2026-10-05.md)保留范围与验证边界。
+
+### 算力卡与训练架构 · 2026-10-06
+
+9. [A/H/B GPU及其他AI加速器](content/questions/systems/infra-ai-accelerators.md)：A100→H100/H200→B200/GB200，延伸B300、AMD CDNA、Gaudi、TPU、Trainium和昇腾；解释SXM/PCIe、HBM/互联、dense/sparse与软件兼容。约1.8万字符、12道问答、本文概念图和NVIDIA GH100原图。保留具体SKU、两份固定datasheet hash和[CPU算例](assets/infra/infra-accelerator-check.py)，未进行跨GPU性能复现。[审阅记录](docs/infra-accelerators-audit-2026-10-06.md)。

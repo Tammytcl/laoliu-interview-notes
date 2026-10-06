@@ -62,3 +62,19 @@ test('权重、ZeRO和训练后端三篇在手机上展示容量与独立问答'
   expect(result.dcp_reshard.max_error).toBe(0);
   expect(result.capacity_1T.find(item => item.encoding === 'BF16/FP16').TB).toBe(2);
 });
+
+test('AI算力卡专题展示具体SKU、架构原图和CPU下界，手机无溢出', async ({ page }) => {
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.goto('/#q=infra-ai-accelerators');
+  await expect(page.locator('.reader-header h1')).toContainText('A卡、H卡、B卡');
+  await expect(page.locator('.prose')).toContainText('Q12');
+  await expect(page.locator('.prose')).toContainText('180GB HBM3E');
+  await expect(page.locator('.prose')).toContainText('96GiB');
+  await expect(page.locator('.prose img')).toHaveCount(2);
+  await expect(page.locator('.prose .katex-error')).toHaveCount(0);
+  expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1)).toBe(true);
+  const result = await (await page.request.get('/assets/infra/infra-accelerator-check-results.json')).json();
+  expect(result.model_70B_zero3_D8_state_per_rank_GB).toBe(140);
+  await page.reload();
+  await expect(page.locator('.prose')).toContainText('完整来源清单');
+});

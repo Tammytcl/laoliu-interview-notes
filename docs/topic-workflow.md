@@ -49,7 +49,7 @@ npm run test:browser
 npm run topics:check-live -- https://tammytcl.github.io/laoliu-interview-notes/
 ```
 
-当前线上检查按 `content/research/topics.json` 验证已注册的九篇专题：Infra 列表、旧链接跳转、正文与核对源文件一致、问答、来源下载内容、图片hash与显示比例、目录定位、直接刷新和手机布局。扩展专题时登记清单和必要模块；不再修改检查器中的单篇白名单。
+当前线上检查按 `content/research/topics.json` 验证已注册的十篇专题：Infra 列表、旧链接跳转、正文与核对源文件一致、问答、来源下载内容、图片hash与显示比例、目录定位、直接刷新和手机布局。扩展专题时登记清单和必要模块；不再修改检查器中的单篇白名单。
 
 ## 6. 持续更新与自动化边界
 
@@ -98,3 +98,7 @@ npm run topics:watch
 新增三篇维持独立主问题：权重/分片/恢复与1T容量；ZeRO状态生命周期、通信和offload；DeepSpeed/Lightning/FSDP职责与接入。容量解释先标P、dtype、单位、对象、共享/重复和放置，再计算，不将常驻状态当峰值，也不将纯权重下界当可部署配置。
 
 框架资料抓取遇到JavaScript壳时，回查固定官方源码/RST，不据搜索片段推断能力。这里按固定源码区分Lightning FSDPStrategy和FSDP2组合路径。CPU格式/恢复实验单独记录实际版本与范围；DCP DTensor重分片不等于已验证DeepSpeed/Lightning多GPU恢复。下载检查根据正文自动发现练习脚本/JSON，核对线上字节与仓库一致。
+
+## 11. 硬件规格与架构专题 · 2026-10-06
+
+GPU/AI加速器比较须先登记芯片/产品/形态/系统层次，再看容量、带宽、目标精度dense/sparse、互联方向和软件版本。厂商网页与PDF不一致时固定实际使用的来源/hash和列，不按常见传播数字替换，也不编造差异原因。历史完整芯片图需标明启用配置与SKU不同。本文只做CPU容量/性能下界计算，没有跨设备benchmark或当前报价结论。两份datasheet加入自动hash观察；其他产品页面下一轮人工核查。

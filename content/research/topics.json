@@ -161,5 +161,26 @@
     ],
     "minimumQuestions": 10,
     "minimumCharacters": 6000
+  },
+  {
+    "id": "infra-ai-accelerators",
+    "sources": "content/research/infra-ai-accelerators-sources.json",
+    "figures": "assets/infra/infra-ai-accelerators/figures.json",
+    "requiredSections": [
+      "主问题",
+      "读规格",
+      "A/H/B主线",
+      "架构差异",
+      "训练模型的区别",
+      "互联与系统",
+      "其他AI算力卡",
+      "L40S、RTX",
+      "预训练、SFT",
+      "性能对比",
+      "面试问答",
+      "来源"
+    ],
+    "minimumQuestions": 12,
+    "minimumCharacters": 6000
   }
 ]

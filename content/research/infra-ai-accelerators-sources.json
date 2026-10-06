@@ -1,0 +1,289 @@
+{
+  "version": 1,
+  "topicId": "infra-ai-accelerators",
+  "note": "官方规格与机制核对；PDF按hash记录口径，稀疏峰值转dense明确标记。没有跨设备性能复现或当前报价建议。",
+  "sources": [
+    {
+      "id": "infra-ai-accelerators-source-01",
+      "title": "GB200官方产品页",
+      "url": "https://www.nvidia.com/en-us/data-center/gb200-nvl72/",
+      "kind": "official-docs",
+      "reviewedAt": "2026-10-06",
+      "purpose": "1. 主问题与命名：先确认在比较哪一种产品：核对架构、产品形态、规格/脚注或接入路径"
+    },
+    {
+      "id": "infra-ai-accelerators-source-02",
+      "title": "A100",
+      "url": "https://www.nvidia.com/en-us/data-center/a100/",
+      "kind": "official-docs",
+      "reviewedAt": "2026-10-06",
+      "purpose": "3. NVIDIA A/H/B主线：按明确SKU核对的规格表：核对架构、产品形态、规格/脚注或接入路径"
+    },
+    {
+      "id": "infra-ai-accelerators-source-03",
+      "title": "H100",
+      "url": "https://www.nvidia.com/en-us/data-center/h100/",
+      "kind": "official-docs",
+      "reviewedAt": "2026-10-06",
+      "purpose": "3. NVIDIA A/H/B主线：按明确SKU核对的规格表：核对架构、产品形态、规格/脚注或接入路径"
+    },
+    {
+      "id": "infra-ai-accelerators-source-04",
+      "title": "H200",
+      "url": "https://www.nvidia.com/en-us/data-center/h200/",
+      "kind": "official-docs",
+      "reviewedAt": "2026-10-06",
+      "purpose": "3. NVIDIA A/H/B主线：按明确SKU核对的规格表：核对架构、产品形态、规格/脚注或接入路径"
+    },
+    {
+      "id": "infra-ai-accelerators-source-05",
+      "title": "Blackwell固定PDF第8页",
+      "url": "https://dam-cdn.nvd.orangelogic.com/AssetLink/y441155802qub41q118b2852i557jem5.pdf",
+      "kind": "official-docs",
+      "reviewedAt": "2026-10-06",
+      "purpose": "3. NVIDIA A/H/B主线：按明确SKU核对的规格表：核对架构、产品形态、规格/脚注或接入路径",
+      "reviewedSha256": "ad8ed65e64974278670d8e6904c0e3020391027925e339bf28e75fdfe2d307d7",
+      "watchUrl": "https://dam-cdn.nvd.orangelogic.com/AssetLink/y441155802qub41q118b2852i557jem5.pdf",
+      "sourceType": "fixed-datasheet-PDF",
+      "bytes": 1156321,
+      "pdfPage": 8
+    },
+    {
+      "id": "infra-ai-accelerators-source-06",
+      "title": "Blackwell Ultra固定PDF第5页",
+      "url": "https://dam-cdn.nvd.orangelogic.com/AssetLink/1k0p832eq8r5ca0u5383ie5o4tp3bst1.pdf",
+      "kind": "official-docs",
+      "reviewedAt": "2026-10-06",
+      "purpose": "3. NVIDIA A/H/B主线：按明确SKU核对的规格表：核对架构、产品形态、规格/脚注或接入路径",
+      "reviewedSha256": "ccdffc064731cc160016f4c7a77ecfa37983038bcaf60e39190ba4175b39c7c8",
+      "watchUrl": "https://dam-cdn.nvd.orangelogic.com/AssetLink/1k0p832eq8r5ca0u5383ie5o4tp3bst1.pdf",
+      "sourceType": "fixed-datasheet-PDF",
+      "bytes": 438824,
+      "pdfPage": 5
+    },
+    {
+      "id": "infra-ai-accelerators-source-07",
+      "title": "Ampere作者技术介绍",
+      "url": "https://developer.nvidia.com/blog/nvidia-ampere-architecture-in-depth/",
+      "kind": "author-blog",
+      "reviewedAt": "2026-10-06",
+      "purpose": "4. 架构差异：A100→Hopper→Blackwell改变了哪条训练路径？：核对架构、产品形态、规格/脚注或接入路径"
+    },
+    {
+      "id": "infra-ai-accelerators-source-08",
+      "title": "Hopper作者技术介绍",
+      "url": "https://developer.nvidia.com/blog/nvidia-hopper-architecture-in-depth/",
+      "kind": "author-blog",
+      "reviewedAt": "2026-10-06",
+      "purpose": "4. 架构差异：A100→Hopper→Blackwell改变了哪条训练路径？：核对架构、产品形态、规格/脚注或接入路径"
+    },
+    {
+      "id": "infra-ai-accelerators-source-09",
+      "title": "Blackwell架构介绍",
+      "url": "https://www.nvidia.com/en-us/data-center/technologies/blackwell-architecture/",
+      "kind": "official-docs",
+      "reviewedAt": "2026-10-06",
+      "purpose": "4. 架构差异：A100→Hopper→Blackwell改变了哪条训练路径？：核对架构、产品形态、规格/脚注或接入路径"
+    },
+    {
+      "id": "infra-ai-accelerators-source-10",
+      "title": "Transformer Engine低精度指南",
+      "url": "https://docs.nvidia.com/deeplearning/transformer-engine/features/low_precision_training/index.html",
+      "kind": "official-docs",
+      "reviewedAt": "2026-10-06",
+      "purpose": "4. 架构差异：A100→Hopper→Blackwell改变了哪条训练路径？：核对架构、产品形态、规格/脚注或接入路径"
+    },
+    {
+      "id": "infra-ai-accelerators-source-11",
+      "title": "当前HGX页面",
+      "url": "https://www.nvidia.com/en-us/data-center/hgx/",
+      "kind": "official-docs",
+      "reviewedAt": "2026-10-06",
+      "purpose": "4. 架构差异：A100→Hopper→Blackwell改变了哪条训练路径？：核对架构、产品形态、规格/脚注或接入路径"
+    },
+    {
+      "id": "infra-ai-accelerators-source-12",
+      "title": "MI300X",
+      "url": "https://www.amd.com/en/products/accelerators/instinct/mi300/mi300x.html",
+      "kind": "official-docs",
+      "reviewedAt": "2026-10-06",
+      "purpose": "7. 其他AI算力卡：同一模型还需要哪个软件栈？：核对架构、产品形态、规格/脚注或接入路径"
+    },
+    {
+      "id": "infra-ai-accelerators-source-13",
+      "title": "MI325X",
+      "url": "https://www.amd.com/en/partner/articles/instinct-mi325x-accelerators.html",
+      "kind": "official-docs",
+      "reviewedAt": "2026-10-06",
+      "purpose": "7. 其他AI算力卡：同一模型还需要哪个软件栈？：核对架构、产品形态、规格/脚注或接入路径"
+    },
+    {
+      "id": "infra-ai-accelerators-source-14",
+      "title": "MI355X",
+      "url": "https://www.amd.com/en/products/accelerators/instinct/mi350/mi355x.html",
+      "kind": "official-docs",
+      "reviewedAt": "2026-10-06",
+      "purpose": "7. 其他AI算力卡：同一模型还需要哪个软件栈？：核对架构、产品形态、规格/脚注或接入路径"
+    },
+    {
+      "id": "infra-ai-accelerators-source-15",
+      "title": "Gaudi3官方介绍",
+      "url": "https://www.intel.com/content/www/us/en/newsroom/news/vision-2024-gaudi-3-ai-accelerator.html",
+      "kind": "official-docs",
+      "reviewedAt": "2026-10-06",
+      "purpose": "7. 其他AI算力卡：同一模型还需要哪个软件栈？：核对架构、产品形态、规格/脚注或接入路径"
+    },
+    {
+      "id": "infra-ai-accelerators-source-16",
+      "title": "TPU v6e",
+      "url": "https://docs.cloud.google.com/tpu/docs/v6e",
+      "kind": "official-docs",
+      "reviewedAt": "2026-10-06",
+      "purpose": "7. 其他AI算力卡：同一模型还需要哪个软件栈？：核对架构、产品形态、规格/脚注或接入路径"
+    },
+    {
+      "id": "infra-ai-accelerators-source-17",
+      "title": "TPU7x",
+      "url": "https://docs.cloud.google.com/tpu/docs/tpu7x",
+      "kind": "official-docs",
+      "reviewedAt": "2026-10-06",
+      "purpose": "7. 其他AI算力卡：同一模型还需要哪个软件栈？：核对架构、产品形态、规格/脚注或接入路径"
+    },
+    {
+      "id": "infra-ai-accelerators-source-18",
+      "title": "Trainium2架构",
+      "url": "https://awsdocs-neuron.readthedocs-hosted.com/en/latest/about-neuron/arch/neuron-hardware/trainium2.html",
+      "kind": "official-docs",
+      "reviewedAt": "2026-10-06",
+      "purpose": "7. 其他AI算力卡：同一模型还需要哪个软件栈？：核对架构、产品形态、规格/脚注或接入路径"
+    },
+    {
+      "id": "infra-ai-accelerators-source-19",
+      "title": "昇腾官方入口",
+      "url": "https://www.hiascend.com/en/",
+      "kind": "official-docs",
+      "reviewedAt": "2026-10-06",
+      "purpose": "7. 其他AI算力卡：同一模型还需要哪个软件栈？：核对架构、产品形态、规格/脚注或接入路径"
+    },
+    {
+      "id": "infra-ai-accelerators-source-20",
+      "title": "MI300微架构",
+      "url": "https://rocm.docs.amd.com/en/latest/reference/gpu-arch/mi300.html",
+      "kind": "official-docs",
+      "reviewedAt": "2026-10-06",
+      "purpose": "7. 其他AI算力卡：同一模型还需要哪个软件栈？：核对架构、产品形态、规格/脚注或接入路径"
+    },
+    {
+      "id": "infra-ai-accelerators-source-21",
+      "title": "MI350微架构",
+      "url": "https://rocm.docs.amd.com/en/latest/reference/gpu-arch/mi350.html",
+      "kind": "official-docs",
+      "reviewedAt": "2026-10-06",
+      "purpose": "7. 其他AI算力卡：同一模型还需要哪个软件栈？：核对架构、产品形态、规格/脚注或接入路径"
+    },
+    {
+      "id": "infra-ai-accelerators-source-22",
+      "title": "PyTorch HIP语义",
+      "url": "https://docs.pytorch.org/docs/2.14/notes/hip.html",
+      "kind": "official-docs",
+      "reviewedAt": "2026-10-06",
+      "purpose": "7. 其他AI算力卡：同一模型还需要哪个软件栈？：核对架构、产品形态、规格/脚注或接入路径"
+    },
+    {
+      "id": "infra-ai-accelerators-source-23",
+      "title": "ROCm兼容矩阵",
+      "url": "https://rocm.docs.amd.com/en/latest/compatibility/compatibility-matrix.html",
+      "kind": "official-docs",
+      "reviewedAt": "2026-10-06",
+      "purpose": "7. 其他AI算力卡：同一模型还需要哪个软件栈？：核对架构、产品形态、规格/脚注或接入路径"
+    },
+    {
+      "id": "infra-ai-accelerators-source-24",
+      "title": "RCCL文档",
+      "url": "https://rocm.docs.amd.com/projects/rccl/en/latest/",
+      "kind": "official-docs",
+      "reviewedAt": "2026-10-06",
+      "purpose": "7. 其他AI算力卡：同一模型还需要哪个软件栈？：核对架构、产品形态、规格/脚注或接入路径"
+    },
+    {
+      "id": "infra-ai-accelerators-source-25",
+      "title": "TPU架构",
+      "url": "https://docs.cloud.google.com/tpu/docs/system-architecture-tpu-vm",
+      "kind": "official-docs",
+      "reviewedAt": "2026-10-06",
+      "purpose": "7. 其他AI算力卡：同一模型还需要哪个软件栈？：核对架构、产品形态、规格/脚注或接入路径"
+    },
+    {
+      "id": "infra-ai-accelerators-source-26",
+      "title": "官方PyTorch训练文档",
+      "url": "https://docs.habana.ai/en/latest/PyTorch/index.html",
+      "kind": "official-docs",
+      "reviewedAt": "2026-10-06",
+      "purpose": "7. 其他AI算力卡：同一模型还需要哪个软件栈？：核对架构、产品形态、规格/脚注或接入路径"
+    },
+    {
+      "id": "infra-ai-accelerators-source-27",
+      "title": "Trn2实例规格",
+      "url": "https://aws.amazon.com/ec2/instance-types/trn2/",
+      "kind": "official-docs",
+      "reviewedAt": "2026-10-06",
+      "purpose": "7. 其他AI算力卡：同一模型还需要哪个软件栈？：核对架构、产品形态、规格/脚注或接入路径"
+    },
+    {
+      "id": "infra-ai-accelerators-source-28",
+      "title": "CANN官方组件说明",
+      "url": "https://www.hiascend.com/doc_center/source/en/CANNCommunityEdition/910/index/index.html",
+      "kind": "official-docs",
+      "reviewedAt": "2026-10-06",
+      "purpose": "7. 其他AI算力卡：同一模型还需要哪个软件栈？：核对架构、产品形态、规格/脚注或接入路径"
+    },
+    {
+      "id": "infra-ai-accelerators-source-29",
+      "title": "L40S官方规格",
+      "url": "https://www.nvidia.com/en-us/data-center/l40s/",
+      "kind": "official-docs",
+      "reviewedAt": "2026-10-06",
+      "purpose": "8. L40S、RTX与其他GPU：为什么也能训练，又为何不能按A/H/B替代？：核对架构、产品形态、规格/脚注或接入路径"
+    },
+    {
+      "id": "infra-ai-accelerators-source-30",
+      "title": "RTX PRO6000 Blackwell Workstation Edition",
+      "url": "https://www.nvidia.com/en-us/products/workstations/professional-desktop-gpus/rtx-pro-6000/",
+      "kind": "official-docs",
+      "reviewedAt": "2026-10-06",
+      "purpose": "8. L40S、RTX与其他GPU：为什么也能训练，又为何不能按A/H/B替代？：核对架构、产品形态、规格/脚注或接入路径"
+    },
+    {
+      "id": "infra-ai-accelerators-source-31",
+      "title": "RTX5090",
+      "url": "https://www.nvidia.com/en-us/geforce/graphics-cards/50-series/rtx-5090/",
+      "kind": "official-docs",
+      "reviewedAt": "2026-10-06",
+      "purpose": "8. L40S、RTX与其他GPU：为什么也能训练，又为何不能按A/H/B替代？：核对架构、产品形态、规格/脚注或接入路径"
+    },
+    {
+      "id": "infra-ai-accelerators-source-32",
+      "title": "官方CC表",
+      "url": "https://developer.nvidia.com/cuda/gpus",
+      "kind": "official-docs",
+      "reviewedAt": "2026-10-06",
+      "purpose": "8. L40S、RTX与其他GPU：为什么也能训练，又为何不能按A/H/B替代？：核对架构、产品形态、规格/脚注或接入路径"
+    },
+    {
+      "id": "infra-ai-accelerators-source-33",
+      "title": "Blackwell兼容指南",
+      "url": "https://docs.nvidia.com/cuda/blackwell-compatibility-guide/",
+      "kind": "official-docs",
+      "reviewedAt": "2026-10-06",
+      "purpose": "8. L40S、RTX与其他GPU：为什么也能训练，又为何不能按A/H/B替代？：核对架构、产品形态、规格/脚注或接入路径"
+    },
+    {
+      "id": "infra-ai-accelerators-source-34",
+      "title": "MLPerf Training",
+      "url": "https://mlcommons.org/benchmarks/training/",
+      "kind": "official-docs",
+      "reviewedAt": "2026-10-06",
+      "purpose": "10. 性能对比与选型：先证明训练目标一致：核对架构、产品形态、规格/脚注或接入路径"
+    }
+  ]
+}

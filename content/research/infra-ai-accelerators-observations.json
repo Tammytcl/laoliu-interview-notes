@@ -1,0 +1,21 @@
+{
+  "version": 1,
+  "topicId": "infra-ai-accelerators",
+  "checkedAt": "2026-10-06T04:11:56.444Z",
+  "observations": {
+    "infra-ai-accelerators-source-06": {
+      "checkedAt": "2026-10-06T04:11:56.444Z",
+      "lastSuccessAt": "2026-10-06T04:11:56.444Z",
+      "status": "ok",
+      "sha256": "ccdffc064731cc160016f4c7a77ecfa37983038bcaf60e39190ba4175b39c7c8",
+      "pendingReview": false
+    },
+    "infra-ai-accelerators-source-05": {
+      "checkedAt": "2026-10-06T04:11:56.444Z",
+      "lastSuccessAt": "2026-10-06T04:11:56.444Z",
+      "status": "ok",
+      "sha256": "ad8ed65e64974278670d8e6904c0e3020391027925e339bf28e75fdfe2d307d7",
+      "pendingReview": false
+    }
+  }
+}
