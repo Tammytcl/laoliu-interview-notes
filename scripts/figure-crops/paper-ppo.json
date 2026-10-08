@@ -1,0 +1,54 @@
+{
+  "sourceAssets": [],
+  "crops": [
+    {
+      "name": "figure-1-pdf.png",
+      "page": 3,
+      "box": [
+        135,
+        448,
+        459,
+        596
+      ],
+      "role": "method",
+      "sourceUnavailableReason": "Pinned LaTeX archive contains only ppo-arxiv.tex wrapping ppo-min.pdf; no independent figure or editable figure source."
+    },
+    {
+      "name": "table-1-pdf.png",
+      "page": 6,
+      "box": [
+        69,
+        379,
+        527,
+        575
+      ],
+      "role": "result-table"
+    },
+    {
+      "name": "figure-3-pdf.png",
+      "page": 7,
+      "box": [
+        68,
+        181,
+        527,
+        375
+      ],
+      "role": "result-figure",
+      "sourceUnavailableReason": "Pinned LaTeX archive contains only the complete compiled ppo-min.pdf, without independent plotted assets."
+    },
+    {
+      "name": "table-3-pdf.png",
+      "page": 10,
+      "box": [
+        119,
+        139,
+        477,
+        268
+      ],
+      "role": "experiment-table"
+    }
+  ],
+  "paperId": "paper-ppo",
+  "arxivVersion": "1707.06347v2",
+  "coordinateSystem": "PDF points, top-left origin"
+}

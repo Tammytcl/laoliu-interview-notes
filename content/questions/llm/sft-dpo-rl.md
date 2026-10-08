@@ -4,7 +4,7 @@ title: "SFT、DPO 和在线 RL 分别在优化什么？"
 category: llm
 difficulty: 进阶
 tags: ["P0", "后训练", "DPO"]
-updated: 2026-09-30
+updated: 2026-10-08
 summary: "按数据来源、目标与反馈形式比较方法，避免把偏好优化等同于推理能力。"
 draft: false
 ---
@@ -55,3 +55,8 @@ SFT 的低 loss 可能来自短且重复的回答；DPO 的偏好准确率可能
 
 - [DPO](https://arxiv.org/abs/2305.18290)：核对偏好目标与参考策略的作用。
 - [InstructGPT](https://arxiv.org/abs/2203.02155)：理解示范、奖励模型与 RLHF 的阶段关系。
+
+
+## 原论文精读与机制比较
+
+[进入完整原论文报告](#paper=paper-dpo)，继续核对公式推导、原图表、实验配置、源码和问答。横向复习见[PPO DPO GRPO及其变体](#report=survey-policy-optimization)：按优势、概率比、更新约束和奖励组织比较，避免把离线偏好拟合与在线组训练混为一谈。

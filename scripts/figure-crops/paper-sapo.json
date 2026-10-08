@@ -1,0 +1,36 @@
+{
+  "sourceAssets": [
+    {
+      "name": "figure-1-source.png",
+      "tex": "sapo.tex",
+      "label": "fig:sapo",
+      "role": "method",
+      "path": "figures/sapo.pdf"
+    },
+    {
+      "name": "figure-4-source.png",
+      "tex": "sapo.tex",
+      "label": "fig:results_algo",
+      "role": "result-figure",
+      "path": "figures/results/combined_results_algo.pdf"
+    },
+    {
+      "name": "figure-5-source.png",
+      "tex": "sapo.tex",
+      "label": "fig:results_sapo",
+      "role": "result-figure",
+      "path": "figures/results/combined_results_sapo.pdf"
+    },
+    {
+      "name": "figure-6-source.png",
+      "tex": "sapo.tex",
+      "label": "fig:results_vl",
+      "role": "result-figure",
+      "path": "figures/results/combined_results_vl.pdf"
+    }
+  ],
+  "crops": [],
+  "paperId": "paper-sapo",
+  "arxivVersion": "2511.20347v2",
+  "coordinateSystem": "PDF points, top-left origin"
+}

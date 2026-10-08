@@ -1,0 +1,57 @@
+{
+  "sourceAssets": [
+    {
+      "name": "figure-1-source.png",
+      "tex": "sections/010intro.tex",
+      "label": "fig:front",
+      "role": "result-figure",
+      "path": "figures/score.pdf"
+    },
+    {
+      "name": "figure-2-source.png",
+      "tex": "sections/020preliminary.tex",
+      "label": "fig:clip_high",
+      "role": "result-figure",
+      "paths": [
+        "figures/3.1.2.pdf",
+        "figures/3.1.1.pdf"
+      ],
+      "columns": 2
+    },
+    {
+      "name": "figure-6-source.png",
+      "tex": "sections/040experiments.tex",
+      "label": "fig:afos_compare",
+      "role": "result-figure",
+      "path": "figures/4.1.1.pdf"
+    }
+  ],
+  "crops": [
+    {
+      "name": "algorithm-1-pdf.png",
+      "page": 7,
+      "box": [
+        70,
+        415,
+        543,
+        598
+      ],
+      "role": "method",
+      "sourceUnavailableReason": "Algorithm 1 is an inline LaTeX tabular algorithm without an independent graphic; crop only the original algorithm box."
+    },
+    {
+      "name": "table-1-pdf.png",
+      "page": 9,
+      "box": [
+        173,
+        94,
+        439,
+        235
+      ],
+      "role": "result-table"
+    }
+  ],
+  "paperId": "paper-dapo",
+  "arxivVersion": "2503.14476v2",
+  "coordinateSystem": "PDF points, top-left origin"
+}

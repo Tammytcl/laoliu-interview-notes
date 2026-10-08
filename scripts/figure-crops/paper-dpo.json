@@ -1,0 +1,60 @@
+{
+  "sourceAssets": [
+    {
+      "name": "figure-1-source.png",
+      "tex": "main.tex",
+      "label": "fig:teaser",
+      "role": "method",
+      "path": "figures/diagrams/teaser.png"
+    },
+    {
+      "name": "figure-2-source.png",
+      "tex": "main.tex",
+      "label": "fig:frontier-tldr-main",
+      "role": "result-figure",
+      "paths": [
+        "figures/results/frontier.pdf",
+        "figures/results/tldr_winrate_vs_temp.pdf"
+      ],
+      "columns": 2
+    },
+    {
+      "name": "figure-3-source.png",
+      "tex": "main.tex",
+      "label": "fig:dialogue-main",
+      "role": "result-figure",
+      "paths": [
+        "figures/results/dialogue_winrate_vs_temp.pdf",
+        "figures/results/dialogue_winrate_vs_steps.pdf"
+      ],
+      "columns": 2
+    }
+  ],
+  "crops": [
+    {
+      "name": "table-1-pdf.png",
+      "page": 9,
+      "box": [
+        354,
+        500,
+        506,
+        618
+      ],
+      "role": "result-table"
+    },
+    {
+      "name": "table-2-pdf.png",
+      "page": 10,
+      "box": [
+        317,
+        179,
+        507,
+        346
+      ],
+      "role": "result-table"
+    }
+  ],
+  "paperId": "paper-dpo",
+  "arxivVersion": "2305.18290v3",
+  "coordinateSystem": "PDF points, top-left origin"
+}

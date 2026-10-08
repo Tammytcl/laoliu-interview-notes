@@ -1,0 +1,81 @@
+{
+  "sourceAssets": [
+    {
+      "name": "figure-1a-source.png",
+      "tex": "main_tech_report.tex",
+      "label": "fig:teaser_formulation",
+      "role": "method",
+      "path": "figs/teaser.png"
+    },
+    {
+      "name": "figure-2-source.png",
+      "tex": "sections/motivation.tex",
+      "label": "fig:advantage_illustration_grpo_gdpo",
+      "role": "method",
+      "path": "figs/gdpo_grpo.png"
+    },
+    {
+      "name": "figure-4-source.png",
+      "tex": "sections/exp.tex",
+      "label": "fig:tool_training_curve",
+      "role": "result-figure",
+      "path": "figs/all_median_iqr.pdf"
+    },
+    {
+      "name": "figure-5-source.png",
+      "tex": "sections/exp.tex",
+      "label": "fig:math_1.5b_training_curve",
+      "role": "result-figure",
+      "path": "figs/1.5b_combined_correctness_length_maxlen.pdf"
+    }
+  ],
+  "crops": [
+    {
+      "name": "table-1-pdf.png",
+      "page": 8,
+      "box": [
+        61,
+        140,
+        535,
+        266
+      ],
+      "role": "result-table"
+    },
+    {
+      "name": "table-3-pdf.png",
+      "page": 10,
+      "box": [
+        61,
+        81,
+        535,
+        301
+      ],
+      "role": "result-table"
+    },
+    {
+      "name": "table-6-pdf.png",
+      "page": 21,
+      "box": [
+        61,
+        113,
+        535,
+        260
+      ],
+      "role": "experiment-table"
+    },
+    {
+      "name": "table-5-pdf.png",
+      "page": 12,
+      "box": [
+        61,
+        491,
+        536,
+        745
+      ],
+      "role": "result-table"
+    }
+  ],
+  "paperId": "paper-gdpo",
+  "arxivVersion": "2601.05242v1",
+  "coordinateSystem": "PDF points, top-left origin"
+}

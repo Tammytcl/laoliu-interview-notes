@@ -1,0 +1,42 @@
+{
+  "sourceAssets": [
+    {
+      "name": "figure-1-source.png",
+      "tex": "colm2024_conference.tex",
+      "label": "fig:results",
+      "role": "result-figure",
+      "path": "figs/results.pdf"
+    },
+    {
+      "name": "figure-2-source.png",
+      "tex": "colm2024_conference.tex",
+      "label": "fig:clipping",
+      "role": "result-figure",
+      "path": "figs/clipping.pdf"
+    },
+    {
+      "name": "figure-3-source.png",
+      "tex": "colm2024_conference.tex",
+      "label": "fig:routing_replay",
+      "role": "result-figure",
+      "path": "figs/routing_replay.pdf"
+    }
+  ],
+  "crops": [
+    {
+      "name": "method-equations-pdf.png",
+      "page": 3,
+      "box": [
+        69,
+        371,
+        527,
+        519
+      ],
+      "role": "method",
+      "sourceUnavailableReason": "Original method is given as inline TeX Equations (5)-(7), with no method diagram or standalone asset. This is the original algorithm formulation, not an author flowchart."
+    }
+  ],
+  "paperId": "paper-gspo",
+  "arxivVersion": "2507.18071v2",
+  "coordinateSystem": "PDF points, top-left origin"
+}

@@ -1,0 +1,41 @@
+{
+  "sourceAssets": [
+    {
+      "name": "figure-4-source.png",
+      "tex": "main.tex",
+      "label": "fig:grpo",
+      "role": "method",
+      "path": "figures/GRPO.pdf"
+    },
+    {
+      "name": "figure-5-source.png",
+      "tex": "main.tex",
+      "label": "fig:rl-analysis",
+      "role": "result-figure",
+      "path": "figures/combined_figure_rl.pdf"
+    },
+    {
+      "name": "figure-7-source.png",
+      "tex": "main.tex",
+      "label": "fig:maj-pass",
+      "role": "result-figure",
+      "path": "figures/combined_MAJ_PASS.pdf"
+    }
+  ],
+  "crops": [
+    {
+      "name": "table-5-pdf.png",
+      "page": 12,
+      "box": [
+        70,
+        85,
+        528,
+        726
+      ],
+      "role": "result-table"
+    }
+  ],
+  "paperId": "paper-grpo",
+  "arxivVersion": "2402.03300v3",
+  "coordinateSystem": "PDF points, top-left origin"
+}

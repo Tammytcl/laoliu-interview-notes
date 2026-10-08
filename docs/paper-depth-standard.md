@@ -1,6 +1,6 @@
 # 单篇精读深度标准：以 DDPM 为对照
 
-标准样稿：[Denoising Diffusion Probabilistic Models](../content/papers/diffusion/paper-ddpm.md)。发布新单篇精读时，先从头读一遍这份样稿，并遵循[图表证据与发布流程](./paper-evidence-workflow.md)：它之所以可读，并非因为恰好有五个大标题或约八千字，而是每个事实都能回到固定版本原文、作者代码或原图；读者先学会问题，再读方法，最后知道实验究竟支持了什么。新记录默认 `template_version: 5`、`depth_standard: ddpm`。这个字段表示**写作目标**，不是人工质量认证。截至 2026-10-08，当前 50 篇纳入相同结构/证据门槛；逐篇整改前快照见[全库审查](./paper-audit-2026-09-30.md)。
+标准样稿：[Denoising Diffusion Probabilistic Models](../content/papers/diffusion/paper-ddpm.md)。发布新单篇精读时，先从头读一遍这份样稿，并遵循[图表证据与发布流程](./paper-evidence-workflow.md)：它之所以可读，并非因为恰好有五个大标题或约八千字，而是每个事实都能回到固定版本原文、作者代码或原图；读者先学会问题，再读方法，最后知道实验究竟支持了什么。新记录默认 `template_version: 5`、`depth_standard: ddpm`。这个字段表示**写作目标**，不是人工质量认证。截至 2026-10-08，当前 55 篇纳入相同结构/证据门槛；逐篇整改前快照见[全库审查](./paper-audit-2026-09-30.md)。
 
 | 阅读任务 | DDPM 样稿中的做法 | 新报告需要交付的内容 |
 | --- | --- | --- |

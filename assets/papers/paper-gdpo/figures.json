@@ -1,0 +1,208 @@
+{
+  "paperId": "paper-gdpo",
+  "arxivVersion": "2601.05242v1",
+  "originalUrl": "https://arxiv.org/abs/2601.05242v1",
+  "attribution": "Original figures and tables belong to the paper authors; source extraction and PDF crops for attributed research commentary.",
+  "figures": [
+    {
+      "file": "figure-1a-source.png",
+      "sha256": "19b15f240c60d1cd2182e1bab1cabbf3a8c027d6f8804c2ff5a65c1322914b0a",
+      "original": "https://arxiv.org/src/2601.05242v1",
+      "method": "pinned-latex-asset",
+      "sourceArchiveSha256": "dc5b7d020e4751796e98530f77fa9c695d2342a68daf78006069fa4145ca62a3",
+      "sourcePath": "figs/teaser.png",
+      "sourceSha256": "09670c9bb8751b05e1120c5edbfc82d0653cd7c71382a2daadd15cffc20c0ca9",
+      "sourceFiles": [
+        {
+          "path": "figs/teaser.png",
+          "sha256": "09670c9bb8751b05e1120c5edbfc82d0653cd7c71382a2daadd15cffc20c0ca9"
+        }
+      ],
+      "texFile": "main_tech_report.tex",
+      "texSha256": "586a04cf03bc664fb579e8c117d4e797c76c659be0ec5c202f6b79d3ec9623ac",
+      "figureLabel": "fig:teaser_formulation",
+      "role": "method",
+      "explanation": "complete",
+      "visuallyVerified": true,
+      "reviewedAt": "2026-10-08",
+      "reportSection": "2",
+      "reviewScope": "Viewed the extracted image at reading resolution; checked axes, legends, all panels, table headers and final rows against the pinned PDF. PPO Table 1 and Figure 3 recropped and reviewed to remove clipped captions/adjacent prose."
+    },
+    {
+      "file": "figure-2-source.png",
+      "sha256": "4dfffb3ea3da2aed262c18cbe6e206b1c37c5232e18e59ede66992d4dc53240e",
+      "original": "https://arxiv.org/src/2601.05242v1",
+      "method": "pinned-latex-asset",
+      "sourceArchiveSha256": "dc5b7d020e4751796e98530f77fa9c695d2342a68daf78006069fa4145ca62a3",
+      "sourcePath": "figs/gdpo_grpo.png",
+      "sourceSha256": "aaddacaa869a9621fb555666f83bd3518ac527869c9fc8a0e76b6caa739ed4a1",
+      "sourceFiles": [
+        {
+          "path": "figs/gdpo_grpo.png",
+          "sha256": "aaddacaa869a9621fb555666f83bd3518ac527869c9fc8a0e76b6caa739ed4a1"
+        }
+      ],
+      "texFile": "sections/motivation.tex",
+      "texSha256": "2ea87252c9b9129c7c378b37eb5afcba4e3e42bdbe3a60719e8cdd414adbca2b",
+      "figureLabel": "fig:advantage_illustration_grpo_gdpo",
+      "role": "method",
+      "explanation": "complete",
+      "visuallyVerified": true,
+      "reviewedAt": "2026-10-08",
+      "reportSection": "2",
+      "reviewScope": "Viewed the extracted image at reading resolution; checked axes, legends, all panels, table headers and final rows against the pinned PDF. PPO Table 1 and Figure 3 recropped and reviewed to remove clipped captions/adjacent prose."
+    },
+    {
+      "file": "figure-4-source.png",
+      "sha256": "48a06e8914ec4b7fb58560b500def678fe6a5957c5119adc07ea0e6aba928f70",
+      "original": "https://arxiv.org/src/2601.05242v1",
+      "method": "pinned-latex-asset",
+      "sourceArchiveSha256": "dc5b7d020e4751796e98530f77fa9c695d2342a68daf78006069fa4145ca62a3",
+      "sourcePath": "figs/all_median_iqr.pdf",
+      "sourceSha256": "658a2dd5d36c3f475e1424b96934bf44b5457175c8f5e89cea2b30634e2b6a52",
+      "sourceFiles": [
+        {
+          "path": "figs/all_median_iqr.pdf",
+          "sha256": "658a2dd5d36c3f475e1424b96934bf44b5457175c8f5e89cea2b30634e2b6a52"
+        }
+      ],
+      "texFile": "sections/exp.tex",
+      "texSha256": "9e775b2433c1606df9c6b4ceeac1f600fc6ed875f668b4a19f7748052ee27a3b",
+      "figureLabel": "fig:tool_training_curve",
+      "role": "result-figure",
+      "explanation": "complete",
+      "visuallyVerified": true,
+      "reviewedAt": "2026-10-08",
+      "reportSection": "4",
+      "reviewScope": "Viewed the extracted image at reading resolution; checked axes, legends, all panels, table headers and final rows against the pinned PDF. PPO Table 1 and Figure 3 recropped and reviewed to remove clipped captions/adjacent prose."
+    },
+    {
+      "file": "figure-5-source.png",
+      "sha256": "74fe3870c58632ccb5788fb55e0b3fc26c29425a89820201a6628ef760178c18",
+      "original": "https://arxiv.org/src/2601.05242v1",
+      "method": "pinned-latex-asset",
+      "sourceArchiveSha256": "dc5b7d020e4751796e98530f77fa9c695d2342a68daf78006069fa4145ca62a3",
+      "sourcePath": "figs/1.5b_combined_correctness_length_maxlen.pdf",
+      "sourceSha256": "5e5a52a815346b32a156dda3ed1dbd0aa25a49dbf3d7595d2b86544fd9aa154f",
+      "sourceFiles": [
+        {
+          "path": "figs/1.5b_combined_correctness_length_maxlen.pdf",
+          "sha256": "5e5a52a815346b32a156dda3ed1dbd0aa25a49dbf3d7595d2b86544fd9aa154f"
+        }
+      ],
+      "texFile": "sections/exp.tex",
+      "texSha256": "9e775b2433c1606df9c6b4ceeac1f600fc6ed875f668b4a19f7748052ee27a3b",
+      "figureLabel": "fig:math_1.5b_training_curve",
+      "role": "result-figure",
+      "explanation": "complete",
+      "visuallyVerified": true,
+      "reviewedAt": "2026-10-08",
+      "reportSection": "4",
+      "reviewScope": "Viewed the extracted image at reading resolution; checked axes, legends, all panels, table headers and final rows against the pinned PDF. PPO Table 1 and Figure 3 recropped and reviewed to remove clipped captions/adjacent prose."
+    },
+    {
+      "file": "table-1-pdf.png",
+      "sha256": "db3338f618012d09a51d248048955a48f06b3ff3ba2ef8d1a70addab3a7ab92a",
+      "original": "https://arxiv.org/pdf/2601.05242v1#page=8",
+      "method": "pinned-original-pdf-crop",
+      "pdfPage": 8,
+      "cropBox": [
+        61,
+        140,
+        535,
+        266
+      ],
+      "pdfSha256": "77a9412a04c3ea358d1305e7815ed3af82afb783261b25966f93f9ff8f922193",
+      "scale": 3,
+      "pdfPageSize": [
+        595.2760009765625,
+        841.8900146484375
+      ],
+      "sourceUnavailableReason": "LaTeX table/algorithm typesetting; crop the compiled PDF",
+      "role": "result-table",
+      "explanation": "complete",
+      "visuallyVerified": true,
+      "reportSection": "4",
+      "reviewedAt": "2026-10-08",
+      "reviewScope": "Viewed the extracted image at reading resolution; checked axes, legends, all panels, table headers and final rows against the pinned PDF. PPO Table 1 and Figure 3 recropped and reviewed to remove clipped captions/adjacent prose."
+    },
+    {
+      "file": "table-3-pdf.png",
+      "sha256": "d880679fcb19da06214b876b05ea1eba15c37e280499fa32f848ab36809e9557",
+      "original": "https://arxiv.org/pdf/2601.05242v1#page=10",
+      "method": "pinned-original-pdf-crop",
+      "pdfPage": 10,
+      "cropBox": [
+        61,
+        81,
+        535,
+        301
+      ],
+      "pdfSha256": "77a9412a04c3ea358d1305e7815ed3af82afb783261b25966f93f9ff8f922193",
+      "scale": 3,
+      "pdfPageSize": [
+        595.2760009765625,
+        841.8900146484375
+      ],
+      "sourceUnavailableReason": "LaTeX table/algorithm typesetting; crop the compiled PDF",
+      "role": "result-table",
+      "explanation": "complete",
+      "visuallyVerified": true,
+      "reportSection": "4",
+      "reviewedAt": "2026-10-08",
+      "reviewScope": "Viewed the extracted image at reading resolution; checked axes, legends, all panels, table headers and final rows against the pinned PDF. PPO Table 1 and Figure 3 recropped and reviewed to remove clipped captions/adjacent prose."
+    },
+    {
+      "file": "table-6-pdf.png",
+      "sha256": "8ba982700fef1800f7583f0a5a3433d43422cce25ef615c6c8ac3b965c0c4eb9",
+      "original": "https://arxiv.org/pdf/2601.05242v1#page=21",
+      "method": "pinned-original-pdf-crop",
+      "pdfPage": 21,
+      "cropBox": [
+        61,
+        113,
+        535,
+        260
+      ],
+      "pdfSha256": "77a9412a04c3ea358d1305e7815ed3af82afb783261b25966f93f9ff8f922193",
+      "scale": 3,
+      "pdfPageSize": [
+        595.2760009765625,
+        841.8900146484375
+      ],
+      "sourceUnavailableReason": "LaTeX table/algorithm typesetting; crop the compiled PDF",
+      "role": "experiment-table",
+      "explanation": "complete",
+      "visuallyVerified": true,
+      "reportSection": "3",
+      "reviewedAt": "2026-10-08",
+      "reviewScope": "Viewed the extracted image at reading resolution; checked axes, legends, all panels, table headers and final rows against the pinned PDF. PPO Table 1 and Figure 3 recropped and reviewed to remove clipped captions/adjacent prose."
+    },
+    {
+      "file": "table-5-pdf.png",
+      "sha256": "485890bad5a84fe4a36b7f6a1e9eb245e99ab00ee56f2cf9b339450228f5f295",
+      "original": "https://arxiv.org/pdf/2601.05242v1#page=12",
+      "method": "pinned-original-pdf-crop",
+      "pdfPage": 12,
+      "cropBox": [
+        61,
+        491,
+        536,
+        745
+      ],
+      "pdfSha256": "77a9412a04c3ea358d1305e7815ed3af82afb783261b25966f93f9ff8f922193",
+      "scale": 3,
+      "pdfPageSize": [
+        595.2760009765625,
+        841.8900146484375
+      ],
+      "sourceUnavailableReason": "LaTeX table/algorithm typesetting; crop the compiled PDF",
+      "role": "result-table",
+      "explanation": "complete",
+      "visuallyVerified": true,
+      "reviewedAt": "2026-10-08",
+      "reportSection": "4",
+      "reviewScope": "Recropped after first preview omitted lower tasks; final image inspected with all Apps/Codecontests/Codeforces/Taco Pass/Exceed/Bug rows and bottom rule present."
+    }
+  ]
+}

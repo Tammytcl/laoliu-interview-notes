@@ -1,0 +1,112 @@
+{
+  "paperId": "paper-ppo",
+  "arxivVersion": "1707.06347v2",
+  "originalUrl": "https://arxiv.org/abs/1707.06347v2",
+  "attribution": "Original figures and tables belong to the paper authors; source extraction and PDF crops for attributed research commentary.",
+  "figures": [
+    {
+      "file": "figure-1-pdf.png",
+      "sha256": "c75fa7e3245c4ec6a3f6412d854afca763d1e91e52c3fc551ac7bc351fe0ef20",
+      "original": "https://arxiv.org/pdf/1707.06347v2#page=3",
+      "method": "pinned-original-pdf-crop",
+      "pdfPage": 3,
+      "cropBox": [
+        135,
+        448,
+        459,
+        596
+      ],
+      "pdfSha256": "e78feadadbdbb0b601b3c2bcc81404722cd431a489b307545f9b7bea1e8c4f5b",
+      "scale": 3,
+      "pdfPageSize": [
+        595.2760009765625,
+        841.8900146484375
+      ],
+      "sourceUnavailableReason": "Pinned LaTeX archive contains only ppo-arxiv.tex wrapping ppo-min.pdf; no independent figure or editable figure source.",
+      "role": "method",
+      "explanation": "complete",
+      "visuallyVerified": true,
+      "reviewedAt": "2026-10-08",
+      "reportSection": "2",
+      "reviewScope": "Viewed the extracted image at reading resolution; checked axes, legends, all panels, table headers and final rows against the pinned PDF. PPO Table 1 and Figure 3 recropped and reviewed to remove clipped captions/adjacent prose."
+    },
+    {
+      "file": "table-1-pdf.png",
+      "sha256": "452fa6f9312fdf639799ff254d18993fc556907c945358b73a8dfb52b5ae6a80",
+      "original": "https://arxiv.org/pdf/1707.06347v2#page=6",
+      "method": "pinned-original-pdf-crop",
+      "pdfPage": 6,
+      "cropBox": [
+        69,
+        379,
+        527,
+        575
+      ],
+      "pdfSha256": "e78feadadbdbb0b601b3c2bcc81404722cd431a489b307545f9b7bea1e8c4f5b",
+      "scale": 3,
+      "pdfPageSize": [
+        595.2760009765625,
+        841.8900146484375
+      ],
+      "sourceUnavailableReason": "LaTeX table/algorithm typesetting; crop the compiled PDF",
+      "role": "result-table",
+      "explanation": "complete",
+      "visuallyVerified": true,
+      "reviewedAt": "2026-10-08",
+      "reportSection": "4",
+      "reviewScope": "Viewed the extracted image at reading resolution; checked axes, legends, all panels, table headers and final rows against the pinned PDF. PPO Table 1 and Figure 3 recropped and reviewed to remove clipped captions/adjacent prose."
+    },
+    {
+      "file": "figure-3-pdf.png",
+      "sha256": "cbeb6c704af4a4a753305503505a3c9c216a1ff09db7b0763e7184987d8111bd",
+      "original": "https://arxiv.org/pdf/1707.06347v2#page=7",
+      "method": "pinned-original-pdf-crop",
+      "pdfPage": 7,
+      "cropBox": [
+        68,
+        181,
+        527,
+        375
+      ],
+      "pdfSha256": "e78feadadbdbb0b601b3c2bcc81404722cd431a489b307545f9b7bea1e8c4f5b",
+      "scale": 3,
+      "pdfPageSize": [
+        595.2760009765625,
+        841.8900146484375
+      ],
+      "sourceUnavailableReason": "Pinned LaTeX archive contains only the complete compiled ppo-min.pdf, without independent plotted assets.",
+      "role": "result-figure",
+      "explanation": "complete",
+      "visuallyVerified": true,
+      "reviewedAt": "2026-10-08",
+      "reportSection": "4",
+      "reviewScope": "Viewed the extracted image at reading resolution; checked axes, legends, all panels, table headers and final rows against the pinned PDF. PPO Table 1 and Figure 3 recropped and reviewed to remove clipped captions/adjacent prose."
+    },
+    {
+      "file": "table-3-pdf.png",
+      "sha256": "a2bf18b24b2b8fd48713c3bb413587a58f18745e1fc1fdec3ee87e94ebe4dd8f",
+      "original": "https://arxiv.org/pdf/1707.06347v2#page=10",
+      "method": "pinned-original-pdf-crop",
+      "pdfPage": 10,
+      "cropBox": [
+        119,
+        139,
+        477,
+        268
+      ],
+      "pdfSha256": "e78feadadbdbb0b601b3c2bcc81404722cd431a489b307545f9b7bea1e8c4f5b",
+      "scale": 3,
+      "pdfPageSize": [
+        595.2760009765625,
+        841.8900146484375
+      ],
+      "sourceUnavailableReason": "LaTeX table/algorithm typesetting; crop the compiled PDF",
+      "role": "experiment-table",
+      "explanation": "complete",
+      "visuallyVerified": true,
+      "reviewedAt": "2026-10-08",
+      "reportSection": "3",
+      "reviewScope": "Viewed the extracted image at reading resolution; checked axes, legends, all panels, table headers and final rows against the pinned PDF. PPO Table 1 and Figure 3 recropped and reviewed to remove clipped captions/adjacent prose."
+    }
+  ]
+}

@@ -4,7 +4,7 @@ title: "RLVR 与 GRPO 是一回事吗？组内奖励怎样变成训练信号？"
 category: agent
 difficulty: 深入
 tags: ["P0", "GRPO", "RLVR"]
-updated: 2026-09-30
+updated: 2026-10-08
 summary: "区分奖励来源与优化算法，理解组内优势、采样成本及零方差问题。"
 draft: false
 ---
@@ -52,3 +52,8 @@ clip-surrogate = min(r_it*A_i, clip(r_it,1-e,1+e)*A_i)
 调研日期：2026-09-30。以下为论文或官方文档；正文是学习性整理，小实验是建议练习，未声称已复现。
 
 - [DeepSeekMath](https://arxiv.org/abs/2402.03300)：读第 4.1 节 GRPO；本篇明确采用 outcome supervision 简化说明。
+
+
+## 原论文精读与机制比较
+
+[进入完整原论文报告](#paper=paper-grpo)，继续核对公式推导、原图表、实验配置、源码和问答。横向复习见[PPO DPO GRPO及其变体](#report=survey-policy-optimization)：按优势、概率比、更新约束和奖励组织比较，避免把离线偏好拟合与在线组训练混为一谈。
