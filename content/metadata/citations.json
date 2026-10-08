@@ -683,5 +683,65 @@
         "status": "ok"
       }
     }
+  },
+  "paper-dapo": {
+    "openalex": {
+      "count": 15,
+      "url": "https://openalex.org/W6910529769",
+      "matchedTitle": "DAPO: An Open-Source LLM Reinforcement Learning System at Scale",
+      "fetchedAt": "2026-10-08T10:27:13.467Z"
+    },
+    "attempts": {
+      "openalex": {
+        "checkedAt": "2026-10-08T10:27:13.467Z",
+        "status": "ok"
+      }
+    }
+  },
+  "paper-dpo": {
+    "openalex": {
+      "count": 296,
+      "url": "https://openalex.org/W4378771755",
+      "matchedTitle": "Direct Preference Optimization: Your Language Model is Secretly a Reward Model",
+      "fetchedAt": "2026-10-08T10:27:13.467Z"
+    },
+    "attempts": {
+      "openalex": {
+        "checkedAt": "2026-10-08T10:27:13.467Z",
+        "status": "ok"
+      }
+    }
+  },
+  "paper-gdpo": {
+    "openalex": {
+      "count": 0,
+      "url": "https://openalex.org/W7120177137",
+      "matchedTitle": "GDPO: Group reward-Decoupled Normalization Policy Optimization for Multi-reward RL Optimization",
+      "fetchedAt": "2026-10-08T10:27:13.467Z"
+    },
+    "attempts": {
+      "openalex": {
+        "checkedAt": "2026-10-08T10:27:13.467Z",
+        "status": "ok"
+      }
+    }
+  },
+  "paper-grpo": {
+    "attempts": {
+      "openalex": {
+        "checkedAt": "2026-10-08T10:27:13.467Z",
+        "status": "failed",
+        "reason": "title-mismatch"
+      }
+    }
+  },
+  "paper-ppo": {
+    "attempts": {
+      "openalex": {
+        "checkedAt": "2026-10-08T10:27:13.467Z",
+        "status": "failed",
+        "reason": "http-404"
+      }
+    }
   }
 }
