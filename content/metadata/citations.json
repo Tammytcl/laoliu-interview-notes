@@ -669,5 +669,19 @@
       "matchedTitle": "TideRL: Boosting Agentic RL Goodput with Readiness-Aware Scheduling",
       "fetchedAt": "2026-10-05T09:03:56.065Z"
     }
+  },
+  "paper-dsec": {
+    "openalex": {
+      "count": 0,
+      "url": "https://openalex.org/W7214044146",
+      "matchedTitle": "DeepSeek Elastic Compute (DSec): A Sandbox Infrastructure for Effective Agentic Training at Scale",
+      "fetchedAt": "2026-10-08T06:54:35.590Z"
+    },
+    "attempts": {
+      "openalex": {
+        "checkedAt": "2026-10-08T06:54:35.590Z",
+        "status": "ok"
+      }
+    }
   }
 }
