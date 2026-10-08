@@ -135,3 +135,22 @@ test('三份模板可下载，手机与仓库子路径的论文路由可直接�
   }
   await page.screenshot({ path: 'test-results/paper-mobile.png', fullPage: true });
 });
+
+test('DSec系统精读保留完整作者、配置账本、原图表与源码边界', async ({ page }) => {
+  const data = await (await page.request.get('/data.json')).json();
+  const paper = data.papers.find(p => p.id === 'paper-dsec');
+  expect(paper.authors).toHaveLength(131);
+  expect(paper.affiliations).toEqual(['DeepSeek-AI', 'Tsinghua University']);
+  expect(paper.paperUrl).toBe('https://arxiv.org/abs/2609.22978v1');
+  await page.goto('/#paper=paper-dsec');
+  await expect(page.locator('#paper-body')).toContainText('AMD EPYC9655');
+  await expect(page.locator('#paper-body')).toContainText('时间积分');
+  await expect(page.locator('#paper-body')).toContainText('未找到公开的整个DSec');
+  await expect(page.locator('.publication-toc button')).toHaveCount(5);
+  await expect(page.locator('#paper-body img')).toHaveCount(10);
+  await expect(page.locator('#paper-body .katex-error')).toHaveCount(0);
+  await page.setViewportSize({ width: 390, height: 844 });
+  expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1)).toBe(true);
+  await page.reload();
+  await expect(page.locator('#paper-body')).toContainText('Figure 13');
+});

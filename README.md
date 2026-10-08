@@ -4,7 +4,7 @@
 
 一个内容与界面分离的中文面试准备站。浅色纸张风格、主题导航、全文搜索、题目目录与正式论文报告。发布站点无数据库、追踪统计或运行时 CDN 依赖，适合 GitHub Pages；可选本地工作台提供源码缓存清理。
 
-> 当前有 40 篇学习笔记、49 篇论文精读报告、2 份 Daily 和 3 份专题调研。论文收录独立于面试笔记；报告按原文核读范围说明证据，未登记个人复现。旧项目表达题保留在综合面试中。
+> 当前有 40 篇学习笔记、50 篇论文精读报告、3 份 Daily 和 3 份专题调研。论文收录独立于面试笔记；报告按原文核读范围说明证据，未登记个人复现。旧项目表达题保留在综合面试中。
 
 ## 从这里开始学习
 
@@ -237,3 +237,7 @@ npm run test:browser
 ### 算力卡与训练架构 · 2026-10-06
 
 9. [A/H/B GPU及其他AI加速器](content/questions/systems/infra-ai-accelerators.md)：A100→H100/H200→B200/GB200，延伸B300、AMD CDNA、Gaudi、TPU、Trainium和昇腾；解释SXM/PCIe、HBM/互联、dense/sparse与软件兼容。约1.8万字符、12道问答、本文概念图和NVIDIA GH100原图。保留具体SKU、两份固定datasheet hash和[CPU算例](assets/infra/infra-accelerator-check.py)，未进行跨GPU性能复现。[审阅记录](docs/infra-accelerators-audit-2026-10-06.md)。
+
+### DSec沙箱基础设施精读 · 2026-10-08
+
+[DSec完整报告](content/papers/infra/paper-dsec.md)固定2609.22978v1，包含131位作者与单位、五模块讲解、10张原始图表和公开OverlayBD组件的三处源码路径。区分生产规模、独立CPU集群四类实验和未量化的RL协同；[审阅记录](docs/paper-dsec-audit-2026-10-08.md)记录版本、图表、数值口径与验证范围。

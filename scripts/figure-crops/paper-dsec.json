@@ -1,0 +1,95 @@
+{
+  "paperId": "paper-dsec",
+  "arxivVersion": "2609.22978v1",
+  "coordinateSystem": "PDF points, top-left origin",
+  "sourceAssets": [
+    {
+      "name": "architecture-source.png",
+      "tex": "session/3_architecture.tex",
+      "label": "fig:system_arch",
+      "role": "method",
+      "path": "figs/arch.pdf"
+    },
+    {
+      "name": "lifetime-source.png",
+      "tex": "session/4_workload_challenges.tex",
+      "label": "fig:sandbox_lifetime",
+      "role": "result-figure",
+      "path": "figs/4_workload/lifetime.pdf"
+    },
+    {
+      "name": "composition-source.png",
+      "tex": "session/4_workload_challenges.tex",
+      "label": "fig:toolkit-update",
+      "role": "method",
+      "paths": [
+        "figs/4_workload/composable-layer-A.pdf",
+        "figs/4_workload/composable-layer-B.pdf"
+      ],
+      "columns": 2,
+      "panelWidths": [
+        900,
+        814
+      ]
+    },
+    {
+      "name": "mechanisms-source.png",
+      "tex": "session/5_mechanisms.tex",
+      "label": "fig:dsec_arch",
+      "role": "method",
+      "path": "figs/dsec-arch.pdf"
+    },
+    {
+      "name": "image-pull-source.png",
+      "tex": "session/8_eval.tex",
+      "label": "fig:docker_pull_comparison",
+      "role": "result-figure",
+      "path": "figs/8_eval/docker_pull_comparison.pdf"
+    },
+    {
+      "name": "workspace-source.png",
+      "tex": "session/8_eval.tex",
+      "label": "fig:eval_workspace_tar_erofs",
+      "role": "result-figure",
+      "path": "figs/8_eval/tar_cpu_diskio_ab.pdf"
+    },
+    {
+      "name": "memory-source.png",
+      "tex": "session/8_eval.tex",
+      "label": "fig:uvm_mem_optimization",
+      "role": "result-figure",
+      "path": "figs/8_eval/uvm_mem.pdf"
+    },
+    {
+      "name": "cpu-qos-source.png",
+      "tex": "session/8_eval.tex",
+      "label": "fig:eval_qos_effect",
+      "role": "result-figure",
+      "path": "figs/8_eval/qos_effect.pdf"
+    }
+  ],
+  "crops": [
+    {
+      "name": "table-2-pdf.png",
+      "page": 10,
+      "box": [
+        132,
+        605,
+        460,
+        659
+      ],
+      "role": "experiment-table"
+    },
+    {
+      "name": "table-3-pdf.png",
+      "page": 13,
+      "box": [
+        143,
+        463,
+        452,
+        516
+      ],
+      "role": "experiment-table"
+    }
+  ]
+}

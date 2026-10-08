@@ -1,0 +1,261 @@
+{
+  "paperId": "paper-dsec",
+  "arxivVersion": "2609.22978v1",
+  "originalUrl": "https://arxiv.org/abs/2609.22978v1",
+  "attribution": "Original paper figures and tables by the authors; pinned LaTeX assets / tight PDF table crops with report commentary.",
+  "figures": [
+    {
+      "file": "architecture-source.png",
+      "sha256": "372887694d1cfbaf669c51f6e4a2bd3429a1b7b0a1b295d90a9fd7bcda589c10",
+      "original": "https://arxiv.org/src/2609.22978v1",
+      "method": "pinned-latex-asset",
+      "sourceArchiveSha256": "7b675c884d64ac45537c5e0ed79d0a29d3506da9245c6a94e149b045a1feba27",
+      "sourcePath": "figs/arch.pdf",
+      "sourceSha256": "116579cfb6b55aa0887fd146237f45d79fd7ebeb612b459b234967c3c3115187",
+      "sourceFiles": [
+        {
+          "path": "figs/arch.pdf",
+          "sha256": "116579cfb6b55aa0887fd146237f45d79fd7ebeb612b459b234967c3c3115187"
+        }
+      ],
+      "texFile": "session/3_architecture.tex",
+      "texSha256": "1c997c99881eabd6f2433f236985d9a82bcb5dad2f482f275e56f8ef2a6d2c7e",
+      "figureLabel": "fig:system_arch",
+      "role": "method",
+      "explanation": "complete",
+      "visuallyVerified": true,
+      "reviewedAt": "2026-10-08",
+      "reportSection": "方法与实现机制",
+      "reviewScope": "Compared pinned PDF/LaTeX asset, labels/axes/legends/panels and table headers/final rows; no system deployment or training reproduction"
+    },
+    {
+      "file": "lifetime-source.png",
+      "sha256": "7a3a02458fd7ed0d4da3513ae18016e644b812e1383b0981dbac89d27eaaf1f2",
+      "original": "https://arxiv.org/src/2609.22978v1",
+      "method": "pinned-latex-asset",
+      "sourceArchiveSha256": "7b675c884d64ac45537c5e0ed79d0a29d3506da9245c6a94e149b045a1feba27",
+      "sourcePath": "figs/4_workload/lifetime.pdf",
+      "sourceSha256": "17b711323903d0ed8a5c77d1fa03c656249defc12926a09c7afb56ccd4319528",
+      "sourceFiles": [
+        {
+          "path": "figs/4_workload/lifetime.pdf",
+          "sha256": "17b711323903d0ed8a5c77d1fa03c656249defc12926a09c7afb56ccd4319528"
+        }
+      ],
+      "texFile": "session/4_workload_challenges.tex",
+      "texSha256": "6bbd950ab061485628da05df298293bd72dd4347d8a47636495ebe25b15dbedb",
+      "figureLabel": "fig:sandbox_lifetime",
+      "role": "result-figure",
+      "explanation": "complete",
+      "visuallyVerified": true,
+      "reviewedAt": "2026-10-08",
+      "reportSection": "背景与已有工作",
+      "reviewScope": "Compared pinned PDF/LaTeX asset, labels/axes/legends/panels and table headers/final rows; no system deployment or training reproduction"
+    },
+    {
+      "file": "composition-source.png",
+      "sha256": "cdd5ffffdda696bf48feea0ed585ee41de3007389afdf1e726f127a7071f89d4",
+      "original": "https://arxiv.org/src/2609.22978v1",
+      "method": "pinned-latex-asset",
+      "sourceArchiveSha256": "7b675c884d64ac45537c5e0ed79d0a29d3506da9245c6a94e149b045a1feba27",
+      "sourcePath": null,
+      "sourceSha256": "ff7ec30ee00bb9d6ba1f8dfe0a09bdf1db4c9d14d6fbf77b5fc757b9bdfb76f9",
+      "sourceFiles": [
+        {
+          "path": "figs/4_workload/composable-layer-A.pdf",
+          "sha256": "ff7ec30ee00bb9d6ba1f8dfe0a09bdf1db4c9d14d6fbf77b5fc757b9bdfb76f9"
+        },
+        {
+          "path": "figs/4_workload/composable-layer-B.pdf",
+          "sha256": "a3c59e51e20e6ba39cd1bf89e3eff575cc7fc0856d5becd94211e33a0d6e4eac"
+        }
+      ],
+      "texFile": "session/4_workload_challenges.tex",
+      "texSha256": "6bbd950ab061485628da05df298293bd72dd4347d8a47636495ebe25b15dbedb",
+      "figureLabel": "fig:toolkit-update",
+      "role": "method",
+      "explanation": "complete",
+      "visuallyVerified": true,
+      "columns": 2,
+      "panelWidths": [
+        900,
+        814
+      ],
+      "reviewedAt": "2026-10-08",
+      "reportSection": "方法与实现机制",
+      "reviewScope": "Compared pinned PDF/LaTeX asset, labels/axes/legends/panels and table headers/final rows; no system deployment or training reproduction"
+    },
+    {
+      "file": "mechanisms-source.png",
+      "sha256": "49cec524568789a6299da02098894ed833d0f0a7c09e7a74de04f8eaab53cde6",
+      "original": "https://arxiv.org/src/2609.22978v1",
+      "method": "pinned-latex-asset",
+      "sourceArchiveSha256": "7b675c884d64ac45537c5e0ed79d0a29d3506da9245c6a94e149b045a1feba27",
+      "sourcePath": "figs/dsec-arch.pdf",
+      "sourceSha256": "163c1ed215376332dc37244ee135e978ba8b03b46774c77cb5709fdd31b7eecb",
+      "sourceFiles": [
+        {
+          "path": "figs/dsec-arch.pdf",
+          "sha256": "163c1ed215376332dc37244ee135e978ba8b03b46774c77cb5709fdd31b7eecb"
+        }
+      ],
+      "texFile": "session/5_mechanisms.tex",
+      "texSha256": "5d329a783982d3578bafbb3f347d2706e0d482d43e023996f42c43b1d349873e",
+      "figureLabel": "fig:dsec_arch",
+      "role": "method",
+      "explanation": "complete",
+      "visuallyVerified": true,
+      "reviewedAt": "2026-10-08",
+      "reportSection": "方法与实现机制",
+      "reviewScope": "Compared pinned PDF/LaTeX asset, labels/axes/legends/panels and table headers/final rows; no system deployment or training reproduction"
+    },
+    {
+      "file": "image-pull-source.png",
+      "sha256": "fe8245e83fc42c850e36f81d4a47403d537278fa883a9021e9d91ed600247155",
+      "original": "https://arxiv.org/src/2609.22978v1",
+      "method": "pinned-latex-asset",
+      "sourceArchiveSha256": "7b675c884d64ac45537c5e0ed79d0a29d3506da9245c6a94e149b045a1feba27",
+      "sourcePath": "figs/8_eval/docker_pull_comparison.pdf",
+      "sourceSha256": "c19a4bd75298067e8956b8900f60e450deace9983658c842ba9a48b87bc9ca2f",
+      "sourceFiles": [
+        {
+          "path": "figs/8_eval/docker_pull_comparison.pdf",
+          "sha256": "c19a4bd75298067e8956b8900f60e450deace9983658c842ba9a48b87bc9ca2f"
+        }
+      ],
+      "texFile": "session/8_eval.tex",
+      "texSha256": "c9e7d776bd18076ac711fd9b7abedcad298518db76710352e42277e091600468",
+      "figureLabel": "fig:docker_pull_comparison",
+      "role": "result-figure",
+      "explanation": "complete",
+      "visuallyVerified": true,
+      "reviewedAt": "2026-10-08",
+      "reportSection": "结果与图表解读",
+      "reviewScope": "Compared pinned PDF/LaTeX asset, labels/axes/legends/panels and table headers/final rows; no system deployment or training reproduction"
+    },
+    {
+      "file": "workspace-source.png",
+      "sha256": "a968e1b222465e1fdb69ecae9aae5ed5d5a7f6cfde6d058dd691c7496b9807ce",
+      "original": "https://arxiv.org/src/2609.22978v1",
+      "method": "pinned-latex-asset",
+      "sourceArchiveSha256": "7b675c884d64ac45537c5e0ed79d0a29d3506da9245c6a94e149b045a1feba27",
+      "sourcePath": "figs/8_eval/tar_cpu_diskio_ab.pdf",
+      "sourceSha256": "d6b6e107215eafbf87cbbf0f779a42c0236a240bd7c3ae5e8bcbc85ffab8f7a4",
+      "sourceFiles": [
+        {
+          "path": "figs/8_eval/tar_cpu_diskio_ab.pdf",
+          "sha256": "d6b6e107215eafbf87cbbf0f779a42c0236a240bd7c3ae5e8bcbc85ffab8f7a4"
+        }
+      ],
+      "texFile": "session/8_eval.tex",
+      "texSha256": "c9e7d776bd18076ac711fd9b7abedcad298518db76710352e42277e091600468",
+      "figureLabel": "fig:eval_workspace_tar_erofs",
+      "role": "result-figure",
+      "explanation": "complete",
+      "visuallyVerified": true,
+      "reviewedAt": "2026-10-08",
+      "reportSection": "结果与图表解读",
+      "reviewScope": "Compared pinned PDF/LaTeX asset, labels/axes/legends/panels and table headers/final rows; no system deployment or training reproduction"
+    },
+    {
+      "file": "memory-source.png",
+      "sha256": "8ac4f678f469769aa3e5ae73e66c91632f3ff4fd339ca0aca01bca996d265c9e",
+      "original": "https://arxiv.org/src/2609.22978v1",
+      "method": "pinned-latex-asset",
+      "sourceArchiveSha256": "7b675c884d64ac45537c5e0ed79d0a29d3506da9245c6a94e149b045a1feba27",
+      "sourcePath": "figs/8_eval/uvm_mem.pdf",
+      "sourceSha256": "42d82d46a3b730890e9baef682405d3d667dc4bf66ec9ea844df2aa30d04f818",
+      "sourceFiles": [
+        {
+          "path": "figs/8_eval/uvm_mem.pdf",
+          "sha256": "42d82d46a3b730890e9baef682405d3d667dc4bf66ec9ea844df2aa30d04f818"
+        }
+      ],
+      "texFile": "session/8_eval.tex",
+      "texSha256": "c9e7d776bd18076ac711fd9b7abedcad298518db76710352e42277e091600468",
+      "figureLabel": "fig:uvm_mem_optimization",
+      "role": "result-figure",
+      "explanation": "complete",
+      "visuallyVerified": true,
+      "reviewedAt": "2026-10-08",
+      "reportSection": "结果与图表解读",
+      "reviewScope": "Compared pinned PDF/LaTeX asset, labels/axes/legends/panels and table headers/final rows; no system deployment or training reproduction"
+    },
+    {
+      "file": "cpu-qos-source.png",
+      "sha256": "e38c24cae63d8e2f4ee693189a3f93ea17cdab44b72395c99999e29f63c9ccec",
+      "original": "https://arxiv.org/src/2609.22978v1",
+      "method": "pinned-latex-asset",
+      "sourceArchiveSha256": "7b675c884d64ac45537c5e0ed79d0a29d3506da9245c6a94e149b045a1feba27",
+      "sourcePath": "figs/8_eval/qos_effect.pdf",
+      "sourceSha256": "679770365ddc291ca12f6d100913e25fa69bfb139da2ebcdc605596841b9dfd8",
+      "sourceFiles": [
+        {
+          "path": "figs/8_eval/qos_effect.pdf",
+          "sha256": "679770365ddc291ca12f6d100913e25fa69bfb139da2ebcdc605596841b9dfd8"
+        }
+      ],
+      "texFile": "session/8_eval.tex",
+      "texSha256": "c9e7d776bd18076ac711fd9b7abedcad298518db76710352e42277e091600468",
+      "figureLabel": "fig:eval_qos_effect",
+      "role": "result-figure",
+      "explanation": "complete",
+      "visuallyVerified": true,
+      "reviewedAt": "2026-10-08",
+      "reportSection": "结果与图表解读",
+      "reviewScope": "Compared pinned PDF/LaTeX asset, labels/axes/legends/panels and table headers/final rows; no system deployment or training reproduction"
+    },
+    {
+      "file": "table-2-pdf.png",
+      "sha256": "a9390e0c6c987c98296d06e64abeec1d20c8cbf651faac9fd55b085c981d2e96",
+      "original": "https://arxiv.org/pdf/2609.22978v1#page=10",
+      "method": "pinned-original-pdf-crop",
+      "pdfPage": 10,
+      "cropBox": [
+        132,
+        605,
+        460,
+        659
+      ],
+      "pdfSha256": "649edc87e70b8e57f9515360b15ed5576c6c8afb3c46a3763e83c22a85a660e2",
+      "scale": 3,
+      "pdfPageSize": [
+        595.2760009765625,
+        841.8900146484375
+      ],
+      "sourceUnavailableReason": "LaTeX table/algorithm typesetting; crop the compiled PDF",
+      "role": "experiment-table",
+      "explanation": "complete",
+      "visuallyVerified": true,
+      "reviewedAt": "2026-10-08",
+      "reportSection": "实验设置与算力",
+      "reviewScope": "Compared pinned PDF/LaTeX asset, labels/axes/legends/panels and table headers/final rows; no system deployment or training reproduction"
+    },
+    {
+      "file": "table-3-pdf.png",
+      "sha256": "8cdd13e81dc6affdc0c49e1b1575e4a01442b1c372cff660cf01f8c147f355a6",
+      "original": "https://arxiv.org/pdf/2609.22978v1#page=13",
+      "method": "pinned-original-pdf-crop",
+      "pdfPage": 13,
+      "cropBox": [
+        143,
+        463,
+        452,
+        516
+      ],
+      "pdfSha256": "649edc87e70b8e57f9515360b15ed5576c6c8afb3c46a3763e83c22a85a660e2",
+      "scale": 3,
+      "pdfPageSize": [
+        595.2760009765625,
+        841.8900146484375
+      ],
+      "sourceUnavailableReason": "LaTeX table/algorithm typesetting; crop the compiled PDF",
+      "role": "experiment-table",
+      "explanation": "complete",
+      "visuallyVerified": true,
+      "reviewedAt": "2026-10-08",
+      "reportSection": "实验设置与算力",
+      "reviewScope": "Compared pinned PDF/LaTeX asset, labels/axes/legends/panels and table headers/final rows; no system deployment or training reproduction"
+    }
+  ]
+}

@@ -4,7 +4,7 @@ title: "05 · RL/OPD 训推如何形成闭环？从角色、数据契约到异�
 category: systems
 difficulty: 进阶
 tags: ["P0", "Infra基础", "verl", "slime", "RL系统", "OPD", "异步"]
-updated: 2026-10-05
+updated: 2026-10-08
 summary: "用一条样本追踪rollout、评分、训练和权重发布，拆清behavior/current/reference/teacher概率、组屏障和有界队列，建立低利用率排查与验收方案。"
 draft: false
 ---
@@ -213,3 +213,5 @@ Heddle/TideRL提示多轮任务调度与ready资源匹配的重要性，见 [Hed
 [本篇来源清单](./research/infra-rl-pipeline-sources.json)。五篇到这里形成“状态→硬件→并行→推理→闭环”的基础复习链。下一轮可按实测缺口细化checkpoint恢复、MoE负载、低精度kernel或环境snapshot，分别成篇，不再堆到框架选型文内。
 
 **数值练习下载：** [CPU验算脚本（仅Python标准库）](./assets/infra/infra-foundations-check.py) · [本次验算输出](./assets/infra/infra-foundations-check-results.json)。覆盖梯度有限差分、状态/KV字节、Roofline、TP与分块softmax；不包含GPU训练或测速。
+
+环境侧精读：[DSec沙箱平台](#paper=paper-dsec)说明镜像/层组合、guest内存与CPU QoS，以及GPU trainer被抢占后保留agent loop和sandbox状态的路线；其系统实验与RL学习收益分别解读。
