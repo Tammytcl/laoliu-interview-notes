@@ -743,5 +743,19 @@
         "reason": "http-404"
       }
     }
+  },
+  "paper-mtp-meta": {
+    "openalex": {
+      "count": 9,
+      "url": "https://openalex.org/W4396821494",
+      "matchedTitle": "Better & Faster Large Language Models via Multi-token Prediction",
+      "fetchedAt": "2026-10-09T10:30:26.898Z"
+    },
+    "attempts": {
+      "openalex": {
+        "checkedAt": "2026-10-09T10:30:26.898Z",
+        "status": "ok"
+      }
+    }
   }
 }
