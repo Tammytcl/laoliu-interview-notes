@@ -1,0 +1,18 @@
+{
+  "topicId": "infra-mtp-overview",
+  "reviewedAt": "2026-10-09",
+  "figures": [
+    {
+      "file": "mtp-two-paths.svg",
+      "origin": "本文教学示意",
+      "sourcePage": "https://github.com/Tammytcl/laoliu-interview-notes/blob/main/assets/infra/infra-mtp-overview/mtp-two-paths.svg",
+      "credit": "本文绘制，用于讲授逻辑与成本；不是实测。",
+      "retrievedAt": "2026-10-09",
+      "sha256": "4afb987ec4d391f71782465122d9ca25dab6c8b89acbfd2967fbddf01ad03eba",
+      "visuallyVerified": true,
+      "role": "concept",
+      "explanation": "complete",
+      "reviewScope": "Viewed rendered SVG/source figure; checked text, arrows, axes or table final rows."
+    }
+  ]
+}

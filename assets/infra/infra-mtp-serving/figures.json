@@ -1,0 +1,18 @@
+{
+  "topicId": "infra-mtp-serving",
+  "reviewedAt": "2026-10-09",
+  "figures": [
+    {
+      "file": "mtp-cost-budgets.svg",
+      "origin": "本文教学示意",
+      "sourcePage": "https://github.com/Tammytcl/laoliu-interview-notes/blob/main/assets/infra/infra-mtp-serving/mtp-cost-budgets.svg",
+      "credit": "本文绘制，用于讲授逻辑与成本；不是实测。",
+      "retrievedAt": "2026-10-09",
+      "sha256": "566a4d4911f1e4deee8e5f10d3fcb2e578abae47b296943e47093ce4afaee0e5",
+      "visuallyVerified": true,
+      "role": "concept",
+      "explanation": "complete",
+      "reviewScope": "Viewed rendered SVG/source figure; checked text, arrows, axes or table final rows."
+    }
+  ]
+}

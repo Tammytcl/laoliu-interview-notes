@@ -1,0 +1,87 @@
+{
+  "version": 1,
+  "topicId": "infra-mtp-speculative",
+  "note": "固定原论文与官方代码/doc；CPU课堂验证不是GPU训练或服务benchmark。近期阅读定位未纳入定量排名。",
+  "sources": [
+    {
+      "id": "infra-mtp-speculative-source-01",
+      "title": "greedy kernel",
+      "url": "https://github.com/vllm-project/vllm/blob/18c19eaf239f09bc2543637c73f3b2d05f9bf5c5/vllm/v1/sample/rejection_sampler.py#L767-L773",
+      "kind": "official-code",
+      "reviewedAt": "2026-10-09",
+      "purpose": "核对本文MTP结构、公式、原图、实现或服务口径；固定来源与推断分开。",
+      "repository": "vllm-project/vllm",
+      "revision": "18c19eaf239f09bc2543637c73f3b2d05f9bf5c5",
+      "pinnedUrl": "https://github.com/vllm-project/vllm/blob/18c19eaf239f09bc2543637c73f3b2d05f9bf5c5/vllm/v1/sample/rejection_sampler.py#L767-L773",
+      "watchPath": "vllm/v1/sample/rejection_sampler.py",
+      "watchUrl": "https://raw.githubusercontent.com/vllm-project/vllm/main/vllm/v1/sample/rejection_sampler.py",
+      "reviewedSha256": "9acaefa7ff3ff02649adf3a2edc4a7281d0089c23566fe5ff140c5f820d88ac4"
+    },
+    {
+      "id": "infra-mtp-speculative-source-02",
+      "title": "speculative decoding",
+      "url": "https://arxiv.org/abs/2211.17192v2",
+      "kind": "paper",
+      "reviewedAt": "2026-10-09",
+      "purpose": "核对本文MTP结构、公式、原图、实现或服务口径；固定来源与推断分开。"
+    },
+    {
+      "id": "infra-mtp-speculative-source-03",
+      "title": "vLLM residual kernel",
+      "url": "https://github.com/vllm-project/vllm/blob/18c19eaf239f09bc2543637c73f3b2d05f9bf5c5/vllm/v1/sample/rejection_sampler.py#L1051-L1061",
+      "kind": "official-code",
+      "reviewedAt": "2026-10-09",
+      "purpose": "核对本文MTP结构、公式、原图、实现或服务口径；固定来源与推断分开。",
+      "repository": "vllm-project/vllm",
+      "revision": "18c19eaf239f09bc2543637c73f3b2d05f9bf5c5",
+      "pinnedUrl": "https://github.com/vllm-project/vllm/blob/18c19eaf239f09bc2543637c73f3b2d05f9bf5c5/vllm/v1/sample/rejection_sampler.py#L1051-L1061",
+      "watchPath": "vllm/v1/sample/rejection_sampler.py",
+      "watchUrl": "https://raw.githubusercontent.com/vllm-project/vllm/main/vllm/v1/sample/rejection_sampler.py",
+      "reviewedSha256": "9acaefa7ff3ff02649adf3a2edc4a7281d0089c23566fe5ff140c5f820d88ac4"
+    },
+    {
+      "id": "infra-mtp-speculative-source-04",
+      "title": "Medusa v3",
+      "url": "https://arxiv.org/abs/2401.10774v3",
+      "kind": "paper",
+      "reviewedAt": "2026-10-09",
+      "purpose": "核对本文MTP结构、公式、原图、实现或服务口径；固定来源与推断分开。"
+    },
+    {
+      "id": "infra-mtp-speculative-source-05",
+      "title": "EAGLE v3",
+      "url": "https://arxiv.org/abs/2401.15077v3",
+      "kind": "paper",
+      "reviewedAt": "2026-10-09",
+      "purpose": "核对本文MTP结构、公式、原图、实现或服务口径；固定来源与推断分开。"
+    },
+    {
+      "id": "infra-mtp-speculative-source-06",
+      "title": "vLLM accepted logprob路径",
+      "url": "https://github.com/vllm-project/vllm/blob/18c19eaf239f09bc2543637c73f3b2d05f9bf5c5/vllm/v1/sample/rejection_sampler.py#L254-L264",
+      "kind": "official-code",
+      "reviewedAt": "2026-10-09",
+      "purpose": "核对本文MTP结构、公式、原图、实现或服务口径；固定来源与推断分开。",
+      "repository": "vllm-project/vllm",
+      "revision": "18c19eaf239f09bc2543637c73f3b2d05f9bf5c5",
+      "pinnedUrl": "https://github.com/vllm-project/vllm/blob/18c19eaf239f09bc2543637c73f3b2d05f9bf5c5/vllm/v1/sample/rejection_sampler.py#L254-L264",
+      "watchPath": "vllm/v1/sample/rejection_sampler.py",
+      "watchUrl": "https://raw.githubusercontent.com/vllm-project/vllm/main/vllm/v1/sample/rejection_sampler.py",
+      "reviewedSha256": "9acaefa7ff3ff02649adf3a2edc4a7281d0089c23566fe5ff140c5f820d88ac4"
+    },
+    {
+      "id": "infra-mtp-speculative-source-07",
+      "title": "vLLM保真说明",
+      "url": "https://github.com/vllm-project/vllm/blob/18c19eaf239f09bc2543637c73f3b2d05f9bf5c5/docs/features/speculative_decoding/README.md",
+      "kind": "official-docs",
+      "reviewedAt": "2026-10-09",
+      "purpose": "核对本文MTP结构、公式、原图、实现或服务口径；固定来源与推断分开。",
+      "repository": "vllm-project/vllm",
+      "revision": "18c19eaf239f09bc2543637c73f3b2d05f9bf5c5",
+      "pinnedUrl": "https://github.com/vllm-project/vllm/blob/18c19eaf239f09bc2543637c73f3b2d05f9bf5c5/docs/features/speculative_decoding/README.md",
+      "watchPath": "docs/features/speculative_decoding/README.md",
+      "watchUrl": "https://raw.githubusercontent.com/vllm-project/vllm/main/docs/features/speculative_decoding/README.md",
+      "reviewedSha256": "d7401a38951ec17b8fc04c211f5a0219a69de926f99967a196f89a38eae8ef0c"
+    }
+  ]
+}

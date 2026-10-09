@@ -1,0 +1,75 @@
+{
+  "version": 1,
+  "topicId": "infra-mtp-training",
+  "note": "固定原论文与官方代码/doc；CPU课堂验证不是GPU训练或服务benchmark。近期阅读定位未纳入定量排名。",
+  "sources": [
+    {
+      "id": "infra-mtp-training-source-01",
+      "title": "Meta MTP v1",
+      "url": "https://arxiv.org/abs/2404.19737v1",
+      "kind": "paper",
+      "reviewedAt": "2026-10-09",
+      "purpose": "核对本文MTP结构、公式、原图、实现或服务口径；固定来源与推断分开。"
+    },
+    {
+      "id": "infra-mtp-training-source-02",
+      "title": "DeepSeek-V3 v2 §2.2",
+      "url": "https://arxiv.org/abs/2412.19437v2",
+      "kind": "paper",
+      "reviewedAt": "2026-10-09",
+      "purpose": "核对本文MTP结构、公式、原图、实现或服务口径；固定来源与推断分开。"
+    },
+    {
+      "id": "infra-mtp-training-source-03",
+      "title": "图源：固定v2 Figure3",
+      "url": "https://arxiv.org/pdf/2412.19437v2#page=10",
+      "kind": "paper",
+      "reviewedAt": "2026-10-09",
+      "purpose": "核对本文MTP结构、公式、原图、实现或服务口径；固定来源与推断分开。"
+    },
+    {
+      "id": "infra-mtp-training-source-04",
+      "title": "图源：固定Meta v1 Figure2",
+      "url": "https://arxiv.org/pdf/2404.19737v1#page=3",
+      "kind": "paper",
+      "reviewedAt": "2026-10-09",
+      "purpose": "核对本文MTP结构、公式、原图、实现或服务口径；固定来源与推断分开。"
+    },
+    {
+      "id": "infra-mtp-training-source-05",
+      "title": "DeepSeekMultiTokenPredictorLayer.forward",
+      "url": "https://github.com/vllm-project/vllm/blob/18c19eaf239f09bc2543637c73f3b2d05f9bf5c5/vllm/model_executor/models/deepseek_mtp.py#L124-L136",
+      "kind": "official-code",
+      "reviewedAt": "2026-10-09",
+      "purpose": "核对本文MTP结构、公式、原图、实现或服务口径；固定来源与推断分开。",
+      "repository": "vllm-project/vllm",
+      "revision": "18c19eaf239f09bc2543637c73f3b2d05f9bf5c5",
+      "pinnedUrl": "https://github.com/vllm-project/vllm/blob/18c19eaf239f09bc2543637c73f3b2d05f9bf5c5/vllm/model_executor/models/deepseek_mtp.py#L124-L136",
+      "watchPath": "vllm/model_executor/models/deepseek_mtp.py",
+      "watchUrl": "https://raw.githubusercontent.com/vllm-project/vllm/main/vllm/model_executor/models/deepseek_mtp.py",
+      "reviewedSha256": "aae80e30b2dbfd1df41b83f51aaba4722e9f2dc3b4479d2a38ce1e32926fac11"
+    },
+    {
+      "id": "infra-mtp-training-source-06",
+      "title": "表源：固定v2 Table4",
+      "url": "https://arxiv.org/pdf/2412.19437v2#page=26",
+      "kind": "paper",
+      "reviewedAt": "2026-10-09",
+      "purpose": "核对本文MTP结构、公式、原图、实现或服务口径；固定来源与推断分开。"
+    },
+    {
+      "id": "infra-mtp-training-source-07",
+      "title": "固定权重说明",
+      "url": "https://github.com/deepseek-ai/DeepSeek-V3/blob/9b4e9788e4a3a731f7567338ed15d3ec549ce03b/README_WEIGHTS.md",
+      "kind": "official-docs",
+      "reviewedAt": "2026-10-09",
+      "purpose": "核对本文MTP结构、公式、原图、实现或服务口径；固定来源与推断分开。",
+      "repository": "deepseek-ai/DeepSeek-V3",
+      "revision": "9b4e9788e4a3a731f7567338ed15d3ec549ce03b",
+      "pinnedUrl": "https://github.com/deepseek-ai/DeepSeek-V3/blob/9b4e9788e4a3a731f7567338ed15d3ec549ce03b/README_WEIGHTS.md",
+      "watchPath": "README_WEIGHTS.md",
+      "watchUrl": "https://raw.githubusercontent.com/deepseek-ai/DeepSeek-V3/main/README_WEIGHTS.md",
+      "reviewedSha256": "0d2be8b8c9cb98f3f503f9aa029d1f2907282e68c7cf9429f9f6759ec52c8b23"
+    }
+  ]
+}

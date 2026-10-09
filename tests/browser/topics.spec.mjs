@@ -1,4 +1,24 @@
 import { test, expect } from '@playwright/test';
+test('MTP系列入口可逐篇学习，原论文与CPU练习可打开', async ({ page }) => {
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.goto('/#q=infra-mtp-overview');
+  await expect(page.locator('.reader-header h1')).toContainText('MTP 总览');
+  for (const [id, title] of [['infra-mtp-training', 'MTP 训练'], ['infra-mtp-speculative', 'MTP 投机'], ['infra-mtp-serving', 'MTP 工程']]) {
+    await page.locator(`.prose a[href="#q=${id}"]`).first().click();
+    await expect(page.locator('.reader-header h1')).toContainText(title);
+    await expect(page.locator('.prose')).toContainText('Q08');
+    await expect(page.locator('.prose .katex-error')).toHaveCount(0);
+    expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1)).toBe(true);
+  }
+  const exercise = await page.request.get('/assets/infra/mtp-lab.py');
+  expect(exercise.status()).toBe(200);
+  expect(await exercise.text()).toContain('torch');
+  const results = await (await page.request.get('/assets/infra/mtp-lab-results.json')).json();
+  expect(results.training.max_gradient_difference).toBeLessThan(1e-12);
+  await page.goto('/#paper=paper-mtp-meta');
+  await expect(page.locator('.reader-header h1')).toContainText('Multi-token Prediction');
+  await expect(page.locator('.prose img')).toHaveCount(7);
+});
 test('训练框架专题范围、旧地址与手机布局', async ({ page }) => {
   await page.goto('/');
   await page.locator('[data-category="systems"]').click();

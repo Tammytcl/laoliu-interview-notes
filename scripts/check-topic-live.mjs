@@ -44,7 +44,9 @@ try {
     const manifest = JSON.parse(await readFile(new URL('../' + topic.registration.figures, import.meta.url), 'utf8'));
     const folder = topic.registration.figures.slice(0, topic.registration.figures.lastIndexOf('/') + 1);
     for (const figure of manifest.figures) {
-      const response = await page.request.get(new URL(folder + figure.file, base).href);
+      const assetPath = figure.assetPath || folder + figure.file;
+      assert.ok(assetPath.startsWith('assets/') && !assetPath.split('/').includes('..'), `Unsafe figure path: ${assetPath}`);
+      const response = await page.request.get(new URL(assetPath, base).href);
       assert.equal(response.status(), 200, `Missing figure: ${topic.id}/${figure.file}`);
       assert.equal(createHash('sha256').update(await response.body()).digest('hex'), figure.sha256, `Stale figure: ${topic.id}/${figure.file}`);
     }

@@ -1,0 +1,74 @@
+{
+  "paperId": "paper-mtp-meta",
+  "arxivVersion": "2404.19737v1",
+  "coordinateSystem": "PDF points, top-left origin",
+  "sourceAssets": [
+    {
+      "name": "figure-1-source.png",
+      "path": "img/main_fig_col.png",
+      "tex": "figures/main_figure_col.tex",
+      "label": "fig:main_figure_col",
+      "role": "method"
+    },
+    {
+      "name": "figure-2-source.png",
+      "path": "img/backward_order.png",
+      "tex": "figures/backward.tex",
+      "label": "fig:backward",
+      "role": "method"
+    },
+    {
+      "name": "figure-3-source.png",
+      "path": "img/scaling.pdf",
+      "tex": "figures/scaling_model.tex",
+      "label": "fig:scaling_model",
+      "role": "result-figure"
+    },
+    {
+      "name": "figure-s10-source.png",
+      "paths": [
+        "img/throughput.pdf",
+        "img/latency.pdf"
+      ],
+      "columns": 2,
+      "tex": "figures/decoding.tex",
+      "label": "fig:decoding",
+      "role": "result-figure"
+    }
+  ],
+  "crops": [
+    {
+      "name": "table-1-pdf.png",
+      "page": 4,
+      "box": [
+        54,
+        64,
+        544,
+        335
+      ],
+      "role": "result-table"
+    },
+    {
+      "name": "table-s2-pdf.png",
+      "page": 13,
+      "box": [
+        54,
+        310,
+        544,
+        492
+      ],
+      "role": "result-table"
+    },
+    {
+      "name": "table-s5-pdf.png",
+      "page": 15,
+      "box": [
+        54,
+        332,
+        544,
+        492
+      ],
+      "role": "result-table"
+    }
+  ]
+}

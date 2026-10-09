@@ -1,0 +1,72 @@
+{
+  "topicId": "infra-mtp-training",
+  "reviewedAt": "2026-10-09",
+  "figures": [
+    {
+      "file": "deepseek-mtp-source.png",
+      "origin": "https://arxiv.org/src/2412.19437v2",
+      "sourcePage": "https://arxiv.org/pdf/2412.19437v2#page=10",
+      "credit": "DeepSeek-AI, DeepSeek-V3 Technical Report v2; original Figure3 or Table4.",
+      "retrievedAt": "2026-10-09",
+      "sha256": "6d9f6645e063ddc444f85b815f646210b81e0bc389db1cb61cade45b5ac81a4a",
+      "visuallyVerified": true,
+      "role": "method",
+      "explanation": "complete",
+      "reviewScope": "Viewed rendered SVG/source figure; checked text, arrows, axes or table final rows.",
+      "sourceArchiveSha256": "7b9051eb58724bbbf2480d734593eaac2e0e165f14d45e23255c29b0e0bebcc8",
+      "sourceFiles": [
+        {
+          "path": "figures/nextn.pdf",
+          "sha256": "a4c43b5106e32e70862ab72f87ee766e16c3326f2e3a47ae88d1a53f4d1e8d43"
+        }
+      ],
+      "texFile": "main.tex",
+      "texSha256": "5972785447f4e52c1f7f4d707728c6f053ee5f5f6228ddf7a763fed9e46e738e"
+    },
+    {
+      "file": "figure-2-source.png",
+      "assetPath": "assets/papers/paper-mtp-meta/figure-2-source.png",
+      "origin": "https://arxiv.org/src/2404.19737v1",
+      "sourcePage": "https://arxiv.org/pdf/2404.19737v1#page=3",
+      "credit": "Gloeckle et al., Better & Faster Large Language Models via Multi-token Prediction, Figure2.",
+      "retrievedAt": "2026-10-09",
+      "sha256": "d1d0b531d7f9186e2bbe801e69cad0f0bc996ac1c092857260d5285b0e113a30",
+      "visuallyVerified": true,
+      "role": "method",
+      "explanation": "complete",
+      "reviewScope": "Viewed rendered SVG/source figure; checked text, arrows, axes or table final rows.",
+      "sourceArchiveSha256": "a91df98064351fe22a5a61037bffa22f05657b6f3582107f1506ada0d4bda62e",
+      "sourceFiles": [
+        {
+          "path": "img/backward_order.png",
+          "sha256": "7d93c501a7365814aea60d04a22959c071d924b7ca55981b3977d36d4430ec68"
+        }
+      ],
+      "texFile": "figures/backward.tex"
+    },
+    {
+      "file": "deepseek-table-4-pdf.png",
+      "origin": "https://arxiv.org/src/2412.19437v2",
+      "sourcePage": "https://arxiv.org/pdf/2412.19437v2#page=26",
+      "credit": "DeepSeek-AI, DeepSeek-V3 Technical Report v2; original Figure3 or Table4.",
+      "retrievedAt": "2026-10-09",
+      "sha256": "b347d83b08ec859f6090bc54393d5bf16d786d878175c6f83418c5d9c69f00b9",
+      "visuallyVerified": true,
+      "role": "result-table",
+      "explanation": "complete",
+      "reviewScope": "Viewed rendered SVG/source figure; checked text, arrows, axes or table final rows.",
+      "pdfSha256": "812a3fd645c80725354de9d831a6785503007a60681461407f64e97305fa9330",
+      "pdfPage": 26,
+      "cropBox": [
+        70,
+        252,
+        526,
+        474
+      ],
+      "pdfPageSize": [
+        595.2760009765625,
+        841.8900146484375
+      ]
+    }
+  ]
+}

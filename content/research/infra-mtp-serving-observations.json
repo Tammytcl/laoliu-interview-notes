@@ -1,0 +1,79 @@
+{
+  "version": 1,
+  "topicId": "infra-mtp-serving",
+  "checkedAt": "2026-10-09T10:25:41.003Z",
+  "observations": {
+    "infra-mtp-serving-source-04": {
+      "checkedAt": "2026-10-09T10:25:41.003Z",
+      "lastSuccessAt": "2026-10-09T10:25:41.003Z",
+      "status": "ok",
+      "revision": "516fd1c1b5221b6cab5d53052ac7b9c582b2608a",
+      "sha256": "b83261e82f4195bafc75ed7c92c2b0bc05d77b794866d841c92e6226269bf470",
+      "pendingReview": false
+    },
+    "infra-mtp-serving-source-02": {
+      "checkedAt": "2026-10-09T10:25:41.003Z",
+      "lastSuccessAt": "2026-10-09T10:25:41.003Z",
+      "status": "ok",
+      "revision": "59ffd73e8597d860730f4a8c4f778f27c75a0dfa",
+      "sha256": "aae80e30b2dbfd1df41b83f51aaba4722e9f2dc3b4479d2a38ce1e32926fac11",
+      "pendingReview": false
+    },
+    "infra-mtp-serving-source-03": {
+      "checkedAt": "2026-10-09T10:25:41.003Z",
+      "lastSuccessAt": "2026-10-09T10:25:41.003Z",
+      "status": "ok",
+      "revision": "59ffd73e8597d860730f4a8c4f778f27c75a0dfa",
+      "sha256": "aae80e30b2dbfd1df41b83f51aaba4722e9f2dc3b4479d2a38ce1e32926fac11",
+      "pendingReview": false
+    },
+    "infra-mtp-serving-source-01": {
+      "checkedAt": "2026-10-09T10:25:41.003Z",
+      "lastSuccessAt": "2026-10-09T10:25:41.003Z",
+      "status": "ok",
+      "revision": "9b4e9788e4a3a731f7567338ed15d3ec549ce03b",
+      "sha256": "0d2be8b8c9cb98f3f503f9aa029d1f2907282e68c7cf9429f9f6759ec52c8b23",
+      "pendingReview": false
+    },
+    "infra-mtp-serving-source-07": {
+      "checkedAt": "2026-10-09T10:25:41.003Z",
+      "lastSuccessAt": "2026-10-09T10:25:41.003Z",
+      "status": "ok",
+      "revision": "516fd1c1b5221b6cab5d53052ac7b9c582b2608a",
+      "sha256": "b0ae7719dcd20a52cb7897c78444dcdd2c962d7cfbcad98e6bf504bf8b9f7c7e",
+      "pendingReview": false
+    },
+    "infra-mtp-serving-source-08": {
+      "checkedAt": "2026-10-09T10:25:41.003Z",
+      "lastSuccessAt": "2026-10-09T10:25:41.003Z",
+      "status": "ok",
+      "revision": "516fd1c1b5221b6cab5d53052ac7b9c582b2608a",
+      "sha256": "8e2a658603858a3532c3c1d112ee8537841884b12e78b4e85434232897eb712d",
+      "pendingReview": false
+    },
+    "infra-mtp-serving-source-05": {
+      "checkedAt": "2026-10-09T10:25:41.003Z",
+      "lastSuccessAt": "2026-10-09T10:25:41.003Z",
+      "status": "ok",
+      "revision": "59ffd73e8597d860730f4a8c4f778f27c75a0dfa",
+      "sha256": "eae02c10ccb05901415e1e5539feb08e85cc1b714e70c8b4175ab2d37f587b66",
+      "pendingReview": false
+    },
+    "infra-mtp-serving-source-06": {
+      "checkedAt": "2026-10-09T10:25:41.003Z",
+      "lastSuccessAt": "2026-10-09T10:25:41.003Z",
+      "status": "ok",
+      "revision": "516fd1c1b5221b6cab5d53052ac7b9c582b2608a",
+      "sha256": "6a01cf3bdab19e276a1276bb1474547685b5c40280b5647427be88625d67046b",
+      "pendingReview": false
+    },
+    "infra-mtp-serving-source-09": {
+      "checkedAt": "2026-10-09T10:25:41.003Z",
+      "lastSuccessAt": "2026-10-09T10:25:41.003Z",
+      "status": "ok",
+      "revision": "59ffd73e8597d860730f4a8c4f778f27c75a0dfa",
+      "sha256": "7cb64046883e47457583ac94be3f0761be14a77701571c5d5760742f9cd49900",
+      "pendingReview": false
+    }
+  }
+}

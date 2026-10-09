@@ -173,3 +173,6 @@ Speculative decoding先用较廉价draft提议多个token，再由target批量�
 **数值练习下载：** [CPU验算脚本（仅Python标准库）](./assets/infra/infra-foundations-check.py) · [本次验算输出](./assets/infra/infra-foundations-check-results.json)。覆盖梯度有限差分、状态/KV字节、Roofline、TP与分块softmax；不包含GPU训练或测速。
 
 容量延伸：[1T不同精度占多少磁盘与推理显存](#q=infra-checkpoint-formats)，同时区分纯权重、KV、量化metadata和offload。
+
+
+**2026-10-09 MTP专项入口。** 已独立整理[训练目标与预测结构](#q=infra-mtp-overview)、[Meta/DeepSeek训练设计](#q=infra-mtp-training)、[投机验证与采样校正](#q=infra-mtp-speculative)、[vLLM/SGLang服务落地](#q=infra-mtp-serving)。本篇保留原范围，MTP原理、源码与完整问答在系列中展开。

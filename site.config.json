@@ -27,7 +27,7 @@
     {
       "id": "systems",
       "name": "Infra · 训练与推理",
-      "description": "训练基础、GPU与通信、分布式并行、推理引擎及RL训推闭环"
+      "description": "训练基础、GPU与通信、分布式并行、推理引擎、MTP及RL训推闭环"
     },
     {
       "id": "coding",

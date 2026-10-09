@@ -1,0 +1,81 @@
+{
+  "version": 1,
+  "topicId": "infra-mtp-overview",
+  "note": "固定原论文与官方代码/doc；CPU课堂验证不是GPU训练或服务benchmark。近期阅读定位未纳入定量排名。",
+  "sources": [
+    {
+      "id": "infra-mtp-overview-source-01",
+      "title": "Meta MTP v1",
+      "url": "https://arxiv.org/abs/2404.19737v1",
+      "kind": "paper",
+      "reviewedAt": "2026-10-09",
+      "purpose": "核对本文MTP结构、公式、原图、实现或服务口径；固定来源与推断分开。"
+    },
+    {
+      "id": "infra-mtp-overview-source-02",
+      "title": "DeepSeek-V3 v2",
+      "url": "https://arxiv.org/abs/2412.19437v2",
+      "kind": "paper",
+      "reviewedAt": "2026-10-09",
+      "purpose": "核对本文MTP结构、公式、原图、实现或服务口径；固定来源与推断分开。"
+    },
+    {
+      "id": "infra-mtp-overview-source-03",
+      "title": "Medusa v3",
+      "url": "https://arxiv.org/abs/2401.10774v3",
+      "kind": "paper",
+      "reviewedAt": "2026-10-09",
+      "purpose": "核对本文MTP结构、公式、原图、实现或服务口径；固定来源与推断分开。"
+    },
+    {
+      "id": "infra-mtp-overview-source-04",
+      "title": "EAGLE v3",
+      "url": "https://arxiv.org/abs/2401.15077v3",
+      "kind": "paper",
+      "reviewedAt": "2026-10-09",
+      "purpose": "核对本文MTP结构、公式、原图、实现或服务口径；固定来源与推断分开。"
+    },
+    {
+      "id": "infra-mtp-overview-source-05",
+      "title": "speculative decoding v2",
+      "url": "https://arxiv.org/abs/2211.17192v2",
+      "kind": "paper",
+      "reviewedAt": "2026-10-09",
+      "purpose": "核对本文MTP结构、公式、原图、实现或服务口径；固定来源与推断分开。"
+    },
+    {
+      "id": "infra-mtp-overview-source-06",
+      "title": "Tensor decomposition MTP",
+      "url": "https://arxiv.org/abs/2410.17765v2",
+      "kind": "paper",
+      "reviewedAt": "2026-10-09",
+      "purpose": "核对本文MTP结构、公式、原图、实现或服务口径；固定来源与推断分开。"
+    },
+    {
+      "id": "infra-mtp-overview-source-07",
+      "title": "MTP-D",
+      "url": "https://arxiv.org/abs/2603.23911v1",
+      "kind": "paper",
+      "reviewedAt": "2026-10-09",
+      "purpose": "核对本文MTP结构、公式、原图、实现或服务口径；固定来源与推断分开。"
+    },
+    {
+      "id": "infra-mtp-overview-source-08",
+      "title": "LightMTP",
+      "url": "https://arxiv.org/abs/2610.06031v1",
+      "kind": "paper",
+      "reviewedAt": "2026-10-09",
+      "purpose": "核对本文MTP结构、公式、原图、实现或服务口径；固定来源与推断分开。"
+    },
+    {
+      "id": "infra-mtp-overview-source-09",
+      "title": "Meta官方研究模型card",
+      "url": "https://huggingface.co/facebook/multi-token-prediction",
+      "kind": "official-docs",
+      "reviewedAt": "2026-10-09",
+      "purpose": "核对本文MTP结构、公式、原图、实现或服务口径；固定来源与推断分开。",
+      "revision": "6580f46982ea783120bfe10796717e5c139144b3",
+      "pinnedUrl": "https://huggingface.co/facebook/multi-token-prediction/blob/6580f46982ea783120bfe10796717e5c139144b3/README.md"
+    }
+  ]
+}

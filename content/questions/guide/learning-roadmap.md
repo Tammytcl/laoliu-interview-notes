@@ -4,7 +4,7 @@ title: "从哪里开始？Diffusion、LLM、Agent、Infra 四条学习路线"
 category: guide
 difficulty: 基础
 tags: ["P0", "学习路线", "开始这里"]
-updated: 2026-10-06
+updated: 2026-10-09
 summary: "按先修关系安排学习，每个问题都落到解释、推导或可验证练习。"
 draft: false
 ---
@@ -66,6 +66,8 @@ P0 表示第一轮应掌握的主干，P1 表示主干后再深入。这是本�
 进一步补课按三篇展开：[权重格式、checkpoint与1T存储/推理显存](#q=infra-checkpoint-formats) → [ZeRO三阶段、通信与offload](#q=infra-zero-deepspeed) → [DeepSpeed/Lightning/FSDP接入与恢复](#q=infra-training-backends)。先会计算容量，再解释分片和框架怎样实现。
 
 最后回到框架文章：说明FSDP/Megatron后端、vLLM/SGLang生成、算法角色分别怎样连接，以及同任务换框架要改哪里。产出是容量账本、性能假设、rank布局、调度图、样本契约及一份约束明确的框架选择说明。可下载并运行基础链中的CPU数值练习，不把读完文章等同于完成GPU实验。
+
+MTP专项按[总览](#q=infra-mtp-overview) → [训练设计](#q=infra-mtp-training) → [投机解码](#q=infra-mtp-speculative) → [服务落地](#q=infra-mtp-serving)阅读。先说明多未来监督，再手算接受/残差，最后核权重和同负载成本；四篇均有独立问答与CPU课堂验证。
 
 ## 可重复的复习循环
 

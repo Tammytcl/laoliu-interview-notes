@@ -49,7 +49,7 @@ npm run test:browser
 npm run topics:check-live -- https://tammytcl.github.io/laoliu-interview-notes/
 ```
 
-当前线上检查按 `content/research/topics.json` 验证已注册的十篇专题：Infra 列表、旧链接跳转、正文与核对源文件一致、问答、来源下载内容、图片hash与显示比例、目录定位、直接刷新和手机布局。扩展专题时登记清单和必要模块；不再修改检查器中的单篇白名单。
+当前线上检查按 `content/research/topics.json` 验证已注册的十四篇专题：Infra 列表、旧链接跳转、正文与核对源文件一致、问答、来源下载内容、图片hash与显示比例、目录定位、直接刷新和手机布局。扩展专题时登记清单和必要模块；不再修改检查器中的单篇白名单。
 
 ## 6. 持续更新与自动化边界
 
@@ -102,3 +102,9 @@ npm run topics:watch
 ## 11. 硬件规格与架构专题 · 2026-10-06
 
 GPU/AI加速器比较须先登记芯片/产品/形态/系统层次，再看容量、带宽、目标精度dense/sparse、互联方向和软件版本。厂商网页与PDF不一致时固定实际使用的来源/hash和列，不按常见传播数字替换，也不编造差异原因。历史完整芯片图需标明启用配置与SKU不同。本文只做CPU容量/性能下界计算，没有跨设备benchmark或当前报价结论。两份datasheet加入自动hash观察；其他产品页面下一轮人工核查。
+
+## 12. MTP系列 · 2026-10-09
+
+按总览、训练、精确验证、服务四篇独立主问题展开，背景与前置知识分别成节；真实源码固定commit/行号，教学重述和CPU练习另标。训练质量、candidate接受和服务性能分别登记，理论期望/假设成本不填为GPUbenchmark。主干/MTP/draft/target状态与概率都按真实对象说明；runtime steps、训练深度、tree nodes和accepted length不得按名称混换。原型labelmask不替代真实packed attention验证。
+
+跨文章复用同一原图时，专题图清单可用 `assetPath` 登记仓库 `assets/` 内的实际资源路径；省略时默认专题目录。保留同一图片hash与归属，线上检查覆盖实际共享路径。源码观察优先登记 `watchPath` 与核读文件hash，仓库其他文件的新提交不自动代表本文内容变化。

@@ -261,3 +261,6 @@ slime 的启动脚本常把参数分成几组 shell 数组，传给训练入口�
 **框架后端与保存深入：** [DeepSpeed/Lightning/FSDP的职责与接入](#q=infra-training-backends)单独比较训练循环和分片后端；[ZeRO详解](#q=infra-zero-deepspeed)讲阶段数据流与offload；[权重格式与1T容量](#q=infra-checkpoint-formats)区分文件分卷、分布式状态和推理峰值。本篇保持verl/slime选型主线。
 
 硬件选型补充：[A/H/B与其他AI算力卡](#q=infra-ai-accelerators)介绍架构、规格口径、软件兼容与训练场景；选择verl/slime后端时可据此核查GPU/设备支持。
+
+
+**2026-10-09 MTP专项入口。** 已独立整理[训练目标与预测结构](#q=infra-mtp-overview)、[Meta/DeepSeek训练设计](#q=infra-mtp-training)、[投机验证与采样校正](#q=infra-mtp-speculative)、[vLLM/SGLang服务落地](#q=infra-mtp-serving)。本篇保留原范围，MTP原理、源码与完整问答在系列中展开。

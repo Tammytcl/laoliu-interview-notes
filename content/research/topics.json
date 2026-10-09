@@ -182,5 +182,77 @@
     ],
     "minimumQuestions": 12,
     "minimumCharacters": 6000
+  },
+  {
+    "id": "infra-mtp-overview",
+    "sources": "content/research/infra-mtp-overview-sources.json",
+    "figures": "assets/infra/infra-mtp-overview/figures.json",
+    "requiredSections": [
+      "问题背景",
+      "前置知识",
+      "系列路线",
+      "已有工作",
+      "例子",
+      "面试问答",
+      "来源"
+    ],
+    "minimumQuestions": 8,
+    "minimumCharacters": 6000
+  },
+  {
+    "id": "infra-mtp-training",
+    "sources": "content/research/infra-mtp-training-sources.json",
+    "figures": "assets/infra/infra-mtp-training/figures.json",
+    "requiredSections": [
+      "问题背景",
+      "前置知识",
+      "Meta并行",
+      "DeepSeek串行",
+      "标签与packing",
+      "内存高效",
+      "关键源码",
+      "质量证据",
+      "面试问答",
+      "来源"
+    ],
+    "minimumQuestions": 8,
+    "minimumCharacters": 6000
+  },
+  {
+    "id": "infra-mtp-speculative",
+    "sources": "content/research/infra-mtp-speculative-sources.json",
+    "figures": "assets/infra/infra-mtp-speculative/figures.json",
+    "requiredSections": [
+      "问题背景",
+      "前置知识",
+      "Greedy",
+      "随机采样",
+      "多步",
+      "候选树",
+      "logprob",
+      "面试问答",
+      "来源"
+    ],
+    "minimumQuestions": 8,
+    "minimumCharacters": 6000
+  },
+  {
+    "id": "infra-mtp-serving",
+    "sources": "content/research/infra-mtp-serving-sources.json",
+    "figures": "assets/infra/infra-mtp-serving/figures.json",
+    "requiredSections": [
+      "问题背景",
+      "前置知识",
+      "Checkpoint",
+      "关键源码",
+      "vLLM与SGLang",
+      "性能模型",
+      "接受计数",
+      "同负载",
+      "面试问答",
+      "来源"
+    ],
+    "minimumQuestions": 8,
+    "minimumCharacters": 6000
   }
 ]

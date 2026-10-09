@@ -1,0 +1,124 @@
+{
+  "updated": "2026-10-09",
+  "validation_scope": "CPU classroom checks only",
+  "training": {
+    "max_gradient_difference": 2.7755575615628914e-17,
+    "packed_label_examples": {
+      "1": [
+        [
+          2,
+          3,
+          -100,
+          5,
+          6,
+          -100
+        ]
+      ],
+      "2": [
+        [
+          3,
+          -100,
+          -100,
+          6,
+          -100,
+          -100
+        ]
+      ],
+      "3": [
+        [
+          -100,
+          -100,
+          -100,
+          -100,
+          -100,
+          -100
+        ]
+      ]
+    },
+    "scope": "Toy gradients and label masks; real packed attention must also reset document boundaries."
+  },
+  "sampling": {
+    "target": [
+      0.2,
+      0.5,
+      0.3
+    ],
+    "proposal": [
+      0.5,
+      0.3,
+      0.2
+    ],
+    "acceptance_probability": 0.7,
+    "residual_distribution": [
+      0.0,
+      0.6666666666666667,
+      0.33333333333333326
+    ],
+    "corrected_exact": [
+      0.2,
+      0.5,
+      0.3
+    ],
+    "deterministic_proposal_check": {
+      "proposal": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "corrected_exact": [
+        0.2,
+        0.5,
+        0.3
+      ]
+    },
+    "naive_rejection_then_target_distribution": [
+      0.26,
+      0.45,
+      0.29000000000000004
+    ],
+    "empirical_frequencies": [
+      0.19884,
+      0.49939,
+      0.30177
+    ],
+    "seed": 23,
+    "samples": 100000,
+    "scope": "Single fixed-prefix exact chain sampler; not tree/threshold kernel validation."
+  },
+  "serving": {
+    "conditional_acceptance": [
+      0.9,
+      0.9,
+      0.9
+    ],
+    "expected_emitted_tokens": 3.439,
+    "hypothetical_speedups": {
+      "low_batch_cost_1.6": 2.149375,
+      "high_batch_cost_4.2": 0.8188095238095238
+    },
+    "logits_only_bytes": {
+      "naive": 4194304000,
+      "one_head": 1048576000
+    },
+    "logits_only_GiB": {
+      "naive": 3.90625,
+      "one_head": 0.9765625
+    },
+    "greedy_KV_example": {
+      "committed_KV": [
+        "prefix",
+        "A"
+      ],
+      "discarded_draft_KV": [
+        "X",
+        "C"
+      ],
+      "pending_emitted_token": "B"
+    },
+    "counter_example": {
+      "mean_emitted": 2.3333333333333335,
+      "accepted_over_proposed": 0.4444444444444444
+    },
+    "scope": "Assumed costs and tensor storage, not measured GPU speed/memory."
+  }
+}

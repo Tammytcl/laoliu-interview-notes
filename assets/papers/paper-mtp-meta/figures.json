@@ -1,0 +1,187 @@
+{
+  "paperId": "paper-mtp-meta",
+  "arxivVersion": "2404.19737v1",
+  "originalUrl": "https://arxiv.org/abs/2404.19737v1",
+  "attribution": "Original figures and tables by Gloeckle et al.; attributed research commentary.",
+  "figures": [
+    {
+      "file": "figure-1-source.png",
+      "sha256": "ea5acac577e520948fbd14c49cdc5986bed018fcefb4705cbf429e9024065203",
+      "original": "https://arxiv.org/src/2404.19737v1",
+      "method": "pinned-latex-asset",
+      "sourceArchiveSha256": "a91df98064351fe22a5a61037bffa22f05657b6f3582107f1506ada0d4bda62e",
+      "sourcePath": "img/main_fig_col.png",
+      "sourceSha256": "5fc3a6b36df6afb659b9d88fdc55c41273beb7c4807211c0c5af21305ec804f7",
+      "sourceFiles": [
+        {
+          "path": "img/main_fig_col.png",
+          "sha256": "5fc3a6b36df6afb659b9d88fdc55c41273beb7c4807211c0c5af21305ec804f7"
+        }
+      ],
+      "texFile": "figures/main_figure_col.tex",
+      "texSha256": "176d6075c33ff9c9e5fdaed658d421a9d480cdf5af95796d97b02b53111daa7d",
+      "figureLabel": "fig:main_figure_col",
+      "role": "method",
+      "explanation": "complete",
+      "visuallyVerified": true,
+      "reviewedAt": "2026-10-09",
+      "reportSection": "2",
+      "reviewScope": "Viewed source figure or tight table crop; checked complete panels, legends, axes, table headers and final rows against pinned v1 PDF."
+    },
+    {
+      "file": "figure-2-source.png",
+      "sha256": "d1d0b531d7f9186e2bbe801e69cad0f0bc996ac1c092857260d5285b0e113a30",
+      "original": "https://arxiv.org/src/2404.19737v1",
+      "method": "pinned-latex-asset",
+      "sourceArchiveSha256": "a91df98064351fe22a5a61037bffa22f05657b6f3582107f1506ada0d4bda62e",
+      "sourcePath": "img/backward_order.png",
+      "sourceSha256": "7d93c501a7365814aea60d04a22959c071d924b7ca55981b3977d36d4430ec68",
+      "sourceFiles": [
+        {
+          "path": "img/backward_order.png",
+          "sha256": "7d93c501a7365814aea60d04a22959c071d924b7ca55981b3977d36d4430ec68"
+        }
+      ],
+      "texFile": "figures/backward.tex",
+      "texSha256": "31bb11d1f84074263422b775e54eaa66c42b6102b0bb7a4979f9da59be2eb568",
+      "figureLabel": "fig:backward",
+      "role": "method",
+      "explanation": "complete",
+      "visuallyVerified": true,
+      "reviewedAt": "2026-10-09",
+      "reportSection": "2",
+      "reviewScope": "Viewed source figure or tight table crop; checked complete panels, legends, axes, table headers and final rows against pinned v1 PDF."
+    },
+    {
+      "file": "figure-3-source.png",
+      "sha256": "532266ed74fd9e2b46ad10d599532b863fa75a3c166d70324af366c2e3760207",
+      "original": "https://arxiv.org/src/2404.19737v1",
+      "method": "pinned-latex-asset",
+      "sourceArchiveSha256": "a91df98064351fe22a5a61037bffa22f05657b6f3582107f1506ada0d4bda62e",
+      "sourcePath": "img/scaling.pdf",
+      "sourceSha256": "9201347c82695b54f153e22777b874ba1c283d7434eb7c496464ea90cc808bea",
+      "sourceFiles": [
+        {
+          "path": "img/scaling.pdf",
+          "sha256": "9201347c82695b54f153e22777b874ba1c283d7434eb7c496464ea90cc808bea"
+        }
+      ],
+      "texFile": "figures/scaling_model.tex",
+      "texSha256": "133646183d382d41ef856de23786a7478a6e39aa3cadc3fe0174dc6566b0f7e4",
+      "figureLabel": "fig:scaling_model",
+      "role": "result-figure",
+      "explanation": "complete",
+      "visuallyVerified": true,
+      "reviewedAt": "2026-10-09",
+      "reportSection": "4",
+      "reviewScope": "Viewed source figure or tight table crop; checked complete panels, legends, axes, table headers and final rows against pinned v1 PDF."
+    },
+    {
+      "file": "figure-s10-source.png",
+      "sha256": "4804486eda2cfd0bae76d0658dcc04126194ad7d11c9f71258744f3a09180b85",
+      "original": "https://arxiv.org/src/2404.19737v1",
+      "method": "pinned-latex-asset",
+      "sourceArchiveSha256": "a91df98064351fe22a5a61037bffa22f05657b6f3582107f1506ada0d4bda62e",
+      "sourcePath": null,
+      "sourceSha256": "c5fe58589247cb9ba6044c5eb881da8e518efacc8d151bd55dda05ec546f3a50",
+      "sourceFiles": [
+        {
+          "path": "img/throughput.pdf",
+          "sha256": "c5fe58589247cb9ba6044c5eb881da8e518efacc8d151bd55dda05ec546f3a50"
+        },
+        {
+          "path": "img/latency.pdf",
+          "sha256": "22192ab3cfbccec6ada4e87cc8cf552abc7fb5cdffcdddd4bcaf5d8fba24c0a6"
+        }
+      ],
+      "texFile": "figures/decoding.tex",
+      "texSha256": "5e14b777369f5ffce6dcb0e425db333188b70bcfd318b7077020ec422e6406e9",
+      "figureLabel": "fig:decoding",
+      "role": "result-figure",
+      "explanation": "complete",
+      "visuallyVerified": true,
+      "columns": 2,
+      "reviewedAt": "2026-10-09",
+      "reportSection": "4",
+      "reviewScope": "Viewed source figure or tight table crop; checked complete panels, legends, axes, table headers and final rows against pinned v1 PDF."
+    },
+    {
+      "file": "table-1-pdf.png",
+      "sha256": "a1db891ba71b0f54a93ab93eaf15dd2b13e94b6a13bf763295b923cd0d023023",
+      "original": "https://arxiv.org/pdf/2404.19737v1#page=4",
+      "method": "pinned-original-pdf-crop",
+      "pdfPage": 4,
+      "cropBox": [
+        54,
+        64,
+        544,
+        335
+      ],
+      "pdfSha256": "bf067f57a2f7b03180285efa237635ab4a284dc0761e60fa964554fcdcdef8a1",
+      "scale": 3,
+      "pdfPageSize": [
+        612.0,
+        792.0
+      ],
+      "sourceUnavailableReason": "LaTeX table/algorithm typesetting; crop the compiled PDF",
+      "role": "result-table",
+      "explanation": "complete",
+      "visuallyVerified": true,
+      "reviewedAt": "2026-10-09",
+      "reportSection": "4",
+      "reviewScope": "Viewed source figure or tight table crop; checked complete panels, legends, axes, table headers and final rows against pinned v1 PDF."
+    },
+    {
+      "file": "table-s2-pdf.png",
+      "sha256": "9f7c973b8058b6c858fbf424f1ab71ec3efbe449ffa788fee5c0e39b68bdf1c9",
+      "original": "https://arxiv.org/pdf/2404.19737v1#page=13",
+      "method": "pinned-original-pdf-crop",
+      "pdfPage": 13,
+      "cropBox": [
+        54,
+        310,
+        544,
+        492
+      ],
+      "pdfSha256": "bf067f57a2f7b03180285efa237635ab4a284dc0761e60fa964554fcdcdef8a1",
+      "scale": 3,
+      "pdfPageSize": [
+        612.0,
+        792.0
+      ],
+      "sourceUnavailableReason": "LaTeX table/algorithm typesetting; crop the compiled PDF",
+      "role": "result-table",
+      "explanation": "complete",
+      "visuallyVerified": true,
+      "reviewedAt": "2026-10-09",
+      "reportSection": "4",
+      "reviewScope": "Viewed source figure or tight table crop; checked complete panels, legends, axes, table headers and final rows against pinned v1 PDF."
+    },
+    {
+      "file": "table-s5-pdf.png",
+      "sha256": "a2e897be95890280663586f92f7821eeff277f42b5088fc889c64ce6ff144fe3",
+      "original": "https://arxiv.org/pdf/2404.19737v1#page=15",
+      "method": "pinned-original-pdf-crop",
+      "pdfPage": 15,
+      "cropBox": [
+        54,
+        332,
+        544,
+        492
+      ],
+      "pdfSha256": "bf067f57a2f7b03180285efa237635ab4a284dc0761e60fa964554fcdcdef8a1",
+      "scale": 3,
+      "pdfPageSize": [
+        612.0,
+        792.0
+      ],
+      "sourceUnavailableReason": "LaTeX table/algorithm typesetting; crop the compiled PDF",
+      "role": "result-table",
+      "explanation": "complete",
+      "visuallyVerified": true,
+      "reviewedAt": "2026-10-09",
+      "reportSection": "4",
+      "reviewScope": "Viewed source figure or tight table crop; checked complete panels, legends, axes, table headers and final rows against pinned v1 PDF."
+    }
+  ]
+}
