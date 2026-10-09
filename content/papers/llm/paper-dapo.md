@@ -11,7 +11,7 @@ areas: ["language"]
 tasks: ["training-adaptation", "reasoning"]
 evidence: "已核原文"
 note_ids: ["sft-dpo-rl", "grpo-rlvr", "infra-rl-pipeline"]
-updated: "2026-10-08"
+updated: "2026-10-09"
 template_version: 5
 depth_standard: "ddpm"
 draft: false
@@ -28,20 +28,36 @@ author_affiliations: [[1, 2, 4], [1], [1], [1], [1], [1], [1, 2, 4], [1], [1], [
 
 ## 1. 背景与已有工作
 
-DAPO研究的不是一个孤立loss能否比GRPO高几分，而是从base语言模型开始做长链数学RL时，哪些算法与工程细节决定训练是否能持续改善。作者发现，朴素GRPO配方会遭遇entropy collapse、全同奖励组的无效更新、长回答token权重不足和截断奖励噪声。它将四个相互作用的机制组成公开配方，在Qwen2.5-32B-Base上达到AIME2024 avg@32为50。
+### 问题背景
 
-全名中的Decoupled Clip指拆开概率比的下上裁剪范围，Dynamic Sampling指过滤无区分信号的prompt组并补采；这里的“decoupled”不是GDPO的逐奖励归一化，也不是训推硬件解耦。“dynamic”不是推理服务continuous batching的同义词。先定位算法环节，再讨论与slime、verl或异步rollout的关系，能避免把系统名与优化目标混在一起。
+从base模型开始长CoT数学RL，朴素GRPO经常只能得到有限收益：entropy快速降低、同题回答趋同、有效奖励组变少、长回答更新权重不合理、截断反馈混入噪声。DAPO把这些具体症状拆开处理，公开一套训练配方，而不是只提出一个新的loss符号。
 
-它保留GRPO式同题多回答与组相对优势，不训练独立critic。数学任务使用规则验证reward，并主动去掉reference KL，以允许生成分布向长推理模式变化。这与原始DeepSeekMath的学习reward model、1024输出长度和0.04 KL配方不同；不能把DAPO结果当成只把GRPO的epsilon从0.2改到0.28的单因素实验。
+Decoupled Clip拆开概率比上下界；Dynamic Sampling过滤缺少相对信号的prompt组后补采。它们不等于多reward归一化，也不等于推理continuous batching。配方仍用组优势，数学主实验使用规则验证并移除reference KL，和DeepSeekMath原GRPO的reward模型与短输出设置不同。
 
-| 训练症状 | 作者诊断 | DAPO机制 | 新取舍 |
-| --- | --- | --- | --- |
-| entropy快速下降、回答趋同 | 低概率探索token上升受限 | Clip-Higher | 更大的有利更新区间需监控稳定性 |
-| 同题全对/全错 | 组标准化后任务优势为零 | Dynamic Sampling | 补采成本和题目分布选择 |
-| 长CoT训练不稳定 | 每序列平均导致长回答token弱权重 | Token-level PG reduction | 更长回答获得更大总权重 |
-| 截断回答被一律判失败 | 长度限制混入任务错误信号 | Overlong shaping | 需要定义buffer长度与惩罚 |
+### 前置知识
 
-对面试最有价值的是“四种诊断对应四种修改”，而不是背一个缩写列表。训练entropy过低意味着探索不足，但entropy过高也可能是乱码、重复和模型崩溃；reward上升可能只是拟合训练题；输出变长可能扩大搜索空间，也可能浪费算力。DAPO把这些监控量与具体失败现象连接起来，展示RL是反馈、采样和优化共同构成的过程。[固定v2 §2—§4](https://arxiv.org/pdf/2503.14476v2)。
+**组优势与有效组。** 同题G回答全对或全错时，binary reward的std为零，任务优势缺乏区分。有效训练batch应区分候选prompt、保留prompt和回答条数；过滤后不补采会减少每步实际信号。
+
+**概率比与PPO单侧平台。** ratio衡量当前对旧动作的相对概率，正优势超过upper才进入有利方向平台，负优势低于lower才进入平台。0.01概率token在ratio1.2处只增到0.012，0.9概率token则对应1.08；surrogate门槛不是合法概率的硬限制。
+
+**entropy与探索。** entropy衡量动作分布的不确定性，过低可能缺少探索，过高也可能是乱码或退化。reward、entropy、验证分数和长度必须一起看，不能以entropy单调升高作为训练完成条件。
+
+**token平均与sequence平均。** 两条长度100/1000的回答，sequence平均给予相近总权重，token平均给予约1:10总权重。二者都通过token logprob更新，区别是分母与样本权重；global token分母还要跨microbatch与DP保持一致。
+
+**截断、正确性与长度reward。** 长度上限可能使本来有用的推理没有完成。loss mask可以不训练某些截断片段，soft length penalty则改变reward；这些操作不等于认定所有长答案逻辑错误。惩罚buffer是长度区间，不是动态采样数据buffer。
+
+### 已有工作与本文位置
+
+[PPO](#paper=paper-ppo)提供clip，[GRPO](#paper=paper-grpo)提供组优势。DAPO组合Clip-Higher、补采、token平均和超长reward shaping；最终配方不含reference KL。[固定v2 §3—§4](https://arxiv.org/pdf/2503.14476v2)。
+
+| 症状 | 修改 | 必须付出的代价 |
+| --- | --- | --- |
+| 过早确定化 | 提高upper clip | 更宽有利更新区间需监控 |
+| 零方差组增多 | 过滤并补采 | 生成成本、难度覆盖变化 |
+| 长回答token弱权重 | token-mean reduction | 长回答获得更高总权重 |
+| 截断奖励噪声 | mask与soft penalty | 明确长度目标和verifier |
+
+原主表是按顺序累加的配方实验，不能把最后一项增益当成与其他机制独立的因果贡献，更不能把少一半update steps解释成少一半GPU-hour。
 
 ## 2. 方法与实现机制
 
@@ -120,6 +136,87 @@ $$
 
 [作者项目讲解](https://dapo-sia.github.io/)按训练症状解释四个机制；[verl DAPO文档](https://github.com/verl-project/verl/blob/75879f7f475fd6b64c779f7d9212e45503f58b8f/docs/algo/dapo.md)提供版本与公开复现记录。教程52分、早期44分和论文50分是不同配置/版本，不混写为一个成绩。
 
+### 课堂源码拆解：筛选条件必须改变控制流
+
+先在白板上分开候选prompt数、保留prompt数和trajectory数。目标512prompt、G16意味着8192条有效回答；它不意味着只生成8192条。把过滤后继续采样画成循环，学生才能理解算法与系统成本。
+
+#### 按prompt整组过滤
+
+**真实源码节选：[DAPO 公开复现 · 过滤零方差组](https://github.com/verl-project/verl/blob/4f80e465c2ec79ab9c3c30ec74b9745de61d0490/recipe/dapo/src/dapo_ray_trainer.py#L192-L200)。** 以下保留原始语句，仅去除共同缩进与非语义行末空白；变量初始化和未展示分支见原函数。
+
+```python title="DAPO 公开复现 · 过滤零方差组"
+prompt_uid2metric_std = {}
+for prompt_uid, metric_vals in prompt_uid2metric_vals.items():
+    prompt_uid2metric_std[prompt_uid] = np.std(metric_vals)
+
+kept_prompt_uids = [
+    uid for uid, std in prompt_uid2metric_std.items()
+    if std > 0 or len(prompt_uid2metric_vals[uid]) == 1
+]
+num_prompt_in_batch += len(kept_prompt_uids)
+```
+
+
+
+metric可以是accuracy或reward，`np.std`在该实现是population std；这里只用它是否大于零，正常非退化组的数值尺度不影响筛选真假。保留UID之后必须保留该UID对应的全部回答，不能只留下成功样本再算组优势。单回答回退是实现兼容，正常G16配方不是单rollout。
+
+#### 不足时没有optimizer update
+
+**真实源码节选：[DAPO 公开复现 · 补采与训练量对齐](https://github.com/verl-project/verl/blob/4f80e465c2ec79ab9c3c30ec74b9745de61d0490/recipe/dapo/src/dapo_ray_trainer.py#L213-L227)。** 以下保留原始语句，仅去除共同缩进与非语义行末空白；变量初始化和未展示分支见原函数。
+
+```python title="DAPO 公开复现 · 补采与训练量对齐"
+prompt_bsz = self.config.data.train_batch_size
+if num_prompt_in_batch < prompt_bsz:
+    print(f'{num_prompt_in_batch=} < {prompt_bsz=}')
+    max_num_gen_batches = self.config.algorithm.filter_groups.max_num_gen_batches
+    if max_num_gen_batches <= 0 or num_gen_batches < max_num_gen_batches:
+        print(f'{num_gen_batches=}. Keep generating...')
+        continue
+    else:
+        raise ValueError(
+            f'{num_gen_batches=} >= {max_num_gen_batches=}. Generated too many. Please check your data.'
+        )
+else:
+    # Align the batch
+    traj_bsz = self.config.data.train_batch_size * self.config.actor_rollout_ref.rollout.n
+    batch = batch[:traj_bsz]
+```
+
+
+
+`continue`回到生成循环，尚未执行actor update。`max_num_gen_batches`防止一直补不齐；达到目标后按promptbatch×G裁到训练量。接受率低时成本上升，group diversity与最长等待要监控。代码里的buffer是已完成数据，不能拿它当未完成prefix的partial resume。
+
+#### 长度区间与token权重
+
+**真实源码节选：[DAPO 公开复现 · Soft Overlong Reward](https://github.com/verl-project/verl/blob/4f80e465c2ec79ab9c3c30ec74b9745de61d0490/verl/workers/reward_manager/dapo.py#L103-L108)。** 以下保留原始语句，仅去除共同缩进与非语义行末空白；变量初始化和未展示分支见原函数。
+
+```python title="DAPO 公开复现 · Soft Overlong Reward"
+overlong_buffer_len = self.overlong_buffer_cfg.len
+expected_len = self.max_resp_len - overlong_buffer_len
+exceed_len = valid_response_length - expected_len
+overlong_penalty_factor = self.overlong_buffer_cfg.penalty_factor
+overlong_reward = min(-exceed_len / overlong_buffer_len * overlong_penalty_factor, 0)
+reward += overlong_reward
+```
+
+
+
+`max_resp_len-buffer_len`是开始惩罚的expected长度，超出量除buffer长度得到线性负项，小于阈值时`min(...,0)`为0。这与正确性reward相加，不是替代正确性。代码允许`penalty_factor`缩放，原文核心示例设1；硬上限与有效response length控制实际取值范围。
+
+**真实源码节选：[DAPO 公开复现 · token mean分支](https://github.com/verl-project/verl/blob/4f80e465c2ec79ab9c3c30ec74b9745de61d0490/verl/trainer/ppo/core_algos.py#L283-L284)。** 以下保留原始语句，仅去除共同缩进与非语义行末空白；变量初始化和未展示分支见原函数。
+
+```python title="DAPO 公开复现 · token mean分支"
+if loss_agg_mode == "token-mean":
+    loss = verl_F.masked_mean(loss_mat, loss_mask)
+```
+
+
+
+短分支虽然只有两行，却决定所有有效token用同一分母。让两回答长度2/4且每token值分别1/3，sequence平均是2，token平均是7/3。actor policy kernel仍是clip形式；函数名GRPO不能掩盖DAPO的过滤、reward与reduction改动。
+
+最后拿接受率50%与10%算候选生成量，让学生解释为何更少update steps不直接证明更低GPU-hour；再用progressive主表解释单项收益为何依赖前置机制。
+
+
 ## 3. 实验设置与算力
 
 主实验从Qwen2.5-32B-Base做数学RL，而不是从DeepSeekMath-Instruct接续。数据、上下文和验证方式均影响最终成绩。原文的training step指梯度更新，rollout step指一批生成，两者相差16次更新；dynamic sampling还可能一个有效batch经过多次生成。
@@ -192,3 +289,8 @@ DAPO是一套针对长CoT数学训练验证过的配方。它解决的是探索�
 **Q8：迁移到coding agent先查什么？** verifier覆盖、工具输出mask、失败环境开销、同题组尾部等待、超长是否对应任务复杂度以及过滤率。优化配方不自动处理sandbox状态保存和异步策略版本。
 
 参考[作者项目](https://dapo-sia.github.io/)、[项目源码说明](https://github.com/BytedTsinghua-SIA/DAPO)、固定verl实现与[统一专题](#report=survey-policy-optimization)。原文固定2503.14476v2，首次公开2025-03-18，PDF封面的项目日期不同。该版贡献页列37位去重贡献者，包含abs元数据未列出的Juncai Liu、Ru Zhang，本记录按正文完整列表和单位映射收录。2026-10-08核读原文、原图与公开代码；未执行训练复现。
+
+
+
+
+**2026-10-09更新。** 背景拆为问题背景、前置知识、已有工作；补固定源码节选、逐段形状/梯度讲解与课堂检查。源码节选不是完整可运行训练程序；课堂张量练习见[CPU演示脚本](./assets/learning/policy-optimization-lab.py)，不下载模型且不执行真实RL训练。

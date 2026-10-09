@@ -12,7 +12,7 @@ areas: ["language"]
 tasks: ["training-adaptation", "reasoning"]
 evidence: "已核原文"
 note_ids: ["sft-dpo-rl", "grpo-rlvr", "infra-rl-pipeline"]
-updated: "2026-10-08"
+updated: "2026-10-09"
 template_version: 5
 depth_standard: "ddpm"
 draft: false
@@ -28,24 +28,36 @@ code_note: "正文区分论文原实现与固定commit的现代框架伴读；�
 
 ## 1. 背景与已有工作
 
-GRPO 首次系统提出于 DeepSeekMath，而不是一篇题名为“GRPO”的独立论文。这份精读以原论文 §4 的强化学习与 §5.2 的分析为主，同时交代模型已有的数学预训练和 SFT 基础。要理解贡献，必须分开“基础模型如何获得数学知识”与“在线采样如何改变解题行为”：最终 51.7% 的 MATH 成绩包含整条训练链，不能全部归因于换掉 PPO 的 critic。
+### 问题背景
 
-语言模型的动作是下一 token，状态是问题和生成前缀；回答结束后才获得一个结果分数。PPO 常用 value model 估计每个前缀的未来回报，配合 GAE 给 token 分配优势。大模型的 critic 会带来参数、优化器、激活和额外前反向开销；稀疏终局奖励还让逐 token 价值估计难以学准。GRPO 的直觉是：对同一题生成多条答案，拿它们互相比较，就可以为这道题构建一个相对基线，省去独立 value model。
+语言模型PPO常需一个与actor规模相近的value模型。长回答的终局反馈稀疏，每个前缀的未来回报又难估计，critic的显存和前反向开销因此未必带来可靠优势。DeepSeekMath提出：对同一问题多采几条回答，直接用组内表现构建baseline，能否省去独立critic。
 
-例如题 A 的平均得分是 0.9，题 B 的平均得分是 0.1。直接把奖励 1 都当成同样强的信号，会忽略问题难度和其他可选行为；同题比较让“优于当前模型通常表现”的答案得到正优势。组内基线是关于同题多个完整回答的统计量，不能自动获得 PPO critic 的逐状态、逐动作精细价值估计。
+本文的最终模型还经历数学continued pretraining和SFT。GRPO负责后续RL优化，而不是从无知识状态创造全部数学能力。报告以真实DeepSeekMath题名收录，重点在§4强化学习和§5.2分析，不把最终MATH成绩全部归因于去critic。
 
-[REINFORCE](https://doi.org/10.1007/BF00992696)提供通过 logprob 学习的基础；[PPO](#paper=paper-ppo)提供新旧策略比与裁剪；GRPO 改造优势计算，保留 token-level surrogate 并加入 reference KL。它与 DPO 的区别在于原始 DPO 用固定偏好 pair，而 GRPO 在线采样同题组、打分并更新。与 RFT 的区别在于 RFT 常筛选正确回答做监督拟合，GRPO 可以按相对分数同时增强较好回答、抑制较差回答。
+### 前置知识
 
-| 机制 | 原始 PPO 常见形式 | DeepSeekMath 的 GRPO |
+**策略、终局reward与credit assignment。** 模型的动作是下一token，回答结束后scorer给出一个分数；需要决定这个分数怎样作用到前面的动作。outcome supervision只知道完整结果，process supervision额外给出中间步骤反馈，两者的信息粒度不同。
+
+**value baseline与相对优势。** critic估计$V(s)$，PPO常用GAE比较动作回报和预期。组方法则比较同题的多个完整回答；题A平均0.9与题B平均0.1具有不同baseline。组均值不是逐前缀value，省掉critic也不自动保留GAE全部credit能力。
+
+**分组、标准差与广播。** $G$是同一prompt的回答数，不是batch内所有回答数。UID保证重排后仍找到兄弟样本。组内减均值再除std产生scalar advantage，再广播到有效回答token。总体std与样本std的有限组数值不同；全同reward分子为零，epsilon不能创造区分信息。
+
+**三类模型分布。** current参与本次优化，old描述这组真实生成的概率，reference约束相对锚点的行为变化。old/reference可有不同刷新周期。KL、reward、组优势各在哪一步计算，会改变最终loss，不能只凭名称GRPO判定配方。
+
+**reduction与mask。** 原GRPO先每回答平均token，再平均回答；这与全batch token平均不同。prompt、padding、工具observation不属于actor动作，mask要排除它们。把同一scalar advantage复制到所有token只是一种outcome估计，不等于每个token都得到独立正确性标签。
+
+### 已有工作与本文位置
+
+[PPO](#paper=paper-ppo)给出概率比与clip，REINFORCE提供logprob梯度，[DPO](#paper=paper-dpo)直接拟合离线偏好。GRPO改变的是在线策略梯度的baseline，保留token ratio并在原文中直接加入reference KL。[固定v3 §4](https://arxiv.org/pdf/2402.03300v3#page=13)。
+
+| 机制 | PPO常见做法 | 原GRPO |
 | --- | --- | --- |
-| 优势来源 | 学习 $V(s)$ 与 GAE | 同题多个回答的相对 reward |
-| 训练模型 | actor 与 value | 无独立 value；reward/reference 仍有职责 |
-| outcome 信号 | 通过回报和 critic 分配 | 同回答所有有效 token 共享组优势 |
-| 策略变化约束 | current/old 比与 clip | 仍为 token current/old 比与 clip |
-| 对齐 KL | LLM PPO 常进入 reward shaping | 原文 GRPO 直接进入目标 |
-| 新成本 | critic 更新 | 同题多 rollout、组完成依赖与统计噪声 |
+| baseline | 学习value、GAE | 同题组均值与std |
+| outcome credit | 回报与逐状态value | 每回答共享组优势 |
+| 更新约束 | current/old ratio与clip | 保留token ratio与clip |
+| 新开销 | critic前反向 | G次生成与组完成等待 |
 
-还要避免把 GRPO 和 RLVR 画等号。RLVR 说明奖励可用规则验证，GRPO 说明优化与优势怎样计算。原始 DeepSeekMath 包含训练的 outcome/process reward model；后来的数学 answer matching、代码测试奖励常与 GRPO 结合，但那是可替换的反馈来源。[原文 §4.1—§4.2](https://arxiv.org/pdf/2402.03300v3#page=13)。
+RLVR说明reward可被规则验证，GRPO说明怎样优化。原DeepSeekMath使用学习reward模型；后来的规则判题与GRPO组合，不意味着二者同义。
 
 ## 2. 方法与实现机制
 
@@ -113,7 +125,7 @@ Iterative RL 进一步根据当前策略输出重建 reward-model 数据，用�
 
 在线组方法需要同题多个 reward 才能构建 advantage。异步系统即使取消全局 batch barrier，也可能留下 group-completion barrier：最快完成的答案仍要等待同题慢答案。DAPO 过滤全同组解决信号稀疏，不直接消除这种时序依赖。若改成部分组、running baseline 或单 rollout，应重新审视估计器，不能只说系统“流式”而保持数学目标完全不变。
 
-```python
+```python title="GRPO 教学重述 · 流程示意"
 # outcome GRPO教学重述；std correction需与实际框架匹配
 responses, old_logp = sample_group(old_policy, prompt, G)
 reward = score(responses)
@@ -134,6 +146,57 @@ loss = mean_of_sequence_means(-pg + beta * sampled_kl, response_mask)
 `compute_grpo_outcome_advantage` 接收 `[B,L]` token rewards 和 response mask，用末维求和得到 `[B]` outcome score；按 prompt UID 聚集均值、样本 std，在 no-grad 中得到 scalar advantage 后广播回 `[B,L]`。`norm_adv_by_std_in_grpo=False` 是可选的去 std 变体，不能把开关两边都说成原始 GRPO。单元素组代码使用特殊 mean/std 回退，而不是一个有效的同题多样本相对基线。
 
 `compute_policy_loss_vanilla` 通过新旧 logprob 差取 exp，构造负号版本的两支 clip loss，使用 maximum 与可配置 clip 上下界。`agg_loss` 的 `seq-mean-token-mean` 对应原论文的回答内平均；`token-mean` 对应另一种 token 权重，且分布式使用全局 batch token 总数而非各卡各自平均。三个函数分别实现优势、surrogate 和 reduction，单看函数名 GRPO 不足以判断完整目标。
+
+### 课堂源码拆解：同题统计量不是全batch统计量
+
+取两个prompt，每题三回答，得到B=6条回答；每条有效长度不同，但补齐为 `[6,L]`。先由token reward求和得到 `[6]` 分数，再用UID分成两个G=3组。**先分组、后标准化、最后广播**，不能先在整个batch上求std冒充GRPO。
+
+#### 一道题自己的基线
+
+**真实源码节选：[GRPO 现代verl · 按prompt计算统计量](https://github.com/verl-project/verl/blob/75879f7f475fd6b64c779f7d9212e45503f58b8f/verl/trainer/ppo/core_algos.py#L314-L323)。** 以下保留原始语句，仅去除共同缩进与非语义行末空白；变量初始化和未展示分支见原函数。
+
+```python title="GRPO 现代verl · 按prompt计算统计量"
+for idx in id2score:
+    if len(id2score[idx]) == 1:
+        id2mean[idx] = torch.tensor(0.0)
+        id2std[idx] = torch.tensor(1.0)
+    elif len(id2score[idx]) > 1:
+        scores_tensor = torch.stack(id2score[idx])
+        id2mean[idx] = torch.mean(scores_tensor)
+        id2std[idx] = torch.std(scores_tensor)
+    else:
+        raise ValueError(f"no score in prompt index: {idx}")
+```
+
+
+
+字典键是prompt UID，`scores_tensor`是一道题的G个分数。`torch.std`在这个固定实现默认使用样本标准差，G=3时分母是G−1；与教学用population std的尺度不同。G=1分支设置mean0/std1是实现回退，不是凭单回答获得了可靠组相对基线。正常GRPO需至少两个兄弟样本，仍可能遇到全同分数。
+
+#### 标量优势怎样作用到token
+
+**真实源码节选：[GRPO 现代verl · 标准化并广播优势](https://github.com/verl-project/verl/blob/75879f7f475fd6b64c779f7d9212e45503f58b8f/verl/trainer/ppo/core_algos.py#L324-L329)。** 以下保留原始语句，仅去除共同缩进与非语义行末空白；变量初始化和未展示分支见原函数。
+
+```python title="GRPO 现代verl · 标准化并广播优势"
+for i in range(bsz):
+    if norm_adv_by_std_in_grpo:
+        scores[i] = (scores[i] - id2mean[index[i]]) / (id2std[index[i]] + epsilon)
+    else:
+        scores[i] = scores[i] - id2mean[index[i]]
+scores = scores.unsqueeze(-1) * response_mask
+```
+
+
+
+此段先逐回答更新分数，`i`属于哪个prompt由`index[i]`决定；退出循环后再统一广播。每条回答只生成一个scalar advantage，`unsqueeze(-1)`从 `[B]`变 `[B,1]`，乘mask广播为 `[B,L]`。返回两个相同tensor只是outcome接口兼容，不是学出了每token value。
+
+奖励[0,0,1]的样本std优势约[-0.577,-0.577,1.155]；全[1,1,1]为零。换成另一道题[2,2,3]优势相同，说明group baseline去掉题间平移，但并没有保留绝对分数。再看`norm_adv_by_std_in_grpo=False`，尺度不同，应作为去std变体讨论。
+
+#### 接到policy loss之前应检查什么
+
+UID是否在DP重排后保留，advantage是否no-grad，prompt/tool/padding mask是否正确，old logprob是不是实际behavior版本，reduction究竟sequence-mean还是token-mean。组统计、surrogate、KL与reduction是四个独立步骤；写对advantage函数并不代表整套GRPO配方正确。
+
+课堂上最后问“最快的一条回答能否立即训练”：如果其同题兄弟尚未评分，group baseline还不齐。由这个依赖再进入异步系统，才能说明取消全局batch等待不自动取消group-completion barrier。
+
 
 ## 3. 实验设置与算力
 
@@ -207,3 +270,8 @@ GRPO 用组相对信号代替独立 value baseline，降低 critic 的训练开�
 **Q8：部署异步GRPO最难的算法依赖是什么？** 除版本滞后，还要等同题多个reward构造组优势。partial buffer保留未完成回答不等于可以即时对半组训练；应明确组完成、策略版本、mask、teacher/reward数据何时可用。
 
 后续读[DAPO](#paper=paper-dapo)的零方差过滤与token权重，[GDPO](#paper=paper-gdpo)的多目标信号，[统一专题](#report=survey-policy-optimization)的GSPO/SAPO对照。固定原文2402.03300v3；首次公开2024-02-05。2026-10-08核读全文相关背景、RL机制、原表与分析图，以及官方公开资料和现代verl源码；没有执行训练复现。
+
+
+
+
+**2026-10-09更新。** 背景拆为问题背景、前置知识、已有工作；补固定源码节选、逐段形状/梯度讲解与课堂检查。源码节选不是完整可运行训练程序；课堂张量练习见[CPU演示脚本](./assets/learning/policy-optimization-lab.py)，不下载模型且不执行真实RL训练。

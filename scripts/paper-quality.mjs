@@ -3,7 +3,7 @@ import { fileURLToPath } from 'node:url';
 import { join, relative, basename } from 'node:path';
 import { createHash } from 'node:crypto';
 import { parse } from 'yaml';
-import { renderMarkdown } from './content.mjs';
+import { renderMarkdown, markdownHeadings } from './content.mjs';
 
 const root = fileURLToPath(new URL('../', import.meta.url));
 const titles = ['背景与已有工作', '方法与实现机制', '实验设置与算力', '结果与图表解读', '局限、结论与后续阅读'];
@@ -18,14 +18,14 @@ export async function checkPaperQuality(file, base = root) {
   const meta = parse(match[1]);
   const body = match[2];
   const errors = [];
-  const sections = [...body.matchAll(/^## (.+)$/gm)];
+  const sections = markdownHeadings(body);
   const parts = sections.map((entry, index) => body.slice(entry.index, sections[index + 1]?.index ?? body.length));
   const sectionCharacters = parts.map(part => part.length);
   const imageSections = parts.map(part => [...part.matchAll(/!\[/g)].length);
   const experimentRows = [...((parts[2] ?? '').matchAll(/^\|.*\|$/gm))].length;
   const pinnedSource = /^https:\/\/arxiv\.org\/abs\/\d{4}\.\d{4,5}v\d+$/.test(meta.paper_url ?? '');
   const affiliationPlaceholder = (meta.affiliations ?? []).some(value => /not stated|待核|未知/i.test(value));
-  if (sections.length !== 5 || sections.some((s, i) => !s[1].includes(titles[i]))) errors.push('正文需按 DDPM 范例保留五个主模块');
+  if (sections.length !== 5 || sections.some((s, i) => !s.title.includes(titles[i]))) errors.push('正文需按 DDPM 范例保留五个主模块');
   parts.forEach((part, i) => { if (part.length < floors[i]) errors.push(`${titles[i]} 太薄：${part.length} < ${floors[i]} 字符`); });
   if (!pinnedSource) errors.push('paper_url 必须固定 arXiv 版本');
   if (!/\$\$[\s\S]+?\$\$/.test(parts[1] ?? '') && !(meta.method_formalism === 'process' && /github\.com\//.test(parts[1] ?? '') && /!\[/.test(parts[1] ?? ''))) errors.push('方法缺少关键公式，或已说明为流程型方法并提供原图与源码对照');

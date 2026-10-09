@@ -91,3 +91,18 @@
 /* Keep absolutely positioned KaTeX accessibility nodes inside the scroll container. */
 .publication-table-scroll{position:relative;max-width:100%;overflow-x:auto;margin:24px 0;border-radius:4px}.publication-body .publication-table-scroll table{min-width:var(--table-min-width,600px);margin:0}.publication-table-scroll:focus-visible{outline:2px solid var(--green);outline-offset:3px}
 @media print{.publication-table-scroll{overflow:visible}.publication-body .publication-table-scroll table{min-width:0}}
+
+/* Fenced source excerpts: line numbers stay out of copied code. */
+.prose .code-block{max-width:100%;min-width:0;margin:22px 0 26px;border:1px solid #d3ded2;border-radius:9px;overflow:hidden;background:#f4f7f1}
+.code-header{display:flex;align-items:center;gap:12px;padding:9px 13px;border-bottom:1px solid #d3ded2;background:#e9f0e5;min-width:0}
+.code-language{font:600 10px ui-monospace,SFMono-Regular,Consolas,monospace;letter-spacing:.4px;color:#3c624a;background:white;border:1px solid #d1ddcc;border-radius:4px;padding:3px 6px;flex-shrink:0}
+.code-title{font-size:12px;line-height:1.5;color:#405a48;min-width:0;overflow-wrap:anywhere;flex:1}
+.code-copy{font-size:11px;line-height:1.5;flex-shrink:0;min-height:36px;padding:7px 10px;border:1px solid #c4d2be;border-radius:5px;background:#fff;color:#365642}
+.code-copy:hover{background:#f4f8ef}.code-copy:focus-visible,.prose .code-block pre:focus-visible{outline:2px solid var(--green);outline-offset:-3px}
+.prose .code-block pre{margin:0;padding:13px 0;border:0;border-radius:0;max-width:100%;overflow-x:auto;background:transparent;line-height:1.8;font-size:12px;tab-size:4}
+.prose .code-block pre code{display:block;width:max-content;min-width:100%;font:inherit;font-family:ui-monospace,SFMono-Regular,Consolas,monospace;color:#263e32;background:transparent;padding:0;border-radius:0}
+.code-line{display:block;position:relative;min-height:1.8em;padding:0 16px 0 4.2em;white-space:pre}
+.code-line::before{content:attr(data-line);position:absolute;left:0;width:3.1em;text-align:right;color:#94a58f;border-right:1px solid #dbe4d5;padding-right:.65em;user-select:none;font-variant-numeric:tabular-nums}
+.code-comment{color:#647d59}
+@media(max-width:580px){.code-header{gap:8px;padding:7px 9px}.code-title{font-size:11px}.prose .code-block pre{font-size:11px}.code-copy{min-height:40px}.code-line{padding-left:3.8em}.code-line::before{width:2.8em}}
+@media print{.code-copy{display:none}.prose .code-block pre{overflow:visible}.prose .code-block pre code{width:auto}.code-line{white-space:pre-wrap;overflow-wrap:anywhere}.code-header{break-after:avoid}}

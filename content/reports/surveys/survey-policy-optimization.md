@@ -1,12 +1,12 @@
 ---
 id: survey-policy-optimization
-title: "PPO DPO GRPO GSPO GDPO DAPO SAPO 的机制比较与面试复习"
+title: "PPO DPO GRPO GSPO GDPO DAPO SAPO 的讲课与代码对照"
 type: survey
 date: '2026-10-08'
 directions: [llm, agent, infra]
 paper_ids: [paper-ppo, paper-dpo, paper-grpo, paper-dapo, paper-gdpo]
 tags: [专题调研, Policy Optimization, RLHF, RLVR, Interview]
-updated: '2026-10-08'
+updated: '2026-10-09'
 summary: "把七种方法放入同一训练流程，比较数据来源、优势、概率比、裁剪、reward组织和长度权重；附推导入口、手算例子与场景化面试追问。"
 template_version: 1
 draft: false
@@ -18,13 +18,17 @@ draft: false
 
 主线是：PPO让旧策略生成的数据能被较稳健地多次更新；DPO从偏好pair直接拟合策略；GRPO用同题组替代valuebaseline；GSPO把概率比和clip改成sequence级；DAPO改探索、有效组、token权重与超长反馈；GDPO改多reward归一化顺序；SAPO改硬clip为可微softgate。这些修改不全处于同一层，也不一定互斥。
 
+![本文教学图 · 离线偏好与在线训练的修改位置](./assets/learning/policy-optimization-flow.svg)
+
+**教学图解读。** 上行DPO从固定pair得到四个序列分数并做分类更新；下行在线方法从实际behavior采样，再经过reward、优势、ratio、surrogate和reduction。标签标出每种算法修改的位置，回线是下一轮权重发布，不是reference更新。图由本文为讲课绘制，展示逻辑依赖，不是作者方法原图或性能实验；GPU放置、工具时延和通信均未画入。
+
 先给一个面试开场：**先分离离线偏好拟合与在线策略优化，再沿优势估计、概率比、更新约束、奖励组织和reduction比较。** 回答“哪个更好”前需要模型、数据、反馈、长度、预算与quality指标，不能只背缩写年代。
 
 ## 2. 范围、检索与覆盖边界
 
 2026-10-08按用户列出的七种算法检索原文、arXiv固定版本、LaTeX/PDF及公开实现；补读OpenAI SpinningUp、ICLR PPO实现博客、HuggingFace DPO教程、Qwen GSPO与DAPO/GDPO作者项目。网络检索接口不可用时直接读取原站点和公开仓库，不用搜索摘要代替原文。
 
-每篇正文约9.4k—11.4k字符，包含五模块、原图、推导、手算、源码、配置和问答。PPO/DPO/GRPO/DAPO/GDPO具备原表并发布；GSPO/SAPO全文与原图已完成，但原文没有结果或实验表，依仓库现有规则保留单篇草稿。下文仍比较其方法并链接固定原文，未以别篇表格补证。未执行七种方法的重新训练，性能都标明论文条件。
+七篇保留五模块、原图、推导、手算、配置和问答，本轮进一步将问题背景与前置知识分开，加入固定源码代码块与逐段课堂讲解。PPO/DPO/GRPO/DAPO/GDPO具备原表并发布；GSPO/SAPO全文与原图已完成，但原文没有结果或实验表，依仓库现有规则保留单篇草稿。下文仍比较其方法并链接固定原文，未以别篇表格补证。未执行七种方法的重新训练，性能都标明论文条件。
 
 | 名称 | 固定原文 | 单篇入口与状态 |
 | --- | --- | --- |
@@ -73,6 +77,148 @@ $$
 上式的mean只是谱系示意，GRPO与DAPO的sequence/tokenreduction不同；原始GRPO还含referenceKL，DAPO最终配方移除KL，不能以此卡片取代各篇完整loss。
 
 DPO令$m=\beta[(\ell_{\theta,w}-\ell_{ref,w})-(\ell_{\theta,l}-\ell_{ref,l})]$，$L=-\log\sigma(m)$。分母是reference不是behavior；其pairmargin不是在线GRPO的组优势。
+
+### 关键源码对照：先找变量在哪一层改变
+
+以下直接节选固定源码，统一去除共同缩进与非语义行末空白，保留语句与分支。它们依赖原函数的输入与外层状态；**可复制用于逐行讲解，不是七个可独立运行的trainer。** 原始PPO/DPO、作者GDPO、维护者现代verl与DAPO公开复现的身份各自标明。
+
+#### PPO：固定优势之后的悲观更新
+
+**真实源码节选：[PPO 原实现 · 裁剪策略目标](https://github.com/openai/baselines/blob/da997060461e3cbf54ca4dc7a67081a731fb6b3b/baselines/pposgd/pposgd_simple.py#L110-L113)。** 以下保留原始语句，仅去除共同缩进与非语义行末空白；变量初始化和未展示分支见原函数。
+
+```python title="PPO 原实现 · 裁剪策略目标"
+ratio = tf.exp(pi.pd.logp(ac) - oldpi.pd.logp(ac)) # pnew / pold
+surr1 = ratio * atarg # surrogate from conservative policy iteration
+surr2 = U.clip(ratio, 1.0 - clip_param, 1.0 + clip_param) * atarg #
+pol_surr = - U.mean(tf.minimum(surr1, surr2)) # PPO's pessimistic surrogate (L^CLIP)
+```
+
+
+
+此段只定义actor surrogate。GAE需要在它之前得到固定优势，value/entropy还在别处；先用A正负四个例子判断minimum分支，再将符号转换成最小化loss。clip不直接裁参数、不直接裁A，也不把所有越界样本一起删除。
+
+#### DPO：参考校准后的pair margin
+
+**真实源码节选：[DPO 作者实现 · 偏好margin与loss](https://github.com/eric-mitchell/direct-preference-optimization/blob/f8b8c0f49dc92a430bae41585f9d467d3618fe2f/trainers.py#L70-L87)。** 以下保留原始语句，仅去除共同缩进与非语义行末空白；变量初始化和未展示分支见原函数。
+
+```python title="DPO 作者实现 · 偏好margin与loss"
+pi_logratios = policy_chosen_logps - policy_rejected_logps
+ref_logratios = reference_chosen_logps - reference_rejected_logps
+
+if reference_free:
+    ref_logratios = 0
+
+logits = pi_logratios - ref_logratios  # also known as h_{\pi_\theta}^{y_w,y_l}
+
+if ipo:
+    losses = (logits - 1/(2 * beta)) ** 2  # Eq. 17 of https://arxiv.org/pdf/2310.12036v2.pdf
+else:
+    # Eq. 3 https://ericmitchell.ai/cdpo.pdf; label_smoothing=0 gives original DPO (Eq. 7 of https://arxiv.org/pdf/2305.18290.pdf)
+    losses = -F.logsigmoid(beta * logits) * (1 - label_smoothing) - F.logsigmoid(-beta * logits) * label_smoothing
+
+chosen_rewards = beta * (policy_chosen_logps - reference_chosen_logps).detach()
+rejected_rewards = beta * (policy_rejected_logps - reference_rejected_logps).detach()
+
+return losses, chosen_rewards, rejected_rewards
+```
+
+
+
+输入是四个 `[B]`完整answer logprob，不是 `[B,L]`token advantage。原DPO关闭reference-free、IPO、label smoothing三个后续选项。policy差减reference差得到当前相对偏好变化；`logsigmoid`是训练目标，输出detached rewards只作日志。
+
+#### GRPO：一组的scalar再广播
+
+**真实源码节选：[GRPO 现代verl · 标准化并广播优势](https://github.com/verl-project/verl/blob/75879f7f475fd6b64c779f7d9212e45503f58b8f/verl/trainer/ppo/core_algos.py#L324-L329)。** 以下保留原始语句，仅去除共同缩进与非语义行末空白；变量初始化和未展示分支见原函数。
+
+```python title="GRPO 现代verl · 标准化并广播优势"
+for i in range(bsz):
+    if norm_adv_by_std_in_grpo:
+        scores[i] = (scores[i] - id2mean[index[i]]) / (id2std[index[i]] + epsilon)
+    else:
+        scores[i] = scores[i] - id2mean[index[i]]
+scores = scores.unsqueeze(-1) * response_mask
+```
+
+
+
+这一段位于no-grad与逐样本循环中；UID决定取哪个mean/std。输出 `[B,L]`是同一scalar沿有效token广播，不能解释成每token独立估计reward。正负优势、group std、reduction仍是不同环节。
+
+#### GSPO：共享前向值但保留梯度
+
+**真实源码节选：[GSPO 现代verl · 平均logratio与detach](https://github.com/verl-project/verl/blob/75879f7f475fd6b64c779f7d9212e45503f58b8f/verl/trainer/ppo/core_algos.py#L1583-L1593)。** 以下保留原始语句，仅去除共同缩进与非语义行末空白；变量初始化和未展示分支见原函数。
+
+```python title="GSPO 现代verl · 平均logratio与detach"
+seq_lengths = torch.sum(response_mask, dim=-1).clamp(min=1)
+negative_approx_kl_seq = torch.sum(negative_approx_kl * response_mask, dim=-1) / seq_lengths
+
+# Combined ratio at token level:
+# s_i,t(θ) = sg[s_i(θ)] · π_θ(y_i,t|x, y_i,<t) / sg[π_θ(y_i,t|x, y_i,<t)]
+# In log space: log(s_i,t(θ)) = sg[log(s_i(θ))] + log_prob - sg[log_prob]
+log_seq_importance_ratio = log_prob - log_prob.detach() + negative_approx_kl_seq.detach().unsqueeze(-1)
+log_seq_importance_ratio = torch.clamp(log_seq_importance_ratio, max=10.0)  # clamp for numerical stability
+
+# finaly exp() to remove log
+seq_importance_ratio = torch.exp(log_seq_importance_ratio)
+```
+
+
+
+token差值先按mask取均值；`log_prob-log_prob.detach()`前向零、反向非零。最终ratio在sequence内相同，clip阈值也应按sequence尺度调。把两处detach全部删掉或全部保留，会改变梯度，不是无关的性能调整。
+
+#### GDPO：reward维先保留，再合并
+
+**真实源码节选：[GDPO 作者verl分支 · 拆分奖励再合并](https://github.com/NVlabs/GDPO/blob/4ad86b4fbfc5db594f3a2750ff9c39fdc8ee6115/verl-GDPO/verl/trainer/ppo/ray_trainer.py#L187-L202)。** 以下保留原始语句，仅去除共同缩进与非语义行末空白；变量初始化和未展示分支见原函数。
+
+```python title="GDPO 作者verl分支 · 拆分奖励再合并"
+## handle correctness first
+correctness_normalized_score, _ = core_algos.compute_grpo_outcome_advantage(token_level_rewards=token_level_scores_correctness,
+                                                                eos_mask=response_mask,
+                                                                index=index)
+
+## handle format now
+format_normalized_score, _ = core_algos.compute_grpo_outcome_advantage(token_level_rewards=token_level_scores_format,
+                                                                eos_mask=response_mask,
+                                                                index=index)
+
+new_advantage = correctness_normalized_score + format_normalized_score
+
+advantages = masked_whiten(new_advantage, response_mask) * response_mask
+
+data.batch['advantages'] = advantages
+data.batch['returns'] = advantages
+```
+
+
+
+原分支只处理correctness/format两个维，逐维调用组归一化函数，再合并并whiten；不改变current/old ratio。按token mask做whitening时，长度还影响统计权重，不能与逐回答统计无条件等同。
+
+#### DAPO：一个很短却改变样本权重的分支
+
+**真实源码节选：[DAPO 公开复现 · token mean分支](https://github.com/verl-project/verl/blob/4f80e465c2ec79ab9c3c30ec74b9745de61d0490/verl/trainer/ppo/core_algos.py#L283-L284)。** 以下保留原始语句，仅去除共同缩进与非语义行末空白；变量初始化和未展示分支见原函数。
+
+```python title="DAPO 公开复现 · token mean分支"
+if loss_agg_mode == "token-mean":
+    loss = verl_F.masked_mean(loss_mat, loss_mask)
+```
+
+
+
+它只展示token reduction，完整DAPO还包括filter/refill、upper clip和长度reward，详见单篇四段源码。两条回答长度2/4，每token值1/3，原sequence均值2，token均值7/3；两者都“训练token”，改变的是分母。漏掉补采控制流会把过滤写成更小的有效batch。
+
+#### SAPO：用目标产生gate，不能把gate再当目标
+
+**真实源码节选：[SAPO 现代verl · 可微代理函数](https://github.com/verl-project/verl/blob/75879f7f475fd6b64c779f7d9212e45503f58b8f/verl/trainer/ppo/core_algos.py#L1657-L1659)。** 以下保留原始语句，仅去除共同缩进与非语义行末空白；变量初始化和未展示分支见原函数。
+
+```python title="SAPO 现代verl · 可微代理函数"
+def gate_function(x, tau):
+    """The gating function used in SAPO"""
+    return torch.sigmoid(tau * (x - 1.0)) * (4.0 / tau)
+```
+
+
+
+返回的是f(r)，自动求导得到w(r)=4p(1-p)，对logprob的权重还乘r。命名gate_function不表示这里直接返回w。ratio=2、tau=1时w约0.7864、wr约1.5729；手工优化w(r)r则多出w′项，和SAPO不等价。
+
 
 ## 4. 统一比较表
 
@@ -149,6 +295,45 @@ reward错误时更有效优化可能更快rewardhack；只保存token不等于�
 
 建议先PPO Figure1和GAE，接DPO最优策略与pairloss，再读GRPO Figure4。随后DAPO Algorithm1/Table1建立“诊断→改动”，用GDPO Figure2手算多reward，再读GSPO原式与SAPO Figure1梯度gate。GSPO/SAPO无表的单篇草稿不影响从固定原文学习。
 
+### 一堂90分钟课的讲授顺序
+
+这是建议讲课安排，不是用户本人已完成的学习时间。每一段都要求学生产出一件可检查的东西，不以“听过缩写”算理解。
+
+| 时长 | 内容 | 黑板或演示产出 |
+| --- | --- | --- |
+| 5分钟 | 问题背景：样本贵、分布变化与反馈来源 | 离线pair/在线rollout两条链 |
+| 15分钟 | 前置知识：logprob、return、value、advantage、mask与detach | 标注哪些量可微、哪些量固定 |
+| 10分钟 | PPO的GAE与clip | 两步回报与四种clip分支 |
+| 15分钟 | DPO推导与真实四分数代码 | KL最优策略→reward差→pair loss |
+| 10分钟 | GRPO同题统计与广播 | 两个prompt、各三rollout的优势 |
+| 10分钟 | GSPO概率比与GSPO-token | 几何平均、前向1但有梯度 |
+| 10分钟 | DAPO的过滤/reduction与GDPO多reward | 2/4长度权重、逐维标准化反例 |
+| 10分钟 | SAPO目标/gate与温度 | f、w、wr三列及错误实现对照 |
+| 5分钟 | 同预算证据与检查题 | 解释一个失败条件和一项源码分支 |
+
+### 在课堂运行的小张量演示
+
+下载[CPU演示脚本](./assets/learning/policy-optimization-lab.py)，在已安装PyTorch的Python环境执行。它不下载模型或数据、不调用GPU、不连接工具环境，只检查小张量的值与梯度。代码是本文教学实现，与上方真实源码节选分开。
+
+```bash title="课堂演示 · 只运行小张量"
+python assets/learning/policy-optimization-lab.py
+```
+
+```text title="课堂演示 · 关键输出近似值"
+PPO: 正优势下 r=0.7 有梯度，r=1.3 进入平台
+DPO: margin=0.1，loss≈0.6444，chosen与rejected梯度方向相反
+GRPO: [0,0,1] → [-0.577,-0.577,1.155]；全同reward → 0
+GSPO: ratios=[2,0.5] → sequence ratio=1
+      直接sequence式与detach-token式梯度均为[-0.5,-0.5]
+GDPO: 两组逐维合并优势的幅度不同；互补等权reward仍可抵消
+DAPO: sequence mean=2；token mean=2.3333
+SAPO: r=2，tau=1 → w≈0.7864，r*w≈1.5729
+      误把 w(r)*r 当目标，会得到不同的导数
+```
+
+先遮住输出，请学生预测符号、形状和数值，再执行脚本验证。PPO toy例子用四样本平均，因此单项logprob导数还含1/4；GSPO用0.2裁剪只是课堂分支演示，不是原论文超参。GDPO教学whitening按等长sequence统计，作者token-mask实现的长度权重另看单篇。自动求导通过只证明这几个构造，不证明训练收敛或论文benchmark复现。
+
+
 ### 面试复习主问题
 
 1. **不用缩写讲清一轮在线RL训练。** 说出生成策略、reward、advantages、currentlogprob、ratio、surrogate、mask/reduction、optimizer和下一轮权重；不要只说rollout再backward。
@@ -181,6 +366,8 @@ reward错误时更有效优化可能更快rewardhack；只保存token不等于�
 题目由本文根据原论文整理，不声称来自具体公司的真实面试题库。单篇另外提供共56道机制问答及追问；用途是检查理解，不以未经验证的面试频率作为选题依据。
 
 ## 9. 持续更新记录与来源
+
+2026-10-09：将七篇背景区分为问题、前置知识、已有工作；添加16段固定源码与形状/梯度讲解，专题增加7段源码对照、教学数据流图、90分钟讲授顺序与CPU小张量脚本。脚本已在本地CPU运行通过，不是论文训练复现；GSPO/SAPO保持原草稿状态。
 
 2026-10-08：完成七篇固定版本正文、原图、公开源码伴读与本专题；五篇发布，两篇因原文无表保留完整草稿。新增概率比/优势/reduction对照、GPU-hour口径、56道单篇问答与16道综合复习问题。未执行训练复现。
 

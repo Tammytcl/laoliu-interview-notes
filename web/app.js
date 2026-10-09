@@ -91,7 +91,21 @@ try {
     if (location.hash) location.hash = ''; else renderList();
   });
   for (const id of ['search', 'difficulty', 'tag']) $(`#${id}`).addEventListener(id === 'search' ? 'input' : 'change', renderList);
-  document.addEventListener('click', e => {
+  document.addEventListener('click', async e => {
+    const copy = e.target.closest('[data-copy-code]');
+    if (copy) {
+      const code = copy.closest('.code-block').querySelector('code');
+      const source = [...code.children].map(line => line.textContent).join('\n') + (code.dataset.trailingNewline === 'true' ? '\n' : '');
+      try {
+        await navigator.clipboard.writeText(source);
+        toast('代码已复制');
+      } catch {
+        const range = document.createRange(); range.selectNodeContents(code);
+        const selection = window.getSelection(); selection.removeAllRanges(); selection.addRange(range);
+        toast('复制未完成，已选中代码，可手动复制');
+      }
+      return;
+    }
     const toc = e.target.closest('[data-section]');
     if (toc) document.getElementById(toc.dataset.section)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
   });

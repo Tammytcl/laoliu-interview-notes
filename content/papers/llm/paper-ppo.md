@@ -11,7 +11,7 @@ areas: ["language"]
 tasks: ["training-adaptation", "reasoning"]
 evidence: "已核原文"
 note_ids: ["sft-dpo-rl", "grpo-rlvr", "infra-rl-pipeline"]
-updated: "2026-10-08"
+updated: "2026-10-09"
 template_version: 5
 depth_standard: "ddpm"
 draft: false
@@ -28,23 +28,32 @@ author_affiliations: [[1], [1], [1], [1], [1]]
 
 ## 1. 背景与已有工作
 
-PPO 要解决的是一个非常具体的矛盾：环境交互和模型采样很贵，我们想让同一批经验被训练多次；但经验来自更新前的策略，多次梯度更新以后，当前策略已经变了，继续把旧数据当成当前策略的数据会产生误差，甚至一次更新就破坏已有行为。论文用简单的一阶优化目标，在数据复用与策略变化之间建立实用约束。它的原始实验是机器人控制和 Atari，LLM 的 token、奖励模型、参考模型都属于后来的应用映射。
+### 问题背景
 
-先建立三个基础概念。策略 $\pi_\theta(a\mid s)$ 是在状态 $s$ 下选择动作 $a$ 的概率；奖励描述某次行为或结果的反馈；价值 $V^\pi(s)$ 是从该状态开始、继续按策略行动的预期折扣回报。优势 $A^\pi(s,a)=Q^\pi(s,a)-V^\pi(s)$ 回答“这个动作比此状态下平均选择好多少”。奖励为正不等于优势为正：一个奖励为 5 的动作，如果同状态平均能拿 8，仍应相对减少其概率。
+环境交互比一次梯度计算昂贵时，很自然地想把同一批轨迹多训练几遍。但轨迹由更新前的策略产生，参数更新后动作概率已经变化；若不断强化这批数据中的高分动作，模型可能过拟合有限样本，并在真实环境中失去原有能力。PPO要解决的具体问题是：怎样复用已经付过采样成本的数据，同时限制一次更新中的过度变化。
 
-REINFORCE 利用 $\nabla\log\pi_\theta(a\mid s)$ 把不可微的环境反馈变成可微的策略更新：好动作更常出现，差动作更少出现。引入与动作无关的状态基线不会改变理想的期望策略梯度，却能减少方差。Actor-Critic 学习这个基线；GAE 用多步 TD 残差折中方差与偏差。它们回答“梯度朝哪里走”；PPO 进一步回答“这批数据还能复用多少次、每次走多远”。
+2017年论文验证的是机器人控制与Atari。后来LLM训练把模型生成当作环境交互，长回答又使采样成本突出，因此也使用这条路线。应区分原始控制实验与后来的语言模型应用，不能把reference模型、偏好reward或四模型架构写成PPO在2017年必然具有的组成。
 
-[TRPO 原论文](https://arxiv.org/abs/1502.05477)通过 KL 约束限制新旧策略的变化，近似求解需要自然梯度、共轭梯度和线搜索。PPO 希望保留其经验上的稳健性，同时允许 Adam、minibatch、多 epoch 和参数共享。论文同时研究 PPO-Clip 与自适应 KL Penalty；今天通常说的 PPO 指前者，但算法家族并不只有裁剪版本。
+### 前置知识
 
-| 方法 | 主要处理的问题 | 使用经验的方式 | 仍然需要注意 |
-| --- | --- | --- | --- |
-| REINFORCE / Vanilla PG | 通过回报学习随机策略 | 常规新采样与梯度估计 | 高方差、过大的策略变化 |
-| Actor-Critic / GAE | 估计更稳定的优势 | 依赖 value 与 bootstrap | critic 误差和终止边界 |
-| TRPO | 限制策略分布变化 | 有约束的 surrogate 优化 | 近似二阶求解复杂 |
-| PPO-Clip | 多 epoch 复用同批经验 | 冻结旧策略，裁剪悲观目标 | 不是严格 KL 或性能保证 |
-| PPO-KL | 用惩罚控制变化 | 根据观测 KL 调整惩罚系数 | 目标 KL 与系数需要调节 |
+**状态、动作与策略。** 在机器人中状态可以是位置与速度，动作是控制量；在LLM中状态是prompt加已有前缀，动作是下一token。策略$\pi_\theta(a\mid s)$返回动作分布，而不是直接返回一个reward。采样把概率分布变成实际动作；训练则在这个已采样动作上计算logprob。
 
-在面试中把 PPO 直接描述成“四个大模型”会混淆算法与 LLM RLHF 工程。2017 年的 PPO 可以使用小 MLP、CNN，actor 和 critic 也可以共享 backbone。LLM 中经常出现 actor、critic、reward、reference 四个逻辑角色，但它们不是原算法要求的四套独立同尺寸参数。旧策略又是另一种职责，可能只需保存采样时的 logprob。[原文 §2—§5](https://arxiv.org/pdf/1707.06347v2)。
+**奖励、回报与优势。** 奖励是某一步的反馈，回报$G_t=\sum_{k\ge0}\gamma^kR_{t+k}$考虑未来。$V(s)$估计从状态开始的平均未来回报，$Q(s,a)$额外固定当前动作，$A(s,a)=Q(s,a)-V(s)$衡量动作相对好坏。reward为5而通常可拿8时，优势仍可能为负。critic估计未来回报，reward模型评价输出质量，两者职责不同。
+
+**策略梯度与基线。** $\nabla\log\pi(a\mid s)$提高已采样动作的相对倾向，乘正优势时强化，乘负优势时抑制。环境或判题程序不用可微。与动作无关的状态baseline在理想条件下不改变期望梯度，可以降低方差；GAE组合TD残差，折中依赖critic的偏差与长回报的方差。
+
+**旧策略、logprob与冻结目标。** 本轮数据的旧logprob、优势和return target作为固定数据。当前logprob可微；比值用logprob差取exp，避免直接除极小概率。冻结旧量不等于冻结actor；分子和分母数值相同也不意味着导数为零。这些概念读懂后，再看方法模块的clip和GAE。
+
+### 已有工作与本文位置
+
+REINFORCE/Actor-Critic解决怎样构造策略梯度，GAE改进优势估计。[TRPO](https://arxiv.org/abs/1502.05477)通过KL约束限制变化，但需要较复杂的近似二阶求解。PPO用容易配合Adam与minibatch的surrogate保留实用稳定性；论文比较PPO-Clip与adaptive-KL两类目标，不承诺严格KL边界或每次真实回报必然改善。[固定v2 §2—§5](https://arxiv.org/pdf/1707.06347v2)。
+
+| 路线 | 已经解决 | PPO继续面对的问题 |
+| --- | --- | --- |
+| REINFORCE | 从不可微回报得到可微更新 | 单批估计方差与多次复用 |
+| Actor-Critic / GAE | 基线与多步优势 | critic误差仍影响策略 |
+| TRPO | 有约束的策略更新 | 实现与二阶求解复杂 |
+| PPO-Clip / PPO-KL | 一阶多epoch受控复用 | 经验稳定性不等于理论硬保证 |
 
 ## 2. 方法与实现机制
 
@@ -107,7 +116,7 @@ $$
 
 ### 一轮训练和 LLM 映射
 
-```python
+```python title="PPO 教学重述 · 流程示意"
 # 本文教学重述，省略并行环境、critic优化和截断细节
 batch = rollout(old_policy)  # old_logprob, rewards, values, masks
 adv, target_return = gae(batch)  # 固定本轮目标
@@ -133,6 +142,62 @@ old_policy = snapshot(policy)
 `learn` 建立 `pi/oldpi`，由两者动作 logprob 差取 exp，构造 `minimum(surr1,surr2)` 并取负号；赋值操作冻结本轮旧模型，随后执行多个 minibatch epoch。此历史实现还包含 value clipping，它是实现事实，不应把“PPO-Clip”中的 clip 全部理解成同一个操作。输入主要是 `[NT,...]` 环境轨迹，非 `[B,L,V]` 的 LLM logits。
 
 [OpenAI Spinning Up](https://spinningup.openai.com/en/latest/algorithms/ppo.html)的正负优势讲解有助于理解平台为何只出现在一侧；[The 37 Implementation Details of PPO](https://iclr-blog-track.github.io/2022/03/25/ppo-implementation-details/)提供了版本、GAE、minibatch、网络初始化和终止处理的逐项伴读。它研究的后续 ppo2 版本与这里的 2017 提交有差异，博客性能不能替代本论文原始实验。本文只静态核读源码。
+
+### 课堂源码拆解：先算优势，再限制更新
+
+讲课时先拿两步终止任务走一遍数据，再讲两次optimizer update。**第一段的输出是固定优势，第二段的输入是这个优势和正在变化的ratio。** 这样学生能理解critic信号质量与策略步长控制是两个问题。
+
+#### 从末尾向前传递反馈
+
+**真实源码节选：[PPO 原实现 · GAE递推](https://github.com/openai/baselines/blob/da997060461e3cbf54ca4dc7a67081a731fb6b3b/baselines/pposgd/pposgd_simple.py#L68-L78)。** 以下保留原始语句，仅去除共同缩进与非语义行末空白；变量初始化和未展示分支见原函数。
+
+```python title="PPO 原实现 · GAE递推"
+new = np.append(seg["new"], 0) # last element is only used for last vtarg, but we already zeroed it if last new = 1
+vpred = np.append(seg["vpred"], seg["nextvpred"])
+T = len(seg["rew"])
+seg["adv"] = gaelam = np.empty(T, 'float32')
+rew = seg["rew"]
+lastgaelam = 0
+for t in reversed(range(T)):
+    nonterminal = 1-new[t+1]
+    delta = rew[t] + gamma * vpred[t+1] * nonterminal - vpred[t]
+    gaelam[t] = lastgaelam = delta + gamma * lam * nonterminal * lastgaelam
+seg["tdlamret"] = seg["adv"] + seg["vpred"]
+```
+
+
+
+`seg["rew"]`与`vpred`是长度T的一维数组；额外追加`nextvpred`后，才能计算最后一步的下一状态价值。`new[t+1]`标记下一状态是否是新episode，`nonterminal`用来阻断跨episode传播；倒序循环的`lastgaelam`保存后面已经算好的优势。最后`adv+vpred`成为value训练目标，不能把它继续沿critic目标回传到actor。
+
+用前面的$R=[0,1],V=[0.4,0.6]$例子，在黑板上从末步0.4递推到首步0.6，再把gamma或lambda改小观察早期动作受到的远期信用如何变化。这个历史代码不能完整区分今天环境API的terminated/truncated；time-limit处理必须核自己的环境，不能凭这段旧接口自动认定bootstrap正确。
+
+#### clip约束的是策略目标，不是所有梯度
+
+**真实源码节选：[PPO 原实现 · 裁剪策略目标](https://github.com/openai/baselines/blob/da997060461e3cbf54ca4dc7a67081a731fb6b3b/baselines/pposgd/pposgd_simple.py#L110-L113)。** 以下保留原始语句，仅去除共同缩进与非语义行末空白；变量初始化和未展示分支见原函数。
+
+```python title="PPO 原实现 · 裁剪策略目标"
+ratio = tf.exp(pi.pd.logp(ac) - oldpi.pd.logp(ac)) # pnew / pold
+surr1 = ratio * atarg # surrogate from conservative policy iteration
+surr2 = U.clip(ratio, 1.0 - clip_param, 1.0 + clip_param) * atarg #
+pol_surr = - U.mean(tf.minimum(surr1, surr2)) # PPO's pessimistic surrogate (L^CLIP)
+```
+
+
+
+| 代码量 | 数学意义 | 课堂检查 |
+| --- | --- | --- |
+| `ratio` | $\exp(\ell_\theta-\ell_{old})$ | old冻结，current可微 |
+| `surr1` | 未裁剪收益$rA$ | 好动作增加，坏动作减少 |
+| `surr2` | 裁剪ratio后乘A | 先clip再乘，不clip优势 |
+| `minimum` | 悲观分支 | 按A正负分别读曲线 |
+| 外层负号 | 把最大化改成最小化 | 不能误换成loss的minimum |
+
+让学生算A=2,r=1.3得到loss=-2.4；再换A=-2,r=1.3得到loss=2.6，此时仍有纠错梯度。随后展示原函数另有value loss和entropy：某个策略项进入平台不表示整个共享网络停止更新。最后才讨论多epoch和KL监控，避免把epsilon讲成严格trust-region半径。
+
+#### 能独立讲清楚的检查
+
+不用看代码说明：为什么保存old logprob、为什么GAE倒序、为什么目标要冻结、为什么loss取负minimum、为什么truncation可能bootstrap。五个答案合起来，才是一轮PPO；只会背clip公式不足以实现它。
+
 
 ## 3. 实验设置与算力
 
@@ -212,3 +277,8 @@ PPO 的核心贡献是用容易实现的悲观 surrogate，使多 epoch 的经�
 **Q8：PPO通常称on-policy，为什么还用importance ratio？** 每一轮重新收集当前行为数据，但同一批的多epoch更新使learner逐渐偏离本轮behavior；ratio处理这段有限复用。这个称呼不意味着任意旧replay都安全，异步版本滞后要另设控制。
 
 后续阅读：[DPO](#paper=paper-dpo)把离线偏好拟合重参数化；[DeepSeekMath / GRPO](#paper=paper-grpo)以组基线去掉单独 value model；[后训练优化专题](#report=survey-policy-optimization)统一比较概率比、优势与约束。原文版本固定为 1707.06347v2，首次公开日期是 2017-07-20。2026-10-08 完成正文、附录、原图表和历史源码核读；没有执行机器人、Atari 或 LLM 训练复现。
+
+
+
+
+**2026-10-09更新。** 背景拆为问题背景、前置知识、已有工作；补固定源码节选、逐段形状/梯度讲解与课堂检查。源码节选不是完整可运行训练程序；课堂张量练习见[CPU演示脚本](./assets/learning/policy-optimization-lab.py)，不下载模型且不执行真实RL训练。

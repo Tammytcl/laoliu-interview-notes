@@ -73,6 +73,22 @@ test('图源门槛拒绝整页截图、缺失源码出处和未说明原因的 P
   assert.match((await checkPaperQuality(file, fixture)).errors.join('；'), /PDF 图需记录没有独立图片的原因/);
 });
 
+test('源码代码块中的双井号注释不改变论文五模块边界', async t => {
+  const fixture = await mkdtemp(join(tmpdir(), 'paper-code-headings-'));
+  t.after(() => rm(fixture, { recursive: true, force: true }));
+  const id = 'paper-opd-2606-30406';
+  const source = join('content/papers/llm', id + '.md');
+  await mkdir(join(fixture, 'content/papers/llm'), { recursive: true });
+  await cp(join(root, source), join(fixture, source));
+  await cp(join(root, 'assets/papers', id), join(fixture, 'assets/papers', id), { recursive: true });
+  const file = join(fixture, source);
+  const raw = await readFile(file, 'utf8');
+  await writeFile(file, raw.replace('## 3. 实验设置与算力', '```python title="源码节选"\n## handle correctness first\nscore = 1\n```\n\n## 3. 实验设置与算力'));
+  const report = await checkPaperQuality(file, fixture);
+  assert.equal(report.sectionCharacters.length, 5);
+  assert.deepEqual(report.errors, []);
+});
+
 test('旧报告只保留冻结版本；编辑或新增必须补齐深度证据', async t => {
   const fixture = await mkdtemp(join(tmpdir(), 'paper-depth-'));
   t.after(() => rm(fixture, { recursive: true, force: true }));
@@ -134,7 +150,7 @@ $$not math$$
   const { html } = renderMarkdown(source);
   assert.equal((html.match(/class="math-block"/g) ?? []).length, 2);
   assert.doesNotMatch(html, /katex-error/);
-  assert.match(html, /<code class="language-text">\$\$not math\$\$/);
+  assert.match(html, /<code class="language-text"[^>]*><span class="code-line"[^>]*>\$\$not math\$\$<\/span>/);
   assert.match(html, /转义 \$5/);
 });
 

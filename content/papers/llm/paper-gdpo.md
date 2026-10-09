@@ -12,7 +12,7 @@ areas: ["language"]
 tasks: ["training-adaptation", "reasoning"]
 evidence: "已核原文"
 note_ids: ["sft-dpo-rl", "grpo-rlvr", "infra-rl-pipeline"]
-updated: "2026-10-08"
+updated: "2026-10-09"
 template_version: 5
 depth_standard: "ddpm"
 draft: false
@@ -28,22 +28,34 @@ code_note: "正文区分论文原实现与固定commit的现代框架伴读；�
 
 ## 1. 背景与已有工作
 
-这篇GDPO是NVIDIA的多奖励RL工作，完整题名为Group reward-Decoupled Normalization Policy Optimization for Multi-reward RL Optimization；它不是同名的GFlowNet多样性对齐或Group Direct Preference Optimization。核心问题是：训练同时考虑正确率、格式、长度、代码运行错误时，若先把所有reward相加再做GRPO组内标准化，部分有意义的奖励组合差异会被压缩。GDPO把标准化提前到每个reward维度，再合并优势并做batch归一化。
+### 问题背景
 
-单奖励推理训练主要关心答案正确，实际产品还有正确的JSON、工具参数、长度限制和不抛异常等要求。常见办法是$R=\sum_kw_kR_k$，然后照常使用GRPO。这看起来只是奖励设计，但std归一化对正比例缩放近似不敏感，且求和丢掉每个维度的组成；“两个目标同时变好”可能和“一个目标变好”获得相同优势。
+实际训练既希望答案正确，又希望格式合规、回答短、代码不抛异常。把各维reward求和后直接做GRPO，可能使“一个目标改善”和“多个目标同时改善”得到相同优势。GDPO研究这种多目标训练信号压缩，尝试改变归一化顺序以保留更多相对差异。
 
-以两个rollout为例，总奖励$(0,1)$与$(0,2)$的差不同，但各自在组内减均值、除样本std后都得到约$(-0.7071,0.7071)$。这不是计算bug，而是z-score本身消除幅度的性质。单目标中这种尺度不变性可能有利；多目标中它可能削弱区分满足多少要求的信号，是否值得保留由训练目标决定。
+这里指NVIDIA的Group reward-Decoupled Normalization Policy Optimization，不是同缩写的Group Direct Preference Optimization或GFlowNet工作。它改变advantage计算，可沿用DAPO的采样与policy loss，因此不与DAPO构成互斥选项。
 
-[GRPO](#paper=paper-grpo)解决去critic的baseline问题，[DAPO](#paper=paper-dapo)解决探索、有效组、长token权重与截断；GDPO主要改变**多reward优势构造**。它可以沿用DAPO的dynamic sampling、clip-higher和token-mean loss，论文数学/代码实验也确实这样做。因此比较结果不是GDPO与完整DAPO之间的互斥算法排名。
+### 前置知识
 
-| 做法 | 归一化顺序 | 能保留的信息 | 可能的问题 |
-| --- | --- | --- | --- |
-| GRPO多reward | 先加权求和，再组内z-score | 当前组总分相对排序 | 维度组成与差值幅度压缩 |
-| GRPO去std | 求和，减组均值 | 保留总reward差值幅度 | 仍先聚合维度、尺度与主导reward |
-| GDPO | 每reward组内归一化，合并后batch归一化 | 增加不同reward组合的优势分辨率 | 更改尺度权衡，仍可能冲突或抵消 |
-| 条件reward | 次目标依赖主目标满足门槛 | 体现任务优先级 | 使信号更稀疏，门槛需设计 |
+**reward向量与标量化。** 每条回答可以有$[R_{correct},R_{format},R_{length}]$等多个分数。求加权和表示目标偏好，但也丢掉组成：相同总分可能来自正确但长，或错误但短。最终actor通常仍接收scalar advantage，无法无损保留整向量。
 
-“保留更多distinct advantage”不等于恢复全部奖励向量或自动求Pareto最优。最终优势仍是一个标量，完全相反的维度变化可能抵消；标量化总需要某种偏好选择。论文的经验收益应放在这个边界内理解。[v1 §3—§4](https://arxiv.org/pdf/2601.05242v1)。
+**z-score的尺度不变性。** $(R-\mu)/\sigma$对整体正比例缩放近似不变。两样本总reward$[0,1]$与$[0,2]$各自标准化后相同；这是统计量的性质，不是实现bug。单目标可能需要这种尺度控制，多目标则可能想保留多少维共同满足的差异。
+
+**归一化范围。** group normalization只比较同prompt的G条回答；batch whitening跨多个prompt和回答控制总体尺度。两者的轴不同，不能当作重复操作。按valid token统计时，长回答的scalar advantage会被重复更多次，与逐sequence统计不一定等价。
+
+**权重与条件reward。** 在每维z-score前乘一个正权重通常被抵消，GDPO要在各维优势产生后再加权。若正确性必须优先于长度，可以让长度reward以正确性过门槛为条件；这改变reward语义，和调权重不是同一件事。
+
+**冲突与相关性。** 正负维度可能相互抵消，低方差维又可能被放大。更多distinct advantage不代表Pareto最优、全部约束满足或奖励漏洞消失；需逐维评测和看相关性。
+
+### 已有工作与本文位置
+
+GRPO先加总reward再标准化；去std变体保留部分幅度，但仍先合并维度。GDPO先每维组归一化，合并后batch whitening，再接入policy loss；条件reward另表达优先级。[固定v1 §3](https://arxiv.org/pdf/2601.05242v1)。
+
+| 做法 | 保留的信号 | 边界 |
+| --- | --- | --- |
+| 总reward的GRPO | 同组总分排序 | 幅度与维度组成压缩 |
+| 去std | 总reward差值大小 | 主导reward与量纲仍影响 |
+| GDPO | 部分reward组合差异 | 标量合并仍可能抵消 |
+| 条件reward | 主要目标满足后才奖励次目标 | 信号更稀疏、门槛需定义 |
 
 ## 2. 方法与实现机制
 
@@ -110,6 +122,58 @@ $$
 [masked_whiten](https://github.com/NVlabs/GDPO/blob/4ad86b4fbfc5db594f3a2750ff9c39fdc8ee6115/verl-GDPO/verl/utils/torch_functional.py)用mask计算均值与方差，并通过rsqrt归一化。实际统计对象是展开后的有效token；不同长度回答重复其优势不同次数，因此是token加权统计，与简式逐回答batch均值并不在所有长度分布下等价。分布式是否gather完整组和全局batch亦需核配置。本文指出这个实现边界，不将“有源码”当作公式无差异保证。
 
 [作者项目讲解](https://nvlabs.github.io/GDPO/)以两个reward的枚举入手，本文采用这一可手算入口，同时补上batchwhitening和等权抵消的条件。博客与论文同作者同结果，不算独立外部验证。本文只静态核读，未执行代码或训练。
+
+### 课堂源码拆解：把归一化的两个轴画出来
+
+用 `[B,L,K]`的概念图表示每条回答的K维reward，但不要说官方这个具体分支直接接收该tensor：它显式保存correctness/format两份 `[B,L]`。归一化先沿同prompt回答轴G进行，合并后沿batch有效元素进行，两个范围不同。
+
+#### 保留维度到标准化之后
+
+**真实源码节选：[GDPO 作者verl分支 · 拆分奖励再合并](https://github.com/NVlabs/GDPO/blob/4ad86b4fbfc5db594f3a2750ff9c39fdc8ee6115/verl-GDPO/verl/trainer/ppo/ray_trainer.py#L187-L202)。** 以下保留原始语句，仅去除共同缩进与非语义行末空白；变量初始化和未展示分支见原函数。
+
+```python title="GDPO 作者verl分支 · 拆分奖励再合并"
+## handle correctness first
+correctness_normalized_score, _ = core_algos.compute_grpo_outcome_advantage(token_level_rewards=token_level_scores_correctness,
+                                                                eos_mask=response_mask,
+                                                                index=index)
+
+## handle format now
+format_normalized_score, _ = core_algos.compute_grpo_outcome_advantage(token_level_rewards=token_level_scores_format,
+                                                                eos_mask=response_mask,
+                                                                index=index)
+
+new_advantage = correctness_normalized_score + format_normalized_score
+
+advantages = masked_whiten(new_advantage, response_mask) * response_mask
+
+data.batch['advantages'] = advantages
+data.batch['returns'] = advantages
+```
+
+
+
+两次调用同一个GRPO函数，先分别得到 `[B,L]`标准化信号；相加后再`masked_whiten`。如果reward service只返回一个总分，这段代码无法恢复原始维度。此固定作者分支处理两个reward；任意K维推广必须额外接线，不能因为论文公式有求和就假设代码自动支持。
+
+#### whitening究竟归一化了什么
+
+**真实源码节选：[GDPO 作者实现 · masked whitening](https://github.com/NVlabs/GDPO/blob/4ad86b4fbfc5db594f3a2750ff9c39fdc8ee6115/verl-GDPO/verl/utils/torch_functional.py#L132-L136)。** 以下保留原始语句，仅去除共同缩进与非语义行末空白；变量初始化和未展示分支见原函数。
+
+```python title="GDPO 作者实现 · masked whitening"
+mean, var = masked_mean(values, mask), masked_var(values, mask)
+whitened = (values - mean) * torch.rsqrt(var + 1e-8)
+if not shift_mean:
+    whitened += mean
+return whitened
+```
+
+
+
+`masked_mean/masked_var`统计有效token。某回答的scalar advantage重复L次，因此长回答会影响batch均值/方差更多。这与论文概念性的逐回答whitening在长度不同的时候未必等价，也不是给Transformer加BatchNorm。`shift_mean=False`会把mean加回，调用处默认True；同名whitening开关会改变实际返回值。
+
+用两个prompt分别拥有reward向量[(0,0),(1,0)]与[(0,0),(1,1)]，逐维标准化后幅度约0.707与1.414；再跨两prompt共同whiten，组间相对强度仍不同。若只有后一prompt的两个回答做whiten，幅度又被统一。接着给出互补三样本反例，说明逐维归一化后仍能完全抵消。
+
+学生应能回答：reward weight为什么在归一化后乘，零方差维如何处理，batch统计如何受长度影响，条件长度reward怎样表达正确性优先。GDPO是在advantage轴做修改，policy ratio、clip与reduction还需另外选择。
+
 
 ## 3. 实验设置与算力
 
@@ -189,3 +253,8 @@ GDPO让多reward优化显式保留各维统计，然后控制合并优势尺度�
 **Q8：实际监控哪些量？** 各维rewardmean/std、零方差组比例、rewardcorrelation、每维优势贡献、正确率与约束的独立验证、长度尾部和GPU-hour。sumreward上升不代表所有约束都改善。
 
 参考[作者项目解释](https://nvlabs.github.io/GDPO/)、[v1全文](https://arxiv.org/pdf/2601.05242v1)、NVlabs固定源码与[统一专题](#report=survey-policy-optimization)。2026-10-08核读方法、任务配方、原图表和verl实现，补充归一化抵消反例及源码长度加权边界；没有执行个人训练复现。
+
+
+
+
+**2026-10-09更新。** 背景拆为问题背景、前置知识、已有工作；补固定源码节选、逐段形状/梯度讲解与课堂检查。源码节选不是完整可运行训练程序；课堂张量练习见[CPU演示脚本](./assets/learning/policy-optimization-lab.py)，不下载模型且不执行真实RL训练。

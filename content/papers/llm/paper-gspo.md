@@ -11,7 +11,7 @@ areas: ["language"]
 tasks: ["training-adaptation", "reasoning"]
 evidence: "已核原文"
 note_ids: ["sft-dpo-rl", "grpo-rlvr", "infra-rl-pipeline"]
-updated: "2026-10-08"
+updated: "2026-10-09"
 template_version: 5
 depth_standard: "ddpm"
 draft: true
@@ -28,24 +28,37 @@ author_affiliations: [[1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1]
 
 ## 1. 背景与已有工作
 
-GSPO 的核心问题是：同一个完整回答获得一个奖励，为什么更新时却让每个 token 使用差别很大的 current/old 概率比？长回答、MoE routing 变化和训练推理数值差异，会使少量异常 token 的权重影响长期训练。Qwen 团队提出以完整回答的长度归一化 likelihood ratio 统一加权和裁剪，使更新单元与序列级 reward 更一致。
+### 问题背景
 
-它继承 GRPO 的同题组优势，没有重新训练 critic，也没有把 reward 换成人类偏好 pair。变化主要在 **概率比与裁剪粒度**：原始 GRPO 用 token ratio，各 token 独立进入 clip 分支；GSPO 用 sequence ratio，每条回答共享一个权重和裁剪条件。组大小、reward质量、优势是否除std和长度reduction仍是独立配置。
+长回答只拿到一个最终reward，GRPO更新时却为每token使用自己的概率比。Qwen团队观察到，token权重波动、MoE专家路径变化和训练推理差异会使长期训练不稳。GSPO希望让一条回答共享一个sequence权重和clip条件，减少局部异常在优化中的影响。
 
-大型 MoE 让问题更显著。给定一个前缀，router 选择部分专家参与运算；参数更新或不同后端会改变专家选择，进而改变 token logprob。旧策略生成的token与新策略重算的token即使相同，其激活路径也可能不同。Routing Replay缓存旧expert选择并在训练侧复用，是GRPO的工程稳定措施；GSPO试图通过序列级权重降低对单token波动的敏感性，减少这类依赖。
+这是ratio与更新粒度的问题。GSPO继承同题组优势，不重新训练critic，也不把数据改成DPO偏好pair。是否减少routing replay成本、是否能取消logprob重算，需要在具体训练系统中另外验证。
 
-但重要性采样的理论表述需要审慎。标准 importance sampling 对相同随机变量使用 target/behavior完整密度比，在支持覆盖条件下具有期望恒等式；单样本估计可能高方差，但“只有一个样本”本身并不证明比值无效。GSPO作者对GRPO提出的批评是一种算法设计论证和经验诊断，不应改写成已经证明所有token级PPO目标都非法。
+### 前置知识
 
-| 设计轴 | GRPO | GSPO |
+**完整回答概率。** 自回归概率是各token条件概率的乘积；logprob是其和。current/old完整sequence比就是各token ratio的连乘。长度1000时每token只变化1%，完整比也可能非常大，直接连乘的数值尺度强烈依赖长度。
+
+**几何平均与算术平均。** GSPO用$\exp(\operatorname{mean}_t\log r_t)$，也就是完整ratio的长度次方根。$[2,0.5]$的几何平均为1，算术平均为1.25；不同量不能混写。“平均后接近1”也不证明每token变化小。
+
+**importance sampling。** 标准换测度依赖target/behavior完整密度比与支持覆盖。单样本估计可以高方差，但不会只因为样本数1就数学非法。对完整ratio开长度次方根后，一般不能保留严格IS恒等式；要把surrogate设计与无偏估计分开。
+
+**detach与自动求导。** 一个前向数值为1的比值，如果只有分母detach，导数仍可非零。GSPO-token借此共享sequence前向权重，同时让每token有自己的梯度路径。把全部sequence ratio detach会断梯度，重复保留路径也可能改变权重。
+
+**MoE routing。** router为token选择部分专家；新旧策略或不同后端可能激活不同路径。routing replay缓存旧路径用于重算，是一种稳定措施，不是把全部模型参数固定。总参数存储、激活参数量和路径状态是不同成本。
+
+### 已有工作与本文位置
+
+GRPO去critic但保留token ratio；GSPO把ratio与clip改成sequence级，用长度归一化统一尺度，并给出GSPO-token变体。[固定v2 §3—§4](https://arxiv.org/pdf/2507.18071v2)。
+
+| 设计 | GRPO | GSPO |
 | --- | --- | --- |
-| reward / baseline | 同题组相对评分 | 同题组相对评分 |
-| current/old ratio | 每个token单独计算 | 完整序列比开长度次方根 |
-| clip决策 | token独立进入对应分支 | 整回答共享分支 |
-| 去掉critic | 是 | 是，非本论文新贡献 |
-| token级credit调整 | process等变体可不同 | GSPO-token允许不同优势 |
-| MoE稳定措施 | 主对照使用routing replay | 本文设置不依赖routing replay |
+| 优势 | 同题组相对评分 | 继承组优势 |
+| ratio | token分别计算 | 几何平均sequence ratio |
+| clip | token按优势符号分支 | 回答共享有利方向平台 |
+| 局部credit | 取决outcome/process | GSPO-token允许逐token优势 |
+| MoE主对照 | 配routing replay | 本文设置无需该策略 |
 
-这里的sequence ratio是**几何平均token ratio**，不是完整密度比本身，更不是token ratio的算术平均。它降低数值随长度爆炸/消失的风险，同时也改变标准importance sampling估计器。理解这一点才能同时说明它为何实用、哪些“无偏校正”说法不能直接继承。[固定v2 §3—§4](https://arxiv.org/pdf/2507.18071v2)。
+“reward单位与优化单位一致”是作者的设计动机；实验与数学条件需分别读，不能简化成所有token-level方法错误或GSPO必然稳定。
 
 ## 2. 方法与实现机制
 
@@ -108,7 +121,7 @@ $$
 
 log域接线常写成：
 
-```python
+```python title="GSPO 教学重述 · 流程示意"
 # 教学重述；有效action token参与平均
 log_ratio = logp - old_logp.detach()
 seq_log_ratio = masked_sum(log_ratio) / valid_length
@@ -135,6 +148,53 @@ ratio = exp(token_surrogate_log_ratio)
 `agg_loss`的`seq-mean-token-mean`先回答内平均，再在全局sequence上平均，对应原定义；换`token-mean`会按长度改变权重。`compute_grpo_outcome_advantage`仍负责同题组优势，因此GSPO的loss函数不独立决定reward与baseline。本文静态核读两个主要函数和优势入口，不声称复现作者私有训练系统。
 
 [Qwen作者博客](https://qwenlm.github.io/blog/gspo/)提供“优化单位与reward单位一致”的讲解顺序，本文吸收其直观入口，同时把严格密度比、几何平均surrogate和实现容忍度分开。作者博客与论文都描述相同实验，不当作两份独立复现证据。
+
+### 课堂源码拆解：前向共享权重与后向token路径
+
+用 `[B,L]`的current/old logprob画出三个形状变化：token差→`[B]`有效token均值→再次广播 `[B,L]`。先证明前向ratio是几何平均，再解释detach，顺序不能倒过来。
+
+#### 从token差值到sequence权重
+
+**真实源码节选：[GSPO 现代verl · 平均logratio与detach](https://github.com/verl-project/verl/blob/75879f7f475fd6b64c779f7d9212e45503f58b8f/verl/trainer/ppo/core_algos.py#L1583-L1593)。** 以下保留原始语句，仅去除共同缩进与非语义行末空白；变量初始化和未展示分支见原函数。
+
+```python title="GSPO 现代verl · 平均logratio与detach"
+seq_lengths = torch.sum(response_mask, dim=-1).clamp(min=1)
+negative_approx_kl_seq = torch.sum(negative_approx_kl * response_mask, dim=-1) / seq_lengths
+
+# Combined ratio at token level:
+# s_i,t(θ) = sg[s_i(θ)] · π_θ(y_i,t|x, y_i,<t) / sg[π_θ(y_i,t|x, y_i,<t)]
+# In log space: log(s_i,t(θ)) = sg[log(s_i(θ))] + log_prob - sg[log_prob]
+log_seq_importance_ratio = log_prob - log_prob.detach() + negative_approx_kl_seq.detach().unsqueeze(-1)
+log_seq_importance_ratio = torch.clamp(log_seq_importance_ratio, max=10.0)  # clamp for numerical stability
+
+# finaly exp() to remove log
+seq_importance_ratio = torch.exp(log_seq_importance_ratio)
+```
+
+
+
+`negative_approx_kl`在前文等于current−old logprob；名字不是完整分布KL。mask先去掉非action token，`seq_lengths`只数有效动作。`clamp(min=1)`避免空mask除零，但空sequence仍应在reduction中排除，不能因分母1就当有效样本。
+
+接线`log_prob-log_prob.detach()`前向是0，后向保留每token导数；加上detach后的sequence均值，使每token前向共享同一个ratio。数值`max=10`clamp是防溢出保护，不是论文$3e-4/4e-4$的优化clip。不同clip对象必须在图上标清。
+
+#### 共享ratio进入悲观目标
+
+**真实源码节选：[GSPO 现代verl · 共享ratio的clip](https://github.com/verl-project/verl/blob/75879f7f475fd6b64c779f7d9212e45503f58b8f/verl/trainer/ppo/core_algos.py#L1595-L1597)。** 以下保留原始语句，仅去除共同缩进与非语义行末空白；变量初始化和未展示分支见原函数。
+
+```python title="GSPO 现代verl · 共享ratio的clip"
+pg_losses1 = -advantages * seq_importance_ratio
+pg_losses2 = -advantages * torch.clamp(seq_importance_ratio, 1 - clip_ratio_low, 1 + clip_ratio_high)
+pg_losses = torch.maximum(pg_losses1, pg_losses2)
+```
+
+
+
+现在每token都接收相同sequence ratio；若优势也相同、用sequence-mean/token-mean两级平均，梯度与原序列形式对应。advantages若逐token不同，则进入GSPO-token的更灵活情况。不能把fully detached sequence ratio直接乘loss，否则当前模型完全失去路径。
+
+用ratio[2,0.5]、正优势1比较GRPO与GSPO。GRPO第一个token上平台、第二个仍更新；GSPO前向sequence ratio为1，两token共享权重。在初始ratio都1处，再验证GSPO-token与直接sequence式的梯度一致；学生能同时算值与导数，就理解了detach的作用。
+
+讲课结尾讨论局部异常：sequence平均可能掩盖token偏移，若整条回答进入有利平台又会连带抑制其余token。这是与SAPO的直接对照，不是“GSPO理论正确所以不需要诊断”。
+
 
 ## 3. 实验设置与算力
 
@@ -207,3 +267,8 @@ GSPO把概率比和clip移到sequence层，在特定MoE大规模RL上更稳定�
 **Q8：sequence ratio接近1能证明所有token都on-policy吗？** 不能。ratio2与0.5几何平均为1，局部变化仍很大；相互抵消和长序列平均都可能隐藏outlier，应额外看tokenratio分布与logratio方差。
 
 参考[作者博客](https://qwenlm.github.io/blog/gspo/)、[固定v2全文](https://arxiv.org/pdf/2507.18071v2)、现代verl固定源码。后续读SAPO对soft gate的改动及[统一专题](#report=survey-policy-optimization)。2026-10-08完成方法原式、全部结果原图与实现伴读；未执行训练复现。原文无表，按现有仓库证据规则保留草稿，等待本轮关于原始曲线替代表格的处理选择。
+
+
+
+
+**2026-10-09更新。** 背景拆为问题背景、前置知识、已有工作；补固定源码节选、逐段形状/梯度讲解与课堂检查。源码节选不是完整可运行训练程序；课堂张量练习见[CPU演示脚本](./assets/learning/policy-optimization-lab.py)，不下载模型且不执行真实RL训练。

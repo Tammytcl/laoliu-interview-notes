@@ -18,6 +18,19 @@ test('不执行原始 HTML 或 javascript 链接', () => {
   const q = parseQuestion(header + '<script>alert(1)</script>\n\n[x](javascript:alert(1))', 'test.md', categories);
   assert.doesNotMatch(q.html, /<script>/); assert.doesNotMatch(q.html, /href="javascript:/);
 });
+test('代码块转义源码和标题，保留缩进、空行与语言标记', () => {
+  const source = '    x = "<script>alert(1)</script>"\n\n    # $not_math$\n';
+  const q = parseQuestion(header + '```python title="<img src=x>"\n' + source + '```', 'test.md', categories);
+  assert.match(q.html, /class="code-block"/);
+  assert.match(q.html, /class="language-python" data-trailing-newline="true"/);
+  assert.match(q.html, /data-line="2"><\/span>/);
+  assert.match(q.html, /    x = &quot;&lt;script&gt;/);
+  assert.match(q.html, /&lt;img src=x&gt;/);
+  assert.doesNotMatch(q.html, /<script>|<img |class="katex/);
+  const untrusted = parseQuestion(header + '```python"onclick="alert(1)\nprint(1)\n```', 'test.md', categories);
+  assert.match(untrusted.html, /language-text/);
+  assert.doesNotMatch(untrusted.html, /onclick=/);
+});
 test('拒绝缺失字段、未知分类、无效日期和难度', () => {
   for (const source of [header.replace('category: llm', 'category: unknown'), header.replace('difficulty: 基础', 'difficulty: 难'), header.replace('2026-09-30', '2026-02-30'), header.replace('id: test-question', 'id: ../test'), header.replace('draft: false', 'draft: nope')]) {
     assert.throws(() => parseQuestion(source + '正文', 'test.md', categories));

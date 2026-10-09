@@ -12,7 +12,7 @@ areas: ["language"]
 tasks: ["training-adaptation", "reasoning"]
 evidence: "已核原文"
 note_ids: ["sft-dpo-rl", "grpo-rlvr", "infra-rl-pipeline"]
-updated: "2026-10-08"
+updated: "2026-10-09"
 template_version: 5
 depth_standard: "ddpm"
 draft: false
@@ -28,22 +28,36 @@ code_note: "正文区分论文原实现与固定commit的现代框架伴读；�
 
 ## 1. 背景与已有工作
 
-DPO 的问题是：已经有“同一 prompt 下回答 A 比回答 B 好”的偏好数据，能否直接把这些比较转成语言模型参数更新，而不先训练独立 reward model，再搭建在线 RL 系统？它不是取消偏好标注，也不是凭空制造奖励，而是改变把偏好变成策略的优化路径。论文最关键的结论是：在 KL 正则化奖励最大化与特定偏好概率模型下，可以用策略相对参考模型的 logprob 重参数化奖励，从而构造一个简单的二元分类目标。
+### 问题背景
 
-传统 RLHF 通常先用 SFT 建立可靠的生成分布，再收集 prompt 下的候选回答及人类排序，用 Bradley–Terry 模型拟合 reward，最后在线采样回答，以 PPO 优化 reward 并约束相对参考策略的偏移。系统上需要处理生成、评分、critic、KL 和策略同步；数学上还会同时受到 reward 拟合误差与在线策略优化误差影响。[InstructGPT](https://arxiv.org/abs/2203.02155)是理解这一背景的原始工作之一。
+已有同一prompt下的偏好pair，传统RLHF仍要先学reward，再生成新回答、评分并在线更新策略。奖励拟合与策略优化会分别引入误差，系统还需协调采样、critic、KL和权重版本。DPO问的是：能否把这份已收集的比较数据直接变成策略训练目标，减少中间训练阶段。
 
-偏好标签不同于“这句话每个 token 都正确”。chosen 可能只是比 rejected 更好，也可能两者都有事实错误。SFT 只提高 chosen 的似然；朴素 unlikelihood 同时惩罚 rejected，但缺少随难度和当前排序变化的自适应权重。DPO 使用参考模型校准两条回答的相对变化，用 logistic loss 区分正确和错误排序，使已经满足偏好的 pair 逐渐减小影响。
+这份问题不等同于“如何探索从未出现过的解题路径”。原始DPO使用固定偏好数据，主要目标是把已有相对偏好转成行为。数据生成与人类标注成本仍存在，噪声与覆盖不足也不会因为loss简单而消失。
 
-| 路线 | 训练输入 | 优化信号 | 在线探索 |
-| --- | --- | --- | --- |
-| SFT / Preferred-FT | prompt 与目标回答 | 正例的 token logprob | 原始离线版本没有 |
-| 显式 RLHF | 离线偏好与新 rollout | reward model 分数、优势、KL | PPO 阶段需要 |
-| DPO | prompt、chosen、rejected | 相对 reference 的偏好 logit | 原始训练步不需要 |
-| Best of N | prompt 与多条新回答 | 用 scorer 选择最好一条 | 推理时采样 N 条，未必更新策略 |
+### 前置知识
 
-“Your Language Model is Secretly a Reward Model”指策略可以隐式表达某个奖励等价类，不意味着语言模型已经有一个可靠的通用 reward head。换 prompt、换 reference、换 beta 后隐式奖励也会变化；不能把隐式分数不加验证地当成跨任务统一质量标尺。
+**偏好样本。** 一条记录是$(x,y_w,y_l)$：同一prompt、较受偏好的回答、较不受偏好的回答。winner只是相对更好，并非每token都正确；两答案可能都有错误。pair分类与只拟合chosen的SFT不是同一目标。
 
-读这篇还要记住它与 GRPO 的比较维度不同。DPO 主要改变偏好拟合与策略优化之间的重参数化，GRPO 主要改变在线策略梯度的优势估计；一个是离线 pair 分类的常用路线，一个是在线多回答采样的常用路线。它们并非仅在“有没有 critic”上不同，也不是名字中都含 PO 就能放入同一条无条件性能排行榜。[固定 v3 §3—§5](https://arxiv.org/pdf/2305.18290v3)。
+**自回归似然与teacher forcing。** 完整回答logprob是有效回答token的logprob求和，$\log\pi(y\mid x)=\sum_t\log\pi(y_t\mid x,y_{<t})$。teacher forcing把已知前缀送入模型，计算下个真实token的概率，不需要重新采样整条回答。prompt和padding是条件或补齐，不计入answer loss；一位移位与EOS约定须一致。
+
+**参考分布与KL。** reference是初始行为锚点，通常冻结；当前policy参与梯度。$D_{KL}(\pi\Vert\pi_{ref})$度量当前分布偏离reference的程度，方向不能互换。这里的policy/reference分数不是PPO当前/behavior比，reference没有承担“记录本轮真实采样分布”的职责。
+
+**sigmoid与二元交叉熵。** $\sigma(z)=1/(1+e^{-z})$把分数差转成概率，$-\log\sigma(z)$鼓励winner分数高于loser。错误排序时梯度较强，已获得大正margin时梯度减小。logsigmoid是稳定计算形式，不应先sigmoid再log造成下溢。
+
+**奖励差值与归一化常数。** 同一prompt下所有回答reward加同一个$c(x)$不改变偏好。后面推导中的$Z(x)$负责把完整回答概率归一化，比较同prompt两个回答时会抵消；这一步是DPO成立的关键，不是直接忽略一个难算项。
+
+### 已有工作与本文位置
+
+[InstructGPT](https://arxiv.org/abs/2203.02155)等显式RLHF先学偏好reward再用PPO；Preferred-FT只学chosen，朴素unlikelihood同时增强winner与压低loser。DPO借KL正则化最优策略和Bradley–Terry模型重参数化reward，形成有自适应权重的pair loss。[固定v3 §3—§5](https://arxiv.org/pdf/2305.18290v3)。
+
+| 路线 | 关键依赖 | 与DPO比较时的重点 |
+| --- | --- | --- |
+| SFT / Preferred-FT | 正例答案 | 缺少相对reference的负例margin |
+| 显式RLHF / PPO | reward拟合与在线采样 | 在线探索、critic和优化误差 |
+| DPO | 偏好pair与reference分数 | 简化训练，但依赖离线覆盖 |
+| Best of N | 推理时采样和scorer | 选择成本不等于策略训练成本 |
+
+题名的“隐式reward model”指策略可以表达一个奖励等价类，不意味着已经得到可靠的通用评分器；跨prompt、跨reference的reward数值不能直接排序。
 
 ## 2. 方法与实现机制
 
@@ -115,7 +129,7 @@ beta 在最初 KL 目标中控制约束，在实际 classification loss 中又�
 
 ### 实际数据流与最容易写错的位置
 
-```python
+```python title="DPO 教学重述 · 流程示意"
 # 原始DPO的教学重述；每条序列只统计answer部分
 pi_w = sum_answer_logp(policy, prompt, chosen)
 pi_l = sum_answer_logp(policy, prompt, rejected)
@@ -138,6 +152,80 @@ loss.backward()
 `_get_batch_logps` 接收 `[B,L,V]` logits 和 `[B,L]` labels，错开一位实现自回归预测，忽略 -100 标签并 gather 目标 token logprob；默认 sum，`average_log_prob=True` 则改变 reduction。`concatenated_forward` 先把 chosen/rejected 补齐到同一长度，拼成一次前向，再拆回 `[B]` 的两组序列分数。`preference_loss` 计算两组 policy 差与 reference 差，再通过 `-logsigmoid(beta*logits)` 得到逐 pair loss；输出的 implicit rewards 使用 detach 用于日志，而不是额外训练 reward head。
 
 `get_batch_metrics` 在 reference 的 no-grad 前向后调用这个 loss，统计 chosen/rejected rewards、margin 和排序准确率。这些是偏好拟合诊断，不能与 GPT-4 win rate 或数学 Pass@1 混为一谈。本文静态核读，不声称执行训练。[Hugging Face 的 DPO/TRL 讲解](https://huggingface.co/blog/dpo-trl)采用 prompt/chosen/rejected 的组织方式，本文沿用这个易懂的数据入口；其中 Llama 2 + QLoRA 是教程案例，不是 DPO 原论文的实验模型或超参。
+
+### 课堂源码拆解：从token概率到pair分类
+
+先画两条回答输入，每条都是prompt+answer；再画同样的reference前向。训练最终得到四个 `[B]` 序列分数，loss不接收新的rollout，也不接收value预测。先让学生理解teacher forcing与mask，再推导margin，否则很容易把DPO误写成逐tokenchosen/rejected比较。
+
+#### 有效回答如何得到一个logprob
+
+**真实源码节选：[DPO 作者实现 · 取回答logprob](https://github.com/eric-mitchell/direct-preference-optimization/blob/f8b8c0f49dc92a430bae41585f9d467d3618fe2f/trainers.py#L103-L115)。** 以下保留原始语句，仅去除共同缩进与非语义行末空白；变量初始化和未展示分支见原函数。
+
+```python title="DPO 作者实现 · 取回答logprob"
+labels = labels[:, 1:].clone()
+logits = logits[:, :-1, :]
+loss_mask = (labels != -100)
+
+# dummy token; we'll ignore the losses on these tokens later
+labels[labels == -100] = 0
+
+per_token_logps = torch.gather(logits.log_softmax(-1), dim=2, index=labels.unsqueeze(2)).squeeze(2)
+
+if average_log_prob:
+    return (per_token_logps * loss_mask).sum(-1) / loss_mask.sum(-1)
+else:
+    return (per_token_logps * loss_mask).sum(-1)
+```
+
+
+
+输入logits形状 `[2B,L,V]`，labels是 `[2B,L]`。labels去掉首位、logits去掉末位，实现“位置t预测t+1”；`-100`标记prompt或padding。先把-100替成合法gather索引0，随后用mask去除，既避免索引错误，也不训练这些位置。default分支求和给完整answer的logprob；average分支并非原始DPO调用选择。
+
+例如answer只有两个有效token，其logprob为-0.3和-0.7，返回-1.0；前面的prompt概率不能被加进来。chosen/rejected有不同长度也必须使用一致tokenizer、EOS和截断规则。reference缓存还要绑定这些规则，不能换模板继续复用旧分数。
+
+#### 四个分数怎样变成偏好目标
+
+**真实源码节选：[DPO 作者实现 · 偏好margin与loss](https://github.com/eric-mitchell/direct-preference-optimization/blob/f8b8c0f49dc92a430bae41585f9d467d3618fe2f/trainers.py#L70-L87)。** 以下保留原始语句，仅去除共同缩进与非语义行末空白；变量初始化和未展示分支见原函数。
+
+```python title="DPO 作者实现 · 偏好margin与loss"
+pi_logratios = policy_chosen_logps - policy_rejected_logps
+ref_logratios = reference_chosen_logps - reference_rejected_logps
+
+if reference_free:
+    ref_logratios = 0
+
+logits = pi_logratios - ref_logratios  # also known as h_{\pi_\theta}^{y_w,y_l}
+
+if ipo:
+    losses = (logits - 1/(2 * beta)) ** 2  # Eq. 17 of https://arxiv.org/pdf/2310.12036v2.pdf
+else:
+    # Eq. 3 https://ericmitchell.ai/cdpo.pdf; label_smoothing=0 gives original DPO (Eq. 7 of https://arxiv.org/pdf/2305.18290.pdf)
+    losses = -F.logsigmoid(beta * logits) * (1 - label_smoothing) - F.logsigmoid(-beta * logits) * label_smoothing
+
+chosen_rewards = beta * (policy_chosen_logps - reference_chosen_logps).detach()
+rejected_rewards = beta * (policy_rejected_logps - reference_rejected_logps).detach()
+
+return losses, chosen_rewards, rejected_rewards
+```
+
+
+
+原始DPO对应`reference_free=False, ipo=False, label_smoothing=0`。这三个现代分支与原算法分开；不能在课上把仓库支持的全部选项说成同一条推导。
+
+| 运算 | 读法 | 为什么必要 |
+| --- | --- | --- |
+| policy chosen−rejected | 当前两答案的相对logprob | 只提升chosen不是相对偏好目标 |
+| reference chosen−rejected | 原分布对两答案的相对偏好 | 校准原有概率差异 |
+| 两者再相减 | 策略比原分布更偏向winner多少 | 对应隐式reward差 |
+| beta与logsigmoid | 将margin映射成偏好概率 | 错排序强更新，正确大margin弱更新 |
+| rewards的detach | 只用于日志的隐式分数 | 不额外训练reward head |
+
+把四分数设为policy[-2,-3]、reference[-2.5,-2.5]，beta0.1，手算margin0.1、loss约0.6444。再让两模型分数相同：loss为log2但actor梯度非零。最后问“chosen绝对概率是否一定上升”：目标只要求relative margin，参数共享使绝对量不必逐步单调。
+
+#### 讲解的收束
+
+从KL最优策略、reward重参数化、同prompt常数抵消、pair logistic loss，一直走到shift/mask/sum与四分数。这条链讲完整，才解释了DPO为何简单，也解释了为什么离线覆盖、reference和偏好质量仍不可省略。
+
 
 ## 3. 实验设置与算力
 
@@ -211,3 +299,8 @@ DPO 将偏好 reward 的重参数化与策略学习连起来，降低在线 RL �
 **Q8：什么时候优先选 DPO？** 已有较干净、覆盖目标行为的偏好 pair，想用相对简单的离线训练改进风格、帮助性或领域偏好时，适合作为 baseline；若主要缺口是在线探索新解题路径，应同时考虑 PPO/GRPO 路线。此为基于数据需求的工程判断，不是跨论文成绩排名。
 
 参考讲解包括 [Hugging Face DPO with TRL](https://huggingface.co/blog/dpo-trl)的数据组织、[作者实现](https://github.com/eric-mitchell/direct-preference-optimization)的四 logprob 接线；实验数字和插图均回到固定 v3。后续对照 [PPO](#paper=paper-ppo)、[GRPO原文](#paper=paper-grpo)和[统一比较](#report=survey-policy-optimization)。2026-10-08 核读正文、理论附录、实验细节与源码，未进行个人训练复现。
+
+
+
+
+**2026-10-09更新。** 背景拆为问题背景、前置知识、已有工作；补固定源码节选、逐段形状/梯度讲解与课堂检查。源码节选不是完整可运行训练程序；课堂张量练习见[CPU演示脚本](./assets/learning/policy-optimization-lab.py)，不下载模型且不执行真实RL训练。

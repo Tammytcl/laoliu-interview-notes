@@ -11,7 +11,7 @@ areas: ["language"]
 tasks: ["training-adaptation", "reasoning"]
 evidence: "已核原文"
 note_ids: ["sft-dpo-rl", "grpo-rlvr", "infra-rl-pipeline"]
-updated: "2026-10-08"
+updated: "2026-10-09"
 template_version: 5
 depth_standard: "ddpm"
 draft: true
@@ -28,21 +28,33 @@ author_affiliations: [[1], [1], [1], [1], [1], [1], [1], [1], [1], [1]]
 
 ## 1. 背景与已有工作
 
-本篇SAPO指Qwen的Soft Adaptive Policy Optimization，首次公开于2025-11-25，不是后来的Single-Rollout Autoregressive Policy Optimization或Self-Adaptive Process Optimization。它研究硬裁剪的稳定性与信息利用矛盾：token ratio可能包含异常值，宽松裁剪会放大噪声，紧裁剪又会突然失去有效学习信号。SAPO用可微的sigmoid代理目标，使梯度随偏离平滑衰减，并对负优势使用更快的衰减。
+### 问题背景
 
-从PPO到GRPO，裁剪都采用悲观min形式；GRPO主要去掉critic，以同题组优势训练。GSPO进一步使用sequence ratio，整回答共享权重与clip。SAPO仍使用tokenratio和组优势，改变的是**surrogate及其梯度门控**。它不重新定义同题reward，也不是直接把GSPO的clip函数替换成sigmoid但其余梯度完全相同。
+硬clip存在稳定性与信号利用的取舍：范围宽时异常token可能造成噪声，范围窄时有用更新又突然进入平台。对同一个长回答，少量off-policy token可能使sequence clip连带抑制其他仍有用的token。SAPO希望以连续衰减替代突然的平台切换。
 
-长序列可能只有少数token高度off-policy，其余token接近旧策略。token硬clip使部分项进入平台，sequence硬clip在有利方向越界时让整条回答共享平台。SAPO希望保留接近on-policy的token，同时逐渐弱化离得远的token；没有一个不可微阈值要求某条样本一瞬间从完整参与跳到完全停止。
+这里指Qwen的Soft Adaptive Policy Optimization，而非其他同缩写论文。它保留token ratio与组优势，主要改变surrogate和正负优势的门控宽度。没有因为soft gate而自动解决reward错误、组完成等待或无限stale数据的问题。
 
-| 方法 | 概率比 | 有利方向过度变化时的处理 | 主要修改 |
-| --- | --- | --- | --- |
-| GRPO | token current/old | 相应token进入硬平台 | 组优势、无独立critic |
-| GSPO | 几何平均sequence ratio | 相应回答共享硬平台 | 权重与裁剪单元 |
-| SAPO | token current/old | sigmoid目标的导数平滑衰减 | softgate与符号不对称温度 |
+### 前置知识
 
-作者用“sequence-coherent”描述其在近on-policy、token log-ratio低离散度条件下的平均门控接近sequence门控。这是带条件的近似联系，不等于SAPO对任意轨迹都严格等价GSPO，也不意味着它真的只计算一个sequence ratio。token适应性正是在条件不满足时保留局部区分。
+**代理目标与导数。** 训练最大化一个surrogate函数，实际更新取决于其导数；函数值大不等于梯度大。若用$f(r)A$作目标，logprob梯度系数是$f'(r)rA$，不能把$f$、$f'$或$f'r$三个量混在一起。
 
-还应正确描述hardclip：PPO类目标的零梯度平台取决于advantage符号，不能把所有越界都当成丢弃。SAPO在ratio小于1时也会平滑调整权重，与单侧平台不相同。其最终目标是提高相同训练预算下的可用更新与quality，不能仅用“所有数据都有一点梯度”判断样本效率。[固定v2 §2—§4](https://arxiv.org/pdf/2511.20347v2)。
+**sigmoid与tau约定。** $\sigma(z)=1/(1+e^{-z})$，导数为$\sigma(z)(1-\sigma(z))$。SAPO将tau乘在输入上，tau越大有效区域越窄；这不同于softmax用logits除temperature的约定。4/tau因子用于保持ratio=1附近导数尺度。
+
+**advantage正负与softmax竞争。** 正优势强化采样token，负优势降低它并把概率分散到其他词。LLM大词表中的未采样词未必正确，这解释为何作者对off-policy负更新更保守；不能据此说负反馈没有作用。
+
+**token与sequence尺度。** GRPO逐token硬clip，GSPO按几何平均ratio共享sequence clip，SAPO仍逐token平滑抑制。sequence coherence是特定条件下平均门控的近似性质，不是训练中真正只计算一个sequence ratio。
+
+**近似条件与误差范围。** ratio接近1时$r-1\approx\log r$；同sequence log-ratio方差较小时，平均gate可接近sequence gate。标量gate误差界不自动成为完整向量gradient界，还需考虑梯度与权重的相关性。
+
+### 已有工作与本文位置
+
+PPO/GRPO以有利方向硬平台控制更新；GSPO改变ratio与clip单元。SAPO用sigmoid目标产生连续gate，并用$\tau_->\tau_+$更快衰减负优势更新。[固定v2 §2—§4](https://arxiv.org/pdf/2511.20347v2)。
+
+| 方法 | 权重与平台 | SAPO要改变的点 |
+| --- | --- | --- |
+| GRPO | token ratio与单侧硬平台 | 让越界附近信号连续衰减 |
+| GSPO | sequence共享ratio与平台 | 避免局部异常连带抑制全部token |
+| SAPO | token软目标与符号不同tau | 需控制饱和、温度和近似条件 |
 
 ## 2. 方法与实现机制
 
@@ -110,7 +122,7 @@ $$
 
 ### 实现接线与日志解释
 
-```python
+```python title="SAPO 教学重述 · 流程示意"
 # 原始SAPO目标的教学重述
 ratio = exp(logp - old_logp.detach())
 tau = where(adv > 0, tau_pos, tau_neg)
@@ -126,6 +138,58 @@ loss = mean_of_sequence_means(-f * adv.detach(), action_mask)
 `agg_loss`在SAPO入口明确使用`seq-mean-token-mean`，即回答内平均后sequence平均。组优势仍由GRPO估计入口提供，非actiontooloutput不参与mask。可选rolloutimportanceweights是额外校正，不包含在原SAPO核心式中。tau必须为正，否则4/tau不定义；放大tau虽然更快衰减，也增加标量近似界中的tau平方。
 
 该实现为了统一接口把clipfraction日志返回0，因为没有硬clip；**日志0不意味着没有抑制任何token**。要观察gate分布、有效权重、ratio、KL和validationquality。`ppo_kl`也是采样logprob差的近似诊断，不能自动视为完整分布KL。本文核读函数与reduction，未训练复现。
+
+### 课堂源码拆解：目标值与梯度权重要分两列
+
+在白板上先写$f(r)$，旁边另写$f'(r)$，第三列写对logprob的导数$f'(r)rA$。把三者混在一起最容易写出“看着像SAPO，实际另一个算法”的代码。
+
+#### 训练实际优化的函数
+
+**真实源码节选：[SAPO 现代verl · 可微代理函数](https://github.com/verl-project/verl/blob/75879f7f475fd6b64c779f7d9212e45503f58b8f/verl/trainer/ppo/core_algos.py#L1657-L1659)。** 以下保留原始语句，仅去除共同缩进与非语义行末空白；变量初始化和未展示分支见原函数。
+
+```python title="SAPO 现代verl · 可微代理函数"
+def gate_function(x, tau):
+    """The gating function used in SAPO"""
+    return torch.sigmoid(tau * (x - 1.0)) * (4.0 / tau)
+```
+
+
+
+变量命名gate_function，但返回的是$f=(4/\tau)\sigma(\tau(r-1))$，不是$w=4p(1-p)$。自动求导才产生w；不需要手工再乘一次w。若手工把w当loss并让其也求导，会多出w′项。
+
+#### 选择温度并保留actor梯度
+
+**真实源码节选：[SAPO 现代verl · 分符号温度与目标](https://github.com/verl-project/verl/blob/75879f7f475fd6b64c779f7d9212e45503f58b8f/verl/trainer/ppo/core_algos.py#L1664-L1681)。** 以下保留原始语句，仅去除共同缩进与非语义行末空白；变量初始化和未展示分支见原函数。
+
+```python title="SAPO 现代verl · 分符号温度与目标"
+negative_approx_kl = log_prob - old_log_prob
+# Clamp negative_approx_kl for stability
+negative_approx_kl = torch.clamp(negative_approx_kl, min=-20.0, max=20.0)
+# finally exp() to remove log and get r_{i,t}(θ)
+ratio = torch.exp(negative_approx_kl)
+
+# tau_{i,t} is tau_pos if adv > 0 else tau_neg
+taus = torch.where(
+    condition=advantages > 0,
+    input=tau_pos,  # if A_{i,t} > 0 we set to tau_pos
+    other=tau_neg,  # if A_{i,t} <= 0 we set to tau_neg
+)
+
+# compute the gates f_{i,t}(r_{i,t}(θ)) at token level
+gates = gate_function(ratio, taus)
+
+# compute policy gradient loss
+pg_losses = -gates * advantages
+```
+
+
+
+`negative_approx_kl`是current−old logprob，先数值clamp、exp得到ratio。`advantages>0`选taupos，否则tauneg；这些fixed advantages来自组估计器。`pg_losses=-gates*advantages`保留f的梯度，原函数后续按sequence均值reduce。额外rollout correction接口与此核心式分开。
+
+输入 `[B,L]`无需full-vocabulary KL。ratio1时f=2/tau，但f′=1，因此同一on-policy样本不同tau的rawloss不同而初始策略梯度尺度一致。ratio2,tau1时w约0.7864，但对logprob系数是1.5729×A；这个数值能检验学生是否漏乘ratio。
+
+对tau1/2/3画f与w，不以rawloss高低排名；增大tauneg会更快衰减负优势，不表示负例可以全部删除。最后比较同一回答中的outlier：SAPO弱化局部token，GSPO则共享sequence权重；只有近on-policy、低离散度等条件下才建立sequence近似联系。
+
 
 ## 3. 实验设置与算力
 
@@ -197,3 +261,8 @@ SAPO用平滑代理目标与正负不同temperature，改善硬clip带来的突�
 **Q8：能处理任意旧数据或异步OPD吗？** 它针对RLpolicygradient权重，不能修正所有状态分布变化，也不自动解决teacher缓存。异步需要behavior版本、背压与算法校正，OPD需独立推导loss依赖。
 
 参考[固定v2原文](https://arxiv.org/pdf/2511.20347v2)、现代verl固定源码、GSPO作者讲解与[统一专题](#report=survey-policy-optimization)。2026-10-08核读正文、原图与函数，补充gate/目标区别、近似条件和结果边界；未执行个人训练复现。原文无表，按当前仓库规则保留草稿，等待本轮关于原曲线替代表格的处理选择。
+
+
+
+
+**2026-10-09更新。** 背景拆为问题背景、前置知识、已有工作；补固定源码节选、逐段形状/梯度讲解与课堂检查。源码节选不是完整可运行训练程序；课堂张量练习见[CPU演示脚本](./assets/learning/policy-optimization-lab.py)，不下载模型且不执行真实RL训练。

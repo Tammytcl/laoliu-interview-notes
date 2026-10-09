@@ -40,6 +40,20 @@ md.renderer.rules.image = (tokens, i, options, env, renderer) => {
 };
 export const escapeHtml = s => String(s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 
+md.renderer.rules.fence = (tokens, i) => {
+  const token = tokens[i];
+  const requested = token.info.trim().split(/\s+/)[0] || 'text';
+  const language = /^[a-z0-9_+-]{1,32}$/i.test(requested) ? requested.toLowerCase() : 'text';
+  const labels = { python: 'Python', py: 'Python', javascript: 'JavaScript', js: 'JavaScript', bash: 'Bash', shell: 'Shell', json: 'JSON', yaml: 'YAML', markdown: 'Markdown', text: 'Text' };
+  const label = labels[language] || language;
+  const title = token.info.match(/(?:^|\s)title="([^"\n]{1,160})"/)?.[1] || '代码';
+  const trailing = token.content.endsWith('\n');
+  const lines = token.content.split('\n');
+  if (trailing) lines.pop();
+  const html = lines.map((line, n) => `<span class="code-line${/^\s*(#|\/\/)/.test(line) ? ' code-comment' : ''}" data-line="${n + 1}">${escapeHtml(line)}</span>`).join('');
+  return `<div class="code-block"><div class="code-header"><span class="code-language">${escapeHtml(label)}</span><span class="code-title">${escapeHtml(title)}</span><button type="button" class="code-copy" data-copy-code aria-label="复制${escapeHtml(title)}">复制</button></div><pre tabindex="0" aria-label="${escapeHtml(title)}，可横向滚动" dir="ltr"><code class="language-${language}" data-trailing-newline="${trailing}">${html}</code></pre></div>\n`;
+};
+
 export function renderMarkdown(body) {
   const tokens = md.parse(body, {});
   const toc = [];
@@ -51,6 +65,15 @@ export function renderMarkdown(body) {
     }
   });
   return { html: md.renderer.render(tokens, md.options, {}), toc };
+}
+
+export function markdownHeadings(body, level = 2) {
+  const offsets = []; let offset = 0;
+  for (const line of body.split('\n')) { offsets.push(offset); offset += line.length + 1; }
+  const tokens = md.parse(body, {});
+  return tokens.flatMap((token, i) => token.type === 'heading_open' && token.tag === `h${level}`
+    ? [{ title: tokens[i + 1].content, index: offsets[token.map[0]] }]
+    : []);
 }
 
 export function parseQuestion(source, file, categories) {

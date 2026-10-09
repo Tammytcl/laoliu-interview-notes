@@ -1,5 +1,32 @@
 import { test, expect } from '@playwright/test';
 
+test('课堂代码块在手机上保留源码、空行、复制与独立滚动', async ({ page, context }) => {
+  await context.grantPermissions(['clipboard-read', 'clipboard-write']);
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.goto('/#paper=paper-dpo');
+  await expect(page.locator('#paper-space h1')).toContainText('Direct Preference Optimization');
+  const block = page.locator('.code-block').filter({ has: page.locator('.code-title', { hasText: 'DPO 作者实现 · 取回答logprob' }) });
+  await expect(block).toHaveCount(1);
+  await expect(block.locator('.code-language')).toHaveText('Python');
+  await expect(block.locator('.code-line')).toHaveCount(13);
+  expect(await block.locator('.code-line').nth(3).textContent()).toBe('');
+  expect(await block.locator('pre').evaluate(el => el.scrollWidth > el.clientWidth)).toBe(true);
+  expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1)).toBe(true);
+  const data = await (await page.request.get('/data.json')).json();
+  const body = data.papers.find(p => p.id === 'paper-dpo').body;
+  const source = body.match(/```python title="DPO 作者实现 · 取回答logprob"\n([\s\S]*?)\n```/)[1] + '\n';
+  await block.locator('[data-copy-code]').click();
+  await expect(page.locator('#toast')).toHaveText('代码已复制');
+  expect(await page.evaluate(() => navigator.clipboard.readText())).toBe(source);
+  await page.evaluate(() => Object.defineProperty(navigator, 'clipboard', { configurable: true, value: { writeText: async () => { throw new Error('unavailable'); } } }));
+  await block.locator('[data-copy-code]').click();
+  await expect(page.locator('#toast')).toContainText('复制未完成');
+  expect(await page.evaluate(() => window.getSelection().toString().length)).toBeGreaterThan(0);
+  for (const title of ['问题背景', '前置知识', '已有工作与本文位置']) {
+    await expect(page.locator('.publication-body h3', { hasText: title })).toHaveCount(1);
+  }
+});
+
 test('论文库、两行任务筛选、Daily 与专题报告相互链接', async ({ page }) => {
   const errors = []; page.on('pageerror', error => errors.push(error.message));
   await page.goto('/'); await page.locator('[data-paper-nav]').click();
