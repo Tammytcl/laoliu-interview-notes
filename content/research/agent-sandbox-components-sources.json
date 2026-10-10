@@ -1,0 +1,171 @@
+{
+  "version": 1,
+  "topicId": "agent-sandbox-components",
+  "note": "ACS按阿里云容器计算服务的Agent Sandbox解释；源码和官方文档固定基线，课堂CPU示例不代表云产品/模型基准。",
+  "sources": [
+    {
+      "title": "Harbor核心对象",
+      "kind": "official-docs",
+      "purpose": "核task/dataset/agent/environment/verifier/trial/job的职责",
+      "watchUrl": "https://docs.harborframework.com/core-concepts/index.md",
+      "reviewedSha256": "409443cd7fe2bd38ed19fdfe3d795e2490481db165c414954231e6e1e3385c2c",
+      "id": "agent-sandbox-components-01",
+      "url": "https://docs.harborframework.com/core-concepts/index",
+      "reviewedAt": "2026-10-10"
+    },
+    {
+      "title": "Harbor ATIF",
+      "kind": "official-docs",
+      "purpose": "核轨迹保存与加载能力的区别",
+      "watchUrl": "https://docs.harborframework.com/agents/atif.md",
+      "reviewedSha256": "cc3fdacbccb761631aa94580f59f290b4c67d412183d7bc362c2d6f744c642d1",
+      "id": "agent-sandbox-components-02",
+      "url": "https://docs.harborframework.com/agents/atif",
+      "reviewedAt": "2026-10-10"
+    },
+    {
+      "title": "harbor-framework/harbor src/harbor/trial/trial.py",
+      "kind": "official-code",
+      "purpose": "固定源码/文档核职责、生命周期、执行语义或配置；不是本轮部署结果。",
+      "repository": "harbor-framework/harbor",
+      "revision": "09f5b964f8e5075f7e52fd08c9994dfc80ad5d24",
+      "pinnedUrl": "https://github.com/harbor-framework/harbor/blob/09f5b964f8e5075f7e52fd08c9994dfc80ad5d24/src/harbor/trial/trial.py#L492-L520",
+      "watchPath": "src/harbor/trial/trial.py",
+      "watchUrl": "https://raw.githubusercontent.com/harbor-framework/harbor/main/src/harbor/trial/trial.py",
+      "reviewedSha256": "3bb2c0b9dd7553022ba98da96ef5188abc27e2c8475ac949d541f47c5d86ecc6",
+      "id": "agent-sandbox-components-03",
+      "url": "https://github.com/harbor-framework/harbor/blob/09f5b964f8e5075f7e52fd08c9994dfc80ad5d24/src/harbor/trial/trial.py#L492-L520",
+      "reviewedAt": "2026-10-10"
+    },
+    {
+      "title": "harbor-framework/harbor src/harbor/models/task/config.py",
+      "kind": "official-code",
+      "purpose": "固定源码/文档核职责、生命周期、执行语义或配置；不是本轮部署结果。",
+      "repository": "harbor-framework/harbor",
+      "revision": "09f5b964f8e5075f7e52fd08c9994dfc80ad5d24",
+      "pinnedUrl": "https://github.com/harbor-framework/harbor/blob/09f5b964f8e5075f7e52fd08c9994dfc80ad5d24/src/harbor/models/task/config.py#L801-L820",
+      "watchPath": "src/harbor/models/task/config.py",
+      "watchUrl": "https://raw.githubusercontent.com/harbor-framework/harbor/main/src/harbor/models/task/config.py",
+      "reviewedSha256": "f9cd1d01960de82f1ec025c285a7367cec5eb8e3a2bb0b8e6313e7bce3283e5e",
+      "id": "agent-sandbox-components-04",
+      "url": "https://github.com/harbor-framework/harbor/blob/09f5b964f8e5075f7e52fd08c9994dfc80ad5d24/src/harbor/models/task/config.py#L801-L820",
+      "reviewedAt": "2026-10-10"
+    },
+    {
+      "title": "Harbor任务配置网页",
+      "kind": "official-docs",
+      "purpose": "核网页示例schema与固定实现的区别",
+      "watchUrl": "https://docs.harborframework.com/tasks/configuration.md",
+      "reviewedSha256": "fccdb3adc7cb7e54fa4bfd2ef1bdca363d748c088862035b9b6529e4b3d79c33",
+      "id": "agent-sandbox-components-05",
+      "url": "https://docs.harborframework.com/tasks/configuration",
+      "reviewedAt": "2026-10-10"
+    },
+    {
+      "title": "Harbor验证与产物",
+      "kind": "official-docs",
+      "purpose": "核reward路径、JSON优先、独立验证和artifact传递",
+      "watchUrl": "https://docs.harborframework.com/tasks/verifier.md",
+      "reviewedSha256": "5724ea8eaaa0bfef02d0a9f5d20d3abf12cc2639ce711dbe711eeeaac8695c8c",
+      "id": "agent-sandbox-components-06",
+      "url": "https://docs.harborframework.com/tasks/verifier",
+      "reviewedAt": "2026-10-10"
+    },
+    {
+      "title": "E2B概览",
+      "kind": "official-docs",
+      "purpose": "核SDK、sandbox与执行能力定位",
+      "id": "agent-sandbox-components-07",
+      "url": "https://docs.e2b.dev/",
+      "reviewedAt": "2026-10-10"
+    },
+    {
+      "title": "e2b-dev/E2B packages/python-sdk/e2b/sandbox_sync/commands/command.py",
+      "kind": "official-code",
+      "purpose": "固定源码/文档核职责、生命周期、执行语义或配置；不是本轮部署结果。",
+      "repository": "e2b-dev/E2B",
+      "revision": "df6c368152b067512702fc677952c0fc4e13c2f0",
+      "pinnedUrl": "https://github.com/e2b-dev/E2B/blob/df6c368152b067512702fc677952c0fc4e13c2f0/packages/python-sdk/e2b/sandbox_sync/commands/command.py#L285-L302",
+      "watchPath": "packages/python-sdk/e2b/sandbox_sync/commands/command.py",
+      "watchUrl": "https://raw.githubusercontent.com/e2b-dev/E2B/main/packages/python-sdk/e2b/sandbox_sync/commands/command.py",
+      "reviewedSha256": "723d02c4cd612d966361de44147ca8cb222d5355cdcb1d0746177d1361d3475e",
+      "id": "agent-sandbox-components-08",
+      "url": "https://github.com/e2b-dev/E2B/blob/df6c368152b067512702fc677952c0fc4e13c2f0/packages/python-sdk/e2b/sandbox_sync/commands/command.py#L285-L302",
+      "reviewedAt": "2026-10-10"
+    },
+    {
+      "title": "E2B full持久化",
+      "kind": "official-docs",
+      "purpose": "核文件/RAM/进程和外部连接恢复的条件",
+      "watchUrl": "https://docs.e2b.dev/sandbox/persistence.md",
+      "reviewedSha256": "b3e27ce1e4eccdbb7ac267cb424d5f522b16f9e8d1e53031f61545e9a34991ba",
+      "id": "agent-sandbox-components-09",
+      "url": "https://docs.e2b.dev/sandbox/persistence",
+      "reviewedAt": "2026-10-10"
+    },
+    {
+      "title": "E2B filesystem-only",
+      "kind": "official-docs",
+      "purpose": "核重启语义、mode与SDK版本边界",
+      "watchUrl": "https://docs.e2b.dev/sandbox/filesystem-only-snapshots.md",
+      "reviewedSha256": "44790fa8c817e1c1a35f0f0441c00f024b550c45d85099f02a19f425d3f05544",
+      "id": "agent-sandbox-components-10",
+      "url": "https://docs.e2b.dev/sandbox/filesystem-only-snapshots",
+      "reviewedAt": "2026-10-10"
+    },
+    {
+      "title": "E2B fork",
+      "kind": "official-docs",
+      "purpose": "核snapshot与新实例的关系",
+      "watchUrl": "https://docs.e2b.dev/sandbox/fork.md",
+      "reviewedSha256": "ca0515df8fc089e52d06aec162df3afcaf31f07724cb8873e9e9d4b2e2c69b46",
+      "id": "agent-sandbox-components-11",
+      "url": "https://docs.e2b.dev/sandbox/fork",
+      "reviewedAt": "2026-10-10"
+    },
+    {
+      "title": "ACS Agent Sandbox概述",
+      "kind": "official-docs",
+      "purpose": "核产品定位、隔离、预热及SDK/CR接入",
+      "id": "agent-sandbox-components-12",
+      "url": "https://help.aliyun.com/zh/cs/user-guide/agent-sandbox/",
+      "reviewedAt": "2026-10-10"
+    },
+    {
+      "title": "ACS创建Agent Sandbox",
+      "kind": "official-docs",
+      "purpose": "核Set/Claim/TTL、域名认证、镜像和run_code边界",
+      "id": "agent-sandbox-components-13",
+      "url": "https://help.aliyun.com/zh/cs/user-guide/create-an-agent-sandbox",
+      "reviewedAt": "2026-10-10"
+    },
+    {
+      "title": "alibaba/OpenSandbox README.md",
+      "kind": "official-docs",
+      "purpose": "固定源码/文档核职责、生命周期、执行语义或配置；不是本轮部署结果。",
+      "repository": "alibaba/OpenSandbox",
+      "revision": "9bc2967b78a9506a9282b0b28dc5db0cb8c50cc0",
+      "pinnedUrl": "https://github.com/alibaba/OpenSandbox/blob/9bc2967b78a9506a9282b0b28dc5db0cb8c50cc0/README.md",
+      "watchPath": "README.md",
+      "watchUrl": "https://raw.githubusercontent.com/alibaba/OpenSandbox/main/README.md",
+      "reviewedSha256": "b68fe385dc6b45f4253647f85922a01f8a445aeea9242e1ce043a1fd176c0758",
+      "id": "agent-sandbox-components-14",
+      "url": "https://github.com/alibaba/OpenSandbox/blob/9bc2967b78a9506a9282b0b28dc5db0cb8c50cc0/README.md",
+      "reviewedAt": "2026-10-10"
+    },
+    {
+      "title": "harbor-framework/harbor src/harbor/environments/e2b.py",
+      "kind": "official-code",
+      "purpose": "固定源码/文档核职责、生命周期、执行语义或配置；不是本轮部署结果。",
+      "repository": "harbor-framework/harbor",
+      "revision": "09f5b964f8e5075f7e52fd08c9994dfc80ad5d24",
+      "pinnedUrl": "https://github.com/harbor-framework/harbor/blob/09f5b964f8e5075f7e52fd08c9994dfc80ad5d24/src/harbor/environments/e2b.py#L495-L507",
+      "watchPath": "src/harbor/environments/e2b.py",
+      "watchUrl": "https://raw.githubusercontent.com/harbor-framework/harbor/main/src/harbor/environments/e2b.py",
+      "reviewedSha256": "44d623f99a9af9318672ea2c7523527e498ffae04defa36c58f478ce5c076e0d",
+      "id": "agent-sandbox-components-15",
+      "url": "https://github.com/harbor-framework/harbor/blob/09f5b964f8e5075f7e52fd08c9994dfc80ad5d24/src/harbor/environments/e2b.py#L495-L507",
+      "reviewedAt": "2026-10-10"
+    }
+  ]
+}

@@ -4,10 +4,11 @@
 
 一个内容与界面分离的中文面试准备站。浅色纸张风格、主题导航、全文搜索、题目目录与正式论文报告。发布站点无数据库、追踪统计或运行时 CDN 依赖，适合 GitHub Pages；可选本地工作台提供源码缓存清理。
 
-> 当前有 44 篇学习笔记、56 篇论文精读报告、4 份 Daily 和 5 份专题调研。论文收录独立于面试笔记；报告按原文核读范围说明证据，未登记个人复现。旧项目表达题保留在综合面试中。
+> 当前有 48 篇学习笔记、56 篇论文精读报告、4 份 Daily 和 5 份专题调研。论文收录独立于面试笔记；报告按原文核读范围说明证据，未登记个人复现。旧项目表达题保留在综合面试中。
 
 ## 从这里开始学习
 
+- [Code/Search Agent组件系列](content/questions/agent/agent-components-overview.md)：四篇按任务流程讲Harbor/E2B/ACS、工具协议、沙箱、代码修改与搜索证据，配关键源码、状态图与CPU练习。
 - [MTP系列](content/questions/systems/infra-mtp-overview.md)：四篇Infra梳理训练、精确验证、后端接入与成本，配原图、源码和CPU练习。
 - [PPO DPO GRPO及其变体](content/reports/surveys/survey-policy-optimization.md)：七篇问题/前置知识分开的讲课稿、关键源码代码块、原图证据与56道单篇问答；GSPO/SAPO因原文无表保留完整草稿。
 - [四条学习路线](content/questions/guide/learning-roadmap.md)：按先修关系阅读，P0 主干 / P1 深入不是面试频率统计。

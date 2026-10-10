@@ -1,0 +1,18 @@
+{
+  "topicId": "agent-search-components",
+  "reviewedAt": "2026-10-10",
+  "figures": [
+    {
+      "file": "search-flow.svg",
+      "origin": "本文教学示意",
+      "sourcePage": "https://github.com/Tammytcl/laoliu-interview-notes/blob/main/assets/agent/agent-search-components/search-flow.svg",
+      "credit": "本文绘制，说明组件职责与信息流；不是厂商架构原图或性能实测。",
+      "retrievedAt": "2026-10-10",
+      "sha256": "a89e227d621ed6a8344f0e9ddc33025ae1ea9df8452514e5d43a86ac9124fe7a",
+      "visuallyVerified": true,
+      "role": "concept",
+      "explanation": "complete",
+      "reviewScope": "逐张查看SVG渲染图，核文字完整、箭头/循环、层次和教学归属。"
+    }
+  ]
+}

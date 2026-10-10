@@ -1,0 +1,49 @@
+{
+  "updated": "2026-10-10",
+  "scope": "Local CPU teaching contracts, not a product or agent benchmark.",
+  "code": {
+    "baseline_exit": 1,
+    "patched_exit": 0,
+    "chat_restored_workspace_lost_exit": 1,
+    "independent_assertions": 3,
+    "patch": "--- base/labmath.py\n+++ patched/labmath.py\n@@ -1,2 +1,2 @@\n def mean(values):\n-    return sum(values) / len(values)\n+    return sum(values) / len(values) if values else 0\n"
+  },
+  "retry": {
+    "naive_retry": {
+      "requests": 2,
+      "effects": 2,
+      "last_reply": 2
+    },
+    "stable_operation_id": {
+      "requests": 2,
+      "effects": 1,
+      "last_reply": 1
+    },
+    "scope": "Single-process toy; persistent dedup/concurrency not implemented."
+  },
+  "search": {
+    "required": [
+      "C1",
+      "C2",
+      "C3",
+      "C4"
+    ],
+    "supported": [
+      "C1",
+      "C2",
+      "C3"
+    ],
+    "unresolved": [
+      "C4"
+    ],
+    "coverage": 0.75,
+    "retrieved_records": 4,
+    "eligible_records": 3,
+    "eligible_independent_roots": 2,
+    "scope": "Pre-annotated teaching supports; no semantic web fact checking."
+  },
+  "lifecycle": {
+    "after_claim_expiry_sandbox": "running",
+    "explicit_sandbox_cleanup_required": true
+  }
+}

@@ -4,7 +4,7 @@ title: "从哪里开始？Diffusion、LLM、Agent、Infra 四条学习路线"
 category: guide
 difficulty: 基础
 tags: ["P0", "学习路线", "开始这里"]
-updated: 2026-10-09
+updated: 2026-10-10
 summary: "按先修关系安排学习，每个问题都落到解释、推导或可验证练习。"
 draft: false
 ---
@@ -52,6 +52,8 @@ P0 表示第一轮应掌握的主干，P1 表示主干后再深入。这是本�
 3. [评测](#q=agent-evaluation)。产出：定义完成判据并区分单次可靠性、多次探索。
 4. [多轮梯度与 mask](#q=agent-gradient)。产出：保存每轮真实训练条件。
 5. [GRPO/RLVR](#q=grpo-rlvr) → [OPD](#q=opd-vs-sft)。产出：说清采样者、监督来源与概率目标。
+
+Agent组件专项按[总览](#q=agent-components-overview) → [Harbor E2B ACS与沙箱](#q=agent-sandbox-components) → [Code agent](#q=agent-code-components) / [Search agent](#q=agent-search-components)阅读。先沿同一任务标出决策、工具、执行、状态和验证，再解释产品所在层；用课堂脚本检查重试、恢复和证据覆盖。
 
 ## Infra：从训练基础到框架与训推闭环
 

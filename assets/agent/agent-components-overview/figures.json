@@ -1,0 +1,18 @@
+{
+  "topicId": "agent-components-overview",
+  "reviewedAt": "2026-10-10",
+  "figures": [
+    {
+      "file": "component-map.svg",
+      "origin": "本文教学示意",
+      "sourcePage": "https://github.com/Tammytcl/laoliu-interview-notes/blob/main/assets/agent/agent-components-overview/component-map.svg",
+      "credit": "本文绘制，说明组件职责与信息流；不是厂商架构原图或性能实测。",
+      "retrievedAt": "2026-10-10",
+      "sha256": "871d4ea454e03a433b8ad3556f36ed2cd8b44a0f2662fbabfe7513e03a26af53",
+      "visuallyVerified": true,
+      "role": "concept",
+      "explanation": "complete",
+      "reviewScope": "逐张查看SVG渲染图，核文字完整、箭头/循环、层次和教学归属。"
+    }
+  ]
+}

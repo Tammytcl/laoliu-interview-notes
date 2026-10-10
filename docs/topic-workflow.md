@@ -49,7 +49,7 @@ npm run test:browser
 npm run topics:check-live -- https://tammytcl.github.io/laoliu-interview-notes/
 ```
 
-当前线上检查按 `content/research/topics.json` 验证已注册的十四篇专题：Infra 列表、旧链接跳转、正文与核对源文件一致、问答、来源下载内容、图片hash与显示比例、目录定位、直接刷新和手机布局。扩展专题时登记清单和必要模块；不再修改检查器中的单篇白名单。
+当前线上检查按 `content/research/topics.json` 验证已注册的十八篇专题：按注册文章的实际分类检查Infra/Agent列表，保留旧链接跳转、正文与核对源文件一致、问答、来源下载内容、图片hash与显示比例、目录定位、直接刷新和手机布局。扩展专题时登记清单和必要模块；不再修改检查器中的单篇白名单。练习下载可位于任意合法的仓库assets子目录，仍按线上/本地字节一致验收。
 
 ## 6. 持续更新与自动化边界
 
@@ -108,3 +108,9 @@ GPU/AI加速器比较须先登记芯片/产品/形态/系统层次，再看容�
 按总览、训练、精确验证、服务四篇独立主问题展开，背景与前置知识分别成节；真实源码固定commit/行号，教学重述和CPU练习另标。训练质量、candidate接受和服务性能分别登记，理论期望/假设成本不填为GPUbenchmark。主干/MTP/draft/target状态与概率都按真实对象说明；runtime steps、训练深度、tree nodes和accepted length不得按名称混换。原型labelmask不替代真实packed attention验证。
 
 跨文章复用同一原图时，专题图清单可用 `assetPath` 登记仓库 `assets/` 内的实际资源路径；省略时默认专题目录。保留同一图片hash与归属，线上检查覆盖实际共享路径。源码观察优先登记 `watchPath` 与核读文件hash，仓库其他文件的新提交不自动代表本文内容变化。
+
+## 13. Agent组件与流程 · 2026-10-10
+
+先用任务数据流区分模型、harness、工具、执行环境、状态、验证与观察，再解释具体产品。Harbor按Terminal-Bench团队的评测框架，ACS按阿里云Agent Sandbox；同名产品/同缩写协议带全称区分，不靠缩写推断等价关系。
+
+接口兼容按所需能力逐项核查：commands/files/run_code、身份、超时、后台进程、快照、路由和回收。图checkpoint、文件/RAM snapshot、trajectory与artifact分别定义；语义恢复需要对账实际环境。Search按claim/来源片段/版本时间/独立证据关系组织，检索score不作为可信概率。CPU练习仅验证固定契约与标注关系，不代替云厂商性能或任意网页的事实判断。

@@ -22,7 +22,7 @@
     {
       "id": "agent",
       "name": "Agent · 交互与学习",
-      "description": "工具、上下文、评测与轨迹训练"
+      "description": "Code/Search流程、工具与沙箱、上下文、评测与轨迹训练"
     },
     {
       "id": "systems",

@@ -1,0 +1,83 @@
+{
+  "version": 1,
+  "topicId": "agent-components-overview",
+  "note": "ACS按阿里云容器计算服务的Agent Sandbox解释；源码和官方文档固定基线，课堂CPU示例不代表云产品/模型基准。",
+  "sources": [
+    {
+      "title": "长期任务harness设计",
+      "kind": "author-blog",
+      "purpose": "交接、进度、测试与环境恢复的边界",
+      "id": "agent-components-overview-01",
+      "url": "https://www.anthropic.com/engineering/effective-harnesses-for-long-running-agents",
+      "reviewedAt": "2026-10-10"
+    },
+    {
+      "title": "LangGraph persistence",
+      "kind": "official-docs",
+      "purpose": "核图状态checkpointer与跨thread store区别",
+      "id": "agent-components-overview-02",
+      "url": "https://docs.langchain.com/oss/python/langgraph/persistence",
+      "reviewedAt": "2026-10-10"
+    },
+    {
+      "title": "MCP 2025-11-25架构",
+      "kind": "official-docs",
+      "purpose": "固定规范介绍host/client/server分工",
+      "id": "agent-components-overview-03",
+      "url": "https://modelcontextprotocol.io/specification/2025-11-25/architecture",
+      "reviewedAt": "2026-10-10"
+    },
+    {
+      "title": "ACP官方介绍",
+      "kind": "official-docs",
+      "purpose": "核client到coding agent会话边界",
+      "id": "agent-components-overview-04",
+      "url": "https://agentclientprotocol.com/get-started/introduction",
+      "reviewedAt": "2026-10-10"
+    },
+    {
+      "title": "A2A官方介绍",
+      "kind": "official-docs",
+      "purpose": "核agent到agent协作定位",
+      "id": "agent-components-overview-05",
+      "url": "https://a2a-protocol.org/latest/topics/what-is-a2a/",
+      "reviewedAt": "2026-10-10"
+    },
+    {
+      "title": "Harbor核心对象",
+      "kind": "official-docs",
+      "purpose": "核task/dataset/agent/environment/verifier/trial/job的职责",
+      "watchUrl": "https://docs.harborframework.com/core-concepts/index.md",
+      "reviewedSha256": "409443cd7fe2bd38ed19fdfe3d795e2490481db165c414954231e6e1e3385c2c",
+      "id": "agent-components-overview-06",
+      "url": "https://docs.harborframework.com/core-concepts/index",
+      "reviewedAt": "2026-10-10"
+    },
+    {
+      "title": "E2B概览",
+      "kind": "official-docs",
+      "purpose": "核SDK、sandbox与执行能力定位",
+      "id": "agent-components-overview-07",
+      "url": "https://docs.e2b.dev/",
+      "reviewedAt": "2026-10-10"
+    },
+    {
+      "title": "ACS Agent Sandbox概述",
+      "kind": "official-docs",
+      "purpose": "核产品定位、隔离、预热及SDK/CR接入",
+      "id": "agent-components-overview-08",
+      "url": "https://help.aliyun.com/zh/cs/user-guide/agent-sandbox/",
+      "reviewedAt": "2026-10-10"
+    },
+    {
+      "title": "Harbor ATIF",
+      "kind": "official-docs",
+      "purpose": "核轨迹保存与加载能力的区别",
+      "watchUrl": "https://docs.harborframework.com/agents/atif.md",
+      "reviewedSha256": "cc3fdacbccb761631aa94580f59f290b4c67d412183d7bc362c2d6f744c642d1",
+      "id": "agent-components-overview-09",
+      "url": "https://docs.harborframework.com/agents/atif",
+      "reviewedAt": "2026-10-10"
+    }
+  ]
+}

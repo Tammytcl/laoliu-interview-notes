@@ -1,0 +1,75 @@
+{
+  "version": 1,
+  "topicId": "agent-code-components",
+  "note": "ACS按阿里云容器计算服务的Agent Sandbox解释；源码和官方文档固定基线，课堂CPU示例不代表云产品/模型基准。",
+  "sources": [
+    {
+      "title": "MCP 2025-11-25工具",
+      "kind": "official-docs",
+      "purpose": "固定规范核schema、调用与annotation提示边界",
+      "id": "agent-code-components-01",
+      "url": "https://modelcontextprotocol.io/specification/2025-11-25/server/tools",
+      "reviewedAt": "2026-10-10"
+    },
+    {
+      "title": "e2b-dev/E2B packages/python-sdk/e2b/sandbox_sync/commands/command.py",
+      "kind": "official-code",
+      "purpose": "固定源码/文档核职责、生命周期、执行语义或配置；不是本轮部署结果。",
+      "repository": "e2b-dev/E2B",
+      "revision": "df6c368152b067512702fc677952c0fc4e13c2f0",
+      "pinnedUrl": "https://github.com/e2b-dev/E2B/blob/df6c368152b067512702fc677952c0fc4e13c2f0/packages/python-sdk/e2b/sandbox_sync/commands/command.py#L316-L327",
+      "watchPath": "packages/python-sdk/e2b/sandbox_sync/commands/command.py",
+      "watchUrl": "https://raw.githubusercontent.com/e2b-dev/E2B/main/packages/python-sdk/e2b/sandbox_sync/commands/command.py",
+      "reviewedSha256": "723d02c4cd612d966361de44147ca8cb222d5355cdcb1d0746177d1361d3475e",
+      "id": "agent-code-components-02",
+      "url": "https://github.com/e2b-dev/E2B/blob/df6c368152b067512702fc677952c0fc4e13c2f0/packages/python-sdk/e2b/sandbox_sync/commands/command.py#L316-L327",
+      "reviewedAt": "2026-10-10"
+    },
+    {
+      "title": "SWE-agent/mini-swe-agent README.md",
+      "kind": "official-docs",
+      "purpose": "固定源码/文档核职责、生命周期、执行语义或配置；不是本轮部署结果。",
+      "repository": "SWE-agent/mini-swe-agent",
+      "revision": "04d809ceab9df28f9adaed044884180159172930",
+      "pinnedUrl": "https://github.com/SWE-agent/mini-swe-agent/blob/04d809ceab9df28f9adaed044884180159172930/README.md",
+      "watchPath": "README.md",
+      "watchUrl": "https://raw.githubusercontent.com/SWE-agent/mini-swe-agent/main/README.md",
+      "reviewedSha256": "9982d90b7566f2f3fa5e9811b475d5e8e2a84e2df80cf3f1e4be6e820b129835",
+      "id": "agent-code-components-03",
+      "url": "https://github.com/SWE-agent/mini-swe-agent/blob/04d809ceab9df28f9adaed044884180159172930/README.md",
+      "reviewedAt": "2026-10-10"
+    },
+    {
+      "title": "LangGraph persistence",
+      "kind": "official-docs",
+      "purpose": "核图状态checkpointer与跨thread store区别",
+      "id": "agent-code-components-04",
+      "url": "https://docs.langchain.com/oss/python/langgraph/persistence",
+      "reviewedAt": "2026-10-10"
+    },
+    {
+      "title": "长期任务harness设计",
+      "kind": "author-blog",
+      "purpose": "交接、进度、测试与环境恢复的边界",
+      "id": "agent-code-components-05",
+      "url": "https://www.anthropic.com/engineering/effective-harnesses-for-long-running-agents",
+      "reviewedAt": "2026-10-10"
+    },
+    {
+      "title": "SWE-bench官网",
+      "kind": "official-docs",
+      "purpose": "核仓库修复评测的定位",
+      "id": "agent-code-components-06",
+      "url": "https://www.swebench.com/",
+      "reviewedAt": "2026-10-10"
+    },
+    {
+      "title": "Terminal-Bench官网",
+      "kind": "official-docs",
+      "purpose": "核终端任务评测与框架的区别",
+      "id": "agent-code-components-07",
+      "url": "https://www.tbench.ai",
+      "reviewedAt": "2026-10-10"
+    }
+  ]
+}

@@ -254,5 +254,77 @@
     ],
     "minimumQuestions": 8,
     "minimumCharacters": 6000
+  },
+  {
+    "id": "agent-components-overview",
+    "sources": "content/research/agent-components-overview-sources.json",
+    "figures": "assets/agent/agent-components-overview/figures.json",
+    "requiredSections": [
+      "问题背景",
+      "前置知识",
+      "术语地图",
+      "一次任务",
+      "Harness",
+      "组件依赖",
+      "轨迹产物",
+      "面试问答",
+      "来源"
+    ],
+    "minimumQuestions": 12,
+    "minimumCharacters": 6000
+  },
+  {
+    "id": "agent-sandbox-components",
+    "sources": "content/research/agent-sandbox-components-sources.json",
+    "figures": "assets/agent/agent-sandbox-components/figures.json",
+    "requiredSections": [
+      "问题背景",
+      "前置知识",
+      "Harbor",
+      "E2B",
+      "ACS",
+      "同层比较",
+      "真实源码",
+      "面试问答",
+      "来源"
+    ],
+    "minimumQuestions": 12,
+    "minimumCharacters": 6000
+  },
+  {
+    "id": "agent-code-components",
+    "sources": "content/research/agent-code-components-sources.json",
+    "figures": "assets/agent/agent-code-components/figures.json",
+    "requiredSections": [
+      "问题背景",
+      "前置知识",
+      "完整流程",
+      "Agent loop",
+      "Harness",
+      "状态恢复",
+      "评测",
+      "面试问答",
+      "来源"
+    ],
+    "minimumQuestions": 8,
+    "minimumCharacters": 6000
+  },
+  {
+    "id": "agent-search-components",
+    "sources": "content/research/agent-search-components-sources.json",
+    "figures": "assets/agent/agent-search-components/figures.json",
+    "requiredSections": [
+      "问题背景",
+      "前置知识",
+      "完整流程",
+      "组件选择",
+      "证据对象",
+      "RAG",
+      "成本",
+      "面试问答",
+      "来源"
+    ],
+    "minimumQuestions": 8,
+    "minimumCharacters": 6000
   }
 ]

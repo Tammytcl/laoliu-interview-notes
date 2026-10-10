@@ -1,0 +1,55 @@
+{
+  "version": 1,
+  "topicId": "agent-search-components",
+  "note": "ACS按阿里云容器计算服务的Agent Sandbox解释；源码和官方文档固定基线，课堂CPU示例不代表云产品/模型基准。",
+  "sources": [
+    {
+      "title": "Tavily Search API",
+      "kind": "official-docs",
+      "purpose": "核query/results/content/raw_content与调用参数",
+      "id": "agent-search-components-01",
+      "url": "https://docs.tavily.com/documentation/api-reference/endpoint/search",
+      "reviewedAt": "2026-10-10"
+    },
+    {
+      "title": "Exa Search API",
+      "kind": "official-docs",
+      "purpose": "核search入口的职责，不作搜索质量排名",
+      "id": "agent-search-components-02",
+      "url": "https://docs.exa.ai/reference/search",
+      "reviewedAt": "2026-10-10"
+    },
+    {
+      "title": "Firecrawl官方介绍",
+      "kind": "official-docs",
+      "purpose": "核scrape/crawl/search的角色区别",
+      "id": "agent-search-components-03",
+      "url": "https://docs.firecrawl.dev/introduction",
+      "reviewedAt": "2026-10-10"
+    },
+    {
+      "title": "Playwright Python",
+      "kind": "official-docs",
+      "purpose": "核browser自动化定位与会话接口",
+      "id": "agent-search-components-04",
+      "url": "https://playwright.dev/python/docs/intro",
+      "reviewedAt": "2026-10-10"
+    },
+    {
+      "title": "MCP 2025-11-25工具",
+      "kind": "official-docs",
+      "purpose": "固定规范核schema、调用与annotation提示边界",
+      "id": "agent-search-components-05",
+      "url": "https://modelcontextprotocol.io/specification/2025-11-25/server/tools",
+      "reviewedAt": "2026-10-10"
+    },
+    {
+      "title": "Agent评测原始解释",
+      "kind": "author-blog",
+      "purpose": "核最终结果、过程、grader与指标拆解",
+      "id": "agent-search-components-06",
+      "url": "https://www.anthropic.com/engineering/demystifying-evals-for-ai-agents",
+      "reviewedAt": "2026-10-10"
+    }
+  ]
+}

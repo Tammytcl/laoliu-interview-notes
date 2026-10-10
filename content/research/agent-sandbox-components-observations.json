@@ -1,0 +1,96 @@
+{
+  "version": 1,
+  "topicId": "agent-sandbox-components",
+  "checkedAt": "2026-10-10T02:56:08.787Z",
+  "observations": {
+    "agent-sandbox-components-01": {
+      "checkedAt": "2026-10-10T02:56:08.787Z",
+      "lastSuccessAt": "2026-10-10T02:56:08.787Z",
+      "status": "ok",
+      "sha256": "409443cd7fe2bd38ed19fdfe3d795e2490481db165c414954231e6e1e3385c2c",
+      "pendingReview": false
+    },
+    "agent-sandbox-components-02": {
+      "checkedAt": "2026-10-10T02:56:08.787Z",
+      "lastSuccessAt": "2026-10-10T02:56:08.787Z",
+      "status": "ok",
+      "sha256": "cc3fdacbccb761631aa94580f59f290b4c67d412183d7bc362c2d6f744c642d1",
+      "pendingReview": false
+    },
+    "agent-sandbox-components-04": {
+      "checkedAt": "2026-10-10T02:56:08.787Z",
+      "lastSuccessAt": "2026-10-10T02:56:08.787Z",
+      "status": "ok",
+      "revision": "09f5b964f8e5075f7e52fd08c9994dfc80ad5d24",
+      "sha256": "f9cd1d01960de82f1ec025c285a7367cec5eb8e3a2bb0b8e6313e7bce3283e5e",
+      "pendingReview": false
+    },
+    "agent-sandbox-components-03": {
+      "checkedAt": "2026-10-10T02:56:08.787Z",
+      "lastSuccessAt": "2026-10-10T02:56:08.787Z",
+      "status": "ok",
+      "revision": "09f5b964f8e5075f7e52fd08c9994dfc80ad5d24",
+      "sha256": "3bb2c0b9dd7553022ba98da96ef5188abc27e2c8475ac949d541f47c5d86ecc6",
+      "pendingReview": false
+    },
+    "agent-sandbox-components-05": {
+      "checkedAt": "2026-10-10T02:56:08.787Z",
+      "lastSuccessAt": "2026-10-10T02:56:08.787Z",
+      "status": "ok",
+      "sha256": "fccdb3adc7cb7e54fa4bfd2ef1bdca363d748c088862035b9b6529e4b3d79c33",
+      "pendingReview": false
+    },
+    "agent-sandbox-components-06": {
+      "checkedAt": "2026-10-10T02:56:08.787Z",
+      "lastSuccessAt": "2026-10-10T02:56:08.787Z",
+      "status": "ok",
+      "sha256": "5724ea8eaaa0bfef02d0a9f5d20d3abf12cc2639ce711dbe711eeeaac8695c8c",
+      "pendingReview": false
+    },
+    "agent-sandbox-components-09": {
+      "checkedAt": "2026-10-10T02:56:08.787Z",
+      "lastSuccessAt": "2026-10-10T02:56:08.787Z",
+      "status": "ok",
+      "sha256": "b3e27ce1e4eccdbb7ac267cb424d5f522b16f9e8d1e53031f61545e9a34991ba",
+      "pendingReview": false
+    },
+    "agent-sandbox-components-08": {
+      "checkedAt": "2026-10-10T02:56:08.787Z",
+      "lastSuccessAt": "2026-10-10T02:56:08.787Z",
+      "status": "ok",
+      "revision": "df6c368152b067512702fc677952c0fc4e13c2f0",
+      "sha256": "723d02c4cd612d966361de44147ca8cb222d5355cdcb1d0746177d1361d3475e",
+      "pendingReview": false
+    },
+    "agent-sandbox-components-10": {
+      "checkedAt": "2026-10-10T02:56:08.787Z",
+      "lastSuccessAt": "2026-10-10T02:56:08.787Z",
+      "status": "ok",
+      "sha256": "44790fa8c817e1c1a35f0f0441c00f024b550c45d85099f02a19f425d3f05544",
+      "pendingReview": false
+    },
+    "agent-sandbox-components-15": {
+      "checkedAt": "2026-10-10T02:56:08.787Z",
+      "lastSuccessAt": "2026-10-10T02:56:08.787Z",
+      "status": "ok",
+      "revision": "09f5b964f8e5075f7e52fd08c9994dfc80ad5d24",
+      "sha256": "44d623f99a9af9318672ea2c7523527e498ffae04defa36c58f478ce5c076e0d",
+      "pendingReview": false
+    },
+    "agent-sandbox-components-11": {
+      "checkedAt": "2026-10-10T02:56:08.787Z",
+      "lastSuccessAt": "2026-10-10T02:56:08.787Z",
+      "status": "ok",
+      "sha256": "ca0515df8fc089e52d06aec162df3afcaf31f07724cb8873e9e9d4b2e2c69b46",
+      "pendingReview": false
+    },
+    "agent-sandbox-components-14": {
+      "checkedAt": "2026-10-10T02:56:08.787Z",
+      "lastSuccessAt": "2026-10-10T02:56:08.787Z",
+      "status": "ok",
+      "revision": "4777925160cfb49937dc3030abd30f6b0029198d",
+      "sha256": "b68fe385dc6b45f4253647f85922a01f8a445aeea9242e1ce043a1fd176c0758",
+      "pendingReview": false
+    }
+  }
+}

@@ -1,4 +1,24 @@
 import { test, expect } from '@playwright/test';
+test('Agent组件系列连接沙箱、代码、搜索，并提供可读练习', async ({ page }) => {
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.goto('/#q=agent-components-overview');
+  await expect(page.locator('.reader-header h1')).toContainText('Code 与 Search');
+  await expect(page.locator('.prose')).toContainText('阿里云');
+  for (const [id, title] of [['agent-sandbox-components', 'Harbor E2B ACS'], ['agent-code-components', 'Code Agent'], ['agent-search-components', 'Search Agent']]) {
+    await page.locator(`.prose a[href="#q=${id}"]`).first().click();
+    await expect(page.locator('.reader-header h1')).toContainText(title);
+    await expect(page.locator('.prose')).toContainText('Q08');
+    await expect(page.locator('.prose pre').first()).toBeVisible();
+    expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1)).toBe(true);
+  }
+  const script = await page.request.get('/assets/agent/agent-components-lab.py');
+  expect(script.status()).toBe(200);
+  expect(await script.text()).toContain('TemporaryDirectory');
+  const results = await (await page.request.get('/assets/agent/agent-components-lab-results.json')).json();
+  expect(results.code.patched_exit).toBe(0);
+  expect(results.retry.naive_retry.effects).toBe(2);
+  expect(results.search.coverage).toBe(0.75);
+});
 test('MTP系列入口可逐篇学习，原论文与CPU练习可打开', async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 });
   await page.goto('/#q=infra-mtp-overview');

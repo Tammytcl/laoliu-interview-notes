@@ -39,6 +39,9 @@ pass@k 衡量多次机会的探索能力，pass^k 更偏向稳定性。线上只
 
 ## 小实验与自检
 
+评测组织可继续读[Harbor任务与Verifier](#q=agent-sandbox-components)；具体完成判据与失败归因分别见[Code流程](#q=agent-code-components)和[Search证据流程](#q=agent-search-components)。
+
+
 选择 10 个任务，每题运行 3 次，把“至少一次成功”和“三次全成功”分开统计。将失败归因到检索、规划、调用、环境或验证，记录 p50/p95 延迟和每成功任务成本。
 
 自检：提升模型温度可能怎样影响单次表现和多次探索？两种指标能否都改善？

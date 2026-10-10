@@ -52,7 +52,10 @@ try {
     }
   }
   for (const topic of expectedTopics) {
-    for (const [, path] of topic.body.matchAll(/\]\(\.\/(assets\/infra\/[^\s)]+\.(?:py|json))\)/g)) downloads.add(path);
+    for (const [, path] of topic.body.matchAll(/\]\(\.\/(assets\/[^\s)]+\.(?:py|json))\)/g)) {
+      assert.ok(!path.split('/').includes('..'), `Unsafe download path: ${path}`);
+      downloads.add(path);
+    }
   }
   for (const file of ['infra-foundations-check.py', 'infra-foundations-check-results.json']) downloads.add(`assets/infra/${file}`);
   for (const path of downloads) {
@@ -62,15 +65,19 @@ try {
       const source = await readFile(new URL('../content/' + path, import.meta.url), 'utf8');
       assert.deepEqual(await response.json(), JSON.parse(source), `Stale source download: ${path}`);
     }
-    if (path.startsWith('assets/infra/')) assert.deepEqual(await response.body(), await readFile(new URL('../' + path, import.meta.url)), `Stale exercise download: ${path}`);
+    if (path.startsWith('assets/')) assert.deepEqual(await response.body(), await readFile(new URL('../' + path, import.meta.url)), `Stale exercise download: ${path}`);
   }
-  const publishedSystems = sourceQuestions.filter(q => !q.draft && q.category === 'systems').map(q => q.id).sort();
-  assert.deepEqual(data.questions.filter(q => q.category === 'systems').map(q => q.id).sort(), publishedSystems);
-  url.hash = '';
-  await page.goto(url.href);
-  await page.locator('[data-category="systems"]').click();
-  await expect(page.locator('.question-card')).toHaveCount(publishedSystems.length);
-  for (const topic of expectedTopics) await expect(page.locator('.question-card a').filter({ hasText: topic.title })).toHaveCount(1);
+  for (const category of new Set(expectedTopics.map(topic => topic.category))) {
+    const published = sourceQuestions.filter(q => !q.draft && q.category === category).map(q => q.id).sort();
+    assert.deepEqual(data.questions.filter(q => q.category === category).map(q => q.id).sort(), published);
+    url.hash = '';
+    await page.goto(url.href);
+    await page.locator(`[data-category="${category}"]`).click();
+    await expect(page.locator('.question-card')).toHaveCount(published.length);
+    for (const topic of expectedTopics.filter(topic => topic.category === category)) {
+      await expect(page.locator('.question-card a').filter({ hasText: topic.title })).toHaveCount(1);
+    }
+  }
   const redirects = JSON.parse(await readFile(new URL('../content/metadata/note-redirects.json', import.meta.url), 'utf8'));
   assert.deepEqual(data.noteRedirects, redirects);
   for (const [oldId, target] of Object.entries(redirects)) {

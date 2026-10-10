@@ -55,6 +55,8 @@ draft: false
 
 下一篇：[工具接口](#q=agent-tool-design)。
 
+组件与实际流程系列：[总览](#q=agent-components-overview) → [Harbor E2B ACS沙箱](#q=agent-sandbox-components) → [Code agent](#q=agent-code-components) / [Search agent](#q=agent-search-components)。从一次任务理解harness、执行环境、协议、状态和独立验证。
+
 ## 原始资料与阅读提示
 
 调研日期：2026-09-30。以下为论文或官方文档；正文是学习性整理，小实验是建议练习，未声称已复现。
