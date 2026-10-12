@@ -1,37 +1,37 @@
 {
   "version": 1,
   "topicId": "infra-mtp-speculative",
-  "checkedAt": "2026-10-09T10:25:37.342Z",
+  "checkedAt": "2026-10-12T09:12:23.352Z",
   "observations": {
     "infra-mtp-speculative-source-01": {
-      "checkedAt": "2026-10-09T10:25:37.342Z",
-      "lastSuccessAt": "2026-10-09T10:25:37.342Z",
+      "checkedAt": "2026-10-12T09:12:23.352Z",
+      "lastSuccessAt": "2026-10-12T09:12:23.352Z",
       "status": "ok",
-      "revision": "59ffd73e8597d860730f4a8c4f778f27c75a0dfa",
+      "revision": "a33d46b47193e3273dc38f980abbf55459f3c77f",
       "sha256": "9acaefa7ff3ff02649adf3a2edc4a7281d0089c23566fe5ff140c5f820d88ac4",
       "pendingReview": false
     },
     "infra-mtp-speculative-source-03": {
-      "checkedAt": "2026-10-09T10:25:37.342Z",
-      "lastSuccessAt": "2026-10-09T10:25:37.342Z",
+      "checkedAt": "2026-10-12T09:12:23.352Z",
+      "lastSuccessAt": "2026-10-12T09:12:23.352Z",
       "status": "ok",
-      "revision": "59ffd73e8597d860730f4a8c4f778f27c75a0dfa",
+      "revision": "a33d46b47193e3273dc38f980abbf55459f3c77f",
       "sha256": "9acaefa7ff3ff02649adf3a2edc4a7281d0089c23566fe5ff140c5f820d88ac4",
       "pendingReview": false
     },
     "infra-mtp-speculative-source-06": {
-      "checkedAt": "2026-10-09T10:25:37.342Z",
-      "lastSuccessAt": "2026-10-09T10:25:37.342Z",
+      "checkedAt": "2026-10-12T09:12:23.352Z",
+      "lastSuccessAt": "2026-10-12T09:12:23.352Z",
       "status": "ok",
-      "revision": "59ffd73e8597d860730f4a8c4f778f27c75a0dfa",
+      "revision": "a33d46b47193e3273dc38f980abbf55459f3c77f",
       "sha256": "9acaefa7ff3ff02649adf3a2edc4a7281d0089c23566fe5ff140c5f820d88ac4",
       "pendingReview": false
     },
     "infra-mtp-speculative-source-07": {
-      "checkedAt": "2026-10-09T10:25:37.342Z",
-      "lastSuccessAt": "2026-10-09T10:25:37.342Z",
+      "checkedAt": "2026-10-12T09:12:23.352Z",
+      "lastSuccessAt": "2026-10-12T09:12:23.352Z",
       "status": "ok",
-      "revision": "59ffd73e8597d860730f4a8c4f778f27c75a0dfa",
+      "revision": "a33d46b47193e3273dc38f980abbf55459f3c77f",
       "sha256": "d7401a38951ec17b8fc04c211f5a0219a69de926f99967a196f89a38eae8ef0c",
       "pendingReview": false
     }
