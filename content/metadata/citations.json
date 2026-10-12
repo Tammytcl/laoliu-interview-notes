@@ -767,5 +767,103 @@
         "status": "ok"
       }
     }
+  },
+  "paper-actfirst-opd": {
+    "openalex": {
+      "count": 0,
+      "url": "https://openalex.org/W7214961601",
+      "matchedTitle": "Act First, Reason Later: Accelerating On-Policy Distillation for Multi-Turn Agents via Reference-Conditioned Inverse Dynamics",
+      "fetchedAt": "2026-10-12T11:33:30.977Z"
+    },
+    "attempts": {
+      "openalex": {
+        "checkedAt": "2026-10-12T11:33:30.977Z",
+        "status": "ok"
+      }
+    }
+  },
+  "paper-agent-lightning": {
+    "openalex": {
+      "count": 0,
+      "url": "https://openalex.org/W7077067785",
+      "matchedTitle": "Agent Lightning: Train ANY AI Agents with Reinforcement Learning",
+      "fetchedAt": "2026-10-12T11:33:30.977Z"
+    },
+    "attempts": {
+      "openalex": {
+        "checkedAt": "2026-10-12T11:33:30.977Z",
+        "status": "ok"
+      }
+    }
+  },
+  "paper-gigpo": {
+    "openalex": {
+      "count": 5,
+      "url": "https://openalex.org/W4417093501",
+      "matchedTitle": "Group-in-Group Policy Optimization for LLM Agent Training",
+      "fetchedAt": "2026-10-12T11:33:30.977Z"
+    },
+    "attempts": {
+      "openalex": {
+        "checkedAt": "2026-10-12T11:33:30.977Z",
+        "status": "ok"
+      }
+    }
+  },
+  "paper-guided-opd": {
+    "openalex": {
+      "count": 0,
+      "url": "https://openalex.org/W7164915140",
+      "matchedTitle": "On-Policy Distillation with Curriculum Turn-level Guidance for Multi-turn Agents",
+      "fetchedAt": "2026-10-12T11:33:30.977Z"
+    },
+    "attempts": {
+      "openalex": {
+        "checkedAt": "2026-10-12T11:33:30.977Z",
+        "status": "ok"
+      }
+    }
+  },
+  "paper-search-r1": {
+    "openalex": {
+      "count": 12,
+      "url": "https://openalex.org/W4417422257",
+      "matchedTitle": "Search-R1: Training LLMs to Reason and Leverage Search Engines with Reinforcement Learning",
+      "fetchedAt": "2026-10-12T11:33:30.977Z"
+    },
+    "attempts": {
+      "openalex": {
+        "checkedAt": "2026-10-12T11:33:30.977Z",
+        "status": "ok"
+      }
+    }
+  },
+  "paper-uopd": {
+    "openalex": {
+      "count": 0,
+      "url": "https://openalex.org/W7214711013",
+      "matchedTitle": "UOPD: Uncertainty-Aware Intervention for On-Policy Distillation of Multi-Turn Agents",
+      "fetchedAt": "2026-10-12T11:33:30.977Z"
+    },
+    "attempts": {
+      "openalex": {
+        "checkedAt": "2026-10-12T11:33:30.977Z",
+        "status": "ok"
+      }
+    }
+  },
+  "paper-rethink-mopd": {
+    "openalex": {
+      "count": 0,
+      "url": "https://openalex.org/W7220731822",
+      "matchedTitle": "Rethinking Self-Distillation for Multi-Teacher Capability Merging",
+      "fetchedAt": "2026-10-12T11:33:30.977Z"
+    },
+    "attempts": {
+      "openalex": {
+        "checkedAt": "2026-10-12T11:33:30.977Z",
+        "status": "ok"
+      }
+    }
   }
 }
