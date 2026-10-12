@@ -1,0 +1,48 @@
+{
+  "paperId": "paper-search-r1",
+  "arxivVersion": "2503.09516v5",
+  "sourceAssets": [
+    {
+      "name": "method-source.png",
+      "tex": "3.methodology.tex",
+      "label": "fig:main",
+      "role": "method",
+      "path": "figures/main.pdf"
+    }
+  ],
+  "crops": [
+    {
+      "name": "table-2-pdf.png",
+      "page": 8,
+      "box": [
+        105,
+        80,
+        508,
+        386
+      ],
+      "role": "result-table"
+    },
+    {
+      "name": "table-3-pdf.png",
+      "page": 8,
+      "box": [
+        105,
+        399,
+        508,
+        545
+      ],
+      "role": "result-table"
+    },
+    {
+      "name": "table-4-pdf.png",
+      "page": 9,
+      "box": [
+        105,
+        249,
+        508,
+        335
+      ],
+      "role": "result-table"
+    }
+  ]
+}

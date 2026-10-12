@@ -1,0 +1,14 @@
+{
+  "version": 1,
+  "topicId": "rl-policy-optimization-map",
+  "checkedAt": "2026-10-12T11:17:52.641Z",
+  "observations": {
+    "rl-policy-optimization-map-03": {
+      "checkedAt": "2026-10-12T11:17:52.641Z",
+      "lastSuccessAt": "2026-10-12T11:17:52.641Z",
+      "status": "ok",
+      "revision": "2035f58dcb06d8cad4caee107b30f4045d724367",
+      "pendingReview": true
+    }
+  }
+}

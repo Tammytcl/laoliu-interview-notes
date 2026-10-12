@@ -1,0 +1,78 @@
+{
+  "paperId": "paper-agent-lightning",
+  "arxivVersion": "2508.03680v1",
+  "sourceAssets": [
+    {
+      "name": "method-source.png",
+      "tex": "sections/2.2_alg.tex",
+      "label": "fig:alg",
+      "role": "method",
+      "path": "figures/algorithm.png"
+    },
+    {
+      "name": "architecture-source.png",
+      "tex": "sections/2.3_infra.tex",
+      "label": "fig:agent_lightning_architecture",
+      "role": "method",
+      "path": "figures/agent_lightning_architecture_v3.png"
+    },
+    {
+      "name": "sql-source.png",
+      "tex": "sections/3_results.tex",
+      "label": "fig:sql_curve",
+      "role": "result-figure",
+      "paths": [
+        "figures/train_spider.png",
+        "figures/test_spider.png"
+      ],
+      "columns": 2,
+      "panelWidths": [
+        800,
+        800
+      ]
+    },
+    {
+      "name": "rag-source.png",
+      "tex": "sections/3_results.tex",
+      "label": "fig:musique_curve",
+      "role": "result-figure",
+      "paths": [
+        "figures/train_rag_llama.png",
+        "figures/test_rag_llama.png"
+      ],
+      "columns": 2,
+      "panelWidths": [
+        800,
+        800
+      ]
+    },
+    {
+      "name": "calc-source.png",
+      "tex": "sections/3_results.tex",
+      "label": "fig:calc_curve",
+      "role": "result-figure",
+      "paths": [
+        "figures/train_calc.png",
+        "figures/test_calc.png"
+      ],
+      "columns": 2,
+      "panelWidths": [
+        800,
+        800
+      ]
+    }
+  ],
+  "crops": [
+    {
+      "name": "table-1-pdf.png",
+      "page": 11,
+      "box": [
+        70,
+        580,
+        526,
+        682
+      ],
+      "role": "experiment-table"
+    }
+  ]
+}

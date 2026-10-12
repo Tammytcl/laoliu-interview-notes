@@ -1,0 +1,21 @@
+{
+  "version": 1,
+  "topicId": "agentic-opd-pipeline",
+  "checkedAt": "2026-10-12T11:17:54.435Z",
+  "observations": {
+    "agentic-opd-pipeline-01": {
+      "checkedAt": "2026-10-12T11:17:54.435Z",
+      "lastSuccessAt": "2026-10-12T11:17:54.435Z",
+      "status": "ok",
+      "revision": "befd0c0a582ec6efc055660467db95d522519591",
+      "pendingReview": false
+    },
+    "agentic-opd-pipeline-06": {
+      "checkedAt": "2026-10-12T11:17:54.435Z",
+      "lastSuccessAt": "2026-10-12T11:17:54.435Z",
+      "status": "ok",
+      "revision": "befd0c0a582ec6efc055660467db95d522519591",
+      "pendingReview": false
+    }
+  }
+}

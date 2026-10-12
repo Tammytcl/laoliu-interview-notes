@@ -1,0 +1,44 @@
+{
+  "paperId": "paper-guided-opd",
+  "arxivVersion": "2606.15912v2",
+  "sourceAssets": [
+    {
+      "name": "method-source.png",
+      "tex": "acl_latex.tex",
+      "label": "fig:method",
+      "role": "method",
+      "path": "figures/figure2.pdf"
+    },
+    {
+      "name": "diagnostic-source.png",
+      "tex": "acl_latex.tex",
+      "label": "fig:teaser",
+      "role": "result-figure",
+      "path": "figures/figure1.png"
+    }
+  ],
+  "crops": [
+    {
+      "name": "table-1-pdf.png",
+      "page": 7,
+      "box": [
+        69,
+        70,
+        529,
+        380
+      ],
+      "role": "result-table"
+    },
+    {
+      "name": "table-2-pdf.png",
+      "page": 7,
+      "box": [
+        69,
+        392,
+        297,
+        658
+      ],
+      "role": "result-table"
+    }
+  ]
+}

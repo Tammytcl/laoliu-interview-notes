@@ -1,0 +1,17 @@
+{
+  "topicId": "rl-returns-gae",
+  "reviewedAt": "2026-10-12",
+  "figures": [
+    {
+      "file": "gae-masks.svg",
+      "sourcePage": "https://github.com/Tammytcl/laoliu-interview-notes/blob/main/assets/learning/rl-returns-gae/gae-masks.svg",
+      "credit": "本文教学示意，展示信息与梯度边界；不是论文原图或性能实测。",
+      "sha256": "ec2a54ab63ef46c218a02741a90116b782d3caa11b89e55d6fe94df5c0bc959d",
+      "visuallyVerified": true,
+      "explanation": "complete",
+      "role": "concept",
+      "reviewedAt": "2026-10-12",
+      "reviewScope": "逐张查看浏览器SVG渲染，核文字、箭头和完整边界。"
+    }
+  ]
+}

@@ -1,0 +1,208 @@
+{
+  "updated": "2026-10-12",
+  "validation_scope": "Small CPU classroom checks only",
+  "actor_critic": {
+    "direct_autograd": 0.375,
+    "baselines": {
+      "0.0": {
+        "expected_gradient": 0.375,
+        "variance": 0.421875
+      },
+      "0.5": {
+        "expected_gradient": 0.375,
+        "variance": 0.1875
+      },
+      "1.5": {
+        "expected_gradient": 0.375,
+        "variance": 0.0
+      }
+    },
+    "G2_group_mean_expected_gradient": 0.1875,
+    "G2_LOO_expected_gradient": 0.375
+  },
+  "GAE": {
+    "gamma": 0.9,
+    "lambda": 0.8,
+    "two_step_advantages": [
+      0.42800000000000005,
+      0.4
+    ],
+    "critic_targets": [
+      0.8280000000000001,
+      1.0
+    ],
+    "lambda1_advantages": [
+      0.5,
+      0.4
+    ],
+    "terminal": [
+      -2.0
+    ],
+    "continuable_truncation": [
+      0.7000000000000002
+    ],
+    "separate_episodes": [
+      0.3,
+      -0.9
+    ],
+    "wrong_trace_connection": [
+      -0.34800000000000014,
+      -0.9
+    ],
+    "observation_skip_matches_decision_sequence": true
+  },
+  "PPO_CISPO": {
+    "ratios": [
+      0.7,
+      1.3,
+      0.7,
+      1.3
+    ],
+    "advantages": [
+      2.0,
+      2.0,
+      -2.0,
+      -2.0
+    ],
+    "PPO_logprob_gradients_mean4": [
+      -0.35,
+      0.0,
+      0.0,
+      0.65
+    ],
+    "CISPO_logprob_gradients_mean4": [
+      -0.4,
+      -0.6,
+      0.4,
+      0.6
+    ],
+    "ratio1_logprob_gradient": -2.0,
+    "scope": "Local objectives, not a complete training implementation."
+  },
+  "groups": {
+    "centered": [
+      -1.3333333333333333,
+      -0.33333333333333326,
+      1.6666666666666667
+    ],
+    "LOO": [
+      -2.0,
+      -0.5,
+      2.5
+    ],
+    "population_std_advantages": [
+      -1.0,
+      -1.0,
+      1.0,
+      1.0
+    ],
+    "sample_std_advantages": [
+      -0.8660254037844387,
+      -0.8660254037844387,
+      0.8660254037844387,
+      0.8660254037844387
+    ],
+    "all_equal_advantages": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "sequence_mean": 2.0,
+    "token_mean": 2.3333333333333335,
+    "episode_mean": 0.5,
+    "repeated_turn_row_mean": 0.75,
+    "GiGPO_toy_joint_advantages": {
+      "S0": [
+        1.0,
+        -1.0
+      ],
+      "S1": [
+        1.5,
+        -1.5
+      ]
+    },
+    "scope": "Fixed groups/returns; no actual environments or similarity clustering."
+  },
+  "OPD": {
+    "student": [
+      0.20000000000000007,
+      0.5000000000000001,
+      0.3
+    ],
+    "teacher": [
+      0.5,
+      0.3,
+      0.2
+    ],
+    "reverse_KL": 0.1937941979406138,
+    "forward_KL": 0.22380465718564724,
+    "exact_rKL_gradient": [
+      -0.22201698596295386,
+      0.15851571291268848,
+      0.06350127305026504
+    ],
+    "score_surrogate_gradient": [
+      -0.22201698596295377,
+      0.1585157129126886,
+      0.06350127305026515
+    ],
+    "naive_sample_scalar_expected_gradient": [
+      -4.4408920985006276e-17,
+      -1.1102230246251568e-16,
+      -1.2212453270876723e-16
+    ],
+    "forward_KL_and_SFT_gradient": [
+      -0.29999999999999993,
+      0.20000000000000012,
+      0.10000000000000003
+    ],
+    "scope": "Fixed-prefix conditional derivatives; no state-occupancy derivative."
+  },
+  "agentic": {
+    "actual_gate_rate": 0.8,
+    "gate_execution_distribution": [
+      0.6000000000000001,
+      0.24,
+      0.16000000000000003
+    ],
+    "independent_mixture_same_rate": [
+      0.44,
+      0.33999999999999997,
+      0.22000000000000003
+    ],
+    "Guided_cosine_beta_at_steps": {
+      "0": 1.0,
+      "100": 0.5,
+      "200": 0.0,
+      "250": 0.0
+    },
+    "ActFirst_assumed_T": 10,
+    "ActFirst_ideal_speedup": 4.705882352941177,
+    "ActFirst_no_overlap_speedup": 0.8888888888888888,
+    "GiGPO_seconds_based_overhead_percent": 0.14883003059283964,
+    "same_model_rewritten_context_false_ratio": 0.23354305255606117,
+    "scope": "Algebra and assumed latencies; not measured GPU throughput."
+  },
+  "ESCD_event": {
+    "probabilities": [
+      0.10000000000000003,
+      0.2,
+      0.4,
+      0.3
+    ],
+    "completion_ids": [
+      1,
+      2
+    ],
+    "teacher_mass_weight": 0.7,
+    "completion_probability": 0.6000000000000001,
+    "loss": 0.35757793663619347,
+    "logit_gradient": [
+      0.07,
+      -0.09333333333333332,
+      -0.18666666666666665,
+      0.2099999999999999
+    ],
+    "scope": "A fixed toy event; not real-tokenizer or distributed ESCD verification."
+  }
+}

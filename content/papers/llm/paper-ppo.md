@@ -10,8 +10,8 @@ direction: "llm"
 areas: ["language"]
 tasks: ["training-adaptation", "reasoning"]
 evidence: "已核原文"
-note_ids: ["sft-dpo-rl", "grpo-rlvr", "infra-rl-pipeline"]
-updated: "2026-10-09"
+note_ids: ["sft-dpo-rl", "grpo-rlvr", "infra-rl-pipeline", "rl-actor-critic", "rl-returns-gae", "rl-ppo-training"]
+updated: "2026-10-12"
 template_version: 5
 depth_standard: "ddpm"
 draft: false
@@ -35,6 +35,8 @@ author_affiliations: [[1], [1], [1], [1], [1]]
 2017年论文验证的是机器人控制与Atari。后来LLM训练把模型生成当作环境交互，长回答又使采样成本突出，因此也使用这条路线。应区分原始控制实验与后来的语言模型应用，不能把reference模型、偏好reward或四模型架构写成PPO在2017年必然具有的组成。
 
 ### 前置知识
+
+新增先修[Actor–critic推导](#q=rl-actor-critic)、[回报与GAE边界](#q=rl-returns-gae)和[PPO训练一步](#q=rl-ppo-training)。Agent迁移时区分可bootstrap截断与trace reset，用原始回报目标训练critic、归一化优势优化actor；工具观察可见但非生成动作。
 
 **状态、动作与策略。** 在机器人中状态可以是位置与速度，动作是控制量；在LLM中状态是prompt加已有前缀，动作是下一token。策略$\pi_\theta(a\mid s)$返回动作分布，而不是直接返回一个reward。采样把概率分布变成实际动作；训练则在这个已采样动作上计算logprob。
 

@@ -6,13 +6,15 @@ date: '2026-10-08'
 directions: [llm, agent, infra]
 paper_ids: [paper-ppo, paper-dpo, paper-grpo, paper-dapo, paper-gdpo]
 tags: [专题调研, Policy Optimization, RLHF, RLVR, Interview]
-updated: '2026-10-09'
+updated: "2026-10-12"
 summary: "把七种方法放入同一训练流程，比较数据来源、优势、概率比、裁剪、reward组织和长度权重；附推导入口、手算例子与场景化面试追问。"
 template_version: 1
 draft: false
 ---
 
 ## 1. 研究问题与使用场景
+
+基础路线已扩为[Actor–critic](#q=rl-actor-critic) → [MC/TD/GAE](#q=rl-returns-gae) → [PPO完整batch](#q=rl-ppo-training) → [六轴算法对照](#q=rl-policy-optimization-map)，并接[Agentic RL专题](#report=survey-agentic-rl-2026)。原七算法精读与草稿发布条件保留。
 
 这七种方法分别改变训练的哪一个环节，遇到什么问题才需要它？本专题围绕后训练优化机制，服务于论文精读、工程排查和面试表达。重点是公式与实际数据流，框架选型、GPU架构和checkpoint格式留在各自Infra笔记中，不扩成后训练大杂烩。
 

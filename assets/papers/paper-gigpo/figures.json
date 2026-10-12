@@ -1,0 +1,152 @@
+{
+  "paperId": "paper-gigpo",
+  "arxivVersion": "2505.10978v3",
+  "originalUrl": "https://arxiv.org/abs/2505.10978v3",
+  "attribution": "Original figures and tables by the paper authors; fixed source assets and PDF tables with report commentary.",
+  "figures": [
+    {
+      "file": "method-source.png",
+      "sha256": "b60e963cb2f9853b30bae266f967e033f0da6586644bfd075d9760411a59b3f5",
+      "original": "https://arxiv.org/src/2505.10978v3",
+      "method": "pinned-latex-asset",
+      "sourceArchiveSha256": "61a0bada6c51db9f70b9cbfe984d671a9969b93a25ae505421b5aedba6162b26",
+      "sourcePath": "figure/workflow.pdf",
+      "sourceSha256": "5c98832811f7b0d418a18da6a23d735253115849473ae25b8e4937487cd4646e",
+      "sourceFiles": [
+        {
+          "path": "figure/workflow.pdf",
+          "sha256": "5c98832811f7b0d418a18da6a23d735253115849473ae25b8e4937487cd4646e"
+        }
+      ],
+      "texFile": "body/method.tex",
+      "texSha256": "996bbdd077905cc74f6db607bee1468a50d838418f7e87a4016e1155e372e5a1",
+      "figureLabel": "fig:workflow",
+      "role": "method",
+      "explanation": "complete",
+      "visuallyVerified": true,
+      "reviewedAt": "2026-10-12",
+      "reportSection": 2,
+      "reviewScope": "逐张查看原资产或局部裁图；对照固定PDF/TeX图号，核完整图例、表注、边界、末行和坐标。"
+    },
+    {
+      "file": "anchor-source.png",
+      "sha256": "1eaeed0512912f39f4f9392b797fbc26dd3aa1a638d0f1996b0d9537b647448a",
+      "original": "https://arxiv.org/src/2505.10978v3",
+      "method": "pinned-latex-asset",
+      "sourceArchiveSha256": "61a0bada6c51db9f70b9cbfe984d671a9969b93a25ae505421b5aedba6162b26",
+      "sourcePath": "figure/anchor_state.pdf",
+      "sourceSha256": "42374429784ed9466e6b0db7eb233c1fc15e5e5af500669ea3c8dd2be46cf945",
+      "sourceFiles": [
+        {
+          "path": "figure/anchor_state.pdf",
+          "sha256": "42374429784ed9466e6b0db7eb233c1fc15e5e5af500669ea3c8dd2be46cf945"
+        }
+      ],
+      "texFile": "body/method.tex",
+      "texSha256": "996bbdd077905cc74f6db607bee1468a50d838418f7e87a4016e1155e372e5a1",
+      "figureLabel": "fig:how_work",
+      "role": "method",
+      "explanation": "complete",
+      "visuallyVerified": true,
+      "reviewedAt": "2026-10-12",
+      "reviewScope": "逐张查看原资产或局部裁图；对照固定PDF/TeX图号，核完整图例、表注、边界、末行和坐标。"
+    },
+    {
+      "file": "ablation-source.png",
+      "sha256": "5d4835caabe92a5d2f10914ac5c903b2290ea9b98dcd8cca000c309bcc45b2db",
+      "original": "https://arxiv.org/src/2505.10978v3",
+      "method": "pinned-latex-asset",
+      "sourceArchiveSha256": "61a0bada6c51db9f70b9cbfe984d671a9969b93a25ae505421b5aedba6162b26",
+      "sourcePath": "figure/ablation.pdf",
+      "sourceSha256": "1798d02d90dcef491c304cb63ff2d2919dfbafcb0d204ebcdc43df49b44bd4c8",
+      "sourceFiles": [
+        {
+          "path": "figure/ablation.pdf",
+          "sha256": "1798d02d90dcef491c304cb63ff2d2919dfbafcb0d204ebcdc43df49b44bd4c8"
+        }
+      ],
+      "texFile": "body/experiment.tex",
+      "texSha256": "ba2197fac6146fd10cafa4cc46b964733406460aaad135337fa7e0262b5d3937",
+      "figureLabel": "fig:ablation",
+      "role": "result-figure",
+      "explanation": "complete",
+      "visuallyVerified": true,
+      "reviewedAt": "2026-10-12",
+      "reviewScope": "逐张查看原资产或局部裁图；对照固定PDF/TeX图号，核完整图例、表注、边界、末行和坐标。"
+    },
+    {
+      "file": "compute-source.png",
+      "sha256": "fd61c6f25daae79e3d57491c2fec581af8d4a005c24aa750cea8cf93434f2bad",
+      "original": "https://arxiv.org/src/2505.10978v3",
+      "method": "pinned-latex-asset",
+      "sourceArchiveSha256": "61a0bada6c51db9f70b9cbfe984d671a9969b93a25ae505421b5aedba6162b26",
+      "sourcePath": "figure/compute.pdf",
+      "sourceSha256": "651e725e55db12ec3ef372b669c8be60f9aada08d32af5ea86af3c63f1a74206",
+      "sourceFiles": [
+        {
+          "path": "figure/compute.pdf",
+          "sha256": "651e725e55db12ec3ef372b669c8be60f9aada08d32af5ea86af3c63f1a74206"
+        }
+      ],
+      "texFile": "body/experiment.tex",
+      "texSha256": "ba2197fac6146fd10cafa4cc46b964733406460aaad135337fa7e0262b5d3937",
+      "figureLabel": "fig:budget",
+      "role": "result-figure",
+      "explanation": "complete",
+      "visuallyVerified": true,
+      "reviewedAt": "2026-10-12",
+      "reviewScope": "逐张查看原资产或局部裁图；对照固定PDF/TeX图号，核完整图例、表注、边界、末行和坐标。"
+    },
+    {
+      "file": "table-1-pdf.png",
+      "sha256": "7588158855adad22d3131c6b2068b897394b86f61fd3a2257de26c83617b913b",
+      "original": "https://arxiv.org/pdf/2505.10978v3#page=8",
+      "method": "pinned-original-pdf-crop",
+      "pdfPage": 8,
+      "cropBox": [
+        107,
+        68,
+        507,
+        326
+      ],
+      "pdfSha256": "f6a4d4559c41048be67a0e4a062f9957996fc79e6a80f65fe66f1140fac82dcd",
+      "scale": 3,
+      "pdfPageSize": [
+        612.0,
+        792.0
+      ],
+      "sourceUnavailableReason": "LaTeX table/algorithm typesetting; crop the compiled PDF",
+      "role": "result-table",
+      "explanation": "complete",
+      "visuallyVerified": true,
+      "reviewedAt": "2026-10-12",
+      "reviewScope": "逐张查看原资产或局部裁图；对照固定PDF/TeX图号，核完整图例、表注、边界、末行和坐标。"
+    },
+    {
+      "file": "table-2-pdf.png",
+      "sha256": "5598d7db7cb57b14cbc55d0088a93927081c694f5aae6185846239f3491ff6e0",
+      "original": "https://arxiv.org/pdf/2505.10978v3#page=8",
+      "method": "pinned-original-pdf-crop",
+      "pdfPage": 8,
+      "cropBox": [
+        107,
+        334,
+        507,
+        505
+      ],
+      "pdfSha256": "f6a4d4559c41048be67a0e4a062f9957996fc79e6a80f65fe66f1140fac82dcd",
+      "scale": 3,
+      "pdfPageSize": [
+        612.0,
+        792.0
+      ],
+      "sourceUnavailableReason": "LaTeX table/algorithm typesetting; crop the compiled PDF",
+      "role": "result-table",
+      "explanation": "complete",
+      "visuallyVerified": true,
+      "reviewedAt": "2026-10-12",
+      "reviewScope": "逐张查看原资产或局部裁图；对照固定PDF/TeX图号，核完整图例、表注、边界、末行和坐标。"
+    }
+  ],
+  "reviewedAt": "2026-10-12"
+}

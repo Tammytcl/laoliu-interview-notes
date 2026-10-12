@@ -1,0 +1,49 @@
+{
+  "version": 1,
+  "topicId": "opd-project-defense",
+  "sources": [
+    {
+      "id": "opd-project-defense-01",
+      "url": "https://github.com/Tammytcl/ESCD/blob/befd0c0a582ec6efc055660467db95d522519591/docs/methods.md",
+      "title": "固定代码与method说明",
+      "kind": "official-code",
+      "reviewedAt": "2026-10-12",
+      "purpose": "本篇题源类型、原始方法或固定源码依据；公开题型与自拟问题分别标注。",
+      "repository": "Tammytcl/ESCD",
+      "revision": "befd0c0a582ec6efc055660467db95d522519591",
+      "pinnedUrl": "https://github.com/Tammytcl/ESCD/blob/befd0c0a582ec6efc055660467db95d522519591/docs/methods.md"
+    },
+    {
+      "id": "opd-project-defense-02",
+      "url": "https://arxiv.org/abs/2609.34738v1",
+      "title": "原始ESCD论文",
+      "kind": "paper",
+      "reviewedAt": "2026-10-12",
+      "purpose": "本篇题源类型、原始方法或固定源码依据；公开题型与自拟问题分别标注。"
+    },
+    {
+      "id": "opd-project-defense-03",
+      "url": "https://arxiv.org/abs/2606.24143v1",
+      "title": "AsyncOPD",
+      "kind": "paper",
+      "reviewedAt": "2026-10-12",
+      "purpose": "本篇题源类型、原始方法或固定源码依据；公开题型与自拟问题分别标注。"
+    },
+    {
+      "id": "opd-project-defense-04",
+      "url": "https://arxiv.org/abs/2505.24298v1",
+      "title": "AReaL",
+      "kind": "paper",
+      "reviewedAt": "2026-10-12",
+      "purpose": "本篇题源类型、原始方法或固定源码依据；公开题型与自拟问题分别标注。"
+    },
+    {
+      "id": "opd-project-defense-05",
+      "url": "https://arxiv.org/abs/2610.04272v1",
+      "title": "新MOPD审计",
+      "kind": "paper",
+      "reviewedAt": "2026-10-12",
+      "purpose": "本篇题源类型、原始方法或固定源码依据；公开题型与自拟问题分别标注。"
+    }
+  ]
+}

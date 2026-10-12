@@ -1,0 +1,21 @@
+{
+  "version": 1,
+  "topicId": "rl-returns-gae",
+  "checkedAt": "2026-10-12T11:17:51.699Z",
+  "observations": {
+    "rl-returns-gae-02": {
+      "checkedAt": "2026-10-12T11:17:51.699Z",
+      "lastSuccessAt": "2026-10-12T11:17:51.699Z",
+      "status": "ok",
+      "revision": "ea25b9e8b234e6ee1bca43083f8f3cf974143998",
+      "pendingReview": true
+    },
+    "rl-returns-gae-03": {
+      "checkedAt": "2026-10-12T11:17:51.699Z",
+      "lastSuccessAt": "2026-10-12T11:17:51.699Z",
+      "status": "ok",
+      "revision": "2035f58dcb06d8cad4caee107b30f4045d724367",
+      "pendingReview": true
+    }
+  }
+}

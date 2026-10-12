@@ -1,0 +1,17 @@
+{
+  "topicId": "rl-policy-optimization-map",
+  "reviewedAt": "2026-10-12",
+  "figures": [
+    {
+      "file": "algorithm-map.svg",
+      "sourcePage": "https://github.com/Tammytcl/laoliu-interview-notes/blob/main/assets/learning/rl-policy-optimization-map/algorithm-map.svg",
+      "credit": "本文教学示意，展示信息与梯度边界；不是论文原图或性能实测。",
+      "sha256": "5968d42f8692fdfdba84e877f4a76e2a84aa8014e1f587451f81fbe0bb6b0c10",
+      "visuallyVerified": true,
+      "explanation": "complete",
+      "role": "concept",
+      "reviewedAt": "2026-10-12",
+      "reviewScope": "逐张查看浏览器SVG渲染，核文字、箭头和完整边界。"
+    }
+  ]
+}

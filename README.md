@@ -4,7 +4,7 @@
 
 一个内容与界面分离的中文面试准备站。浅色纸张风格、主题导航、全文搜索、题目目录与正式论文报告。发布站点无数据库、追踪统计或运行时 CDN 依赖，适合 GitHub Pages；可选本地工作台提供源码缓存清理。
 
-> 当前有 48 篇学习笔记、56 篇论文精读报告、4 份 Daily 和 5 份专题调研。论文收录独立于面试笔记；报告按原文核读范围说明证据，未登记个人复现。旧项目表达题保留在综合面试中。
+> 当前有 58 篇学习笔记、63 篇论文精读报告、5 份 Daily 和 7 份专题调研。论文收录独立于面试笔记；报告按原文核读范围说明证据，未登记个人复现。旧项目表达题保留在综合面试中。
 
 ## 从这里开始学习
 
@@ -53,6 +53,12 @@ npm run papers:clean                                # 清理源码缓存，保�
 源码保留在被忽略的 `.paper-cache/`，报告图表保存在 `assets/papers/` 并发布。构建校验本地插图是否存在。工作台仅监听本机，缓存清理需要同源会话 token；普通 preview / GitHub Pages 没有清理写接口。完整流程、字段和验收标准见 [工作流文档](docs/paper-workflow.md)。
 
 题目与论文页面只组织内容，不提供收藏、待精读、复习状态或进度操作。公开正文通过 Git 管理，原文核对与实验复现作为报告的来源说明。
+
+## RL、Agentic OPD与项目面试
+
+从[Actor–critic](content/questions/agent/rl-actor-critic.md)开始读六篇基础教学，再接[Pipeline与Infra](content/questions/agent/agentic-opd-pipeline.md)。[OPD基础](content/questions/agent/opd-interview-foundations.md)、[Cross-tokenizer真实代码](content/questions/agent/opd-interview-cross-tokenizer.md)、[项目展示答辩](content/questions/behavior/opd-project-defense.md)提供分层题库与30秒/3分钟/10分钟讲稿，共156道新增笔记问答；公开题型与自拟追问分开。
+
+新增七篇精读（Search-R1、GiGPO、Agent Lightning、Guided-OPD、UOPD、ActFirst、新多教师SFT审计）和两份Agentic专题，共37张固定原图表、七张教学图。共享CPU脚本只验证小张量与梯度，不是模型训练复现；个人成绩和分工按真实日志填写。
 
 ## 内容与排版分开
 

@@ -6,13 +6,15 @@ date: '2026-10-04'
 directions: [infra, agent, llm]
 paper_ids: [paper-asyncopd, paper-heddle, paper-tiderl, paper-areal, paper-pipelinerl, paper-april, paper-sao, paper-stride, paper-flexmarl, paper-rolloutpipe]
 tags: [专题调研, Async Training, OPD, Rollout]
-updated: '2026-10-04'
+updated: "2026-10-12"
 summary: "围绕用户指定的 11 篇论文，比较就绪边界、权重版本、慢轨迹去向与 buffer；单独区分提前 backward、跨版本训练和主动早停。"
 template_version: 1
 draft: false
 ---
 
 ## 1. 研究问题与使用场景
+
+2026-10-12新增[Agentic OPD系统接线](#q=agentic-opd-pipeline)与[项目答辩](#q=opd-project-defense)，围绕actual prefix、teacher cache、bounded queues、请求边界权重同步、mixed versions和任务覆盖组织读法；相应方法对照见[Agentic OPD专题](#report=survey-agentic-opd-2026)。
 
 研究问题是：长程 agent 的 rollout 主导训练时，哪些等待可以在保持更新边界的情况下解除，哪些需要接受旧数据或混合版本，哪些应直接减少交互？本专题服务于异步 OPD 的 baseline 设计和论文/面试阅读。保持训练框架笔记集中介绍 verl/slime，本页只比较用户给出的异步相关工作。
 

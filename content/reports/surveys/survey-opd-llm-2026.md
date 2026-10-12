@@ -6,13 +6,15 @@ date: "2026-09-30"
 directions: ["llm"]
 paper_ids: ["paper-opd-2306-13649", "paper-opd-2306-08543", "paper-opd-2601-18734", "paper-opd-2602-12275", "paper-opd-2603-07079", "paper-opd-2603-11137", "paper-opd-2603-24472", "paper-opd-2604-00626", "paper-opd-2604-13016", "paper-opd-2604-07466", "paper-opd-2605-10889", "paper-opd-2605-12652", "paper-opd-2605-07711", "paper-opd-2606-01249", "paper-opd-2606-06021", "paper-opd-2606-09456", "paper-opd-2606-22793", "paper-opd-2606-30406", "paper-opd-2607-05184", "paper-opd-2607-13399", "paper-opd-2607-22334", "paper-opd-2608-06296", "paper-opd-2608-11829", "paper-opd-2608-24696", "paper-opd-2608-29662", "paper-opd-2609-10154", "paper-opd-2609-20511", "paper-opd-2609-22254", "paper-opd-2609-30837", "paper-opd-2609-34738", "paper-opd-2609-35347", "paper-opd-2609-35505", "paper-opd-2609-37326", "paper-opd-2609-37377", "paper-opd-2609-38025"]
 tags: ["专题调研", "LLM", "On-Policy Distillation", "MOPD", "Cross-Tokenizer"]
-updated: "2026-09-30"
+updated: "2026-10-12"
 summary: "截至 2026-09-30 的 LLM OPD 专题：整理 35 篇，其中 33 篇为 2026 年 arXiv 新作，聚焦 teacher/student 状态分布、训练稳定性、多教师 MOPD 与 cross-tokenizer 概率对齐。"
 template_version: 1
 draft: false
 ---
 
 ## 1. 研究问题与使用场景
+
+**2026-10-12追加入口。** 原35篇集合和检索截止口径保留；另增[Agentic OPD专题](#report=survey-agentic-opd-2026)、[多教师强SFT审计](#paper=paper-rethink-mopd)、[Pipeline](#q=agentic-opd-pipeline)和[项目答辩](#q=opd-project-defense)。ESCD现有公开代码，旧精读已补固定commit；arXiv v1成绩与当前release分开，本文历史“未公开”状态不当最新结论。
 
 这份专题要回答一个实际的 post-training 问题：**让 student 在自己会走到的状态上学习 teacher 的知识，什么时候比 teacher 先写好数据再做 SFT 更合适？当 teacher/student tokenizer 不同，或能力来自多个专长 teacher 时，怎样保留稠密监督而不引入新的偏差？**
 

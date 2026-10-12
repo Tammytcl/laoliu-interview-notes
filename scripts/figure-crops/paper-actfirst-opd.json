@@ -1,0 +1,55 @@
+{
+  "paperId": "paper-actfirst-opd",
+  "arxivVersion": "2609.36608v1",
+  "sourceAssets": [
+    {
+      "name": "method-source.png",
+      "tex": "iclr2027_conference.tex",
+      "label": "fig:actfirst-framework",
+      "role": "method",
+      "path": "figures/actfirst_opd_timeline.pdf"
+    },
+    {
+      "name": "efficiency-source.png",
+      "tex": "iclr2027_conference.tex",
+      "label": "fig:efficiency-analysis",
+      "role": "result-figure",
+      "path": "figures/efficiency_analysis_combined.pdf"
+    }
+  ],
+  "crops": [
+    {
+      "name": "table-1-pdf.png",
+      "page": 7,
+      "box": [
+        107,
+        79,
+        507,
+        332
+      ],
+      "role": "result-table"
+    },
+    {
+      "name": "table-2-pdf.png",
+      "page": 7,
+      "box": [
+        107,
+        351,
+        507,
+        619
+      ],
+      "role": "result-table"
+    },
+    {
+      "name": "table-3-pdf.png",
+      "page": 8,
+      "box": [
+        107,
+        78,
+        507,
+        228
+      ],
+      "role": "result-table"
+    }
+  ]
+}

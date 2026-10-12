@@ -1,0 +1,50 @@
+{
+  "version": 1,
+  "topicId": "rl-ppo-training",
+  "note": "原始论文和静态源码作为事实依据；共享CPU例子只核小张量与梯度，不代表模型复现。",
+  "sources": [
+    {
+      "id": "rl-ppo-training-01",
+      "url": "https://github.com/openai/baselines/blob/da997060461e3cbf54ca4dc7a67081a731fb6b3b/baselines/pposgd/pposgd_simple.py#L110-L113",
+      "title": "策略目标",
+      "kind": "official-code",
+      "reviewedAt": "2026-10-12",
+      "purpose": "核对本篇对应公式、实现或原始实验；教学示例另行标注。",
+      "repository": "openai/baselines",
+      "revision": "da997060461e3cbf54ca4dc7a67081a731fb6b3b",
+      "pinnedUrl": "https://github.com/openai/baselines/blob/da997060461e3cbf54ca4dc7a67081a731fb6b3b/baselines/pposgd/pposgd_simple.py#L110-L113"
+    },
+    {
+      "id": "rl-ppo-training-02",
+      "url": "https://arxiv.org/abs/1707.06347v2",
+      "title": "PPO v2",
+      "kind": "paper",
+      "reviewedAt": "2026-10-12",
+      "purpose": "核对本篇对应公式、实现或原始实验；教学示例另行标注。"
+    },
+    {
+      "id": "rl-ppo-training-03",
+      "url": "https://arxiv.org/abs/1502.05477v5",
+      "title": "TRPO v5",
+      "kind": "paper",
+      "reviewedAt": "2026-10-12",
+      "purpose": "核对本篇对应公式、实现或原始实验；教学示例另行标注。"
+    },
+    {
+      "id": "rl-ppo-training-04",
+      "url": "https://spinningup.openai.com/en/latest/algorithms/ppo.html",
+      "title": "SpinningUp PPO",
+      "kind": "official-docs",
+      "reviewedAt": "2026-10-12",
+      "purpose": "核对本篇对应公式、实现或原始实验；教学示例另行标注。"
+    },
+    {
+      "id": "rl-ppo-training-05",
+      "url": "https://iclr-blog-track.github.io/2022/03/25/ppo-implementation-details/",
+      "title": "实现细节博客",
+      "kind": "official-docs",
+      "reviewedAt": "2026-10-12",
+      "purpose": "核对本篇对应公式、实现或原始实验；教学示例另行标注。"
+    }
+  ]
+}

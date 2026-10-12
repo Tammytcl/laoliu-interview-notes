@@ -326,5 +326,125 @@
     ],
     "minimumQuestions": 8,
     "minimumCharacters": 6000
+  },
+  {
+    "id": "rl-actor-critic",
+    "sources": "content/research/rl-actor-critic-sources.json",
+    "figures": "assets/learning/rl-actor-critic/figures.json",
+    "minimumQuestions": 12,
+    "minimumCharacters": 6000,
+    "requiredSections": [
+      "问题背景",
+      "前置知识",
+      "面试问答"
+    ]
+  },
+  {
+    "id": "rl-returns-gae",
+    "sources": "content/research/rl-returns-gae-sources.json",
+    "figures": "assets/learning/rl-returns-gae/figures.json",
+    "minimumQuestions": 12,
+    "minimumCharacters": 6000,
+    "requiredSections": [
+      "问题背景",
+      "前置知识",
+      "面试问答"
+    ]
+  },
+  {
+    "id": "rl-ppo-training",
+    "sources": "content/research/rl-ppo-training-sources.json",
+    "figures": "assets/learning/rl-ppo-training/figures.json",
+    "minimumQuestions": 12,
+    "minimumCharacters": 6000,
+    "requiredSections": [
+      "问题背景",
+      "前置知识",
+      "面试问答"
+    ]
+  },
+  {
+    "id": "rl-policy-optimization-map",
+    "sources": "content/research/rl-policy-optimization-map-sources.json",
+    "figures": "assets/learning/rl-policy-optimization-map/figures.json",
+    "minimumQuestions": 12,
+    "minimumCharacters": 6000,
+    "requiredSections": [
+      "问题背景",
+      "前置知识",
+      "面试问答"
+    ]
+  },
+  {
+    "id": "agentic-rl-training",
+    "sources": "content/research/agentic-rl-training-sources.json",
+    "figures": "assets/learning/agentic-rl-training/figures.json",
+    "minimumQuestions": 12,
+    "minimumCharacters": 6000,
+    "requiredSections": [
+      "问题背景",
+      "前置知识",
+      "面试问答"
+    ]
+  },
+  {
+    "id": "agentic-opd-training",
+    "sources": "content/research/agentic-opd-training-sources.json",
+    "figures": "assets/learning/agentic-opd-training/figures.json",
+    "minimumQuestions": 12,
+    "minimumCharacters": 6000,
+    "requiredSections": [
+      "问题背景",
+      "前置知识",
+      "面试问答"
+    ]
+  },
+  {
+    "id": "agentic-opd-pipeline",
+    "sources": "content/research/agentic-opd-pipeline-sources.json",
+    "figures": "assets/learning/agentic-opd-pipeline/figures.json",
+    "minimumCharacters": 6000,
+    "minimumQuestions": 12,
+    "requiredSections": [
+      "问题背景",
+      "前置知识",
+      "面试问答"
+    ]
+  },
+  {
+    "id": "opd-interview-foundations",
+    "sources": "content/research/opd-interview-foundations-sources.json",
+    "figures": "assets/learning/opd-interview-foundations/figures.json",
+    "minimumCharacters": 6000,
+    "minimumQuestions": 24,
+    "requiredSections": [
+      "问题背景",
+      "前置知识",
+      "面试问答"
+    ]
+  },
+  {
+    "id": "opd-interview-cross-tokenizer",
+    "sources": "content/research/opd-interview-cross-tokenizer-sources.json",
+    "figures": "assets/learning/opd-interview-cross-tokenizer/figures.json",
+    "minimumCharacters": 6000,
+    "minimumQuestions": 24,
+    "requiredSections": [
+      "问题背景",
+      "前置知识",
+      "面试问答"
+    ]
+  },
+  {
+    "id": "opd-project-defense",
+    "sources": "content/research/opd-project-defense-sources.json",
+    "figures": "assets/learning/opd-project-defense/figures.json",
+    "minimumCharacters": 6000,
+    "minimumQuestions": 24,
+    "requiredSections": [
+      "问题背景",
+      "前置知识",
+      "面试问答"
+    ]
   }
 ]

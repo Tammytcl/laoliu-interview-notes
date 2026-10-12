@@ -49,7 +49,7 @@ npm run test:browser
 npm run topics:check-live -- https://tammytcl.github.io/laoliu-interview-notes/
 ```
 
-当前线上检查按 `content/research/topics.json` 验证已注册的十八篇专题：按注册文章的实际分类检查Infra/Agent列表，保留旧链接跳转、正文与核对源文件一致、问答、来源下载内容、图片hash与显示比例、目录定位、直接刷新和手机布局。扩展专题时登记清单和必要模块；不再修改检查器中的单篇白名单。练习下载可位于任意合法的仓库assets子目录，仍按线上/本地字节一致验收。
+当前线上检查按 `content/research/topics.json` 验证已注册的二十八篇专题：按注册文章的实际分类检查Infra/Agent/综合面试列表，保留旧链接跳转、正文与核对源文件一致、问答、来源下载内容、图片hash与显示比例、目录定位、直接刷新和手机布局。扩展专题时登记清单和必要模块；不再修改检查器中的单篇白名单。练习下载可位于任意合法的仓库assets子目录，仍按线上/本地字节一致验收。
 
 ## 6. 持续更新与自动化边界
 
@@ -114,3 +114,11 @@ GPU/AI加速器比较须先登记芯片/产品/形态/系统层次，再看容�
 先用任务数据流区分模型、harness、工具、执行环境、状态、验证与观察，再解释具体产品。Harbor按Terminal-Bench团队的评测框架，ACS按阿里云Agent Sandbox；同名产品/同缩写协议带全称区分，不靠缩写推断等价关系。
 
 接口兼容按所需能力逐项核查：commands/files/run_code、身份、超时、后台进程、快照、路由和回收。图checkpoint、文件/RAM snapshot、trajectory与artifact分别定义；语义恢复需要对账实际环境。Search按claim/来源片段/版本时间/独立证据关系组织，检索score不作为可信概率。CPU练习仅验证固定契约与标注关系，不代替云厂商性能或任意网页的事实判断。
+
+## 14. RL、OPD与项目面试 · 2026-10-12
+
+先按先修链解释回报、baseline、TD/GAE、ratio/surrogate/reduction，再按真实多轮比较信用、探索与系统。核proposal、execute、train身份及行为/当前/教师版本，不把学生局部采样等同部署状态占用。静态代码、CPU数值、多GPU/环境验证和独立任务成绩分别标。
+
+面经登记页面、核对日、来源类型与可验证边界；题解和匿名经历不推断公司真实性/频次。公开题型与自拟追问分开，技术答案回原始论文/作者实现。个人贡献和成绩按runmanifest填写，不从目录或设计文档推成已完成实验。
+
+跨tokenizer按byte接口、位置、公共事件、质量守恒、EOS/截断、teacher payload、CP/TP与global reduction核查；YAML追真实dispatch。Release模板与历史实验分开，固定代码不替原表版本。来源观察只生成候选，不自动改写正文。

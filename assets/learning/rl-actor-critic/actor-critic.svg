@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1120 470" role="img" aria-labelledby="title"><title id="title">Actor / critic: one transition</title><defs><marker id="arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0 L8 4 L0 8" fill="#5684ae"/></marker></defs><rect width="1120" height="470" rx="20" fill="#f4f8fc"/><g font-family="Arial,sans-serif" fill="#153552"><text x="36" y="48" font-size="25" font-weight="bold">Actor / critic: one transition</text>
+<rect x="36" y="82" width="225" height="85" rx="10" fill="#dfecfa" stroke="#5684ae"/><text x="148" y="131" font-size="16" text-anchor="middle">State s</text>
+<path d="M261 124 H302" stroke="#5684ae" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="310" y="82" width="225" height="85" rx="10" fill="#dfecfa" stroke="#5684ae"/><text x="422" y="131" font-size="16" text-anchor="middle">Actor pi(a|s)</text>
+<path d="M535 124 H576" stroke="#5684ae" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="584" y="82" width="225" height="85" rx="10" fill="#dfecfa" stroke="#5684ae"/><text x="696" y="131" font-size="16" text-anchor="middle">Action + environment</text>
+<path d="M809 124 H850" stroke="#5684ae" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="858" y="82" width="225" height="85" rx="10" fill="#dfecfa" stroke="#5684ae"/><text x="970" y="131" font-size="16" text-anchor="middle">Reward r, next state</text>
+<text x="46" y="225" font-size="19">1. Critic V(s): expected return</text>
+<text x="46" y="273" font-size="19">2. TD error: r + gamma V(next) - V(s)</text>
+<text x="46" y="321" font-size="19">3. Actor: advantage.detach() * logprob</text>
+<text x="46" y="369" font-size="19">4. Value loss: fit a frozen return target</text>
+<text x="36" y="446" font-size="14" fill="#536c83">Teaching diagram by this notebook. No measured performance is implied.</text></g></svg>

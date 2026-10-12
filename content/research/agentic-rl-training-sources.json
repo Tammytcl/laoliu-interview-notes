@@ -1,0 +1,74 @@
+{
+  "version": 1,
+  "topicId": "agentic-rl-training",
+  "note": "原始论文和静态源码作为事实依据；共享CPU例子只核小张量与梯度，不代表模型复现。",
+  "sources": [
+    {
+      "id": "agentic-rl-training-01",
+      "url": "https://arxiv.org/abs/2504.20073v2",
+      "title": "RAGEN v2",
+      "kind": "paper",
+      "reviewedAt": "2026-10-12",
+      "purpose": "核对本篇对应公式、实现或原始实验；教学示例另行标注。"
+    },
+    {
+      "id": "agentic-rl-training-02",
+      "url": "https://www.together.ai/blog/deepswe",
+      "title": "DeepSWE作者说明",
+      "kind": "author-blog",
+      "reviewedAt": "2026-10-12",
+      "purpose": "核对本篇对应公式、实现或原始实验；教学示例另行标注。"
+    },
+    {
+      "id": "agentic-rl-training-03",
+      "url": "https://github.com/langfengQ/verl-agent/blob/20bd331bdbc9026a5668e11362178e10ab7400c8/gigpo/core_gigpo.py#L160-L171",
+      "title": "组合入口",
+      "kind": "official-code",
+      "reviewedAt": "2026-10-12",
+      "purpose": "核对本篇对应公式、实现或原始实验；教学示例另行标注。",
+      "repository": "langfengQ/verl-agent",
+      "revision": "20bd331bdbc9026a5668e11362178e10ab7400c8",
+      "pinnedUrl": "https://github.com/langfengQ/verl-agent/blob/20bd331bdbc9026a5668e11362178e10ab7400c8/gigpo/core_gigpo.py#L160-L171"
+    },
+    {
+      "id": "agentic-rl-training-04",
+      "url": "https://arxiv.org/abs/2402.19446v1",
+      "title": "ArCHer v1",
+      "kind": "paper",
+      "reviewedAt": "2026-10-12",
+      "purpose": "核对本篇对应公式、实现或原始实验；教学示例另行标注。"
+    },
+    {
+      "id": "agentic-rl-training-05",
+      "url": "https://arxiv.org/abs/2507.19849v1",
+      "title": "ARPO v1",
+      "kind": "paper",
+      "reviewedAt": "2026-10-12",
+      "purpose": "核对本篇对应公式、实现或原始实验；教学示例另行标注。"
+    },
+    {
+      "id": "agentic-rl-training-06",
+      "url": "https://arxiv.org/abs/2510.01132v2",
+      "title": "Practitioner’s Guide v2",
+      "kind": "paper",
+      "reviewedAt": "2026-10-12",
+      "purpose": "核对本篇对应公式、实现或原始实验；教学示例另行标注。"
+    },
+    {
+      "id": "agentic-rl-training-07",
+      "url": "https://arxiv.org/abs/2608.17528v1",
+      "title": "Agent Lightning v1.0原文",
+      "kind": "paper",
+      "reviewedAt": "2026-10-12",
+      "purpose": "核对本篇对应公式、实现或原始实验；教学示例另行标注。"
+    },
+    {
+      "id": "agentic-rl-training-08",
+      "url": "https://arxiv.org/abs/2510.04206v1",
+      "title": "THUDM AgentRL v1",
+      "kind": "paper",
+      "reviewedAt": "2026-10-12",
+      "purpose": "核对本篇对应公式、实现或原始实验；教学示例另行标注。"
+    }
+  ]
+}

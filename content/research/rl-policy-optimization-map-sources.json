@@ -1,0 +1,58 @@
+{
+  "version": 1,
+  "topicId": "rl-policy-optimization-map",
+  "note": "原始论文和静态源码作为事实依据；共享CPU例子只核小张量与梯度，不代表模型复现。",
+  "sources": [
+    {
+      "id": "rl-policy-optimization-map-01",
+      "url": "https://arxiv.org/abs/1502.05477v5",
+      "title": "TRPO v5",
+      "kind": "paper",
+      "reviewedAt": "2026-10-12",
+      "purpose": "核对本篇对应公式、实现或原始实验；教学示例另行标注。"
+    },
+    {
+      "id": "rl-policy-optimization-map-02",
+      "url": "https://arxiv.org/abs/2402.14740v2",
+      "title": "Back to Basics v2",
+      "kind": "paper",
+      "reviewedAt": "2026-10-12",
+      "purpose": "核对本篇对应公式、实现或原始实验；教学示例另行标注。"
+    },
+    {
+      "id": "rl-policy-optimization-map-03",
+      "url": "https://github.com/verl-project/verl/blob/75879f7f475fd6b64c779f7d9212e45503f58b8f/verl/trainer/ppo/core_algos.py#L314-L329",
+      "title": "GRPO分支",
+      "kind": "official-code",
+      "reviewedAt": "2026-10-12",
+      "purpose": "核对本篇对应公式、实现或原始实验；教学示例另行标注。",
+      "repository": "verl-project/verl",
+      "revision": "75879f7f475fd6b64c779f7d9212e45503f58b8f",
+      "pinnedUrl": "https://github.com/verl-project/verl/blob/75879f7f475fd6b64c779f7d9212e45503f58b8f/verl/trainer/ppo/core_algos.py#L314-L329"
+    },
+    {
+      "id": "rl-policy-optimization-map-04",
+      "url": "https://arxiv.org/abs/2503.20783v2",
+      "title": "Dr.GRPO v2",
+      "kind": "paper",
+      "reviewedAt": "2026-10-12",
+      "purpose": "核对本篇对应公式、实现或原始实验；教学示例另行标注。"
+    },
+    {
+      "id": "rl-policy-optimization-map-05",
+      "url": "https://arxiv.org/abs/2501.03262v9",
+      "title": "REINFORCE++ v9",
+      "kind": "paper",
+      "reviewedAt": "2026-10-12",
+      "purpose": "核对本篇对应公式、实现或原始实验；教学示例另行标注。"
+    },
+    {
+      "id": "rl-policy-optimization-map-06",
+      "url": "https://arxiv.org/abs/2506.13585v1",
+      "title": "MiniMax-M1 v1",
+      "kind": "paper",
+      "reviewedAt": "2026-10-12",
+      "purpose": "核对本篇对应公式、实现或原始实验；教学示例另行标注。"
+    }
+  ]
+}

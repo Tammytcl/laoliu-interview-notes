@@ -1,0 +1,78 @@
+{
+  "paperId": "paper-rethink-mopd",
+  "arxivVersion": "2610.04272v1",
+  "sourceAssets": [
+    {
+      "name": "cost-source.png",
+      "path": "figs/fig_cost.pdf",
+      "tex": "main.tex",
+      "label": "fig:cost",
+      "role": "result-figure"
+    },
+    {
+      "name": "diagnostics-source.png",
+      "path": "figs/fig_diagnostics.pdf",
+      "tex": "main.tex",
+      "label": "fig:diagnostics",
+      "role": "result-figure"
+    }
+  ],
+  "crops": [
+    {
+      "name": "method-pdf.png",
+      "page": 4,
+      "box": [
+        69,
+        56,
+        545,
+        294
+      ],
+      "role": "method",
+      "sourceUnavailableReason": "Figure 2 是 main.tex 中的内联 TikZ，没有独立方法图资产；不执行 TeX，使用固定 PDF 局部裁图。"
+    },
+    {
+      "name": "table-1-pdf.png",
+      "page": 6,
+      "box": [
+        68,
+        66,
+        545,
+        347
+      ],
+      "role": "result-table"
+    },
+    {
+      "name": "table-2-pdf.png",
+      "page": 7,
+      "box": [
+        68,
+        66,
+        545,
+        209
+      ],
+      "role": "result-table"
+    },
+    {
+      "name": "table-4-pdf.png",
+      "page": 9,
+      "box": [
+        68,
+        247,
+        545,
+        395
+      ],
+      "role": "result-table"
+    },
+    {
+      "name": "table-19-pdf.png",
+      "page": 28,
+      "box": [
+        68,
+        66,
+        545,
+        259
+      ],
+      "role": "result-table"
+    }
+  ]
+}

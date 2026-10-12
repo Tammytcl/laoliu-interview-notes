@@ -1,0 +1,93 @@
+{
+  "version": 1,
+  "topicId": "opd-interview-cross-tokenizer",
+  "sources": [
+    {
+      "id": "opd-interview-cross-tokenizer-01",
+      "url": "https://github.com/Tammytcl/ESCD",
+      "title": "公开仓库",
+      "kind": "official-code",
+      "reviewedAt": "2026-10-12",
+      "purpose": "本篇题源类型、原始方法或固定源码依据；公开题型与自拟问题分别标注。"
+    },
+    {
+      "id": "opd-interview-cross-tokenizer-02",
+      "url": "https://github.com/huggingface/tokenizers/issues/1881",
+      "title": "Tokenizers issue1881",
+      "kind": "community",
+      "reviewedAt": "2026-10-12",
+      "purpose": "本篇题源类型、原始方法或固定源码依据；公开题型与自拟问题分别标注。"
+    },
+    {
+      "id": "opd-interview-cross-tokenizer-03",
+      "url": "https://arxiv.org/abs/2607.22334v1",
+      "title": "BPM",
+      "kind": "paper",
+      "reviewedAt": "2026-10-12",
+      "purpose": "本篇题源类型、原始方法或固定源码依据；公开题型与自拟问题分别标注。"
+    },
+    {
+      "id": "opd-interview-cross-tokenizer-04",
+      "url": "https://arxiv.org/abs/2609.34738v1",
+      "title": "ESCD",
+      "kind": "paper",
+      "reviewedAt": "2026-10-12",
+      "purpose": "本篇题源类型、原始方法或固定源码依据；公开题型与自拟问题分别标注。"
+    },
+    {
+      "id": "opd-interview-cross-tokenizer-05",
+      "url": "https://github.com/Tammytcl/ESCD/blob/befd0c0a582ec6efc055660467db95d522519591/docs/methods.md",
+      "title": "methods说明",
+      "kind": "official-code",
+      "reviewedAt": "2026-10-12",
+      "purpose": "本篇题源类型、原始方法或固定源码依据；公开题型与自拟问题分别标注。",
+      "repository": "Tammytcl/ESCD",
+      "revision": "befd0c0a582ec6efc055660467db95d522519591",
+      "pinnedUrl": "https://github.com/Tammytcl/ESCD/blob/befd0c0a582ec6efc055660467db95d522519591/docs/methods.md"
+    },
+    {
+      "id": "opd-interview-cross-tokenizer-06",
+      "url": "https://github.com/Tammytcl/ESCD/blob/befd0c0a582ec6efc055660467db95d522519591/docs/reproduction.md",
+      "title": "复现范围",
+      "kind": "official-code",
+      "reviewedAt": "2026-10-12",
+      "purpose": "本篇题源类型、原始方法或固定源码依据；公开题型与自拟问题分别标注。",
+      "repository": "Tammytcl/ESCD",
+      "revision": "befd0c0a582ec6efc055660467db95d522519591",
+      "pinnedUrl": "https://github.com/Tammytcl/ESCD/blob/befd0c0a582ec6efc055660467db95d522519591/docs/reproduction.md"
+    },
+    {
+      "id": "opd-interview-cross-tokenizer-07",
+      "url": "https://github.com/Tammytcl/ESCD/blob/befd0c0a582ec6efc055660467db95d522519591/opd/cross_tokenizer/escd_core.py#L224",
+      "title": "escd_core.py",
+      "kind": "official-code",
+      "reviewedAt": "2026-10-12",
+      "purpose": "本篇题源类型、原始方法或固定源码依据；公开题型与自拟问题分别标注。",
+      "repository": "Tammytcl/ESCD",
+      "revision": "befd0c0a582ec6efc055660467db95d522519591",
+      "pinnedUrl": "https://github.com/Tammytcl/ESCD/blob/befd0c0a582ec6efc055660467db95d522519591/opd/cross_tokenizer/escd_core.py#L224"
+    },
+    {
+      "id": "opd-interview-cross-tokenizer-08",
+      "url": "https://github.com/Tammytcl/ESCD/blob/befd0c0a582ec6efc055660467db95d522519591/opd/cross_tokenizer/escd.py#L320",
+      "title": "escd.py的_score_child_targets",
+      "kind": "official-code",
+      "reviewedAt": "2026-10-12",
+      "purpose": "本篇题源类型、原始方法或固定源码依据；公开题型与自拟问题分别标注。",
+      "repository": "Tammytcl/ESCD",
+      "revision": "befd0c0a582ec6efc055660467db95d522519591",
+      "pinnedUrl": "https://github.com/Tammytcl/ESCD/blob/befd0c0a582ec6efc055660467db95d522519591/opd/cross_tokenizer/escd.py#L320"
+    },
+    {
+      "id": "opd-interview-cross-tokenizer-09",
+      "url": "https://github.com/Tammytcl/ESCD/blob/befd0c0a582ec6efc055660467db95d522519591/opd/cross_tokenizer/escd_full_vocab.py",
+      "title": "full-vocab plugin",
+      "kind": "official-code",
+      "reviewedAt": "2026-10-12",
+      "purpose": "本篇题源类型、原始方法或固定源码依据；公开题型与自拟问题分别标注。",
+      "repository": "Tammytcl/ESCD",
+      "revision": "befd0c0a582ec6efc055660467db95d522519591",
+      "pinnedUrl": "https://github.com/Tammytcl/ESCD/blob/befd0c0a582ec6efc055660467db95d522519591/opd/cross_tokenizer/escd_full_vocab.py"
+    }
+  ]
+}

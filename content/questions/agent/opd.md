@@ -4,7 +4,7 @@ title: "On-policy distillation 和 SFT 有什么区别？"
 category: agent
 difficulty: 进阶
 tags: ["OPD","后训练"]
-updated: 2026-09-30
+updated: "2026-10-12"
 summary: "先说清轨迹由谁生成，再说明监督信号从哪里来。"
 draft: false
 ---
@@ -14,6 +14,8 @@ draft: false
 SFT 常在固定示范数据上训练；on-policy distillation 让学生按自身策略生成，再由 teacher 提供蒸馏信号，使训练更多覆盖学生实际会访问的前缀。
 
 ## 核心思路
+
+详细教学读[Agentic OPD](#q=agentic-opd-training)，系统接线读[Pipeline](#q=agentic-opd-pipeline)，面试读[目标与梯度题库](#q=opd-interview-foundations)及[Cross-tokenizer源码问答](#q=opd-interview-cross-tokenizer)。
 
 一种 sampled-token OPD 流程：
 

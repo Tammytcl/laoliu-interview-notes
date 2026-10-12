@@ -1,0 +1,70 @@
+{
+  "version": 1,
+  "topicId": "opd-interview-foundations",
+  "sources": [
+    {
+      "id": "opd-interview-foundations-01",
+      "url": "https://www.nowcoder.com/discuss/933731201871806464?sourceSSR=post",
+      "title": "牛客AI Infra面经题解",
+      "kind": "community",
+      "reviewedAt": "2026-10-12",
+      "purpose": "本篇题源类型、原始方法或固定源码依据；公开题型与自拟问题分别标注。"
+    },
+    {
+      "id": "opd-interview-foundations-02",
+      "url": "https://ricardokevins.github.io/notes/llm-interview-question-bank/chapters/091.html",
+      "title": "九坤Agent题解章",
+      "kind": "community",
+      "reviewedAt": "2026-10-12",
+      "purpose": "本篇题源类型、原始方法或固定源码依据；公开题型与自拟问题分别标注。"
+    },
+    {
+      "id": "opd-interview-foundations-03",
+      "url": "https://lpq29743.github.io/wiki/interview/",
+      "title": "个人Interview知识页",
+      "kind": "community",
+      "reviewedAt": "2026-10-12",
+      "purpose": "本篇题源类型、原始方法或固定源码依据；公开题型与自拟问题分别标注。"
+    },
+    {
+      "id": "opd-interview-foundations-04",
+      "url": "https://thinkingmachines.ai/blog/on-policy-distillation/",
+      "title": "Thinking Machines作者博客",
+      "kind": "author-blog",
+      "reviewedAt": "2026-10-12",
+      "purpose": "本篇题源类型、原始方法或固定源码依据；公开题型与自拟问题分别标注。"
+    },
+    {
+      "id": "opd-interview-foundations-05",
+      "url": "https://arxiv.org/abs/2306.13649",
+      "title": "GKD",
+      "kind": "paper",
+      "reviewedAt": "2026-10-12",
+      "purpose": "本篇题源类型、原始方法或固定源码依据；公开题型与自拟问题分别标注。"
+    },
+    {
+      "id": "opd-interview-foundations-06",
+      "url": "https://arxiv.org/abs/2306.08543",
+      "title": "MiniLLM",
+      "kind": "paper",
+      "reviewedAt": "2026-10-12",
+      "purpose": "本篇题源类型、原始方法或固定源码依据；公开题型与自拟问题分别标注。"
+    },
+    {
+      "id": "opd-interview-foundations-07",
+      "url": "https://arxiv.org/abs/2610.04272v1",
+      "title": "新MOPD审计",
+      "kind": "paper",
+      "reviewedAt": "2026-10-12",
+      "purpose": "本篇题源类型、原始方法或固定源码依据；公开题型与自拟问题分别标注。"
+    },
+    {
+      "id": "opd-interview-foundations-08",
+      "url": "https://arxiv.org/abs/2606.24143v1",
+      "title": "AsyncOPD",
+      "kind": "paper",
+      "reviewedAt": "2026-10-12",
+      "purpose": "本篇题源类型、原始方法或固定源码依据；公开题型与自拟问题分别标注。"
+    }
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "topicId": "agentic-opd-training",
+  "reviewedAt": "2026-10-12",
+  "figures": [
+    {
+      "file": "opd-action-state.svg",
+      "sourcePage": "https://github.com/Tammytcl/laoliu-interview-notes/blob/main/assets/learning/agentic-opd-training/opd-action-state.svg",
+      "credit": "本文教学示意，展示信息与梯度边界；不是论文原图或性能实测。",
+      "sha256": "70af0bd350784f6af25373fc97b50a4424fbde7d18b7f3c7821ca0116febe191",
+      "visuallyVerified": true,
+      "explanation": "complete",
+      "role": "concept",
+      "reviewedAt": "2026-10-12",
+      "reviewScope": "逐张查看浏览器SVG渲染，核文字、箭头和完整边界。"
+    }
+  ]
+}

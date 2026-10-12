@@ -1,0 +1,16 @@
+{
+  "topicId": "agentic-opd-pipeline",
+  "figures": [
+    {
+      "file": "pipeline.svg",
+      "sourcePage": "https://github.com/Tammytcl/laoliu-interview-notes/blob/main/assets/learning/agentic-opd-pipeline/pipeline.svg",
+      "credit": "本文教学示意，非原论文图或性能实测。",
+      "sha256": "5f675914dc7e659a5e1274097554814750866bb0e045463b9d078946677c7192",
+      "visuallyVerified": true,
+      "explanation": "complete",
+      "role": "concept",
+      "reviewedAt": "2026-10-12",
+      "reviewScope": "逐张查看浏览器SVG渲染，核文字、箭头和完整边界。"
+    }
+  ]
+}

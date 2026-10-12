@@ -1,0 +1,63 @@
+{
+  "paperId": "paper-uopd",
+  "arxivVersion": "2609.34036v1",
+  "sourceAssets": [
+    {
+      "name": "method-source.png",
+      "tex": "sections/introduction.tex",
+      "label": "fig:opd_comparison",
+      "role": "method",
+      "path": "figures/uai_opd_pipeline.pdf"
+    },
+    {
+      "name": "motivation-source.png",
+      "tex": "sections/motivation.tex",
+      "label": "fig:motivation",
+      "role": "result-figure",
+      "paths": [
+        "figures/fig_motivation_alfworld_confidence_depth.pdf",
+        "figures/fig_motivation_alfworld_confidence_recovery.pdf",
+        "figures/fig_motivation_alfworld_performance.pdf",
+        "figures/fig_motivation_alfworld_state_return.pdf"
+      ],
+      "columns": 4,
+      "panelWidths": [
+        800,
+        800,
+        800,
+        800
+      ]
+    },
+    {
+      "name": "search-source.png",
+      "tex": "sections/experiments.tex",
+      "label": "fig:search-15b-multihop",
+      "role": "result-figure",
+      "path": "figures/fig_search_15b_multihop_compact.pdf"
+    }
+  ],
+  "crops": [
+    {
+      "name": "table-1-pdf.png",
+      "page": 9,
+      "box": [
+        62,
+        84,
+        550,
+        450
+      ],
+      "role": "result-table"
+    },
+    {
+      "name": "table-2-pdf.png",
+      "page": 11,
+      "box": [
+        62,
+        84,
+        550,
+        370
+      ],
+      "role": "result-table"
+    }
+  ]
+}

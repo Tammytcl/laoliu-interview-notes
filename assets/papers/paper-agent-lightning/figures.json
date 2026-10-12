@@ -1,0 +1,177 @@
+{
+  "paperId": "paper-agent-lightning",
+  "arxivVersion": "2508.03680v1",
+  "originalUrl": "https://arxiv.org/abs/2508.03680v1",
+  "attribution": "Original figures and tables by the paper authors; fixed source assets and PDF tables with report commentary.",
+  "figures": [
+    {
+      "file": "method-source.png",
+      "sha256": "5359874e02481aba565db9531fe552951b4f9dedbdd07473268ffe89979f642d",
+      "original": "https://arxiv.org/src/2508.03680v1",
+      "method": "pinned-latex-asset",
+      "sourceArchiveSha256": "ee5df9062e497dde0ef5cdfe3b9cb0b1e27366142dc50a4865fa9a07f6e24e26",
+      "sourcePath": "figures/algorithm.png",
+      "sourceSha256": "50aa483b476e822190406fb71477825a33d6d81263f21aa39eb14a08c9713c62",
+      "sourceFiles": [
+        {
+          "path": "figures/algorithm.png",
+          "sha256": "50aa483b476e822190406fb71477825a33d6d81263f21aa39eb14a08c9713c62"
+        }
+      ],
+      "texFile": "sections/2.2_alg.tex",
+      "texSha256": "45a83a48869a759f1bdb2f3141ea488b3870a9966482cdb20d60275d2de7c264",
+      "figureLabel": "fig:alg",
+      "role": "method",
+      "explanation": "complete",
+      "visuallyVerified": true,
+      "reviewedAt": "2026-10-12",
+      "reportSection": 2,
+      "reviewScope": "逐张查看原资产或局部裁图；对照固定PDF/TeX图号，核完整图例、表注、边界、末行和坐标。"
+    },
+    {
+      "file": "architecture-source.png",
+      "sha256": "f03f1946f566b5c8656382f562bbdb1d658985fb536f5bb95d339a5ac3c55865",
+      "original": "https://arxiv.org/src/2508.03680v1",
+      "method": "pinned-latex-asset",
+      "sourceArchiveSha256": "ee5df9062e497dde0ef5cdfe3b9cb0b1e27366142dc50a4865fa9a07f6e24e26",
+      "sourcePath": "figures/agent_lightning_architecture_v3.png",
+      "sourceSha256": "e587095ce255021796a5796820da298efab504896aee961fa212380b3f1b456a",
+      "sourceFiles": [
+        {
+          "path": "figures/agent_lightning_architecture_v3.png",
+          "sha256": "e587095ce255021796a5796820da298efab504896aee961fa212380b3f1b456a"
+        }
+      ],
+      "texFile": "sections/2.3_infra.tex",
+      "texSha256": "d585c315b8e811b8bf79cc31ce7dd4f63adfe28054ec63ebfc82f9a43b8f6f4e",
+      "figureLabel": "fig:agent_lightning_architecture",
+      "role": "method",
+      "explanation": "complete",
+      "visuallyVerified": true,
+      "reviewedAt": "2026-10-12",
+      "reviewScope": "逐张查看原资产或局部裁图；对照固定PDF/TeX图号，核完整图例、表注、边界、末行和坐标。"
+    },
+    {
+      "file": "sql-source.png",
+      "sha256": "58ae9a2f37aca40f2acc38595ddd4313636b2b181164ddacad37d224b1b306f3",
+      "original": "https://arxiv.org/src/2508.03680v1",
+      "method": "pinned-latex-asset",
+      "sourceArchiveSha256": "ee5df9062e497dde0ef5cdfe3b9cb0b1e27366142dc50a4865fa9a07f6e24e26",
+      "sourcePath": null,
+      "sourceSha256": "d4c3caa1e0660f3e057f8873dd2eb919cb52648a63432dee8061642885b4318c",
+      "sourceFiles": [
+        {
+          "path": "figures/train_spider.png",
+          "sha256": "d4c3caa1e0660f3e057f8873dd2eb919cb52648a63432dee8061642885b4318c"
+        },
+        {
+          "path": "figures/test_spider.png",
+          "sha256": "eb842139cc6a2e32a963625ebc72d82632dbbb217285ee9863801b777840a0ee"
+        }
+      ],
+      "texFile": "sections/3_results.tex",
+      "texSha256": "f402ffdfca9142468bb2a916ed06c08c866efa8d0ee3921eff551388142be9ef",
+      "figureLabel": "fig:sql_curve",
+      "role": "result-figure",
+      "explanation": "complete",
+      "visuallyVerified": true,
+      "columns": 2,
+      "panelWidths": [
+        800,
+        800
+      ],
+      "reviewedAt": "2026-10-12",
+      "reviewScope": "逐张查看原资产或局部裁图；对照固定PDF/TeX图号，核完整图例、表注、边界、末行和坐标。"
+    },
+    {
+      "file": "rag-source.png",
+      "sha256": "f41aa035d81e34fddbc7d666856e4a9ee9ed15a505bc3b1e3615def3e1aca8de",
+      "original": "https://arxiv.org/src/2508.03680v1",
+      "method": "pinned-latex-asset",
+      "sourceArchiveSha256": "ee5df9062e497dde0ef5cdfe3b9cb0b1e27366142dc50a4865fa9a07f6e24e26",
+      "sourcePath": null,
+      "sourceSha256": "967fc07a8a8eeb87e35154f134514f40794b4863a79e87d064f4f5085c976c42",
+      "sourceFiles": [
+        {
+          "path": "figures/train_rag_llama.png",
+          "sha256": "967fc07a8a8eeb87e35154f134514f40794b4863a79e87d064f4f5085c976c42"
+        },
+        {
+          "path": "figures/test_rag_llama.png",
+          "sha256": "b787a87f15b4b71a49eca0231362f06f210f77e0e5ffd9926ae4e9576587b46c"
+        }
+      ],
+      "texFile": "sections/3_results.tex",
+      "texSha256": "f402ffdfca9142468bb2a916ed06c08c866efa8d0ee3921eff551388142be9ef",
+      "figureLabel": "fig:musique_curve",
+      "role": "result-figure",
+      "explanation": "complete",
+      "visuallyVerified": true,
+      "columns": 2,
+      "panelWidths": [
+        800,
+        800
+      ],
+      "reviewedAt": "2026-10-12",
+      "reviewScope": "逐张查看原资产或局部裁图；对照固定PDF/TeX图号，核完整图例、表注、边界、末行和坐标。"
+    },
+    {
+      "file": "calc-source.png",
+      "sha256": "9b21c97ef3366ab355d73934f16fe031417a5cf8471bb6f520ea5c1b554264de",
+      "original": "https://arxiv.org/src/2508.03680v1",
+      "method": "pinned-latex-asset",
+      "sourceArchiveSha256": "ee5df9062e497dde0ef5cdfe3b9cb0b1e27366142dc50a4865fa9a07f6e24e26",
+      "sourcePath": null,
+      "sourceSha256": "4dca48485054d08f2d850d78e0606790d5557bb1de0bfc435169b5e63d9ebb6e",
+      "sourceFiles": [
+        {
+          "path": "figures/train_calc.png",
+          "sha256": "4dca48485054d08f2d850d78e0606790d5557bb1de0bfc435169b5e63d9ebb6e"
+        },
+        {
+          "path": "figures/test_calc.png",
+          "sha256": "03d1c9dc3379b1ce790b8e5d706a9e8cb9d9d9d5114b939f095fdc98e7e4ba3f"
+        }
+      ],
+      "texFile": "sections/3_results.tex",
+      "texSha256": "f402ffdfca9142468bb2a916ed06c08c866efa8d0ee3921eff551388142be9ef",
+      "figureLabel": "fig:calc_curve",
+      "role": "result-figure",
+      "explanation": "complete",
+      "visuallyVerified": true,
+      "columns": 2,
+      "panelWidths": [
+        800,
+        800
+      ],
+      "reviewedAt": "2026-10-12",
+      "reviewScope": "逐张查看原资产或局部裁图；对照固定PDF/TeX图号，核完整图例、表注、边界、末行和坐标。"
+    },
+    {
+      "file": "table-1-pdf.png",
+      "sha256": "37aeac75e53b4d68ba9bd196d8cf32b8df99719f7fc3ce0961a7b45ad8d4c3b4",
+      "original": "https://arxiv.org/pdf/2508.03680v1#page=11",
+      "method": "pinned-original-pdf-crop",
+      "pdfPage": 11,
+      "cropBox": [
+        70,
+        580,
+        526,
+        682
+      ],
+      "pdfSha256": "e223648a09b021785a46f60dd5ce13301622eca930ff91a5b45e971b53422561",
+      "scale": 3,
+      "pdfPageSize": [
+        595.2760009765625,
+        841.8900146484375
+      ],
+      "sourceUnavailableReason": "LaTeX table/algorithm typesetting; crop the compiled PDF",
+      "role": "experiment-table",
+      "explanation": "complete",
+      "visuallyVerified": true,
+      "reviewedAt": "2026-10-12",
+      "reviewScope": "逐张查看原资产或局部裁图；对照固定PDF/TeX图号，核完整图例、表注、边界、末行和坐标。"
+    }
+  ],
+  "reviewedAt": "2026-10-12"
+}

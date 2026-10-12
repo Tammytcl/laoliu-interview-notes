@@ -1,0 +1,26 @@
+{
+  "version": 1,
+  "topicId": "agentic-opd-training",
+  "note": "原始论文和静态源码作为事实依据；共享CPU例子只核小张量与梯度，不代表模型复现。",
+  "sources": [
+    {
+      "id": "agentic-opd-training-01",
+      "url": "https://github.com/onepounchman/UOPD/blob/61f90c5c3f2c75b0f4be2742682baab63b8a8672/trinity/algorithm/policy_loss_fn/uopd_policy_loss.py#L48-L57",
+      "title": "UOPD policy loss",
+      "kind": "official-code",
+      "reviewedAt": "2026-10-12",
+      "purpose": "核对本篇对应公式、实现或原始实验；教学示例另行标注。",
+      "repository": "onepounchman/UOPD",
+      "revision": "61f90c5c3f2c75b0f4be2742682baab63b8a8672",
+      "pinnedUrl": "https://github.com/onepounchman/UOPD/blob/61f90c5c3f2c75b0f4be2742682baab63b8a8672/trinity/algorithm/policy_loss_fn/uopd_policy_loss.py#L48-L57"
+    },
+    {
+      "id": "agentic-opd-training-02",
+      "url": "https://proceedings.mlr.press/v15/ross11a.html",
+      "title": "DAgger原始工作",
+      "kind": "official-docs",
+      "reviewedAt": "2026-10-12",
+      "purpose": "核对本篇对应公式、实现或原始实验；教学示例另行标注。"
+    }
+  ]
+}

@@ -1,0 +1,53 @@
+{
+  "version": 1,
+  "topicId": "rl-returns-gae",
+  "note": "原始论文和静态源码作为事实依据；共享CPU例子只核小张量与梯度，不代表模型复现。",
+  "sources": [
+    {
+      "id": "rl-returns-gae-01",
+      "url": "https://arxiv.org/abs/1506.02438v6",
+      "title": "GAE固定原论文v6",
+      "kind": "paper",
+      "reviewedAt": "2026-10-12",
+      "purpose": "核对本篇对应公式、实现或原始实验；教学示例另行标注。"
+    },
+    {
+      "id": "rl-returns-gae-02",
+      "url": "https://github.com/openai/baselines/blob/da997060461e3cbf54ca4dc7a67081a731fb6b3b/baselines/pposgd/pposgd_simple.py#L68-L78",
+      "title": "GAE节选",
+      "kind": "official-code",
+      "reviewedAt": "2026-10-12",
+      "purpose": "核对本篇对应公式、实现或原始实验；教学示例另行标注。",
+      "repository": "openai/baselines",
+      "revision": "da997060461e3cbf54ca4dc7a67081a731fb6b3b",
+      "pinnedUrl": "https://github.com/openai/baselines/blob/da997060461e3cbf54ca4dc7a67081a731fb6b3b/baselines/pposgd/pposgd_simple.py#L68-L78"
+    },
+    {
+      "id": "rl-returns-gae-03",
+      "url": "https://github.com/verl-project/verl/blob/75879f7f475fd6b64c779f7d9212e45503f58b8f/verl/trainer/ppo/core_algos.py#L244-L263",
+      "title": "GAE实现",
+      "kind": "official-code",
+      "reviewedAt": "2026-10-12",
+      "purpose": "核对本篇对应公式、实现或原始实验；教学示例另行标注。",
+      "repository": "verl-project/verl",
+      "revision": "75879f7f475fd6b64c779f7d9212e45503f58b8f",
+      "pinnedUrl": "https://github.com/verl-project/verl/blob/75879f7f475fd6b64c779f7d9212e45503f58b8f/verl/trainer/ppo/core_algos.py#L244-L263"
+    },
+    {
+      "id": "rl-returns-gae-04",
+      "url": "https://people.eecs.berkeley.edu/~russell/papers/icml99-shaping.pdf",
+      "title": "原始证明：Ng、Harada与Russell，1999",
+      "kind": "paper",
+      "reviewedAt": "2026-10-12",
+      "purpose": "核对本篇对应公式、实现或原始实验；教学示例另行标注。"
+    },
+    {
+      "id": "rl-returns-gae-05",
+      "url": "https://iclr-blog-track.github.io/2022/03/25/ppo-implementation-details/",
+      "title": "作者实现细节博客",
+      "kind": "official-docs",
+      "reviewedAt": "2026-10-12",
+      "purpose": "核对本篇对应公式、实现或原始实验；教学示例另行标注。"
+    }
+  ]
+}

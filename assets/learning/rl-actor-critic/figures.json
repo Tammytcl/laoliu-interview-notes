@@ -1,0 +1,17 @@
+{
+  "topicId": "rl-actor-critic",
+  "reviewedAt": "2026-10-12",
+  "figures": [
+    {
+      "file": "actor-critic.svg",
+      "sourcePage": "https://github.com/Tammytcl/laoliu-interview-notes/blob/main/assets/learning/rl-actor-critic/actor-critic.svg",
+      "credit": "本文教学示意，展示信息与梯度边界；不是论文原图或性能实测。",
+      "sha256": "6e771e25935dee16a8f9f016f4a2d127f7cce57c9a487a069b704f955d90d1c0",
+      "visuallyVerified": true,
+      "explanation": "complete",
+      "role": "concept",
+      "reviewedAt": "2026-10-12",
+      "reviewScope": "逐张查看浏览器SVG渲染，核文字、箭头和完整边界。"
+    }
+  ]
+}

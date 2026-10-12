@@ -4,7 +4,7 @@ title: "多轮 Agent 调用工具后，梯度如何回传？"
 category: agent
 difficulty: 深入
 tags: ["Agent","梯度","Loss mask"]
-updated: 2026-09-30
+updated: "2026-10-12"
 summary: "区分 rollout 的离散交互和训练阶段重新计算的可微 loss。"
 draft: false
 ---
@@ -14,6 +14,8 @@ draft: false
 通常不对工具执行过程反向传播，而是保存各轮真实上下文和生成 token，训练时重新 forward，对 assistant action token 计算 loss。
 
 ## 核心思路
+
+先修为[Actor–critic](#q=rl-actor-critic)与[两mask/GAE](#q=rl-returns-gae)。完整轨迹与信用比较见[Agentic RL](#q=agentic-rl-training)，执行与评分/训练/发布接线见[Pipeline](#q=agentic-opd-pipeline)。
 
 ```text
 任务 → thinking + command → tool output → thinking + command

@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1120 520" role="img" aria-labelledby="title"><title id="title">Agentic OPD execution and training pipeline</title><defs><marker id="a" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0L8 4L0 8" fill="#527caa"/></marker></defs><rect width="1120" height="520" rx="20" fill="#f4f8fc"/><g font-family="Arial,sans-serif" fill="#173854"><text x="35" y="48" font-size="25" font-weight="bold">Agentic OPD: execution, scoring, learning and weight publication</text>
+<rect x="35" y="90" width="226" height="80" rx="10" fill="#deebfa" stroke="#527caa"/><text x="148" y="136" text-anchor="middle" font-size="16">Admit task</text>
+<path d="M261 130 H301" stroke="#527caa" stroke-width="2" marker-end="url(#a)"/>
+<rect x="311" y="90" width="226" height="80" rx="10" fill="#deebfa" stroke="#527caa"/><text x="424" y="136" text-anchor="middle" font-size="16">Agent controller</text>
+<path d="M537 130 H577" stroke="#527caa" stroke-width="2" marker-end="url(#a)"/>
+<rect x="587" y="90" width="226" height="80" rx="10" fill="#deebfa" stroke="#527caa"/><text x="700" y="136" text-anchor="middle" font-size="16">Student request</text>
+<path d="M813 130 H853" stroke="#527caa" stroke-width="2" marker-end="url(#a)"/>
+<rect x="863" y="90" width="226" height="80" rx="10" fill="#deebfa" stroke="#527caa"/><text x="976" y="136" text-anchor="middle" font-size="16">Tool / environment</text>
+<rect x="35" y="260" width="226" height="80" rx="10" fill="#deeee5" stroke="#527caa"/><text x="148" y="306" text-anchor="middle" font-size="16">Save actual context</text>
+<path d="M261 300 H301" stroke="#527caa" stroke-width="2" marker-end="url(#a)"/>
+<rect x="311" y="260" width="226" height="80" rx="10" fill="#deeee5" stroke="#527caa"/><text x="424" y="306" text-anchor="middle" font-size="16">Teacher scoring</text>
+<path d="M537 300 H577" stroke="#527caa" stroke-width="2" marker-end="url(#a)"/>
+<rect x="587" y="260" width="226" height="80" rx="10" fill="#deeee5" stroke="#527caa"/><text x="700" y="306" text-anchor="middle" font-size="16">Bounded ready queue</text>
+<path d="M813 300 H853" stroke="#527caa" stroke-width="2" marker-end="url(#a)"/>
+<rect x="863" y="260" width="226" height="80" rx="10" fill="#deeee5" stroke="#527caa"/><text x="976" y="306" text-anchor="middle" font-size="16">Learner update</text>
+<path d="M955 170 V213 H148 V260" fill="none" stroke="#527caa" stroke-width="2" marker-end="url(#a)"/><text x="390" y="204" font-size="16">Record actions and observations; keep raw tokens, logprobs and versions</text><path d="M954 340 V365 H1104 V182 H700 V170" fill="none" stroke="#527caa" stroke-width="2" stroke-dasharray="6 4" marker-end="url(#a)"/><text x="35" y="419" font-size="19">Weight publication: gate new requests, confirm drain, sync, then resume</text><text x="35" y="454" font-size="19">Backpressure bounds active work + scoring + ready results, not only one queue</text><text x="35" y="492" font-size="14" fill="#536c83">Teaching diagram. Shared history must preserve the execution and probability contracts.</text></g></svg>

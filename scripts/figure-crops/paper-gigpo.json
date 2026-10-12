@@ -1,0 +1,58 @@
+{
+  "paperId": "paper-gigpo",
+  "arxivVersion": "2505.10978v3",
+  "sourceAssets": [
+    {
+      "name": "method-source.png",
+      "tex": "body/method.tex",
+      "label": "fig:workflow",
+      "role": "method",
+      "path": "figure/workflow.pdf"
+    },
+    {
+      "name": "anchor-source.png",
+      "tex": "body/method.tex",
+      "label": "fig:how_work",
+      "role": "method",
+      "path": "figure/anchor_state.pdf"
+    },
+    {
+      "name": "ablation-source.png",
+      "tex": "body/experiment.tex",
+      "label": "fig:ablation",
+      "role": "result-figure",
+      "path": "figure/ablation.pdf"
+    },
+    {
+      "name": "compute-source.png",
+      "tex": "body/experiment.tex",
+      "label": "fig:budget",
+      "role": "result-figure",
+      "path": "figure/compute.pdf"
+    }
+  ],
+  "crops": [
+    {
+      "name": "table-1-pdf.png",
+      "page": 8,
+      "box": [
+        107,
+        68,
+        507,
+        326
+      ],
+      "role": "result-table"
+    },
+    {
+      "name": "table-2-pdf.png",
+      "page": 8,
+      "box": [
+        107,
+        334,
+        507,
+        505
+      ],
+      "role": "result-table"
+    }
+  ]
+}

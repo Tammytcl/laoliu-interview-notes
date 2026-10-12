@@ -1,0 +1,61 @@
+{
+  "version": 1,
+  "topicId": "rl-actor-critic",
+  "note": "原始论文和静态源码作为事实依据；共享CPU例子只核小张量与梯度，不代表模型复现。",
+  "sources": [
+    {
+      "id": "rl-actor-critic-01",
+      "url": "https://link.springer.com/article/10.1007/BF00992696",
+      "title": "Williams1992",
+      "kind": "official-docs",
+      "reviewedAt": "2026-10-12",
+      "purpose": "核对本篇对应公式、实现或原始实验；教学示例另行标注。"
+    },
+    {
+      "id": "rl-actor-critic-02",
+      "url": "https://papers.neurips.cc/paper_files/paper/1999/hash/464d828b85b0bed98e80ade0a5c43b0f-Abstract.html",
+      "title": "Sutton等1999策略梯度论文",
+      "kind": "paper",
+      "reviewedAt": "2026-10-12",
+      "purpose": "核对本篇对应公式、实现或原始实验；教学示例另行标注。"
+    },
+    {
+      "id": "rl-actor-critic-03",
+      "url": "https://github.com/openai/baselines/blob/da997060461e3cbf54ca4dc7a67081a731fb6b3b/baselines/pposgd/mlp_policy.py#L27-L41",
+      "title": "MlpPolicy",
+      "kind": "official-code",
+      "reviewedAt": "2026-10-12",
+      "purpose": "核对本篇对应公式、实现或原始实验；教学示例另行标注。",
+      "repository": "openai/baselines",
+      "revision": "da997060461e3cbf54ca4dc7a67081a731fb6b3b",
+      "pinnedUrl": "https://github.com/openai/baselines/blob/da997060461e3cbf54ca4dc7a67081a731fb6b3b/baselines/pposgd/mlp_policy.py#L27-L41"
+    },
+    {
+      "id": "rl-actor-critic-04",
+      "url": "https://github.com/openai/baselines/blob/da997060461e3cbf54ca4dc7a67081a731fb6b3b/baselines/pposgd/mlp_policy.py#L46-L52",
+      "title": "act路径",
+      "kind": "official-code",
+      "reviewedAt": "2026-10-12",
+      "purpose": "核对本篇对应公式、实现或原始实验；教学示例另行标注。",
+      "repository": "openai/baselines",
+      "revision": "da997060461e3cbf54ca4dc7a67081a731fb6b3b",
+      "pinnedUrl": "https://github.com/openai/baselines/blob/da997060461e3cbf54ca4dc7a67081a731fb6b3b/baselines/pposgd/mlp_policy.py#L46-L52"
+    },
+    {
+      "id": "rl-actor-critic-05",
+      "url": "https://arxiv.org/abs/1602.01783v2",
+      "title": "2016原论文",
+      "kind": "paper",
+      "reviewedAt": "2026-10-12",
+      "purpose": "核对本篇对应公式、实现或原始实验；教学示例另行标注。"
+    },
+    {
+      "id": "rl-actor-critic-06",
+      "url": "https://spinningup.openai.com/en/latest/spinningup/rl_intro3.html",
+      "title": "SpinningUp策略梯度推导",
+      "kind": "official-docs",
+      "reviewedAt": "2026-10-12",
+      "purpose": "核对本篇对应公式、实现或原始实验；教学示例另行标注。"
+    }
+  ]
+}

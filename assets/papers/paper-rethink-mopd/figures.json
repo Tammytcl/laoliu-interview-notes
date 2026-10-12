@@ -1,0 +1,178 @@
+{
+  "paperId": "paper-rethink-mopd",
+  "arxivVersion": "2610.04272v1",
+  "figures": [
+    {
+      "file": "method-pdf.png",
+      "sha256": "f8cbf1fd0cfdaf17505653d818665eb30d73a93f26916877294beb05dd65b1a5",
+      "original": "https://arxiv.org/pdf/2610.04272v1#page=4",
+      "method": "pinned-original-pdf-crop",
+      "pdfPage": 4,
+      "cropBox": [
+        69,
+        56,
+        545,
+        294
+      ],
+      "pdfSha256": "00f14b7010f3e5ddc1deaf525988d8837d1e27e46935ca4d298fb17a78581f23",
+      "scale": 3,
+      "pdfPageSize": [
+        612.0,
+        792.0
+      ],
+      "sourceUnavailableReason": "Figure 2 是 main.tex 中的内联 TikZ，没有独立方法图资产；不执行 TeX，使用固定 PDF 局部裁图。",
+      "role": "method",
+      "explanation": "complete",
+      "visuallyVerified": true,
+      "reviewedAt": "2026-10-12",
+      "reviewScope": "逐张查看原资产或局部裁图；对照固定PDF/TeX图号，核完整图例、表注、边界、末行和坐标。"
+    },
+    {
+      "file": "table-1-pdf.png",
+      "sha256": "72c7b70ffc80a16a87f215dcce372387d9c09f66cd9ff6fa4c9b5c611b4f66a9",
+      "original": "https://arxiv.org/pdf/2610.04272v1#page=6",
+      "method": "pinned-original-pdf-crop",
+      "pdfPage": 6,
+      "cropBox": [
+        68,
+        66,
+        545,
+        347
+      ],
+      "pdfSha256": "00f14b7010f3e5ddc1deaf525988d8837d1e27e46935ca4d298fb17a78581f23",
+      "scale": 3,
+      "pdfPageSize": [
+        612.0,
+        792.0
+      ],
+      "sourceUnavailableReason": "LaTeX table/algorithm typesetting; crop the compiled PDF",
+      "role": "result-table",
+      "explanation": "complete",
+      "visuallyVerified": true,
+      "reviewedAt": "2026-10-12",
+      "reviewScope": "逐张查看原资产或局部裁图；对照固定PDF/TeX图号，核完整图例、表注、边界、末行和坐标。"
+    },
+    {
+      "file": "table-2-pdf.png",
+      "sha256": "0c269b17a0cad6f5f2759968535919e5720805ee1f53c822d590ff9d12f9eec9",
+      "original": "https://arxiv.org/pdf/2610.04272v1#page=7",
+      "method": "pinned-original-pdf-crop",
+      "pdfPage": 7,
+      "cropBox": [
+        68,
+        66,
+        545,
+        209
+      ],
+      "pdfSha256": "00f14b7010f3e5ddc1deaf525988d8837d1e27e46935ca4d298fb17a78581f23",
+      "scale": 3,
+      "pdfPageSize": [
+        612.0,
+        792.0
+      ],
+      "sourceUnavailableReason": "LaTeX table/algorithm typesetting; crop the compiled PDF",
+      "role": "result-table",
+      "explanation": "complete",
+      "visuallyVerified": true,
+      "reviewedAt": "2026-10-12",
+      "reviewScope": "逐张查看原资产或局部裁图；对照固定PDF/TeX图号，核完整图例、表注、边界、末行和坐标。"
+    },
+    {
+      "file": "table-4-pdf.png",
+      "sha256": "b4f1307752284a512da9bd3e66ecb9ea21cca1976eeba41cff798dc1857abbc3",
+      "original": "https://arxiv.org/pdf/2610.04272v1#page=9",
+      "method": "pinned-original-pdf-crop",
+      "pdfPage": 9,
+      "cropBox": [
+        68,
+        247,
+        545,
+        395
+      ],
+      "pdfSha256": "00f14b7010f3e5ddc1deaf525988d8837d1e27e46935ca4d298fb17a78581f23",
+      "scale": 3,
+      "pdfPageSize": [
+        612.0,
+        792.0
+      ],
+      "sourceUnavailableReason": "LaTeX table/algorithm typesetting; crop the compiled PDF",
+      "role": "result-table",
+      "explanation": "complete",
+      "visuallyVerified": true,
+      "reviewedAt": "2026-10-12",
+      "reviewScope": "逐张查看原资产或局部裁图；对照固定PDF/TeX图号，核完整图例、表注、边界、末行和坐标。"
+    },
+    {
+      "file": "table-19-pdf.png",
+      "sha256": "2e8adfe54b3b3c3868aa0bf6b209746632b11fe87a312b8cfdf60e83b47fc93b",
+      "original": "https://arxiv.org/pdf/2610.04272v1#page=28",
+      "method": "pinned-original-pdf-crop",
+      "pdfPage": 28,
+      "cropBox": [
+        68,
+        66,
+        545,
+        259
+      ],
+      "pdfSha256": "00f14b7010f3e5ddc1deaf525988d8837d1e27e46935ca4d298fb17a78581f23",
+      "scale": 3,
+      "pdfPageSize": [
+        612.0,
+        792.0
+      ],
+      "sourceUnavailableReason": "LaTeX table/algorithm typesetting; crop the compiled PDF",
+      "role": "result-table",
+      "explanation": "complete",
+      "visuallyVerified": true,
+      "reviewedAt": "2026-10-12",
+      "reviewScope": "逐张查看原资产或局部裁图；对照固定PDF/TeX图号，核完整图例、表注、边界、末行和坐标。"
+    },
+    {
+      "file": "cost-source.png",
+      "sha256": "31bdfa4c03f6a0bd13f6db3559ac26fbe4d6193a2cfae0494733e62ab73602d8",
+      "original": "https://arxiv.org/src/2610.04272v1",
+      "method": "pinned-latex-asset",
+      "sourceArchiveSha256": "8735c49083e77ffe2b59d5fdb130a93686e7e1842ced11798c97672754654d99",
+      "sourcePath": "figs/fig_cost.pdf",
+      "sourceSha256": "26925ad08467569cd7edaa34d730744c292f3aeeaae00654700033ff52363ca9",
+      "sourceFiles": [
+        {
+          "path": "figs/fig_cost.pdf",
+          "sha256": "26925ad08467569cd7edaa34d730744c292f3aeeaae00654700033ff52363ca9"
+        }
+      ],
+      "texFile": "main.tex",
+      "texSha256": "e231de72c4bb0157f8592cd58ddb717789727393c429bf937cba6839cc6e9cf9",
+      "figureLabel": "fig:cost",
+      "role": "result-figure",
+      "explanation": "complete",
+      "visuallyVerified": true,
+      "reviewedAt": "2026-10-12",
+      "reviewScope": "逐张查看原资产或局部裁图；对照固定PDF/TeX图号，核完整图例、表注、边界、末行和坐标。"
+    },
+    {
+      "file": "diagnostics-source.png",
+      "sha256": "a9a7be01ccf3a0f8198c52dad5ef7c154f91c9733ce0ea531edf25434abd4309",
+      "original": "https://arxiv.org/src/2610.04272v1",
+      "method": "pinned-latex-asset",
+      "sourceArchiveSha256": "8735c49083e77ffe2b59d5fdb130a93686e7e1842ced11798c97672754654d99",
+      "sourcePath": "figs/fig_diagnostics.pdf",
+      "sourceSha256": "423cbabd450aaef742532dc8118967f9b4a1788d374f7a91f7155173a02c1d1c",
+      "sourceFiles": [
+        {
+          "path": "figs/fig_diagnostics.pdf",
+          "sha256": "423cbabd450aaef742532dc8118967f9b4a1788d374f7a91f7155173a02c1d1c"
+        }
+      ],
+      "texFile": "main.tex",
+      "texSha256": "e231de72c4bb0157f8592cd58ddb717789727393c429bf937cba6839cc6e9cf9",
+      "figureLabel": "fig:diagnostics",
+      "role": "result-figure",
+      "explanation": "complete",
+      "visuallyVerified": true,
+      "reviewedAt": "2026-10-12",
+      "reviewScope": "逐张查看原资产或局部裁图；对照固定PDF/TeX图号，核完整图例、表注、边界、末行和坐标。"
+    }
+  ],
+  "reviewedAt": "2026-10-12"
+}

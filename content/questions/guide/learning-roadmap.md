@@ -4,7 +4,7 @@ title: "从哪里开始？Diffusion、LLM、Agent、Infra 四条学习路线"
 category: guide
 difficulty: 基础
 tags: ["P0", "学习路线", "开始这里"]
-updated: 2026-10-10
+updated: "2026-10-12"
 summary: "按先修关系安排学习，每个问题都落到解释、推导或可验证练习。"
 draft: false
 ---
@@ -54,6 +54,8 @@ P0 表示第一轮应掌握的主干，P1 表示主干后再深入。这是本�
 5. [GRPO/RLVR](#q=grpo-rlvr) → [OPD](#q=opd-vs-sft)。产出：说清采样者、监督来源与概率目标。
 
 Agent组件专项按[总览](#q=agent-components-overview) → [Harbor E2B ACS与沙箱](#q=agent-sandbox-components) → [Code agent](#q=agent-code-components) / [Search agent](#q=agent-search-components)阅读。先沿同一任务标出决策、工具、执行、状态和验证，再解释产品所在层；用课堂脚本检查重试、恢复和证据覆盖。
+
+训练基础新增[Actor–critic](#q=rl-actor-critic) → [回报/GAE](#q=rl-returns-gae) → [PPO完整一步](#q=rl-ppo-training) → [算法对照](#q=rl-policy-optimization-map)。再读[Agentic RL](#q=agentic-rl-training)、[Agentic OPD](#q=agentic-opd-training)和[系统pipeline](#q=agentic-opd-pipeline)。面试用[基础题库](#q=opd-interview-foundations) → [Cross-tokenizer源码题](#q=opd-interview-cross-tokenizer) → [项目展示答辩](#q=opd-project-defense)，按真实证据补个人成绩与分工。
 
 ## Infra：从训练基础到框架与训推闭环
 

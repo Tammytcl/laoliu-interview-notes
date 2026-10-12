@@ -1,0 +1,131 @@
+{
+  "paperId": "paper-actfirst-opd",
+  "arxivVersion": "2609.36608v1",
+  "originalUrl": "https://arxiv.org/abs/2609.36608v1",
+  "attribution": "Original figures and tables by the paper authors; fixed source assets and PDF tables with report commentary.",
+  "figures": [
+    {
+      "file": "method-source.png",
+      "sha256": "56320716287b7aed9965edc343eced3c7a24e1894f7d90d621fe8ad7b6785b0f",
+      "original": "https://arxiv.org/src/2609.36608v1",
+      "method": "pinned-latex-asset",
+      "sourceArchiveSha256": "34de8e6a3d7773d0faf783cea58304783ca33829a0661e4f3129afccb53f4ef3",
+      "sourcePath": "figures/actfirst_opd_timeline.pdf",
+      "sourceSha256": "8445c8d56c2eb5cf6c7fc8ff82529ead1810064cc21b75fa904fef959431908c",
+      "sourceFiles": [
+        {
+          "path": "figures/actfirst_opd_timeline.pdf",
+          "sha256": "8445c8d56c2eb5cf6c7fc8ff82529ead1810064cc21b75fa904fef959431908c"
+        }
+      ],
+      "texFile": "iclr2027_conference.tex",
+      "texSha256": "76aa950adea22d307032d106294204393917416ace4ed0c280e57ab153e51c88",
+      "figureLabel": "fig:actfirst-framework",
+      "role": "method",
+      "explanation": "complete",
+      "visuallyVerified": true,
+      "reviewedAt": "2026-10-12",
+      "reportSection": 2,
+      "reviewScope": "逐张查看原资产或局部裁图；对照固定PDF/TeX图号，核完整图例、表注、边界、末行和坐标。"
+    },
+    {
+      "file": "efficiency-source.png",
+      "sha256": "bddaf4ee9f919fa40374659613751c0f0edfd1935a1d7d4020151dace9f63d9f",
+      "original": "https://arxiv.org/src/2609.36608v1",
+      "method": "pinned-latex-asset",
+      "sourceArchiveSha256": "34de8e6a3d7773d0faf783cea58304783ca33829a0661e4f3129afccb53f4ef3",
+      "sourcePath": "figures/efficiency_analysis_combined.pdf",
+      "sourceSha256": "23810f70578691bb909e3923ff301d562113b41cfb4ee2f71e8f17755add9037",
+      "sourceFiles": [
+        {
+          "path": "figures/efficiency_analysis_combined.pdf",
+          "sha256": "23810f70578691bb909e3923ff301d562113b41cfb4ee2f71e8f17755add9037"
+        }
+      ],
+      "texFile": "iclr2027_conference.tex",
+      "texSha256": "76aa950adea22d307032d106294204393917416ace4ed0c280e57ab153e51c88",
+      "figureLabel": "fig:efficiency-analysis",
+      "role": "result-figure",
+      "explanation": "complete",
+      "visuallyVerified": true,
+      "reviewedAt": "2026-10-12",
+      "reviewScope": "逐张查看原资产或局部裁图；对照固定PDF/TeX图号，核完整图例、表注、边界、末行和坐标。"
+    },
+    {
+      "file": "table-1-pdf.png",
+      "sha256": "98663fcb483e3056d2e3469a86d12117829591f11f539af526d58c44256cddf4",
+      "original": "https://arxiv.org/pdf/2609.36608v1#page=7",
+      "method": "pinned-original-pdf-crop",
+      "pdfPage": 7,
+      "cropBox": [
+        107,
+        79,
+        507,
+        332
+      ],
+      "pdfSha256": "b0a09d1ec31f816d0dd5ba27ad59c5f98d504703ba009f418c87ab761475e3ac",
+      "scale": 3,
+      "pdfPageSize": [
+        612.0,
+        792.0
+      ],
+      "sourceUnavailableReason": "LaTeX table/algorithm typesetting; crop the compiled PDF",
+      "role": "result-table",
+      "explanation": "complete",
+      "visuallyVerified": true,
+      "reviewedAt": "2026-10-12",
+      "reviewScope": "逐张查看原资产或局部裁图；对照固定PDF/TeX图号，核完整图例、表注、边界、末行和坐标。"
+    },
+    {
+      "file": "table-2-pdf.png",
+      "sha256": "e7328cb6f99f41a4a8f268a6261f17f18d78fb5a3ca06e85008b55e031543774",
+      "original": "https://arxiv.org/pdf/2609.36608v1#page=7",
+      "method": "pinned-original-pdf-crop",
+      "pdfPage": 7,
+      "cropBox": [
+        107,
+        351,
+        507,
+        619
+      ],
+      "pdfSha256": "b0a09d1ec31f816d0dd5ba27ad59c5f98d504703ba009f418c87ab761475e3ac",
+      "scale": 3,
+      "pdfPageSize": [
+        612.0,
+        792.0
+      ],
+      "sourceUnavailableReason": "LaTeX table/algorithm typesetting; crop the compiled PDF",
+      "role": "result-table",
+      "explanation": "complete",
+      "visuallyVerified": true,
+      "reviewedAt": "2026-10-12",
+      "reviewScope": "逐张查看原资产或局部裁图；对照固定PDF/TeX图号，核完整图例、表注、边界、末行和坐标。"
+    },
+    {
+      "file": "table-3-pdf.png",
+      "sha256": "6932f24ffa262beae0a913024f416adf9541438e0d4c0535603c7afe337051ab",
+      "original": "https://arxiv.org/pdf/2609.36608v1#page=8",
+      "method": "pinned-original-pdf-crop",
+      "pdfPage": 8,
+      "cropBox": [
+        107,
+        78,
+        507,
+        228
+      ],
+      "pdfSha256": "b0a09d1ec31f816d0dd5ba27ad59c5f98d504703ba009f418c87ab761475e3ac",
+      "scale": 3,
+      "pdfPageSize": [
+        612.0,
+        792.0
+      ],
+      "sourceUnavailableReason": "LaTeX table/algorithm typesetting; crop the compiled PDF",
+      "role": "result-table",
+      "explanation": "complete",
+      "visuallyVerified": true,
+      "reviewedAt": "2026-10-12",
+      "reviewScope": "逐张查看原资产或局部裁图；对照固定PDF/TeX图号，核完整图例、表注、边界、末行和坐标。"
+    }
+  ],
+  "reviewedAt": "2026-10-12"
+}
