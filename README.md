@@ -4,7 +4,7 @@
 
 一个内容与界面分离的中文面试准备站。浅色纸张风格、主题导航、全文搜索、题目目录与正式论文报告。发布站点无数据库、追踪统计或运行时 CDN 依赖，适合 GitHub Pages；可选本地工作台提供源码缓存清理。
 
-> 当前有 58 篇学习笔记、63 篇论文精读报告、5 份 Daily 和 7 份专题调研。论文收录独立于面试笔记；报告按原文核读范围说明证据，未登记个人复现。旧项目表达题保留在综合面试中。
+> 当前有 66 篇学习笔记、63 篇论文精读报告、6 份 Daily 和 8 份专题调研。论文收录独立于面试笔记；报告按原文核读范围说明证据，未登记个人复现。旧项目表达题保留在综合面试中。
 
 ## 从这里开始学习
 
@@ -250,3 +250,7 @@ npm run test:browser
 ### DSec沙箱基础设施精读 · 2026-10-08
 
 [DSec完整报告](content/papers/infra/paper-dsec.md)固定2609.22978v1，包含131位作者与单位、五模块讲解、10张原始图表和公开OverlayBD组件的三处源码路径。区分生产规模、独立CPU集群四类实验和未量化的RL协同；[审阅记录](docs/paper-dsec-audit-2026-10-08.md)记录版本、图表、数值口径与验证范围。
+
+## 后训练清单与自己的项目 · 2026-10-13
+
+[来源实际222项的专题合并地图](content/questions/guide/post-training-checklist-map.md)逐编号指向正文，已有算法/Infra复用，LoRA/RAG原入口扩写。[后训练40题](content/questions/llm/post-training-interview.md)与基础分词、评分/评测、服务化补课；[ESCD作者讲稿](content/questions/behavior/escd-project-interview.md)、[指定turn工作树实现](content/questions/agent/agentic-turn-framework.md)和[Critic创新论证](content/questions/agent/agentic-turn-innovation.md)分开。公开图表、工作树hash、当前机制与待验证收益分别标注；新增CPU白板不代表GPU模型复现。

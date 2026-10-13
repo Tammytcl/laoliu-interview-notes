@@ -1,0 +1,219 @@
+{
+  "project": "MultiTeacher-OPD-Agent-turn",
+  "reviewedAt": "2026-10-13",
+  "baseCommit": "e2e0bcc95cf130acf2bfaba1edff740b2ef96f1a",
+  "workingTreeDirty": true,
+  "scope": "Static working-tree source snapshot; no GPU training executed. Base commit is not the revision of these uncommitted files.",
+  "files": [
+    {
+      "path": "src/innovator_agent/turn_opd/feedback.py",
+      "sha256": "4b567376526da287977fec5ac446f9825eb1a69ae27944a7f3f070dec6be5333",
+      "lines": 80
+    },
+    {
+      "path": "src/innovator_agent/turn_opd/stream_timing.py",
+      "sha256": "89273fd439d37fc7ddf1d36ff22ec396fbc8035d5866ed749c926377c3c65b69",
+      "lines": 97
+    },
+    {
+      "path": "src/innovator_agent/turn_opd/teacher.py",
+      "sha256": "b335ed14d6bd6cdad5bf5351cdb37f7729eca70876f032b336f143845dff2a69",
+      "lines": 68
+    },
+    {
+      "path": "src/innovator_agent/turn_opd/sage.py",
+      "sha256": "a222a862fe9ebdf8802cf5bd3eb9294eefd8beb29df7c9db8d693d8b843d82e7",
+      "lines": 164
+    },
+    {
+      "path": "src/innovator_agent/turn_opd/pipeline.py",
+      "sha256": "3a4c9435969b75e5f3ece8f0e90ad55016ad4d0393de01bf93d5f8a08955c2a2",
+      "lines": 216
+    },
+    {
+      "path": "src/innovator_agent/turn_opd/cohort.py",
+      "sha256": "85dd4d9d3d7deec2cb5af0e461f661d562552a8b54b12857d0a1063e4ccb55b0",
+      "lines": 117
+    },
+    {
+      "path": "src/innovator_agent/turn_opd/telemetry.py",
+      "sha256": "bfd3ae18d90f8ac6b3b9c6303cecd7167449326be36dfb921a9eb668c33a3d3e",
+      "lines": 20
+    },
+    {
+      "path": "src/innovator_agent/turn_opd/data.py",
+      "sha256": "b1281bba2fb604ed8d1e8db3019c83a35764366cd3622edf77a230f0022b01ec",
+      "lines": 145
+    },
+    {
+      "path": "src/innovator_agent/turn_opd/ingress.py",
+      "sha256": "829c9955cdb638efbf8bf78aef859f42010c47f36fb58d2f617293e4aebe66b0",
+      "lines": 63
+    },
+    {
+      "path": "src/innovator_agent/turn_opd/teacher_routing.py",
+      "sha256": "f5eae3a5dd67bf2f513fd7f77e86c73160cf7dd730c122582d658de510fb2049",
+      "lines": 146
+    },
+    {
+      "path": "src/innovator_agent/turn_opd/coalescing.py",
+      "sha256": "7cde5b8cf63024d6db553e65f8183b223c2ec898b9a17fef2aa20986b08fd9f4",
+      "lines": 132
+    },
+    {
+      "path": "src/innovator_agent/turn_opd/gradients.py",
+      "sha256": "44a8a60b7f413b733a1c10f167135663321ab6b2d6b32cc1b300860223346986",
+      "lines": 88
+    },
+    {
+      "path": "src/innovator_agent/turn_opd/megatron_session.py",
+      "sha256": "3155e6c4b4a94891817ef95970727c89da11e039822d49d0de18fba1b999a68e",
+      "lines": 151
+    },
+    {
+      "path": "src/innovator_agent/turn_opd/__init__.py",
+      "sha256": "755fc465dc12e599f92d083ce94b29c06a81c209c8820df64fd65eaf9e6e4905",
+      "lines": 1
+    },
+    {
+      "path": "src/innovator_agent/turn_opd/flow_control.py",
+      "sha256": "f9ac98fc53070613dc74610c090dd775cea321e1c9cbdba9b65482af780c0271",
+      "lines": 67
+    },
+    {
+      "path": "src/innovator_agent/turn_opd/protocol.py",
+      "sha256": "c1482fd571bfadce99f7ac2dee929d4a071ce8c015c3699aece72b3a616b95b2",
+      "lines": 176
+    },
+    {
+      "path": "src/innovator_agent/turn_opd/sequence_buckets.py",
+      "sha256": "b0f3803d34c7c6f9370a9be919d9d518ea5bd33d50b93f8c670271e01d6bed48",
+      "lines": 25
+    },
+    {
+      "path": "src/innovator_agent/turn_opd/weight_control.py",
+      "sha256": "c8ced63ff1e84c027ae81e4c12af6c33702583eec07d627c6a9ad3b97ce0ce1c",
+      "lines": 89
+    },
+    {
+      "path": "src/innovator_agent/turn_opd/resume.py",
+      "sha256": "dda259ddebdd964fc1806e3cf9aecb02d33e12eaee5d011f079ced2d0f35ca44",
+      "lines": 53
+    },
+    {
+      "path": "src/innovator_agent/turn_opd/chunked_learner.py",
+      "sha256": "402712b4c63b19d9d633a51a919817ce22dd06a18e26d96f5e0a3217c557ef97",
+      "lines": 101
+    },
+    {
+      "path": "src/innovator_agent/turn_opd/request_coordinator.py",
+      "sha256": "a32e4c4da3234804a927984696d94f72cb0d6dbe9629769aaa0fbc21c3806c8e",
+      "lines": 41
+    },
+    {
+      "path": "src/innovator_agent/turn_opd/critic_weighting.py",
+      "sha256": "203b168ac985061f45d62b134417d64f6727aed48c52f2d3bf818aee49205f4d",
+      "lines": 163
+    },
+    {
+      "path": "src/innovator_agent/turn_opd/pool.py",
+      "sha256": "0ef07ff3cea4faa7edac17d19fd90419c85eb04aca070ea0c2646e234ae7afb7",
+      "lines": 109
+    },
+    {
+      "path": "src/innovator_agent/turn_opd/train.py",
+      "sha256": "a0ef65904a4bbefe583f69b3647f778183056ba66af351c57e41d9867fb4aab9",
+      "lines": 230
+    },
+    {
+      "path": "src/innovator_agent/turn_opd/single_forward.py",
+      "sha256": "8c4a68c6e0f36d09aba7debdb59065425c0f515b194038cb0b0ac693de41aa31",
+      "lines": 30
+    },
+    {
+      "path": "src/innovator_agent/turn_opd/async_driver.py",
+      "sha256": "8c33e5d978208a0d6f3d3a363a7accae823ef6916cd352d8d7489ae3e09219ed",
+      "lines": 538
+    },
+    {
+      "path": "src/innovator_agent/turn_opd/store.py",
+      "sha256": "b0e663db9be780b694d16a5ef6de5745235d4c3d6dfa9b9126b836037c1cb82d",
+      "lines": 56
+    },
+    {
+      "path": "src/innovator_agent/turn_opd/delta_probe_loader.py",
+      "sha256": "6dd5e7801073df0fc68996e352a01ae77265be33c021eb6271e64cd04f9165cd",
+      "lines": 48
+    },
+    {
+      "path": "src/innovator_agent/turn_opd/weight_source.py",
+      "sha256": "627be8afaccd7fac5c8e0a1aea2acc336d9ab46adc1a3a092a99f30db07a4a1a",
+      "lines": 42
+    },
+    {
+      "path": "src/innovator_agent/turn_opd/generate.py",
+      "sha256": "f118d38c6914d0659970090cc038aa6aff7d6c449f510ac4199f67122b69ea23",
+      "lines": 32
+    },
+    {
+      "path": "src/innovator_agent/turn_opd/version_gate.py",
+      "sha256": "da59d7cbcdfd143e4c706f2a8b6517dbe6281e9ab9c162e0ef013606895ef15e",
+      "lines": 65
+    },
+    {
+      "path": "src/innovator_agent/turn_opd/ray_learner.py",
+      "sha256": "69f38aa4958fcfb676a60b0063b87e90f1becb3a71f466b9f6d78d630ace7bac",
+      "lines": 150
+    },
+    {
+      "path": "src/innovator_agent/slime_remote_agent/proxy.py",
+      "sha256": "3dc3d3a2444761058555cf495cee1a4437d8dfa458bfe67463f310ed469e2758",
+      "lines": 2034
+    },
+    {
+      "path": "slime/slime/backends/megatron_utils/loss.py",
+      "sha256": "697b75a80929e867573578e284969a5adfddf3f7c3cd81e3beec150fe920b7b1",
+      "lines": 3378
+    },
+    {
+      "path": "docs/trail/reports/method-and-evidence.md",
+      "sha256": "5b1a6ff2ab49adb42c3479e005a040b4b06b918e63c80312b96ed96c87274cb6",
+      "lines": 93
+    },
+    {
+      "path": "docs/turn_opd.md",
+      "sha256": "2a01f62681794d0f10d525b5150673fa7ea290a2eb284e54f3ed62d019d07439",
+      "lines": 217
+    },
+    {
+      "path": "docs/critic_weighted_opd_training.md",
+      "sha256": "e877ce98296d33c49f0c1205c2a4d5eac6153802d1773465d31fdc9ad9b6e152",
+      "lines": 584
+    },
+    {
+      "path": "docs/critic_supervision_benefit_design.md",
+      "sha256": "0071b8d3d5ee60042ff5bb788755ab80a995d193d713bd25846880372dd1d4df",
+      "lines": 582
+    },
+    {
+      "path": "critic/training/model.py",
+      "sha256": "b536392298737e643d82e7de08d8caa4376e63158bbed40773efbf93bc0bdf60",
+      "lines": 46
+    },
+    {
+      "path": "critic/serving/server.py",
+      "sha256": "376a73bc8b71a57a9b438a292672cdc062dc36ce5a61253b60c1045bf9f8ec09",
+      "lines": 627
+    },
+    {
+      "path": "critic/training/train.py",
+      "sha256": "8511b3b2469db0c9c9948fab47941192921e340834a3bc44765624ffcb6f1c4b",
+      "lines": 314
+    },
+    {
+      "path": "docs/trail/paper/trail_zh_draft.md",
+      "sha256": "87fe9cd442d435182cd5e1719bf66a4f61a9b189511b754219eb6c28756a0819",
+      "lines": 321
+    }
+  ]
+}

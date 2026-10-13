@@ -1,0 +1,47 @@
+{
+  "version": 1,
+  "topicId": "agentic-turn-innovation",
+  "sources": [
+    {
+      "id": "agentic-turn-innovation-01",
+      "title": "AReaL",
+      "kind": "paper",
+      "url": "https://arxiv.org/abs/2505.24298v1",
+      "reviewedAt": "2026-10-13",
+      "purpose": "题型来源与技术依据分层；正文独立讲解，项目来源/验证边界明确。"
+    },
+    {
+      "id": "agentic-turn-innovation-02",
+      "title": "AsyncOPD",
+      "kind": "paper",
+      "url": "https://arxiv.org/abs/2606.24143v1",
+      "reviewedAt": "2026-10-13",
+      "purpose": "题型来源与技术依据分层；正文独立讲解，项目来源/验证边界明确。"
+    },
+    {
+      "id": "agentic-turn-innovation-03",
+      "title": "SAGE-OPD",
+      "kind": "paper",
+      "url": "https://arxiv.org/abs/2606.19659",
+      "reviewedAt": "2026-10-13",
+      "purpose": "题型来源与技术依据分层；正文独立讲解，项目来源/验证边界明确。"
+    },
+    {
+      "id": "agentic-turn-innovation-04",
+      "title": "ATOD",
+      "kind": "paper",
+      "url": "https://arxiv.org/abs/2606.27814",
+      "reviewedAt": "2026-10-13",
+      "purpose": "题型来源与技术依据分层；正文独立讲解，项目来源/验证边界明确。"
+    },
+    {
+      "id": "agentic-turn-innovation-05",
+      "title": "TurnOPD",
+      "kind": "paper",
+      "url": "https://arxiv.org/abs/2607.05804",
+      "reviewedAt": "2026-10-13",
+      "purpose": "题型来源与技术依据分层；正文独立讲解，项目来源/验证边界明确。"
+    }
+  ],
+  "localEvidence": "assets/learning/agentic-turn-framework/code-evidence.json"
+}

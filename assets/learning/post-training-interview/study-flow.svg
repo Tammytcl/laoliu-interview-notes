@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1120 480" role="img" aria-labelledby="title"><title id="title">Question-driven post-training</title><defs><marker id="a" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0L8 4L0 8" fill="#4d789b"/></marker></defs><rect width="1120" height="480" rx="20" fill="#f3f7fb"/><g font-family="Arial,sans-serif" fill="#173751"><text x="34" y="49" font-size="25" font-weight="bold">Question-driven post-training</text>
+<rect x="34" y="83" width="227" height="84" rx="10" fill="#deebf8" stroke="#4d789b"/><text x="147" y="132" text-anchor="middle" font-size="16">Task + feedback</text>
+<path d="M261 125 H301" stroke="#4d789b" stroke-width="2" marker-end="url(#a)"/>
+<rect x="309" y="83" width="227" height="84" rx="10" fill="#deebf8" stroke="#4d789b"/><text x="422" y="132" text-anchor="middle" font-size="16">Data + support</text>
+<path d="M536 125 H576" stroke="#4d789b" stroke-width="2" marker-end="url(#a)"/>
+<rect x="584" y="83" width="227" height="84" rx="10" fill="#deebf8" stroke="#4d789b"/><text x="697" y="132" text-anchor="middle" font-size="16">Loss + gradient</text>
+<path d="M811 125 H851" stroke="#4d789b" stroke-width="2" marker-end="url(#a)"/>
+<rect x="859" y="83" width="227" height="84" rx="10" fill="#deebf8" stroke="#4d789b"/><text x="972" y="132" text-anchor="middle" font-size="16">Runtime + resources</text>
+<text x="43" y="225" font-size="19">1. Start from a question; name the objects before comparing methods</text>
+<text x="43" y="274" font-size="19">2. Separate objective, estimator, reduction and update boundary</text>
+<text x="43" y="323" font-size="19">3. Check a tiny numerical example and one real code path</text>
+<text x="43" y="372" font-size="19">4. Answer with evidence, conditions and a project-specific follow-up</text>
+<text x="34" y="453" font-size="14" fill="#61798a">Teaching diagram based on reviewed contracts. No performance or novelty claim is implied.</text></g></svg>

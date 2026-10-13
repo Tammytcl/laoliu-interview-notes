@@ -4,7 +4,7 @@ title: "从哪里开始？Diffusion、LLM、Agent、Infra 四条学习路线"
 category: guide
 difficulty: 基础
 tags: ["P0", "学习路线", "开始这里"]
-updated: "2026-10-12"
+updated: "2026-10-13"
 summary: "按先修关系安排学习，每个问题都落到解释、推导或可验证练习。"
 draft: false
 ---
@@ -74,6 +74,8 @@ Agent组件专项按[总览](#q=agent-components-overview) → [Harbor E2B ACS�
 MTP专项按[总览](#q=infra-mtp-overview) → [训练设计](#q=infra-mtp-training) → [投机解码](#q=infra-mtp-speculative) → [服务落地](#q=infra-mtp-serving)阅读。先说明多未来监督，再手算接受/残差，最后核权重和同负载成本；四篇均有独立问答与CPU课堂验证。
 
 ## 可重复的复习循环
+
+后训练专项从[222项专题合并地图](#q=post-training-checklist-map)查缺口，按[40题](#q=post-training-interview)、[基础分词](#q=llm-foundations-interview)、[LoRA/QLoRA](#q=lora-finetuning)、[Reward/Judge](#q=reward-judge-interview)、[RAG](#q=rag-vs-finetuning)和[服务化](#q=model-service-interview)补课。你的项目用[ESCD讲稿](#q=escd-project-interview)和[turn实现](#q=agentic-turn-framework)→[创新论证](#q=agentic-turn-innovation)，原先已完整解释的算法/Infra页面直接复用。
 
 每次选一个主问题：先自己解释两分钟；读机制并做一个小推导；完成或设计小实验；写下失败条件；最后不看笔记回答 30 秒。能解释假设、边界和例子，再标记“已掌握”。
 

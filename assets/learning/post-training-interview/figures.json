@@ -1,0 +1,16 @@
+{
+  "topicId": "post-training-interview",
+  "figures": [
+    {
+      "file": "study-flow.svg",
+      "sourcePage": "https://github.com/Tammytcl/laoliu-interview-notes/blob/main/assets/learning/post-training-interview/study-flow.svg",
+      "credit": "本文按已核接口绘制教学示意，非实测/原论文结果。",
+      "sha256": "b6d31624443aab2ce27269a1226784eb101a3a7e2b9a34e9681df6618f345706",
+      "visuallyVerified": true,
+      "explanation": "complete",
+      "role": "concept",
+      "reviewedAt": "2026-10-13",
+      "reviewScope": "实际浏览器渲染逐张看框、文字、箭头、版本与双更新边界。"
+    }
+  ]
+}

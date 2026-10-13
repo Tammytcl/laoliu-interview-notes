@@ -1,0 +1,14 @@
+{
+  "version": 1,
+  "topicId": "llm-foundations-interview",
+  "checkedAt": "2026-10-13T06:00:51.037Z",
+  "observations": {
+    "llm-foundations-interview-01": {
+      "checkedAt": "2026-10-13T06:00:51.037Z",
+      "lastSuccessAt": "2026-10-13T06:00:51.037Z",
+      "status": "ok",
+      "sha256": "7026686674a3227a2f730dbb5766b33754c13d46f3e05f7675e424243cfff3d0",
+      "pendingReview": false
+    }
+  }
+}

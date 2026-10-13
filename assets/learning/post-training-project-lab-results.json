@@ -1,0 +1,24 @@
+{
+  "validation_scope": "CPU toy mathematics only; not real-tokenizer, multi-GPU, environment or model benchmark",
+  "causal_attention_future_difference": 0.0,
+  "lora_initial_A_gradient": 0.0,
+  "lora_initial_B_gradient": 0.3927025222397072,
+  "lora_merge_error": 8.881784197001252e-16,
+  "DPO_initial_loss": 0.6931471805599453,
+  "DPO_chosen_gradient": -0.1,
+  "DPO_rejected_gradient": 0.1,
+  "weighted_window_gradient": -3.2,
+  "scaled_weights_gradient": -3.2,
+  "effective_weights": [
+    2.0,
+    0.6666666666666666
+  ],
+  "single_forward_ratio": 1.0,
+  "single_forward_logprob_gradient": -0.7,
+  "BPE_nonoverlap_example": [
+    "aa",
+    "a"
+  ],
+  "same_version_value_delta": 0.04999999999999999,
+  "mixed_version_false_delta": 0.25
+}

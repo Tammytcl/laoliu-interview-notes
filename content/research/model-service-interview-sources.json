@@ -1,0 +1,24 @@
+{
+  "version": 1,
+  "topicId": "model-service-interview",
+  "sources": [
+    {
+      "id": "model-service-interview-01",
+      "title": "清单",
+      "kind": "community",
+      "url": "https://tcsnyy.github.io/llm-interview-notes/22_100%E9%97%AEChecklist/",
+      "reviewedAt": "2026-10-13",
+      "purpose": "题型来源与技术依据分层；正文独立讲解，项目来源/验证边界明确。",
+      "watchUrl": "https://tcsnyy.github.io/llm-interview-notes/22_100%E9%97%AEChecklist/",
+      "reviewedSha256": "7026686674a3227a2f730dbb5766b33754c13d46f3e05f7675e424243cfff3d0"
+    },
+    {
+      "id": "model-service-interview-02",
+      "title": "WHO健康领域LMM治理指南",
+      "kind": "official-docs",
+      "url": "https://www.who.int/publications/i/item/9789240084759",
+      "reviewedAt": "2026-10-13",
+      "purpose": "题型来源与技术依据分层；正文独立讲解，项目来源/验证边界明确。"
+    }
+  ]
+}

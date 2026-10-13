@@ -4,12 +4,14 @@ title: "Agentic OPD与Cross-tokenizer OPD项目展示和答辩"
 category: behavior
 difficulty: 进阶
 tags: ["P0", "Project", "OPD", "Agentic", "ESCD", "Interview"]
-updated: "2026-10-12"
+updated: "2026-10-13"
 summary: "两项目的30秒/3分钟/10分钟讲稿、12项证据页与24道逐层追问，区分公开实现、设计、实验结论与个人贡献，衔接pipeline和概率事件。"
 draft: false
 ---
 
 ## 1. 问题背景 从论文知识到自己的项目故事
+
+**2026-10-13具体项目入口。** 已新增[你的ESCD方法/实验讲稿](#q=escd-project-interview)、[指定turn分支Infra与代码](#q=agentic-turn-framework)、[Critic/创新论证](#q=agentic-turn-innovation)和[后训练40题](#q=post-training-interview)。本页保留通用答辩结构，当前项目机制以这三篇为准，不将之前完整trajectory async目录当turn实现。
 
 面试官首先想确认问题是否具体、贡献是否可验证，再追算法和系统细节。只说“用了slime、Megatron、SGLang、Harbor、异步OPD”是栈名清单；只说“提出更好的蒸馏”也缺少实现和证据。两项目需要各自的一条核心主张：Agentic围绕真实多轮状态、长尾与训练效率；Cross-tokenizer围绕公共概率事件和可靠监督。
 

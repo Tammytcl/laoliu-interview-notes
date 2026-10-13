@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "topicId": "agentic-turn-framework",
+  "sources": [
+    {
+      "id": "agentic-turn-framework-01",
+      "title": "AReaL",
+      "kind": "paper",
+      "url": "https://arxiv.org/abs/2505.24298v1",
+      "reviewedAt": "2026-10-13",
+      "purpose": "题型来源与技术依据分层；正文独立讲解，项目来源/验证边界明确。"
+    },
+    {
+      "id": "agentic-turn-framework-02",
+      "title": "AsyncOPD",
+      "kind": "paper",
+      "url": "https://arxiv.org/abs/2606.24143v1",
+      "reviewedAt": "2026-10-13",
+      "purpose": "题型来源与技术依据分层；正文独立讲解，项目来源/验证边界明确。"
+    }
+  ],
+  "localEvidence": "assets/learning/agentic-turn-framework/code-evidence.json"
+}

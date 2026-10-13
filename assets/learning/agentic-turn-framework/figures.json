@@ -1,0 +1,16 @@
+{
+  "topicId": "agentic-turn-framework",
+  "figures": [
+    {
+      "file": "turn-flow.svg",
+      "sourcePage": "https://github.com/Tammytcl/laoliu-interview-notes/blob/main/assets/learning/agentic-turn-framework/turn-flow.svg",
+      "credit": "本文按已核接口绘制教学示意，非实测/原论文结果。",
+      "sha256": "07a30cb475031b53a701f88e8341415ea5b678a2ee55f8f7f7beac0d1c523d36",
+      "visuallyVerified": true,
+      "explanation": "complete",
+      "role": "concept",
+      "reviewedAt": "2026-10-13",
+      "reviewScope": "实际浏览器渲染逐张看框、文字、箭头、版本与双更新边界。"
+    }
+  ]
+}

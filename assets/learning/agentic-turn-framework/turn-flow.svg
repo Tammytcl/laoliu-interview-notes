@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1120 510" role="img" aria-labelledby="title"><title id="title">Turn handoff and independent actor / critic updates</title><defs><marker id="a" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0L8 4L0 8" fill="#4d789b"/></marker></defs><rect width="1120" height="510" rx="20" fill="#f3f7fb"/><g font-family="Arial,sans-serif" fill="#173751"><text x="34" y="44" font-size="25" font-weight="bold">Turn handoff and independent actor / critic updates</text>
+<rect x="34" y="83" width="227" height="75" rx="10" fill="#deebf8" stroke="#4d789b"/><text x="147" y="127" text-anchor="middle" font-size="16">Sealed response</text>
+<path d="M261 120 H301" stroke="#4d789b" stroke-width="2" marker-end="url(#a)"/>
+<rect x="309" y="83" width="227" height="75" rx="10" fill="#deebf8" stroke="#4d789b"/><text x="422" y="127" text-anchor="middle" font-size="16">Actual tool feedback</text>
+<path d="M536 120 H576" stroke="#4d789b" stroke-width="2" marker-end="url(#a)"/>
+<rect x="584" y="83" width="227" height="75" rx="10" fill="#deebf8" stroke="#4d789b"/><text x="697" y="127" text-anchor="middle" font-size="16">Teacher + value pair</text>
+<path d="M811 120 H851" stroke="#4d789b" stroke-width="2" marker-end="url(#a)"/>
+<rect x="859" y="83" width="227" height="75" rx="10" fill="#deebf8" stroke="#4d789b"/><text x="972" y="127" text-anchor="middle" font-size="16">Actor token window</text>
+<rect x="34" y="248" width="227" height="75" rx="10" fill="#ddecdf" stroke="#4d789b"/><text x="147" y="292" text-anchor="middle" font-size="16">Complete trajectory</text>
+<path d="M261 285 H301" stroke="#4d789b" stroke-width="2" marker-end="url(#a)"/>
+<rect x="309" y="248" width="227" height="75" rx="10" fill="#ddecdf" stroke="#4d789b"/><text x="422" y="292" text-anchor="middle" font-size="16">Valid terminal label</text>
+<path d="M536 285 H576" stroke="#4d789b" stroke-width="2" marker-end="url(#a)"/>
+<rect x="584" y="248" width="227" height="75" rx="10" fill="#ddecdf" stroke="#4d789b"/><text x="697" y="292" text-anchor="middle" font-size="16">Critic batch update</text>
+<path d="M811 285 H851" stroke="#4d789b" stroke-width="2" marker-end="url(#a)"/>
+<rect x="859" y="248" width="227" height="75" rx="10" fill="#ddecdf" stroke="#4d789b"/><text x="972" y="292" text-anchor="middle" font-size="16">Critic checkpoint</text>
+<path d="M969 248 V179 H696 V158" fill="none" stroke="#4d789b" stroke-dasharray="6 4" stroke-width="2" marker-end="url(#a)"/><text x="34" y="204" font-size="17">Feedback is required by state-delta weighting; vanilla turn OPD has a different readiness rule.</text><text x="34" y="377" font-size="19">Actor: fixed parameters per accumulation window; one commit, then publish.</text><text x="34" y="416" font-size="19">Critic: valid terminal labels, separate optimizer, versioned before/after pair.</text><text x="34" y="455" font-size="19">Teacher determines direction; detached critic weights adjust relative strength.</text><text x="34" y="490" font-size="14" fill="#61798a">Teaching diagram of reviewed interfaces, not an experiment result or proof of novelty.</text></g></svg>

@@ -1,0 +1,1341 @@
+{
+  "reviewedAt": "2026-10-13",
+  "sourceUrl": "https://tcsnyy.github.io/llm-interview-notes/22_100%E9%97%AEChecklist/",
+  "sourcePageSha256": "7026686674a3227a2f730dbb5766b33754c13d46f3e05f7675e424243cfff3d0",
+  "actualItems": 222,
+  "note": "Knowledge prompts are independently paraphrased; source questions and personal project claims are not redistributed. Links indicate learning routes, not completed user proficiency.",
+  "items": [
+    {
+      "sourceNumber": 1,
+      "studyPrompt": "规模与计算预算",
+      "target": "#q=llm-foundations-interview",
+      "sourceTopic": "模型基础与能力"
+    },
+    {
+      "sourceNumber": 2,
+      "studyPrompt": "公开代际演化",
+      "target": "#q=llm-foundations-interview",
+      "sourceTopic": "模型基础与能力"
+    },
+    {
+      "sourceNumber": 3,
+      "studyPrompt": "三类网络任务",
+      "target": "#q=llm-foundations-interview",
+      "sourceTopic": "模型基础与能力"
+    },
+    {
+      "sourceNumber": 4,
+      "studyPrompt": "因果生成取舍",
+      "target": "#q=llm-foundations-interview",
+      "sourceTopic": "模型基础与能力"
+    },
+    {
+      "sourceNumber": 5,
+      "studyPrompt": "能力阈值与指标",
+      "target": "#q=llm-foundations-interview",
+      "sourceTopic": "模型基础与能力"
+    },
+    {
+      "sourceNumber": 6,
+      "studyPrompt": "幻觉归因",
+      "target": "#q=llm-foundations-interview",
+      "sourceTopic": "模型基础与能力"
+    },
+    {
+      "sourceNumber": 7,
+      "studyPrompt": "训练阶段职责",
+      "target": "#q=llm-foundations-interview",
+      "sourceTopic": "模型基础与能力"
+    },
+    {
+      "sourceNumber": 8,
+      "studyPrompt": "上下文示例学习",
+      "target": "#q=llm-foundations-interview",
+      "sourceTopic": "模型基础与能力"
+    },
+    {
+      "sourceNumber": 9,
+      "studyPrompt": "推理路径与预算",
+      "target": "#q=llm-foundations-interview",
+      "sourceTopic": "模型基础与能力"
+    },
+    {
+      "sourceNumber": 10,
+      "studyPrompt": "代理目标退化",
+      "target": "#q=llm-foundations-interview",
+      "sourceTopic": "模型基础与能力"
+    },
+    {
+      "sourceNumber": 11,
+      "studyPrompt": "层级数据形状",
+      "target": "#q=llm-foundations-interview",
+      "sourceTopic": "Transformer机制"
+    },
+    {
+      "sourceNumber": 12,
+      "studyPrompt": "匹配与内容投影",
+      "target": "#q=llm-foundations-interview",
+      "sourceTopic": "Transformer机制"
+    },
+    {
+      "sourceNumber": 13,
+      "studyPrompt": "多头子空间",
+      "target": "#q=llm-foundations-interview",
+      "sourceTopic": "Transformer机制"
+    },
+    {
+      "sourceNumber": 14,
+      "studyPrompt": "点积量级缩放",
+      "target": "#q=llm-foundations-interview",
+      "sourceTopic": "Transformer机制"
+    },
+    {
+      "sourceNumber": 15,
+      "studyPrompt": "归一化与残差",
+      "target": "#q=llm-foundations-interview",
+      "sourceTopic": "Transformer机制"
+    },
+    {
+      "sourceNumber": 16,
+      "studyPrompt": "跨序列信息融合",
+      "target": "#q=llm-foundations-interview",
+      "sourceTopic": "Transformer机制"
+    },
+    {
+      "sourceNumber": 17,
+      "studyPrompt": "未来可见性",
+      "target": "#q=causal-attention-coding",
+      "sourceTopic": "Transformer机制"
+    },
+    {
+      "sourceNumber": 18,
+      "studyPrompt": "位置表示",
+      "target": "#q=llm-foundations-interview",
+      "sourceTopic": "Transformer机制"
+    },
+    {
+      "sourceNumber": 19,
+      "studyPrompt": "门控前馈",
+      "target": "#q=llm-foundations-interview",
+      "sourceTopic": "Transformer机制"
+    },
+    {
+      "sourceNumber": 20,
+      "studyPrompt": "注意力IO优化",
+      "target": "#q=llm-foundations-interview",
+      "sourceTopic": "Transformer机制"
+    },
+    {
+      "sourceNumber": 21,
+      "studyPrompt": "合并式词表构造",
+      "target": "#q=llm-foundations-interview",
+      "sourceTopic": "分词和输入协议"
+    },
+    {
+      "sourceNumber": 22,
+      "studyPrompt": "切分算法差别",
+      "target": "#q=llm-foundations-interview",
+      "sourceTopic": "分词和输入协议"
+    },
+    {
+      "sourceNumber": 23,
+      "studyPrompt": "分词工具与算法",
+      "target": "#q=llm-foundations-interview",
+      "sourceTopic": "分词和输入协议"
+    },
+    {
+      "sourceNumber": 24,
+      "studyPrompt": "控制标记",
+      "target": "#q=llm-foundations-interview",
+      "sourceTopic": "分词和输入协议"
+    },
+    {
+      "sourceNumber": 25,
+      "studyPrompt": "词表与长度成本",
+      "target": "#q=llm-foundations-interview",
+      "sourceTopic": "分词和输入协议"
+    },
+    {
+      "sourceNumber": 26,
+      "studyPrompt": "跨语言单位统计",
+      "target": "#q=llm-foundations-interview",
+      "sourceTopic": "分词和输入协议"
+    },
+    {
+      "sourceNumber": 27,
+      "studyPrompt": "消息模板",
+      "target": "#q=llm-foundations-interview",
+      "sourceTopic": "分词和输入协议"
+    },
+    {
+      "sourceNumber": 28,
+      "studyPrompt": "ID与参数兼容",
+      "target": "#q=opd-interview-cross-tokenizer",
+      "sourceTopic": "分词和输入协议"
+    },
+    {
+      "sourceNumber": 29,
+      "studyPrompt": "监督目标",
+      "target": "#q=post-training-interview",
+      "sourceTopic": "SFT与数据"
+    },
+    {
+      "sourceNumber": 30,
+      "studyPrompt": "消息与示范格式",
+      "target": "#q=post-training-interview",
+      "sourceTopic": "SFT与数据"
+    },
+    {
+      "sourceNumber": 31,
+      "studyPrompt": "输入输出mask",
+      "target": "#q=post-training-interview",
+      "sourceTopic": "SFT与数据"
+    },
+    {
+      "sourceNumber": 32,
+      "studyPrompt": "重复训练与泛化",
+      "target": "#q=post-training-interview",
+      "sourceTopic": "SFT与数据"
+    },
+    {
+      "sourceNumber": 33,
+      "studyPrompt": "有效数据质量",
+      "target": "#q=post-training-interview",
+      "sourceTopic": "SFT与数据"
+    },
+    {
+      "sourceNumber": 34,
+      "studyPrompt": "任务覆盖",
+      "target": "#q=post-training-interview",
+      "sourceTopic": "SFT与数据"
+    },
+    {
+      "sourceNumber": 35,
+      "studyPrompt": "学习率与批量",
+      "target": "#q=post-training-interview",
+      "sourceTopic": "SFT与数据"
+    },
+    {
+      "sourceNumber": 36,
+      "studyPrompt": "拟合与真实质量",
+      "target": "#q=post-training-interview",
+      "sourceTopic": "SFT与数据"
+    },
+    {
+      "sourceNumber": 37,
+      "studyPrompt": "多轮响应选择",
+      "target": "#q=post-training-interview",
+      "sourceTopic": "SFT与数据"
+    },
+    {
+      "sourceNumber": 38,
+      "studyPrompt": "示范筛选",
+      "target": "#q=post-training-interview",
+      "sourceTopic": "SFT与数据"
+    },
+    {
+      "sourceNumber": 39,
+      "studyPrompt": "能力迁移与遗忘",
+      "target": "#q=post-training-interview",
+      "sourceTopic": "SFT与数据"
+    },
+    {
+      "sourceNumber": 40,
+      "studyPrompt": "个人运行配置",
+      "target": "#q=post-training-interview",
+      "sourceTopic": "SFT与数据"
+    },
+    {
+      "sourceNumber": 41,
+      "studyPrompt": "低秩层形状",
+      "target": "#q=lora-finetuning",
+      "sourceTopic": "参数高效训练"
+    },
+    {
+      "sourceNumber": 42,
+      "studyPrompt": "更新缩放",
+      "target": "#q=lora-finetuning",
+      "sourceTopic": "参数高效训练"
+    },
+    {
+      "sourceNumber": 43,
+      "studyPrompt": "投影层选择",
+      "target": "#q=lora-finetuning",
+      "sourceTopic": "参数高效训练"
+    },
+    {
+      "sourceNumber": 44,
+      "studyPrompt": "量化适配组件",
+      "target": "#q=lora-finetuning",
+      "sourceTopic": "参数高效训练"
+    },
+    {
+      "sourceNumber": 45,
+      "studyPrompt": "权重量化分布",
+      "target": "#q=lora-finetuning",
+      "sourceTopic": "参数高效训练"
+    },
+    {
+      "sourceNumber": 46,
+      "studyPrompt": "元数据压缩",
+      "target": "#q=lora-finetuning",
+      "sourceTopic": "参数高效训练"
+    },
+    {
+      "sourceNumber": 47,
+      "studyPrompt": "适配位置对照",
+      "target": "#q=lora-finetuning",
+      "sourceTopic": "参数高效训练"
+    },
+    {
+      "sourceNumber": 48,
+      "studyPrompt": "支路合并等价",
+      "target": "#q=lora-finetuning",
+      "sourceTopic": "参数高效训练"
+    },
+    {
+      "sourceNumber": 49,
+      "studyPrompt": "多adapter路由",
+      "target": "#q=lora-finetuning",
+      "sourceTopic": "参数高效训练"
+    },
+    {
+      "sourceNumber": 50,
+      "studyPrompt": "个人量化配置",
+      "target": "#q=lora-finetuning",
+      "sourceTopic": "参数高效训练"
+    },
+    {
+      "sourceNumber": 51,
+      "studyPrompt": "四分数margin",
+      "target": "#q=post-training-interview",
+      "sourceTopic": "偏好优化"
+    },
+    {
+      "sourceNumber": 52,
+      "studyPrompt": "偏好概率假设",
+      "target": "#q=post-training-interview",
+      "sourceTopic": "偏好优化"
+    },
+    {
+      "sourceNumber": 53,
+      "studyPrompt": "温度与约束尺度",
+      "target": "#q=post-training-interview",
+      "sourceTopic": "偏好优化"
+    },
+    {
+      "sourceNumber": 54,
+      "studyPrompt": "饱和梯度",
+      "target": "#q=post-training-interview",
+      "sourceTopic": "偏好优化"
+    },
+    {
+      "sourceNumber": 55,
+      "studyPrompt": "偏好泛化",
+      "target": "#q=post-training-interview",
+      "sourceTopic": "偏好优化"
+    },
+    {
+      "sourceNumber": 56,
+      "studyPrompt": "成对数据质量",
+      "target": "#q=post-training-interview",
+      "sourceTopic": "偏好优化"
+    },
+    {
+      "sourceNumber": 57,
+      "studyPrompt": "相对基线模型",
+      "target": "#q=post-training-interview",
+      "sourceTopic": "偏好优化"
+    },
+    {
+      "sourceNumber": 58,
+      "studyPrompt": "在线与离线优化",
+      "target": "#q=post-training-interview",
+      "sourceTopic": "偏好优化"
+    },
+    {
+      "sourceNumber": 59,
+      "studyPrompt": "偏好与真实性",
+      "target": "#q=post-training-interview",
+      "sourceTopic": "偏好优化"
+    },
+    {
+      "sourceNumber": 60,
+      "studyPrompt": "迭代采样",
+      "target": "#q=post-training-interview",
+      "sourceTopic": "偏好优化"
+    },
+    {
+      "sourceNumber": 61,
+      "studyPrompt": "个人偏好配置",
+      "target": "#q=post-training-interview",
+      "sourceTopic": "偏好优化"
+    },
+    {
+      "sourceNumber": 62,
+      "studyPrompt": "排序分数与生成质量",
+      "target": "#q=post-training-interview",
+      "sourceTopic": "偏好优化"
+    },
+    {
+      "sourceNumber": 63,
+      "studyPrompt": "偏好训练闭环",
+      "target": "#q=rl-policy-optimization-map",
+      "sourceTopic": "在线策略优化"
+    },
+    {
+      "sourceNumber": 64,
+      "studyPrompt": "角色分工",
+      "target": "#q=rl-policy-optimization-map",
+      "sourceTopic": "在线策略优化"
+    },
+    {
+      "sourceNumber": 65,
+      "studyPrompt": "悲观更新约束",
+      "target": "#q=rl-ppo-training",
+      "sourceTopic": "在线策略优化"
+    },
+    {
+      "sourceNumber": 66,
+      "studyPrompt": "策略正则",
+      "target": "#q=rl-ppo-training",
+      "sourceTopic": "在线策略优化"
+    },
+    {
+      "sourceNumber": 67,
+      "studyPrompt": "时序优势",
+      "target": "#q=rl-returns-gae",
+      "sourceTopic": "在线策略优化"
+    },
+    {
+      "sourceNumber": 68,
+      "studyPrompt": "组相对估计",
+      "target": "#q=rl-policy-optimization-map",
+      "sourceTopic": "在线策略优化"
+    },
+    {
+      "sourceNumber": 69,
+      "studyPrompt": "留一baseline",
+      "target": "#q=rl-policy-optimization-map",
+      "sourceTopic": "在线策略优化"
+    },
+    {
+      "sourceNumber": 70,
+      "studyPrompt": "回报归一变体",
+      "target": "#q=rl-policy-optimization-map",
+      "sourceTopic": "在线策略优化"
+    },
+    {
+      "sourceNumber": 71,
+      "studyPrompt": "探索与有效组配方",
+      "target": "#q=rl-policy-optimization-map",
+      "sourceTopic": "在线策略优化"
+    },
+    {
+      "sourceNumber": 72,
+      "studyPrompt": "可验证反馈",
+      "target": "#q=rl-policy-optimization-map",
+      "sourceTopic": "在线策略优化"
+    },
+    {
+      "sourceNumber": 73,
+      "studyPrompt": "目标套利",
+      "target": "#q=rl-policy-optimization-map",
+      "sourceTopic": "在线策略优化"
+    },
+    {
+      "sourceNumber": 74,
+      "studyPrompt": "行为分布偏移",
+      "target": "#q=rl-policy-optimization-map",
+      "sourceTopic": "在线策略优化"
+    },
+    {
+      "sourceNumber": 75,
+      "studyPrompt": "学生状态监督",
+      "target": "#q=opd-interview-foundations",
+      "sourceTopic": "在线蒸馏"
+    },
+    {
+      "sourceNumber": 76,
+      "studyPrompt": "蒸馏与偏好目标",
+      "target": "#q=opd-interview-foundations",
+      "sourceTopic": "在线蒸馏"
+    },
+    {
+      "sourceNumber": 77,
+      "studyPrompt": "循环生成评分",
+      "target": "#q=opd-interview-foundations",
+      "sourceTopic": "在线蒸馏"
+    },
+    {
+      "sourceNumber": 78,
+      "studyPrompt": "同预算强基线",
+      "target": "#q=opd-interview-foundations",
+      "sourceTopic": "在线蒸馏"
+    },
+    {
+      "sourceNumber": 79,
+      "studyPrompt": "迭代数据与目标区别",
+      "target": "#q=opd-interview-foundations",
+      "sourceTopic": "在线蒸馏"
+    },
+    {
+      "sourceNumber": 80,
+      "studyPrompt": "偏好标量训练",
+      "target": "#q=reward-judge-interview",
+      "sourceTopic": "奖励与过程评价"
+    },
+    {
+      "sourceNumber": 81,
+      "studyPrompt": "过程和结果单位",
+      "target": "#q=reward-judge-interview",
+      "sourceTopic": "奖励与过程评价"
+    },
+    {
+      "sourceNumber": 82,
+      "studyPrompt": "过程标签来源",
+      "target": "#q=reward-judge-interview",
+      "sourceTopic": "奖励与过程评价"
+    },
+    {
+      "sourceNumber": 83,
+      "studyPrompt": "奖励捷径",
+      "target": "#q=reward-judge-interview",
+      "sourceTopic": "奖励与过程评价"
+    },
+    {
+      "sourceNumber": 84,
+      "studyPrompt": "评分分布漂移",
+      "target": "#q=reward-judge-interview",
+      "sourceTopic": "奖励与过程评价"
+    },
+    {
+      "sourceNumber": 85,
+      "studyPrompt": "排序与校准",
+      "target": "#q=reward-judge-interview",
+      "sourceTopic": "奖励与过程评价"
+    },
+    {
+      "sourceNumber": 86,
+      "studyPrompt": "隐式奖励关系",
+      "target": "#q=reward-judge-interview",
+      "sourceTopic": "奖励与过程评价"
+    },
+    {
+      "sourceNumber": 87,
+      "studyPrompt": "规则反馈边界",
+      "target": "#q=reward-judge-interview",
+      "sourceTopic": "奖励与过程评价"
+    },
+    {
+      "sourceNumber": 88,
+      "studyPrompt": "证据处理链",
+      "target": "#q=rag-vs-finetuning",
+      "sourceTopic": "检索增强质量"
+    },
+    {
+      "sourceNumber": 89,
+      "studyPrompt": "检索增强层次",
+      "target": "#q=rag-vs-finetuning",
+      "sourceTopic": "检索增强质量"
+    },
+    {
+      "sourceNumber": 90,
+      "studyPrompt": "表示与召回评测",
+      "target": "#q=rag-vs-finetuning",
+      "sourceTopic": "检索增强质量"
+    },
+    {
+      "sourceNumber": 91,
+      "studyPrompt": "结构切块",
+      "target": "#q=rag-vs-finetuning",
+      "sourceTopic": "检索增强质量"
+    },
+    {
+      "sourceNumber": 92,
+      "studyPrompt": "混合召回",
+      "target": "#q=rag-vs-finetuning",
+      "sourceTopic": "检索增强质量"
+    },
+    {
+      "sourceNumber": 93,
+      "studyPrompt": "候选重排",
+      "target": "#q=rag-vs-finetuning",
+      "sourceTopic": "检索增强质量"
+    },
+    {
+      "sourceNumber": 94,
+      "studyPrompt": "证据位置影响",
+      "target": "#q=rag-vs-finetuning",
+      "sourceTopic": "检索增强质量"
+    },
+    {
+      "sourceNumber": 95,
+      "studyPrompt": "检索故障定位",
+      "target": "#q=rag-vs-finetuning",
+      "sourceTopic": "检索增强质量"
+    },
+    {
+      "sourceNumber": 96,
+      "studyPrompt": "外部知识与参数更新",
+      "target": "#q=rag-vs-finetuning",
+      "sourceTopic": "检索增强质量"
+    },
+    {
+      "sourceNumber": 97,
+      "studyPrompt": "分层任务指标",
+      "target": "#q=rag-vs-finetuning",
+      "sourceTopic": "检索增强质量"
+    },
+    {
+      "sourceNumber": 98,
+      "studyPrompt": "领域语料来源",
+      "target": "#q=rag-vs-finetuning",
+      "sourceTopic": "检索增强质量"
+    },
+    {
+      "sourceNumber": 99,
+      "studyPrompt": "风险验证模块",
+      "target": "#q=rag-vs-finetuning",
+      "sourceTopic": "检索增强质量"
+    },
+    {
+      "sourceNumber": 100,
+      "studyPrompt": "Rubric与偏差",
+      "target": "#q=reward-judge-interview",
+      "sourceTopic": "生成式评委"
+    },
+    {
+      "sourceNumber": 101,
+      "studyPrompt": "回答顺序控制",
+      "target": "#q=reward-judge-interview",
+      "sourceTopic": "生成式评委"
+    },
+    {
+      "sourceNumber": 102,
+      "studyPrompt": "绝对与成对评分",
+      "target": "#q=reward-judge-interview",
+      "sourceTopic": "生成式评委"
+    },
+    {
+      "sourceNumber": 103,
+      "studyPrompt": "人审一致性",
+      "target": "#q=reward-judge-interview",
+      "sourceTopic": "生成式评委"
+    },
+    {
+      "sourceNumber": 104,
+      "studyPrompt": "个人评价协议",
+      "target": "#q=reward-judge-interview",
+      "sourceTopic": "生成式评委"
+    },
+    {
+      "sourceNumber": 105,
+      "studyPrompt": "风险评分补偿",
+      "target": "#q=reward-judge-interview",
+      "sourceTopic": "生成式评委"
+    },
+    {
+      "sourceNumber": 106,
+      "studyPrompt": "评测任务口径",
+      "target": "#q=reward-judge-interview",
+      "sourceTopic": "生成式评委"
+    },
+    {
+      "sourceNumber": 107,
+      "studyPrompt": "评委与训练评分器",
+      "target": "#q=reward-judge-interview",
+      "sourceTopic": "生成式评委"
+    },
+    {
+      "sourceNumber": 108,
+      "studyPrompt": "推理资源管理",
+      "target": "#q=infra-inference-engine",
+      "sourceTopic": "推理引擎"
+    },
+    {
+      "sourceNumber": 109,
+      "studyPrompt": "KV物理布局",
+      "target": "#q=infra-inference-engine",
+      "sourceTopic": "推理引擎"
+    },
+    {
+      "sourceNumber": 110,
+      "studyPrompt": "请求持续批处理",
+      "target": "#q=infra-inference-engine",
+      "sourceTopic": "推理引擎"
+    },
+    {
+      "sourceNumber": 111,
+      "studyPrompt": "后端条件比较",
+      "target": "#q=infra-inference-engine",
+      "sourceTopic": "推理引擎"
+    },
+    {
+      "sourceNumber": 112,
+      "studyPrompt": "服务容量约束",
+      "target": "#q=infra-inference-engine",
+      "sourceTopic": "推理引擎"
+    },
+    {
+      "sourceNumber": 113,
+      "studyPrompt": "个人压测配置",
+      "target": "#q=infra-inference-engine",
+      "sourceTopic": "推理引擎"
+    },
+    {
+      "sourceNumber": 114,
+      "studyPrompt": "浮点范围",
+      "target": "#q=infra-training-step",
+      "sourceTopic": "训练资源与数值"
+    },
+    {
+      "sourceNumber": 115,
+      "studyPrompt": "批量梯度累计",
+      "target": "#q=infra-training-step",
+      "sourceTopic": "训练资源与数值"
+    },
+    {
+      "sourceNumber": 116,
+      "studyPrompt": "激活重算",
+      "target": "#q=infra-training-step",
+      "sourceTopic": "训练资源与数值"
+    },
+    {
+      "sourceNumber": 117,
+      "studyPrompt": "状态分片阶段",
+      "target": "#q=infra-zero-deepspeed",
+      "sourceTopic": "训练资源与数值"
+    },
+    {
+      "sourceNumber": 118,
+      "studyPrompt": "分片后端",
+      "target": "#q=infra-training-backends",
+      "sourceTopic": "训练资源与数值"
+    },
+    {
+      "sourceNumber": 119,
+      "studyPrompt": "非有限值诊断",
+      "target": "#q=infra-training-step",
+      "sourceTopic": "训练资源与数值"
+    },
+    {
+      "sourceNumber": 120,
+      "studyPrompt": "显存组成",
+      "target": "#q=infra-training-step",
+      "sourceTopic": "训练资源与数值"
+    },
+    {
+      "sourceNumber": 121,
+      "studyPrompt": "个人资源账本",
+      "target": "#q=infra-training-step",
+      "sourceTopic": "训练资源与数值"
+    },
+    {
+      "sourceNumber": 122,
+      "studyPrompt": "风险目标与责任",
+      "target": "#q=model-service-interview",
+      "sourceTopic": "应用风险"
+    },
+    {
+      "sourceNumber": 123,
+      "studyPrompt": "误拒与漏检",
+      "target": "#q=model-service-interview",
+      "sourceTopic": "应用风险"
+    },
+    {
+      "sourceNumber": 124,
+      "studyPrompt": "输入侧行为约束",
+      "target": "#q=model-service-interview",
+      "sourceTopic": "应用风险"
+    },
+    {
+      "sourceNumber": 125,
+      "studyPrompt": "输出语义审计",
+      "target": "#q=model-service-interview",
+      "sourceTopic": "应用风险"
+    },
+    {
+      "sourceNumber": 126,
+      "studyPrompt": "领域风险测试",
+      "target": "#q=model-service-interview",
+      "sourceTopic": "应用风险"
+    },
+    {
+      "sourceNumber": 127,
+      "studyPrompt": "证据适用范围冲突",
+      "target": "#q=model-service-interview",
+      "sourceTopic": "应用风险"
+    },
+    {
+      "sourceNumber": 128,
+      "studyPrompt": "安全反馈数据",
+      "target": "#q=model-service-interview",
+      "sourceTopic": "应用风险"
+    },
+    {
+      "sourceNumber": 129,
+      "studyPrompt": "用途边界",
+      "target": "#q=model-service-interview",
+      "sourceTopic": "应用风险"
+    },
+    {
+      "sourceNumber": 130,
+      "studyPrompt": "任务到产物链",
+      "target": "#q=opd-project-defense",
+      "sourceTopic": "个人项目证据"
+    },
+    {
+      "sourceNumber": 131,
+      "studyPrompt": "模型选择依据",
+      "target": "#q=opd-project-defense",
+      "sourceTopic": "个人项目证据"
+    },
+    {
+      "sourceNumber": 132,
+      "studyPrompt": "真实示范来源",
+      "target": "#q=opd-project-defense",
+      "sourceTopic": "个人项目证据"
+    },
+    {
+      "sourceNumber": 133,
+      "studyPrompt": "真实偏好来源",
+      "target": "#q=opd-project-defense",
+      "sourceTopic": "个人项目证据"
+    },
+    {
+      "sourceNumber": 134,
+      "studyPrompt": "评价维度理由",
+      "target": "#q=opd-project-defense",
+      "sourceTopic": "个人项目证据"
+    },
+    {
+      "sourceNumber": 135,
+      "studyPrompt": "故障和幻觉复盘",
+      "target": "#q=opd-project-defense",
+      "sourceTopic": "个人项目证据"
+    },
+    {
+      "sourceNumber": 136,
+      "studyPrompt": "检索验证设计",
+      "target": "#q=opd-project-defense",
+      "sourceTopic": "个人项目证据"
+    },
+    {
+      "sourceNumber": 137,
+      "studyPrompt": "相对与绝对变化",
+      "target": "#q=opd-project-defense",
+      "sourceTopic": "个人项目证据"
+    },
+    {
+      "sourceNumber": 138,
+      "studyPrompt": "下一轮实验",
+      "target": "#q=opd-project-defense",
+      "sourceTopic": "个人项目证据"
+    },
+    {
+      "sourceNumber": 139,
+      "studyPrompt": "工程与研究差别",
+      "target": "#q=opd-project-defense",
+      "sourceTopic": "个人项目证据"
+    },
+    {
+      "sourceNumber": 140,
+      "studyPrompt": "个人算法贡献",
+      "target": "#q=opd-project-defense",
+      "sourceTopic": "个人项目证据"
+    },
+    {
+      "sourceNumber": 141,
+      "studyPrompt": "模型练习收获",
+      "target": "#q=opd-project-defense",
+      "sourceTopic": "个人项目证据"
+    },
+    {
+      "sourceNumber": 142,
+      "studyPrompt": "方法比较",
+      "target": "#q=opd-project-defense",
+      "sourceTopic": "个人项目证据"
+    },
+    {
+      "sourceNumber": 143,
+      "studyPrompt": "岗位职责",
+      "target": "#q=opd-project-defense",
+      "sourceTopic": "个人项目证据"
+    },
+    {
+      "sourceNumber": 144,
+      "studyPrompt": "研究方向",
+      "target": "#q=opd-project-defense",
+      "sourceTopic": "个人项目证据"
+    },
+    {
+      "sourceNumber": 145,
+      "studyPrompt": "稳定注意力",
+      "target": "#q=causal-attention-coding",
+      "sourceTopic": "代码白板"
+    },
+    {
+      "sourceNumber": 146,
+      "studyPrompt": "分头张量变换",
+      "target": "#q=causal-attention-coding",
+      "sourceTopic": "代码白板"
+    },
+    {
+      "sourceNumber": 147,
+      "studyPrompt": "Shift与忽略标签",
+      "target": "#q=causal-lm-training",
+      "sourceTopic": "代码白板"
+    },
+    {
+      "sourceNumber": 148,
+      "studyPrompt": "偏好margin代码",
+      "target": "#paper=paper-dpo",
+      "sourceTopic": "代码白板"
+    },
+    {
+      "sourceNumber": 149,
+      "studyPrompt": "低秩支路",
+      "target": "#q=lora-finetuning",
+      "sourceTopic": "代码白板"
+    },
+    {
+      "sourceNumber": 150,
+      "studyPrompt": "完整更新窗口",
+      "target": "#q=infra-training-step",
+      "sourceTopic": "代码白板"
+    },
+    {
+      "sourceNumber": 151,
+      "studyPrompt": "相邻合并",
+      "target": "#q=causal-attention-coding",
+      "sourceTopic": "代码白板"
+    },
+    {
+      "sourceNumber": 152,
+      "studyPrompt": "旋转或距离偏置",
+      "target": "#q=rope-position",
+      "sourceTopic": "代码白板"
+    },
+    {
+      "sourceNumber": 153,
+      "studyPrompt": "产物发布链",
+      "target": "#q=model-service-interview",
+      "sourceTopic": "服务与模型产物"
+    },
+    {
+      "sourceNumber": 154,
+      "studyPrompt": "调用契约",
+      "target": "#q=model-service-interview",
+      "sourceTopic": "服务与模型产物"
+    },
+    {
+      "sourceNumber": 155,
+      "studyPrompt": "协议选择",
+      "target": "#q=model-service-interview",
+      "sourceTopic": "服务与模型产物"
+    },
+    {
+      "sourceNumber": 156,
+      "studyPrompt": "版本与回滚",
+      "target": "#q=model-service-interview",
+      "sourceTopic": "服务与模型产物"
+    },
+    {
+      "sourceNumber": 157,
+      "studyPrompt": "知识和权重兼容",
+      "target": "#q=model-service-interview",
+      "sourceTopic": "服务与模型产物"
+    },
+    {
+      "sourceNumber": 158,
+      "studyPrompt": "服务故障语义",
+      "target": "#q=model-service-interview",
+      "sourceTopic": "服务与模型产物"
+    },
+    {
+      "sourceNumber": 159,
+      "studyPrompt": "Adapter身份",
+      "target": "#q=model-service-interview",
+      "sourceTopic": "服务与模型产物"
+    },
+    {
+      "sourceNumber": 160,
+      "studyPrompt": "上线回归",
+      "target": "#q=model-service-interview",
+      "sourceTopic": "服务与模型产物"
+    },
+    {
+      "sourceNumber": 161,
+      "studyPrompt": "运行配置影响",
+      "target": "#q=infra-inference-engine",
+      "sourceTopic": "Serving配置与优化"
+    },
+    {
+      "sourceNumber": 162,
+      "studyPrompt": "多维压测",
+      "target": "#q=infra-inference-engine",
+      "sourceTopic": "Serving配置与优化"
+    },
+    {
+      "sourceNumber": 163,
+      "studyPrompt": "静态与动态adapter",
+      "target": "#q=infra-inference-engine",
+      "sourceTopic": "Serving配置与优化"
+    },
+    {
+      "sourceNumber": 164,
+      "studyPrompt": "KV block取舍",
+      "target": "#q=infra-inference-engine",
+      "sourceTopic": "Serving配置与优化"
+    },
+    {
+      "sourceNumber": 165,
+      "studyPrompt": "部署容量估算",
+      "target": "#q=infra-inference-engine",
+      "sourceTopic": "Serving配置与优化"
+    },
+    {
+      "sourceNumber": 166,
+      "studyPrompt": "Prefill与Decode调度",
+      "target": "#q=infra-inference-engine",
+      "sourceTopic": "Serving配置与优化"
+    },
+    {
+      "sourceNumber": 167,
+      "studyPrompt": "前缀重用",
+      "target": "#q=infra-inference-engine",
+      "sourceTopic": "Serving配置与优化"
+    },
+    {
+      "sourceNumber": 168,
+      "studyPrompt": "引擎条件对照",
+      "target": "#q=infra-inference-engine",
+      "sourceTopic": "Serving配置与优化"
+    },
+    {
+      "sourceNumber": 169,
+      "studyPrompt": "首响应时间",
+      "target": "#q=model-service-interview",
+      "sourceTopic": "请求性能"
+    },
+    {
+      "sourceNumber": 170,
+      "studyPrompt": "后续token间隔",
+      "target": "#q=model-service-interview",
+      "sourceTopic": "请求性能"
+    },
+    {
+      "sourceNumber": 171,
+      "studyPrompt": "有效生成吞吐",
+      "target": "#q=model-service-interview",
+      "sourceTopic": "请求性能"
+    },
+    {
+      "sourceNumber": 172,
+      "studyPrompt": "全请求分位数",
+      "target": "#q=model-service-interview",
+      "sourceTopic": "请求性能"
+    },
+    {
+      "sourceNumber": 173,
+      "studyPrompt": "到达负载与饱和",
+      "target": "#q=model-service-interview",
+      "sourceTopic": "请求性能"
+    },
+    {
+      "sourceNumber": 174,
+      "studyPrompt": "流式感知",
+      "target": "#q=model-service-interview",
+      "sourceTopic": "请求性能"
+    },
+    {
+      "sourceNumber": 175,
+      "studyPrompt": "阶段时序拆解",
+      "target": "#q=rag-vs-finetuning",
+      "sourceTopic": "RAG关键路径"
+    },
+    {
+      "sourceNumber": 176,
+      "studyPrompt": "向量索引瓶颈",
+      "target": "#q=rag-vs-finetuning",
+      "sourceTopic": "RAG关键路径"
+    },
+    {
+      "sourceNumber": 177,
+      "studyPrompt": "重排成本控制",
+      "target": "#q=rag-vs-finetuning",
+      "sourceTopic": "RAG关键路径"
+    },
+    {
+      "sourceNumber": 178,
+      "studyPrompt": "生成负载",
+      "target": "#q=rag-vs-finetuning",
+      "sourceTopic": "RAG关键路径"
+    },
+    {
+      "sourceNumber": 179,
+      "studyPrompt": "慢依赖与尾延迟",
+      "target": "#q=rag-vs-finetuning",
+      "sourceTopic": "RAG关键路径"
+    },
+    {
+      "sourceNumber": 180,
+      "studyPrompt": "召回预算",
+      "target": "#q=rag-vs-finetuning",
+      "sourceTopic": "RAG关键路径"
+    },
+    {
+      "sourceNumber": 181,
+      "studyPrompt": "并行分支",
+      "target": "#q=rag-vs-finetuning",
+      "sourceTopic": "RAG关键路径"
+    },
+    {
+      "sourceNumber": 182,
+      "studyPrompt": "Trace定位",
+      "target": "#q=rag-vs-finetuning",
+      "sourceTopic": "RAG关键路径"
+    },
+    {
+      "sourceNumber": 183,
+      "studyPrompt": "独立召回并发",
+      "target": "#q=rag-vs-finetuning",
+      "sourceTopic": "RAG并行和批量"
+    },
+    {
+      "sourceNumber": 184,
+      "studyPrompt": "依赖与推测执行",
+      "target": "#q=rag-vs-finetuning",
+      "sourceTopic": "RAG并行和批量"
+    },
+    {
+      "sourceNumber": 185,
+      "studyPrompt": "部分失败处理",
+      "target": "#q=rag-vs-finetuning",
+      "sourceTopic": "RAG并行和批量"
+    },
+    {
+      "sourceNumber": 186,
+      "studyPrompt": "离线批量与在线等待",
+      "target": "#q=rag-vs-finetuning",
+      "sourceTopic": "RAG并行和批量"
+    },
+    {
+      "sourceNumber": 187,
+      "studyPrompt": "请求合批",
+      "target": "#q=rag-vs-finetuning",
+      "sourceTopic": "RAG并行和批量"
+    },
+    {
+      "sourceNumber": 188,
+      "studyPrompt": "流水线就绪",
+      "target": "#q=rag-vs-finetuning",
+      "sourceTopic": "RAG并行和批量"
+    },
+    {
+      "sourceNumber": 189,
+      "studyPrompt": "缓存对象分层",
+      "target": "#q=rag-vs-finetuning",
+      "sourceTopic": "RAG缓存"
+    },
+    {
+      "sourceNumber": 190,
+      "studyPrompt": "语义答案复用",
+      "target": "#q=rag-vs-finetuning",
+      "sourceTopic": "RAG缓存"
+    },
+    {
+      "sourceNumber": 191,
+      "studyPrompt": "内容表示缓存",
+      "target": "#q=rag-vs-finetuning",
+      "sourceTopic": "RAG缓存"
+    },
+    {
+      "sourceNumber": 192,
+      "studyPrompt": "版本主动失效",
+      "target": "#q=rag-vs-finetuning",
+      "sourceTopic": "RAG缓存"
+    },
+    {
+      "sourceNumber": 193,
+      "studyPrompt": "权限与个性化隔离",
+      "target": "#q=rag-vs-finetuning",
+      "sourceTopic": "RAG缓存"
+    },
+    {
+      "sourceNumber": 194,
+      "studyPrompt": "Fast与Full路径",
+      "target": "#q=model-service-interview",
+      "sourceTopic": "路由与优先级"
+    },
+    {
+      "sourceNumber": 195,
+      "studyPrompt": "复杂度和风险估计",
+      "target": "#q=model-service-interview",
+      "sourceTopic": "路由与优先级"
+    },
+    {
+      "sourceNumber": 196,
+      "studyPrompt": "高风险人工升级",
+      "target": "#q=model-service-interview",
+      "sourceTopic": "路由与优先级"
+    },
+    {
+      "sourceNumber": 197,
+      "studyPrompt": "高风险验证流程",
+      "target": "#q=model-service-interview",
+      "sourceTopic": "路由与优先级"
+    },
+    {
+      "sourceNumber": 198,
+      "studyPrompt": "路由可审计性",
+      "target": "#q=model-service-interview",
+      "sourceTopic": "路由与优先级"
+    },
+    {
+      "sourceNumber": 199,
+      "studyPrompt": "梯度同步时机",
+      "target": "#q=infra-distributed-parallelism",
+      "sourceTopic": "分布式训练"
+    },
+    {
+      "sourceNumber": 200,
+      "studyPrompt": "状态生命周期",
+      "target": "#q=infra-training-backends",
+      "sourceTopic": "分布式训练"
+    },
+    {
+      "sourceNumber": 201,
+      "studyPrompt": "分片通信",
+      "target": "#q=infra-zero-deepspeed",
+      "sourceTopic": "分布式训练"
+    },
+    {
+      "sourceNumber": 202,
+      "studyPrompt": "后端参数契约",
+      "target": "#q=infra-zero-deepspeed",
+      "sourceTopic": "分布式训练"
+    },
+    {
+      "sourceNumber": 203,
+      "studyPrompt": "Node与Rank启动",
+      "target": "#q=infra-distributed-parallelism",
+      "sourceTopic": "分布式训练"
+    },
+    {
+      "sourceNumber": 204,
+      "studyPrompt": "模型并行与副本",
+      "target": "#q=model-service-interview",
+      "sourceTopic": "分布式Serving"
+    },
+    {
+      "sourceNumber": 205,
+      "studyPrompt": "同请求协作",
+      "target": "#q=model-service-interview",
+      "sourceTopic": "分布式Serving"
+    },
+    {
+      "sourceNumber": 206,
+      "studyPrompt": "缓存和负载取舍",
+      "target": "#q=model-service-interview",
+      "sourceTopic": "分布式Serving"
+    },
+    {
+      "sourceNumber": 207,
+      "studyPrompt": "Ready与健康探针",
+      "target": "#q=model-service-interview",
+      "sourceTopic": "分布式Serving"
+    },
+    {
+      "sourceNumber": 208,
+      "studyPrompt": "质量与资源metrics",
+      "target": "#q=model-service-interview",
+      "sourceTopic": "观测与告警"
+    },
+    {
+      "sourceNumber": 209,
+      "studyPrompt": "请求版本追踪",
+      "target": "#q=model-service-interview",
+      "sourceTopic": "观测与告警"
+    },
+    {
+      "sourceNumber": 210,
+      "studyPrompt": "输出证据日志",
+      "target": "#q=model-service-interview",
+      "sourceTopic": "观测与告警"
+    },
+    {
+      "sourceNumber": 211,
+      "studyPrompt": "采集与基数",
+      "target": "#q=model-service-interview",
+      "sourceTopic": "观测与告警"
+    },
+    {
+      "sourceNumber": 212,
+      "studyPrompt": "SLO和风险告警",
+      "target": "#q=model-service-interview",
+      "sourceTopic": "观测与告警"
+    },
+    {
+      "sourceNumber": 213,
+      "studyPrompt": "分阶段切流",
+      "target": "#q=model-service-interview",
+      "sourceTopic": "发布策略"
+    },
+    {
+      "sourceNumber": 214,
+      "studyPrompt": "双环境与灰度",
+      "target": "#q=model-service-interview",
+      "sourceTopic": "发布策略"
+    },
+    {
+      "sourceNumber": 215,
+      "studyPrompt": "版本组合回滚",
+      "target": "#q=model-service-interview",
+      "sourceTopic": "发布策略"
+    },
+    {
+      "sourceNumber": 216,
+      "studyPrompt": "语义风险检测",
+      "target": "#q=model-service-interview",
+      "sourceTopic": "故障与风险控制"
+    },
+    {
+      "sourceNumber": 217,
+      "studyPrompt": "依赖熔断",
+      "target": "#q=model-service-interview",
+      "sourceTopic": "故障与风险控制"
+    },
+    {
+      "sourceNumber": 218,
+      "studyPrompt": "明确降级",
+      "target": "#q=model-service-interview",
+      "sourceTopic": "故障与风险控制"
+    },
+    {
+      "sourceNumber": 219,
+      "studyPrompt": "敏感信息最小化",
+      "target": "#q=model-service-interview",
+      "sourceTopic": "敏感应用服务"
+    },
+    {
+      "sourceNumber": 220,
+      "studyPrompt": "用户缓存隔离",
+      "target": "#q=model-service-interview",
+      "sourceTopic": "敏感应用服务"
+    },
+    {
+      "sourceNumber": 221,
+      "studyPrompt": "风险请求调度",
+      "target": "#q=model-service-interview",
+      "sourceTopic": "敏感应用服务"
+    },
+    {
+      "sourceNumber": 222,
+      "studyPrompt": "反馈到数据版本",
+      "target": "#q=model-service-interview",
+      "sourceTopic": "敏感应用服务"
+    }
+  ]
+}

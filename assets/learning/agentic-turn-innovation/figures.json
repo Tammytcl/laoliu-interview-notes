@@ -1,0 +1,16 @@
+{
+  "topicId": "agentic-turn-innovation",
+  "figures": [
+    {
+      "file": "two-clocks.svg",
+      "sourcePage": "https://github.com/Tammytcl/laoliu-interview-notes/blob/main/assets/learning/agentic-turn-innovation/two-clocks.svg",
+      "credit": "本文按已核接口绘制教学示意，非实测/原论文结果。",
+      "sha256": "fea306799f36f08c0a60ff2fdacaf6c6ed8d63560a69cb0e9c561e2d22fadf47",
+      "visuallyVerified": true,
+      "explanation": "complete",
+      "role": "concept",
+      "reviewedAt": "2026-10-13",
+      "reviewScope": "实际浏览器渲染逐张看框、文字、箭头、版本与双更新边界。"
+    }
+  ]
+}

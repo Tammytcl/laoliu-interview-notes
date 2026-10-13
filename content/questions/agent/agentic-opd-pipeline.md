@@ -4,12 +4,14 @@ title: "Agentic OPD执行流程、异步pipeline与Infra接线"
 category: agent
 difficulty: 进阶
 tags: ["P0", "Agentic OPD", "Pipeline", "Async", "Infra", "Project"]
-updated: "2026-10-12"
+updated: "2026-10-13"
 summary: "沿任务准入、sandbox、模型请求、轨迹重建、教师评分、learner和权重发布讲全链路；解释队列、背压、混合版本、KV与恢复及性能排查。"
 draft: false
 ---
 
 ## 1. 问题背景 为什么有很多GPU仍然训练等rollout
+
+指定turn项目现在有独立[实现精读](#q=agentic-turn-framework)和[Critic创新专题](#q=agentic-turn-innovation)，分别核single-forward、窗口分母、prefix复用和双更新时机。本篇继续讲通用数据契约，不用它替代具体分支的实际配置。
 
 多轮coding/search任务不是持续占用推理GPU：模型生成一段动作，调用工具，等待进程/网络/环境，观察返回后再排队生成。整批训练等待所有任务完成时，一个长轨迹会拖住learner；即使Generate阶段内，GPU也可能因为可运行请求不足、工具等待、重复prefill、长尾排队而空闲。总活跃agent数不等于可运行推理数。
 

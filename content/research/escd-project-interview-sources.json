@@ -1,0 +1,80 @@
+{
+  "version": 1,
+  "topicId": "escd-project-interview",
+  "sources": [
+    {
+      "id": "escd-project-interview-01",
+      "title": "公开repo固定报告",
+      "kind": "paper",
+      "url": "https://github.com/Tammytcl/ESCD/blob/befd0c0a582ec6efc055660467db95d522519591/ESCD.pdf",
+      "reviewedAt": "2026-10-13",
+      "purpose": "题型来源与技术依据分层；正文独立讲解，项目来源/验证边界明确。",
+      "repository": "Tammytcl/ESCD",
+      "revision": "befd0c0a582ec6efc055660467db95d522519591",
+      "pinnedUrl": "https://github.com/Tammytcl/ESCD/blob/befd0c0a582ec6efc055660467db95d522519591/ESCD.pdf"
+    },
+    {
+      "id": "escd-project-interview-02",
+      "title": "arXiv v1",
+      "kind": "paper",
+      "url": "https://arxiv.org/abs/2609.34738v1",
+      "reviewedAt": "2026-10-13",
+      "purpose": "题型来源与技术依据分层；正文独立讲解，项目来源/验证边界明确。"
+    },
+    {
+      "id": "escd-project-interview-03",
+      "title": "固定公开资产assets/method.png",
+      "kind": "official-code",
+      "url": "https://github.com/Tammytcl/ESCD/blob/befd0c0a582ec6efc055660467db95d522519591/assets/method.png",
+      "reviewedAt": "2026-10-13",
+      "purpose": "题型来源与技术依据分层；正文独立讲解，项目来源/验证边界明确。",
+      "repository": "Tammytcl/ESCD",
+      "revision": "befd0c0a582ec6efc055660467db95d522519591",
+      "pinnedUrl": "https://github.com/Tammytcl/ESCD/blob/befd0c0a582ec6efc055660467db95d522519591/assets/method.png"
+    },
+    {
+      "id": "escd-project-interview-04",
+      "title": "固定源码",
+      "kind": "official-code",
+      "url": "https://github.com/Tammytcl/ESCD/blob/befd0c0a582ec6efc055660467db95d522519591/opd/cross_tokenizer/escd.py#L320",
+      "reviewedAt": "2026-10-13",
+      "purpose": "题型来源与技术依据分层；正文独立讲解，项目来源/验证边界明确。",
+      "repository": "Tammytcl/ESCD",
+      "revision": "befd0c0a582ec6efc055660467db95d522519591",
+      "pinnedUrl": "https://github.com/Tammytcl/ESCD/blob/befd0c0a582ec6efc055660467db95d522519591/opd/cross_tokenizer/escd.py#L320"
+    },
+    {
+      "id": "escd-project-interview-05",
+      "title": "methods",
+      "kind": "official-code",
+      "url": "https://github.com/Tammytcl/ESCD/blob/befd0c0a582ec6efc055660467db95d522519591/docs/methods.md",
+      "reviewedAt": "2026-10-13",
+      "purpose": "题型来源与技术依据分层；正文独立讲解，项目来源/验证边界明确。",
+      "repository": "Tammytcl/ESCD",
+      "revision": "befd0c0a582ec6efc055660467db95d522519591",
+      "pinnedUrl": "https://github.com/Tammytcl/ESCD/blob/befd0c0a582ec6efc055660467db95d522519591/docs/methods.md"
+    },
+    {
+      "id": "escd-project-interview-06",
+      "title": "reproduction",
+      "kind": "official-code",
+      "url": "https://github.com/Tammytcl/ESCD/blob/befd0c0a582ec6efc055660467db95d522519591/docs/reproduction.md",
+      "reviewedAt": "2026-10-13",
+      "purpose": "题型来源与技术依据分层；正文独立讲解，项目来源/验证边界明确。",
+      "repository": "Tammytcl/ESCD",
+      "revision": "befd0c0a582ec6efc055660467db95d522519591",
+      "pinnedUrl": "https://github.com/Tammytcl/ESCD/blob/befd0c0a582ec6efc055660467db95d522519591/docs/reproduction.md"
+    },
+    {
+      "id": "escd-project-interview-07",
+      "title": "固定assets/table1.png",
+      "kind": "official-code",
+      "url": "https://github.com/Tammytcl/ESCD/blob/befd0c0a582ec6efc055660467db95d522519591/assets/table1.png",
+      "reviewedAt": "2026-10-13",
+      "purpose": "题型来源与技术依据分层；正文独立讲解，项目来源/验证边界明确。",
+      "repository": "Tammytcl/ESCD",
+      "revision": "befd0c0a582ec6efc055660467db95d522519591",
+      "pinnedUrl": "https://github.com/Tammytcl/ESCD/blob/befd0c0a582ec6efc055660467db95d522519591/assets/table1.png"
+    }
+  ]
+}

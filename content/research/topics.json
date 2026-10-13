@@ -446,5 +446,125 @@
       "前置知识",
       "面试问答"
     ]
+  },
+  {
+    "id": "post-training-interview",
+    "sources": "content/research/post-training-interview-sources.json",
+    "figures": "assets/learning/post-training-interview/figures.json",
+    "minimumCharacters": 6000,
+    "minimumQuestions": 40,
+    "requiredSections": [
+      "问题背景",
+      "前置知识",
+      "面试问答"
+    ]
+  },
+  {
+    "id": "escd-project-interview",
+    "sources": "content/research/escd-project-interview-sources.json",
+    "figures": "assets/learning/escd-project-interview/figures.json",
+    "minimumCharacters": 6000,
+    "minimumQuestions": 16,
+    "requiredSections": [
+      "问题背景",
+      "前置知识",
+      "面试问答"
+    ]
+  },
+  {
+    "id": "agentic-turn-framework",
+    "sources": "content/research/agentic-turn-framework-sources.json",
+    "figures": "assets/learning/agentic-turn-framework/figures.json",
+    "minimumCharacters": 6000,
+    "minimumQuestions": 16,
+    "requiredSections": [
+      "问题背景",
+      "前置知识",
+      "面试问答"
+    ]
+  },
+  {
+    "id": "agentic-turn-innovation",
+    "sources": "content/research/agentic-turn-innovation-sources.json",
+    "figures": "assets/learning/agentic-turn-innovation/figures.json",
+    "minimumCharacters": 6000,
+    "minimumQuestions": 12,
+    "requiredSections": [
+      "问题背景",
+      "前置知识",
+      "面试问答"
+    ]
+  },
+  {
+    "id": "llm-foundations-interview",
+    "sources": "content/research/llm-foundations-interview-sources.json",
+    "figures": "assets/learning/llm-foundations-interview/figures.json",
+    "minimumCharacters": 6000,
+    "minimumQuestions": 16,
+    "requiredSections": [
+      "问题背景",
+      "前置知识",
+      "面试问答"
+    ]
+  },
+  {
+    "id": "reward-judge-interview",
+    "sources": "content/research/reward-judge-interview-sources.json",
+    "figures": "assets/learning/reward-judge-interview/figures.json",
+    "minimumCharacters": 6000,
+    "minimumQuestions": 16,
+    "requiredSections": [
+      "问题背景",
+      "前置知识",
+      "面试问答"
+    ]
+  },
+  {
+    "id": "model-service-interview",
+    "sources": "content/research/model-service-interview-sources.json",
+    "figures": "assets/learning/model-service-interview/figures.json",
+    "minimumCharacters": 6000,
+    "minimumQuestions": 16,
+    "requiredSections": [
+      "问题背景",
+      "前置知识",
+      "面试问答"
+    ]
+  },
+  {
+    "id": "post-training-checklist-map",
+    "sources": "content/research/post-training-checklist-map-sources.json",
+    "figures": "assets/learning/post-training-checklist-map/figures.json",
+    "minimumCharacters": 6000,
+    "minimumQuestions": 8,
+    "requiredSections": [
+      "问题背景",
+      "前置知识",
+      "面试问答"
+    ]
+  },
+  {
+    "id": "lora-finetuning",
+    "sources": "content/research/lora-finetuning-sources.json",
+    "figures": "assets/learning/lora-finetuning/figures.json",
+    "minimumCharacters": 6000,
+    "minimumQuestions": 16,
+    "requiredSections": [
+      "问题背景",
+      "前置知识",
+      "面试问答"
+    ]
+  },
+  {
+    "id": "rag-vs-finetuning",
+    "sources": "content/research/rag-vs-finetuning-sources.json",
+    "figures": "assets/learning/rag-vs-finetuning/figures.json",
+    "minimumCharacters": 6000,
+    "minimumQuestions": 16,
+    "requiredSections": [
+      "问题背景",
+      "前置知识",
+      "面试问答"
+    ]
   }
 ]

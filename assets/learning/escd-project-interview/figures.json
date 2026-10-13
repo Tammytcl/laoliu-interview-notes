@@ -1,0 +1,25 @@
+{
+  "topicId": "escd-project-interview",
+  "figures": [
+    {
+      "file": "method-public.png",
+      "sourcePage": "https://github.com/Tammytcl/ESCD/blob/befd0c0a582ec6efc055660467db95d522519591/assets/method.png",
+      "credit": "ESCD作者公开原资产；固定repo报告，未代换arXiv v1图表。",
+      "sha256": "95bad199c49f4b2873423faf45eb421698d892bd6c3d2ee833970b28842c75d9",
+      "visuallyVerified": true,
+      "explanation": "complete",
+      "role": "method",
+      "reviewedAt": "2026-10-13"
+    },
+    {
+      "file": "table1-public.png",
+      "sourcePage": "https://github.com/Tammytcl/ESCD/blob/befd0c0a582ec6efc055660467db95d522519591/assets/table1.png",
+      "credit": "ESCD作者公开原资产；固定repo报告，未代换arXiv v1图表。",
+      "sha256": "3de0440c7a57bcb23dba11ee61039823a0f349d9e7545408a2c77576c7264f63",
+      "visuallyVerified": true,
+      "explanation": "complete",
+      "role": "result-table",
+      "reviewedAt": "2026-10-13"
+    }
+  ]
+}

@@ -1,0 +1,51 @@
+{
+  "version": 1,
+  "topicId": "reward-judge-interview",
+  "sources": [
+    {
+      "id": "reward-judge-interview-01",
+      "title": "用户清单",
+      "kind": "community",
+      "url": "https://tcsnyy.github.io/llm-interview-notes/22_100%E9%97%AEChecklist/",
+      "reviewedAt": "2026-10-13",
+      "purpose": "题型来源与技术依据分层；正文独立讲解，项目来源/验证边界明确。",
+      "watchUrl": "https://tcsnyy.github.io/llm-interview-notes/22_100%E9%97%AEChecklist/",
+      "reviewedSha256": "7026686674a3227a2f730dbb5766b33754c13d46f3e05f7675e424243cfff3d0"
+    },
+    {
+      "id": "reward-judge-interview-02",
+      "title": "InstructGPT",
+      "kind": "paper",
+      "url": "https://arxiv.org/abs/2203.02155",
+      "reviewedAt": "2026-10-13",
+      "purpose": "题型来源与技术依据分层；正文独立讲解，项目来源/验证边界明确。"
+    },
+    {
+      "id": "reward-judge-interview-03",
+      "title": "Let’s Verify Step by Step",
+      "kind": "paper",
+      "url": "https://arxiv.org/abs/2305.20050",
+      "reviewedAt": "2026-10-13",
+      "purpose": "题型来源与技术依据分层；正文独立讲解，项目来源/验证边界明确。"
+    },
+    {
+      "id": "reward-judge-interview-04",
+      "title": "MT-Bench/Chatbot Arena研究",
+      "kind": "paper",
+      "url": "https://arxiv.org/abs/2306.05685",
+      "reviewedAt": "2026-10-13",
+      "purpose": "题型来源与技术依据分层；正文独立讲解，项目来源/验证边界明确。"
+    },
+    {
+      "id": "reward-judge-interview-05",
+      "title": "ESCD公开评价workflow",
+      "kind": "official-code",
+      "url": "https://github.com/Tammytcl/ESCD/blob/befd0c0a582ec6efc055660467db95d522519591/docs/phyrd40-evaluation.md",
+      "reviewedAt": "2026-10-13",
+      "purpose": "题型来源与技术依据分层；正文独立讲解，项目来源/验证边界明确。",
+      "repository": "Tammytcl/ESCD",
+      "revision": "befd0c0a582ec6efc055660467db95d522519591",
+      "pinnedUrl": "https://github.com/Tammytcl/ESCD/blob/befd0c0a582ec6efc055660467db95d522519591/docs/phyrd40-evaluation.md"
+    }
+  ]
+}

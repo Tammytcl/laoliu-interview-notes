@@ -1,0 +1,78 @@
+{
+  "version": 1,
+  "topicId": "post-training-interview",
+  "sources": [
+    {
+      "id": "post-training-interview-01",
+      "title": "个人暑期实习记录",
+      "kind": "community",
+      "url": "https://www.nowcoder.com/feed/main/detail/0a36b958ef864c8db004bd45694ec9a6",
+      "reviewedAt": "2026-10-13",
+      "purpose": "题型来源与技术依据分层；正文独立讲解，项目来源/验证边界明确。"
+    },
+    {
+      "id": "post-training-interview-02",
+      "title": "字节算法岗题型汇总",
+      "kind": "community",
+      "url": "https://www.nowcoder.com/discuss/922308546966847488?sourceSSR=post",
+      "reviewedAt": "2026-10-13",
+      "purpose": "题型来源与技术依据分层；正文独立讲解，项目来源/验证边界明确。"
+    },
+    {
+      "id": "post-training-interview-03",
+      "title": "百度算法岗汇总",
+      "kind": "community",
+      "url": "https://www.nowcoder.com/discuss/927018114900922368",
+      "reviewedAt": "2026-10-13",
+      "purpose": "题型来源与技术依据分层；正文独立讲解，项目来源/验证边界明确。"
+    },
+    {
+      "id": "post-training-interview-04",
+      "title": "TRL DPO官方文档",
+      "kind": "official-docs",
+      "url": "https://huggingface.co/docs/trl/en/dpo_trainer",
+      "reviewedAt": "2026-10-13",
+      "purpose": "题型来源与技术依据分层；正文独立讲解，项目来源/验证边界明确。"
+    },
+    {
+      "id": "post-training-interview-05",
+      "title": "PPO",
+      "kind": "paper",
+      "url": "https://arxiv.org/abs/1707.06347v2",
+      "reviewedAt": "2026-10-13",
+      "purpose": "题型来源与技术依据分层；正文独立讲解，项目来源/验证边界明确。"
+    },
+    {
+      "id": "post-training-interview-06",
+      "title": "DPO",
+      "kind": "paper",
+      "url": "https://arxiv.org/abs/2305.18290v2",
+      "reviewedAt": "2026-10-13",
+      "purpose": "题型来源与技术依据分层；正文独立讲解，项目来源/验证边界明确。"
+    },
+    {
+      "id": "post-training-interview-07",
+      "title": "DeepSeekMath",
+      "kind": "paper",
+      "url": "https://arxiv.org/abs/2402.03300v3",
+      "reviewedAt": "2026-10-13",
+      "purpose": "题型来源与技术依据分层；正文独立讲解，项目来源/验证边界明确。"
+    },
+    {
+      "id": "post-training-interview-08",
+      "title": "DAPO",
+      "kind": "paper",
+      "url": "https://arxiv.org/abs/2503.14476v2",
+      "reviewedAt": "2026-10-13",
+      "purpose": "题型来源与技术依据分层；正文独立讲解，项目来源/验证边界明确。"
+    },
+    {
+      "id": "post-training-interview-09",
+      "title": "GKD",
+      "kind": "paper",
+      "url": "https://arxiv.org/abs/2306.13649v3",
+      "reviewedAt": "2026-10-13",
+      "purpose": "题型来源与技术依据分层；正文独立讲解，项目来源/验证边界明确。"
+    }
+  ]
+}
