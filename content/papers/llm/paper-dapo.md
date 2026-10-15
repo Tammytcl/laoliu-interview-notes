@@ -10,8 +10,8 @@ direction: "llm"
 areas: ["language"]
 tasks: ["training-adaptation", "reasoning"]
 evidence: "已核原文"
-note_ids: ["sft-dpo-rl", "grpo-rlvr", "infra-rl-pipeline"]
-updated: "2026-10-09"
+note_ids: ["sft-dpo-rl", "grpo-rlvr", "infra-rl-pipeline", "rl-policy-optimization-map", "rl-ppo-training"]
+updated: "2026-10-15"
 template_version: 5
 depth_standard: "ddpm"
 draft: false
@@ -60,6 +60,20 @@ Decoupled Clip拆开概率比上下界；Dynamic Sampling过滤缺少相对信�
 原主表是按顺序累加的配方实验，不能把最后一项增益当成与其他机制独立的因果贡献，更不能把少一半update steps解释成少一半GPU-hour。
 
 ## 2. 方法与实现机制
+
+### 在统一训练主线中的位置
+
+**本文解决：修复探索 有效组与长度处理。** 教学入口是[算法总览的DAPO层](#q=rl-policy-optimization-map)；本篇继续保留原论文推导、真实代码身份、原图与实验条件。
+
+| 公式或代码对象 | 本文中应怎样解释 |
+| --- | --- |
+| upper clip | loss内放宽正优势增长空间 |
+| filter/refill | collector外层控制流，补足有效prompt组 |
+| token mean | 全局有效token分母，改变回答长度权重 |
+| overlong reward | 区分超长截断与任务错误，记录补采总成本 |
+
+[统一CPU课堂脚本](./assets/learning/rl-algorithms-unified-lab.py)用于解释共同接口和局部梯度，下面的原始或维护者实现用于核实际接线。先完成对象对应，再进入本篇专属方法；实验结论仍以第3至4节的论文证据为准。
+
 
 ### 共同骨架与完整目标
 

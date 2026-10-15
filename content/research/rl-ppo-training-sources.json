@@ -8,7 +8,7 @@
       "url": "https://github.com/openai/baselines/blob/da997060461e3cbf54ca4dc7a67081a731fb6b3b/baselines/pposgd/pposgd_simple.py#L110-L113",
       "title": "策略目标",
       "kind": "official-code",
-      "reviewedAt": "2026-10-12",
+      "reviewedAt": "2026-10-15",
       "purpose": "核对本篇对应公式、实现或原始实验；教学示例另行标注。",
       "repository": "openai/baselines",
       "revision": "da997060461e3cbf54ca4dc7a67081a731fb6b3b",

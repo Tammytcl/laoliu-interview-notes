@@ -11,8 +11,8 @@ direction: "llm"
 areas: ["language"]
 tasks: ["training-adaptation", "reasoning"]
 evidence: "已核原文"
-note_ids: ["sft-dpo-rl", "grpo-rlvr", "infra-rl-pipeline"]
-updated: "2026-10-09"
+note_ids: ["sft-dpo-rl", "grpo-rlvr", "infra-rl-pipeline", "rl-policy-optimization-map", "rl-ppo-training"]
+updated: "2026-10-15"
 template_version: 5
 depth_standard: "ddpm"
 draft: false
@@ -60,6 +60,20 @@ code_note: "正文区分论文原实现与固定commit的现代框架伴读；�
 RLVR说明reward可被规则验证，GRPO说明怎样优化。原DeepSeekMath使用学习reward模型；后来的规则判题与GRPO组合，不意味着二者同义。
 
 ## 2. 方法与实现机制
+
+### 在统一训练主线中的位置
+
+**本文解决：以同题组统计替代学习V。** 教学入口是[GRPO完整流程](#q=grpo-rlvr)；本篇继续保留原论文推导、真实代码身份、原图与实验条件。
+
+| 公式或代码对象 | 本文中应怎样解释 |
+| --- | --- |
+| prompt UID | 确定谁和谁共同估计baseline |
+| 组mean/std | 由回答reward得到一个回答优势 |
+| `unsqueeze(-1) * mask` | 广播系数，不是token独立评分 |
+| 下游policy loss | 仍须指定ratio、clip、KL与归约 |
+
+[统一CPU课堂脚本](./assets/learning/rl-algorithms-unified-lab.py)用于解释共同接口和局部梯度，下面的原始或维护者实现用于核实际接线。先完成对象对应，再进入本篇专属方法；实验结论仍以第3至4节的论文证据为准。
+
 
 ### 同题组如何产生优势
 

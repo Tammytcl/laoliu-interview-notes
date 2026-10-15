@@ -4,7 +4,7 @@ title: "从哪里开始？Diffusion、LLM、Agent、Infra 四条学习路线"
 category: guide
 difficulty: 基础
 tags: ["P0", "学习路线", "开始这里"]
-updated: "2026-10-13"
+updated: "2026-10-15"
 summary: "按先修关系安排学习，每个问题都落到解释、推导或可验证练习。"
 draft: false
 ---
@@ -55,7 +55,7 @@ P0 表示第一轮应掌握的主干，P1 表示主干后再深入。这是本�
 
 Agent组件专项按[总览](#q=agent-components-overview) → [Harbor E2B ACS与沙箱](#q=agent-sandbox-components) → [Code agent](#q=agent-code-components) / [Search agent](#q=agent-search-components)阅读。先沿同一任务标出决策、工具、执行、状态和验证，再解释产品所在层；用课堂脚本检查重试、恢复和证据覆盖。
 
-训练基础新增[Actor–critic](#q=rl-actor-critic) → [回报/GAE](#q=rl-returns-gae) → [PPO完整一步](#q=rl-ppo-training) → [算法对照](#q=rl-policy-optimization-map)。再读[Agentic RL](#q=agentic-rl-training)、[Agentic OPD](#q=agentic-opd-training)和[系统pipeline](#q=agentic-opd-pipeline)。面试用[基础题库](#q=opd-interview-foundations) → [Cross-tokenizer源码题](#q=opd-interview-cross-tokenizer) → [项目展示答辩](#q=opd-project-defense)，按真实证据补个人成绩与分工。
+RL算法从[统一总览](#q=rl-policy-optimization-map)进入，再沿[Actor–critic](#q=rl-actor-critic) → [回报/GAE](#q=rl-returns-gae) → [PPO完整一步](#q=rl-ppo-training) → [GRPO完整流程](#q=grpo-rlvr)，用[统一CPU脚本](./assets/learning/rl-algorithms-unified-lab.py)连接公式与两次optimizer更新。原图表与真实源码集中在[七篇论文对照](#report=survey-policy-optimization)。再读[Agentic RL](#q=agentic-rl-training)、[Agentic OPD](#q=agentic-opd-training)和[系统pipeline](#q=agentic-opd-pipeline)。面试用[基础题库](#q=opd-interview-foundations) → [Cross-tokenizer源码题](#q=opd-interview-cross-tokenizer) → [项目展示答辩](#q=opd-project-defense)，按真实证据补个人成绩与分工。
 
 ## Infra：从训练基础到框架与训推闭环
 

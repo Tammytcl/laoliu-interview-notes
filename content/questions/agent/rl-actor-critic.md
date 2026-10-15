@@ -4,7 +4,7 @@ title: "Actor Critic从回报到策略梯度"
 category: agent
 difficulty: 基础
 tags: ["P0", "RL", "Actor Critic", "Policy Gradient", "REINFORCE"]
-updated: "2026-10-12"
+updated: "2026-10-15"
 summary: "从状态动作回报推导REINFORCE与baseline，解释actor/critic各自学习什么、TD误差、共享参数和实际源码。"
 draft: false
 ---
@@ -39,6 +39,18 @@ $\gamma\in[0,1]$ 控制远期反馈权重。它不只是“为了稳定而默认
 本文教学示意。上方沿一次决策的真实信息流阅读，下方列出训练所需的职责和边界。箭头表示数据传递，不表示环境反馈可以直接反向传播；具体公式、mask和梯度在后续章节逐项展开。
 
 ## 3. 从REINFORCE推导不可微环境下的更新
+
+### 先用一个能完整算清的任务理解符号
+
+模型连续选择两个bit，只有选出[1,1]才获得终局reward1，其余为0。初始两个动作都等概率，四条路径各占1/4。首状态记作$s_0$；第二步必须记住第一步选了什么，所以第二步状态分成$s_{10}$与$s_{11}$。如果只写“第2步”而不保留首动作信息，未来奖励就不只依赖所写状态，不满足这份MDP的状态定义。
+
+| 状态 | 当前策略下未来可能发生什么 | 真实value |
+| --- | --- | --- |
+| $s_0$ | 两次都选1的概率为1/4 | 0.25 |
+| $s_{10}$ | 第一位已是0，无法成功 | 0 |
+| $s_{11}$ | 第二位选1即成功，概率1/2 | 0.5 |
+
+最后一步在$s_{11}$选1，Q为1，优势为$1-0.5=0.5$；选0，Q为0，优势为$-0.5$。Value比较的是这个状态的一般表现，不是另一条任务的平均难度。这个例子将在[GAE](#q=rl-returns-gae)和[PPO](#q=rl-ppo-training)继续使用，完整可运行代码在[统一课堂脚本](./assets/learning/rl-algorithms-unified-lab.py)。
 
 轨迹概率分解为：
 
@@ -102,6 +114,28 @@ $$
 **V也不必是最小方差的baseline。** score 的平方会影响最优常数。本例 baseline1.5使两个单样本梯度都为0.375，方差为0；它却不等于 $V=0.5$。实际 actor–critic 用价值估计有清晰Bellman结构和通用性，不应把“预测平均回报”说成对所有参数方向都达到最小梯度方差。
 
 ## 5. V Q A与critic究竟学什么
+
+### 从一个logprob到词表参数 为什么正优势会提高动作概率
+
+令策略logits为$z$，$\pi_k=\operatorname{softmax}(z)_k$，本次采样动作是$a$。对固定优势$A$，训练最小化$L=-A\log\pi_a$：
+
+$$
+\frac{\partial L}{\partial z_k}
+=-A\left(\mathbf1[k=a]-\pi_k\right).
+$$
+
+$A>0$时，被选动作的logit梯度为负，梯度下降将其提高；其他动作的logit梯度为正，被相对压低。$A<0$时方向相反。这解释了策略梯度为何能改变分布，而不是只改变一个孤立的概率数。
+
+```python title="教学实现 监督的对象是已采样动作的logprob"
+# logits: [B,V]，actions: [B]，fixed_advantage: [B]
+all_logp = logits.log_softmax(dim=-1)
+selected_logp = all_logp.gather(-1, actions[:, None]).squeeze(-1)
+actor_loss = -(selected_logp * fixed_advantage.detach()).mean()
+```
+
+`gather`选择实际动作的分数，softmax的分母仍让全部logits参与梯度。正reward不必对应正优势；固定数据上用一律正系数做NLL则更接近示范拟合。实际LLM的参数共享使多个位置互相影响，这个局部导数用于解释更新方向，不保证一次全模型step后每个动作概率都按局部方向变化。
+
+### 价值与优势的正式定义
 
 $$
 V^\pi(s)=\mathbb E[G_t\mid s_t=s],\quad
@@ -220,6 +254,8 @@ token级状态是实际prefix，动作是下一个token，V可对prefix输出标
 **Q12 [方差] V一定是最佳baseline吗？** 不保证。score大小影响最低方差baseline；两动作例子说明期望价值与最小方差常数可不同。
 
 ## 11. 来源与CPU练习
+
+学习入口回到[RL算法总览](#q=rl-policy-optimization-map)。本篇负责策略梯度与价值定义，GAE主文负责估计器，PPO主文负责有限数据上的更新，不必在每篇重新背一遍所有算法。
 
 [CPU课堂脚本](./assets/learning/agent-training-lab.py)和[结果](./assets/learning/agent-training-lab-results.json)枚举上述两动作期望与方差，并用autograd核梯度；不运行环境训练。[来源清单](./research/rl-actor-critic-sources.json)保留原始工作、固定代码和教学依据。
 

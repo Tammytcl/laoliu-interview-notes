@@ -11,8 +11,8 @@ direction: "llm"
 areas: ["language"]
 tasks: ["training-adaptation", "reasoning"]
 evidence: "已核原文"
-note_ids: ["sft-dpo-rl", "grpo-rlvr", "infra-rl-pipeline"]
-updated: "2026-10-09"
+note_ids: ["sft-dpo-rl", "grpo-rlvr", "infra-rl-pipeline", "rl-policy-optimization-map", "rl-ppo-training"]
+updated: "2026-10-15"
 template_version: 5
 depth_standard: "ddpm"
 draft: false
@@ -58,6 +58,20 @@ GRPO先加总reward再标准化；去std变体保留部分幅度，但仍先合�
 | 条件reward | 主要目标满足后才奖励次目标 | 信号更稀疏、门槛需定义 |
 
 ## 2. 方法与实现机制
+
+### 在统一训练主线中的位置
+
+**本文解决：保留reward组成后构造优势。** 教学入口是[算法总览的多奖励层](#q=rl-policy-optimization-map)；本篇继续保留原论文推导、真实代码身份、原图与实验条件。
+
+| 公式或代码对象 | 本文中应怎样解释 |
+| --- | --- |
+| reward维`K` | 归一化前保留正确性、格式等组成 |
+| 每维同prompt统计 | 先分别z-score，再施加reward weights |
+| 合并后whitening | 作者token-mask统计与等权回答教学不同 |
+| 原policy loss | 主要替换优势，不自动更换ratio或clip |
+
+[统一CPU课堂脚本](./assets/learning/rl-algorithms-unified-lab.py)用于解释共同接口和局部梯度，下面的原始或维护者实现用于核实际接线。先完成对象对应，再进入本篇专属方法；实验结论仍以第3至4节的论文证据为准。
+
 
 ### 三步优势构造
 

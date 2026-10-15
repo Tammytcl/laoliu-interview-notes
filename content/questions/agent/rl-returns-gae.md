@@ -4,7 +4,7 @@ title: "Monte Carlo TD与GAE怎样分配回报"
 category: agent
 difficulty: 进阶
 tags: ["P0", "RL", "GAE", "TD", "Bootstrap", "Credit Assignment"]
-updated: "2026-10-12"
+updated: "2026-10-15"
 summary: "从MC和n-step推导GAE，手算优势与value target，区分真正终止、截断、padding、工具观察和两个mask。"
 draft: false
 ---
@@ -58,6 +58,21 @@ $$
 例子：两步reward[0,1]，value[0.4,0.6,0]，$\gamma=0.9$。首步TDtarget=0.54、优势0.14；MCtarget=0.9、优势0.5。一个看近一步的估计与完整终局观察，给出的信号不同；critic若过高或过低，也可能改变优势符号。
 
 ## 4. GAE从TD残差到倒序递推
+
+### 先从多个n-step target的混合看lambda
+
+设当前片段还剩$N$个真实transition，每种$n$都有一个$n$步reward加末value的target $G_t^{(n)}$。有限片段的lambda-return可写成：
+
+$$
+G_t^\lambda=(1-\lambda)\sum_{n=1}^{N-1}
+\lambda^{n-1}G_t^{(n)}+\lambda^{N-1}G_t^{(N)}.
+$$
+
+最后一项接收剩余权重，全部权重和为1。$G_t^\lambda-V_{old}(s_t)$可以展开成下文TD残差的加权和，这就是GAE与多步回报的连接。$\lambda$较小更依赖短步value，较大更使用远期实际reward；它不改变已经观察到的reward本身。
+
+两步例子中，首步TD target为0.54，完整MC target为0.9。$\lambda=0.8$时混合target为$0.2\times0.54+0.8\times0.9=0.828$，减value0.4得到优势0.428。下面的倒序算法会给出完全相同的数字。先理解混合的对象，再看递推，不必从一行反向for循环猜算法含义。
+
+### 用TD残差得到线性时间递推
 
 对同一真实episode：
 
@@ -116,6 +131,19 @@ $b_t$控制能否使用下一状态value；$c_t$控制能否连接下一条样�
 这不是PPOclip能修复的错误：优势已经错了，更新限制只限制错信号的幅度。应在数据层先验证episode和segment边界。
 
 ## 6. 教学代码和历史源码的差别
+
+### 输入输出与梯度各归谁
+
+`rewards`、`old_values`、`next_values`、`bootstrap`和`trace`均为`[B,T]`，这里的T是实际决策数。返回两个对象：`advantages`给actor，`returns`给critic。函数在no-grad中计算，因此即使value来自模型forward，target也不保留训练图。
+
+| 量 | 后续用途 | 更新时是否重新算 |
+| --- | --- | --- |
+| old value | 生成优势与target | 这轮固定 |
+| raw advantage | actor反馈、构造target | 通常这轮固定 |
+| returns | critic的监督标签 | 这轮固定 |
+| current value | 与returns比较求MSE | 每次learner forward重算 |
+
+区别在于“用旧估计构造标签”和“拟合标签的当前预测”。把二者都替换成同一current tensor，可能让目标随预测一起移动；若还允许target反传，就改变了semi-gradient TD的更新规则。
 
 ```python title="教学实现 分开bootstrap与trace"
 adv = torch.zeros_like(rewards)
@@ -201,5 +229,7 @@ value MSE小也不自动说明actor优势可靠：小误差可能集中在少数
 **Q12 [讲课] 怎样快速证明自己理解GAE？** 手算两步、列terminal/truncation两mask，再说明工具观察与padding处理，最后核return和actor优势的梯度边界。
 
 ## 11. 来源与CPU例子
+
+[统一课堂脚本](./assets/learning/rl-algorithms-unified-lab.py)的`gae`采用显式真实transition接口；其中两步任务取$\gamma=\lambda=1$，故每条路径的target为实际终局reward。Token布局中的工具观察跳过逻辑留在上面的verl伴读，不能把两种输入布局混用。[统一结果](./assets/learning/rl-algorithms-unified-lab-results.json)还核对了terminal优势-2与可继续截断优势0.7。
 
 [CPU结果](./assets/learning/agent-training-lab-results.json)记录两步GAE、lambda变化、terminal/truncation和错误跨episode连接；验证固定小张量，不是训练收敛或框架完整复现。[来源清单](./research/rl-returns-gae-sources.json)登记原文、源码和[作者实现细节博客](https://iclr-blog-track.github.io/2022/03/25/ppo-implementation-details/)。继续读[PPO训练一步](#q=rl-ppo-training)。

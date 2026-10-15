@@ -56,6 +56,9 @@ npm run papers:clean                                # 清理源码缓存，保�
 
 ## RL、Agentic OPD与项目面试
 
+RL算法从[统一总览](content/questions/agent/rl-policy-optimization-map.md)进入，依次学习Actor Critic、GAE、PPO完整一步和GRPO，再按优势、ratio、surrogate与归约比较变体。[七篇论文对照](content/reports/surveys/survey-policy-optimization.md)负责真实代码和实验证据；[统一CPU课堂脚本](assets/learning/rl-algorithms-unified-lab.py)连接MDP中的PPO更新与同批梯度比较。
+
+
 从[Actor–critic](content/questions/agent/rl-actor-critic.md)开始读六篇基础教学，再接[Pipeline与Infra](content/questions/agent/agentic-opd-pipeline.md)。[OPD基础](content/questions/agent/opd-interview-foundations.md)、[Cross-tokenizer真实代码](content/questions/agent/opd-interview-cross-tokenizer.md)、[项目展示答辩](content/questions/behavior/opd-project-defense.md)提供分层题库与30秒/3分钟/10分钟讲稿，共156道新增笔记问答；公开题型与自拟追问分开。
 
 新增七篇精读（Search-R1、GiGPO、Agent Lightning、Guided-OPD、UOPD、ActFirst、新多教师SFT审计）和两份Agentic专题，共37张固定原图表、七张教学图。共享CPU脚本只验证小张量与梯度，不是模型训练复现；个人成绩和分工按真实日志填写。

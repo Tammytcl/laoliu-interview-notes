@@ -11,8 +11,8 @@ direction: "llm"
 areas: ["language"]
 tasks: ["training-adaptation", "reasoning"]
 evidence: "已核原文"
-note_ids: ["sft-dpo-rl", "grpo-rlvr", "infra-rl-pipeline"]
-updated: "2026-10-09"
+note_ids: ["sft-dpo-rl", "grpo-rlvr", "infra-rl-pipeline", "rl-policy-optimization-map", "rl-ppo-training"]
+updated: "2026-10-15"
 template_version: 5
 depth_standard: "ddpm"
 draft: false
@@ -60,6 +60,20 @@ code_note: "正文区分论文原实现与固定commit的现代框架伴读；�
 题名的“隐式reward model”指策略可以表达一个奖励等价类，不意味着已经得到可靠的通用评分器；跨prompt、跨reference的reward数值不能直接排序。
 
 ## 2. 方法与实现机制
+
+### 在统一训练主线中的位置
+
+**本文解决：用偏好pair直接训练策略。** 教学入口是[SFT DPO与在线RL](#q=sft-dpo-rl)；本篇继续保留原论文推导、真实代码身份、原图与实验条件。
+
+| 公式或代码对象 | 本文中应怎样解释 |
+| --- | --- |
+| 四个完整回答logprob | policy和reference分别评分chosen/rejected |
+| 回答内求和 | 原始序列概率，不是逐token配对或长度平均 |
+| relative margin | policy pair差减reference pair差 |
+| `logsigmoid` | 偏好分类，无需每步在线rollout或PPO clip |
+
+[统一CPU课堂脚本](./assets/learning/rl-algorithms-unified-lab.py)用于解释共同接口和局部梯度，下面的原始或维护者实现用于核实际接线。先完成对象对应，再进入本篇专属方法；实验结论仍以第3至4节的论文证据为准。
+
 
 ### 从 KL 正则化目标得到最优策略
 

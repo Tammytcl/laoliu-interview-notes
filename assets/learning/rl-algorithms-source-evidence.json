@@ -1,0 +1,68 @@
+{
+  "scope": "Public source bytes re-read for this editorial revision; own CPU lesson is not LLM training validation",
+  "sources": [
+    {
+      "file": "core_algos.py",
+      "url": "https://raw.githubusercontent.com/verl-project/verl/75879f7f475fd6b64c779f7d9212e45503f58b8f/verl/trainer/ppo/core_algos.py",
+      "bytes": 105282,
+      "sha256": "369b614f239f237a04a38a40b1877cd6fd14aa7bd5f9ff4fe4d7758b682a6948",
+      "reviewedAt": "2026-10-15"
+    },
+    {
+      "file": "spinningup.html",
+      "url": "https://spinningup.openai.com/en/latest/spinningup/rl_intro3.html",
+      "bytes": 60306,
+      "sha256": "ae75a858eca7155b69b4ff5e414added08c11d7bcc5cc4af752a8d6df25e6877",
+      "reviewedAt": "2026-10-15"
+    },
+    {
+      "file": "qwen-gspo.html",
+      "url": "https://qwenlm.github.io/blog/gspo/",
+      "bytes": 25141,
+      "sha256": "1b68a00a5f70a887f968a17c717b51bb6139ac3856b3b1206e05b321d30a9fab",
+      "reviewedAt": "2026-10-15"
+    },
+    {
+      "file": "dapo.html",
+      "url": "https://dapo-sia.github.io/",
+      "bytes": 14691,
+      "sha256": "bc5a4903e40088a67818a4575586572a8ff355ed32d2de345e35cbe1c75e7f07",
+      "reviewedAt": "2026-10-15"
+    },
+    {
+      "file": "gdpo.html",
+      "url": "https://nvlabs.github.io/GDPO/",
+      "bytes": 35237,
+      "sha256": "743f77be3386310e0ef807d791bde8aea78e86e82ea6eee12c8baf0deeefad14",
+      "reviewedAt": "2026-10-15"
+    },
+    {
+      "file": "baselines-ppo.py",
+      "url": "https://raw.githubusercontent.com/openai/baselines/da997060461e3cbf54ca4dc7a67081a731fb6b3b/baselines/pposgd/pposgd_simple.py",
+      "bytes": 9666,
+      "sha256": "34483d05ab5a2ac69355afcda715554986d96b206756a0c77628bb7f597c7d54",
+      "revision": "da997060461e3cbf54ca4dc7a67081a731fb6b3b",
+      "reviewedAt": "2026-10-15"
+    },
+    {
+      "file": "baselines-policy.py",
+      "url": "https://raw.githubusercontent.com/openai/baselines/da997060461e3cbf54ca4dc7a67081a731fb6b3b/baselines/pposgd/mlp_policy.py",
+      "bytes": 2623,
+      "sha256": "eb8e2ae456c69fc7dfa4684f30f5a6ab975066b86bc00267bfb0844a43c9a326",
+      "revision": "da997060461e3cbf54ca4dc7a67081a731fb6b3b",
+      "reviewedAt": "2026-10-15"
+    }
+  ],
+  "classroom": {
+    "script": {
+      "path": "assets/learning/rl-algorithms-unified-lab.py",
+      "sha256": "d7f2192445bcbad92a1ad1283ad97a98d7fc047d74b1e49f844bec79a4c31435",
+      "bytes": 13081
+    },
+    "results": {
+      "path": "assets/learning/rl-algorithms-unified-lab-results.json",
+      "sha256": "7de2bdace64e06b6e2facf0ace2d0a23cd4a7d16818596b7b18a8a53968c1b7e",
+      "bytes": 7432
+    }
+  }
+}

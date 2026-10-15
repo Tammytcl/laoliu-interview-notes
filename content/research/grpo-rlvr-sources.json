@@ -1,0 +1,26 @@
+{
+  "version": 1,
+  "topicId": "grpo-rlvr",
+  "note": "论文事实、固定实现与自有CPU教学代码分开；本次不进行LLM训练复现。",
+  "sources": [
+    {
+      "url": "https://github.com/verl-project/verl/blob/75879f7f475fd6b64c779f7d9212e45503f58b8f/verl/trainer/ppo/core_algos.py#L268-L331",
+      "title": "verl固定实现 GRPO outcome组优势与广播",
+      "kind": "official-code",
+      "reviewedAt": "2026-10-15",
+      "purpose": "核对prompt索引分组、样本std、singleton分支、关闭std选项和response mask广播。",
+      "repository": "verl-project/verl",
+      "revision": "75879f7f475fd6b64c779f7d9212e45503f58b8f",
+      "pinnedUrl": "https://github.com/verl-project/verl/blob/75879f7f475fd6b64c779f7d9212e45503f58b8f/verl/trainer/ppo/core_algos.py#L268-L331",
+      "id": "grpo-rlvr-01"
+    },
+    {
+      "id": "grpo-rlvr-02",
+      "title": "DeepSeekMath",
+      "url": "https://arxiv.org/abs/2402.03300v3",
+      "kind": "paper",
+      "reviewedAt": "2026-10-05",
+      "purpose": "核对GRPO的同题组优势、token更新、三策略职责及outcome/process区分；原图与实验条件见DeepSeekMath精读。"
+    }
+  ]
+}

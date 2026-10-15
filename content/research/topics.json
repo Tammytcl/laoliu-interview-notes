@@ -566,5 +566,17 @@
       "前置知识",
       "面试问答"
     ]
+  },
+  {
+    "id": "grpo-rlvr",
+    "sources": "content/research/grpo-rlvr-sources.json",
+    "figures": "assets/learning/grpo-rlvr/figures.json",
+    "minimumQuestions": 12,
+    "minimumCharacters": 6000,
+    "requiredSections": [
+      "问题背景",
+      "前置知识",
+      "面试问答"
+    ]
   }
 ]

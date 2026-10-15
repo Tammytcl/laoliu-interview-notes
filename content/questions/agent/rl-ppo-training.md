@@ -4,7 +4,7 @@ title: "PPO训练一步的数据梯度与实现"
 category: agent
 difficulty: 进阶
 tags: ["P0", "PPO", "Actor Critic", "KL", "Rollout", "Implementation"]
-updated: "2026-10-12"
+updated: "2026-10-15"
 summary: "从采样到optimizer逐项追踪PPO，解释冻结量、四种裁剪、actor/critic/reference职责、KL、mask和多epoch复用。"
 draft: false
 ---
@@ -39,6 +39,19 @@ RL经历由一个策略采样，训练后参数变化，同一动作在当前策
 这张表不是所有系统都同步执行的保证。异步流水线会让轨迹、评分、learner和权重发布重叠，仍需要标出各数据量的版本。反向传播提前完成、optimizer更新和推理权重发布是三个不同事件。
 
 ## 4. 比值从哪来 为什么初始为1仍有梯度
+
+### 先解释为什么需要old分母
+
+固定一个已经访问的状态$s$，希望评估新策略对固定优势$A_{old}(s,a)$的加权效果。如果动作来自old分布，可用概率比改写：
+
+$$
+\sum_a\pi_\theta(a\mid s)A_{old}(s,a)
+=\mathbb E_{a\sim\pi_{old}}
+\left[\frac{\pi_\theta(a\mid s)}{\pi_{old}(a\mid s)}
+A_{old}(s,a)\right].
+$$
+
+这是给定状态、支持覆盖下的action换测度。真实策略目标还依赖策略访问哪些状态；PPO局部surrogate沿old状态分布做近似，再用clip抑制部分过大更新。先从这个恒等式理解ratio，再区分完整目标和局部近似，比把ratio只当“稳定训练的技巧”更清楚。
 
 对同一真实状态动作：
 
@@ -90,12 +103,12 @@ actor_loss = (per_token_loss * action_mask).sum() / action_mask.sum()
 
 ```python title="Baselines真实源码 四行surrogate"
 ratio = tf.exp(pi.pd.logp(ac) - oldpi.pd.logp(ac)) # pnew / pold
-surr1 = ratio * atarg
-surr2 = tf.clip_by_value(ratio, 1.0 - clip_param, 1.0 + clip_param) * atarg
-pol_surr = - tf.reduce_mean(tf.minimum(surr1, surr2))
+surr1 = ratio * atarg # surrogate from conservative policy iteration
+surr2 = U.clip(ratio, 1.0 - clip_param, 1.0 + clip_param) * atarg #
+pol_surr = - U.mean(tf.minimum(surr1, surr2)) # PPO's pessimistic surrogate (L^CLIP)
 ```
 
-pi/oldpi是当前与旧分布，ac是已采样动作，atarg是优势。旧模型变量和更新顺序由周围代码保证，不能仅见没有detach就说有bug：TensorFlow的变量组与optimizer选取也决定哪些参数更新。这是控制任务的旧实现，不带LLM的token mask、teacher和reference角色。
+pi/oldpi是当前与旧分布，ac是已采样动作，atarg是优势。`U.clip`和`U.mean`是这份实现的封装调用；上面按固定源码保留原句，与前面的PyTorch教学重述分开。旧模型变量和更新顺序由周围代码保证，不能仅见没有detach就说有bug：TensorFlow的变量组与optimizer选取也决定哪些参数更新。这是控制任务的旧实现，不带LLM的token mask、teacher和reference角色。
 
 ## 6. Critic loss与联合目标
 
@@ -129,6 +142,54 @@ $$
 PPO的old/proximal用于控制“这一轮更新离比较策略多远”，reference用于“长期偏离哪份锚点”。若每个minibatch把reference换成current，它就不再是固定reference；若始终把old换成初始SFT，它就不再是通常近期PPO旧策略。
 
 ## 8. 多epoch缓存和不可变的数据契约
+
+### 从模型logits提取实际动作分数
+
+对LLM，policy loss前还要完成一次因果移位。假设`action_mask`标记的是`input_ids`中实际动作token的位置，完整序列logits为`[B,S,V]`：
+
+```python title="教学实现 当前logprob来自同一真实prefix"
+prediction = logits[:, :-1, :].log_softmax(dim=-1)  # 位置j预测j+1
+targets = input_ids[:, 1:]                        # 实际下一个token
+logp = prediction.gather(-1, targets[..., None]).squeeze(-1)
+mask = action_mask[:, 1:]                         # 和targets同一布局
+```
+
+第一个响应token由其前一个位置预测，不能先截response logits再错误地整体右移。Prompt与工具观察通常不承担actor loss，但应保留在模型输入中。真实高效实现常用融合cross entropy或词表并行logprob，避免物化完整`[B,S,V]`的log-softmax；上面用完整张量只是为了把位置与梯度讲清。
+
+### 一个真正执行forward backward和step的最小例子
+
+沿[Actor Critic的两bit任务](#q=rl-actor-critic)：首步选bit，次状态按首bit分成两种，只有[1,1]成功。初始actor均匀；枚举四条路径就能得到其精确采样期望。故这里没有随机collector误差，也不加载语言模型。
+
+为观察critic如何学习，故意初始化value为[0.4,0.1,0.6]，区别于真实value[0.25,0,0.5]。更新使用SGD学习率0.1、value系数0.5，actor与value均按这批有效决策平均。取$\gamma=\lambda=1$，GAE target就是各路径的终局reward，优势与target如下：
+
+| 两步动作 | 两步old value | 两步优势 | critic target |
+| --- | --- | --- | --- |
+| [0,0] | [0.4,0.1] | [-0.4,-0.1] | [0,0] |
+| [0,1] | [0.4,0.1] | [-0.4,-0.1] | [0,0] |
+| [1,0] | [0.4,0.6] | [-0.4,-0.6] | [0,0] |
+| [1,1] | [0.4,0.6] | [0.6,0.4] | [1,1] |
+
+表中成功轨迹首步优势0.6并非真实$A^\pi$的精确值，而是这条样本的MC return减不完美baseline；四条路径平均后仍给正确的策略梯度方向。Value target是监督，不等于每个单样本上的真实状态value。
+
+```python title="统一课堂脚本的训练核心 两个epoch共用冻结标签"
+for epoch in range(2):
+    logp = actor[states].log_softmax(-1).gather(
+        -1, actions[..., None]
+    ).squeeze(-1)
+    actor_loss = policy_loss(
+        logp, old_logp, adv, torch.ones_like(logp), "ppo", "token"
+    )
+    value_loss = .5 * (critic[states] - returns).square().mean()
+    optimizer.zero_grad()
+    (actor_loss + .5 * value_loss).backward()
+    optimizer.step()
+```
+
+`actor`是`[3,2]`可训练logits表，`critic`是`[3]`value表；查表是这个小MDP的forward。`states/actions`为`[4,2]`，表示四条路径、每条两步。`gather`后得到每条路径实际动作的logprob，再进入和LLM相同结构的PPO目标。
+
+代码同时更新actor和critic，但`adv/returns/old_logp`在进入循环前由no-grad计算并固定。首轮actor在首状态与“首bit为1”的次状态上，两个logit梯度均为[0.0625,-0.0625]，梯度下降提高选择1的概率；critic通过MSE纠正不完美value。第二轮重新forward current logits，ratio已经能偏离1，却继续使用同一old分母和标签。
+
+[完整可运行脚本](./assets/learning/rl-algorithms-unified-lab.py)断言了梯度方向、缓存不变和两次step后的精确期望reward提高；[结果JSON](./assets/learning/rl-algorithms-unified-lab-results.json)包含每轮梯度。它说明数据到更新能闭环，不代表真实LLM训练的收敛或效果。
 
 同一iteration内old logprob、优势和critic target通常固定，current forward每个minibatch重算。多个epoch增加样本利用率，但会使ratio偏离1、clip增加，旧优势也可能不再适合远离采样策略的更新。KL early stop是实用控制，不能当成TRPO理论硬保证。
 

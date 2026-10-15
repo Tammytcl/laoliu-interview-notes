@@ -10,8 +10,8 @@ direction: "llm"
 areas: ["language"]
 tasks: ["training-adaptation", "reasoning"]
 evidence: "已核原文"
-note_ids: ["sft-dpo-rl", "grpo-rlvr", "infra-rl-pipeline", "rl-actor-critic", "rl-returns-gae", "rl-ppo-training"]
-updated: "2026-10-12"
+note_ids: ["sft-dpo-rl", "grpo-rlvr", "infra-rl-pipeline", "rl-actor-critic", "rl-returns-gae", "rl-ppo-training", "rl-policy-optimization-map"]
+updated: "2026-10-15"
 template_version: 5
 depth_standard: "ddpm"
 draft: false
@@ -58,6 +58,20 @@ REINFORCE/Actor-Critic解决怎样构造策略梯度，GAE改进优势估计。[
 | PPO-Clip / PPO-KL | 一阶多epoch受控复用 | 经验稳定性不等于理论硬保证 |
 
 ## 2. 方法与实现机制
+
+### 在统一训练主线中的位置
+
+**本文解决：优势已固定后 怎样限制重复更新。** 教学入口是[PPO训练一步](#q=rl-ppo-training)；先修[GAE](#q=rl-returns-gae)；本篇继续保留原论文推导、真实代码身份、原图与实验条件。
+
+| 公式或代码对象 | 本文中应怎样解释 |
+| --- | --- |
+| `old_logprob`与`advantages` | 采样后冻结，同一轮minibatch复用 |
+| `exp(current-old)` | 当前分子可微，旧分母固定 |
+| `min(rA, clip(r)A)` | 正优势上侧与负优势下侧形成平台 |
+| `value target` | raw advantage加old value，不用白化后的优势 |
+
+[统一CPU课堂脚本](./assets/learning/rl-algorithms-unified-lab.py)用于解释共同接口和局部梯度，下面的原始或维护者实现用于核实际接线。先完成对象对应，再进入本篇专属方法；实验结论仍以第3至4节的论文证据为准。
+
 
 ### 从策略梯度到冻结旧策略的 surrogate
 

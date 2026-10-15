@@ -24,7 +24,7 @@
       "url": "https://github.com/verl-project/verl/blob/75879f7f475fd6b64c779f7d9212e45503f58b8f/verl/trainer/ppo/core_algos.py#L314-L329",
       "title": "GRPO分支",
       "kind": "official-code",
-      "reviewedAt": "2026-10-12",
+      "reviewedAt": "2026-10-15",
       "purpose": "核对本篇对应公式、实现或原始实验；教学示例另行标注。",
       "repository": "verl-project/verl",
       "revision": "75879f7f475fd6b64c779f7d9212e45503f58b8f",
@@ -53,6 +53,46 @@
       "kind": "paper",
       "reviewedAt": "2026-10-12",
       "purpose": "核对本篇对应公式、实现或原始实验；教学示例另行标注。"
+    },
+    {
+      "id": "rl-policy-optimization-map-07",
+      "url": "https://spinningup.openai.com/en/latest/spinningup/rl_intro3.html",
+      "title": "SpinningUp策略梯度推导",
+      "kind": "official-docs",
+      "reviewedAt": "2026-10-15",
+      "purpose": "核对本篇对应公式、实现或原始实验；教学示例另行标注。"
+    },
+    {
+      "id": "rl-policy-optimization-map-08",
+      "title": "DeepSeekMath",
+      "url": "https://arxiv.org/abs/2402.03300v3",
+      "kind": "paper",
+      "reviewedAt": "2026-10-05",
+      "purpose": "核对GRPO的同题组优势、token更新、三策略职责及outcome/process区分；原图与实验条件见DeepSeekMath精读。"
+    },
+    {
+      "url": "https://qwenlm.github.io/blog/gspo/",
+      "title": "Qwen GSPO作者博客",
+      "kind": "author-blog",
+      "reviewedAt": "2026-10-15",
+      "purpose": "核对本篇所引用的算法定义、推导或实现。",
+      "id": "rl-policy-optimization-map-09"
+    },
+    {
+      "url": "https://dapo-sia.github.io/",
+      "title": "DAPO作者项目",
+      "kind": "author-blog",
+      "reviewedAt": "2026-10-15",
+      "purpose": "核对本篇所引用的算法定义、推导或实现。",
+      "id": "rl-policy-optimization-map-10"
+    },
+    {
+      "url": "https://nvlabs.github.io/GDPO/",
+      "title": "GDPO作者项目",
+      "kind": "author-blog",
+      "reviewedAt": "2026-10-15",
+      "purpose": "核对本篇所引用的算法定义、推导或实现。",
+      "id": "rl-policy-optimization-map-11"
     }
   ]
 }

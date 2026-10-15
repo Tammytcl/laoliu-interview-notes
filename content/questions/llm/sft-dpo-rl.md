@@ -4,7 +4,7 @@ title: "SFT、DPO 和在线 RL 分别在优化什么？"
 category: llm
 difficulty: 进阶
 tags: ["P0", "后训练", "DPO"]
-updated: 2026-10-08
+updated: "2026-10-15"
 summary: "按数据来源、目标与反馈形式比较方法，避免把偏好优化等同于推理能力。"
 draft: false
 ---
@@ -25,6 +25,18 @@ draft: false
 
 ## DPO 的一个标准公式
 
+### 问题背景与理论假设分别是什么
+
+问题背景是：有chosen/rejected偏好对，却不想先学一个显式reward model、再运行完整在线PPO。前置知识是KL正则最优化、Bradley–Terry偏好模型和自回归序列logprob。二者分开后，DPO可以理解为“利用特定模型假设，把偏好学习直接写成策略分类目标”，而不是“把两个答案做一次普通SFT”。
+
+对固定prompt，考虑期望reward减reference KL的目标，其最优策略形式为：
+
+$$
+\pi^*(y\mid x)\propto\pi_{ref}(y\mid x)\exp(r(x,y)/\beta).
+$$
+
+取log后，reward可以写成$\beta\log(\pi^*/\pi_{ref})+\beta\log Z(x)$。同prompt两回答做差时，未知的$\log Z(x)$抵消；再代入Bradley–Terry的偏好概率$\sigma(r_w-r_l)$，得到下面的DPO loss。这条推导解释了为什么必须比较同prompt pair，以及reference为什么出现在公式里。
+
 同一 prompt x 下，偏好回答 y_w 与 y_l，固定参考策略 pi_ref：
 
 ```text
@@ -34,6 +46,21 @@ L_DPO = -log sigmoid(beta*delta)
 ```
 
 标准序列 logprob 是有效回答 token logprob 的和；长度归一化等改动会改变目标。beta 不是学习率。DPO 在特定 KL 正则奖励建模假设下推导，不需要先显式训练奖励模型，但并不意味着任何偏好数据都对应真实任务奖励。
+
+### 四个序列分数怎样落到代码
+
+对chosen与rejected分别做causal forward，先按有效回答mask求token logprob，再沿token维求和得到两个`[B]`分数；reference以相同文本、模板和mask产生另外两个固定分数。
+
+```python title="教学实现 DPO不是逐token比较chosen与rejected"
+policy_margin = chosen_logp - rejected_logp
+reference_margin = (ref_chosen_logp - ref_rejected_logp).detach()
+preference_logit = beta * (policy_margin - reference_margin)
+loss = -F.logsigmoid(preference_logit).mean()
+```
+
+Chosen与rejected长度可以不同，不需要逐token对齐。原目标使用回答logprob求和；改成长度平均会改变偏好模型对应的目标。Reference可以缓存，不意味着可以混用另一套template、tokenizer或mask生成的旧分数。
+
+例如chosen=-2、rejected=-3，reference均=-2.5，beta0.1，得到margin0.1、loss约0.6444。Loss对chosen分数的导数为负、对rejected为正，鼓励相对偏好差；模型参数共享后，两个回答的绝对概率可能同时下降，所以margin提高不保证chosen概率每步上升。
 
 ## 为什么不能只比 loss？
 
@@ -59,4 +86,4 @@ SFT 的低 loss 可能来自短且重复的回答；DPO 的偏好准确率可能
 
 ## 原论文精读与机制比较
 
-[进入完整原论文报告](#paper=paper-dpo)，继续核对公式推导、原图表、实验配置、源码和问答。横向复习见[PPO DPO GRPO及其变体](#report=survey-policy-optimization)：按优势、概率比、更新约束和奖励组织比较，避免把离线偏好拟合与在线组训练混为一谈。
+[DPO原论文报告](#paper=paper-dpo)继续讲最优策略、梯度、官方代码与原实验；[RL算法总览](#q=rl-policy-optimization-map)按反馈、优势、ratio、目标和归约比较各方法。[统一CPU脚本](./assets/learning/rl-algorithms-unified-lab.py)的`dpo_loss`只接收四个回答分数，可和在线loss接口直接对照；[结果](./assets/learning/rl-algorithms-unified-lab-results.json)核对上述margin与梯度。

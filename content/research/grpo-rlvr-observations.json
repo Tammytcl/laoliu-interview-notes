@@ -1,0 +1,14 @@
+{
+  "version": 1,
+  "topicId": "grpo-rlvr",
+  "checkedAt": "2026-10-15T08:54:02.583Z",
+  "observations": {
+    "grpo-rlvr-01": {
+      "checkedAt": "2026-10-15T08:54:02.583Z",
+      "lastSuccessAt": "2026-10-15T08:54:02.583Z",
+      "status": "ok",
+      "revision": "5b550b0c3dad8c7bb7aab834a3fe195f8cdfc517",
+      "pendingReview": true
+    }
+  }
+}

@@ -10,8 +10,8 @@ direction: "llm"
 areas: ["language"]
 tasks: ["training-adaptation", "reasoning"]
 evidence: "已核原文"
-note_ids: ["sft-dpo-rl", "grpo-rlvr", "infra-rl-pipeline"]
-updated: "2026-10-09"
+note_ids: ["sft-dpo-rl", "grpo-rlvr", "infra-rl-pipeline", "rl-policy-optimization-map", "rl-ppo-training"]
+updated: "2026-10-15"
 template_version: 5
 depth_standard: "ddpm"
 draft: true
@@ -61,6 +61,20 @@ GRPO去critic但保留token ratio；GSPO把ratio与clip改成sequence级，用�
 “reward单位与优化单位一致”是作者的设计动机；实验与数学条件需分别读，不能简化成所有token-level方法错误或GSPO必然稳定。
 
 ## 2. 方法与实现机制
+
+### 在统一训练主线中的位置
+
+**本文解决：让回答共享ratio与clip条件。** 教学入口是[算法总览的GSPO层](#q=rl-policy-optimization-map)；本篇继续保留原论文推导、真实代码身份、原图与实验条件。
+
+| 公式或代码对象 | 本文中应怎样解释 |
+| --- | --- |
+| mean log-ratio | 有效token求均值后exp，得到几何平均 |
+| sequence clip | 回答共享分支，非所有越界统一停止 |
+| `logp-sg(logp)` | 前向0，反向保留token路径 |
+| sequence mean | 与直接sequence式等价还需回答内优势相同 |
+
+[统一CPU课堂脚本](./assets/learning/rl-algorithms-unified-lab.py)用于解释共同接口和局部梯度，下面的原始或维护者实现用于核实际接线。先完成对象对应，再进入本篇专属方法；实验结论仍以第3至4节的论文证据为准。
+
 
 ### 从完整回答概率到长度归一化比值
 

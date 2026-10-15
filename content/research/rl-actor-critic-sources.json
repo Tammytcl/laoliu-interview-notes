@@ -24,7 +24,7 @@
       "url": "https://github.com/openai/baselines/blob/da997060461e3cbf54ca4dc7a67081a731fb6b3b/baselines/pposgd/mlp_policy.py#L27-L41",
       "title": "MlpPolicy",
       "kind": "official-code",
-      "reviewedAt": "2026-10-12",
+      "reviewedAt": "2026-10-15",
       "purpose": "核对本篇对应公式、实现或原始实验；教学示例另行标注。",
       "repository": "openai/baselines",
       "revision": "da997060461e3cbf54ca4dc7a67081a731fb6b3b",
@@ -35,7 +35,7 @@
       "url": "https://github.com/openai/baselines/blob/da997060461e3cbf54ca4dc7a67081a731fb6b3b/baselines/pposgd/mlp_policy.py#L46-L52",
       "title": "act路径",
       "kind": "official-code",
-      "reviewedAt": "2026-10-12",
+      "reviewedAt": "2026-10-15",
       "purpose": "核对本篇对应公式、实现或原始实验；教学示例另行标注。",
       "repository": "openai/baselines",
       "revision": "da997060461e3cbf54ca4dc7a67081a731fb6b3b",
@@ -54,7 +54,7 @@
       "url": "https://spinningup.openai.com/en/latest/spinningup/rl_intro3.html",
       "title": "SpinningUp策略梯度推导",
       "kind": "official-docs",
-      "reviewedAt": "2026-10-12",
+      "reviewedAt": "2026-10-15",
       "purpose": "核对本篇对应公式、实现或原始实验；教学示例另行标注。"
     }
   ]

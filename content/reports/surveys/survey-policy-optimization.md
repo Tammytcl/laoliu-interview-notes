@@ -1,24 +1,31 @@
 ---
 id: survey-policy-optimization
-title: "PPO DPO GRPO GSPO GDPO DAPO SAPO 的讲课与代码对照"
+title: "七篇策略优化论文的机制 代码与实验证据对照"
 type: survey
 date: '2026-10-08'
 directions: [llm, agent, infra]
 paper_ids: [paper-ppo, paper-dpo, paper-grpo, paper-dapo, paper-gdpo]
 tags: [专题调研, Policy Optimization, RLHF, RLVR, Interview]
-updated: "2026-10-12"
-summary: "把七种方法放入同一训练流程，比较数据来源、优势、概率比、裁剪、reward组织和长度权重；附推导入口、手算例子与场景化面试追问。"
+updated: "2026-10-15"
+summary: "连接RL基础主线与七篇精读，逐段对应真实源码、原图和实验条件，区分算法修改位置与可比较证据。"
 template_version: 1
 draft: false
 ---
 
 ## 1. 研究问题与使用场景
 
-基础路线已扩为[Actor–critic](#q=rl-actor-critic) → [MC/TD/GAE](#q=rl-returns-gae) → [PPO完整batch](#q=rl-ppo-training) → [六轴算法对照](#q=rl-policy-optimization-map)，并接[Agentic RL专题](#report=survey-agentic-rl-2026)。原七算法精读与草稿发布条件保留。
+本文集中回答：**论文改了哪一层，真实代码怎样实现，原实验支持多强的结论。** 从零学习先看[RL算法总览](#q=rl-policy-optimization-map)，沿[Actor Critic](#q=rl-actor-critic) → [GAE](#q=rl-returns-gae) → [PPO训练一步](#q=rl-ppo-training) → [GRPO](#q=grpo-rlvr)建立一条数据流，再回本文核论文。
 
-这七种方法分别改变训练的哪一个环节，遇到什么问题才需要它？本专题围绕后训练优化机制，服务于论文精读、工程排查和面试表达。重点是公式与实际数据流，框架选型、GPU架构和checkpoint格式留在各自Infra笔记中，不扩成后训练大杂烩。
+学习专题与论文精读的分工如下。基础专题负责定义、推导和统一小例子；本报告负责横向比较和源码定位；单篇保留作者原图、完整方法、模型/数据/算力、结果与局限。遇到同一知识点优先回主文，不需要在三个入口重复学习。
 
-主线是：PPO让旧策略生成的数据能被较稳健地多次更新；DPO从偏好pair直接拟合策略；GRPO用同题组替代valuebaseline；GSPO把概率比和clip改成sequence级；DAPO改探索、有效组、token权重与超长反馈；GDPO改多reward归一化顺序；SAPO改硬clip为可微softgate。这些修改不全处于同一层，也不一定互斥。
+| 要解决的问题 | 主入口 |
+| --- | --- |
+| 策略梯度、baseline、V/Q/A为何成立 | [Actor Critic](#q=rl-actor-critic) |
+| 回报、TD、GAE、终止与截断怎么算 | [GAE](#q=rl-returns-gae) |
+| 张量怎样经过loss、backward、step | [PPO训练一步](#q=rl-ppo-training) |
+| 不同算法如何共用一套接口 | [算法总览](#q=rl-policy-optimization-map) |
+| 原论文的方法图、实验数字、配置与代码身份 | 本文及下面七篇精读 |
+| 工具轨迹的credit、状态和系统 | [Agentic RL](#q=agentic-rl-training) |
 
 ![本文教学图 · 离线偏好与在线训练的修改位置](./assets/learning/policy-optimization-flow.svg)
 
@@ -37,48 +44,30 @@ draft: false
 | PPO | [1707.06347v2](https://arxiv.org/abs/1707.06347v2) | [PPO精读](#paper=paper-ppo) |
 | DPO | [2305.18290v3](https://arxiv.org/abs/2305.18290v3) | [DPO精读](#paper=paper-dpo) |
 | GRPO | [DeepSeekMath 2402.03300v3](https://arxiv.org/abs/2402.03300v3) | [DeepSeekMath精读](#paper=paper-grpo) |
-| GSPO | [2507.18071v2](https://arxiv.org/abs/2507.18071v2) | 完整本地草稿；原文无表 |
+| GSPO | [2507.18071v2](https://arxiv.org/abs/2507.18071v2) | [完整草稿](./paper-drafts/paper-gspo.md)；原文无表 |
 | GDPO | [2601.05242v1](https://arxiv.org/abs/2601.05242v1) | [GDPO精读](#paper=paper-gdpo) |
 | DAPO | [2503.14476v2](https://arxiv.org/abs/2503.14476v2) | [DAPO精读](#paper=paper-dapo) |
-| SAPO | [Soft Adaptive 2511.20347v2](https://arxiv.org/abs/2511.20347v2) | 完整本地草稿；原文无表 |
+| SAPO | [Soft Adaptive 2511.20347v2](https://arxiv.org/abs/2511.20347v2) | [完整草稿](./paper-drafts/paper-sapo.md)；原文无表 |
 
 GDPO排除同名GFlowNet和image-superresolution工作；SAPO排除single-rollout、self-adaptiveprocess等其他缩写。GRPO没有伪造一篇独立题名“Group Relative Policy Optimization”的原论文，而以真实DeepSeekMath全文收录。
 
 ## 3. 论文集合与方法谱系
 
-### 先建立共同符号与四个模型职责
+### 用统一接口定位每篇修改
 
-| 对象 | 输入与输出 | 更新周期 | 容易混淆的对象 |
+共同符号、公式推导和教学实现已集中到[算法总览](#q=rl-policy-optimization-map)，下面直接对照真实源码。阅读一个函数时按“输入形状 → 哪一量改变 → 是否可微 → 输出交给谁”四步解释。
+
+| 论文 | 首先定位的代码 | 改变的对象 | 继续追踪 |
 | --- | --- | --- | --- |
-| currentpolicy $\pi_\theta$ | prefix→nexttoken概率 | optimizerstep变化 | actor不是所有阶段都同一版本 |
-| behavior/old $\pi_b$ | 实际生成回答的策略/概率 | 每轮rollout或异步版本段 | 与reference职责不同 |
-| reference $\pi_{ref}$ | 原行为分布锚点 | 可固定，也可outeriteration刷新 | 不是GAE的baseline |
-| reward $R$ | 完整回答/过程/环境→反馈 | 规则固定或模型迭代 | 不必可微，不等于critic |
-| value $V$ | prefix/state→未来预期回报 | critic训练更新 | 与rewardmodel学习目标不同 |
+| PPO | GAE与`surr1/surr2` | 固定优势下的悲观更新目标 | old拷贝时机、minibatch与optimizer |
+| DPO | 四个回答分数与`logsigmoid` | 偏好分类目标 | 回答mask、sum、reference缓存 |
+| GRPO | prompt索引与mean/std | 回答级优势 | 广播后进入哪种policy loss |
+| GSPO | mean log-ratio与detach | sequence权重、token梯度路径 | sequence归约和clip尺度 |
+| GDPO | 分reward调用归一化 | 多奖励优势 | 最后whitening的统计单位 |
+| DAPO | filter/refill、agg loss | 数据准入、clip、长度权重 | 超长reward与实际补采成本 |
+| SAPO | sigmoid代理函数 | 平滑surrogate | 正负tau和对logprob的梯度 |
 
-old有时只需保存logprob，不必常驻一套可训练参数；reference可能缓存；actor/critic可共享backbone。这里是逻辑职责，不是“五套同大小模型的峰值显存公式”。
-
-在线组方法的流程是prompt→同题G条rollout→评分→组优势→重算logprob→ratio→surrogate→reduction→optimizer→权重发布。GRPO/GDPO改优势，GSPO改ratio和clip单位，SAPO改surrogate，DAPO同时作用于采样、clip、reduction、reward。训推异步主要改变这些量何时就绪和属于哪个版本，数学含义仍需核对。
-
-DPO流程是固定prompt/chosen/rejected→policy/reference四组logprob→pairmargin→logsigmoidloss→optimizer。它不在每个更新步做rollout或学习value，但生成偏好数据的成本仍存在；onlineDPO等后续路线会改变这一点。
-
-### 最小公式卡片
-
-用$r_{i,t}=\exp(\ell_\theta-\ell_b)$表示tokenratio，$s_i=\exp(\operatorname{mean}_t\log r_{i,t})$表示几何平均sequence比。忽略非核心项后：
-
-$$
-\begin{aligned}
-\text{PPO: }&\;A_t=\operatorname{GAE}(R,V),\quad J=\mathbb E\min(r_tA_t,\operatorname{clip}(r_t)A_t).\\
-\text{GRPO: }&\;A_i=\frac{R_i-\mu_q}{\sigma_q},\quad J=\mathbb E\operatorname{mean}_{i,t}\min(r_{i,t}A_i,\operatorname{clip}(r_{i,t})A_i).\\
-\text{GSPO: }&\;J=\mathbb E\operatorname{mean}_i\min(s_iA_i,\operatorname{clip}(s_i)A_i).\\
-\text{GDPO: }&\;A_i=\operatorname{Whiten}_B\left(\sum_kw_k\operatorname{ZScore}_q(R_{i,k})\right).\\
-\text{SAPO: }&\;J=\mathbb E\operatorname{mean}_{i,t}\left[\frac4{\tau_i}\sigma(\tau_i(r_{i,t}-1))A_i\right].
-\end{aligned}
-$$
-
-上式的mean只是谱系示意，GRPO与DAPO的sequence/tokenreduction不同；原始GRPO还含referenceKL，DAPO最终配方移除KL，不能以此卡片取代各篇完整loss。
-
-DPO令$m=\beta[(\ell_{\theta,w}-\ell_{ref,w})-(\ell_{\theta,l}-\ell_{ref,l})]$，$L=-\log\sigma(m)$。分母是reference不是behavior；其pairmargin不是在线GRPO的组优势。
+[统一课堂脚本](./assets/learning/rl-algorithms-unified-lab.py)使用可独立运行的小张量接口；下列原源码依赖各自框架。两者分开，便于先理解数学，再读部署系统。
 
 ### 关键源码对照：先找变量在哪一层改变
 
@@ -285,89 +274,44 @@ reward错误时更有效优化可能更快rewardhack；只保存token不等于�
 
 概念上GDPO优势可接GSPO/SAPO loss，DAPO过滤可接别的surrogate，但组合会改变有效batch、尺度与探索。推荐先建立一条可核对的baseline，一次改变一个轴，再测试联合方案；“所有开关都打开”很难解释失败。
 
-## 7. 空白与下一轮验证
+## 7. 控制实验与证据空白
 
-七篇已完成固定来源和核心机制精读，仍有明确验证空白：GSPO/SAPO缺完整实验表和硬件参数；DeepSeekMath原GRPO训练代码未公开；各论文不同任务、模型和reward无法直接互证；本次未运行训练。应从原作者/维护者配方补充，不用常见超参填空。
+七篇已保留固定原文、原图和机制解释，仍要区分原论文证据与新组合假设。GSPO/SAPO没有原文实验表，相关硬件和部分训练参数也未完整公开；DeepSeekMath没有公开原始GRPO完整训练代码，因此维护者实现只能作为伴读，不能冒充原实验程序。
 
-若做一套真正可比较实验，可固定一个小模型与同一math/coding数据，冻结verifier、初始化、最大长度与采样预算。记录每promptG、每rollout更新数、有效组比例、每rank全局token分母、生成/评分/训练耗时、GPU-hour、held-outPass@1与尾部长度。然后分三组比较：优势（GRPO/GDPO）、ratio（GRPO/GSPO）、surrogate（hardclip/SAPO）；DAPO四项再独立消融。此为建议方案，尚未执行。
+若要做可比较实验，固定初始化、任务、verifier、采样预算、长度与训练资源。分别比较优势估计（critic/组baseline/逐reward）、ratio（token/sequence）、surrogate（hard clip/soft sigmoid/stop-grad weight），一次改变一层。DAPO应拆开过滤补采、clip、归约与超长处理，避免把总收益全部归给一个loss。
 
-需要更完整的理论对照时，后续可专门读GAE、RLOO、Dr.GRPO、REINFORCE++、CISPO等。本轮仅将它们作为边界说明，不追加浅摘要扩大论文集合。
+记录生成/评分/训练耗时、实际总生成tokens、环境调用、全局有效token数、G、过滤率、KL、ratio尾部、clip/gate分布、held-out任务成功与GPU-hour。组合不同层在接口上可行，只说明可以实现；收益是否叠加仍需独立对照。
 
-## 8. 阅读顺序与个人理解检查
+## 8. 理论到代码的课堂顺序
 
-建议先PPO Figure1和GAE，接DPO最优策略与pairloss，再读GRPO Figure4。随后DAPO Algorithm1/Table1建立“诊断→改动”，用GDPO Figure2手算多reward，再读GSPO原式与SAPO Figure1梯度gate。GSPO/SAPO无表的单篇草稿不影响从固定原文学习。
-
-### 一堂90分钟课的讲授顺序
-
-这是建议讲课安排，不是用户本人已完成的学习时间。每一段都要求学生产出一件可检查的东西，不以“听过缩写”算理解。
-
-| 时长 | 内容 | 黑板或演示产出 |
+| 顺序 | 讲解内容 | 当场完成的动作 |
 | --- | --- | --- |
-| 5分钟 | 问题背景：样本贵、分布变化与反馈来源 | 离线pair/在线rollout两条链 |
-| 15分钟 | 前置知识：logprob、return、value、advantage、mask与detach | 标注哪些量可微、哪些量固定 |
-| 10分钟 | PPO的GAE与clip | 两步回报与四种clip分支 |
-| 15分钟 | DPO推导与真实四分数代码 | KL最优策略→reward差→pair loss |
-| 10分钟 | GRPO同题统计与广播 | 两个prompt、各三rollout的优势 |
-| 10分钟 | GSPO概率比与GSPO-token | 几何平均、前向1但有梯度 |
-| 10分钟 | DAPO的过滤/reduction与GDPO多reward | 2/4长度权重、逐维标准化反例 |
-| 10分钟 | SAPO目标/gate与温度 | f、w、wr三列及错误实现对照 |
-| 5分钟 | 同预算证据与检查题 | 解释一个失败条件和一项源码分支 |
+| 1 | 两bit任务、策略梯度与价值 | 列出四条路径，算真实V=[0.25,0,0.5] |
+| 2 | GAE与固定标签 | 用不完美critic算两步advantages和returns |
+| 3 | PPO一次更新与同批复用 | 核首轮ratio1但actor梯度非零，第二轮old不变 |
+| 4 | 同题组反馈 | 用[0,0,1]与[0,1,1]算GRPO，再比较LOO |
+| 5 | GSPO和SAPO | 解释detach的前向/后向，区分f、f′、rf′ |
+| 6 | DAPO与GDPO | 指出collector、reward轴和reduction的位置 |
+| 7 | 真实代码与原表 | 从上方节选进入单篇，说明版本与实验条件 |
 
-### 在课堂运行的小张量演示
+### 两种代码怎样一起读
 
-下载[CPU演示脚本](./assets/learning/policy-optimization-lab.py)，在已安装PyTorch的Python环境执行。它不下载模型或数据、不调用GPU、不连接工具环境，只检查小张量的值与梯度。代码是本文教学实现，与上方真实源码节选分开。
+先运行[统一脚本](./assets/learning/rl-algorithms-unified-lab.py)，看[完整结果](./assets/learning/rl-algorithms-unified-lab-results.json)。脚本用一个可枚举MDP执行两次PPO step，再用同一六回答数据比较五种局部目标；mask位置必须没有actor梯度，GSPO两种接线只在指定条件下等价，global分母的拆批梯度应一致。
 
-```bash title="课堂演示 · 只运行小张量"
-python assets/learning/policy-optimization-lab.py
-```
+再去读本报告的真实节选：找出相同数学对象在原代码中叫什么，原实现增加了哪些配置或系统分支。例如GSPO现代分支有数值clamp和额外rollout权重接口；GDPO作者分支按token mask whiten；DAPO动态采样需要回到collector控制流。这些差异解释了为什么一个20行函数不能宣称复现完整论文。
 
-```text title="课堂演示 · 关键输出近似值"
-PPO: 正优势下 r=0.7 有梯度，r=1.3 进入平台
-DPO: margin=0.1，loss≈0.6444，chosen与rejected梯度方向相反
-GRPO: [0,0,1] → [-0.577,-0.577,1.155]；全同reward → 0
-GSPO: ratios=[2,0.5] → sequence ratio=1
-      直接sequence式与detach-token式梯度均为[-0.5,-0.5]
-GDPO: 两组逐维合并优势的幅度不同；互补等权reward仍可抵消
-DAPO: sequence mean=2；token mean=2.3333
-SAPO: r=2，tau=1 → w≈0.7864，r*w≈1.5729
-      误把 w(r)*r 当目标，会得到不同的导数
-```
+原[局部策略演示](./assets/learning/policy-optimization-lab.py)继续用于PPO四分支、DPO四分数、GSPO detach和SAPO错误目标反例；[基础演示](./assets/learning/agent-training-lab.py)负责baseline方差与GAE边界。它们都是CPU教学验证，不包含模型benchmark。
 
-先遮住输出，请学生预测符号、形状和数值，再执行脚本验证。PPO toy例子用四样本平均，因此单项logprob导数还含1/4；GSPO用0.2裁剪只是课堂分支演示，不是原论文超参。GDPO教学whitening按等长sequence统计，作者token-mask实现的长度权重另看单篇。自动求导通过只证明这几个构造，不证明训练收敛或论文benchmark复现。
+### 面试如何回答算法比较题
 
+按四句话组织：**共同骨架是什么；它改了哪一层；给一个公式、手算或代码分支；这个改动有什么代价和条件。** 例如GSPO与GRPO，共享组优势和近策略训练，主要改token ratio为几何平均sequence ratio与共享clip，随后说明长度归约和局部异常被平均的取舍。
 
-### 面试复习主问题
-
-1. **不用缩写讲清一轮在线RL训练。** 说出生成策略、reward、advantages、currentlogprob、ratio、surrogate、mask/reduction、optimizer和下一轮权重；不要只说rollout再backward。
-2. **为什么reward、critic、reference、oldpolicy不同？** reward评价行为，critic估计状态未来回报，reference锚定行为，old描述实际数据来源；它们的更新周期各异。
-3. **DPO到底省掉哪些环节？** 原始训练步不需onlinegeneration、显式RM训练和value估计，仍需偏好pair与reference分数。
-4. **GRPO去critic的代价是什么？** 同题G次rollout、统计尺度、零方差、粗credit与组完成依赖。
-5. **用正负A四种情况解释clip。** 正上平台、负下平台；另一侧保留纠错梯度。
-6. **GSPO的ratio如何计算？** 对logprob差取有效token均值再exp；是几何平均，不是算术平均或完整无偏densityratio。
-7. **GSPO-token为何前向为1的项还有梯度？** 分子可微、分母detach；前向值与导数不能混为一谈。
-8. **DAPO为何仍使用GRPOadvantage？** 它主要改采样、clip、reduction与超长reward，adv_estimator标签只说明一个环节。
-9. **GDPO权重应该在哪一步乘？** 逐维z-score之后；归一化前整体乘正数通常被抵消。
-10. **SAPO公式中的f和w分别是什么？** f是sigmoid代理目标，w是导数4p(1-p)，真实logpolicygradient还乘r。
-11. **提高tau为什么更快衰减？** 因为tau乘在sigmoid输入上；不要用除temperature的softmax习惯。
-12. **如何诊断相同reward但不同梯度？** 检查groupstd、batchwhiten、advsign、ratio与tokenreduction，再排查mask和版本。
-13. **解释avg@32、pass@32、cons@32。** 平均单次成功率、至少一次成功、候选投票，是三个不同预算/选择问题。
-14. **新算法是否天然适合异步？** 需behaviorlogprob、版本段、组依赖、队列背压；门控/clip不解决所有状态分布漂移。
-15. **如何公平比较训练效率？** 同模型、数据、reward、长度和GPU-hour，报有效训练tokens与taskquality，不只steps/s。
-16. **如何保证这不是背论文结论？** 手算、推导梯度、说明一条源码分支，再给一个失效条件或反例。
-
-### 五个手算自检
-
-| 题目 | 应得到的结论 |
-| --- | --- |
-| epsilon0.2，A=±2，r=0.7/1.3 | 四种clip分支不同，不是越界统一零梯度 |
-| rewards[0,0,1,1] | populationadv±1，samplestd约±0.866；要注明定义 |
-| tokenratios[2,0.5] | GSPO几何平均1，算术平均1.25 |
-| 两reward互补[1,1,0]与[0,0,1] | 总分全1；等权GDPO也可抵消为0 |
-| SAPOtau1，r=1/2/5 | w约1/0.7864/0.0707；wr与w不同 |
-
-题目由本文根据原论文整理，不声称来自具体公司的真实面试题库。单篇另外提供共56道机制问答及追问；用途是检查理解，不以未经验证的面试频率作为选题依据。
+分层练习题统一到[总览24问](#q=rl-policy-optimization-map)，PPO/GAE/GRPO主文继续保留自己的机制问答。涉及原论文具体结果，必须同时说模型、任务、采样预算和指标，不能只背一个提升数字。
 
 ## 9. 持续更新记录与来源
+
+2026-10-15：将基础推导与教学公式集中到统一主线，本报告聚焦七篇真实源码与实验证据，保留原图表入口和实验条件。加入可枚举MDP到optimizer的CPU示例及同批梯度对照。
+
 
 2026-10-09：将七篇背景区分为问题、前置知识、已有工作；添加16段固定源码与形状/梯度讲解，专题增加7段源码对照、教学数据流图、90分钟讲授顺序与CPU小张量脚本。脚本已在本地CPU运行通过，不是论文训练复现；GSPO/SAPO保持原草稿状态。
 
