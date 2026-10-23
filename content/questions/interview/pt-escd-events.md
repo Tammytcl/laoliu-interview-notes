@@ -13,6 +13,30 @@ draft: false
 
 教师和学生 tokenizer 不同，首先 token ID 不是同一动作，接着相同字符串的切分还会造成位置不一致。需要先找到相同因果文本或 byte 前缀，再定义可比较的概率事件。对于一个教师事件被学生多个 token 完成的情况，学生已经进入其中一个部分前缀后，ESCD 关注所有兼容后续补全的总概率，而不是任意指定其中一个学生 token 承担教师概率。这样监督的是事件完成，与事件进入的 root 对齐互补。它仍依赖事件覆盖、残余质量和边界处理；不能说任何多 token 事件都已被一次完成或所有概率都严格等价。
 
+## 原理拆解
+
+### 先对齐因果历史，再构造共同事件
+
+同一字符串可被两个 tokenizer 切成不同 token 数，词表下标也没有共同语义。因此需要基于实际生成文本的 byte 边界建立对应关系，并确保教师评分只看到当前可用前缀；仅把最终完整文本重分词后按序号配对，可能在教师侧引入学生当时尚未生成的后缀。即使找到了共同历史，下一 token 仍可能表示不同长度的字符串事件，位置对齐并没有解决概率空间对齐。
+
+公开实现将教师事件路由到学生 root 事件，并保留投影外残余质量；root 对齐负责“进入哪个事件”。当学生实际生成进入某个教师 token 的部分前缀后，child 监督再负责“如何完成该事件”。当前公开 recipe 使用完整教师词表支持、root forward KL、completion-set loss 与固定 child 系数；通用配置里的 `sampled` 名称不代表活跃插件在做 sampled-token KL。[公开目标与 baseline 说明](https://github.com/Tammytcl/ESCD/blob/main/docs/methods.md)
+
+### 为什么监督集合质量比指定一个 token 更合理
+
+若剩余事件要求 byte 前缀 `d`，`d`、`ding`、`dog` 都可能在规定的事件定义下兼容。对 $C$ 内质量用 $\ell=-w\log\sum_{v\in C}p_v$，令 $P_C=\sum_{v\in C}p_v$，对学生 logits $z_k$ 有：
+
+$$
+\frac{\partial\ell}{\partial z_k}=w\left(p_k-\mathbf1_{k\in C}\frac{p_k}{P_C}\right).
+$$
+
+所有兼容 token 按当前条件质量共同承接监督；它没有规定集合内部必须均匀，也没有凭空选择唯一“正确”token。这个集合项仍需事件权重、root 目标与访问条件共同定义完整算法。多个不互斥事件不能未经处理就当概率分区相加，否则会重复计算质量。
+
+### 理论事件、近似实现与复现范围分别检验
+
+单条选定 tokenization 路径的概率不等于所有字符串实现的 marginal；部分事件还需要更深层补全，下一步集合不能覆盖所有任意长路径。实现需明确 byte 解码、特殊 token、EOS、空白和截断规则。用 `logsumexp` 计算集合 log 质量，并核对残余非负与归一、teacher detach 和对应梯度，避免在很小概率处出现数值异常。
+
+最小证据先做 toy 词表的集合/梯度测试，再做真实 tokenizer 的边界与质量覆盖统计，最后比较 root-only、单 token child、集合 child 及相同预算 baseline。完整教师支持提高覆盖，也增加 logits、投影与通信负担，需报告内存/吞吐。公开仓库包含小规模 baseline/ESCD、数据入口和 PHYRD-40 评测；大规模 recipes 与 checkpoints 的公开范围要单独说明，不能把代码可运行等同所有论文结果已复现。
+
 ## 白板与例子
 
 教学示意：假设某个教师事件要求剩余 byte 前缀 `d`。在当前学生状态，下一个学生 token 可能是 `d`、`ding`、`dog` 或 `x`。前三个都以要求的 `d` 开始，在相应 byte 事件定义下均可能兼容；若只规定 `d` 为唯一正确 token，就任意排除了其他完成路径。实际兼容性以公开实现的 byte 与事件定义为准，这些字符串不是某个真实 tokenizer 的测量结果。
@@ -44,10 +68,6 @@ $$
 - 在部分教师事件尚未完成时，用未来文本错误对齐当前状态。
 - 说所有兼容 token 权重必须相等，或把集合监督说成指定唯一 token。
 
-## 闭卷自检
-
-不用论文术语，在白板画 teacher 一个事件、student root 和两个 child，圈出合法补全集合；再解释 EOS、特殊 token 和 byte 解码各会在哪里破坏天真的对齐。
-
 [//]: # (interview-generated-start)
 
 ## 题源与延伸
@@ -58,7 +78,7 @@ $$
 | --- | --- |
 | [ESCD 公开实现与评测说明](https://github.com/Tammytcl/ESCD) | 事件补全、公开 baseline、数据和独立 PHYRD-40 评测的证据边界 |
 
-**原理只在主文深入维护：** [Cross-tokenizer OPD面试：字节、概率事件与ESCD真实代码](#q=opd-interview-cross-tokenizer) · [我的ESCD工作：面试介绍、方法推导、实验与关键追问](#q=escd-project-interview)
+**相关专题详解：** [Cross-tokenizer OPD面试：字节、概率事件与ESCD真实代码](#q=opd-interview-cross-tokenizer) · [我的ESCD工作：面试介绍、方法推导、实验与关键追问](#q=escd-project-interview)
 
 [返回 20 题目录](#q=post-training-interview-practice) · [上一题](#q=pt-opd-gradient) · [下一题](#q=pt-multi-task-distillation)
 

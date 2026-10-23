@@ -13,6 +13,30 @@ draft: false
 
 GRPO 对同一个 prompt 从旧策略采样一组回答，根据组内回报的相对位置构造优势，通常不额外训练独立 critic。随后用 current 对采样策略的 token 概率比构造 clipped surrogate，并根据具体配方加入相对 reference 的 KL。对只有终局奖励的版本，同一回答的 token 可以共享一个组优势，但具体 mask、长度归约和优化批次会改变实际梯度。它的节省来自省去常规 value 模型及相关前向与训练，不是免费生成奖励。对于长程任务、同组无差异或反馈噪声大的情况，优势质量和采样成本仍要验证。
 
+## 原理拆解
+
+### Group baseline 代替了什么，没有代替什么
+
+对相同 prompt 的 $G$ 条回答用组内回报构造相对优势，省去了常规独立 critic 的学习与训练状态。它仍需要生成、评分和一个 baseline；只是 baseline 从组回报得到，而不是一个泛化到状态的 value 网络。奖励可以来自规则或 RM，reference KL 是否启用则由具体配方决定。[DeepSeekMath 的 GRPO 定义](https://arxiv.org/html/2402.03300v3)
+
+只看中心化、不除标准差时，若样本条件独立且同分布，$\bar R$ 包含本条样本自身，会使期望策略梯度带有 $(G-1)/G$ 的缩放；leave-one-out baseline 不包含本条回报，可以避开这个自包含项。再除组标准差后，分母本身依赖采样，不能继续当作纯常数缩放。这说明组大小、baseline 和标准化都属于目标估计器的设计。
+
+### 写出 token 级优化目标才算讲完整
+
+一个带终局回报与参考约束的常见形式是：
+
+$$
+J=\mathbb E\left[\frac1G\sum_{i=1}^G\frac1{T_i}\sum_{t=1}^{T_i}\left(\min(\rho_{it}A_i,\operatorname{clip}(\rho_{it},1-\epsilon,1+\epsilon)A_i)-\beta K_{it}\right)\right].
+$$
+
+$A_i$ 来自固定 rollout 的组回报；$\rho_{it}$ 比较 current 与 behavior；$K_{it}$ 是所声明的 reference KL 项或估计器。同一响应共享 $A_i$，不代表每个 token 有相同的因果贡献；它只是用序列结果给生成动作提供共同更新信号。若采用过程 reward，就要重新说明 token/step 优势如何累积。
+
+### 长度归约怎样进入梯度
+
+两条回答长度分别为 10 与 100，若每条先除自身长度再平均，则每条响应总系数相同，但短回答每个 token 的系数是长回答的 10 倍；若全批 token 平均，单 token 系数相同，长回答包含更多更新项。若用固定最大长度归约，又是另一种尺度。它们影响正负优势长短样本的累计作用，不能用“只是 batch mean 写法不同”略过。
+
+实际训练还要记录原始 prompt 数、每题生成量、有效组占比、token 数与评分成本。省去 critic 是某类成本下降，并不保证比所有 PPO 配置更便宜；当 group 很大、响应很长或大量组同分时，rollout 可能成为主要成本。
+
 ## 白板与例子
 
 给定同 prompt 的 $G$ 个回答，一种常见优势为：
@@ -44,10 +68,6 @@ $$
 - 因为“没有 critic”而说 GRPO 完全没有 baseline。
 - 不分原始目标、框架实现和后续变体的归约方式。
 
-## 闭卷自检
-
-写出 group、response、token 三层索引，指出行为策略、参考模型和 current actor 分别出现在何处；用四个奖励算出一组优势。
-
 [//]: # (interview-generated-start)
 
 ## 题源与延伸
@@ -60,7 +80,7 @@ $$
 | [美团算法一面面经（2025）](https://www.nowcoder.com/feed/main/detail/7197e4d2e8934c76a3bc65aedaf1afeb) | 经历自述，招聘真实性未独立核验；公开正文；仅作题型依据 |
 | [DeepSeekMath / GRPO](https://arxiv.org/abs/2402.03300v3) | 组相对优势、策略目标及 outcome/process 监督 |
 
-**原理只在主文深入维护：** [GRPO从组奖励到token梯度的完整流程](#q=grpo-rlvr) · [RL算法总览 从Actor Critic到PPO和组策略优化](#q=rl-policy-optimization-map)
+**相关专题详解：** [GRPO从组奖励到token梯度的完整流程](#q=grpo-rlvr) · [RL算法总览 从Actor Critic到PPO和组策略优化](#q=rl-policy-optimization-map)
 
 [返回 20 题目录](#q=post-training-interview-practice) · [上一题](#q=pt-dpo-derivation) · [下一题](#q=pt-zero-variance-groups)
 

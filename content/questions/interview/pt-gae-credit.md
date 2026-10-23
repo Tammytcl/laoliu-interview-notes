@@ -13,6 +13,24 @@ draft: false
 
 Critic 给出从当前状态继续执行的预期回报，而策略梯度需要评价某次动作相对该状态平均水平的好坏。GAE 把多步 TD residual 组合成优势，利用 critic 降低方差，通过 λ 调节估计的偏差与方差。实现前必须定义 reward、折扣、状态边界和截断含义：真实终止不再 bootstrap，时间限制如果只是截断而任务仍可继续，可能要 bootstrap，但不能把新任务的 value 接上旧任务。不能用“失败轨迹所有轮都负分”代替这个推导。
 
+## 原理拆解
+
+### 从 policy gradient 到 baseline
+
+策略梯度需要 $\mathbb E[\nabla\log\pi(a|s)Q^\pi(s,a)]$。减去只依赖状态的 baseline 不改变其期望，因为 $\sum_a\pi(a|s)\nabla\log\pi(a|s)=0$；选 $V^\pi(s)$ 可把动作相对状态平均水平的好坏写成 advantage。Critic 估出 $V$，并不直接给出某个已执行动作的真实 $Q$，还需要奖励和后续状态来形成样本估计。
+
+### GAE 为什么是 TD residual 的加权和
+
+一步估计是 $\delta_t=r_t+\gamma V(s_{t+1})-V(s_t)$；两步、三步 return 减去 $V(s_t)$ 可依次写成 $\delta_t+\gamma\delta_{t+1}$ 等。对这些多步估计做几何加权，得到 $\hat A_t=\sum_{l\ge0}(\gamma\lambda)^l\delta_{t+l}$，实际在轨迹边界截断。较小 $\lambda$ 更依赖短程 bootstrap，较大 $\lambda$ 让更远的实际回报进入估计；value 不准时前者更易受估值误差影响，后者往往有更高采样方差。[GAE 原论文](https://arxiv.org/abs/1506.02438v6)
+
+这里的“偏差与方差”需要给出针对哪个回报定义、critic 和边界的条件，不应承诺某个 $\lambda$ 对所有任务最优。训练 critic 常以 $\hat R_t=\operatorname{sg}(\hat A_t+V_{old}(s_t))$ 回归；若先把 advantage 标准化再加回 value，当作原尺度 return，就会破坏这个目标。
+
+### 终止、截断与模型上下文长度不是同一个边界
+
+任务真实成功/失败终止，后续价值为零；仅因采样窗口结束而截断，若定义的任务仍可继续，可用截断状态的 value bootstrap，但不把下一条独立 episode 接上递推。若产品本身规定最大步数即任务失败，那么到预算就是该有限时域任务的终止，不能套“所有超时都 bootstrap”。状态最好包含剩余预算，否则相同历史在不同剩余步数下的价值可能混在一起。
+
+工具执行耗时还涉及折扣单位：按 token、turn 或墙钟折扣是不同目标。多轮 Agent 把一个响应视作一项宏动作时，可以在 turn 边界定义 return；若要和 token 层传播结合，应明确中间工具观察是否消耗决策步、如何处理可变响应长度，不能仅把所有 mask 乘在同一处。
+
 ## 白板与例子
 
 使用两个不同的边界 mask：
@@ -44,10 +62,6 @@ $b_t$ 控制是否 bootstrap，$c_t$ 控制优势递推是否跨过当前边界�
 - 将超时、模型输出超长、沙箱故障和任务真实失败全部混为终止。
 - 认为 GRPO 必须像 PPO 一样训练 critic、计算 GAE。
 
-## 闭卷自检
-
-把算例的终点改成仍可继续的 timeout，给定末状态 value 后重算 target；再说明为什么 bootstrap 可以保留，而 GAE 不应递推到另一个新任务。
-
 [//]: # (interview-generated-start)
 
 ## 题源与延伸
@@ -59,7 +73,7 @@ $b_t$ 控制是否 bootstrap，$c_t$ 控制优势递推是否跨过当前边界�
 | [字节算法岗公开题型汇总](https://www.nowcoder.com/discuss/922308546966847488) | 二次汇总，不按公司认证真题处理；公开正文；所选条目标注 2026 年 4 月；仅作题型依据 |
 | [GAE 原论文](https://arxiv.org/abs/1506.02438v6) | TD residual、优势估计与偏差方差 |
 
-**原理只在主文深入维护：** [Monte Carlo TD与GAE怎样分配回报](#q=rl-returns-gae) · [Actor Critic从回报到策略梯度](#q=rl-actor-critic)
+**相关专题详解：** [Monte Carlo TD与GAE怎样分配回报](#q=rl-returns-gae) · [Actor Critic从回报到策略梯度](#q=rl-actor-critic)
 
 [返回 20 题目录](#q=post-training-interview-practice) · [上一题](#q=pt-ppo-four-models) · [下一题](#q=pt-clip-kl)
 

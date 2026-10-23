@@ -32,7 +32,7 @@ export function validateInterviewCollection(manifest, questions) {
     if (item.origin === '公开题型改写' && !item.sourceIds.some(id => sources.get(id).kind === 'community')) throw new Error(`Public question lacks interview evidence: ${item.id}`);
     if (!item.theoryIds?.length || item.theoryIds.some(id => !published.has(id))) throw new Error(`Unresolved interview theory link: ${item.id}`);
     if (!q.title.startsWith(`Q${String(item.number).padStart(2, '0')} · `)) throw new Error(`Question title/number differs: ${item.id}`);
-    for (const section of ['60–90 秒回答', '白板与例子', '追问怎么接', '项目怎么联系', '容易答错的点', '闭卷自检']) {
+    for (const section of ['60–90 秒回答', '白板与例子', '追问怎么接', '项目怎么联系', '容易答错的点', '原理拆解']) {
       if (!q.toc.some(entry => entry.title === section)) throw new Error(`${item.id}: missing answer section ${section}`);
     }
     if (q.html.includes('katex-error')) throw new Error(`Invalid interview formula: ${item.id}`);
@@ -67,7 +67,7 @@ export function generatedInterviewBlocks(manifest, questions) {
     const selected = item.sourceIds.map(id => sources.get(id));
     const lines = ['## 题源与延伸', '', `**题目归类：${item.origin}。** 下面的追问、算例和口述稿由本站独立整理；不是逐字面试记录。`, '', '| 来源 | 使用范围 |', '| --- | --- |'];
     for (const s of selected) lines.push(`| [${cell(s.title)}](${s.url}) | ${cell(s.kind === 'community' ? s.evidence + '；' + s.access + '；仅作题型依据' : s.purpose)} |`);
-    lines.push('', '**原理只在主文深入维护：** ' + item.theoryIds.map(id => `[${cell(published.get(id).title)}](#q=${id})`).join(' · '), '', `[返回 ${sorted.length} 题目录](#q=${manifest.topicId})` + (i ? ` · [上一题](#q=${sorted[i - 1].id})` : '') + (i < sorted.length - 1 ? ` · [下一题](#q=${sorted[i + 1].id})` : ''));
+    lines.push('', '**相关专题详解：** ' + item.theoryIds.map(id => `[${cell(published.get(id).title)}](#q=${id})`).join(' · '), '', `[返回 ${sorted.length} 题目录](#q=${manifest.topicId})` + (i ? ` · [上一题](#q=${sorted[i - 1].id})` : '') + (i < sorted.length - 1 ? ` · [下一题](#q=${sorted[i + 1].id})` : ''));
     blocks.set(item.id, lines.join('\n'));
   });
   return blocks;

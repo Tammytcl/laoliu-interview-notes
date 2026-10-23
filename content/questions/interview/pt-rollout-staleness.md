@@ -13,6 +13,26 @@ draft: false
 
 我会先 profile rollout、teacher/reward、learner、工具执行和权重同步的时间线。大教师评分可批量 prefill，学生生成却按 token 串行推进，多轮工具等待和少数长任务还会使整批交接出现气泡。优化可从连续批处理、长度分桶、部分就绪消费、资源配比和轮级异步入手，但异步会引入旧策略数据。每段响应必须保存真实 history、behavior log-prob 和版本；控制在途量、队列年龄、ratio 尾部与任务覆盖，并在适用条件下做校正。仅记录“落后两版”不等于概率偏差小，也不能声称局部 IS 消除了旧状态分布问题。
 
+## 原理拆解
+
+### 流水线的收益取决于哪个阶段最慢
+
+同步批次时间可按关键路径拆成生成与工具等待、评分、优化和同步，而非只看 learner。理想流水线的稳定完成速率受最慢阶段服务能力约束；短任务提前消费可以减少屏障等待，但若 actor 已饱和，继续提高 rollout 只会让队列增长。应记录每个任务/turn 的生成完成、反馈就绪、评分就绪、进入训练与完成更新的时间戳，计算等待时间和实际服务时间。
+
+轮级消费还需要定义数据就绪：teacher 可只依赖当前 history 与响应，而某些权重必须等环境反馈；critic target 可能要等有效终局结果。这些条件决定哪些工作可以重叠。预先把所有结果假定可用，会让所谓异步时间线失真。
+
+### 三种分布不能折成一个版本号
+
+在 behavior 状态 $h\sim d_b$ 上生成动作 $a\sim\pi_b$，局部动作重要性比 $\rho=\pi_\theta(a|h)/\pi_b(a|h)$ 可在支持条件下校正该固定状态的动作期望；它没有把 $d_b$ 变成当前策略状态分布 $d_\theta$。完整轨迹比则是多步 ratio 的乘积，长程下方差容易很大。PPO 的局部 surrogate、裁剪或 V-trace 等设计各有目标与偏差，不能统称为“IS 后严格 on-policy”。[IMPALA 的异步与校正讨论](https://arxiv.org/abs/1802.01561v3)
+
+解码也属于行为分布：temperature 改变归一化，top-p/top-k 截断可能造成目标有质量、行为无支持的动作。不能把未变换模型概率直接当实际行为概率；工程若采用近似校正，应明确近似在哪一步，而非只保存 policy version 就认为已解决。
+
+### 如何同时控制队列和任务覆盖
+
+给在途请求与待训 token 设置上限，按队列年龄、版本差和实际 log-ratio 监控滞后；过载时先背压生成，必要时刷新或丢弃数据，但记录每域、每长度的丢弃率。只删除慢任务会改变目标分布。版本同步放在生成请求边界可以避免一次响应中途换权重，但一条多轮任务仍可能混合多个 actor 版本，必须逐响应记录。
+
+固定状态上的权重 ESS 可写为 $(\sum_i\rho_i)^2/\sum_i\rho_i^2$，用于看权重是否被少数样本支配；它无法证明整个状态分布已匹配。最终按独立质量—总墙钟或 GPU-hour 画曲线，同时报告所有采样、评分、排队与废弃成本，才知道异步是提高了利用率还是仅更快消费了更旧数据。
+
 ## 白板与例子
 
 ```text
@@ -43,10 +63,6 @@ draft: false
 - 用修改后的 summary/history 重算并冒充原始 behavior log-prob。
 - 将环境错误重试、策略更新和 teacher 版本混为一个版本号。
 
-## 闭卷自检
-
-画出一条跨两次 actor 更新的三轮轨迹，为每轮标 policy version、请求边界、可用监督和最终回报到达时刻；指出哪些缓存可以安全复用。
-
 [//]: # (interview-generated-start)
 
 ## 题源与延伸
@@ -60,7 +76,7 @@ draft: false
 | [IMPALA / V-trace](https://arxiv.org/abs/1802.01561v3) | actor–learner 解耦和 off-policy 校正的经典依据 |
 | [verl 性能调优文档](https://verl.readthedocs.io/en/latest/perf/perf_tuning.html) | rollout、batch、packing 和训练/推理内存取舍；参数支持随版本核对 |
 
-**原理只在主文深入维护：** [05 · RL/OPD 训推如何形成闭环？从角色、数据契约到异步与排障](#q=infra-rl-pipeline) · [Agentic OPD执行流程、异步pipeline与Infra接线](#q=agentic-opd-pipeline)
+**相关专题详解：** [05 · RL/OPD 训推如何形成闭环？从角色、数据契约到异步与排障](#q=infra-rl-pipeline) · [Agentic OPD执行流程、异步pipeline与Infra接线](#q=agentic-opd-pipeline)
 
 [返回 20 题目录](#q=post-training-interview-practice) · [上一题](#q=pt-memory-parallel) · [下一题](#q=pt-agent-credit-mask)
 

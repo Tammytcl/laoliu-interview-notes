@@ -13,6 +13,30 @@ draft: false
 
 PPO clip 通常作用于 current 对旧策略的概率比，限制某些会过度增大 surrogate 的更新；reference KL 约束模型相对另一个参考分布的偏离。二者的锚点和作用不同，clip 也不是严格的 KL 上界。KL 怎么算必须说明方向、条件、采样来源、放进 reward 还是单独的 loss。完整词表可以直接求和；采样估计要核对样本来自谁。即使一个估计量的数值无偏，直接 autograd 的梯度也未必等于目标梯度，尤其在 OPD 和 off-policy 复用中不能只看公式名字。
 
+## 原理拆解
+
+### Clip 是一侧停止奖励，不是把参数锁在范围内
+
+令 $f(\rho,A)=\min(\rho A,\operatorname{clip}(\rho,1-\epsilon,1+\epsilon)A)$。当 $A>0$，只有 $\rho>1+\epsilon$ 的“继续强化好动作”方向被截平；$\rho$ 太小仍保留恢复其概率的梯度。当 $A<0$，只有 $\rho<1-\epsilon$ 的“继续压低坏动作”方向被截平；$\rho$ 太大仍需要惩罚。由此可见，clip 不是把所有样本 ratio 强制留在区间；共享网络参数的其他样本更新也可以继续改变已被截平样本的概率。
+
+所以 clip fraction 高需要结合正负 advantage、ratio 分布和优化方向解释。它可能表示数据过旧或步长过大，也可能有计算口径差异；不能从一个比例直接推出模型 KL 或有效梯度大小。
+
+### KL 的方向、值估计与梯度要分开
+
+固定一个共同状态，取 $p$ 为 current、$q$ 为 reference：
+
+$$
+D_{KL}(p\|q)=\sum_a p(a)[\log p(a)-\log q(a)].
+$$
+
+若 $a\sim p$，样本 log-ratio 的均值估计这个方向；若 $a\sim q$，直接平均同一项估计的是另一个量。对 $u=\log p-\log q$，$\mathbb E_p[e^{-u}]=1$ 要求相应支持条件，所以 $e^{-u}-1+u$ 与 $u$ 期望相同。这个恒等式说明数值估计的关系，不能推出固定采样 index 的 autograd 一定给出目标梯度；局部求导的具体推导见 [Q17](#q=pt-opd-gradient)。
+
+有限样本的均值可以波动；单个 log-ratio 为负很正常。Full-vocab 求和要使用规范化概率，在 FP32 等足够精度下累加；top-k 条件归一算的是截断分布，除非显式保留残余事件，否则不是原分布的 KL。
+
+### 为什么 reference KL 与 PPO 更新约束要同时监控
+
+Behavior 是采样锚点，reference 是能力或行为锚点：前者每轮可刷新，后者常固定。每轮只走很小一步，长期仍可能远离 reference；反过来，相对 reference 的平均 KL 很小，也不保证某个旧 rollout batch 的 ratio 稳定。KL 可作为 reward shaping 影响优势，也可作为带梯度的独立 loss；两者的目标路径、估计分布和 detach 位置需分别说明。标准 clip surrogate 的定义与局限参见 [PPO 原论文](https://arxiv.org/abs/1707.06347v2)。
+
 ## 白板与例子
 
 设 $\rho_t=\pi_\theta(a_t|s_t)/\pi_b(a_t|s_t)$，最大化的 clipped 部分为：
@@ -43,10 +67,6 @@ $$
 - 说“样本 log-ratio 是负数，所以 KL 原理错了”。
 - 用 top-k 的未归一分数计算声称完整词表的 KL。
 
-## 闭卷自检
-
-给 $A$ 的正负与 $\rho$ 的区间各画一格，标出四种主要分支的梯度；再说清采样 KL 的期望对哪个分布取。
-
 [//]: # (interview-generated-start)
 
 ## 题源与延伸
@@ -59,7 +79,7 @@ $$
 | [百度算法岗公开题型汇总](https://www.nowcoder.com/discuss/927018114900922368) | 二次汇总，不按公司认证真题处理；页面公开内容与检索摘要；未读取付费部分；仅作题型依据 |
 | [PPO 原论文](https://arxiv.org/abs/1707.06347v2) | clipped surrogate、旧策略与更新约束 |
 
-**原理只在主文深入维护：** [PPO训练一步的数据梯度与实现](#q=rl-ppo-training) · [RL算法总览 从Actor Critic到PPO和组策略优化](#q=rl-policy-optimization-map)
+**相关专题详解：** [PPO训练一步的数据梯度与实现](#q=rl-ppo-training) · [RL算法总览 从Actor Critic到PPO和组策略优化](#q=rl-policy-optimization-map)
 
 [返回 20 题目录](#q=post-training-interview-practice) · [上一题](#q=pt-gae-credit) · [下一题](#q=pt-dpo-derivation)
 

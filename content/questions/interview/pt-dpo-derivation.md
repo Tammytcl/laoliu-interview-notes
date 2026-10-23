@@ -13,6 +13,36 @@ draft: false
 
 DPO 在相应的 KL 正则奖励最大化和偏好概率假设下，把显式 reward 差改写成策略相对 reference 的 log-ratio 差。每个同 prompt 的 chosen/rejected 各需要 current 与 reference 两个序列概率，共四个量；通常只对 response token 求 log-prob 的和。β 同时出现在理论关系和训练 loss 的尺度里，实际效果要结合学习率、margin 和饱和情况分析。若输出变长，先检查偏好数据中的长度关联、EOS 与解码、mask 和 reference 设置，再做长度受控对照，而不是直接认定模型推理增强。
 
+## 原理拆解
+
+### 第一步：把带 KL 的最优策略解出来
+
+固定 prompt $x$，对分布 $\pi$ 最大化 $\sum_y\pi(y)r(y)-\beta\sum_y\pi(y)\log[\pi(y)/\pi_{ref}(y)]$，并加上概率和为 1 的拉格朗日约束。对 $\pi(y)$ 求导并置零，得到 $r(y)-\beta(\log[\pi(y)/\pi_{ref}(y)]+1)+\eta=0$，故：
+
+$$
+\pi^*(y|x)=\frac{\pi_{ref}(y|x)e^{r(x,y)/\beta}}{Z(x)}.
+$$
+
+这一步假设在相应支持集上能优化分布。实际参数化网络、有限数据和优化步数并不保证达到这个最优解。
+
+### 第二步：用偏好差消掉配分函数
+
+重排可得 $r(x,y)=\beta\log[\pi^*(y|x)/\pi_{ref}(y|x)]+\beta\log Z(x)$。在同 prompt 的偏好对中，$\beta\log Z(x)$ 抵消，代入 Bradley–Terry 概率，再用 $\pi_\theta$ 参数化，得到前述 DPO loss。Reference 的两个序列分数通常冻结；current 两个分数带梯度。每个序列 log-prob 是其 response token 条件 log-prob 的和，通常还要明确 EOS 和截断。[DPO 原论文及附录推导](https://arxiv.org/html/2305.18290v3)
+
+设 $z=\beta\Delta$，则
+
+$$
+\nabla L=-\beta\sigma(-z)\,[\nabla\log\pi_\theta(y^+|x)-\nabla\log\pi_\theta(y^-|x)].
+$$
+
+它增大相对 margin；参数共享时 chosen 的绝对概率仍可能下降。已明显偏向 chosen 的 pair 权重较低，矛盾标签与难判 pair 则可能长期贡献梯度。
+
+### β 为什么不能只背成“越大越保守”
+
+对固定 reward 的理论最优策略，大 $\beta$ 表示更强 KL 约束；而在固定离线偏好数据的训练中，$\beta$ 同时进入梯度系数与 sigmoid 饱和。初始化 current=reference 时 $z=0$，梯度系数是 $\beta/2$；所以不控制学习率、训练步数和数据 margin，不能直接用理论最优关系预测每一步的实际变化。
+
+输出变长时分别检查：偏好标签是否奖励长度、长短负样本是否不平衡、EOS 是否被监督、截断是否切掉答案以及 chosen/rejected 是否按同条件评分。缓存 reference log-prob 可节省算力，但仅对固定模板、分词、截断和参考权重有效；任一项改变均应重新计算。实现接口见 [TRL DPO Trainer](https://huggingface.co/docs/trl/en/dpo_trainer)。
+
 ## 白板与例子
 
 KL 正则的最优策略关系可写成 $r(x,y)=\beta\log[\pi^*(y|x)/\pi_{ref}(y|x)]+C(x)$。将其代入同 prompt 的 Bradley–Terry 差值，$C(x)$ 抵消。定义：
@@ -44,10 +74,6 @@ $$
 - 认为没有显式 reward model 就没有奖励/偏好假设。
 - 说 DPO 保证 chosen 概率上升、保证不遗忘或必然更稳定。
 
-## 闭卷自检
-
-写出一对样本的四个 log-prob，算 margin 和 loss；解释“loss 初值 0.693”为什么不说明数据没有训练信号。
-
 [//]: # (interview-generated-start)
 
 ## 题源与延伸
@@ -61,7 +87,7 @@ $$
 | [DPO 原论文](https://arxiv.org/abs/2305.18290v3) | 偏好模型、KL 正则最优策略与 DPO loss |
 | [TRL DPO 官方文档](https://huggingface.co/docs/trl/en/dpo_trainer) | 偏好格式、reference log-prob 和训练实现 |
 
-**原理只在主文深入维护：** [SFT、DPO 和在线 RL 分别在优化什么？](#q=sft-dpo-rl) · [后训练面试：40个问题驱动SFT、偏好优化、RL与蒸馏学习](#q=post-training-interview)
+**相关专题详解：** [SFT、DPO 和在线 RL 分别在优化什么？](#q=sft-dpo-rl) · [后训练面试：40个问题驱动SFT、偏好优化、RL与蒸馏学习](#q=post-training-interview)
 
 [返回 20 题目录](#q=post-training-interview-practice) · [上一题](#q=pt-clip-kl) · [下一题](#q=pt-grpo-objective)
 

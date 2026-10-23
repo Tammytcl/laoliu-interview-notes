@@ -13,6 +13,30 @@ draft: false
 
 我会先固定基础 GRPO，再逐项比较。DAPO 包含非对称裁剪、有效组动态采样、token 级损失聚合及超长响应处理等配方；Dr. GRPO 分析逐响应长度与组标准差归一带来的优化偏差，并调整这些缩放；GSPO 将长度归一的序列 likelihood ratio 用于序列级裁剪与优化。它们不只是同一个 loss 换名字，也不在同一层修改。选型时要控制模型、prompt、奖励、解码、KL、生成预算和停止规则，再通过逐项消融找原因；不能一次换完整配方后把全部收益归因到某一个公式。
 
+## 原理拆解
+
+### DAPO：分别处理探索、无效组与长响应
+
+非对称 clip 将上界和下界分开，让提高低概率有利动作的空间可以不同于压低不利动作的空间；这并不保证 entropy 一定上升。动态采样补足有奖励差异的组，但带来额外生成和分布筛选。Token 级聚合改变长短响应的梯度份额；超长处理避免把长度截断一概当作可靠负反馈，同时仍需约束无效延长。这几项分别作用于 surrogate、数据选择、归约和奖励，比较时应独立开关。[DAPO 原论文](https://arxiv.org/html/2503.14476v2)
+
+### Dr. GRPO：区分长度分母与奖励标准差
+
+对相同 $A_i$，原始每响应除以 $T_i$ 会让长短样本的每个 token 系数不同；组标准差则让任务的回报离散程度进一步缩放梯度。Dr. GRPO 针对这些因素，去除所分析的标准差和响应长度归一，采用固定因子归约。这里的无偏性针对其声明的优化目标与假设，不能扩展成“所有任务都不应长度归一”。尤其把分母换成当前 batch 的随机总长度，与换成固定常数不是同一步改动。[Dr. GRPO 分析与实现](https://arxiv.org/html/2503.20783v2)
+
+### GSPO：把裁剪单元改成响应
+
+GSPO 先算长度归一序列 ratio $s_i$，再优化 $\min(s_iA_i,\operatorname{clip}(s_i)A_i)$。未裁剪分支的导数满足：
+
+$$
+\nabla s_i=\frac{s_i}{T_i}\sum_t\nabla\log\pi_\theta(a_{it}|h_{it}).
+$$
+
+因此一条响应共享同一个 ratio 系数与裁剪判定；GRPO 则可对不同 token 分别裁剪。例子：两个 token ratio 为 2 和 0.5，几何平均是 1，序列级判定可能不裁剪，而 token 级两项都有大幅偏离。这个例子说明行为差异，也说明序列平均可能掩盖局部尖峰，不能把它当作所有 token 都接近旧策略的证明。其 MoE 稳定性收益是论文设定下的实证结果。[GSPO 原论文](https://arxiv.org/html/2507.18071v2)
+
+### 同预算比较先固定哪几个变量
+
+先固定起点、奖励、数据顺序、采样温度、上下文预算、reference 设置与训练 token 口径，再逐轴换 advantage、ratio、clip、归约。动态采样另报全部候选生成量；长响应方法另画成功率—推理 token 曲线；系统吞吐另报全部资源。一次替换整套 recipe 的结果只能证明该组合更好，无法独立证明某个目标项的贡献。
+
 ## 白板与例子
 
 | 方法 | 优势 / 归一 | ratio 或 surrogate | 额外关注 |
@@ -48,10 +72,6 @@ $$
 - 把 Dr. GRPO 的分析结论扩展成所有长度归一都错误。
 - 把汇总帖里的改进题说成每家公司都问过所有变体；此处 Dr. GRPO/GSPO 为论文延伸比较。
 
-## 闭卷自检
-
-给三行伪代码，分别只替换 advantage、ratio、reduction；说明每次改动会改变什么，哪项成本必须额外计入。
-
 [//]: # (interview-generated-start)
 
 ## 题源与延伸
@@ -65,7 +85,7 @@ $$
 | [Dr. GRPO 分析论文](https://arxiv.org/abs/2503.20783v2) | 组标准差、长度归一与优化偏差 |
 | [GSPO 原论文](https://arxiv.org/abs/2507.18071v2) | 长度归一的序列 ratio 与序列裁剪 |
 
-**原理只在主文深入维护：** [RL算法总览 从Actor Critic到PPO和组策略优化](#q=rl-policy-optimization-map) · [GRPO从组奖励到token梯度的完整流程](#q=grpo-rlvr)
+**相关专题详解：** [RL算法总览 从Actor Critic到PPO和组策略优化](#q=rl-policy-optimization-map) · [GRPO从组奖励到token梯度的完整流程](#q=grpo-rlvr)
 
 [返回 20 题目录](#q=post-training-interview-practice) · [上一题](#q=pt-zero-variance-groups) · [下一题](#q=pt-rlvr-hacking)
 

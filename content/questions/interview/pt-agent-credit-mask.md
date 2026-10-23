@@ -13,6 +13,26 @@ draft: false
 
 多轮 Agent 的状态是实际可见的交互历史，动作可以是一段推理、工具调用或最终回复，工具结果是环境给出的观察。通常只在模型生成的动作 token 上优化策略，观察不算 actor loss 但参与后续条件。终局任务回报可以通过 return、critic/GAE 或组比较形成优势，也能设计过程反馈；它们不能不加区分直接广播成“每轮因果价值”。若使用 turn 权重，还要说清长度归约与监督就绪条件。观察、padding、人工控制 token、终止和跨 turn 递推的 mask 负责不同事情，应逐项核对。
 
+## 原理拆解
+
+### 先确定决策单元，再谈信用分配
+
+Token 视角把每个生成 token 当动作；turn 视角把一个完整响应/工具调用当宏动作，工具执行产生下一状态。两者都能建模，但折扣、长度和状态转移的单位不同。模型实际看到的截断或压缩历史是训练条件；日志中原始完整历史不能直接代替它。多工具调用、并发返回与失败重试也应明确怎样形成下一次模型输入。
+
+至少区分四种 mask：attention 可见性、生成动作 loss、GAE/return 的 continuation、训练样本有效性。工具观察通常只有第二类为零，不应阻断后续读取或错误地结束 return。模型自己生成的工具名/参数属于动作；执行器注入的结果属于观察；特殊控制 token 是否受监督依据实际谁生成来定。
+
+### 在线 Critic 的训练目标与打分用途
+
+若任务结果 $z\in\{0,1\}$，可用已结束的有效轨迹，对其中状态回归学生未来成功概率；用 BCE 或平方损失时分别说明预测与校准。最终失败不意味着前面所有动作都没有价值，而是这些状态在当时继续策略下得到一次失败样本。学生更新后 $V^{\pi}$ 也改变，critic 需要消费新经验，并记录样本策略版本和年龄，防止旧轨迹长期主导。
+
+若用同一 critic 快照比较行动前后状态，$\Delta_j=V_\phi(h_{j+1})-V_\phi(h_j)$ 至少排除了两次打分间模型参数变化的混淆；仍可能受到观察信息、随机工具反馈和估值误差影响。它是进展代理，既不是直接因果贡献，也不必然等于 advantage。若定义包含中间奖励与折扣，对应 TD residual 还包含 $r_j$ 与 $\gamma$，不能漏项后仍称完全相同。
+
+### 从价值差到 OPD 权重要固定接口
+
+教学例可用 $w_j=\operatorname{clip}(1+\alpha\Delta_j,w_{min},w_{max})$，$0\le w_{min}\le1\le w_{max}$。它把 critic 的估计转为蒸馏强度，负价值差通常意味着减弱模仿，而非把教师目标反向训练。若 $w_{min}=0$，部分 turn 会失去监督，需检查错误恢复状态是否被长期排除。这个映射只是示例，项目中的真实函数应按实现讲述。
+
+Actor 更新时可固定/停止梯度通过 $w_j$，避免它通过修改打分器“降低损失”；critic 用独立目标更新。固定有效 token 分母会使平均权重影响总梯度尺度，除以加权 token 总量则更接近重分配；应监控平均权重及长短 turn 贡献，防止实际收益来自隐含学习率变化。比较等权、随机同分布权重、固定 critic 与在线 critic，才能分清重标定、选择与持续价值学习的贡献。
+
 ## 白板与例子
 
 教学轨迹：查看文件 → 收到缺依赖错误 → 安装/调整方案 → 通过测试。第二轮的报错是条件，不意味着第一轮必然应被惩罚；模型利用错误反馈恢复正是目标能力之一。
@@ -43,10 +63,6 @@ $$
 - 将 turn-level 加权、GAE 和 PRM 当作同一个数学对象。
 - 认为终局回报能精确标注每一步贡献，或认为价值差就是因果效应。
 
-## 闭卷自检
-
-给一个 assistant/tool/assistant 的 token 示意，分别画 loss mask、attention 可见性和 terminal/continuation mask；说明改成每 turn 平均会怎样改变梯度权重。
-
 [//]: # (interview-generated-start)
 
 ## 题源与延伸
@@ -59,7 +75,7 @@ $$
 | [快手大模型算法二面公开问答](https://www.nowcoder.com/discuss/876505573997432832) | 公开问答整理，不按认证真题处理；仅公开片段；未读取付费部分；仅作题型依据 |
 | [GAE 原论文](https://arxiv.org/abs/1506.02438v6) | TD residual、优势估计与偏差方差 |
 
-**原理只在主文深入维护：** [Agentic RL多轮环境信用分配与训练工作](#q=agentic-rl-training) · [Agentic Code OPD turn框架：从请求到梯度、窗口更新与权重发布](#q=agentic-turn-framework) · [Monte Carlo TD与GAE怎样分配回报](#q=rl-returns-gae)
+**相关专题详解：** [Agentic RL多轮环境信用分配与训练工作](#q=agentic-rl-training) · [Agentic Code OPD turn框架：从请求到梯度、窗口更新与权重发布](#q=agentic-turn-framework) · [Monte Carlo TD与GAE怎样分配回报](#q=rl-returns-gae)
 
 [返回 20 题目录](#q=post-training-interview-practice) · [上一题](#q=pt-rollout-staleness) · [下一题](#q=pt-opd-gradient)
 

@@ -13,6 +13,24 @@ draft: false
 
 我会先定义什么叫好答案，再确定监督是结果正确性、相对偏好还是逐步 rubric。成对偏好必须来自同一个 prompt，标签应尽量反映目标能力，而非长度、位置和文风。奖励模型可以用 chosen 与 rejected 的分数差拟合偏好；即便用强模型打标签，也要做位置交换、重复评分和人工抽样校准。训练、标注验证和最终测试需要独立切分，保存 judge 版本与提示词。评价不能只看奖励模型训练准确率，还要检查它在学生新生成分布上的排序是否可靠，以及学生是否学会利用其漏洞。
 
+## 原理拆解
+
+### Pairwise loss 学到的是相对排序
+
+对分差 $d=r_\phi(x,y^+)-r_\phi(x,y^-)$，有 $\partial L/\partial d=-\sigma(-d)$：当前判错或不确定的 pair 提供更大梯度，已分开的 pair 梯度趋小。只有差值进入 loss，因此两个回答同时加常数无法被偏好标签识别；分数 8 不能未经校准就解释成 80% 成功率，也不能把不同 prompt 的分差都当同样可信。
+
+Reward model 常用 backbone 加标量 head；训练时同 prompt 的两个候选共享题面但独立编码，确认截断未删掉关键答案或停止标记。若候选只在长度、格式上不同，模型容易用这些便宜特征拟合标签。更有价值的审计是构造短正确/长错误、格式一致/逻辑不同、等价解/措辞不同的受控 pair，检验排序是否跟随目标能力。
+
+### 怎样把“标签有噪声”拆成可处理的问题
+
+位置交换失败说明呈现顺序影响判断；重复评分分歧大说明随机性或 rubric 不确定；专家复核持续反对自动 judge，说明能力或标准存在系统偏差。三者对应的修复不同：位置平衡、明确评分标准、补充参考或人工裁决。不要用简单多数投票掩盖几个 judge 共享的同一偏差。裁判偏差的实证讨论见 [MT-Bench / LLM-as-a-Judge](https://arxiv.org/abs/2306.05685v4)。
+
+有争议的 pair 可以标为不确定、设置权重或保留分布式标签，但要提前定义规则。只保留高度一致 pair 会改变难度覆盖，需同时报告舍弃率与每类任务占比；“更干净”并不自动意味着更全面。
+
+### 上线前应看分布外排序与可利用性
+
+训练集准确率只反映已见候选分布。把新学生 checkpoint 的回答作为单独测试，观察 RM 分与独立质量的关系，尤其检查高分尾部、超长输出、空泛正确话术和指令注入。一个 RM 在旧模型上排序好，仍可能被优化后的策略利用。最终任务评测应尽量使用独立规则、不同裁判或人工复核；记录 judge 模型、提示词、参考、解析失败与重试，避免把评分链路变化误当作学生进步。
+
 ## 白板与例子
 
 以 Bradley–Terry 模型为例：
@@ -44,10 +62,6 @@ PHYRD-40 可以作为例子：候选模型只见题面，judge 才见参考和 r
 - 混淆 reward model、LLM judge、reference 和 critic。
 - 用平均奖励上涨代替独立任务质量改善。
 
-## 闭卷自检
-
-设计一张含位置偏差、长度偏差、标签冲突和学生新分布四项检查的审计表，并说清每项失败后改变数据、评分器还是训练目标。
-
 [//]: # (interview-generated-start)
 
 ## 题源与延伸
@@ -61,7 +75,7 @@ PHYRD-40 可以作为例子：候选模型只见题面，judge 才见参考和 r
 | [TRL DPO 官方文档](https://huggingface.co/docs/trl/en/dpo_trainer) | 偏好格式、reference log-prob 和训练实现 |
 | [LLM-as-a-Judge / MT-Bench](https://arxiv.org/abs/2306.05685v4) | 位置、长度及自我偏好等裁判偏差 |
 
-**原理只在主文深入维护：** [Reward Model、PRM与LLM Judge：监督、校准和评测面试](#q=reward-judge-interview) · [SFT、DPO 和在线 RL 分别在优化什么？](#q=sft-dpo-rl)
+**相关专题详解：** [Reward Model、PRM与LLM Judge：监督、校准和评测面试](#q=reward-judge-interview) · [SFT、DPO 和在线 RL 分别在优化什么？](#q=sft-dpo-rl)
 
 [返回 20 题目录](#q=post-training-interview-practice) · [上一题](#q=pt-lora-budget) · [下一题](#q=pt-ppo-four-models)
 
