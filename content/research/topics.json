@@ -578,5 +578,18 @@
       "前置知识",
       "面试问答"
     ]
+  },
+  {
+    "id": "post-training-interview-practice",
+    "sources": "content/research/post-training-interview-practice-sources.json",
+    "figures": "assets/learning/post-training-interview-practice/figures.json",
+    "minimumCharacters": 1200,
+    "requiredSections": [
+      "问题背景",
+      "面试题目录",
+      "公司题型",
+      "来源账本",
+      "避免重复"
+    ]
   }
 ]

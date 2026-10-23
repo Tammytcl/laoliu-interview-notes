@@ -1,0 +1,636 @@
+{
+  "version": 1,
+  "topicId": "post-training-interview-practice",
+  "reviewedAt": "2026-10-23",
+  "groups": [
+    {
+      "id": "sft",
+      "title": "01 / SFT、数据与偏好基础"
+    },
+    {
+      "id": "objectives",
+      "title": "02 / PPO、GAE、KL 与 DPO"
+    },
+    {
+      "id": "grpo",
+      "title": "03 / GRPO、变体与奖励"
+    },
+    {
+      "id": "runtime",
+      "title": "04 / 训练系统与多轮 Agent"
+    },
+    {
+      "id": "projects",
+      "title": "05 / OPD 与项目答辩"
+    }
+  ],
+  "questions": [
+    {
+      "id": "pt-method-selection",
+      "number": 1,
+      "group": "sft",
+      "concept": "method-selection",
+      "origin": "公开题型改写",
+      "sourceIds": [
+        "nc-meituan",
+        "nc-alibaba-2025",
+        "nc-alibaba-summary"
+      ],
+      "theoryIds": [
+        "sft-dpo-rl",
+        "post-training-interview"
+      ]
+    },
+    {
+      "id": "pt-sft-data",
+      "number": 2,
+      "group": "sft",
+      "concept": "sft-data-and-masking",
+      "origin": "公开题型改写",
+      "sourceIds": [
+        "nc-meituan",
+        "nc-alibaba-rag",
+        "doc-sft"
+      ],
+      "theoryIds": [
+        "causal-lm-training",
+        "sft-dpo-rl"
+      ]
+    },
+    {
+      "id": "pt-lora-budget",
+      "number": 3,
+      "group": "sft",
+      "concept": "parameter-efficient-finetuning",
+      "origin": "公开题型改写",
+      "sourceIds": [
+        "nc-byte-2024",
+        "nc-meituan",
+        "paper-lora",
+        "paper-qlora"
+      ],
+      "theoryIds": [
+        "lora-finetuning",
+        "infra-training-step"
+      ]
+    },
+    {
+      "id": "pt-reward-preference-data",
+      "number": 4,
+      "group": "sft",
+      "concept": "preference-label-quality",
+      "origin": "公开题型改写",
+      "sourceIds": [
+        "nc-alibaba-2025",
+        "nc-alibaba-summary",
+        "doc-dpo",
+        "paper-judge"
+      ],
+      "theoryIds": [
+        "reward-judge-interview",
+        "sft-dpo-rl"
+      ]
+    },
+    {
+      "id": "pt-ppo-four-models",
+      "number": 5,
+      "group": "objectives",
+      "concept": "ppo-model-roles",
+      "origin": "公开题型改写",
+      "sourceIds": [
+        "nc-meituan",
+        "nc-alibaba-2025",
+        "paper-ppo"
+      ],
+      "theoryIds": [
+        "rl-actor-critic",
+        "rl-ppo-training"
+      ]
+    },
+    {
+      "id": "pt-gae-credit",
+      "number": 6,
+      "group": "objectives",
+      "concept": "gae-and-terminal-boundaries",
+      "origin": "公开题型改写",
+      "sourceIds": [
+        "nc-byte-summary",
+        "paper-gae"
+      ],
+      "theoryIds": [
+        "rl-returns-gae",
+        "rl-actor-critic"
+      ]
+    },
+    {
+      "id": "pt-clip-kl",
+      "number": 7,
+      "group": "objectives",
+      "concept": "proximal-clip-versus-reference-kl",
+      "origin": "公开题型改写",
+      "sourceIds": [
+        "nc-byte-summary",
+        "nc-baidu-summary",
+        "paper-ppo"
+      ],
+      "theoryIds": [
+        "rl-ppo-training",
+        "rl-policy-optimization-map"
+      ]
+    },
+    {
+      "id": "pt-dpo-derivation",
+      "number": 8,
+      "group": "objectives",
+      "concept": "dpo-objective-and-length",
+      "origin": "公开题型改写",
+      "sourceIds": [
+        "nc-byte-summary",
+        "nc-baidu-summary",
+        "paper-dpo",
+        "doc-dpo"
+      ],
+      "theoryIds": [
+        "sft-dpo-rl",
+        "post-training-interview"
+      ]
+    },
+    {
+      "id": "pt-grpo-objective",
+      "number": 9,
+      "group": "grpo",
+      "concept": "grpo-group-relative-advantage",
+      "origin": "公开题型改写",
+      "sourceIds": [
+        "nc-tencent",
+        "nc-meituan",
+        "paper-grpo"
+      ],
+      "theoryIds": [
+        "grpo-rlvr",
+        "rl-policy-optimization-map"
+      ]
+    },
+    {
+      "id": "pt-zero-variance-groups",
+      "number": 10,
+      "group": "grpo",
+      "concept": "grpo-zero-variance-and-selection",
+      "origin": "公开题型改写",
+      "sourceIds": [
+        "nc-kuaishou",
+        "paper-grpo",
+        "paper-dapo",
+        "paper-drgrpo"
+      ],
+      "theoryIds": [
+        "grpo-rlvr",
+        "rl-policy-optimization-map"
+      ]
+    },
+    {
+      "id": "pt-grpo-variants",
+      "number": 11,
+      "group": "grpo",
+      "concept": "grpo-variant-dimensions",
+      "origin": "公开题型改写",
+      "sourceIds": [
+        "nc-byte-summary",
+        "paper-dapo",
+        "paper-drgrpo",
+        "paper-gspo"
+      ],
+      "theoryIds": [
+        "rl-policy-optimization-map",
+        "grpo-rlvr"
+      ]
+    },
+    {
+      "id": "pt-rlvr-hacking",
+      "number": 12,
+      "group": "grpo",
+      "concept": "reward-hacking-and-independent-verification",
+      "origin": "公开题型改写",
+      "sourceIds": [
+        "nc-alibaba-rag",
+        "nc-alibaba-summary",
+        "paper-judge"
+      ],
+      "theoryIds": [
+        "reward-judge-interview",
+        "agent-evaluation"
+      ]
+    },
+    {
+      "id": "pt-rl-collapse",
+      "number": 13,
+      "group": "runtime",
+      "concept": "training-collapse-diagnostics",
+      "origin": "公开题型改写",
+      "sourceIds": [
+        "nc-alibaba-rag",
+        "nc-baidu-summary",
+        "doc-verl-performance"
+      ],
+      "theoryIds": [
+        "grpo-rlvr",
+        "infra-rl-pipeline"
+      ]
+    },
+    {
+      "id": "pt-memory-parallel",
+      "number": 14,
+      "group": "runtime",
+      "concept": "rl-memory-budget-and-sharding",
+      "origin": "公开题型改写",
+      "sourceIds": [
+        "nc-baidu-summary",
+        "nc-byte-summary",
+        "paper-zero",
+        "doc-verl-performance",
+        "code-escd"
+      ],
+      "theoryIds": [
+        "infra-training-step",
+        "infra-zero-deepspeed",
+        "infra-distributed-parallelism"
+      ]
+    },
+    {
+      "id": "pt-rollout-staleness",
+      "number": 15,
+      "group": "runtime",
+      "concept": "actor-learner-staleness",
+      "origin": "公开题型改写",
+      "sourceIds": [
+        "nc-byte-summary",
+        "nc-alibaba-summary",
+        "paper-impala",
+        "doc-verl-performance"
+      ],
+      "theoryIds": [
+        "infra-rl-pipeline",
+        "agentic-opd-pipeline"
+      ]
+    },
+    {
+      "id": "pt-agent-credit-mask",
+      "number": 16,
+      "group": "runtime",
+      "concept": "multi-turn-credit-and-tool-masking",
+      "origin": "公开题型改写",
+      "sourceIds": [
+        "nc-byte-summary",
+        "nc-kuaishou-agent",
+        "paper-gae"
+      ],
+      "theoryIds": [
+        "agentic-rl-training",
+        "agentic-turn-framework",
+        "rl-returns-gae"
+      ]
+    },
+    {
+      "id": "pt-opd-gradient",
+      "number": 17,
+      "group": "projects",
+      "concept": "on-policy-distillation-gradient",
+      "origin": "项目自拟",
+      "sourceIds": [
+        "paper-gkd",
+        "blog-opd"
+      ],
+      "theoryIds": [
+        "opd-interview-foundations",
+        "opd-vs-sft"
+      ]
+    },
+    {
+      "id": "pt-escd-events",
+      "number": 18,
+      "group": "projects",
+      "concept": "cross-tokenizer-event-completion",
+      "origin": "项目自拟",
+      "sourceIds": [
+        "code-escd"
+      ],
+      "theoryIds": [
+        "opd-interview-cross-tokenizer",
+        "escd-project-interview"
+      ]
+    },
+    {
+      "id": "pt-multi-task-distillation",
+      "number": 19,
+      "group": "projects",
+      "concept": "multi-task-capability-consolidation",
+      "origin": "项目自拟",
+      "sourceIds": [
+        "paper-pcgrad",
+        "paper-ties"
+      ],
+      "theoryIds": [
+        "opd-interview-foundations",
+        "opd-project-defense"
+      ]
+    },
+    {
+      "id": "pt-project-evidence",
+      "number": 20,
+      "group": "projects",
+      "concept": "experimental-evidence-and-ownership",
+      "origin": "公开题型改写",
+      "sourceIds": [
+        "nc-byte-2024",
+        "nc-byte-summary",
+        "nc-tencent",
+        "paper-judge",
+        "code-escd"
+      ],
+      "theoryIds": [
+        "opd-project-defense",
+        "escd-project-interview",
+        "agent-evaluation"
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "id": "nc-byte-2024",
+      "title": "字节算法面试记录（2024）",
+      "url": "https://www.nowcoder.com/feed/main/detail/30c5b57a0acb4a0f9d2250cafadf94b1",
+      "kind": "community",
+      "purpose": "LoRA、PPO、优化效果与项目分工",
+      "reviewedAt": "2026-10-23",
+      "company": "字节",
+      "evidence": "经历自述，招聘真实性未独立核验",
+      "access": "公开正文",
+      "publishedAt": "2024-09-07"
+    },
+    {
+      "id": "nc-byte-summary",
+      "title": "字节算法岗公开题型汇总",
+      "url": "https://www.nowcoder.com/discuss/922308546966847488",
+      "kind": "community",
+      "purpose": "优势与 KL、DAPO、显存并行、长尾 rollout、过程反馈及消融",
+      "reviewedAt": "2026-10-23",
+      "company": "字节",
+      "evidence": "二次汇总，不按公司认证真题处理",
+      "access": "公开正文；所选条目标注 2026 年 4 月"
+    },
+    {
+      "id": "nc-alibaba-2025",
+      "title": "阿里国际「国际一面」（2025）",
+      "url": "https://www.nowcoder.com/feed/main/detail/166d1f3bb6b84624b912dcc3997f8081",
+      "kind": "community",
+      "purpose": "方法选型、PPO 模型角色和 critic/reward 的损失",
+      "reviewedAt": "2026-10-23",
+      "company": "阿里",
+      "evidence": "经历自述，招聘真实性未独立核验",
+      "access": "检索可见正文；直链读取返回简页",
+      "publishedAt": "2025-09-05"
+    },
+    {
+      "id": "nc-alibaba-summary",
+      "title": "阿里算法岗公开题型汇总",
+      "url": "https://www.nowcoder.com/discuss/923309531445071872",
+      "kind": "community",
+      "purpose": "SFT 数据、GRPO、奖励设计、质量达标和策略版本滞后",
+      "reviewedAt": "2026-10-23",
+      "company": "阿里",
+      "evidence": "二次汇总，不按公司认证真题处理",
+      "access": "公开正文；所选条目标注 2026 年 7 月"
+    },
+    {
+      "id": "nc-alibaba-rag",
+      "title": "阿里国际 AI 算法公开问答",
+      "url": "https://www.nowcoder.com/feed/main/detail/21fe1ff2b5de4c6fa2a56a27b54f3d3c",
+      "kind": "community",
+      "purpose": "数据筛选、奖励作弊、训练质量与策略退化",
+      "reviewedAt": "2026-10-23",
+      "company": "阿里",
+      "evidence": "带参考答案的公开整理，非技术权威",
+      "access": "公开正文；页面仅显示月日，不推断年份"
+    },
+    {
+      "id": "nc-tencent",
+      "title": "腾讯技术研究 NLP 面经（2025）",
+      "url": "https://www.nowcoder.com/feed/main/detail/c8ddab6cf8ea467c9e4003c9256616cb",
+      "kind": "community",
+      "purpose": "GRPO 公式、方法比较、论文讲解及项目参数",
+      "reviewedAt": "2026-10-23",
+      "company": "腾讯",
+      "evidence": "经历自述，招聘真实性未独立核验",
+      "access": "检索可见正文；直链读取返回简页",
+      "publishedAt": "2025-04-19"
+    },
+    {
+      "id": "nc-meituan",
+      "title": "美团算法一面面经（2025）",
+      "url": "https://www.nowcoder.com/feed/main/detail/7197e4d2e8934c76a3bc65aedaf1afeb",
+      "kind": "community",
+      "purpose": "SFT 后为何 RL、PPO 四模型、QLoRA、数据多样性",
+      "reviewedAt": "2026-10-23",
+      "company": "美团",
+      "evidence": "经历自述，招聘真实性未独立核验",
+      "access": "公开正文",
+      "publishedAt": "2025-04-12"
+    },
+    {
+      "id": "nc-kuaishou",
+      "title": "快手大模型推荐算法一面分享",
+      "url": "https://www.nowcoder.com/feed/main/detail/327c7fee6b5b4a8e92f318b317eff650",
+      "kind": "community",
+      "purpose": "SFT 质量、奖励设计、全零或全一组反馈",
+      "reviewedAt": "2026-10-23",
+      "company": "快手",
+      "evidence": "公开分享，未独立核验经历",
+      "access": "公开正文；页面仅显示月日，不推断年份"
+    },
+    {
+      "id": "nc-kuaishou-agent",
+      "title": "快手大模型算法二面公开问答",
+      "url": "https://www.nowcoder.com/discuss/876505573997432832",
+      "kind": "community",
+      "purpose": "Agent 训练流程、多轮上下文及工具观察 mask",
+      "reviewedAt": "2026-10-23",
+      "company": "快手",
+      "evidence": "公开问答整理，不按认证真题处理",
+      "access": "仅公开片段；未读取付费部分"
+    },
+    {
+      "id": "nc-baidu-summary",
+      "title": "百度算法岗公开题型汇总",
+      "url": "https://www.nowcoder.com/discuss/927018114900922368",
+      "kind": "community",
+      "purpose": "DPO、KL、输出长度及 7B 显存和 ZeRO 分片",
+      "reviewedAt": "2026-10-23",
+      "company": "百度",
+      "evidence": "二次汇总，不按公司认证真题处理",
+      "access": "页面公开内容与检索摘要；未读取付费部分"
+    },
+    {
+      "id": "paper-ppo",
+      "title": "PPO 原论文",
+      "url": "https://arxiv.org/abs/1707.06347v2",
+      "kind": "paper",
+      "purpose": "clipped surrogate、旧策略与更新约束",
+      "reviewedAt": "2026-10-23"
+    },
+    {
+      "id": "paper-gae",
+      "title": "GAE 原论文",
+      "url": "https://arxiv.org/abs/1506.02438v6",
+      "kind": "paper",
+      "purpose": "TD residual、优势估计与偏差方差",
+      "reviewedAt": "2026-10-23"
+    },
+    {
+      "id": "paper-dpo",
+      "title": "DPO 原论文",
+      "url": "https://arxiv.org/abs/2305.18290v3",
+      "kind": "paper",
+      "purpose": "偏好模型、KL 正则最优策略与 DPO loss",
+      "reviewedAt": "2026-10-23"
+    },
+    {
+      "id": "paper-grpo",
+      "title": "DeepSeekMath / GRPO",
+      "url": "https://arxiv.org/abs/2402.03300v3",
+      "kind": "paper",
+      "purpose": "组相对优势、策略目标及 outcome/process 监督",
+      "reviewedAt": "2026-10-23"
+    },
+    {
+      "id": "paper-dapo",
+      "title": "DAPO 原论文",
+      "url": "https://arxiv.org/abs/2503.14476v2",
+      "kind": "paper",
+      "purpose": "非对称裁剪、动态采样、token 归约与超长样本处理",
+      "reviewedAt": "2026-10-23"
+    },
+    {
+      "id": "paper-drgrpo",
+      "title": "Dr. GRPO 分析论文",
+      "url": "https://arxiv.org/abs/2503.20783v2",
+      "kind": "paper",
+      "purpose": "组标准差、长度归一与优化偏差",
+      "reviewedAt": "2026-10-23"
+    },
+    {
+      "id": "paper-gspo",
+      "title": "GSPO 原论文",
+      "url": "https://arxiv.org/abs/2507.18071v2",
+      "kind": "paper",
+      "purpose": "长度归一的序列 ratio 与序列裁剪",
+      "reviewedAt": "2026-10-23"
+    },
+    {
+      "id": "paper-lora",
+      "title": "LoRA 原论文",
+      "url": "https://arxiv.org/abs/2106.09685v2",
+      "kind": "paper",
+      "purpose": "低秩增量、训练参数及合并",
+      "reviewedAt": "2026-10-23"
+    },
+    {
+      "id": "paper-qlora",
+      "title": "QLoRA 原论文",
+      "url": "https://arxiv.org/abs/2305.14314",
+      "kind": "paper",
+      "purpose": "4-bit 基础权重、量化常数及 adapter 训练",
+      "reviewedAt": "2026-10-23"
+    },
+    {
+      "id": "paper-zero",
+      "title": "ZeRO 原论文",
+      "url": "https://arxiv.org/abs/1910.02054v3",
+      "kind": "paper",
+      "purpose": "优化器、梯度和参数分片的区别",
+      "reviewedAt": "2026-10-23"
+    },
+    {
+      "id": "paper-gkd",
+      "title": "GKD / On-Policy Distillation",
+      "url": "https://arxiv.org/abs/2306.13649v3",
+      "kind": "paper",
+      "purpose": "学生生成分布与教师反馈的蒸馏目标",
+      "reviewedAt": "2026-10-23"
+    },
+    {
+      "id": "paper-judge",
+      "title": "LLM-as-a-Judge / MT-Bench",
+      "url": "https://arxiv.org/abs/2306.05685v4",
+      "kind": "paper",
+      "purpose": "位置、长度及自我偏好等裁判偏差",
+      "reviewedAt": "2026-10-23"
+    },
+    {
+      "id": "paper-impala",
+      "title": "IMPALA / V-trace",
+      "url": "https://arxiv.org/abs/1802.01561v3",
+      "kind": "paper",
+      "purpose": "actor–learner 解耦和 off-policy 校正的经典依据",
+      "reviewedAt": "2026-10-23"
+    },
+    {
+      "id": "paper-pcgrad",
+      "title": "Gradient Surgery for Multi-Task Learning",
+      "url": "https://arxiv.org/abs/2001.06782v4",
+      "kind": "paper",
+      "purpose": "任务梯度干扰的分析；不是本人已使用方法的声明",
+      "reviewedAt": "2026-10-23"
+    },
+    {
+      "id": "paper-ties",
+      "title": "TIES-Merging",
+      "url": "https://arxiv.org/abs/2306.01708v2",
+      "kind": "paper",
+      "purpose": "区分权重合并与联合训练；不是本人已使用方法的声明",
+      "reviewedAt": "2026-10-23"
+    },
+    {
+      "id": "doc-sft",
+      "title": "TRL SFT 官方文档",
+      "url": "https://huggingface.co/docs/trl/en/sft_trainer",
+      "kind": "official-docs",
+      "purpose": "数据格式、assistant-only loss、packing 与配置边界",
+      "reviewedAt": "2026-10-23"
+    },
+    {
+      "id": "doc-dpo",
+      "title": "TRL DPO 官方文档",
+      "url": "https://huggingface.co/docs/trl/en/dpo_trainer",
+      "kind": "official-docs",
+      "purpose": "偏好格式、reference log-prob 和训练实现",
+      "reviewedAt": "2026-10-23"
+    },
+    {
+      "id": "doc-verl-performance",
+      "title": "verl 性能调优文档",
+      "url": "https://verl.readthedocs.io/en/latest/perf/perf_tuning.html",
+      "kind": "official-docs",
+      "purpose": "rollout、batch、packing 和训练/推理内存取舍；参数支持随版本核对",
+      "reviewedAt": "2026-10-23"
+    },
+    {
+      "id": "blog-opd",
+      "title": "Thinking Machines：On-Policy Distillation",
+      "url": "https://thinkingmachines.ai/blog/on-policy-distillation/",
+      "kind": "author-blog",
+      "purpose": "学生轨迹、教师 token 评分与反向 KL 蒸馏",
+      "reviewedAt": "2026-10-23"
+    },
+    {
+      "id": "code-escd",
+      "title": "ESCD 公开实现与评测说明",
+      "url": "https://github.com/Tammytcl/ESCD",
+      "kind": "official-code",
+      "purpose": "事件补全、公开 baseline、数据和独立 PHYRD-40 评测的证据边界",
+      "reviewedAt": "2026-10-23",
+      "repository": "Tammytcl/ESCD",
+      "revision": "befd0c0a582ec6efc055660467db95d522519591",
+      "pinnedUrl": "https://github.com/Tammytcl/ESCD/tree/befd0c0a582ec6efc055660467db95d522519591"
+    }
+  ]
+}

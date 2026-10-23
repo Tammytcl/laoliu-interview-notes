@@ -6,6 +6,7 @@ import { parseQuestion, escapeHtml } from './content.mjs';
 import { parsePaperContent, paperDirections, paperCategories, paperTaxonomy, validatePaperLinks } from './papers-content.mjs';
 import { auditPapers } from './paper-quality.mjs';
 import { auditTopics } from './topic-quality.mjs';
+import { checkInterviewCollection } from './interview-collection.mjs';
 
 const root = fileURLToPath(new URL('../', import.meta.url));
 const config = JSON.parse(await readFile(join(root, 'site.config.json'), 'utf8'));
@@ -34,6 +35,7 @@ for (const p of await walk(join(root, 'content/questions'))) {
   if (!question.draft) questions.push(question);
 }
 questions.sort((a, b) => b.updated.localeCompare(a.updated) || a.title.localeCompare(b.title, 'zh-CN'));
+const interviewCollection = await checkInterviewCollection(root, allQuestions);
 const collections = {};
 for (const name of ['papers', 'reports']) {
   collections[name] = [];
@@ -106,11 +108,13 @@ await writeFile(join(dist, appFile), app);
 await writeFile(join(dist, styleFile), style);
 await copyFile(join(root, 'web/favicon.svg'), join(dist, 'favicon.svg'));
 await mkdir(join(dist, 'templates'), { recursive: true });
-for (const file of ['paper.md', 'daily-report.md', 'survey-report.md', 'topic.md']) {
+for (const file of ['paper.md', 'daily-report.md', 'survey-report.md', 'topic.md', 'interview-question.md']) {
   await copyFile(join(root, 'templates', file), join(dist, 'templates', file));
 }
 await mkdir(join(dist, 'docs'), { recursive: true });
 try { await copyFile(join(root, 'docs/topic-workflow.md'), join(dist, 'docs/topic-workflow.md')); }
+catch (error) { if (error.code !== 'ENOENT') throw error; }
+try { await copyFile(join(root, 'docs/interview-workflow.md'), join(dist, 'docs/interview-workflow.md')); }
 catch (error) { if (error.code !== 'ENOENT') throw error; }
 await mkdir(join(dist, 'research'), { recursive: true });
 let registeredTopics = [];
@@ -129,7 +133,7 @@ for (const [file, source] of researchDownloads) {
   catch (error) { if (error.code !== 'ENOENT') throw error; }
 }
 const template = await readFile(join(root, 'web/index.html'), 'utf8');
-await writeFile(join(dist, 'index.html'), template.replaceAll('__TITLE__', escapeHtml(config.title)).replaceAll('__DESCRIPTION__', escapeHtml(config.description)).replaceAll('__MATH_CSS__', `./${mathPath}/katex.min.css`).replace('./app.js', `./${appFile}`).replace('./style.css', `./${styleFile}`));
+await writeFile(join(dist, 'index.html'), template.replaceAll('__TITLE__', escapeHtml(config.title)).replaceAll('__DESCRIPTION__', escapeHtml(config.description)).replaceAll('__INTERVIEW_COUNT__', String(interviewCollection?.questions.length || 0)).replaceAll('__MATH_CSS__', `./${mathPath}/katex.min.css`).replace('./app.js', `./${appFile}`).replace('./style.css', `./${styleFile}`));
 // 保留固定地址供外部读取；页面读取带内容指纹的文件，避免命中上一版缓存。
 await writeFile(join(dist, 'data.json'), data);
 await writeFile(join(dist, '.nojekyll'), '');

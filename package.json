@@ -27,7 +27,9 @@
     "papers:check-live": "node scripts/check-paper-live.mjs",
     "topics:quality": "node scripts/topic-quality.mjs",
     "topics:watch": "node scripts/topic-sources.mjs",
-    "topics:check-live": "node scripts/check-topic-live.mjs"
+    "topics:check-live": "node scripts/check-topic-live.mjs",
+    "interviews:index": "node scripts/interview-collection.mjs --write",
+    "interviews:check": "node scripts/interview-collection.mjs"
   },
   "dependencies": {
     "katex": "^0.16.22",

@@ -4,9 +4,11 @@
 
 一个内容与界面分离的中文面试准备站。浅色纸张风格、主题导航、全文搜索、题目目录与正式论文报告。发布站点无数据库、追踪统计或运行时 CDN 依赖，适合 GitHub Pages；可选本地工作台提供源码缓存清理。
 
-> 当前有 66 篇学习笔记、63 篇论文精读报告、6 份 Daily 和 8 份专题调研。论文收录独立于面试笔记；报告按原文核读范围说明证据，未登记个人复现。旧项目表达题保留在综合面试中。
+> 知识库包含原理笔记、独立面试练习、论文精读、Daily 与专题调研，当前数量见网页统计。首批后训练面试练习含 20 个主问题；面经来源与技术依据分开登记。论文报告按原文核读范围说明证据，未登记个人复现。
 
 ## 从这里开始学习
+
+- [后训练面试 · 首批 20 题](content/questions/guide/post-training-interview-practice.md)：字节、阿里、腾讯、美团、快手、百度公开题型；五组主线，每题有口述、白板、追问、项目联系、误区和自检。[维护规则](docs/interview-workflow.md)将来源、目录和独立题页分开，构建检查重复概念与编号。
 
 - [Code/Search Agent组件系列](content/questions/agent/agent-components-overview.md)：四篇按任务流程讲Harbor/E2B/ACS、工具协议、沙箱、代码修改与搜索证据，配关键源码、状态图与CPU练习。
 - [MTP系列](content/questions/systems/infra-mtp-overview.md)：四篇Infra梳理训练、精确验证、后端接入与成本，配原图、源码和CPU练习。

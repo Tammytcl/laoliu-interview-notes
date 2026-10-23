@@ -10,6 +10,11 @@
       "description": "四条主线、先修关系与练习闭环"
     },
     {
+      "id": "interview",
+      "name": "后训练面试 · 逐题练习",
+      "description": "按来源、口述、白板、追问和项目证据组织"
+    },
+    {
       "id": "diffusion",
       "name": "Diffusion · 生成模型",
       "description": "去噪、采样、Flow Matching 与条件生成"
