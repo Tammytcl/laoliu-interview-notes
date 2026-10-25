@@ -83,7 +83,7 @@ loss = -(ratio * adv * response_mask).sum() / response_mask.sum().clamp_min(1)
 | [GKD / On-Policy Distillation](https://arxiv.org/abs/2306.13649v3) | 学生生成分布与教师反馈的蒸馏目标 |
 | [Thinking Machines：On-Policy Distillation](https://thinkingmachines.ai/blog/on-policy-distillation/) | 学生轨迹、教师 token 评分与反向 KL 蒸馏 |
 
-**相关专题详解：** [OPD面试基础：目标、梯度、训练代码与强基线](#q=opd-interview-foundations) · [On-policy distillation 和 SFT 有什么区别？](#q=opd-vs-sft)
+**相关专题详解：** [OPD系统整理：概率基础、公式推导、训练实现与面试问答](#q=opd-interview-foundations) · [On-policy distillation 和 SFT 有什么区别？](#q=opd-vs-sft)
 
 [返回 20 题目录](#q=post-training-interview-practice) · [上一题](#q=pt-agent-credit-mask) · [下一题](#q=pt-escd-events)
 

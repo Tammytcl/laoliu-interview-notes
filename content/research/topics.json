@@ -415,12 +415,26 @@
     "id": "opd-interview-foundations",
     "sources": "content/research/opd-interview-foundations-sources.json",
     "figures": "assets/learning/opd-interview-foundations/figures.json",
-    "minimumCharacters": 6000,
-    "minimumQuestions": 24,
+    "minimumCharacters": 30000,
+    "minimumQuestions": 80,
     "requiredSections": [
       "问题背景",
       "前置知识",
-      "面试问答"
+      "全文符号",
+      "Forward KL",
+      "Reverse KL",
+      "Sampled-token",
+      "top-k",
+      "完整序列",
+      "最小训练实现",
+      "异步",
+      "Mask",
+      "学生复读",
+      "学生截断",
+      "reward hacking",
+      "面试问答",
+      "小实验",
+      "原始资料"
     ]
   },
   {

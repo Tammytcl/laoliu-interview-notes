@@ -1,4 +1,29 @@
 {
   "topicId": "opd-interview-foundations",
-  "figures": []
+  "figures": [
+    {
+      "file": "opd-training-loop.svg",
+      "origin": "original",
+      "sourcePage": "https://tammytcl.github.io/laoliu-interview-notes/#q=opd-interview-foundations",
+      "credit": "本文独立绘制的教学示意，非作者论文原图、非模型实验结果。",
+      "retrievedAt": "2026-10-25",
+      "sha256": "d221273eab84a55beb2441847dec0c9a0551f771c66b2b6617503d4089a50c01",
+      "visuallyVerified": true,
+      "role": "conceptual-data-flow",
+      "explanation": "complete",
+      "note": "逐节点解释学生rollout、固定前缀、教师/学生条件概率和只更新学生；明确不是硬件或耗时实测。"
+    },
+    {
+      "file": "opd-topk-tail.svg",
+      "origin": "original",
+      "sourcePage": "https://tammytcl.github.io/laoliu-interview-notes/#q=opd-interview-foundations",
+      "credit": "本文独立绘制的教学示意，非作者论文原图、非模型实验结果。",
+      "retrievedAt": "2026-10-25",
+      "sha256": "c9cab0691df7de94e79e972a7944158f6ef7a86753c2aafa4c02233ceeca5f9b",
+      "visuallyVerified": true,
+      "role": "constructed-probability-example",
+      "explanation": "complete",
+      "note": "按0.45/0.45/0.10和0.05/0.05/0.90绘制完整质量，再展示候选内归一化；数值由CPU脚本复核。"
+    }
+  ]
 }

@@ -31,40 +31,130 @@
       "url": "https://thinkingmachines.ai/blog/on-policy-distillation/",
       "title": "Thinking Machines作者博客",
       "kind": "author-blog",
-      "reviewedAt": "2026-10-12",
-      "purpose": "本篇题源类型、原始方法或固定源码依据；公开题型与自拟问题分别标注。"
+      "reviewedAt": "2026-10-25",
+      "purpose": "学生rollout、teacher-forcing评分、即时token反馈与实现思路；本轮重新核读。"
     },
     {
       "id": "opd-interview-foundations-05",
       "url": "https://arxiv.org/abs/2306.13649",
       "title": "GKD",
       "kind": "paper",
-      "reviewedAt": "2026-10-12",
-      "purpose": "本篇题源类型、原始方法或固定源码依据；公开题型与自拟问题分别标注。"
+      "reviewedAt": "2026-10-25",
+      "purpose": "GKD原论文的历史入口；正文新增固定v3用于精确公式与混合目标。"
     },
     {
       "id": "opd-interview-foundations-06",
       "url": "https://arxiv.org/abs/2306.08543",
       "title": "MiniLLM",
       "kind": "paper",
-      "reviewedAt": "2026-10-12",
-      "purpose": "本篇题源类型、原始方法或固定源码依据；公开题型与自拟问题分别标注。"
+      "reviewedAt": "2026-10-25",
+      "purpose": "MiniLLM原论文历史入口；正文新增固定v6讨论序列RKL与单步/长程分解。"
     },
     {
       "id": "opd-interview-foundations-07",
       "url": "https://arxiv.org/abs/2610.04272v1",
       "title": "新MOPD审计",
       "kind": "paper",
-      "reviewedAt": "2026-10-12",
-      "purpose": "本篇题源类型、原始方法或固定源码依据；公开题型与自拟问题分别标注。"
+      "reviewedAt": "2026-10-25",
+      "purpose": "特定同源多教师设置中的强SFT、独立调参与公平成本，不外推所有OPD。"
     },
     {
       "id": "opd-interview-foundations-08",
       "url": "https://arxiv.org/abs/2606.24143v1",
       "title": "AsyncOPD",
       "kind": "paper",
-      "reviewedAt": "2026-10-12",
-      "purpose": "本篇题源类型、原始方法或固定源码依据；公开题型与自拟问题分别标注。"
+      "reviewedAt": "2026-10-25",
+      "purpose": "旧动作/旧状态、当前信号与有限教师缓存的异步OPD问题。"
+    },
+    {
+      "id": "opd-foundations-ref-09",
+      "url": "https://arxiv.org/abs/1503.02531v1",
+      "title": "Distilling the Knowledge in a Neural Network",
+      "kind": "paper",
+      "reviewedAt": "2026-10-25",
+      "purpose": "软目标、温度蒸馏与传统KD背景；不作为OPD效果保证。"
+    },
+    {
+      "id": "opd-foundations-ref-10",
+      "url": "https://arxiv.org/abs/1011.0686v3",
+      "title": "DAgger: A Reduction of Imitation Learning and Structured Prediction to No-Regret Online Learning",
+      "kind": "paper",
+      "reviewedAt": "2026-10-25",
+      "purpose": "学习者状态上的专家监督背景，算法保证不直接外推。"
+    },
+    {
+      "id": "opd-foundations-ref-11",
+      "url": "https://arxiv.org/html/2306.13649v3",
+      "title": "GKD: On-policy Distillation of Language Models",
+      "kind": "paper",
+      "reviewedAt": "2026-10-25",
+      "purpose": "学生轨迹、固定采样历史、可选散度与离线混合；核对方法和公式。"
+    },
+    {
+      "id": "opd-foundations-ref-12",
+      "url": "https://arxiv.org/html/2306.08543v6",
+      "title": "MiniLLM: On-Policy Distillation of Large Language Models",
+      "kind": "paper",
+      "reviewedAt": "2026-10-25",
+      "purpose": "RKL和序列/单步/长程优化背景；固定v6，初稿2023。"
+    },
+    {
+      "id": "opd-foundations-ref-13",
+      "url": "https://arxiv.org/html/2609.34447v2",
+      "title": "Unbiased Top-k Estimation for On-Policy Distillation",
+      "kind": "paper",
+      "reviewedAt": "2026-10-25",
+      "purpose": "局部KL梯度、ST/FV/TK差异和具体尾部校正；不把监督项计数当端到端加速。"
+    },
+    {
+      "id": "opd-foundations-ref-14",
+      "url": "https://arxiv.org/html/2608.14728v1",
+      "title": "Tail-Aware Top-k On-Policy Distillation",
+      "kind": "paper",
+      "reviewedAt": "2026-10-25",
+      "purpose": "子集归一化遗漏质量与tail-aware目标；不把粗粒度KL称全词表无偏。"
+    },
+    {
+      "id": "opd-foundations-tinker-20261025",
+      "url": "https://github.com/thinking-machines-lab/tinker-cookbook/blob/54b3cb293038ccf2e49952e46ed5abac7119fdf8/tinker_cookbook/distillation/train_on_policy.py",
+      "title": "Tinker OPD训练源码",
+      "kind": "official-code",
+      "reviewedAt": "2026-10-25",
+      "purpose": "固定版本静态核读，说明采样信号/分布损失与具体配置；未执行该框架GPU训练。",
+      "repository": "thinking-machines-lab/tinker-cookbook",
+      "revision": "54b3cb293038ccf2e49952e46ed5abac7119fdf8",
+      "pinnedUrl": "https://github.com/thinking-machines-lab/tinker-cookbook/blob/54b3cb293038ccf2e49952e46ed5abac7119fdf8/tinker_cookbook/distillation/train_on_policy.py",
+      "reviewedSha256": "4a7a24afc5ac0d7f0b5f8afcd26e5bb44f3d379b17e4344935e44a46764bad1e"
+    },
+    {
+      "id": "opd-foundations-verl-20261025",
+      "url": "https://github.com/verl-project/verl/blob/3c6d9b43b67c74ec343d77874cd8fa6e841523da/docs/algo/opd.md",
+      "title": "verl OPD官方文档",
+      "kind": "official-docs",
+      "reviewedAt": "2026-10-25",
+      "purpose": "固定版本静态核读，说明采样信号/分布损失与具体配置；未执行该框架GPU训练。",
+      "repository": "verl-project/verl",
+      "revision": "3c6d9b43b67c74ec343d77874cd8fa6e841523da",
+      "pinnedUrl": "https://github.com/verl-project/verl/blob/3c6d9b43b67c74ec343d77874cd8fa6e841523da/docs/algo/opd.md",
+      "reviewedSha256": "0b81ce31f08a243ad96a53a4d78bfce2b2b5b6d367a0e673500a96bb95bc651c"
+    },
+    {
+      "id": "opd-foundations-ref-17",
+      "url": "https://arxiv.org/html/2610.03185v1",
+      "title": "Gains and Collapse in On-Policy Distillation",
+      "kind": "paper",
+      "reviewedAt": "2026-10-25",
+      "purpose": "特定sampled/PPO实现中重复和过长的实验观察，预印本，不外推所有OPD。"
+    },
+    {
+      "id": "opd-foundations-ref-18",
+      "url": "https://arxiv.org/html/2606.01249v1",
+      "title": "Trust Region On-Policy Distillation",
+      "kind": "paper",
+      "reviewedAt": "2026-10-25",
+      "purpose": "师生分布差异、不可靠局部监督与引导方式的适用边界。"
     }
-  ]
+  ],
+  "updated": "2026-10-25",
+  "scope": "统一教材与80问；保留2026-10-12历史题源登记，新增原始技术依据按本轮核读版本记录。"
 }

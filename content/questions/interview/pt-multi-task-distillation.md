@@ -76,7 +76,7 @@ $$
 | [Gradient Surgery for Multi-Task Learning](https://arxiv.org/abs/2001.06782v4) | 任务梯度干扰的分析；不是本人已使用方法的声明 |
 | [TIES-Merging](https://arxiv.org/abs/2306.01708v2) | 区分权重合并与联合训练；不是本人已使用方法的声明 |
 
-**相关专题详解：** [OPD面试基础：目标、梯度、训练代码与强基线](#q=opd-interview-foundations) · [Agentic OPD与Cross-tokenizer OPD项目展示和答辩](#q=opd-project-defense)
+**相关专题详解：** [OPD系统整理：概率基础、公式推导、训练实现与面试问答](#q=opd-interview-foundations) · [Agentic OPD与Cross-tokenizer OPD项目展示和答辩](#q=opd-project-defense)
 
 [返回 20 题目录](#q=post-training-interview-practice) · [上一题](#q=pt-escd-events) · [下一题](#q=pt-project-evidence)
 

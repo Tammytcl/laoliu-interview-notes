@@ -1,0 +1,225 @@
+{
+  "reviewed_at": "2026-10-25",
+  "executed_at_utc": "2026-10-25T03:51:44.222907+00:00",
+  "validation_scope": "CPU finite-distribution enumeration and finite differences; no LLM or GPU training.",
+  "student_symbol": "p",
+  "teacher_symbol": "q",
+  "check_count": 15,
+  "all_passed": true,
+  "checks": [
+    {
+      "name": "full_vocabulary_logit_gradients",
+      "passed": true,
+      "student": [
+        0.31274111296092955,
+        0.17163596187795446,
+        0.5156229251611161
+      ],
+      "teacher": [
+        0.65,
+        0.25,
+        0.1
+      ],
+      "forward_kl": 0.4055385507917719,
+      "reverse_kl": 0.5523774954446168,
+      "forward_gradient": [
+        -0.3372588870390705,
+        -0.07836403812204554,
+        0.4156229251611161
+      ],
+      "reverse_gradient": [
+        -0.40155149692289455,
+        -0.1593575851763536,
+        0.5609090820992481
+      ]
+    },
+    {
+      "name": "forward_kl_equals_cross_entropy_minus_teacher_entropy",
+      "passed": true,
+      "cross_entropy": 1.2623795458312443,
+      "teacher_entropy": 0.8568409950394724
+    },
+    {
+      "name": "sampled_kl_value_and_gradient_are_different_questions",
+      "passed": true,
+      "expected_naive_k1_gradient": [
+        -2.0816681711721685e-17,
+        -2.0816681711721685e-17,
+        -2.7755575615628914e-17
+      ],
+      "expected_pg_gradient": [
+        -0.4015514969228946,
+        -0.1593575851763536,
+        0.5609090820992481
+      ]
+    },
+    {
+      "name": "scalar_estimator_value_does_not_determine_its_gradient",
+      "passed": true,
+      "k2_expected_value": 0.7894164170292047,
+      "k2_expected_gradient": [
+        -0.4015514969228946,
+        -0.1593575851763536,
+        0.5609090820992481
+      ],
+      "k3_expected_value": 0.5523774954446168,
+      "k3_fixed_index_expected_gradient": [
+        -0.3372588870390705,
+        -0.07836403812204554,
+        0.415622925161116
+      ],
+      "note": "K3 here uses q_teacher/p_student; definitions vary between libraries."
+    },
+    {
+      "name": "student_samples_can_estimate_forward_kl_gradient_with_full_support_is",
+      "passed": true,
+      "behavior": [
+        0.2,
+        0.2,
+        0.6
+      ],
+      "expected_gradient": [
+        -0.3372588870390705,
+        -0.07836403812204552,
+        0.4156229251611161
+      ]
+    },
+    {
+      "name": "truncated_support_cannot_recover_missing_teacher_actions",
+      "passed": true,
+      "behavior": [
+        0.5,
+        0.5,
+        0.0
+      ],
+      "biased_gradient": [
+        -0.3685329983351634,
+        -0.09552763430984097,
+        0.4640606326450045
+      ],
+      "required_gradient": [
+        -0.3372588870390705,
+        -0.07836403812204554,
+        0.4156229251611161
+      ]
+    },
+    {
+      "name": "normalized_top2_can_hide_premature_eos",
+      "passed": true,
+      "student": [
+        0.05,
+        0.05,
+        0.9
+      ],
+      "teacher": [
+        0.45,
+        0.45,
+        0.1
+      ],
+      "normalized_top2_forward_kl": 0.0,
+      "full_forward_kl": 1.7577796618689758,
+      "eos_logit_gradient": 0.8
+    },
+    {
+      "name": "tail_bucket_is_coarsened_kl_not_full_kl",
+      "passed": true,
+      "full_reverse_kl": 0.6035192272270327,
+      "coarse_reverse_kl": 0.4302324320870462,
+      "omitted_reverse_kl": 0.17328679513998632,
+      "full_forward_kl": 0.5163428862988714,
+      "coarse_forward_kl": 0.4470281682428769
+    },
+    {
+      "name": "unnormalized_partial_kl_can_be_negative",
+      "passed": true,
+      "partial_reverse_sum": -0.10986122886681096
+    },
+    {
+      "name": "action_is_with_current_signal_and_stale_signal_differ",
+      "passed": true,
+      "current_signal_gradient": [
+        -0.4015514969228946,
+        -0.1593575851763536,
+        0.5609090820992481
+      ],
+      "stale_signal_gradient": [
+        -0.5302881850028067,
+        -0.12702820046004382,
+        0.6573163854628504
+      ]
+    },
+    {
+      "name": "local_frozen_prefix_gradient_is_not_full_sequence_gradient",
+      "passed": true,
+      "root_student": [
+        0.5,
+        0.5
+      ],
+      "root_teacher": [
+        0.5,
+        0.5
+      ],
+      "fixed_leaf_reverse_kl": 0.8317766166719343,
+      "full_sequence_gradient": 0.20794415417357826,
+      "local_gradient": 0.0
+    },
+    {
+      "name": "global_token_denominator_and_sequence_mean_differ",
+      "passed": true,
+      "sequence_lengths": [
+        1,
+        3
+      ],
+      "token_mean_gradient": -0.05,
+      "sequence_mean_gradient": 0.09999999999999999,
+      "weighted_microbatch_gradient": -0.05000000000000002
+    },
+    {
+      "name": "multi_teacher_forward_and_reverse_have_different_targets",
+      "passed": true,
+      "forward_optimum": [
+        0.41000000000000003,
+        0.42,
+        0.16999999999999998
+      ],
+      "reverse_optimum": [
+        0.38105862911101296,
+        0.44815506004947214,
+        0.17078631083951498
+      ]
+    },
+    {
+      "name": "do_not_multiply_a_student_sample_by_student_probability_again",
+      "passed": true,
+      "correct_expected_log_ratio": 0.5523774954446168,
+      "double_weighted_value": 0.35344219834013146
+    },
+    {
+      "name": "causal_shift_predicts_the_next_token_including_real_eos",
+      "passed": true,
+      "pairs": [
+        {
+          "context": [
+            "PROMPT"
+          ],
+          "target": "A"
+        },
+        {
+          "context": [
+            "PROMPT",
+            "A"
+          ],
+          "target": "B"
+        },
+        {
+          "context": [
+            "PROMPT",
+            "A",
+            "B"
+          ],
+          "target": "EOS"
+        }
+      ]
+    }
+  ]
+}

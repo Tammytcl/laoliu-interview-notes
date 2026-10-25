@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="640" height="610" viewBox="0 0 640 610" role="img" aria-labelledby="title desc">
+  <title id="title">Top-k重新归一化可以隐藏EOS概率差异</title>
+  <desc id="desc">教师分布为A百分之45、B百分之45、EOS百分之10；学生为A百分之5、B百分之5、EOS百分之90。只取A和B重新归一化后，双方都变成各百分之50，子集KL为零，而全词表forward KL约为1.757780。</desc>
+  <rect width="640" height="610" fill="#fff"/>
+  <g font-family="system-ui, sans-serif" fill="#1b2838" font-size="22">
+    <text x="30" y="32">完整概率不同，子集比例却可以相同</text>
+    <rect x="32" y="52" width="22" height="18" fill="#b7d0ef"/><text x="64" y="70">继续 A</text>
+    <rect x="210" y="52" width="22" height="18" fill="#baded1"/><text x="242" y="70">继续 B</text>
+    <rect x="392" y="52" width="22" height="18" fill="#efccaa"/><text x="424" y="70">EOS</text>
+    <text x="30" y="111">教师 q = (0.45, 0.45, 0.10)</text>
+    <rect x="30" y="128" width="252" height="44" fill="#b7d0ef"/>
+    <rect x="282" y="128" width="252" height="44" fill="#baded1"/>
+    <rect x="534" y="128" width="56" height="44" fill="#efccaa"/>
+    <text x="30" y="210">学生 p = (0.05, 0.05, 0.90)</text>
+    <rect x="30" y="227" width="28" height="44" fill="#b7d0ef"/>
+    <rect x="58" y="227" width="28" height="44" fill="#baded1"/>
+    <rect x="86" y="227" width="504" height="44" fill="#efccaa"/>
+    <path d="M310 283V315m-8-8 8 8 8-8" fill="none" stroke="#526377" stroke-width="2"/>
+    <text x="30" y="347">仅取 A/B，并在子集内重新归一化</text>
+    <text x="30" y="386">教师 top-2 = (0.50, 0.50)</text>
+    <rect x="30" y="402" width="280" height="44" fill="#b7d0ef"/>
+    <rect x="310" y="402" width="280" height="44" fill="#baded1"/>
+    <text x="30" y="486">学生 top-2 = (0.50, 0.50)</text>
+    <rect x="30" y="502" width="280" height="44" fill="#b7d0ef"/>
+    <rect x="310" y="502" width="280" height="44" fill="#baded1"/>
+    <text x="30" y="586">子集 KL = 0；完整 FKL ≈ 1.757780</text>
+  </g>
+</svg>

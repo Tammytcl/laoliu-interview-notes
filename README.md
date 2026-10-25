@@ -8,6 +8,8 @@
 
 ## 从这里开始学习
 
+- [OPD系统教材：从概率基础到训练实现与80道面试问答](content/questions/agent/opd-interview-foundations.md)：从token概率和统一符号开始，逐步推导FKL/RKL、sampled梯度、top-k与tail、序列信用，连接复读、截断、reward hacking和系统排查；配两张本文示意与15项CPU数值验算。
+
 - [后训练面试 · 首批 20 题](content/questions/guide/post-training-interview-practice.md)：字节、阿里、腾讯、美团、快手、百度公开题型；五组主线，每题有口述、白板、追问、项目联系、误区和自检。[维护规则](docs/interview-workflow.md)将来源、目录和独立题页分开，构建检查重复概念与编号。
 
 - [Code/Search Agent组件系列](content/questions/agent/agent-components-overview.md)：四篇按任务流程讲Harbor/E2B/ACS、工具协议、沙箱、代码修改与搜索证据，配关键源码、状态图与CPU练习。
@@ -61,7 +63,7 @@ npm run papers:clean                                # 清理源码缓存，保�
 RL算法从[统一总览](content/questions/agent/rl-policy-optimization-map.md)进入，依次学习Actor Critic、GAE、PPO完整一步和GRPO，再按优势、ratio、surrogate与归约比较变体。[七篇论文对照](content/reports/surveys/survey-policy-optimization.md)负责真实代码和实验证据；[统一CPU课堂脚本](assets/learning/rl-algorithms-unified-lab.py)连接MDP中的PPO更新与同批梯度比较。
 
 
-从[Actor–critic](content/questions/agent/rl-actor-critic.md)开始读六篇基础教学，再接[Pipeline与Infra](content/questions/agent/agentic-opd-pipeline.md)。[OPD基础](content/questions/agent/opd-interview-foundations.md)、[Cross-tokenizer真实代码](content/questions/agent/opd-interview-cross-tokenizer.md)、[项目展示答辩](content/questions/behavior/opd-project-defense.md)提供分层题库与30秒/3分钟/10分钟讲稿，共156道新增笔记问答；公开题型与自拟追问分开。
+从[Actor–critic](content/questions/agent/rl-actor-critic.md)开始读六篇基础教学，再接[Pipeline与Infra](content/questions/agent/agentic-opd-pipeline.md)。[OPD系统教材](content/questions/agent/opd-interview-foundations.md)可以从概率基础独立开始，包含80道分层问答；[Cross-tokenizer真实代码](content/questions/agent/opd-interview-cross-tokenizer.md)、[项目展示答辩](content/questions/behavior/opd-project-defense.md)继续连接具体实现与项目表达。各篇保留30秒/3分钟/10分钟讲稿，公开题型与自拟追问分开。
 
 新增七篇精读（Search-R1、GiGPO、Agent Lightning、Guided-OPD、UOPD、ActFirst、新多教师SFT审计）和两份Agentic专题，共37张固定原图表、七张教学图。共享CPU脚本只验证小张量与梯度，不是模型训练复现；个人成绩和分工按真实日志填写。
 
