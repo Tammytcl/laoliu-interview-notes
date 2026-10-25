@@ -8,7 +8,7 @@
 
 ## 从这里开始学习
 
-- [OPD系统教材：从概率基础到训练实现与80道面试问答](content/questions/agent/opd-interview-foundations.md)：从token概率和统一符号开始，逐步推导FKL/RKL、sampled梯度、top-k与tail、序列信用，连接复读、截断、reward hacking和系统排查；配两张本文示意与15项CPU数值验算。
+- [OPD系统教材：从概率基础到训练实现与80道面试问答](content/questions/agent/opd-interview-foundations.md)：从token概率和统一符号开始，用同一算例、梯度、PyTorch代码与训练循环对照sampled/top-k/全词表，连接序列信用、复读、截断、reward hacking和系统排查；配两张本文示意、15项标准库验算和47项PyTorch CPU检查。
 
 - [后训练面试 · 首批 20 题](content/questions/guide/post-training-interview-practice.md)：字节、阿里、腾讯、美团、快手、百度公开题型；五组主线，每题有口述、白板、追问、项目联系、误区和自检。[维护规则](docs/interview-workflow.md)将来源、目录和独立题页分开，构建检查重复概念与编号。
 

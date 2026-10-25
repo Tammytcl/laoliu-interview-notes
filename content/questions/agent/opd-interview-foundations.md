@@ -5,7 +5,7 @@ category: agent
 difficulty: 进阶
 tags: ["P0", "OPD", "Interview", "KL", "Policy Gradient", "Distillation", "系统教材"]
 updated: "2026-10-25"
-summary: "面向初学者的OPD完整学习链：统一符号，逐步解释FKL/RKL、采样梯度、top-k与尾部、序列信用、训练代码、异步、多教师、复读/截断/reward hacking，配80道分层问答和15项可运行CPU验算。"
+summary: "面向初学者的OPD完整学习链：统一符号，推导FKL/RKL；用同一算例、梯度与可运行PyTorch代码对照sampled-token/top-k/全词表，连接异步、多教师、复读/截断/reward hacking，配80道问答与两套CPU验算。"
 draft: false
 ---
 
@@ -16,6 +16,8 @@ On-Policy Distillation，简称OPD，中文可译为“同策略蒸馏”或“�
 理解OPD有一条连续的因果链：离线示范不能覆盖所有学生错误前缀，因此改用学生轨迹；既然教师在学生前缀上给出概率，就要选择概率匹配目标；词表太大时需要监督近似；近似、状态覆盖与教师可靠性共同决定纠偏能力，也共同解释复读、截断和目标偏离。
 
 本文先讲基础，再给推导和实现，最后提供面试问答。第一次阅读建议按第2—7节理解概率、前缀、角色和目标；第二次读第8—16节掌握梯度、近似与工程；第三次读第17—24节理解异常、评估与扩展，最后闭卷回答题库。只准备简答时，可先看第27节的分层讲稿，再回到正文查公式。
+
+**如果最困惑的是“采样token、top-k、全词表有什么区别”，先读第10节开头的对照，再看10.6的同一个四token算例，最后对照第14节代码。**三种方法通常使用同一条学生生成的轨迹；区别首先是每个位置比较多少个“可能的下一个token”、采用什么数学目标，以及怎样获得梯度，不是生成三条不同的答案。
 
 本篇覆盖标准自回归语言模型OPD的基础，以及异步、多教师、跨tokenizer和Agent场景的核心接口与边界。复杂跨词表源码详解读[Cross-tokenizer专题](#q=opd-interview-cross-tokenizer)，真实工具交互和系统接线读[Agentic OPD](#q=agentic-opd-training)与[Pipeline](#q=agentic-opd-pipeline)，项目材料组织读[项目答辩](#q=opd-project-defense)。这些链接是深入阅读，不是初读本文的先修门槛。
 
@@ -287,6 +289,15 @@ JSD原式在$\alpha=0$或1时退化为0，不能直接把端点写成FKL/RKL。�
 
 采样ID作为固定索引，直接对$k_1(a)$反传，只得到$\nabla\log p_a$；其期望为0。这遗漏了“采样概率也依赖参数”的score-function贡献。**一个标量是无偏KL值估计，并不保证对这个标量自动求导后还是无偏KL梯度。**
 
+一般地，当被平均的函数$f_\theta(a)$和采样分布都依赖参数时，在可交换求导与求和等条件下：
+
+$$
+\nabla_\theta\mathbb E_{a\sim p_\theta}[f_\theta(a)]
+=\mathbb E_{a\sim p_\theta}\left[\nabla_\theta f_\theta(a)+f_\theta(a)\nabla_\theta\log p_\theta(a)\right].
+$$
+
+第一项是“这个动作的函数值怎样变化”，第二项是“这个动作被抽到的概率怎样变化”。普通索引取值的自动求导只保留第一项。代入$f_\theta=\log p_\theta-\log q$后，第一项的期望为0，第二项恰好给出第8节的RKL梯度；这解释了为什么需要PG代理或经过推导的其他路径，而不是简单对采样log-ratio调用`backward()`。
+
 当前采样参数为$\bar\theta$时，可用局部代理损失：
 
 $$
@@ -320,13 +331,43 @@ $$
 
 对应教学代理为$-\operatorname{sg}(q_a/b_a)\log p_a$。$q_a/b_a$是重要性权重，不是再乘一次学生概率。教师偏好某动作而行为几乎不采它时，权重可能很大，产生高方差；行为top-k令$b_a=0$后，普通IS也无法恢复这个未采动作的贡献。
 
+### 9.5 一个采样token不等于只更新一个logit
+
+固定当前前缀，在$p=b$的参数点，记$r(a)=\log p_a-\log q_a$，一次正确sampled RKL更新对任意学生logit $z_u$的梯度估计为：
+
+$$
+\widehat g_u(a)=\operatorname{sg}(r(a))\big(\mathbf1[u=a]-p_u\big).
+$$
+
+即使只查询了一个教师概率$q_a$，`log_softmax`的分母也包含其他学生token，所以通常整个logit向量都有梯度。**缺少的是其他token各自的教师概率信息，不是其他logit一定没有梯度。**不同未采token在这次更新中通过归一化受到耦合影响，无法因此分别知道教师更喜欢哪一个。
+
+例：学生采到EOS且$p_{\mathrm{EOS}}>q_{\mathrm{EOS}}$时，$r(\mathrm{EOS})>0$，会压低EOS并相对抬高其他方向；但一次更新不能仅凭$q_{\mathrm{EOS}}$区分其他方向中谁正确。第10.6节给出具体梯度数值。
+
+### 9.6 多采几次、全词表和方差是什么关系
+
+对**同一个固定前缀**独立采$R$次动作，令$\widehat g^{(j)}$为第$j$次的无偏局部梯度估计，则$R^{-1}\sum_{j=1}^R\widehat g^{(j)}$仍无偏，有限方差时各分量的方差是单次的$1/R$。独立性与同条件是这里的前提；一条回答的相邻位置有不同前缀，不能当成同一前缀的独立重复抽样。
+
+全词表直接求和相当于把这一层动作期望精确算完，去掉的是给定前缀下的动作采样方差。任务抽样、前缀覆盖、随机优化和教师误差仍存在。因而“sampled也能无偏”不等于有限样本与full的每步更新相同；“full的信息更完整”也不能直接推出任意预算下最终准确率必然最高。
+
 ## 10. 全词表、top-k与尾部质量：三种不同近似
+
+先固定一个学生已经访问到的前缀$h$。假设这一步实际生成的是token B，而词表还允许A、C和EOS。所谓“全词表”是在这个位置比较A/B/C/EOS的所有**可能性**，不是要求学生把四个token都生成出来；“top-k”选其中$k$个候选；“sampled-token”通常只保留实际采到的B的师生分数。
+
+| 对照维度 | Sampled-token | Top-k | 全词表 |
+| --- | --- | --- | --- |
+| 每个位置向教师索取什么 | 实际采样动作的教师logprob | 公共候选ID及其教师logprobs；tail还需总质量语义 | 全部V个token的分布 |
+| 常见教师payload形状 | `[B,L]` | IDs与logprobs为`[B,L,k]` | `[B,L,V]` |
+| 损失使用哪些动作 | 一个或若干随机样本 | 候选集，可能另加tail/随机校正项 | 对所有动作求和 |
+| 与原完整局部KL的关系 | 正确估计器、支持和采样条件下，梯度可无偏 | 普通确定性截断/重归一通常改变目标；特定随机校正可恢复梯度 | 直接计算所选完整条件KL |
+| 主要代价或风险 | 有采样方差；低概率有效动作难观察 | 候选偏差、质量丢失、EOS与尾部盲区 | logits存储/传输、损失计算与反向成本 |
+
+这里“监督多少个token”说的是**每个位置沿词表这一维**有多少概率项；不是只训练回答中的一个位置，也不是只训练top-k个回答位置。只要mask允许，sampled方法同样可以为回答的每个生成位置提供信号。FKL/RKL是另外一条设计轴：不要把sampled固定等同RKL、top-k固定等同FKL；它们只是存在常见组合。
 
 ### 10.1 全词表完整在哪里
 
 固定前缀上全词表KL对$V$个token精确求和，提供相应条件分布的完整梯度。它没有消除轨迹采样误差、未访问状态、教师偏差或学生容量限制。
 
-朴素logits张量大小为$[B,L,V]$，其中$L$为批次补齐后的序列长度。仅一个BF16 logits张量约占$2BLV$字节。例如$B=1,L=4096,V=150000$时约1.229 GB（约1.144 GiB），尚未计算另一模型、梯度、激活与缓冲。分块、融合、分布式词表和按需传输可以减少峰值，不能把这个朴素张量下界当成所有实现的固定开销。
+朴素logits张量大小为$[B,L,V]$，其中$L$为批次补齐后的序列长度。仅一个BF16 logits张量约占$2BLV$字节。例如$B=1,L=4096,V=150000$时约1.229 GB（约1.144 GiB），尚未计算另一模型、梯度、激活与缓冲。分块、融合、分布式词表和按需传输可以减少峰值，因此这只是朴素物化张量的大小，不是所有实现必须满足的峰值显存下界。
 
 ### 10.2 Top-k集合怎样选择
 
@@ -336,9 +377,9 @@ $$
 
 ### 10.3 三种处理方法不能混称“top-k KL”
 
-**方法A：直接保留部分项。**例如$\sum_{v\in S}q_v\log(q_v/p_v)$是完整FKL的一部分，不一定非负。把负值截成0、再按token裁剪，又会改变目标与梯度。
+**方法A：直接保留部分项。**记$\ell_{F,S}^{\mathrm{partial}}=\sum_{v\in S}q_v\log(q_v/p_v)$，它是完整FKL的一部分，不一定非负。把负值截成0、再按token裁剪，又会改变目标与梯度。
 
-**方法B：子集内重新归一化。**定义$\tilde p_v=p_v/P_S$、$\tilde q_v=q_v/Q_S$后计算KL，得到候选集条件分布的合法KL，但忽略$P_S,Q_S$的不同。该方法可有很小的损失而学生把绝大多数概率放在集合外。
+**方法B：子集内重新归一化。**定义$\tilde p_v=p_v/P_S$、$\tilde q_v=q_v/Q_S$后计算$\ell_{F,S}^{\mathrm{renorm}}=D_{\mathrm{KL}}(\tilde q\|\tilde p)$，得到候选集条件分布的合法KL，但忽略$P_S,Q_S$的不同。RKL则交换两侧身份。该方法可有很小的损失而学生把绝大多数概率放在集合外。
 
 **方法C：保留一个tail类别。**将集合外所有token合并为一个事件，FKL为：
 
@@ -364,6 +405,16 @@ $$
 
 这条式子明确写出了合并尾部后遗漏的非负项。零尾部质量时应按极限和支持条件处理，不直接除以0。
 
+还可以把方法C写成两个容易理解的任务。令$\operatorname{Ber}(a)$表示“在$S$内”的概率为$a$、在集合外的概率为$1-a$的二元分布，则在头部和尾部质量均非零时：
+
+$$
+\ell_{F,S+\mathrm{tail}}
+=D_{\mathrm{KL}}(\operatorname{Ber}(Q_S)\|\operatorname{Ber}(P_S))
++Q_S D_{\mathrm{KL}}(\tilde q\|\tilde p).
+$$
+
+第一项比较“多少概率放进候选集”，第二项比较“放进来之后怎样分配”，并按教师头部质量加权。RKL对应交换两侧，头部条件KL按$P_S$加权。只做方法B时，恰好没有第一项，也没有这里的质量加权；这比笼统说“top-k丢了些token”更精确。
+
 ### 10.4 用提前EOS反例理解为什么尾部重要
 
 | 下一个token | 教师$q$ | 学生$p$ |
@@ -378,6 +429,8 @@ $$
 
 图用同一总宽表示总概率1。上两行完整分布有明显差异，下两行只保留A/B并归一化后相同。箭头表示近似时被丢掉的信息，不表示真实训练一定会提前EOS。$k=1$时，若两边都只把同一个候选归一化成1且没有tail或其他项，KL恒为0；真实库的“top-1”可能采用采样代理或二元tail目标，应读具体实现。
 
+这个三token例子中，集合外**恰好只有EOS一个token**，因此加上tail就恢复了完整分布；这是一种特例。真实词表的tail通常包含很多token，第10.6节用两个尾部token展示仍然遗漏的信息。
+
 ### 10.5 无偏尾部校正与工程成本
 
 一种数学思路是对$S$内求和精确计算，对尾部用保留完整支持的提案分布$r$采样。对任意求和项$f_\theta(v)$，
@@ -391,6 +444,82 @@ $$
 这是数值分解；要构造无偏梯度，还必须正确处理$r$、$f_\theta$的可微路径和停止梯度，不能随意自动微分后沿用值估计结论。TT-OPD研究了利用学生采样token校正top-k梯度的具体构造；tail bucket则是另一个粗粒度目标。[无偏Top-k论文](https://arxiv.org/html/2609.34447v2)、[Tail-Aware论文](https://arxiv.org/html/2608.14728v1)分别支撑这两类问题。
 
 Sampled/top-k主要减少需要保留、传输或聚合的概率项。教师通常仍需前向，学生通常仍需得到归一化概率。不能从$O(k)$与$O(V)$的监督项计数直接推出端到端加速$V/k$倍。
+
+### 10.6 同一个四token算例：每种方法到底算出了什么
+
+在同一个前缀下，令词表为$\{A,B,C,\mathrm{EOS}\}$，教师top-2为$S=\{A,B\}$：
+
+| Token | 教师q | 学生p | 是否在候选集S |
+| --- | --- | --- | --- |
+| A | 0.30 | 0.10 | 是 |
+| B | 0.40 | 0.15 | 是 |
+| C | 0.20 | 0.25 | 否 |
+| EOS | 0.10 | 0.50 | 否 |
+
+教师集合内质量$Q_S=0.70$，学生$P_S=0.25$；尾部质量分别为0.30和0.75。以下均为自然对数，四舍五入到6位：
+
+| 方法 | FKL或其部分/投影量 | RKL或其部分/投影量 |
+| --- | --- | --- |
+| 全词表精确求和 | 0.516343 | 0.603519 |
+| 只加A/B原始项，不重新归一 | 0.721915 | -0.256986 |
+| A/B各自重归一后做KL | 0.001688 | 0.001677 |
+| A/B与一个tail类别做KL | 0.447028 | 0.430232 |
+
+这组数值回答四个问题：第一，部分求和可为负，也可比完整KL大，不是完整KL的通用上下界；第二，候选内比例几乎一致，并不代表集合总质量一致；第三，合法tail粗粒度KL不超过对应full KL；第四，C和EOS在尾部的相对比例仍不同，所以这里tail没有恢复full的全部信息。不能把这几种不同目标的loss大小当作训练质量排名。
+
+Sampled不应再填一个“必然等于full”的固定数。若这次从学生采到EOS，K1值是$\log(0.50/0.10)=\log5\approx1.609438$；若采到A，则为$\log(0.10/0.30)\approx-1.098612$。按学生概率对所有抽样结果取期望才得到0.603519。
+
+采到EOS时，正确局部sampled RKL梯度估计按A/B/C/EOS顺序为：
+
+$$
+\widehat g(\mathrm{EOS})
+=\log5\,(-0.10,-0.15,-0.25,0.50)
+\approx(-0.160944,-0.241416,-0.402359,0.804719).
+$$
+
+四个分量都非零，但只查询了$q_{\mathrm{EOS}}$。把每种可能动作的梯度按$p$平均，会恢复full RKL梯度；单次EOS更新不等于full更新。第14节的可运行脚本逐项枚举，并另做固定随机种子的10万次采样对照。
+
+### 10.7 候选外的token有没有梯度：必须看目标
+
+固定候选集$S$，温度为1，对FKL三种处理分别求学生logit梯度。令$\tilde p_u=p_u/P_S$、$\tilde q_u=q_u/Q_S$仅在$u\in S$定义：
+
+$$
+\frac{\partial\ell_{F,S}^{\mathrm{partial}}}{\partial z_u}
+=Q_Sp_u-\mathbf1[u\in S]q_u.
+$$
+
+$$
+\frac{\partial\ell_{F,S}^{\mathrm{renorm}}}{\partial z_u}
+=\begin{cases}\tilde p_u-\tilde q_u,&u\in S,\\0,&u\notin S.\end{cases}
+$$
+
+$$
+\frac{\partial\ell_{F,S+\mathrm{tail}}}{\partial z_u}
+=\begin{cases}p_u-q_u,&u\in S,\\
+p_u\left(1-\dfrac{1-Q_S}{1-P_S}\right),&u\notin S.\end{cases}
+$$
+
+最后一式的外部项假设$1-P_S>0$；空尾部单独回到full。只做候选内归一时，学生全词表softmax分母会在$p_u/P_S$中抵消，实际只剩候选logits的softmax，故候选外logit直接梯度为0。Partial使用原始归一化概率，分母没有抵消，因此外部logit仍有耦合梯度。Tail进一步比较外部总质量，但不使用外部每个token自己的$q_u$。
+
+在上例中，EOS的FKL logit梯度：full为0.40，partial为0.35，renormalized为0，tail为0.30。**“不在top-k，所以没有梯度”只适用于特定目标，不能泛指所有top-k实现。**这里说的是固定前缀的独立logit梯度；真实网络共享参数，即使某个logit的这一直接导数为0，更新其他位置/方向仍可能使它改变。若由学生选$S$，常见实现将离散top-k索引视为固定，本式不对排名切换求导。
+
+RKL也要区分直接部分求和与截断score代理。若$\ell_{R,S}^{\mathrm{partial}}=\sum_{v\in S}p_v\log(p_v/q_v)$，则：
+
+$$
+\frac{\partial\ell_{R,S}^{\mathrm{partial}}}{\partial z_u}
+=\mathbf1[u\in S]p_u\left(\log\frac{p_u}{q_u}+1\right)
+-p_u\left(\ell_{R,S}^{\mathrm{partial}}+P_S\right).
+$$
+
+把完整score期望$\sum_vp_v\log(p_v/q_v)\nabla\log p_v$直接截到$S$，不再自动等于上面部分标量的导数；原先可消去的$\sum_v\nabla p_v=0$只对全词表成立。因此“top-k RKL”尤其需要同时给出目标和detach路径。
+
+### 10.8 从教师payload到实际开销，怎样选择
+
+完整概率满足$\log q_v=z^T_v-\log\sum_u\exp z^T_u$，其中$z^T$为教师logits。只要一个token的准确归一化logprob，常见dense LM也仍需计算全词表归一化；API可以通过融合/分块只返回少量结果，而不是完全不计算其余词表。若API只给top-k的原始logits而不给全词表归一化常数，就不能从这些数字恢复真实$Q_S$和tail；若只给候选内归一化概率，也同样丢失总质量。
+
+工程上先问接口，再选目标：能取完整分布且预算允许，可建立full对照；只能取指定学生动作logprob，可选推导正确的sampled路径；能取教师top-k的全局归一化logprob，可定义partial、renormalized或tail，并报告$P_S,Q_S$；需要学生top-k或并集时，还得让教师能评分这些指定ID。候选top-k的$k$与生成时的top-k/top-p分别记录。
+
+学生侧即使最终只返回$[B,L]$采样logprob，仍可能通过完整输出层、softmax和Transformer反传。因此要分开报告教师前向、返回字节、学生峰值显存、loss归约和端到端耗时；教学代码为了易读先构造完整logits，也不能据此声称实现了生产系统的稀疏通信或省显存优化。
 
 ## 11. 局部条件KL、完整序列KL与信用分配
 
@@ -424,6 +553,31 @@ $$
 
 局部方法通常更简单、反馈更直接；序列回报更明确地考虑未来，但方差和归因难度可能更大。不能把有teacher token信号等同于已经解决长程信用分配。[MiniLLM的单步与长程分解](https://arxiv.org/html/2306.08543v6)提供方法背景。
 
+### 11.4 如果追问完整序列梯度，可以写到哪一步
+
+令$c_t=\log p_t(y_t)-\log q_t(y_t)$，$s_t=\nabla_\theta\log p_t(y_t)$。在教师冻结、完整支持、自然终止一致、可交换求导与期望等条件下，对第11.1节未归一化的序列RKL，有：
+
+$$
+\begin{aligned}
+\nabla_\theta D_{\mathrm{KL}}(P_\theta\|Q)
+&=\mathbb E_{y\sim P_\theta}
+\left[\left(\sum_uc_u\right)\left(\sum_ts_t\right)\right]\\
+&=\mathbb E_{y\sim P_\theta}
+\left[\sum_ts_t\left(\sum_{u=t}^{T}c_u\right)\right].
+\end{aligned}
+$$
+
+第一行中的直接导数$\mathbb E\nabla\log P_\theta=0$已消去。第二行利用因果性：当前动作的score乘过去已确定的代价，其条件期望为0；保留下当前和未来代价。以第11.3节$r_t=-c_t$表示奖励，就对应$\gamma=1$的return-to-go，而只使用$c_t$会去掉未来信用。任意折扣、长度平均、筛选或人工终止都会要求重新定义目标，不能无条件沿用这一等式。
+
+Forward序列KL的前缀权重又不同：
+
+$$
+D_{\mathrm{KL}}(Q\|P_\theta)
+=\mathbb E_{y\sim Q}\left[\sum_tD_{\mathrm{KL}}(q_t\|p_t)\right].
+$$
+
+这里前缀由教师$Q$访问。OPD在学生前缀上计算FKL依然是一个合理的条件匹配目标，但一般不等于这个教师前缀加权的完整序列FKL。**“每个位置用全词表”描述词表维度的完整性，不决定前缀权重，也不自动给出完整序列目标的导数。**
+
 ## 12. 温度、熵、KL系数和归一化分别控制什么
 
 Rollout温度$\tau_r$影响学生探索和实际行为分布；教师温度$\tau_T$改变希望学生匹配的分布；学生损失温度$\tau_s$改变损失中的学生概率。这三者可以不同，但必须在行为分母和推导中如实体现。教师温度改变了目标，不只是“数值稳定技巧”。
@@ -444,6 +598,8 @@ Token-mean使长回答提供更多位置的监督；seq-mean先在每条内部�
 
 梯度累积、多卡DDP、CP/TP分片中应保留全局有效token分母。对长度不同的microbatch先各取mean、再简单平均，通常不能复现完整批次的token平均。若后端默认跨卡平均梯度，还需结合后端缩放约定核对，不能只在每卡分母上做直觉修改。
 
+关于“无偏”的进一步条件：第9节针对固定前缀、固定且不依赖待抽动作的权重成立。若抽到EOS会改变长度，按完成结果筛选会改变保留率，或随机分母$N$与动作相关，就不能只凭单个位置的推导，声称聚合后的sampled梯度与另一套full目标必然严格等价。固定已记录批次求导，与对数据生成、长度和筛选的总体期望求导，是两种不同操作。
+
 ## 13. 教师接口：白盒、top-k API和纯文本API
 
 | 教师能力 | 可以提供的监督 | 需要检查 |
@@ -460,56 +616,94 @@ Token-mean使长回答提供更多位置的监督；seq-mean先在每条内部�
 
 Teacher cache的key至少应能区分教师/词表/模板版本、实际输入前缀、温度和候选事件。教师冻结允许相同条件复用，学生更新后优势中的学生项、学生top-k集合却可能已经变化。缓存命中率不能替代概率等价性检查。
 
-## 14. 最小训练实现：先区分直接KL和PG路径
+## 14. 最小训练实现：公式、张量与代码逐项对应
 
-### 14.1 全词表教学实现
+以下为本文独立编写的教学实现，不是某框架源码复制。完整可运行文件见[PyTorch监督对照实验](./assets/learning/opd-supervision-lab.py)，实际执行结果见[CPU结果JSON](./assets/learning/opd-supervision-lab-results.json)。只用CPU上的有限维logits演示，不下载模型、不调用教师服务。所有函数共用$p$学生、$q$教师的约定，默认温度1、公共词表和有限logits；实际零支持、跨词表与分布式归约需另外实现。
 
-以下代码是本文独立编写的教学实现，不是某框架原样源码。`student_logits`和`teacher_logits`形状均为`[B,L,V]`，每个row已经对应同一个预测前缀；`action_mask`为`[B,L]`。调用者应先正确shift并构造mask。教师前向应在`no_grad()`中完成，下面的detach是第二层保护。
+### 14.1 全词表：先取有效位置，再匹配两个分布
+
+`student_logits`与`teacher_logits`均为`[B,L,V]`，每个row必须已对应相同预测前缀；`action_mask`为布尔`[B,L]`。先保留有效位置后得到`[N,V]`，$N$是本批有效模型动作数。它不是把词表缩成$N$类。第14.5节展示如何从模型原始输出shift成这组输入。
 
 ```python
 import torch
+```
+
+```python
+def valid_logprobs(student_logits, teacher_logits, action_mask):
+    # [B,L,V], [B,L,V], bool[B,L] -> two [N,V] tensors, N valid actions.
+    if student_logits.ndim != 3 or teacher_logits.shape != student_logits.shape:
+        raise ValueError("expected matching [B,L,V] logits")
+    if action_mask.dtype != torch.bool or action_mask.shape != student_logits.shape[:2]:
+        raise ValueError("expected bool[B,L] action_mask")
+    if not action_mask.any().item():
+        raise ValueError("batch has no valid model action")
+    # Select before log_softmax: NaN * 0 is still NaN.
+    s = student_logits[action_mask]
+    t = teacher_logits.detach()[action_mask]
+    if not torch.isfinite(s).all().item() or not torch.isfinite(t).all().item():
+        raise ValueError("valid rows require finite, full-support logits")
+    dtype = torch.float64 if s.dtype == torch.float64 else torch.float32
+    return s.to(dtype).log_softmax(-1), t.to(dtype).log_softmax(-1)
+
+
+def kl_per_row(logp, logq, direction="reverse"):
+    logq = logq.detach()
+    if direction == "forward":
+        return (logq.exp() * (logq - logp)).sum(-1)
+    if direction == "reverse":
+        return (logp.exp() * (logp - logq)).sum(-1)
+    raise ValueError("direction must be forward or reverse")
+
 
 def full_vocab_opd(student_logits, teacher_logits, action_mask,
                    direction="reverse"):
-    # [B,L,V] -> [B,L,V]; only the student path is differentiable.
-    logp = student_logits.float().log_softmax(dim=-1)
-    logq = teacher_logits.detach().float().log_softmax(dim=-1)
-
-    if direction == "forward":
-        per_token = (logq.exp() * (logq - logp)).sum(dim=-1)
-    elif direction == "reverse":
-        # Keep the student probability differentiable in the full KL.
-        per_token = (logp.exp() * (logp - logq)).sum(dim=-1)
-    else:
-        raise ValueError("direction must be forward or reverse")
-
-    weights = action_mask.to(per_token.dtype)
-    count = weights.sum()
-    if count.item() == 0:
-        raise ValueError("batch has no valid model action")
-    return (per_token * weights).sum() / count
+    logp, logq = valid_logprobs(student_logits, teacher_logits, action_mask)
+    return kl_per_row(logp, logq, direction).mean()
 ```
 
-这个实现的目标是固定前缀上的token-mean条件KL。没有实现生成、EOS构造、跨词表对齐、分布式词表、packed attention或多卡全局归约，因此不能直接当生产训练配方。RKL里的`logp.exp()`不能detach；否则会改变梯度。若调用`F.kl_div`，应查清输入需要logprob、target需要概率还是logprob，以及哪个方向实际被计算，不以函数名判断。
+`kl_per_row`先沿最后一维词表求和，得到每个有效位置一个值；外层`mean()`沿$N$个位置平均，正好对应第6节token-mean。Full RKL中的`logp.exp()`保持可微，因为概率权重本身依赖学生。Teacher detach不等于学生概率也detach。
 
-### 14.2 Sampled PG教学实现
+这里先选择有效行，再做`log_softmax`；不采用“先在全部位置算完，再乘零”的写法。无效行中的NaN或全负无穷不应进入loss运算图；有效行出现非有限值则报错核查。这个选择只能避免loss阶段的无效运算，不能自动修复模型前向内部已有的NaN。空mask明确报错，由训练循环决定跳批，不能默默制造一个零损失批次。
 
-以下是一轮当前采样策略附近的局部代理；输入均为`[B,L]`，教师/行为logprob记录在同一学生动作上：
+函数为了梯度验算保留FP64输入；常见BF16/FP16/FP32输入在FP32中计算概率。教师前向仍应在`no_grad()`中执行。该实现未做词表分片、融合内核、packed attention或多卡分母，因此是正确性参考，不是省显存实现。
+
+### 14.2 Sampled：相同动作上的三个logprob与停止梯度
+
+输入都是`[B,L]`：`current_logp`来自当前学生且可微；`behavior_logp`来自生成这批动作的真实行为分布并冻结；`teacher_logq`是教师对同一动作、同一前缀的评分并冻结。
 
 ```python
-def sampled_opd_pg(current_logp, behavior_logp, teacher_logq, action_mask):
-    # Frozen old advantage: locally matches the RKL gradient at current==behavior.
-    advantage = (teacher_logq - behavior_logp).detach()
-    ratio = (current_logp - behavior_logp.detach()).exp()
-    per_token = -ratio * advantage
-    weights = action_mask.to(per_token.dtype)
-    count = weights.sum()
-    if count.item() == 0:
+def sampled_opd_pg(current_logp, behavior_logp, teacher_logq, action_mask,
+                   signal="behavior"):
+    # Inputs: [B,L] on the SAME sampled actions; behavior records actual sampling.
+    if (current_logp.shape != behavior_logp.shape
+            or current_logp.shape != teacher_logq.shape
+            or current_logp.shape != action_mask.shape
+            or current_logp.ndim != 2 or action_mask.dtype != torch.bool):
+        raise ValueError("expected matching [B,L] tensors and a boolean mask")
+    if not action_mask.any().item():
         raise ValueError("batch has no valid model action")
-    return (per_token * weights).sum() / count
+    lp = current_logp[action_mask]
+    lb = behavior_logp.detach()[action_mask]
+    lq = teacher_logq.detach()[action_mask]
+    dtype = torch.float64 if lp.dtype == torch.float64 else torch.float32
+    lp, lb, lq = lp.to(dtype), lb.to(dtype), lq.to(dtype)
+    if not all(torch.isfinite(v).all().item() for v in (lp, lb, lq)):
+        raise ValueError("valid sampled logprobs must be finite")
+    if signal == "behavior":
+        advantage = (lq - lb).detach()  # Local RKL match only at p == b.
+    elif signal == "current":
+        advantage = (lq - lp).detach()  # Current local RKL, with full-support IS.
+    else:
+        raise ValueError("signal must be behavior or current")
+    ratio = (lp - lb).exp()  # Keep the numerator differentiable.
+    if not torch.isfinite(ratio).all().item():
+        raise ValueError("importance ratio overflow; inspect policy mismatch")
+    return (-ratio * advantage).mean()
 ```
 
-该loss在采样参数点有相应局部梯度解释；多次复用固定旧advantage后，它是特定surrogate，不能继续无条件称“当前RKL精确梯度”。若需针对旧动作采样构造当前局部RKL梯度，可以在完整支持和正确IS下使用当前$\operatorname{sg}(\log q-\log p_\theta)$权重；两种选择都要按公式描述。
+`signal="behavior"`复用$A_b=\log q-\log b$，在$p=b$的参数点匹配局部RKL梯度，随后是旧信号surrogate；`signal="current"`使用$A_\theta=\operatorname{sg}(\log q-\log p_\theta)$，在行为支持完整、IS正确且权重固定等条件下修正同一旧前缀上的动作采样。它仍不修正前缀访问分布。两种模式都应让ratio分子的学生路径可微。
+
+前向返回值是代理标量，可能为负，也不是应当作为精确KL报告的数。不能通过比较它和`full_vocab_opd`的loss大小判断训练优劣；应比较预期梯度与独立任务效果。
 
 PPO clipping是额外的近端更新设计，不是所有OPD的定义。Group-relative归一化也不是必需步骤；每题减去由同组采样动作估计的均值或按标准差缩放，可能改变尺度和估计性质。只有给定状态、与当前动作独立的baseline等满足条件时，才能直接使用经典“baseline不改变期望梯度”的结论。
 
@@ -518,6 +712,122 @@ PPO clipping是额外的近端更新设计，不是所有OPD的定义。Group-re
 本次核读的[Tinker固定版本](https://github.com/thinking-machines-lab/tinker-cookbook/blob/54b3cb293038ccf2e49952e46ed5abac7119fdf8/tinker_cookbook/distillation/train_on_policy.py)使用学生与教师logprob差构造token信号，并提供未来累计选项；它包含完整训练系统，本文两段教学代码只解释局部loss。
 
 本次核读的[verl固定OPD文档](https://github.com/verl-project/verl/blob/3c6d9b43b67c74ec343d77874cd8fa6e841523da/docs/algo/opd.md)区分teacher-top-k FKL、带tail的粗粒度FKL和sampled估计器/PG路径。文档中的配置名、clamp与调用方式属于该commit，不能推广成所有版本或所有框架的约定。静态核读不等于已执行多GPU框架训练。
+
+### 14.4 Top-k：在相同ID上实现三种不同目标
+
+这里复用第14.1节返回的`logp, logq`，形状均为`[N,V]`。为了能对照所有模式，教学函数拥有完整教师分布；生产API只返回top-k时，要用真实payload接入，不能先假定能访问教师遗漏的每个token。
+
+```python
+def topk_opd(logp, logq, k, direction="forward", mode="tail"):
+    # Already normalized logprobs [N,V], common vocabulary, finite full support.
+    # This reference has full teacher logits; a real API may only supply q on S.
+    if logp.ndim != 2 or logq.shape != logp.shape:
+        raise ValueError("expected matching [N,V] logprobs")
+    if not 1 <= k <= logp.shape[-1]:
+        raise ValueError("k must be between 1 and V")
+    logq = logq.detach()
+    ids = logq.topk(k, dim=-1).indices  # SAME token IDs for both models.
+    lp = logp.gather(-1, ids)
+    lq = logq.gather(-1, ids)
+    if mode == "renormalized":
+        lp = lp - lp.logsumexp(-1, keepdim=True)
+        lq = lq - lq.logsumexp(-1, keepdim=True)
+    elif mode == "tail":
+        if k < logp.shape[-1]:
+            selected = torch.zeros_like(logp, dtype=torch.bool)
+            selected.scatter_(-1, ids, True)
+            # Stable log tail; avoids subtracting an almost-one head mass.
+            pt = logp.masked_fill(selected, -torch.inf).logsumexp(-1, keepdim=True)
+            qt = logq.masked_fill(selected, -torch.inf).logsumexp(-1, keepdim=True)
+            lp, lq = torch.cat((lp, pt), -1), torch.cat((lq, qt), -1)
+    elif mode != "partial":
+        raise ValueError("mode must be partial, renormalized or tail")
+    # In partial mode these are incomplete sums, not normalized KLs.
+    return kl_per_row(lp, lq, direction).mean()
+```
+
+三种调用分别为`mode="partial"`、`"renormalized"`、`"tail"`，并可选择FKL/RKL。`gather`按教师选出的同一批token ID取学生分数，避免按排名错配。Tail模式在log空间对集合外求和，减少$1-P_S$在$P_S$接近1时的相消；$k=V$直接使用全词表，不构造一个零概率的假tail。
+
+若教师只返回全局归一化后的top-k logprob，则其tail由$\log(1-Q_S)$确定，宜用经过验证的`log1mexp`等稳定实现；只有候选内归一化分数时不能恢复它。上面的代码显式访问全词表尾部，便于验证公式，不宣称已经实现top-k API的通信收益。
+
+还需特别区分一种错误接法：先算full/top-k分布KL，把**整个位置的一个KL标量**detach成负奖励，再只乘该位置已采动作的`logp`。若这个标量只依赖固定前缀而不依赖抽到的动作，它相当于状态常数，当前策略下score期望为0，并不能恢复该分布KL的梯度。分布损失应直接反传，或按逐动作贡献推导合法估计器；不是所有叫“KL loss”的张量都能互换进PG接口。
+
+### 14.5 训练循环伪代码：从rollout接到shift与backward
+
+下面是一轮一更新的同步伪代码；`sync_rollout_weights`和`collect_rollouts`是由实际框架实现的抽象接口，不是可直接调用的库函数。假设教师/学生输入模板与词表相同、右padding、普通文本轨迹，生成温度1且没有top-k/top-p截断或其他logit处理。三条loss分支共用同一批学生前缀，**每轮只选择一条分支**。
+
+Collector返回的`input_ids/attention_mask/response_mask/behavior_logp`均为`[B,M]`。`response_mask`标注真实生成的模型动作，包含自然EOS，不包括prompt、padding和人工补EOS。`behavior_logp[:,j]`记录`input_ids[:,j]`这个动作在其生成前缀下的实际采样logprob；非动作位置可放NaN，并在取值前排除。
+
+```python
+mode = "full"  # Choose "full", "topk_tail" or "sampled".
+teacher.eval().requires_grad_(False)
+student.eval()  # eval disables dropout, NOT autograd.
+
+for prompts in prompt_loader:
+    sync_rollout_weights(student)
+    with torch.no_grad():
+        batch = collect_rollouts(prompts, temperature=1.0,
+                                 top_p=1.0, top_k=None)
+
+    ids = batch["input_ids"]
+    attn = batch["attention_mask"]
+    labels = ids[:, 1:]  # logits at j-1 predict token j.
+    mask = batch["response_mask"][:, 1:] & attn[:, 1:].bool()
+
+    optimizer.zero_grad()
+    with torch.no_grad():
+        teacher_logits = teacher(ids, attention_mask=attn).logits[:, :-1, :]
+    student_logits = student(ids, attention_mask=attn).logits[:, :-1, :]
+    logp, logq = valid_logprobs(student_logits, teacher_logits, mask)
+
+    if mode == "full":
+        loss = kl_per_row(logp, logq, direction="reverse").mean()
+    elif mode == "topk_tail":
+        loss = topk_opd(logp, logq, k=2,
+                        direction="reverse", mode="tail")
+    elif mode == "sampled":
+        actions = labels[mask].unsqueeze(-1)  # [N,1], actual sampled IDs.
+        current = logp.gather(-1, actions).squeeze(-1)[None, :]  # [1,N]
+        teacher_action = logq.gather(-1, actions).squeeze(-1)[None, :]
+        behavior = batch["behavior_logp"][:, 1:][mask][None, :]
+        loss = sampled_opd_pg(current, behavior, teacher_action,
+                             torch.ones_like(current, dtype=torch.bool),
+                             signal="current")
+    else:
+        raise ValueError("unknown supervision mode")
+
+    loss.backward()
+    optimizer.step()
+    # Next iteration resamples after synchronizing the updated student.
+```
+
+`[:, :-1]`去掉最后一个没有后继目标的位置，`[:, 1:]`去掉第一个没有本序列内预测行的目标；prompt最后一个位置因而可以预测回答首token。动作mask跟着**目标token**移动。即使EOS与padding恰好共用ID，也不能只凭`ids != pad_id`决定动作mask，应保留真实长度、角色与停止原因。
+
+这份伪代码为了对照三种方法统一算全词表，sampled分支并未因此省下教师payload；真实系统应在教师接口处只请求所需动作分数，并在学生侧按内核能力只保留所需中间量。多轮Agent、不同模板、TP/CP/DDP、混合任务奖励与多次复用旧batch，需要另加相应条件和归约，而不是无条件套这段循环。
+
+### 14.6 使用PyTorch KL接口，方向和mean怎样核对
+
+对已选出的`[N,V]`有效位置，使用`log_target=True`时：
+
+```python
+import torch.nn.functional as F
+
+# Both tensors are logprobs. Freeze the teacher, keep the student differentiable.
+fkl_per_row = F.kl_div(logp, logq.detach(),
+                       reduction="none", log_target=True).sum(-1)
+rkl_per_row = F.kl_div(logq.detach(), logp,
+                       reduction="none", log_target=True).sum(-1)
+fkl = fkl_per_row.mean()
+rkl = rkl_per_row.mean()
+```
+
+这个接口计算`target.exp() * (target - input)`，所以`input=logp, target=logq`是FKL，交换后才是RKL；RKL中的student处在target参数也必须保留梯度。对于`[N,V]`，直接`reduction="mean"`会额外除以$V$；`batchmean`在这里除以$N$，但如果仍传`[B,L,V]`，它除以的是$B$，不是有效token数。显式`none → 词表sum → 有效位置mean`更容易核查。接口语义见[PyTorch 2.11官方文档](https://docs.pytorch.org/docs/2.11/generated/torch.nn.functional.kl_div.html)，本轮在实际安装的PyTorch 2.11.0中核对方向、数值与梯度。
+
+### 14.7 读代码时的逐项自检
+
+先打印一个有效位置的token ID、真实前缀、教师/当前/行为logprob；再检查概率归一化、候选ID对齐和head/tail质量；然后在有限词表上对照loss值与学生梯度，确认teacher与behavior不收梯度。最后检查mask/shift、空批、旧策略修正、全局分母，以及训练后真实任务指标。
+
+尤其不要把“loss是一个标量”“张量形状能相减”“backward没有报错”当成目标正确的证据。本节下载脚本用独立解析梯度、有限差分、枚举与采样分别验证这些问题；EOS演示只优化三个独立logit，不表示已经训练语言模型修好了截断。
 
 ## 15. 异步、旧轨迹和重要性采样
 
@@ -564,6 +874,8 @@ Attention mask决定能看什么，loss mask决定什么位置训练，终止/�
 ### 16.3 NaN、Inf与极端权重
 
 使用FP32的`log_softmax`和归约通常更便于调试；教师冻结和eval模式避免无意更新或不必要的随机性。先检查合法支持、位置对应、空mask与logprob条件，再考虑学习率、梯度裁剪和数值clamp。
+
+`NaN * 0`仍为NaN；已经进入计算图的非法除法/对数，也未必能靠末尾mask消除坏梯度。第14节因而在loss运算前先选有效行，并检查有效行有限。词表中有合法零概率时，应按明确支持和极限专门处理，不能把含负无穷的logprob直接送入所有通用乘法。相关机制见[PyTorch autograd官方说明](https://docs.pytorch.org/docs/2.11/notes/autograd.html)。`eval()`改变dropout等模块行为，不会关闭autograd；`no_grad()`才关闭相应前向的梯度记录。
 
 给0概率加$\epsilon$、截断ratio或裁剪token损失都会改变精确目标。可以作为明确的数值或优化设计，但不应在实现后仍宣称所有原始数学性质原封不动成立。对top-k聚合质量，宜在稳定精度下计算残余概率，区分舍入保护与真实概率重定义。
 
@@ -789,16 +1101,14 @@ $$
 **Q09 [自拟·代码] 写一个能自动求导的固定prefix full-vocab loss。**
 
 ```python
-# Teaching code, [B,L,V], same vocabulary and fixed histories.
-logp = student_logits.float().log_softmax(-1)
-with torch.no_grad():
-    logq = teacher_logits.float().log_softmax(-1)
-rkl = (logp.exp() * (logp - logq)).sum(-1)  # do NOT detach p
-loss = (rkl * assistant_mask).sum() / assistant_mask.sum().clamp_min(1)
-loss.backward()  # only student receives gradients
+# Reuse the validated teaching function from section 14.1.
+# Logits: [B,L,V]; action_mask: bool[B,L], targets already shifted.
+loss = full_vocab_opd(student_logits, teacher_logits,
+                      action_mask, direction="reverse")
+loss.backward()  # teacher is detached; student probabilities remain differentiable.
 ```
 
-应解释形状、teacher no_grad、FP32稳定计算、shift和有效token分母。这个例子是token-mean，若论文用seq-mean或group-mean要改聚合，不能只说“都取mean一样”。拿两/三token词表检查数值与梯度，再检teacher.grad为空。
+应解释形状、teacher no_grad、稳定计算、shift和有效token分母；第14.1节先选有效行，并对空mask报错，不依赖末尾乘零或分母夹成1隐藏无效批次。这个例子是token-mean，若论文用seq-mean或group-mean要改聚合，不能只说“都取mean一样”。拿两/三token词表检查数值与梯度，再检teacher.grad为空。
 
 **Q10 [自拟·PG] Sampled OPD的一步如何写？**
 
@@ -903,7 +1213,7 @@ Q25—Q80均为本文整理的教学与面试追问；不作为具体公司面�
 
 **Q32 [自拟·探索] 学生完全不会某种格式或知识，OPD能凭空学会吗？**
 
-完整教师分布可以提供未采token的梯度，sampled方法依赖学生探索到相关动作；两者的信息覆盖不同。如果有价值路径在学生中概率极低，单纯rollout可能效率很差。可使用示范冷启动、混合前缀或适配教师，但是否学到新能力需通过独立协议验证，不能仅由OPD名称推断。
+完整教师分布为未采token提供各自的教师信息；sampled的归一化梯度也会影响未采logit，但要取得某动作自己的教师评分，仍需抽到它或另外查询。如果有价值路径在学生中概率极低，单纯rollout可能效率很差。可使用示范冷启动、混合前缀或适配教师，但是否学到新能力需通过独立协议验证，不能仅由OPD名称推断。
 
 **Q33 [自拟·GKD] 混合离线和在线数据的参数控制什么？**
 
@@ -1140,6 +1450,8 @@ OPD让学生自己生成轨迹，教师在学生实际访问的前缀上提供�
 
 ## 28. 小实验、自检与本轮验证范围
 
+### 28.1 不装PyTorch也能运行的基础验算
+
 下载[OPD基础CPU验算脚本](./assets/learning/opd-foundations-check.py)与[本轮执行结果](./assets/learning/opd-foundations-check-results.json)。脚本只依赖Python标准库，枚举有限分布并使用有限差分，不加载模型、不访问教师API、不运行GPU训练。
 
 ```bash
@@ -1148,7 +1460,21 @@ python assets/learning/opd-foundations-check.py
 
 本轮实际通过15项检查：完整FKL/RKL的logit梯度；FKL与交叉熵关系；K1值与梯度；K2/K3的前向与反向差别；学生提案估计FKL梯度；截断支持缺失；top-2/EOS反例；tail粗粒度分解；部分KL负值；当前/旧信号IS差异；局部/序列梯度反例；全局token分母；多教师两类最优分布；重复乘学生概率的错误；因果shift与真实EOS对应。
 
-建议按三个层次复习：先手算三token的FKL/RKL和$p-q$；再用脚本验证采样估计与梯度；最后在自己的小模型训练中单独验证teacher输入、mask、EOS、长度与任务质量。第三层是后续实验计划，本文没有把它登记为已完成。
+### 28.2 实际backward的PyTorch监督对照实验
+
+下载[完整教学代码](./assets/learning/opd-supervision-lab.py)与[实际运行结果](./assets/learning/opd-supervision-lab-results.json)。在已安装PyTorch的环境、从仓库根目录执行：
+
+```bash
+python assets/learning/opd-supervision-lab.py
+```
+
+本轮使用Python 3.12与PyTorch 2.11.0，在CPU上通过47项检查。脚本先用FP64核对解析梯度和有限差分，再检查第14节函数的实际反传：full FKL/RKL、三种top-k的两个方向、$k=V$、教师/行为冻结、K1/K2/K3、sampled期望、current/old信号IS、候选外梯度、tail分解、极小尾部的log空间计算，以及无效位置和空批处理。另以固定随机种子抽10万个动作，对照采样平均梯度与完整梯度；它验证的是同一有限前缀上的估计，不是10万条语言模型回答。
+
+结果JSON中的`top2_comparison`保存第10.6节每种top-k的loss和logit梯度，`three_logit_EOS_traces`保存20步梯度下降的EOS概率。三logit例子的学生起始EOS为0.90、教师为0.10；候选内归一的FKL无纠偏梯度，full与tail会降低EOS，且因集合外只有EOS一个事件，两者轨迹一致。这个可运行反例用于理解目标盲区，不是声称某个真实模型已修复提前结束。
+
+### 28.3 怎样把练习推进到真实训练
+
+建议按三个层次复习：先手算三/四token的FKL/RKL和$p-q$；再运行两套脚本，对照值、采样分布、停止梯度与实际backward；最后在自己的小模型训练中单独验证teacher输入、mask、EOS、长度与任务质量。第三层是后续实验计划，本文没有把它登记为已完成。
 
 第一轮内容审阅核对了角色、概率空间、KL方向、可微路径、温度、尾部、终止和归约；第二轮通过可枚举反例与数值梯度复核关键结论，并在站点构建中检查公式、来源、链接和图表。发布审阅另见[本轮审阅记录](./assets/learning/opd-interview-foundations/review-2026-10-25.md)。数学正确性、静态代码核读与实际大模型实验是三种不同证据。
 
@@ -1171,6 +1497,8 @@ python assets/learning/opd-foundations-check.py
 | [多教师离线基线审计](https://arxiv.org/abs/2610.04272v1) | v1，2026，预印本 | 强SFT、独立调参与公平成本对照 |
 | [Tinker源码](https://github.com/thinking-machines-lab/tinker-cookbook/blob/54b3cb293038ccf2e49952e46ed5abac7119fdf8/tinker_cookbook/distillation/train_on_policy.py) | `54b3cb293038ccf2e49952e46ed5abac7119fdf8` | token信号和未来累计选项的静态核读 |
 | [verl OPD文档](https://github.com/verl-project/verl/blob/3c6d9b43b67c74ec343d77874cd8fa6e841523da/docs/algo/opd.md) | `3c6d9b43b67c74ec343d77874cd8fa6e841523da` | top-k、tail、sampled与PG路径的版本化接口 |
+| [PyTorch kl_div](https://docs.pytorch.org/docs/2.11/generated/torch.nn.functional.kl_div.html) | 2.11文档；本机2.11.0实测 | 参数方向、log_target、归约；学生target侧梯度已核对 |
+| [PyTorch autograd](https://docs.pytorch.org/docs/2.11/notes/autograd.html) | 2.11文档 | 非法运算与mask、eval/no_grad及冻结的不同作用 |
 
 第25节保留的社区题源只支持问题方向，不用于替代原始技术依据。首次登记日期仍为2026-10-12，不把历史登记冒充本轮新抓取。来源清单可下载[JSON账本](./research/opd-interview-foundations-sources.json)；源码SHA与文档hash用于核对，不等于已安装或运行对应框架。
 

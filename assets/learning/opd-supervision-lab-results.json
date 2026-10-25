@@ -1,0 +1,451 @@
+{
+  "executed_at_utc": "2026-10-25T04:57:26.673690+00:00",
+  "python_version": "3.12.3",
+  "torch_version": "2.11.0+cu129",
+  "device": "cpu",
+  "dtype": "float64 for analytic/finite-difference checks",
+  "scope": "Independent logits on fixed prefixes; no LLM, API, GPU, DDP or performance benchmark.",
+  "student": [
+    0.1,
+    0.15,
+    0.25,
+    0.5
+  ],
+  "teacher": [
+    0.3,
+    0.4,
+    0.2,
+    0.1
+  ],
+  "vocabulary": [
+    "A",
+    "B",
+    "C",
+    "EOS"
+  ],
+  "check_count": 47,
+  "all_passed": true,
+  "checks": [
+    {
+      "name": "full_forward_analytic_logit_gradient",
+      "passed": true,
+      "value": 0.5163428862988709,
+      "gradient": [
+        -0.19999999999999987,
+        -0.25,
+        0.04999999999999996,
+        0.39999999999999986
+      ]
+    },
+    {
+      "name": "full_forward_finite_difference_gradcheck",
+      "passed": true
+    },
+    {
+      "name": "pytorch_kl_div_argument_order_forward",
+      "passed": true
+    },
+    {
+      "name": "pytorch_kl_div_student_gradient_forward",
+      "passed": true
+    },
+    {
+      "name": "top2_partial_forward_gradcheck",
+      "passed": true
+    },
+    {
+      "name": "topk_equals_full_at_k_V_partial_forward",
+      "passed": true
+    },
+    {
+      "name": "top2_renormalized_forward_gradcheck",
+      "passed": true
+    },
+    {
+      "name": "topk_equals_full_at_k_V_renormalized_forward",
+      "passed": true
+    },
+    {
+      "name": "top2_tail_forward_gradcheck",
+      "passed": true
+    },
+    {
+      "name": "topk_equals_full_at_k_V_tail_forward",
+      "passed": true
+    },
+    {
+      "name": "full_reverse_analytic_logit_gradient",
+      "passed": true,
+      "value": 0.6035192272270327,
+      "gradient": [
+        -0.17021315158951422,
+        -0.23765227203581382,
+        -0.09509391897820568,
+        0.5029593426035337
+      ]
+    },
+    {
+      "name": "full_reverse_finite_difference_gradcheck",
+      "passed": true
+    },
+    {
+      "name": "pytorch_kl_div_argument_order_reverse",
+      "passed": true
+    },
+    {
+      "name": "pytorch_kl_div_student_gradient_reverse",
+      "passed": true
+    },
+    {
+      "name": "top2_partial_reverse_gradcheck",
+      "passed": true
+    },
+    {
+      "name": "topk_equals_full_at_k_V_partial_reverse",
+      "passed": true
+    },
+    {
+      "name": "top2_renormalized_reverse_gradcheck",
+      "passed": true
+    },
+    {
+      "name": "topk_equals_full_at_k_V_renormalized_reverse",
+      "passed": true
+    },
+    {
+      "name": "top2_tail_reverse_gradcheck",
+      "passed": true
+    },
+    {
+      "name": "topk_equals_full_at_k_V_tail_reverse",
+      "passed": true
+    },
+    {
+      "name": "sampled_behavior_expected_gradient_at_behavior",
+      "passed": true,
+      "gradient": [
+        -0.1702131515895142,
+        -0.23765227203581382,
+        -0.09509391897820571,
+        0.5029593426035337
+      ]
+    },
+    {
+      "name": "sampled_current_expected_gradient_at_behavior",
+      "passed": true,
+      "gradient": [
+        -0.1702131515895142,
+        -0.23765227203581382,
+        -0.09509391897820571,
+        0.5029593426035337
+      ]
+    },
+    {
+      "name": "current_signal_IS_matches_and_old_signal_does_not_away_from_behavior",
+      "passed": true,
+      "current_gradient": [
+        -0.1702131515895142,
+        -0.2376522720358138,
+        -0.09509391897820565,
+        0.5029593426035337
+      ],
+      "old_signal_gradient": [
+        -0.026687565186768507,
+        -0.08318365864791992,
+        0.15214827137155368,
+        -0.04227704753686527
+      ]
+    },
+    {
+      "name": "fixed_action_autograd_k1",
+      "passed": true,
+      "value": 0.6035192272270326,
+      "expected_gradient": [
+        -1.3877787807814457e-17,
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "name": "fixed_action_autograd_k2",
+      "passed": true,
+      "value": 0.7862961288645928,
+      "expected_gradient": [
+        -0.1702131515895142,
+        -0.23765227203581382,
+        -0.09509391897820571,
+        0.5029593426035337
+      ]
+    },
+    {
+      "name": "fixed_action_autograd_k3",
+      "passed": true,
+      "value": 0.6035192272270327,
+      "expected_gradient": [
+        -0.19999999999999993,
+        -0.25,
+        0.04999999999999999,
+        0.39999999999999997
+      ]
+    },
+    {
+      "name": "one_sample_still_has_dense_softmax_logit_gradient",
+      "passed": true,
+      "gradient": [
+        -0.16094379124341004,
+        -0.241415686865115,
+        -0.402359478108525,
+        0.80471895621705
+      ]
+    },
+    {
+      "name": "state_constant_KL_is_not_a_valid_replacement_for_action_specific_PG_signal",
+      "passed": true
+    },
+    {
+      "name": "teacher_frozen_in_full_forward",
+      "passed": true
+    },
+    {
+      "name": "teacher_frozen_in_full_reverse",
+      "passed": true
+    },
+    {
+      "name": "teacher_frozen_in_topk",
+      "passed": true
+    },
+    {
+      "name": "teacher_and_behavior_frozen_in_sampled",
+      "passed": true
+    },
+    {
+      "name": "invalid_rows_selected_before_softmax_and_backward",
+      "passed": true
+    },
+    {
+      "name": "invalid_rows_selected_before_sampled_ratio",
+      "passed": true
+    },
+    {
+      "name": "reject_empty_mask",
+      "passed": true
+    },
+    {
+      "name": "reject_valid_nonfinite_row",
+      "passed": true
+    },
+    {
+      "name": "reject_invalid_k",
+      "passed": true
+    },
+    {
+      "name": "partial_normalized_tail_have_different_outside_gradients",
+      "passed": true,
+      "partial_EOS": 0.35,
+      "normalized_EOS": 1.1102230246251565e-16,
+      "tail_EOS": 0.3,
+      "full_EOS": 0.39999999999999986
+    },
+    {
+      "name": "partial_reverse_KL_gradient_includes_uncancelled_mass_term",
+      "passed": true
+    },
+    {
+      "name": "multi_token_tail_omitted_internal_forward",
+      "passed": true,
+      "full": 0.5163428862988713,
+      "coarse": 0.4470281682428768,
+      "omitted": 0.06931471805599454
+    },
+    {
+      "name": "tail_is_membership_KL_plus_weighted_head_KL_forward",
+      "passed": true
+    },
+    {
+      "name": "multi_token_tail_omitted_internal_reverse",
+      "passed": true,
+      "full": 0.6035192272270326,
+      "coarse": 0.4302324320870463,
+      "omitted": 0.17328679513998635
+    },
+    {
+      "name": "tail_is_membership_KL_plus_weighted_head_KL_reverse",
+      "passed": true
+    },
+    {
+      "name": "log_space_tiny_tail_is_finite_forward",
+      "passed": true
+    },
+    {
+      "name": "log_space_tiny_tail_is_finite_reverse",
+      "passed": true
+    },
+    {
+      "name": "three_logit_EOS_demo_full_and_tail_correct_but_renormalized_is_blind",
+      "passed": true,
+      "final_EOS": {
+        "full": 0.1449992206016809,
+        "renormalized": 0.8999999999999999,
+        "tail": 0.1449992206016809
+      }
+    },
+    {
+      "name": "seeded_100000_sample_gradient_mean",
+      "passed": true,
+      "samples": 100000,
+      "expected": [
+        -0.17021315158951422,
+        -0.23765227203581382,
+        -0.09509391897820568,
+        0.5029593426035337
+      ],
+      "empirical": [
+        -0.17194091491703592,
+        -0.23740757951460656,
+        -0.09636017670150095,
+        0.5057086711331434
+      ],
+      "max_abs_error": 0.0027493285296097403
+    }
+  ],
+  "top2_comparison": [
+    {
+      "mode": "partial",
+      "direction": "forward",
+      "loss": 0.7219153878051233,
+      "logit_gradient": [
+        -0.22999999999999998,
+        -0.29500000000000004,
+        0.175,
+        0.35
+      ]
+    },
+    {
+      "mode": "renormalized",
+      "direction": "forward",
+      "loss": 0.0016882796833038692,
+      "logit_gradient": [
+        -0.02857142857142856,
+        0.028571428571428394,
+        5.551115123125783e-17,
+        1.1102230246251565e-16
+      ]
+    },
+    {
+      "mode": "tail",
+      "direction": "forward",
+      "loss": 0.4470281682428768,
+      "logit_gradient": [
+        -0.19999999999999996,
+        -0.25,
+        0.14999999999999997,
+        0.3
+      ]
+    },
+    {
+      "mode": "partial",
+      "direction": "reverse",
+      "loss": -0.2569856168185699,
+      "logit_gradient": [
+        -0.009162667184953953,
+        0.003923454571026533,
+        0.0017464042046424731,
+        0.0034928084092849462
+      ]
+    },
+    {
+      "mode": "renormalized",
+      "direction": "reverse",
+      "loss": 0.001676949906878493,
+      "logit_gradient": [
+        -0.02826792855753188,
+        0.028267928557532088,
+        -6.938893903907228e-17,
+        -1.3877787807814457e-16
+      ]
+    },
+    {
+      "mode": "tail",
+      "direction": "reverse",
+      "loss": 0.4302324320870463,
+      "logit_gradient": [
+        -0.15288447207551562,
+        -0.2116592527648159,
+        0.1215145749467772,
+        0.24302914989355417
+      ]
+    }
+  ],
+  "three_logit_EOS_traces": {
+    "full": [
+      0.8999999999999999,
+      0.8316301240081786,
+      0.7404871353179373,
+      0.6383331018233273,
+      0.541004404601793,
+      0.4585040414101747,
+      0.3928746845549262,
+      0.3418860627718669,
+      0.3023114360510048,
+      0.2712976749875633,
+      0.24665700111349942,
+      0.22679202163652118,
+      0.21055077407962036,
+      0.19709955525024825,
+      0.1858285590877883,
+      0.17628568793729882,
+      0.1681309185874654,
+      0.16110485312503214,
+      0.15500688423841105,
+      0.14967986688966095,
+      0.1449992206016809
+    ],
+    "renormalized": [
+      0.8999999999999999,
+      0.8999999999999999,
+      0.8999999999999999,
+      0.8999999999999999,
+      0.8999999999999999,
+      0.8999999999999999,
+      0.8999999999999999,
+      0.8999999999999999,
+      0.8999999999999999,
+      0.8999999999999999,
+      0.8999999999999999,
+      0.8999999999999999,
+      0.8999999999999999,
+      0.8999999999999999,
+      0.8999999999999999,
+      0.8999999999999999,
+      0.8999999999999999,
+      0.8999999999999999,
+      0.8999999999999999,
+      0.8999999999999999,
+      0.8999999999999999
+    ],
+    "tail": [
+      0.8999999999999999,
+      0.8316301240081786,
+      0.7404871353179373,
+      0.6383331018233273,
+      0.541004404601793,
+      0.4585040414101747,
+      0.3928746845549262,
+      0.3418860627718669,
+      0.3023114360510048,
+      0.2712976749875633,
+      0.24665700111349942,
+      0.22679202163652118,
+      0.21055077407962036,
+      0.19709955525024825,
+      0.1858285590877883,
+      0.17628568793729882,
+      0.1681309185874654,
+      0.16110485312503214,
+      0.15500688423841105,
+      0.14967986688966095,
+      0.1449992206016809
+    ]
+  }
+}

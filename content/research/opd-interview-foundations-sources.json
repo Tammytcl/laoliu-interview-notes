@@ -153,8 +153,24 @@
       "kind": "paper",
       "reviewedAt": "2026-10-25",
       "purpose": "师生分布差异、不可靠局部监督与引导方式的适用边界。"
+    },
+    {
+      "id": "opd-foundations-pytorch-kl-211",
+      "url": "https://docs.pytorch.org/docs/2.11/generated/torch.nn.functional.kl_div.html",
+      "title": "PyTorch 2.11 kl_div官方文档",
+      "kind": "official-docs",
+      "reviewedAt": "2026-10-25",
+      "purpose": "核对log_target、参数顺序和none/mean/batchmean归约；用本机2.11.0实际检查学生在target侧的梯度。"
+    },
+    {
+      "id": "opd-foundations-pytorch-autograd-211",
+      "url": "https://docs.pytorch.org/docs/2.11/notes/autograd.html",
+      "title": "PyTorch 2.11 autograd机制官方文档",
+      "kind": "official-docs",
+      "reviewedAt": "2026-10-25",
+      "purpose": "非法运算后的mask不能保证消除坏梯度；区分eval、no_grad、detach与冻结参数。"
     }
   ],
   "updated": "2026-10-25",
-  "scope": "统一教材与80问；保留2026-10-12历史题源登记，新增原始技术依据按本轮核读版本记录。"
+  "scope": "统一教材与80问；本轮复核采样/top-k/full的值、梯度、接口与CPU可运行代码。历史题源保留原登记日期，技术依据按实际核读版本记录。"
 }
