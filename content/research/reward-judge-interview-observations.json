@@ -1,18 +1,18 @@
 {
   "version": 1,
   "topicId": "reward-judge-interview",
-  "checkedAt": "2026-10-19T07:46:09.649Z",
+  "checkedAt": "2026-10-26T07:48:09.072Z",
   "observations": {
     "reward-judge-interview-01": {
-      "checkedAt": "2026-10-19T07:46:09.649Z",
-      "lastSuccessAt": "2026-10-19T07:46:09.649Z",
+      "checkedAt": "2026-10-26T07:48:09.072Z",
+      "lastSuccessAt": "2026-10-26T07:48:09.072Z",
       "status": "ok",
       "sha256": "7026686674a3227a2f730dbb5766b33754c13d46f3e05f7675e424243cfff3d0",
       "pendingReview": false
     },
     "reward-judge-interview-05": {
-      "checkedAt": "2026-10-19T07:46:09.649Z",
-      "lastSuccessAt": "2026-10-19T07:46:09.649Z",
+      "checkedAt": "2026-10-26T07:48:09.072Z",
+      "lastSuccessAt": "2026-10-26T07:48:09.072Z",
       "status": "ok",
       "revision": "befd0c0a582ec6efc055660467db95d522519591",
       "pendingReview": false

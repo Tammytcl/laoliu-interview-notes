@@ -1,23 +1,23 @@
 {
   "version": 1,
   "topicId": "agent-code-components",
-  "checkedAt": "2026-10-19T07:46:06.880Z",
+  "checkedAt": "2026-10-26T07:48:05.081Z",
   "observations": {
     "agent-code-components-03": {
-      "checkedAt": "2026-10-19T07:46:06.880Z",
-      "lastSuccessAt": "2026-10-19T07:46:06.880Z",
+      "checkedAt": "2026-10-26T07:48:05.081Z",
+      "lastSuccessAt": "2026-10-26T07:48:05.081Z",
       "status": "ok",
       "revision": "04d809ceab9df28f9adaed044884180159172930",
       "sha256": "9982d90b7566f2f3fa5e9811b475d5e8e2a84e2df80cf3f1e4be6e820b129835",
       "pendingReview": false
     },
     "agent-code-components-02": {
-      "checkedAt": "2026-10-19T07:46:06.880Z",
-      "lastSuccessAt": "2026-10-19T07:46:06.880Z",
+      "checkedAt": "2026-10-26T07:48:05.081Z",
+      "lastSuccessAt": "2026-10-26T07:48:05.081Z",
       "status": "ok",
-      "revision": "62a17dfc3f11439d1d06bfb9bb515eadc5adfcd3",
-      "sha256": "723d02c4cd612d966361de44147ca8cb222d5355cdcb1d0746177d1361d3475e",
-      "pendingReview": false
+      "revision": "a2b2caea4498766aee8fd33d3280b56744070e99",
+      "sha256": "7718bd5502296273f7f30eed94669153b9bbbc90cd7d4c25bc1fb9ca22027bc6",
+      "pendingReview": true
     }
   }
 }

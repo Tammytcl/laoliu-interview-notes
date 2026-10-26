@@ -1,38 +1,38 @@
 {
   "version": 1,
   "topicId": "infra-mtp-speculative",
-  "checkedAt": "2026-10-19T07:46:02.324Z",
+  "checkedAt": "2026-10-26T07:48:01.146Z",
   "observations": {
     "infra-mtp-speculative-source-01": {
-      "checkedAt": "2026-10-19T07:46:02.324Z",
-      "lastSuccessAt": "2026-10-19T07:46:02.324Z",
+      "checkedAt": "2026-10-26T07:48:01.146Z",
+      "lastSuccessAt": "2026-10-26T07:48:01.146Z",
       "status": "ok",
-      "revision": "bbf59fbad49243d12dc966f13b037ffee39f7317",
+      "revision": "9bea474d656a3569c5e95a0575e6da50b68cd832",
       "sha256": "9f035dd0c5af33b29ffcc63e2192f7b2fb85f8a6b4ac89275ecb5698f7ca2ff1",
       "pendingReview": true
     },
     "infra-mtp-speculative-source-03": {
-      "checkedAt": "2026-10-19T07:46:02.324Z",
-      "lastSuccessAt": "2026-10-19T07:46:02.324Z",
+      "checkedAt": "2026-10-26T07:48:01.146Z",
+      "lastSuccessAt": "2026-10-26T07:48:01.146Z",
       "status": "ok",
-      "revision": "bbf59fbad49243d12dc966f13b037ffee39f7317",
+      "revision": "9bea474d656a3569c5e95a0575e6da50b68cd832",
       "sha256": "9f035dd0c5af33b29ffcc63e2192f7b2fb85f8a6b4ac89275ecb5698f7ca2ff1",
       "pendingReview": true
     },
     "infra-mtp-speculative-source-06": {
-      "checkedAt": "2026-10-19T07:46:02.324Z",
-      "lastSuccessAt": "2026-10-19T07:46:02.324Z",
+      "checkedAt": "2026-10-26T07:48:01.146Z",
+      "lastSuccessAt": "2026-10-26T07:48:01.146Z",
       "status": "ok",
-      "revision": "bbf59fbad49243d12dc966f13b037ffee39f7317",
+      "revision": "9bea474d656a3569c5e95a0575e6da50b68cd832",
       "sha256": "9f035dd0c5af33b29ffcc63e2192f7b2fb85f8a6b4ac89275ecb5698f7ca2ff1",
       "pendingReview": true
     },
     "infra-mtp-speculative-source-07": {
-      "checkedAt": "2026-10-19T07:46:02.324Z",
-      "lastSuccessAt": "2026-10-19T07:46:02.324Z",
+      "checkedAt": "2026-10-26T07:48:01.146Z",
+      "lastSuccessAt": "2026-10-26T07:48:01.146Z",
       "status": "ok",
-      "revision": "bbf59fbad49243d12dc966f13b037ffee39f7317",
-      "sha256": "a873467b865505d3b89b3188fe0f1ada9deb1f3450d089e0cb339f5eb9005e4a",
+      "revision": "9bea474d656a3569c5e95a0575e6da50b68cd832",
+      "sha256": "c5d8d31e0a16e1ffbe49f77d20a93dc7073ae92764c293ff17a446a41b06d447",
       "pendingReview": true
     }
   }

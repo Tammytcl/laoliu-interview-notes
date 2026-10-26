@@ -1,21 +1,21 @@
 {
   "version": 1,
   "topicId": "agent-components-overview",
-  "checkedAt": "2026-10-19T07:46:04.606Z",
+  "checkedAt": "2026-10-26T07:48:02.644Z",
   "observations": {
     "agent-components-overview-06": {
-      "checkedAt": "2026-10-19T07:46:04.606Z",
-      "lastSuccessAt": "2026-10-19T07:46:04.606Z",
+      "checkedAt": "2026-10-26T07:48:02.644Z",
+      "lastSuccessAt": "2026-10-26T07:48:02.644Z",
       "status": "ok",
-      "sha256": "409443cd7fe2bd38ed19fdfe3d795e2490481db165c414954231e6e1e3385c2c",
-      "pendingReview": false
+      "sha256": "b242128adddf79e902959889b27462e22d3b2d66911f2e0694a91b798d19b4b0",
+      "pendingReview": true
     },
     "agent-components-overview-09": {
-      "checkedAt": "2026-10-19T07:46:04.606Z",
-      "lastSuccessAt": "2026-10-19T07:46:04.606Z",
+      "checkedAt": "2026-10-26T07:48:02.644Z",
+      "lastSuccessAt": "2026-10-26T07:48:02.644Z",
       "status": "ok",
-      "sha256": "cc3fdacbccb761631aa94580f59f290b4c67d412183d7bc362c2d6f744c642d1",
-      "pendingReview": false
+      "sha256": "b0c52549a0080f87a690ac317c115dcd916b1586e1aa6ad3480a337f564e8200",
+      "pendingReview": true
     }
   }
 }

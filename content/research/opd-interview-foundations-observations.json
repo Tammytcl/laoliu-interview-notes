@@ -1,6 +1,21 @@
 {
   "version": 1,
   "topicId": "opd-interview-foundations",
-  "checkedAt": "2026-10-19T07:46:08.948Z",
-  "observations": {}
+  "checkedAt": "2026-10-26T07:48:07.880Z",
+  "observations": {
+    "opd-foundations-verl-20261025": {
+      "checkedAt": "2026-10-26T07:48:07.880Z",
+      "lastSuccessAt": "2026-10-26T07:48:07.880Z",
+      "status": "ok",
+      "revision": "3dd97a0e1b4b2cdf84c302c53431efaad441ae9b",
+      "pendingReview": true
+    },
+    "opd-foundations-tinker-20261025": {
+      "checkedAt": "2026-10-26T07:48:07.880Z",
+      "lastSuccessAt": "2026-10-26T07:48:07.880Z",
+      "status": "ok",
+      "revision": "5624af2cd982fba6e5861e08dc142f0e2ae8e0a2",
+      "pendingReview": true
+    }
+  }
 }

@@ -1,95 +1,95 @@
 {
   "version": 1,
   "topicId": "agent-sandbox-components",
-  "checkedAt": "2026-10-19T07:46:04.999Z",
+  "checkedAt": "2026-10-26T07:48:03.170Z",
   "observations": {
     "agent-sandbox-components-01": {
-      "checkedAt": "2026-10-19T07:46:04.999Z",
-      "lastSuccessAt": "2026-10-19T07:46:04.999Z",
+      "checkedAt": "2026-10-26T07:48:03.170Z",
+      "lastSuccessAt": "2026-10-26T07:48:03.170Z",
       "status": "ok",
-      "sha256": "409443cd7fe2bd38ed19fdfe3d795e2490481db165c414954231e6e1e3385c2c",
-      "pendingReview": false
+      "sha256": "b242128adddf79e902959889b27462e22d3b2d66911f2e0694a91b798d19b4b0",
+      "pendingReview": true
     },
     "agent-sandbox-components-02": {
-      "checkedAt": "2026-10-19T07:46:04.999Z",
-      "lastSuccessAt": "2026-10-19T07:46:04.999Z",
+      "checkedAt": "2026-10-26T07:48:03.170Z",
+      "lastSuccessAt": "2026-10-26T07:48:03.170Z",
       "status": "ok",
-      "sha256": "cc3fdacbccb761631aa94580f59f290b4c67d412183d7bc362c2d6f744c642d1",
-      "pendingReview": false
+      "sha256": "b0c52549a0080f87a690ac317c115dcd916b1586e1aa6ad3480a337f564e8200",
+      "pendingReview": true
     },
     "agent-sandbox-components-04": {
-      "checkedAt": "2026-10-19T07:46:04.999Z",
-      "lastSuccessAt": "2026-10-19T07:46:04.999Z",
+      "checkedAt": "2026-10-26T07:48:03.170Z",
+      "lastSuccessAt": "2026-10-26T07:48:03.170Z",
       "status": "ok",
-      "revision": "357c5e74020fc0890d69fb3a7db610896b9ce57d",
-      "sha256": "0957943fa81848e2ece4651f0f7af75a070f0d66531e67dbdbdab08e9e31971e",
+      "revision": "872da9479f4a2078142d22c49c9ffae0f09e2e63",
+      "sha256": "ac9f5d19e2cd311b2fe1c9d885c89fe21a98270613ae4546640b823540bf2163",
       "pendingReview": true
     },
     "agent-sandbox-components-03": {
-      "checkedAt": "2026-10-19T07:46:04.999Z",
-      "lastSuccessAt": "2026-10-19T07:46:04.999Z",
+      "checkedAt": "2026-10-26T07:48:03.170Z",
+      "lastSuccessAt": "2026-10-26T07:48:03.170Z",
       "status": "ok",
-      "revision": "357c5e74020fc0890d69fb3a7db610896b9ce57d",
-      "sha256": "d618d594a86a7abf362025f0eed8fa6b8a086891a4f997ccc74170ae7f3ff6d8",
+      "revision": "872da9479f4a2078142d22c49c9ffae0f09e2e63",
+      "sha256": "d6ab11b45f5d90d5cb898c5eaf1fb5aec113860c041f35034109ad464939ca96",
       "pendingReview": true
     },
     "agent-sandbox-components-05": {
-      "checkedAt": "2026-10-19T07:46:04.999Z",
-      "lastSuccessAt": "2026-10-19T07:46:04.999Z",
+      "checkedAt": "2026-10-26T07:48:03.170Z",
+      "lastSuccessAt": "2026-10-26T07:48:03.170Z",
       "status": "ok",
-      "sha256": "0ac35bfa79d480d88d2192f9ad09e95f64a64ad3e9c8cfed562a0f7610486faf",
+      "sha256": "bcfb75da8deb71fd66d646e608e31ca4a16aee461d3f91ef800028fcb7a5416f",
       "pendingReview": true
     },
     "agent-sandbox-components-06": {
-      "checkedAt": "2026-10-19T07:46:04.999Z",
-      "lastSuccessAt": "2026-10-19T07:46:04.999Z",
+      "checkedAt": "2026-10-26T07:48:03.170Z",
+      "lastSuccessAt": "2026-10-26T07:48:03.170Z",
       "status": "ok",
-      "sha256": "5724ea8eaaa0bfef02d0a9f5d20d3abf12cc2639ce711dbe711eeeaac8695c8c",
-      "pendingReview": false
+      "sha256": "7eb3dd33f96fc92b328608161ad79e6533a0d3c2501d30c69daf68476f225960",
+      "pendingReview": true
     },
     "agent-sandbox-components-09": {
-      "checkedAt": "2026-10-19T07:46:04.999Z",
-      "lastSuccessAt": "2026-10-19T07:46:04.999Z",
+      "checkedAt": "2026-10-26T07:48:03.170Z",
+      "lastSuccessAt": "2026-10-26T07:48:03.170Z",
       "status": "ok",
-      "sha256": "ada818173f457479331b1f369af107aa3505f41c2b445925a4a258fa950e0663",
+      "sha256": "1a85da4964e1c00362fe70ac327c84ee80e41ee0abe42bbcdef984826e0350c1",
       "pendingReview": true
     },
     "agent-sandbox-components-08": {
-      "checkedAt": "2026-10-19T07:46:04.999Z",
-      "lastSuccessAt": "2026-10-19T07:46:04.999Z",
+      "checkedAt": "2026-10-26T07:48:03.170Z",
+      "lastSuccessAt": "2026-10-26T07:48:03.170Z",
       "status": "ok",
-      "revision": "62a17dfc3f11439d1d06bfb9bb515eadc5adfcd3",
-      "sha256": "723d02c4cd612d966361de44147ca8cb222d5355cdcb1d0746177d1361d3475e",
-      "pendingReview": false
+      "revision": "a2b2caea4498766aee8fd33d3280b56744070e99",
+      "sha256": "7718bd5502296273f7f30eed94669153b9bbbc90cd7d4c25bc1fb9ca22027bc6",
+      "pendingReview": true
     },
     "agent-sandbox-components-10": {
-      "checkedAt": "2026-10-19T07:46:04.999Z",
-      "lastSuccessAt": "2026-10-19T07:46:04.999Z",
+      "checkedAt": "2026-10-26T07:48:03.170Z",
+      "lastSuccessAt": "2026-10-26T07:48:03.170Z",
       "status": "ok",
-      "sha256": "44790fa8c817e1c1a35f0f0441c00f024b550c45d85099f02a19f425d3f05544",
-      "pendingReview": false
+      "sha256": "74d4eab7a456ad60796013a3045b1357a2eb5b28d8d08ccedc1a6889a8f86ec5",
+      "pendingReview": true
     },
     "agent-sandbox-components-15": {
-      "checkedAt": "2026-10-19T07:46:04.999Z",
-      "lastSuccessAt": "2026-10-19T07:46:04.999Z",
+      "checkedAt": "2026-10-26T07:48:03.170Z",
+      "lastSuccessAt": "2026-10-26T07:48:03.170Z",
       "status": "ok",
-      "revision": "357c5e74020fc0890d69fb3a7db610896b9ce57d",
-      "sha256": "55611240d0499449bc3d82bb1c74cadbb639434856a4bdcb14956cd842ac6190",
+      "revision": "872da9479f4a2078142d22c49c9ffae0f09e2e63",
+      "sha256": "1adc198029c1afe24cb454ac0b440992fde76f720085d1549edab573db60fd6f",
       "pendingReview": true
     },
     "agent-sandbox-components-11": {
-      "checkedAt": "2026-10-19T07:46:04.999Z",
-      "lastSuccessAt": "2026-10-19T07:46:04.999Z",
+      "checkedAt": "2026-10-26T07:48:03.170Z",
+      "lastSuccessAt": "2026-10-26T07:48:03.170Z",
       "status": "ok",
-      "sha256": "ca0515df8fc089e52d06aec162df3afcaf31f07724cb8873e9e9d4b2e2c69b46",
-      "pendingReview": false
+      "sha256": "d68be5f9a166f901f93a1fd397872b885f203ca74be6c3179a361ff6877e079f",
+      "pendingReview": true
     },
     "agent-sandbox-components-14": {
-      "checkedAt": "2026-10-19T07:46:04.999Z",
-      "lastSuccessAt": "2026-10-19T07:46:04.999Z",
+      "checkedAt": "2026-10-26T07:48:03.170Z",
+      "lastSuccessAt": "2026-10-26T07:48:03.170Z",
       "status": "ok",
-      "revision": "834c839dcf587784c16449aed56c21a5cf71b6d1",
-      "sha256": "a5b1b229fef6cb9112fa79886cc9c90d7bdcd17138143715290753ff984ec275",
+      "revision": "4423a6ad8b6e91ce369422feb6c97605636303bf",
+      "sha256": "ffb75f76774475343a15cd52d3659b318df3ceb08558190d144dd927280fb444",
       "pendingReview": true
     }
   }

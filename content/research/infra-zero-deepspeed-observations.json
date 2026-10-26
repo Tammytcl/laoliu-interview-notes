@@ -1,13 +1,13 @@
 {
   "version": 1,
   "topicId": "infra-zero-deepspeed",
-  "checkedAt": "2026-10-19T07:46:01.133Z",
+  "checkedAt": "2026-10-26T07:47:49.887Z",
   "observations": {
     "infra-zero-deepspeed-source-08": {
-      "checkedAt": "2026-10-19T07:46:01.133Z",
-      "lastSuccessAt": "2026-10-19T07:46:01.133Z",
+      "checkedAt": "2026-10-26T07:47:49.887Z",
+      "lastSuccessAt": "2026-10-26T07:47:49.887Z",
       "status": "ok",
-      "revision": "cc7b5125d52bf0878ead8237379e08e569e407f6",
+      "revision": "8a47f98915b9e6dab61f877d889f1f257274da4c",
       "pendingReview": true
     }
   }
