@@ -1,19 +1,19 @@
 {
   "version": 1,
   "topicId": "infra-mtp-training",
-  "checkedAt": "2026-10-26T07:48:00.569Z",
+  "checkedAt": "2026-11-02T09:30:14.521Z",
   "observations": {
     "infra-mtp-training-source-05": {
-      "checkedAt": "2026-10-26T07:48:00.569Z",
-      "lastSuccessAt": "2026-10-26T07:48:00.569Z",
+      "checkedAt": "2026-11-02T09:30:14.521Z",
+      "lastSuccessAt": "2026-11-02T09:30:14.521Z",
       "status": "ok",
-      "revision": "9bea474d656a3569c5e95a0575e6da50b68cd832",
-      "sha256": "b42943de5e90203f79c9a4b6a3dc713e586a05f21d3c0247fd91b4baf373fbc1",
+      "revision": "5689c2790c911a55c75825aac5166305df0b591d",
+      "sha256": "640f2c4e592d2e4244910b6b97fe77fa7ffd62eab228894a3cbdc5ddf9c3fc20",
       "pendingReview": true
     },
     "infra-mtp-training-source-07": {
-      "checkedAt": "2026-10-26T07:48:00.569Z",
-      "lastSuccessAt": "2026-10-26T07:48:00.569Z",
+      "checkedAt": "2026-11-02T09:30:14.521Z",
+      "lastSuccessAt": "2026-11-02T09:30:14.521Z",
       "status": "ok",
       "revision": "9b4e9788e4a3a731f7567338ed15d3ec549ce03b",
       "sha256": "0d2be8b8c9cb98f3f503f9aa029d1f2907282e68c7cf9429f9f6759ec52c8b23",

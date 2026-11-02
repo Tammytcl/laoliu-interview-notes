@@ -1,46 +1,46 @@
 {
   "version": 1,
   "topicId": "infra-training-backends",
-  "checkedAt": "2026-10-26T07:47:50.140Z",
+  "checkedAt": "2026-11-02T09:30:14.074Z",
   "observations": {
     "infra-training-backends-source-05": {
-      "checkedAt": "2026-10-26T07:47:50.140Z",
-      "lastSuccessAt": "2026-10-26T07:47:50.140Z",
+      "checkedAt": "2026-11-02T09:30:14.074Z",
+      "lastSuccessAt": "2026-11-02T09:30:14.074Z",
       "status": "ok",
       "revision": "84df182f50ab34301aabb3c0eb4031815bfb413d",
       "pendingReview": false
     },
     "infra-training-backends-source-06": {
-      "checkedAt": "2026-10-26T07:47:50.140Z",
-      "lastSuccessAt": "2026-10-26T07:47:50.140Z",
+      "checkedAt": "2026-11-02T09:30:14.074Z",
+      "lastSuccessAt": "2026-11-02T09:30:14.074Z",
       "status": "ok",
       "revision": "84df182f50ab34301aabb3c0eb4031815bfb413d",
       "pendingReview": false
     },
     "infra-training-backends-source-07": {
-      "checkedAt": "2026-10-26T07:47:50.140Z",
-      "lastSuccessAt": "2026-10-26T07:47:50.140Z",
+      "checkedAt": "2026-11-02T09:30:14.074Z",
+      "lastSuccessAt": "2026-11-02T09:30:14.074Z",
       "status": "ok",
       "revision": "84df182f50ab34301aabb3c0eb4031815bfb413d",
       "pendingReview": false
     },
     "infra-training-backends-source-08": {
-      "checkedAt": "2026-10-26T07:47:50.140Z",
-      "lastSuccessAt": "2026-10-26T07:47:50.140Z",
+      "checkedAt": "2026-11-02T09:30:14.074Z",
+      "lastSuccessAt": "2026-11-02T09:30:14.074Z",
       "status": "ok",
       "revision": "84df182f50ab34301aabb3c0eb4031815bfb413d",
       "pendingReview": false
     },
     "infra-training-backends-source-09": {
-      "checkedAt": "2026-10-26T07:47:50.140Z",
-      "lastSuccessAt": "2026-10-26T07:47:50.140Z",
+      "checkedAt": "2026-11-02T09:30:14.074Z",
+      "lastSuccessAt": "2026-11-02T09:30:14.074Z",
       "status": "ok",
       "revision": "84df182f50ab34301aabb3c0eb4031815bfb413d",
       "pendingReview": false
     },
     "infra-training-backends-source-10": {
-      "checkedAt": "2026-10-26T07:47:50.140Z",
-      "lastSuccessAt": "2026-10-26T07:47:50.140Z",
+      "checkedAt": "2026-11-02T09:30:14.074Z",
+      "lastSuccessAt": "2026-11-02T09:30:14.074Z",
       "status": "ok",
       "revision": "84df182f50ab34301aabb3c0eb4031815bfb413d",
       "pendingReview": false

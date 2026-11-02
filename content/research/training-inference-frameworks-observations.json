@@ -1,93 +1,93 @@
 {
   "version": 1,
   "topicId": "training-inference-frameworks",
-  "checkedAt": "2026-10-26T07:47:47.990Z",
+  "checkedAt": "2026-11-02T09:30:11.185Z",
   "observations": {
     "source-02": {
-      "checkedAt": "2026-10-26T07:47:47.990Z",
-      "lastSuccessAt": "2026-10-26T07:47:47.990Z",
+      "checkedAt": "2026-11-02T09:30:11.185Z",
+      "lastSuccessAt": "2026-11-02T09:30:11.185Z",
       "status": "ok",
-      "revision": "ed9c2c8c1cf4a5438922ae8d215181e7c8b9e0fe",
+      "revision": "617eca05c15f53779567c92ead7455e8fcd76b4b",
       "pendingReview": true
     },
     "source-05": {
-      "checkedAt": "2026-10-26T07:47:47.990Z",
-      "lastSuccessAt": "2026-10-26T07:47:47.990Z",
+      "checkedAt": "2026-11-02T09:30:11.185Z",
+      "lastSuccessAt": "2026-11-02T09:30:11.185Z",
       "status": "ok",
-      "revision": "18868a79b0b083a093798a94ed0f8cb4f71b9c14",
+      "revision": "540ea919e45b8b929198abce008a103be9cfc779",
       "pendingReview": true
     },
     "source-04": {
-      "checkedAt": "2026-10-26T07:47:47.990Z",
-      "lastSuccessAt": "2026-10-26T07:47:47.990Z",
+      "checkedAt": "2026-11-02T09:30:11.185Z",
+      "lastSuccessAt": "2026-11-02T09:30:11.185Z",
       "status": "ok",
-      "revision": "3dd97a0e1b4b2cdf84c302c53431efaad441ae9b",
+      "revision": "6879e1ab07b9cfd0b4b27c31ca4e7afcad1466b3",
       "pendingReview": true
     },
     "source-35": {
-      "checkedAt": "2026-10-26T07:47:47.990Z",
-      "lastSuccessAt": "2026-10-26T07:47:47.990Z",
+      "checkedAt": "2026-11-02T09:30:11.185Z",
+      "lastSuccessAt": "2026-11-02T09:30:11.185Z",
       "status": "ok",
-      "revision": "18868a79b0b083a093798a94ed0f8cb4f71b9c14",
+      "revision": "540ea919e45b8b929198abce008a103be9cfc779",
       "pendingReview": true
     },
     "source-43": {
-      "checkedAt": "2026-10-26T07:47:47.990Z",
-      "lastSuccessAt": "2026-10-26T07:47:47.990Z",
+      "checkedAt": "2026-11-02T09:30:11.185Z",
+      "lastSuccessAt": "2026-11-02T09:30:11.185Z",
       "status": "ok",
       "revision": "dc2a7ad326f619fc5a47737ea47d1920ce2c0b53",
       "pendingReview": false
     },
     "source-44": {
-      "checkedAt": "2026-10-26T07:47:47.990Z",
-      "lastSuccessAt": "2026-10-26T07:47:47.990Z",
+      "checkedAt": "2026-11-02T09:30:11.185Z",
+      "lastSuccessAt": "2026-11-02T09:30:11.185Z",
       "status": "ok",
-      "revision": "30311bae50929a8aa3bd139a44793dec65709d85",
+      "revision": "d25f2929b2a1e962e9d366717fbf872ab46a4997",
       "pendingReview": true
     },
     "verl-fully-async": {
-      "checkedAt": "2026-10-26T07:47:47.990Z",
-      "lastSuccessAt": "2026-10-26T07:47:47.990Z",
+      "checkedAt": "2026-11-02T09:30:11.185Z",
+      "lastSuccessAt": "2026-11-02T09:30:11.185Z",
       "status": "ok",
-      "revision": "3dd97a0e1b4b2cdf84c302c53431efaad441ae9b",
+      "revision": "6879e1ab07b9cfd0b4b27c31ca4e7afcad1466b3",
       "sha256": "61676351b33d69f0f3406ac21a5cdfba3c5ebc1f92083710fd825e070777aec3",
       "pendingReview": false
     },
     "verl-hybrid-flow": {
-      "checkedAt": "2026-10-26T07:47:47.990Z",
-      "lastSuccessAt": "2026-10-26T07:47:47.990Z",
+      "checkedAt": "2026-11-02T09:30:11.185Z",
+      "lastSuccessAt": "2026-11-02T09:30:11.185Z",
       "status": "ok",
-      "revision": "3dd97a0e1b4b2cdf84c302c53431efaad441ae9b",
+      "revision": "6879e1ab07b9cfd0b4b27c31ca4e7afcad1466b3",
       "sha256": "e6328517392492c7b945d2fc895705e4b635d9a5558453e980da028e251e7acc",
       "pendingReview": false
     },
     "slime-agent-guide": {
-      "checkedAt": "2026-10-26T07:47:47.990Z",
-      "lastSuccessAt": "2026-10-26T07:47:47.990Z",
+      "checkedAt": "2026-11-02T09:30:11.185Z",
+      "lastSuccessAt": "2026-11-02T09:30:11.185Z",
       "status": "ok",
-      "revision": "18868a79b0b083a093798a94ed0f8cb4f71b9c14",
+      "revision": "540ea919e45b8b929198abce008a103be9cfc779",
       "sha256": "24b94a8bcdb58c1a4ea2fea481eba9a6696598737f050f0997666f3675304055",
       "pendingReview": true
     },
     "framework-ref-13": {
-      "checkedAt": "2026-10-26T07:47:47.990Z",
-      "lastSuccessAt": "2026-10-26T07:47:47.990Z",
+      "checkedAt": "2026-11-02T09:30:11.185Z",
+      "lastSuccessAt": "2026-11-02T09:30:11.185Z",
       "status": "ok",
-      "revision": "3dd97a0e1b4b2cdf84c302c53431efaad441ae9b",
+      "revision": "6879e1ab07b9cfd0b4b27c31ca4e7afcad1466b3",
       "pendingReview": true
     },
     "framework-ref-14": {
-      "checkedAt": "2026-10-26T07:47:47.990Z",
-      "lastSuccessAt": "2026-10-26T07:47:47.990Z",
+      "checkedAt": "2026-11-02T09:30:11.185Z",
+      "lastSuccessAt": "2026-11-02T09:30:11.185Z",
       "status": "ok",
-      "revision": "3dd97a0e1b4b2cdf84c302c53431efaad441ae9b",
+      "revision": "6879e1ab07b9cfd0b4b27c31ca4e7afcad1466b3",
       "pendingReview": true
     },
     "framework-ref-17": {
-      "checkedAt": "2026-10-26T07:47:47.990Z",
-      "lastSuccessAt": "2026-10-26T07:47:47.990Z",
+      "checkedAt": "2026-11-02T09:30:11.185Z",
+      "lastSuccessAt": "2026-11-02T09:30:11.185Z",
       "status": "ok",
-      "revision": "18868a79b0b083a093798a94ed0f8cb4f71b9c14",
+      "revision": "540ea919e45b8b929198abce008a103be9cfc779",
       "pendingReview": true
     }
   }

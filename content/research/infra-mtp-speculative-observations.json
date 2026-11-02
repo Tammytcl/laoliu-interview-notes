@@ -1,38 +1,38 @@
 {
   "version": 1,
   "topicId": "infra-mtp-speculative",
-  "checkedAt": "2026-10-26T07:48:01.146Z",
+  "checkedAt": "2026-11-02T09:30:15.065Z",
   "observations": {
     "infra-mtp-speculative-source-01": {
-      "checkedAt": "2026-10-26T07:48:01.146Z",
-      "lastSuccessAt": "2026-10-26T07:48:01.146Z",
+      "checkedAt": "2026-11-02T09:30:15.065Z",
+      "lastSuccessAt": "2026-11-02T09:30:15.065Z",
       "status": "ok",
-      "revision": "9bea474d656a3569c5e95a0575e6da50b68cd832",
+      "revision": "5689c2790c911a55c75825aac5166305df0b591d",
       "sha256": "9f035dd0c5af33b29ffcc63e2192f7b2fb85f8a6b4ac89275ecb5698f7ca2ff1",
       "pendingReview": true
     },
     "infra-mtp-speculative-source-03": {
-      "checkedAt": "2026-10-26T07:48:01.146Z",
-      "lastSuccessAt": "2026-10-26T07:48:01.146Z",
+      "checkedAt": "2026-11-02T09:30:15.065Z",
+      "lastSuccessAt": "2026-11-02T09:30:15.065Z",
       "status": "ok",
-      "revision": "9bea474d656a3569c5e95a0575e6da50b68cd832",
+      "revision": "5689c2790c911a55c75825aac5166305df0b591d",
       "sha256": "9f035dd0c5af33b29ffcc63e2192f7b2fb85f8a6b4ac89275ecb5698f7ca2ff1",
       "pendingReview": true
     },
     "infra-mtp-speculative-source-06": {
-      "checkedAt": "2026-10-26T07:48:01.146Z",
-      "lastSuccessAt": "2026-10-26T07:48:01.146Z",
+      "checkedAt": "2026-11-02T09:30:15.065Z",
+      "lastSuccessAt": "2026-11-02T09:30:15.065Z",
       "status": "ok",
-      "revision": "9bea474d656a3569c5e95a0575e6da50b68cd832",
+      "revision": "5689c2790c911a55c75825aac5166305df0b591d",
       "sha256": "9f035dd0c5af33b29ffcc63e2192f7b2fb85f8a6b4ac89275ecb5698f7ca2ff1",
       "pendingReview": true
     },
     "infra-mtp-speculative-source-07": {
-      "checkedAt": "2026-10-26T07:48:01.146Z",
-      "lastSuccessAt": "2026-10-26T07:48:01.146Z",
+      "checkedAt": "2026-11-02T09:30:15.065Z",
+      "lastSuccessAt": "2026-11-02T09:30:15.065Z",
       "status": "ok",
-      "revision": "9bea474d656a3569c5e95a0575e6da50b68cd832",
-      "sha256": "c5d8d31e0a16e1ffbe49f77d20a93dc7073ae92764c293ff17a446a41b06d447",
+      "revision": "5689c2790c911a55c75825aac5166305df0b591d",
+      "sha256": "2388558c70707eba73fd78a2c1476c5ef9270d55d78335b78220ae939c2458c1",
       "pendingReview": true
     }
   }
