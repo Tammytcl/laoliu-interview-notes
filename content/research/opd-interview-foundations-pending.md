@@ -1,6 +1,6 @@
 # opd-interview-foundations 来源观察记录
 
-自动检测时间：2026-11-02T09:30:22.003Z
+自动检测时间：2026-11-09T09:47:56.218Z
 
 这是来源变化的候选账本。正文核对日期、固定版本和结论不会由检测脚本覆盖。仓库 commit 更新可能与本文无关；需要阅读差异后再判断。
 
@@ -8,8 +8,8 @@
 
 ## 待核对变化
 
-- [Tinker OPD训练源码](https://github.com/thinking-machines-lab/tinker-cookbook/compare/54b3cb293038ccf2e49952e46ed5abac7119fdf8...6daabe0838736557f0e802020b710073eb340287)：与正文核对基线有差异；核查受影响段落、支持组合、源码入口和示例。
-- [verl OPD官方文档](https://github.com/verl-project/verl/compare/3c6d9b43b67c74ec343d77874cd8fa6e841523da...6879e1ab07b9cfd0b4b27c31ca4e7afcad1466b3)：与正文核对基线有差异；核查受影响段落、支持组合、源码入口和示例。
+- [Tinker OPD训练源码](https://github.com/thinking-machines-lab/tinker-cookbook/compare/54b3cb293038ccf2e49952e46ed5abac7119fdf8...8486b8df2fc32e9713cf96dd5f75d43c7ef70a17)：与正文核对基线有差异；核查受影响段落、支持组合、源码入口和示例。
+- [verl OPD官方文档](https://github.com/verl-project/verl/compare/3c6d9b43b67c74ec343d77874cd8fa6e841523da...a911bca25d6adb26f5bef2dc57e7ba62e99b7ade)：与正文核对基线有差异；核查受影响段落、支持组合、源码入口和示例。
 
 ## 抓取失败
 

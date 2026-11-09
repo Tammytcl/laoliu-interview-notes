@@ -1,6 +1,6 @@
 # infra-zero-deepspeed 来源观察记录
 
-自动检测时间：2026-11-02T09:30:13.724Z
+自动检测时间：2026-11-09T09:47:50.691Z
 
 这是来源变化的候选账本。正文核对日期、固定版本和结论不会由检测脚本覆盖。仓库 commit 更新可能与本文无关；需要阅读差异后再判断。
 
@@ -8,7 +8,7 @@
 
 ## 待核对变化
 
-- [固定engine保存说明](https://github.com/deepspeedai/DeepSpeed/compare/a77aeb676507beb9fe0604bc31c2bf075daf7c46...2d80cedd2bda7223139d7dd2118950db59ab982c)：与正文核对基线有差异；核查受影响段落、支持组合、源码入口和示例。
+- [固定engine保存说明](https://github.com/deepspeedai/DeepSpeed/compare/a77aeb676507beb9fe0604bc31c2bf075daf7c46...a4c989b765b14661cf88a78134385aeaad749c15)：与正文核对基线有差异；核查受影响段落、支持组合、源码入口和示例。
 
 ## 抓取失败
 

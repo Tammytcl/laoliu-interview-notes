@@ -1,11 +1,11 @@
 {
   "version": 1,
   "topicId": "post-training-interview-practice",
-  "checkedAt": "2026-11-02T09:30:23.760Z",
+  "checkedAt": "2026-11-09T09:47:57.416Z",
   "observations": {
     "code-escd": {
-      "checkedAt": "2026-11-02T09:30:23.760Z",
-      "lastSuccessAt": "2026-11-02T09:30:23.760Z",
+      "checkedAt": "2026-11-09T09:47:57.416Z",
+      "lastSuccessAt": "2026-11-09T09:47:57.416Z",
       "status": "ok",
       "revision": "befd0c0a582ec6efc055660467db95d522519591",
       "pendingReview": false

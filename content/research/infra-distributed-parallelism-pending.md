@@ -1,6 +1,6 @@
 # infra-distributed-parallelism 来源观察记录
 
-自动检测时间：2026-11-02T09:30:12.367Z
+自动检测时间：2026-11-09T09:47:49.662Z
 
 这是来源变化的候选账本。正文核对日期、固定版本和结论不会由检测脚本覆盖。仓库 commit 更新可能与本文无关；需要阅读差异后再判断。
 
@@ -8,9 +8,9 @@
 
 ## 待核对变化
 
-- [verl固定代码树](https://github.com/verl-project/verl/compare/8718ca30a3f002f93b7c4fd99b9b2506718681bc...6879e1ab07b9cfd0b4b27c31ca4e7afcad1466b3)：与正文核对基线有差异；核查受影响段落、支持组合、源码入口和示例。
-- [slime固定代码树](https://github.com/THUDM/slime/compare/8c17b676cb57af1d17ee4402e91e9209af84b60b...540ea919e45b8b929198abce008a103be9cfc779)：与正文核对基线有差异；核查受影响段落、支持组合、源码入口和示例。
-- [Megatron固定代码树](https://github.com/NVIDIA/Megatron-LM/compare/ef8cd10b8e34a94c9ad7452e7851f58337f353a0...617eca05c15f53779567c92ead7455e8fcd76b4b)：与正文核对基线有差异；核查受影响段落、支持组合、源码入口和示例。
+- [verl固定代码树](https://github.com/verl-project/verl/compare/8718ca30a3f002f93b7c4fd99b9b2506718681bc...a911bca25d6adb26f5bef2dc57e7ba62e99b7ade)：与正文核对基线有差异；核查受影响段落、支持组合、源码入口和示例。
+- [slime固定代码树](https://github.com/THUDM/slime/compare/8c17b676cb57af1d17ee4402e91e9209af84b60b...79aa41a884ab0bf65222c94418f6357d3c31192b)：与正文核对基线有差异；核查受影响段落、支持组合、源码入口和示例。
+- [Megatron固定代码树](https://github.com/NVIDIA/Megatron-LM/compare/ef8cd10b8e34a94c9ad7452e7851f58337f353a0...928ce7ce256b734f00f1c81ddd3a8958d6b61ebf)：与正文核对基线有差异；核查受影响段落、支持组合、源码入口和示例。
 
 ## 抓取失败
 

@@ -1,6 +1,6 @@
 # infra-mtp-serving 来源观察记录
 
-自动检测时间：2026-11-02T09:30:15.708Z
+自动检测时间：2026-11-09T09:47:52.061Z
 
 这是来源变化的候选账本。正文核对日期、固定版本和结论不会由检测脚本覆盖。仓库 commit 更新可能与本文无关；需要阅读差异后再判断。
 
@@ -8,13 +8,13 @@
 
 ## 待核对变化
 
-- [vLLM加载检查](https://github.com/vllm-project/vllm/compare/18c19eaf239f09bc2543637c73f3b2d05f9bf5c5...5689c2790c911a55c75825aac5166305df0b591d)：与正文核对基线有差异；核查受影响段落、支持组合、源码入口和示例。
-- [DeepSeekMultiTokenPredictor.forward](https://github.com/vllm-project/vllm/compare/18c19eaf239f09bc2543637c73f3b2d05f9bf5c5...5689c2790c911a55c75825aac5166305df0b591d)：与正文核对基线有差异；核查受影响段落、支持组合、源码入口和示例。
-- [DeepseekModelNextN.forward](https://github.com/sgl-project/sglang/compare/23f890613e1798a99e9eee4453350f67751b1637...1ced9a9eb0224e5c12c9ed236b188868a635cd5c)：与正文核对基线有差异；核查受影响段落、支持组合、源码入口和示例。
-- [固定MTP文档](https://github.com/vllm-project/vllm/compare/18c19eaf239f09bc2543637c73f3b2d05f9bf5c5...5689c2790c911a55c75825aac5166305df0b591d)：与正文核对基线有差异；核查受影响段落、支持组合、源码入口和示例。
-- [固定speculative文档](https://github.com/sgl-project/sglang/compare/23f890613e1798a99e9eee4453350f67751b1637...1ced9a9eb0224e5c12c9ed236b188868a635cd5c)：与正文核对基线有差异；核查受影响段落、支持组合、源码入口和示例。
-- [EagleVerifyInput](https://github.com/sgl-project/sglang/compare/23f890613e1798a99e9eee4453350f67751b1637...1ced9a9eb0224e5c12c9ed236b188868a635cd5c)：与正文核对基线有差异；核查受影响段落、支持组合、源码入口和示例。
-- [固定V3 cookbook](https://github.com/sgl-project/sglang/compare/23f890613e1798a99e9eee4453350f67751b1637...1ced9a9eb0224e5c12c9ed236b188868a635cd5c)：与正文核对基线有差异；核查受影响段落、支持组合、源码入口和示例。
+- [vLLM加载检查](https://github.com/vllm-project/vllm/compare/18c19eaf239f09bc2543637c73f3b2d05f9bf5c5...a3c14efbc77c018e8bf579935095a87721349e05)：与正文核对基线有差异；核查受影响段落、支持组合、源码入口和示例。
+- [DeepSeekMultiTokenPredictor.forward](https://github.com/vllm-project/vllm/compare/18c19eaf239f09bc2543637c73f3b2d05f9bf5c5...a3c14efbc77c018e8bf579935095a87721349e05)：与正文核对基线有差异；核查受影响段落、支持组合、源码入口和示例。
+- [DeepseekModelNextN.forward](https://github.com/sgl-project/sglang/compare/23f890613e1798a99e9eee4453350f67751b1637...a4b880119793c14c5b210c12655b54f612d28f90)：与正文核对基线有差异；核查受影响段落、支持组合、源码入口和示例。
+- [固定MTP文档](https://github.com/vllm-project/vllm/compare/18c19eaf239f09bc2543637c73f3b2d05f9bf5c5...a3c14efbc77c018e8bf579935095a87721349e05)：与正文核对基线有差异；核查受影响段落、支持组合、源码入口和示例。
+- [固定speculative文档](https://github.com/sgl-project/sglang/compare/23f890613e1798a99e9eee4453350f67751b1637...a4b880119793c14c5b210c12655b54f612d28f90)：与正文核对基线有差异；核查受影响段落、支持组合、源码入口和示例。
+- [EagleVerifyInput](https://github.com/sgl-project/sglang/compare/23f890613e1798a99e9eee4453350f67751b1637...a4b880119793c14c5b210c12655b54f612d28f90)：与正文核对基线有差异；核查受影响段落、支持组合、源码入口和示例。
+- [固定V3 cookbook](https://github.com/sgl-project/sglang/compare/23f890613e1798a99e9eee4453350f67751b1637...a4b880119793c14c5b210c12655b54f612d28f90)：与正文核对基线有差异；核查受影响段落、支持组合、源码入口和示例。
 
 ## 抓取失败
 

@@ -1,77 +1,77 @@
 {
   "version": 1,
   "topicId": "infra-mtp-serving",
-  "checkedAt": "2026-11-02T09:30:15.708Z",
+  "checkedAt": "2026-11-09T09:47:52.061Z",
   "observations": {
     "infra-mtp-serving-source-04": {
-      "checkedAt": "2026-11-02T09:30:15.708Z",
-      "lastSuccessAt": "2026-11-02T09:30:15.708Z",
+      "checkedAt": "2026-11-09T09:47:52.061Z",
+      "lastSuccessAt": "2026-11-09T09:47:52.061Z",
       "status": "ok",
-      "revision": "1ced9a9eb0224e5c12c9ed236b188868a635cd5c",
-      "sha256": "d45c1dd04505facf25279056cbf75b7898f06bcb533c464d35f254f8aff692ab",
+      "revision": "a4b880119793c14c5b210c12655b54f612d28f90",
+      "sha256": "67b0ec8b8f43818428253601c4c0b90a3e9e4002b96d81961541737e222c85f6",
       "pendingReview": true
     },
     "infra-mtp-serving-source-02": {
-      "checkedAt": "2026-11-02T09:30:15.708Z",
-      "lastSuccessAt": "2026-11-02T09:30:15.708Z",
+      "checkedAt": "2026-11-09T09:47:52.061Z",
+      "lastSuccessAt": "2026-11-09T09:47:52.061Z",
       "status": "ok",
-      "revision": "5689c2790c911a55c75825aac5166305df0b591d",
-      "sha256": "640f2c4e592d2e4244910b6b97fe77fa7ffd62eab228894a3cbdc5ddf9c3fc20",
+      "revision": "a3c14efbc77c018e8bf579935095a87721349e05",
+      "sha256": "ee200f1966fb78d95ad34e834b626363a652265acfbe6d6878d2f1f37d61da69",
       "pendingReview": true
     },
     "infra-mtp-serving-source-03": {
-      "checkedAt": "2026-11-02T09:30:15.708Z",
-      "lastSuccessAt": "2026-11-02T09:30:15.708Z",
+      "checkedAt": "2026-11-09T09:47:52.061Z",
+      "lastSuccessAt": "2026-11-09T09:47:52.061Z",
       "status": "ok",
-      "revision": "5689c2790c911a55c75825aac5166305df0b591d",
-      "sha256": "640f2c4e592d2e4244910b6b97fe77fa7ffd62eab228894a3cbdc5ddf9c3fc20",
+      "revision": "a3c14efbc77c018e8bf579935095a87721349e05",
+      "sha256": "ee200f1966fb78d95ad34e834b626363a652265acfbe6d6878d2f1f37d61da69",
       "pendingReview": true
     },
     "infra-mtp-serving-source-01": {
-      "checkedAt": "2026-11-02T09:30:15.708Z",
-      "lastSuccessAt": "2026-11-02T09:30:15.708Z",
+      "checkedAt": "2026-11-09T09:47:52.061Z",
+      "lastSuccessAt": "2026-11-09T09:47:52.061Z",
       "status": "ok",
       "revision": "9b4e9788e4a3a731f7567338ed15d3ec549ce03b",
       "sha256": "0d2be8b8c9cb98f3f503f9aa029d1f2907282e68c7cf9429f9f6759ec52c8b23",
       "pendingReview": false
     },
     "infra-mtp-serving-source-07": {
-      "checkedAt": "2026-11-02T09:30:15.708Z",
-      "lastSuccessAt": "2026-11-02T09:30:15.708Z",
+      "checkedAt": "2026-11-09T09:47:52.061Z",
+      "lastSuccessAt": "2026-11-09T09:47:52.061Z",
       "status": "ok",
-      "revision": "1ced9a9eb0224e5c12c9ed236b188868a635cd5c",
-      "sha256": "125e744bfc23ab425c9ef498f4f0c9f59f4470ee7620327aa72e5731d9d0e91a",
+      "revision": "a4b880119793c14c5b210c12655b54f612d28f90",
+      "sha256": "c267c78d242aa3e04fde028162966e627725dc6da461dc4e60732c5efc7d22a2",
       "pendingReview": true
     },
     "infra-mtp-serving-source-08": {
-      "checkedAt": "2026-11-02T09:30:15.708Z",
-      "lastSuccessAt": "2026-11-02T09:30:15.708Z",
+      "checkedAt": "2026-11-09T09:47:52.061Z",
+      "lastSuccessAt": "2026-11-09T09:47:52.061Z",
       "status": "ok",
-      "revision": "1ced9a9eb0224e5c12c9ed236b188868a635cd5c",
-      "sha256": "55f66b699e7f772e75e82b8f34c4a7596b3e3e766c28cf32313213b30b4ccb48",
+      "revision": "a4b880119793c14c5b210c12655b54f612d28f90",
+      "sha256": "4f7d898a238117acd6c368fa906c0c08bf0bcf2fbc59177d0db8cdeb81f31cf0",
       "pendingReview": true
     },
     "infra-mtp-serving-source-05": {
-      "checkedAt": "2026-11-02T09:30:15.708Z",
-      "lastSuccessAt": "2026-11-02T09:30:15.708Z",
+      "checkedAt": "2026-11-09T09:47:52.061Z",
+      "lastSuccessAt": "2026-11-09T09:47:52.061Z",
       "status": "ok",
-      "revision": "5689c2790c911a55c75825aac5166305df0b591d",
+      "revision": "a3c14efbc77c018e8bf579935095a87721349e05",
       "sha256": "d45eaafb928d310a6fac8b70a2fcc2e879b94a084ad985def9eb71e423517100",
       "pendingReview": true
     },
     "infra-mtp-serving-source-06": {
-      "checkedAt": "2026-11-02T09:30:15.708Z",
-      "lastSuccessAt": "2026-11-02T09:30:15.708Z",
+      "checkedAt": "2026-11-09T09:47:52.061Z",
+      "lastSuccessAt": "2026-11-09T09:47:52.061Z",
       "status": "ok",
-      "revision": "1ced9a9eb0224e5c12c9ed236b188868a635cd5c",
-      "sha256": "47ce07e02b223b628cfdddfe27de565fd168922a0f67ce91d5115f85d23cfb9d",
+      "revision": "a4b880119793c14c5b210c12655b54f612d28f90",
+      "sha256": "98a3a3b385541a11d8efa3c78e94b8a23c22f617f0eaccf22f194204007f5582",
       "pendingReview": true
     },
     "infra-mtp-serving-source-09": {
-      "checkedAt": "2026-11-02T09:30:15.708Z",
-      "lastSuccessAt": "2026-11-02T09:30:15.708Z",
+      "checkedAt": "2026-11-09T09:47:52.061Z",
+      "lastSuccessAt": "2026-11-09T09:47:52.061Z",
       "status": "ok",
-      "revision": "5689c2790c911a55c75825aac5166305df0b591d",
+      "revision": "a3c14efbc77c018e8bf579935095a87721349e05",
       "sha256": "7cb64046883e47457583ac94be3f0761be14a77701571c5d5760742f9cd49900",
       "pendingReview": false
     }

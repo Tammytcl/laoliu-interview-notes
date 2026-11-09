@@ -1,6 +1,6 @@
 # agent-code-components 来源观察记录
 
-自动检测时间：2026-11-02T09:30:19.134Z
+自动检测时间：2026-11-09T09:47:54.202Z
 
 这是来源变化的候选账本。正文核对日期、固定版本和结论不会由检测脚本覆盖。仓库 commit 更新可能与本文无关；需要阅读差异后再判断。
 
@@ -8,7 +8,7 @@
 
 ## 待核对变化
 
-- [e2b-dev/E2B packages/python-sdk/e2b/sandbox_sync/commands/command.py](https://github.com/e2b-dev/E2B/compare/df6c368152b067512702fc677952c0fc4e13c2f0...8cc9ed1e30a57d89cefaec112680567d62f21112)：与正文核对基线有差异；核查受影响段落、支持组合、源码入口和示例。
+- [e2b-dev/E2B packages/python-sdk/e2b/sandbox_sync/commands/command.py](https://github.com/e2b-dev/E2B/compare/df6c368152b067512702fc677952c0fc4e13c2f0...2d7eb43dfe09215abbdf611abbdacc0c68998977)：与正文核对基线有差异；核查受影响段落、支持组合、源码入口和示例。
 
 ## 抓取失败
 

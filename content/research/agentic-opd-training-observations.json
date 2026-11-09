@@ -1,11 +1,11 @@
 {
   "version": 1,
   "topicId": "agentic-opd-training",
-  "checkedAt": "2026-11-02T09:30:21.204Z",
+  "checkedAt": "2026-11-09T09:47:55.577Z",
   "observations": {
     "agentic-opd-training-01": {
-      "checkedAt": "2026-11-02T09:30:21.204Z",
-      "lastSuccessAt": "2026-11-02T09:30:21.204Z",
+      "checkedAt": "2026-11-09T09:47:55.577Z",
+      "lastSuccessAt": "2026-11-09T09:47:55.577Z",
       "status": "ok",
       "revision": "61f90c5c3f2c75b0f4be2742682baab63b8a8672",
       "pendingReview": false
