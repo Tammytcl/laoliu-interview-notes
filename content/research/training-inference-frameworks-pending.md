@@ -1,22 +1,24 @@
 # training-inference-frameworks 来源观察记录
 
-自动检测时间：2026-11-09T09:47:48.524Z
+自动检测时间：2026-11-16T09:42:03.649Z
 
 这是来源变化的候选账本。正文核对日期、固定版本和结论不会由检测脚本覆盖。仓库 commit 更新可能与本文无关；需要阅读差异后再判断。
 
-观察 12 个来源条目；待核对 10 项；本轮失败 0 项。未观察的网页仍需在整理任务中核查。
+观察 12 个来源条目；待核对 12 项；本轮失败 0 项。未观察的网页仍需在整理任务中核查。
 
 ## 待核对变化
 
-- [Megatron-LM](https://github.com/NVIDIA/Megatron-LM/compare/b1a6f076993662664f824d1cb8e81e51cf572b8b...928ce7ce256b734f00f1c81ddd3a8958d6b61ebf)：与正文核对基线有差异；核查受影响段落、支持组合、源码入口和示例。
-- [verl 官方仓库](https://github.com/verl-project/verl/compare/8718ca30a3f002f93b7c4fd99b9b2506718681bc...a911bca25d6adb26f5bef2dc57e7ba62e99b7ade)：与正文核对基线有差异；核查受影响段落、支持组合、源码入口和示例。
+- [Megatron-LM](https://github.com/NVIDIA/Megatron-LM/compare/b1a6f076993662664f824d1cb8e81e51cf572b8b...11e50e00e8b51da8fd90df2f8d106d49479e84d1)：与正文核对基线有差异；核查受影响段落、支持组合、源码入口和示例。
+- [verl 官方仓库](https://github.com/verl-project/verl/compare/8718ca30a3f002f93b7c4fd99b9b2506718681bc...622cd6c12b2796a3b541fe50babebf8aa3076799)：与正文核对基线有差异；核查受影响段落、支持组合、源码入口和示例。
 - [slime 官方仓库](https://github.com/THUDM/slime/compare/8c17b676cb57af1d17ee4402e91e9209af84b60b...79aa41a884ab0bf65222c94418f6357d3c31192b)：与正文核对基线有差异；核查受影响段落、支持组合、源码入口和示例。
-- [示例目录](https://github.com/verl-project/verl/compare/8718ca30a3f002f93b7c4fd99b9b2506718681bc...a911bca25d6adb26f5bef2dc57e7ba62e99b7ade)：与正文核对基线有差异；核查受影响段落、支持组合、源码入口和示例。
-- [Qwen 数学 GRPO 示例](https://github.com/verl-project/verl/compare/8718ca30a3f002f93b7c4fd99b9b2506718681bc...a911bca25d6adb26f5bef2dc57e7ba62e99b7ade)：与正文核对基线有差异；核查受影响段落、支持组合、源码入口和示例。
+- [示例目录](https://github.com/verl-project/verl/compare/8718ca30a3f002f93b7c4fd99b9b2506718681bc...622cd6c12b2796a3b541fe50babebf8aa3076799)：与正文核对基线有差异；核查受影响段落、支持组合、源码入口和示例。
+- [Qwen 数学 GRPO 示例](https://github.com/verl-project/verl/compare/8718ca30a3f002f93b7c4fd99b9b2506718681bc...622cd6c12b2796a3b541fe50babebf8aa3076799)：与正文核对基线有差异；核查受影响段落、支持组合、源码入口和示例。
 - [Qwen3-4B 启动脚本](https://github.com/THUDM/slime/compare/8c17b676cb57af1d17ee4402e91e9209af84b60b...79aa41a884ab0bf65222c94418f6357d3c31192b)：与正文核对基线有差异；核查受影响段落、支持组合、源码入口和示例。
 - [OpenRLHF](https://github.com/OpenRLHF/OpenRLHF/compare/dc2a7ad326f619fc5a47737ea47d1920ce2c0b53...26494490bc237f6c3af62dab6117e6bbb0a78dba)：与正文核对基线有差异；核查受影响段落、支持组合、源码入口和示例。
-- [AReaL](https://github.com/areal-project/AReaL/compare/2fad2d0e308fe631e70e971b97188ad5c5cc03cb...285a1c3bf2145906c5e9d33ba459f781cbb3e089)：与正文核对基线有差异；核查受影响段落、支持组合、源码入口和示例。
+- [AReaL](https://github.com/areal-project/AReaL/compare/2fad2d0e308fe631e70e971b97188ad5c5cc03cb...7fb167a30e04c9cda1c4dcd6eb88276a2c3d935e)：与正文核对基线有差异；核查受影响段落、支持组合、源码入口和示例。
 - [slime fully_async 示例](https://github.com/THUDM/slime/compare/8c17b676cb57af1d17ee4402e91e9209af84b60b...79aa41a884ab0bf65222c94418f6357d3c31192b)：与正文核对基线有差异；核查受影响段落、支持组合、源码入口和示例。
+- [verl-fully-async](https://github.com/verl-project/verl/compare/8718ca30a3f002f93b7c4fd99b9b2506718681bc...622cd6c12b2796a3b541fe50babebf8aa3076799)：与正文核对基线有差异；核查受影响段落、支持组合、源码入口和示例。
+- [verl-hybrid-flow](https://github.com/verl-project/verl/compare/8718ca30a3f002f93b7c4fd99b9b2506718681bc...622cd6c12b2796a3b541fe50babebf8aa3076799)：与正文核对基线有差异；核查受影响段落、支持组合、源码入口和示例。
 - [slime-agent-guide](https://github.com/THUDM/slime/compare/8c17b676cb57af1d17ee4402e91e9209af84b60b...79aa41a884ab0bf65222c94418f6357d3c31192b)：与正文核对基线有差异；核查受影响段落、支持组合、源码入口和示例。
 
 ## 抓取失败

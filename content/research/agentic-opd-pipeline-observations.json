@@ -1,18 +1,18 @@
 {
   "version": 1,
   "topicId": "agentic-opd-pipeline",
-  "checkedAt": "2026-11-09T09:47:55.893Z",
+  "checkedAt": "2026-11-16T09:42:14.246Z",
   "observations": {
     "agentic-opd-pipeline-01": {
-      "checkedAt": "2026-11-09T09:47:55.893Z",
-      "lastSuccessAt": "2026-11-09T09:47:55.893Z",
+      "checkedAt": "2026-11-16T09:42:14.246Z",
+      "lastSuccessAt": "2026-11-16T09:42:14.246Z",
       "status": "ok",
       "revision": "befd0c0a582ec6efc055660467db95d522519591",
       "pendingReview": false
     },
     "agentic-opd-pipeline-06": {
-      "checkedAt": "2026-11-09T09:47:55.893Z",
-      "lastSuccessAt": "2026-11-09T09:47:55.893Z",
+      "checkedAt": "2026-11-16T09:42:14.246Z",
+      "lastSuccessAt": "2026-11-16T09:42:14.246Z",
       "status": "ok",
       "revision": "befd0c0a582ec6efc055660467db95d522519591",
       "pendingReview": false

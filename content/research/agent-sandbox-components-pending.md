@@ -1,6 +1,6 @@
 # agent-sandbox-components 来源观察记录
 
-自动检测时间：2026-11-09T09:47:52.806Z
+自动检测时间：2026-11-16T09:42:09.841Z
 
 这是来源变化的候选账本。正文核对日期、固定版本和结论不会由检测脚本覆盖。仓库 commit 更新可能与本文无关；需要阅读差异后再判断。
 
@@ -10,16 +10,16 @@
 
 - [Harbor核心对象](https://docs.harborframework.com/core-concepts/index)：与正文核对基线有差异；核查受影响段落、支持组合、源码入口和示例。
 - [Harbor ATIF](https://docs.harborframework.com/agents/atif)：与正文核对基线有差异；核查受影响段落、支持组合、源码入口和示例。
-- [harbor-framework/harbor src/harbor/trial/trial.py](https://github.com/harbor-framework/harbor/compare/09f5b964f8e5075f7e52fd08c9994dfc80ad5d24...9c7a39b991d7e2205019f6be0598cbd22d84bfc3)：与正文核对基线有差异；核查受影响段落、支持组合、源码入口和示例。
-- [harbor-framework/harbor src/harbor/models/task/config.py](https://github.com/harbor-framework/harbor/compare/09f5b964f8e5075f7e52fd08c9994dfc80ad5d24...9c7a39b991d7e2205019f6be0598cbd22d84bfc3)：与正文核对基线有差异；核查受影响段落、支持组合、源码入口和示例。
+- [harbor-framework/harbor src/harbor/trial/trial.py](https://github.com/harbor-framework/harbor/compare/09f5b964f8e5075f7e52fd08c9994dfc80ad5d24...ec6aeab7fe0eb51df52b4e72c524daf5ea9cc5f4)：与正文核对基线有差异；核查受影响段落、支持组合、源码入口和示例。
+- [harbor-framework/harbor src/harbor/models/task/config.py](https://github.com/harbor-framework/harbor/compare/09f5b964f8e5075f7e52fd08c9994dfc80ad5d24...ec6aeab7fe0eb51df52b4e72c524daf5ea9cc5f4)：与正文核对基线有差异；核查受影响段落、支持组合、源码入口和示例。
 - [Harbor任务配置网页](https://docs.harborframework.com/tasks/configuration)：与正文核对基线有差异；核查受影响段落、支持组合、源码入口和示例。
 - [Harbor验证与产物](https://docs.harborframework.com/tasks/verifier)：与正文核对基线有差异；核查受影响段落、支持组合、源码入口和示例。
-- [e2b-dev/E2B packages/python-sdk/e2b/sandbox_sync/commands/command.py](https://github.com/e2b-dev/E2B/compare/df6c368152b067512702fc677952c0fc4e13c2f0...2d7eb43dfe09215abbdf611abbdacc0c68998977)：与正文核对基线有差异；核查受影响段落、支持组合、源码入口和示例。
+- [e2b-dev/E2B packages/python-sdk/e2b/sandbox_sync/commands/command.py](https://github.com/e2b-dev/E2B/compare/df6c368152b067512702fc677952c0fc4e13c2f0...6dc8d5a10aa5db8dc8cf9c4d95fc769d886197fd)：与正文核对基线有差异；核查受影响段落、支持组合、源码入口和示例。
 - [E2B full持久化](https://docs.e2b.dev/sandbox/persistence)：与正文核对基线有差异；核查受影响段落、支持组合、源码入口和示例。
 - [E2B filesystem-only](https://docs.e2b.dev/sandbox/filesystem-only-snapshots)：与正文核对基线有差异；核查受影响段落、支持组合、源码入口和示例。
 - [E2B fork](https://docs.e2b.dev/sandbox/fork)：与正文核对基线有差异；核查受影响段落、支持组合、源码入口和示例。
-- [alibaba/OpenSandbox README.md](https://github.com/alibaba/OpenSandbox/compare/9bc2967b78a9506a9282b0b28dc5db0cb8c50cc0...fed6e60193efe913d470ad545c13289021c1d49e)：与正文核对基线有差异；核查受影响段落、支持组合、源码入口和示例。
-- [harbor-framework/harbor src/harbor/environments/e2b.py](https://github.com/harbor-framework/harbor/compare/09f5b964f8e5075f7e52fd08c9994dfc80ad5d24...9c7a39b991d7e2205019f6be0598cbd22d84bfc3)：与正文核对基线有差异；核查受影响段落、支持组合、源码入口和示例。
+- [alibaba/OpenSandbox README.md](https://github.com/alibaba/OpenSandbox/compare/9bc2967b78a9506a9282b0b28dc5db0cb8c50cc0...4ca105e813240d663cfa9a0c9ccb50b70624246a)：与正文核对基线有差异；核查受影响段落、支持组合、源码入口和示例。
+- [harbor-framework/harbor src/harbor/environments/e2b.py](https://github.com/harbor-framework/harbor/compare/09f5b964f8e5075f7e52fd08c9994dfc80ad5d24...ec6aeab7fe0eb51df52b4e72c524daf5ea9cc5f4)：与正文核对基线有差异；核查受影响段落、支持组合、源码入口和示例。
 
 ## 抓取失败
 

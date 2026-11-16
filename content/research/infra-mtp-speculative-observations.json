@@ -1,10 +1,10 @@
 {
   "version": 1,
   "topicId": "infra-mtp-speculative",
-  "checkedAt": "2026-11-09T09:47:51.691Z",
+  "checkedAt": "2026-11-16T09:42:07.799Z",
   "observations": {
     "infra-mtp-speculative-source-01": {
-      "checkedAt": "2026-11-09T09:47:51.691Z",
+      "checkedAt": "2026-11-16T09:42:07.799Z",
       "lastSuccessAt": "2026-11-02T09:30:15.065Z",
       "status": "error",
       "revision": "5689c2790c911a55c75825aac5166305df0b591d",
@@ -13,7 +13,7 @@
       "reason": "http-404"
     },
     "infra-mtp-speculative-source-03": {
-      "checkedAt": "2026-11-09T09:47:51.691Z",
+      "checkedAt": "2026-11-16T09:42:07.799Z",
       "lastSuccessAt": "2026-11-02T09:30:15.065Z",
       "status": "error",
       "revision": "5689c2790c911a55c75825aac5166305df0b591d",
@@ -22,7 +22,7 @@
       "reason": "http-404"
     },
     "infra-mtp-speculative-source-06": {
-      "checkedAt": "2026-11-09T09:47:51.691Z",
+      "checkedAt": "2026-11-16T09:42:07.799Z",
       "lastSuccessAt": "2026-11-02T09:30:15.065Z",
       "status": "error",
       "revision": "5689c2790c911a55c75825aac5166305df0b591d",
@@ -31,11 +31,11 @@
       "reason": "http-404"
     },
     "infra-mtp-speculative-source-07": {
-      "checkedAt": "2026-11-09T09:47:51.691Z",
-      "lastSuccessAt": "2026-11-09T09:47:51.691Z",
+      "checkedAt": "2026-11-16T09:42:07.799Z",
+      "lastSuccessAt": "2026-11-16T09:42:07.799Z",
       "status": "ok",
-      "revision": "a3c14efbc77c018e8bf579935095a87721349e05",
-      "sha256": "f82166d055a2e1b467f61d4873f80955db84b655299be02857f1f6706ac816a6",
+      "revision": "cf0a516f95cf2ad6f63c11980123d288790b7f4f",
+      "sha256": "98b40ec02e211245d8155481d1c11e5f909fa53616a74d022c2d553f5b1bc093",
       "pendingReview": true
     }
   }

@@ -1,27 +1,27 @@
 {
   "version": 1,
   "topicId": "infra-distributed-parallelism",
-  "checkedAt": "2026-11-09T09:47:49.662Z",
+  "checkedAt": "2026-11-16T09:42:04.713Z",
   "observations": {
     "infra-distributed-parallelism-source-11": {
-      "checkedAt": "2026-11-09T09:47:49.662Z",
-      "lastSuccessAt": "2026-11-09T09:47:49.662Z",
+      "checkedAt": "2026-11-16T09:42:04.713Z",
+      "lastSuccessAt": "2026-11-16T09:42:04.713Z",
       "status": "ok",
       "revision": "79aa41a884ab0bf65222c94418f6357d3c31192b",
       "pendingReview": true
     },
     "infra-distributed-parallelism-source-10": {
-      "checkedAt": "2026-11-09T09:47:49.662Z",
-      "lastSuccessAt": "2026-11-09T09:47:49.662Z",
+      "checkedAt": "2026-11-16T09:42:04.713Z",
+      "lastSuccessAt": "2026-11-16T09:42:04.713Z",
       "status": "ok",
-      "revision": "a911bca25d6adb26f5bef2dc57e7ba62e99b7ade",
+      "revision": "622cd6c12b2796a3b541fe50babebf8aa3076799",
       "pendingReview": true
     },
     "infra-distributed-parallelism-source-12": {
-      "checkedAt": "2026-11-09T09:47:49.662Z",
-      "lastSuccessAt": "2026-11-09T09:47:49.662Z",
+      "checkedAt": "2026-11-16T09:42:04.713Z",
+      "lastSuccessAt": "2026-11-16T09:42:04.713Z",
       "status": "ok",
-      "revision": "928ce7ce256b734f00f1c81ddd3a8958d6b61ebf",
+      "revision": "11e50e00e8b51da8fd90df2f8d106d49479e84d1",
       "pendingReview": true
     }
   }
