@@ -2,41 +2,41 @@
   "paper-react": {
     "attempts": {
       "openalex": {
-        "checkedAt": "2026-11-16T09:42:17.212Z",
+        "checkedAt": "2026-11-23T10:45:17.043Z",
         "status": "ok"
       }
     },
     "openalex": {
-      "count": 5910,
+      "count": 10002,
       "url": "https://openalex.org/W4304195432",
       "matchedTitle": "ReAct: Synergizing Reasoning and Acting in Language Models",
-      "fetchedAt": "2026-11-16T09:42:17.212Z"
+      "fetchedAt": "2026-11-23T10:45:17.043Z"
     }
   },
   "paper-ddpm": {
     "openalex": {
-      "count": 11061,
+      "count": 21081,
       "url": "https://openalex.org/W3036167779",
       "matchedTitle": "Denoising Diffusion Probabilistic Models",
-      "fetchedAt": "2026-11-16T09:42:17.212Z"
+      "fetchedAt": "2026-11-23T10:45:17.043Z"
     },
     "attempts": {
       "openalex": {
-        "checkedAt": "2026-11-16T09:42:17.212Z",
+        "checkedAt": "2026-11-23T10:45:17.043Z",
         "status": "ok"
       }
     }
   },
   "paper-pagedattention": {
     "openalex": {
-      "count": 3968,
+      "count": 11137,
       "url": "https://openalex.org/W4387321091",
       "matchedTitle": "Efficient Memory Management for Large Language Model Serving with PagedAttention",
-      "fetchedAt": "2026-11-16T09:42:17.212Z"
+      "fetchedAt": "2026-11-23T10:45:17.043Z"
     },
     "attempts": {
       "openalex": {
-        "checkedAt": "2026-11-16T09:42:17.212Z",
+        "checkedAt": "2026-11-23T10:45:17.043Z",
         "status": "ok"
       }
     }
@@ -50,8 +50,9 @@
     },
     "attempts": {
       "openalex": {
-        "checkedAt": "2026-11-16T09:42:17.212Z",
-        "status": "ok"
+        "checkedAt": "2026-11-23T10:45:17.043Z",
+        "status": "failed",
+        "reason": "http-429"
       }
     }
   },
@@ -64,21 +65,22 @@
     },
     "attempts": {
       "openalex": {
-        "checkedAt": "2026-11-16T09:42:17.212Z",
-        "status": "ok"
+        "checkedAt": "2026-11-23T10:45:17.043Z",
+        "status": "failed",
+        "reason": "http-429"
       }
     }
   },
   "paper-opd-2306-13649": {
     "openalex": {
-      "count": 275,
+      "count": 348,
       "url": "https://openalex.org/W4382173266",
       "matchedTitle": "On-Policy Distillation of Language Models: Learning from Self-Generated Mistakes",
-      "fetchedAt": "2026-11-16T09:42:17.212Z"
+      "fetchedAt": "2026-11-23T10:45:17.043Z"
     },
     "attempts": {
       "openalex": {
-        "checkedAt": "2026-11-16T09:42:17.212Z",
+        "checkedAt": "2026-11-23T10:45:17.043Z",
         "status": "ok"
       }
     }
@@ -92,21 +94,22 @@
     },
     "attempts": {
       "openalex": {
-        "checkedAt": "2026-11-16T09:42:17.212Z",
-        "status": "ok"
+        "checkedAt": "2026-11-23T10:45:17.043Z",
+        "status": "failed",
+        "reason": "http-429"
       }
     }
   },
   "paper-opd-2602-12275": {
     "openalex": {
-      "count": 217,
+      "count": 240,
       "url": "https://openalex.org/W7128814765",
       "matchedTitle": "On-Policy Context Distillation for Language Models",
-      "fetchedAt": "2026-11-16T09:42:17.212Z"
+      "fetchedAt": "2026-11-23T10:45:17.043Z"
     },
     "attempts": {
       "openalex": {
-        "checkedAt": "2026-11-16T09:42:17.212Z",
+        "checkedAt": "2026-11-23T10:45:17.043Z",
         "status": "ok"
       }
     }
@@ -120,8 +123,9 @@
     },
     "attempts": {
       "openalex": {
-        "checkedAt": "2026-11-16T09:42:17.212Z",
-        "status": "ok"
+        "checkedAt": "2026-11-23T10:45:17.043Z",
+        "status": "failed",
+        "reason": "http-429"
       }
     }
   },
@@ -134,21 +138,22 @@
     },
     "attempts": {
       "openalex": {
-        "checkedAt": "2026-11-16T09:42:17.212Z",
-        "status": "ok"
+        "checkedAt": "2026-11-23T10:45:17.043Z",
+        "status": "failed",
+        "reason": "http-429"
       }
     }
   },
   "paper-opd-2603-24472": {
     "openalex": {
-      "count": 105,
+      "count": 113,
       "url": "https://openalex.org/W7140517510",
       "matchedTitle": "Why Does Self-Distillation (Sometimes) Degrade the Reasoning Capability of LLMs?",
-      "fetchedAt": "2026-11-16T09:42:17.212Z"
+      "fetchedAt": "2026-11-23T10:45:17.043Z"
     },
     "attempts": {
       "openalex": {
-        "checkedAt": "2026-11-16T09:42:17.212Z",
+        "checkedAt": "2026-11-23T10:45:17.043Z",
         "status": "ok"
       }
     }
@@ -162,8 +167,9 @@
     },
     "attempts": {
       "openalex": {
-        "checkedAt": "2026-11-16T09:42:17.212Z",
-        "status": "ok"
+        "checkedAt": "2026-11-23T10:45:17.043Z",
+        "status": "failed",
+        "reason": "http-429"
       }
     }
   },
@@ -176,8 +182,9 @@
     },
     "attempts": {
       "openalex": {
-        "checkedAt": "2026-11-16T09:42:17.212Z",
-        "status": "ok"
+        "checkedAt": "2026-11-23T10:45:17.043Z",
+        "status": "failed",
+        "reason": "http-429"
       }
     }
   },
@@ -190,21 +197,22 @@
     },
     "attempts": {
       "openalex": {
-        "checkedAt": "2026-11-16T09:42:17.212Z",
-        "status": "ok"
+        "checkedAt": "2026-11-23T10:45:17.043Z",
+        "status": "failed",
+        "reason": "http-429"
       }
     }
   },
   "paper-opd-2605-07711": {
     "openalex": {
-      "count": 18,
+      "count": 20,
       "url": "https://openalex.org/W7160849202",
       "matchedTitle": "SimCT: Recovering Lost Supervision for Cross-Tokenizer On-Policy Distillation",
-      "fetchedAt": "2026-11-16T09:42:17.212Z"
+      "fetchedAt": "2026-11-23T10:45:17.043Z"
     },
     "attempts": {
       "openalex": {
-        "checkedAt": "2026-11-16T09:42:17.212Z",
+        "checkedAt": "2026-11-23T10:45:17.043Z",
         "status": "ok"
       }
     }
@@ -218,8 +226,9 @@
     },
     "attempts": {
       "openalex": {
-        "checkedAt": "2026-11-16T09:42:17.212Z",
-        "status": "ok"
+        "checkedAt": "2026-11-23T10:45:17.043Z",
+        "status": "failed",
+        "reason": "http-429"
       }
     }
   },
@@ -232,21 +241,22 @@
     },
     "attempts": {
       "openalex": {
-        "checkedAt": "2026-11-16T09:42:17.212Z",
-        "status": "ok"
+        "checkedAt": "2026-11-23T10:45:17.043Z",
+        "status": "failed",
+        "reason": "http-429"
       }
     }
   },
   "paper-opd-2606-01249": {
     "openalex": {
-      "count": 55,
+      "count": 56,
       "url": "https://openalex.org/W7163131677",
       "matchedTitle": "Trust Region On-Policy Distillation",
-      "fetchedAt": "2026-11-16T09:42:17.212Z"
+      "fetchedAt": "2026-11-23T10:45:17.043Z"
     },
     "attempts": {
       "openalex": {
-        "checkedAt": "2026-11-16T09:42:17.212Z",
+        "checkedAt": "2026-11-23T10:45:17.043Z",
         "status": "ok"
       }
     }
@@ -260,8 +270,9 @@
     },
     "attempts": {
       "openalex": {
-        "checkedAt": "2026-11-16T09:42:17.212Z",
-        "status": "ok"
+        "checkedAt": "2026-11-23T10:45:17.043Z",
+        "status": "failed",
+        "reason": "http-429"
       }
     }
   },
@@ -274,8 +285,9 @@
     },
     "attempts": {
       "openalex": {
-        "checkedAt": "2026-11-16T09:42:17.212Z",
-        "status": "ok"
+        "checkedAt": "2026-11-23T10:45:17.043Z",
+        "status": "failed",
+        "reason": "http-429"
       }
     }
   },
@@ -288,21 +300,22 @@
     },
     "attempts": {
       "openalex": {
-        "checkedAt": "2026-11-16T09:42:17.212Z",
-        "status": "ok"
+        "checkedAt": "2026-11-23T10:45:17.043Z",
+        "status": "failed",
+        "reason": "http-429"
       }
     }
   },
   "paper-opd-2606-30406": {
     "openalex": {
-      "count": 100,
+      "count": 123,
       "url": "https://openalex.org/W7166701728",
       "matchedTitle": "MOPD: Multi-Teacher On-Policy Distillation for Capability Integration in LLM Post-Training",
-      "fetchedAt": "2026-11-16T09:42:17.212Z"
+      "fetchedAt": "2026-11-23T10:45:17.043Z"
     },
     "attempts": {
       "openalex": {
-        "checkedAt": "2026-11-16T09:42:17.212Z",
+        "checkedAt": "2026-11-23T10:45:17.043Z",
         "status": "ok"
       }
     }
@@ -316,8 +329,9 @@
     },
     "attempts": {
       "openalex": {
-        "checkedAt": "2026-11-16T09:42:17.212Z",
-        "status": "ok"
+        "checkedAt": "2026-11-23T10:45:17.043Z",
+        "status": "failed",
+        "reason": "http-429"
       }
     }
   },
@@ -330,8 +344,9 @@
     },
     "attempts": {
       "openalex": {
-        "checkedAt": "2026-11-16T09:42:17.212Z",
-        "status": "ok"
+        "checkedAt": "2026-11-23T10:45:17.043Z",
+        "status": "failed",
+        "reason": "http-429"
       }
     }
   },
@@ -344,21 +359,22 @@
     },
     "attempts": {
       "openalex": {
-        "checkedAt": "2026-11-16T09:42:17.212Z",
-        "status": "ok"
+        "checkedAt": "2026-11-23T10:45:17.043Z",
+        "status": "failed",
+        "reason": "http-429"
       }
     }
   },
   "paper-opd-2608-06296": {
     "openalex": {
-      "count": 26,
+      "count": 31,
       "url": "https://openalex.org/W7201842969",
       "matchedTitle": "On-Policy Self-Distillation without Any Supervision",
-      "fetchedAt": "2026-11-16T09:42:17.212Z"
+      "fetchedAt": "2026-11-23T10:45:17.043Z"
     },
     "attempts": {
       "openalex": {
-        "checkedAt": "2026-11-16T09:42:17.212Z",
+        "checkedAt": "2026-11-23T10:45:17.043Z",
         "status": "ok"
       }
     }
@@ -372,8 +388,9 @@
     },
     "attempts": {
       "openalex": {
-        "checkedAt": "2026-11-16T09:42:17.212Z",
-        "status": "ok"
+        "checkedAt": "2026-11-23T10:45:17.043Z",
+        "status": "failed",
+        "reason": "http-429"
       }
     }
   },
@@ -386,8 +403,9 @@
     },
     "attempts": {
       "openalex": {
-        "checkedAt": "2026-11-16T09:42:17.212Z",
-        "status": "ok"
+        "checkedAt": "2026-11-23T10:45:17.043Z",
+        "status": "failed",
+        "reason": "http-429"
       }
     }
   },
@@ -396,11 +414,11 @@
       "count": 1,
       "url": "https://openalex.org/W7204879293",
       "matchedTitle": "ACTD: Anchor-Based Cross-Tokenizer Distillation with Residual Regularization",
-      "fetchedAt": "2026-11-16T09:42:17.212Z"
+      "fetchedAt": "2026-11-23T10:45:17.043Z"
     },
     "attempts": {
       "openalex": {
-        "checkedAt": "2026-11-16T09:42:17.212Z",
+        "checkedAt": "2026-11-23T10:45:17.043Z",
         "status": "ok"
       }
     }
@@ -414,8 +432,9 @@
     },
     "attempts": {
       "openalex": {
-        "checkedAt": "2026-11-16T09:42:17.212Z",
-        "status": "ok"
+        "checkedAt": "2026-11-23T10:45:17.043Z",
+        "status": "failed",
+        "reason": "http-429"
       }
     }
   },
@@ -428,8 +447,9 @@
     },
     "attempts": {
       "openalex": {
-        "checkedAt": "2026-11-16T09:42:17.212Z",
-        "status": "ok"
+        "checkedAt": "2026-11-23T10:45:17.043Z",
+        "status": "failed",
+        "reason": "http-429"
       }
     }
   },
@@ -442,21 +462,22 @@
     },
     "attempts": {
       "openalex": {
-        "checkedAt": "2026-11-16T09:42:17.212Z",
-        "status": "ok"
+        "checkedAt": "2026-11-23T10:45:17.043Z",
+        "status": "failed",
+        "reason": "http-429"
       }
     }
   },
   "paper-opd-2609-30837": {
     "openalex": {
-      "count": 1,
+      "count": 2,
       "url": "https://openalex.org/W7214617925",
       "matchedTitle": "MOPD-Router: Rethinking Teacher Routing in Multi-Teacher On-Policy Distillation",
-      "fetchedAt": "2026-11-16T09:42:17.212Z"
+      "fetchedAt": "2026-11-23T10:45:17.043Z"
     },
     "attempts": {
       "openalex": {
-        "checkedAt": "2026-11-16T09:42:17.212Z",
+        "checkedAt": "2026-11-23T10:45:17.043Z",
         "status": "ok"
       }
     }
@@ -470,8 +491,9 @@
     },
     "attempts": {
       "openalex": {
-        "checkedAt": "2026-11-16T09:42:17.212Z",
-        "status": "ok"
+        "checkedAt": "2026-11-23T10:45:17.043Z",
+        "status": "failed",
+        "reason": "http-429"
       }
     }
   },
@@ -484,8 +506,9 @@
     },
     "attempts": {
       "openalex": {
-        "checkedAt": "2026-11-16T09:42:17.212Z",
-        "status": "ok"
+        "checkedAt": "2026-11-23T10:45:17.043Z",
+        "status": "failed",
+        "reason": "http-429"
       }
     }
   },
@@ -498,16 +521,18 @@
     },
     "attempts": {
       "openalex": {
-        "checkedAt": "2026-11-16T09:42:17.212Z",
-        "status": "ok"
+        "checkedAt": "2026-11-23T10:45:17.043Z",
+        "status": "failed",
+        "reason": "http-429"
       }
     }
   },
   "paper-opd-2609-37326": {
     "attempts": {
       "openalex": {
-        "checkedAt": "2026-11-16T09:42:17.212Z",
-        "status": "ok"
+        "checkedAt": "2026-11-23T10:45:17.043Z",
+        "status": "failed",
+        "reason": "http-429"
       }
     },
     "openalex": {
@@ -520,22 +545,23 @@
   "paper-opd-2609-37377": {
     "attempts": {
       "openalex": {
-        "checkedAt": "2026-11-16T09:42:17.212Z",
+        "checkedAt": "2026-11-23T10:45:17.043Z",
         "status": "ok"
       }
     },
     "openalex": {
-      "count": 0,
+      "count": 1,
       "url": "https://openalex.org/W7214996978",
       "matchedTitle": "Beyond Prompt Count: How Data Shapes Transfer in On-Policy Distillation",
-      "fetchedAt": "2026-11-16T09:42:17.212Z"
+      "fetchedAt": "2026-11-23T10:45:17.043Z"
     }
   },
   "paper-opd-2609-38025": {
     "attempts": {
       "openalex": {
-        "checkedAt": "2026-11-16T09:42:17.212Z",
-        "status": "ok"
+        "checkedAt": "2026-11-23T10:45:17.043Z",
+        "status": "failed",
+        "reason": "http-429"
       }
     },
     "openalex": {
@@ -548,49 +574,49 @@
   "paper-april": {
     "attempts": {
       "openalex": {
-        "checkedAt": "2026-11-16T09:42:17.212Z",
+        "checkedAt": "2026-11-23T10:45:17.043Z",
         "status": "ok"
       }
     },
     "openalex": {
-      "count": 40,
+      "count": 43,
       "url": "https://openalex.org/W7083183599",
       "matchedTitle": "APRIL: Active Partial Rollouts in Reinforcement Learning to Tame Long-tail Generation",
-      "fetchedAt": "2026-11-16T09:42:17.212Z"
+      "fetchedAt": "2026-11-23T10:45:17.043Z"
     }
   },
   "paper-areal": {
     "attempts": {
       "openalex": {
-        "checkedAt": "2026-11-16T09:42:17.212Z",
+        "checkedAt": "2026-11-23T10:45:17.043Z",
         "status": "ok"
       }
     },
     "openalex": {
-      "count": 222,
+      "count": 314,
       "url": "https://openalex.org/W4414856864",
       "matchedTitle": "AREAL: A Large-Scale Asynchronous Reinforcement Learning System for Language Reasoning",
-      "fetchedAt": "2026-11-16T09:42:17.212Z"
+      "fetchedAt": "2026-11-23T10:45:17.043Z"
     }
   },
   "paper-asyncopd": {
     "attempts": {
       "openalex": {
-        "checkedAt": "2026-11-16T09:42:17.212Z",
+        "checkedAt": "2026-11-23T10:45:17.043Z",
         "status": "ok"
       }
     },
     "openalex": {
-      "count": 9,
+      "count": 16,
       "url": "https://openalex.org/W7165800724",
       "matchedTitle": "AsyncOPD: How Stale Can On-Policy Distillation Be?",
-      "fetchedAt": "2026-11-16T09:42:17.212Z"
+      "fetchedAt": "2026-11-23T10:45:17.043Z"
     }
   },
   "paper-flexmarl": {
     "attempts": {
       "openalex": {
-        "checkedAt": "2026-11-16T09:42:17.212Z",
+        "checkedAt": "2026-11-23T10:45:17.043Z",
         "status": "failed",
         "reason": "title-mismatch"
       }
@@ -605,77 +631,77 @@
   "paper-heddle": {
     "attempts": {
       "openalex": {
-        "checkedAt": "2026-11-16T09:42:17.212Z",
+        "checkedAt": "2026-11-23T10:45:17.043Z",
         "status": "ok"
       }
     },
     "openalex": {
-      "count": 9,
+      "count": 11,
       "url": "https://openalex.org/W7147284941",
       "matchedTitle": "Heddle: A Distributed Orchestration System for Agentic RL Rollout",
-      "fetchedAt": "2026-11-16T09:42:17.212Z"
+      "fetchedAt": "2026-11-23T10:45:17.043Z"
     }
   },
   "paper-pipelinerl": {
     "attempts": {
       "openalex": {
-        "checkedAt": "2026-11-16T09:42:17.212Z",
+        "checkedAt": "2026-11-23T10:45:17.043Z",
         "status": "ok"
       }
     },
     "openalex": {
-      "count": 33,
+      "count": 38,
       "url": "https://openalex.org/W4415330754",
       "matchedTitle": "PipelineRL: Faster On-policy Reinforcement Learning for Long Sequence Generation",
-      "fetchedAt": "2026-11-16T09:42:17.212Z"
+      "fetchedAt": "2026-11-23T10:45:17.043Z"
     }
   },
   "paper-rolloutpipe": {
     "attempts": {
       "openalex": {
-        "checkedAt": "2026-11-16T09:42:17.212Z",
+        "checkedAt": "2026-11-23T10:45:17.043Z",
         "status": "ok"
       }
     },
     "openalex": {
-      "count": 5,
+      "count": 6,
       "url": "https://openalex.org/W7166110731",
       "matchedTitle": "RolloutPipe: Overlapping Pipelined Rollout and Training in Disaggregated On-Policy LLM Reinforcement Learning",
-      "fetchedAt": "2026-11-16T09:42:17.212Z"
+      "fetchedAt": "2026-11-23T10:45:17.043Z"
     }
   },
   "paper-sao": {
     "attempts": {
       "openalex": {
-        "checkedAt": "2026-11-16T09:42:17.212Z",
+        "checkedAt": "2026-11-23T10:45:17.043Z",
         "status": "ok"
       }
     },
     "openalex": {
-      "count": 51,
+      "count": 55,
       "url": "https://openalex.org/W7167815111",
       "matchedTitle": "Single-Rollout Asynchronous Optimization for Agentic Reinforcement Learning",
-      "fetchedAt": "2026-11-16T09:42:17.212Z"
+      "fetchedAt": "2026-11-23T10:45:17.043Z"
     }
   },
   "paper-stride": {
     "attempts": {
       "openalex": {
-        "checkedAt": "2026-11-16T09:42:17.212Z",
+        "checkedAt": "2026-11-23T10:45:17.043Z",
         "status": "ok"
       }
     },
     "openalex": {
-      "count": 2,
+      "count": 3,
       "url": "https://openalex.org/W7213329161",
       "matchedTitle": "Know When to Stop, Where to Restart: Accelerating Multi-Turn Agentic On-Policy Distillation",
-      "fetchedAt": "2026-11-16T09:42:17.212Z"
+      "fetchedAt": "2026-11-23T10:45:17.043Z"
     }
   },
   "paper-tiderl": {
     "attempts": {
       "openalex": {
-        "checkedAt": "2026-11-16T09:42:17.212Z",
+        "checkedAt": "2026-11-23T10:45:17.043Z",
         "status": "ok"
       }
     },
@@ -683,33 +709,33 @@
       "count": 5,
       "url": "https://openalex.org/W7202267739",
       "matchedTitle": "TideRL: Boosting Agentic RL Goodput with Readiness-Aware Scheduling",
-      "fetchedAt": "2026-11-16T09:42:17.212Z"
+      "fetchedAt": "2026-11-23T10:45:17.043Z"
     }
   },
   "paper-dsec": {
     "openalex": {
-      "count": 6,
+      "count": 8,
       "url": "https://openalex.org/W7214044146",
       "matchedTitle": "DeepSeek Elastic Compute (DSec): A Sandbox Infrastructure for Effective Agentic Training at Scale",
-      "fetchedAt": "2026-11-16T09:42:17.212Z"
+      "fetchedAt": "2026-11-23T10:45:17.043Z"
     },
     "attempts": {
       "openalex": {
-        "checkedAt": "2026-11-16T09:42:17.212Z",
+        "checkedAt": "2026-11-23T10:45:17.043Z",
         "status": "ok"
       }
     }
   },
   "paper-dapo": {
     "openalex": {
-      "count": 2866,
+      "count": 3615,
       "url": "https://openalex.org/W7196953391",
       "matchedTitle": "DAPO: An Open-Source LLM Reinforcement Learning System at Scale",
-      "fetchedAt": "2026-11-16T09:42:17.212Z"
+      "fetchedAt": "2026-11-23T10:45:17.043Z"
     },
     "attempts": {
       "openalex": {
-        "checkedAt": "2026-11-16T09:42:17.212Z",
+        "checkedAt": "2026-11-23T10:45:17.043Z",
         "status": "ok"
       }
     }
@@ -723,21 +749,22 @@
     },
     "attempts": {
       "openalex": {
-        "checkedAt": "2026-11-16T09:42:17.212Z",
-        "status": "ok"
+        "checkedAt": "2026-11-23T10:45:17.043Z",
+        "status": "failed",
+        "reason": "http-429"
       }
     }
   },
   "paper-gdpo": {
     "openalex": {
-      "count": 209,
+      "count": 249,
       "url": "https://openalex.org/W7120177137",
       "matchedTitle": "GDPO: Group reward-Decoupled Normalization Policy Optimization for Multi-reward RL Optimization",
-      "fetchedAt": "2026-11-16T09:42:17.212Z"
+      "fetchedAt": "2026-11-23T10:45:17.043Z"
     },
     "attempts": {
       "openalex": {
-        "checkedAt": "2026-11-16T09:42:17.212Z",
+        "checkedAt": "2026-11-23T10:45:17.043Z",
         "status": "ok"
       }
     }
@@ -745,8 +772,9 @@
   "paper-grpo": {
     "attempts": {
       "openalex": {
-        "checkedAt": "2026-11-16T09:42:17.212Z",
-        "status": "ok"
+        "checkedAt": "2026-11-23T10:45:17.043Z",
+        "status": "failed",
+        "reason": "http-429"
       }
     },
     "openalex": {
@@ -759,8 +787,9 @@
   "paper-ppo": {
     "attempts": {
       "openalex": {
-        "checkedAt": "2026-11-16T09:42:17.212Z",
-        "status": "ok"
+        "checkedAt": "2026-11-23T10:45:17.043Z",
+        "status": "failed",
+        "reason": "http-429"
       }
     },
     "openalex": {
@@ -772,84 +801,84 @@
   },
   "paper-mtp-meta": {
     "openalex": {
-      "count": 285,
+      "count": 376,
       "url": "https://openalex.org/W4396821494",
       "matchedTitle": "Better & Faster Large Language Models via Multi-token Prediction",
-      "fetchedAt": "2026-11-16T09:42:17.212Z"
+      "fetchedAt": "2026-11-23T10:45:17.043Z"
     },
     "attempts": {
       "openalex": {
-        "checkedAt": "2026-11-16T09:42:17.212Z",
+        "checkedAt": "2026-11-23T10:45:17.043Z",
         "status": "ok"
       }
     }
   },
   "paper-actfirst-opd": {
     "openalex": {
-      "count": 0,
+      "count": 1,
       "url": "https://openalex.org/W7214961601",
       "matchedTitle": "Act First, Reason Later: Accelerating On-Policy Distillation for Multi-Turn Agents via Reference-Conditioned Inverse Dynamics",
-      "fetchedAt": "2026-11-16T09:42:17.212Z"
+      "fetchedAt": "2026-11-23T10:45:17.043Z"
     },
     "attempts": {
       "openalex": {
-        "checkedAt": "2026-11-16T09:42:17.212Z",
+        "checkedAt": "2026-11-23T10:45:17.043Z",
         "status": "ok"
       }
     }
   },
   "paper-agent-lightning": {
     "openalex": {
-      "count": 136,
+      "count": 161,
       "url": "https://openalex.org/W7077067785",
       "matchedTitle": "Agent Lightning: Train ANY AI Agents with Reinforcement Learning",
-      "fetchedAt": "2026-11-16T09:42:17.212Z"
+      "fetchedAt": "2026-11-23T10:45:17.043Z"
     },
     "attempts": {
       "openalex": {
-        "checkedAt": "2026-11-16T09:42:17.212Z",
+        "checkedAt": "2026-11-23T10:45:17.043Z",
         "status": "ok"
       }
     }
   },
   "paper-gigpo": {
     "openalex": {
-      "count": 373,
+      "count": 639,
       "url": "https://openalex.org/W4417093501",
       "matchedTitle": "Group-in-Group Policy Optimization for LLM Agent Training",
-      "fetchedAt": "2026-11-16T09:42:17.212Z"
+      "fetchedAt": "2026-11-23T10:45:17.043Z"
     },
     "attempts": {
       "openalex": {
-        "checkedAt": "2026-11-16T09:42:17.212Z",
+        "checkedAt": "2026-11-23T10:45:17.043Z",
         "status": "ok"
       }
     }
   },
   "paper-guided-opd": {
     "openalex": {
-      "count": 37,
+      "count": 40,
       "url": "https://openalex.org/W7164915140",
       "matchedTitle": "On-Policy Distillation with Curriculum Turn-level Guidance for Multi-turn Agents",
-      "fetchedAt": "2026-11-16T09:42:17.212Z"
+      "fetchedAt": "2026-11-23T10:45:17.043Z"
     },
     "attempts": {
       "openalex": {
-        "checkedAt": "2026-11-16T09:42:17.212Z",
+        "checkedAt": "2026-11-23T10:45:17.043Z",
         "status": "ok"
       }
     }
   },
   "paper-search-r1": {
     "openalex": {
-      "count": 1477,
+      "count": 1805,
       "url": "https://openalex.org/W4417422257",
       "matchedTitle": "Search-R1: Training LLMs to Reason and Leverage Search Engines with Reinforcement Learning",
-      "fetchedAt": "2026-11-16T09:42:17.212Z"
+      "fetchedAt": "2026-11-23T10:45:17.043Z"
     },
     "attempts": {
       "openalex": {
-        "checkedAt": "2026-11-16T09:42:17.212Z",
+        "checkedAt": "2026-11-23T10:45:17.043Z",
         "status": "ok"
       }
     }
@@ -859,11 +888,11 @@
       "count": 2,
       "url": "https://openalex.org/W7214711013",
       "matchedTitle": "UOPD: Uncertainty-Aware Intervention for On-Policy Distillation of Multi-Turn Agents",
-      "fetchedAt": "2026-11-16T09:42:17.212Z"
+      "fetchedAt": "2026-11-23T10:45:17.043Z"
     },
     "attempts": {
       "openalex": {
-        "checkedAt": "2026-11-16T09:42:17.212Z",
+        "checkedAt": "2026-11-23T10:45:17.043Z",
         "status": "ok"
       }
     }
@@ -877,8 +906,9 @@
     },
     "attempts": {
       "openalex": {
-        "checkedAt": "2026-11-16T09:42:17.212Z",
-        "status": "ok"
+        "checkedAt": "2026-11-23T10:45:17.043Z",
+        "status": "failed",
+        "reason": "http-429"
       }
     }
   }

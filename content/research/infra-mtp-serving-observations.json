@@ -1,77 +1,77 @@
 {
   "version": 1,
   "topicId": "infra-mtp-serving",
-  "checkedAt": "2026-11-16T09:42:08.419Z",
+  "checkedAt": "2026-11-23T10:45:07.879Z",
   "observations": {
     "infra-mtp-serving-source-04": {
-      "checkedAt": "2026-11-16T09:42:08.419Z",
-      "lastSuccessAt": "2026-11-16T09:42:08.419Z",
+      "checkedAt": "2026-11-23T10:45:07.879Z",
+      "lastSuccessAt": "2026-11-23T10:45:07.879Z",
       "status": "ok",
-      "revision": "41384200061f5aea317d402e878750cbf144e7b7",
-      "sha256": "67b0ec8b8f43818428253601c4c0b90a3e9e4002b96d81961541737e222c85f6",
+      "revision": "38ae340221b4b65859c68e85d9e8ffb6b9c6f167",
+      "sha256": "6b68830e7db3a667ac3866cdf4ee4341f635a00f5b644bcfcf68be758900665f",
       "pendingReview": true
     },
     "infra-mtp-serving-source-02": {
-      "checkedAt": "2026-11-16T09:42:08.419Z",
-      "lastSuccessAt": "2026-11-16T09:42:08.419Z",
+      "checkedAt": "2026-11-23T10:45:07.879Z",
+      "lastSuccessAt": "2026-11-23T10:45:07.879Z",
       "status": "ok",
-      "revision": "cf0a516f95cf2ad6f63c11980123d288790b7f4f",
-      "sha256": "ee200f1966fb78d95ad34e834b626363a652265acfbe6d6878d2f1f37d61da69",
+      "revision": "179ebd9896cff5fddc27f622649ff4c99ed5c733",
+      "sha256": "7deba77bb78b98bdc4e4356dce14dc29abde6d311bc48738b491f064c7eb3540",
       "pendingReview": true
     },
     "infra-mtp-serving-source-03": {
-      "checkedAt": "2026-11-16T09:42:08.419Z",
-      "lastSuccessAt": "2026-11-16T09:42:08.419Z",
+      "checkedAt": "2026-11-23T10:45:07.879Z",
+      "lastSuccessAt": "2026-11-23T10:45:07.879Z",
       "status": "ok",
-      "revision": "cf0a516f95cf2ad6f63c11980123d288790b7f4f",
-      "sha256": "ee200f1966fb78d95ad34e834b626363a652265acfbe6d6878d2f1f37d61da69",
+      "revision": "179ebd9896cff5fddc27f622649ff4c99ed5c733",
+      "sha256": "7deba77bb78b98bdc4e4356dce14dc29abde6d311bc48738b491f064c7eb3540",
       "pendingReview": true
     },
     "infra-mtp-serving-source-01": {
-      "checkedAt": "2026-11-16T09:42:08.419Z",
-      "lastSuccessAt": "2026-11-16T09:42:08.419Z",
+      "checkedAt": "2026-11-23T10:45:07.879Z",
+      "lastSuccessAt": "2026-11-23T10:45:07.879Z",
       "status": "ok",
       "revision": "9b4e9788e4a3a731f7567338ed15d3ec549ce03b",
       "sha256": "0d2be8b8c9cb98f3f503f9aa029d1f2907282e68c7cf9429f9f6759ec52c8b23",
       "pendingReview": false
     },
     "infra-mtp-serving-source-07": {
-      "checkedAt": "2026-11-16T09:42:08.419Z",
-      "lastSuccessAt": "2026-11-16T09:42:08.419Z",
+      "checkedAt": "2026-11-23T10:45:07.879Z",
+      "lastSuccessAt": "2026-11-23T10:45:07.879Z",
       "status": "ok",
-      "revision": "41384200061f5aea317d402e878750cbf144e7b7",
-      "sha256": "c267c78d242aa3e04fde028162966e627725dc6da461dc4e60732c5efc7d22a2",
+      "revision": "38ae340221b4b65859c68e85d9e8ffb6b9c6f167",
+      "sha256": "a680ab5541c8223277575efa65284829153dfc892cfa7d370a273268816e1861",
       "pendingReview": true
     },
     "infra-mtp-serving-source-08": {
-      "checkedAt": "2026-11-16T09:42:08.419Z",
-      "lastSuccessAt": "2026-11-16T09:42:08.419Z",
+      "checkedAt": "2026-11-23T10:45:07.879Z",
+      "lastSuccessAt": "2026-11-23T10:45:07.879Z",
       "status": "ok",
-      "revision": "41384200061f5aea317d402e878750cbf144e7b7",
+      "revision": "38ae340221b4b65859c68e85d9e8ffb6b9c6f167",
       "sha256": "4f7d898a238117acd6c368fa906c0c08bf0bcf2fbc59177d0db8cdeb81f31cf0",
       "pendingReview": true
     },
     "infra-mtp-serving-source-05": {
-      "checkedAt": "2026-11-16T09:42:08.419Z",
-      "lastSuccessAt": "2026-11-16T09:42:08.419Z",
+      "checkedAt": "2026-11-23T10:45:07.879Z",
+      "lastSuccessAt": "2026-11-23T10:45:07.879Z",
       "status": "ok",
-      "revision": "cf0a516f95cf2ad6f63c11980123d288790b7f4f",
+      "revision": "179ebd9896cff5fddc27f622649ff4c99ed5c733",
       "sha256": "d45eaafb928d310a6fac8b70a2fcc2e879b94a084ad985def9eb71e423517100",
       "pendingReview": true
     },
     "infra-mtp-serving-source-06": {
-      "checkedAt": "2026-11-16T09:42:08.419Z",
-      "lastSuccessAt": "2026-11-16T09:42:08.419Z",
+      "checkedAt": "2026-11-23T10:45:07.879Z",
+      "lastSuccessAt": "2026-11-23T10:45:07.879Z",
       "status": "ok",
-      "revision": "41384200061f5aea317d402e878750cbf144e7b7",
+      "revision": "38ae340221b4b65859c68e85d9e8ffb6b9c6f167",
       "sha256": "063dc57f9216deb4fffb73c9e5cdff224fe72b354d5ab1238a87d41b2d5acda1",
       "pendingReview": true
     },
     "infra-mtp-serving-source-09": {
-      "checkedAt": "2026-11-16T09:42:08.419Z",
-      "lastSuccessAt": "2026-11-16T09:42:08.419Z",
+      "checkedAt": "2026-11-23T10:45:07.879Z",
+      "lastSuccessAt": "2026-11-23T10:45:07.879Z",
       "status": "ok",
-      "revision": "cf0a516f95cf2ad6f63c11980123d288790b7f4f",
+      "revision": "179ebd9896cff5fddc27f622649ff4c99ed5c733",
       "sha256": "6fa2cdba2d998d4f5d0766931cacb4100b54da7cf125a8fa19f40a12942f5cf8",
       "pendingReview": true
     }

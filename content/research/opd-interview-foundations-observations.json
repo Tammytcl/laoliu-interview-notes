@@ -1,20 +1,20 @@
 {
   "version": 1,
   "topicId": "opd-interview-foundations",
-  "checkedAt": "2026-11-16T09:42:14.618Z",
+  "checkedAt": "2026-11-23T10:45:13.917Z",
   "observations": {
     "opd-foundations-verl-20261025": {
-      "checkedAt": "2026-11-16T09:42:14.618Z",
-      "lastSuccessAt": "2026-11-16T09:42:14.618Z",
+      "checkedAt": "2026-11-23T10:45:13.917Z",
+      "lastSuccessAt": "2026-11-23T10:45:13.917Z",
       "status": "ok",
-      "revision": "622cd6c12b2796a3b541fe50babebf8aa3076799",
+      "revision": "7b6c9cc0e19de780ca52c0c35d5157348955a3dc",
       "pendingReview": true
     },
     "opd-foundations-tinker-20261025": {
-      "checkedAt": "2026-11-16T09:42:14.618Z",
-      "lastSuccessAt": "2026-11-16T09:42:14.618Z",
+      "checkedAt": "2026-11-23T10:45:13.917Z",
+      "lastSuccessAt": "2026-11-23T10:45:13.917Z",
       "status": "ok",
-      "revision": "1991897cba59ea9d9b0030d183d1867b28eba9d9",
+      "revision": "8bf7dd6192a3f1fa64640a04ec54a7f6866bbd83",
       "pendingReview": true
     }
   }

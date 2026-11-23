@@ -1,11 +1,11 @@
 {
   "version": 1,
   "topicId": "opd-project-defense",
-  "checkedAt": "2026-11-16T09:42:15.212Z",
+  "checkedAt": "2026-11-23T10:45:14.433Z",
   "observations": {
     "opd-project-defense-01": {
-      "checkedAt": "2026-11-16T09:42:15.212Z",
-      "lastSuccessAt": "2026-11-16T09:42:15.212Z",
+      "checkedAt": "2026-11-23T10:45:14.433Z",
+      "lastSuccessAt": "2026-11-23T10:45:14.433Z",
       "status": "ok",
       "revision": "befd0c0a582ec6efc055660467db95d522519591",
       "pendingReview": false

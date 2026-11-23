@@ -1,94 +1,94 @@
 {
   "version": 1,
   "topicId": "agent-sandbox-components",
-  "checkedAt": "2026-11-16T09:42:09.841Z",
+  "checkedAt": "2026-11-23T10:45:09.114Z",
   "observations": {
     "agent-sandbox-components-01": {
-      "checkedAt": "2026-11-16T09:42:09.841Z",
-      "lastSuccessAt": "2026-11-16T09:42:09.841Z",
+      "checkedAt": "2026-11-23T10:45:09.114Z",
+      "lastSuccessAt": "2026-11-23T10:45:09.114Z",
       "status": "ok",
       "sha256": "b242128adddf79e902959889b27462e22d3b2d66911f2e0694a91b798d19b4b0",
       "pendingReview": true
     },
     "agent-sandbox-components-02": {
-      "checkedAt": "2026-11-16T09:42:09.841Z",
-      "lastSuccessAt": "2026-11-16T09:42:09.841Z",
+      "checkedAt": "2026-11-23T10:45:09.114Z",
+      "lastSuccessAt": "2026-11-23T10:45:09.114Z",
       "status": "ok",
       "sha256": "21670e1a104af9e06adfebba7f1e4714f5f77a65e146924b14d74ec971831dd9",
       "pendingReview": true
     },
     "agent-sandbox-components-04": {
-      "checkedAt": "2026-11-16T09:42:09.841Z",
-      "lastSuccessAt": "2026-11-16T09:42:09.841Z",
+      "checkedAt": "2026-11-23T10:45:09.114Z",
+      "lastSuccessAt": "2026-11-23T10:45:09.114Z",
       "status": "ok",
-      "revision": "ec6aeab7fe0eb51df52b4e72c524daf5ea9cc5f4",
+      "revision": "b62d54bd36dc3e031d7daa85dd538d5653cba834",
       "sha256": "887faa0f16839b170bc79a098dfe70078a29f45675aa895a6786b76cac310406",
       "pendingReview": true
     },
     "agent-sandbox-components-03": {
-      "checkedAt": "2026-11-16T09:42:09.841Z",
-      "lastSuccessAt": "2026-11-16T09:42:09.841Z",
+      "checkedAt": "2026-11-23T10:45:09.114Z",
+      "lastSuccessAt": "2026-11-23T10:45:09.114Z",
       "status": "ok",
-      "revision": "ec6aeab7fe0eb51df52b4e72c524daf5ea9cc5f4",
+      "revision": "b62d54bd36dc3e031d7daa85dd538d5653cba834",
       "sha256": "b4befac4c9beeb8fcbf6d6e107a25d39551caa7a6e1369d5f67436da2559fcc2",
       "pendingReview": true
     },
     "agent-sandbox-components-05": {
-      "checkedAt": "2026-11-16T09:42:09.841Z",
-      "lastSuccessAt": "2026-11-16T09:42:09.841Z",
+      "checkedAt": "2026-11-23T10:45:09.114Z",
+      "lastSuccessAt": "2026-11-23T10:45:09.114Z",
       "status": "ok",
       "sha256": "67e03ffedbea92029807825bbee3531a395fd16fc1ba7661d273e02d68ccb0dc",
       "pendingReview": true
     },
     "agent-sandbox-components-06": {
-      "checkedAt": "2026-11-16T09:42:09.841Z",
-      "lastSuccessAt": "2026-11-16T09:42:09.841Z",
+      "checkedAt": "2026-11-23T10:45:09.114Z",
+      "lastSuccessAt": "2026-11-23T10:45:09.114Z",
       "status": "ok",
       "sha256": "9b6f890fd1730bba25359d2e08a07253c80e25d6f47da89885bb683f1cc8c5f7",
       "pendingReview": true
     },
     "agent-sandbox-components-09": {
-      "checkedAt": "2026-11-16T09:42:09.841Z",
-      "lastSuccessAt": "2026-11-16T09:42:09.841Z",
+      "checkedAt": "2026-11-23T10:45:09.114Z",
+      "lastSuccessAt": "2026-11-23T10:45:09.114Z",
       "status": "ok",
       "sha256": "c73544c6915ae500ce1199e7e88ae2bc1ac81d6ffb8ab43339e3308c3712a867",
       "pendingReview": true
     },
     "agent-sandbox-components-08": {
-      "checkedAt": "2026-11-16T09:42:09.841Z",
-      "lastSuccessAt": "2026-11-16T09:42:09.841Z",
+      "checkedAt": "2026-11-23T10:45:09.114Z",
+      "lastSuccessAt": "2026-11-23T10:45:09.114Z",
       "status": "ok",
-      "revision": "6dc8d5a10aa5db8dc8cf9c4d95fc769d886197fd",
-      "sha256": "50de3e8052abee69cbd52ead818035b0eb23da71611569bafcb009395358f9d8",
+      "revision": "08c4eeba6d08413779ec3fa5e7ac0edf3f608b33",
+      "sha256": "f14554f56fab1b11d74bf8530256765d34592c8105b31e730d5deb4185c41d7a",
       "pendingReview": true
     },
     "agent-sandbox-components-10": {
-      "checkedAt": "2026-11-16T09:42:09.841Z",
-      "lastSuccessAt": "2026-11-16T09:42:09.841Z",
+      "checkedAt": "2026-11-23T10:45:09.114Z",
+      "lastSuccessAt": "2026-11-23T10:45:09.114Z",
       "status": "ok",
       "sha256": "74d4eab7a456ad60796013a3045b1357a2eb5b28d8d08ccedc1a6889a8f86ec5",
       "pendingReview": true
     },
     "agent-sandbox-components-15": {
-      "checkedAt": "2026-11-16T09:42:09.841Z",
-      "lastSuccessAt": "2026-11-16T09:42:09.841Z",
+      "checkedAt": "2026-11-23T10:45:09.114Z",
+      "lastSuccessAt": "2026-11-23T10:45:09.114Z",
       "status": "ok",
-      "revision": "ec6aeab7fe0eb51df52b4e72c524daf5ea9cc5f4",
-      "sha256": "d221a7a367ab82c7597a9335de3cae479534cd220ea133ec5b471efb10e5465a",
+      "revision": "b62d54bd36dc3e031d7daa85dd538d5653cba834",
+      "sha256": "fba873789c3b28cf64eb949eb3436e0598a2edcd4d356954dc7ace2c144853da",
       "pendingReview": true
     },
     "agent-sandbox-components-11": {
-      "checkedAt": "2026-11-16T09:42:09.841Z",
-      "lastSuccessAt": "2026-11-16T09:42:09.841Z",
+      "checkedAt": "2026-11-23T10:45:09.114Z",
+      "lastSuccessAt": "2026-11-23T10:45:09.114Z",
       "status": "ok",
       "sha256": "ed1e9e0c9dfb24f5254de9f606d07c31fb6620bf3eabd0d7c13d348a167f49e7",
       "pendingReview": true
     },
     "agent-sandbox-components-14": {
-      "checkedAt": "2026-11-16T09:42:09.841Z",
-      "lastSuccessAt": "2026-11-16T09:42:09.841Z",
+      "checkedAt": "2026-11-23T10:45:09.114Z",
+      "lastSuccessAt": "2026-11-23T10:45:09.114Z",
       "status": "ok",
-      "revision": "4ca105e813240d663cfa9a0c9ccb50b70624246a",
+      "revision": "2e4e6df9329945f0ac10d04bb4cde00bcb3f5f03",
       "sha256": "39535d8f0c100407c2a7bbd3c9e47a058e5ac1aaf1751d6a6dab59c5a51ac48e",
       "pendingReview": true
     }

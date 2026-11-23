@@ -1,6 +1,6 @@
 # infra-rl-pipeline 来源观察记录
 
-自动检测时间：2026-11-16T09:42:05.076Z
+自动检测时间：2026-11-23T10:45:04.524Z
 
 这是来源变化的候选账本。正文核对日期、固定版本和结论不会由检测脚本覆盖。仓库 commit 更新可能与本文无关；需要阅读差异后再判断。
 
@@ -9,7 +9,7 @@
 ## 待核对变化
 
 - [slime固定README](https://github.com/THUDM/slime/compare/8c17b676cb57af1d17ee4402e91e9209af84b60b...79aa41a884ab0bf65222c94418f6357d3c31192b)：与正文核对基线有差异；核查受影响段落、支持组合、源码入口和示例。
-- [verl代码](https://github.com/verl-project/verl/compare/8718ca30a3f002f93b7c4fd99b9b2506718681bc...622cd6c12b2796a3b541fe50babebf8aa3076799)：与正文核对基线有差异；核查受影响段落、支持组合、源码入口和示例。
+- [verl代码](https://github.com/verl-project/verl/compare/8718ca30a3f002f93b7c4fd99b9b2506718681bc...7b6c9cc0e19de780ca52c0c35d5157348955a3dc)：与正文核对基线有差异；核查受影响段落、支持组合、源码入口和示例。
 - [slime代码](https://github.com/THUDM/slime/compare/8c17b676cb57af1d17ee4402e91e9209af84b60b...79aa41a884ab0bf65222c94418f6357d3c31192b)：与正文核对基线有差异；核查受影响段落、支持组合、源码入口和示例。
 
 ## 抓取失败

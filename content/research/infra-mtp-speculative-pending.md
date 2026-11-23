@@ -1,6 +1,6 @@
 # infra-mtp-speculative 来源观察记录
 
-自动检测时间：2026-11-16T09:42:07.799Z
+自动检测时间：2026-11-23T10:45:07.092Z
 
 这是来源变化的候选账本。正文核对日期、固定版本和结论不会由检测脚本覆盖。仓库 commit 更新可能与本文无关；需要阅读差异后再判断。
 
@@ -11,7 +11,7 @@
 - [greedy kernel](https://github.com/vllm-project/vllm/compare/18c19eaf239f09bc2543637c73f3b2d05f9bf5c5...5689c2790c911a55c75825aac5166305df0b591d)：与正文核对基线有差异；核查受影响段落、支持组合、源码入口和示例。
 - [vLLM residual kernel](https://github.com/vllm-project/vllm/compare/18c19eaf239f09bc2543637c73f3b2d05f9bf5c5...5689c2790c911a55c75825aac5166305df0b591d)：与正文核对基线有差异；核查受影响段落、支持组合、源码入口和示例。
 - [vLLM accepted logprob路径](https://github.com/vllm-project/vllm/compare/18c19eaf239f09bc2543637c73f3b2d05f9bf5c5...5689c2790c911a55c75825aac5166305df0b591d)：与正文核对基线有差异；核查受影响段落、支持组合、源码入口和示例。
-- [vLLM保真说明](https://github.com/vllm-project/vllm/compare/18c19eaf239f09bc2543637c73f3b2d05f9bf5c5...cf0a516f95cf2ad6f63c11980123d288790b7f4f)：与正文核对基线有差异；核查受影响段落、支持组合、源码入口和示例。
+- [vLLM保真说明](https://github.com/vllm-project/vllm/compare/18c19eaf239f09bc2543637c73f3b2d05f9bf5c5...179ebd9896cff5fddc27f622649ff4c99ed5c733)：与正文核对基线有差异；核查受影响段落、支持组合、源码入口和示例。
 
 ## 抓取失败
 

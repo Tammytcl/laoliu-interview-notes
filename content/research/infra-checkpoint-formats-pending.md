@@ -1,6 +1,6 @@
 # infra-checkpoint-formats 来源观察记录
 
-自动检测时间：2026-11-16T09:42:05.621Z
+自动检测时间：2026-11-23T10:45:04.960Z
 
 这是来源变化的候选账本。正文核对日期、固定版本和结论不会由检测脚本覆盖。仓库 commit 更新可能与本文无关；需要阅读差异后再判断。
 
@@ -8,7 +8,7 @@
 
 ## 待核对变化
 
-- [固定格式说明](https://github.com/safetensors/safetensors/compare/e246a2560645b7525f5775669ed816eb57c5bcc8...9e6f4d6c7af8c63ac791ab1bfdd58d2de02fbaa4)：与正文核对基线有差异；核查受影响段落、支持组合、源码入口和示例。
+- [固定格式说明](https://github.com/safetensors/safetensors/compare/e246a2560645b7525f5775669ed816eb57c5bcc8...11319d360db5170565db914601fbf375762bf8eb)：与正文核对基线有差异；核查受影响段落、支持组合、源码入口和示例。
 
 ## 抓取失败
 

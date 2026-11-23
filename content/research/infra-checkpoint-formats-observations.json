@@ -1,20 +1,20 @@
 {
   "version": 1,
   "topicId": "infra-checkpoint-formats",
-  "checkedAt": "2026-11-16T09:42:05.621Z",
+  "checkedAt": "2026-11-23T10:45:04.960Z",
   "observations": {
     "infra-checkpoint-formats-source-12": {
-      "checkedAt": "2026-11-16T09:42:05.621Z",
-      "lastSuccessAt": "2026-11-16T09:42:05.621Z",
+      "checkedAt": "2026-11-23T10:45:04.960Z",
+      "lastSuccessAt": "2026-11-23T10:45:04.960Z",
       "status": "ok",
       "revision": "84df182f50ab34301aabb3c0eb4031815bfb413d",
       "pendingReview": false
     },
     "infra-checkpoint-formats-source-03": {
-      "checkedAt": "2026-11-16T09:42:05.621Z",
-      "lastSuccessAt": "2026-11-16T09:42:05.621Z",
+      "checkedAt": "2026-11-23T10:45:04.960Z",
+      "lastSuccessAt": "2026-11-23T10:45:04.960Z",
       "status": "ok",
-      "revision": "9e6f4d6c7af8c63ac791ab1bfdd58d2de02fbaa4",
+      "revision": "11319d360db5170565db914601fbf375762bf8eb",
       "pendingReview": true
     }
   }

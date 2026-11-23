@@ -1,20 +1,20 @@
 {
   "version": 1,
   "topicId": "rl-returns-gae",
-  "checkedAt": "2026-11-16T09:42:12.685Z",
+  "checkedAt": "2026-11-23T10:45:12.027Z",
   "observations": {
     "rl-returns-gae-02": {
-      "checkedAt": "2026-11-16T09:42:12.685Z",
-      "lastSuccessAt": "2026-11-16T09:42:12.685Z",
+      "checkedAt": "2026-11-23T10:45:12.027Z",
+      "lastSuccessAt": "2026-11-23T10:45:12.027Z",
       "status": "ok",
       "revision": "ea25b9e8b234e6ee1bca43083f8f3cf974143998",
       "pendingReview": true
     },
     "rl-returns-gae-03": {
-      "checkedAt": "2026-11-16T09:42:12.685Z",
-      "lastSuccessAt": "2026-11-16T09:42:12.685Z",
+      "checkedAt": "2026-11-23T10:45:12.027Z",
+      "lastSuccessAt": "2026-11-23T10:45:12.027Z",
       "status": "ok",
-      "revision": "622cd6c12b2796a3b541fe50babebf8aa3076799",
+      "revision": "7b6c9cc0e19de780ca52c0c35d5157348955a3dc",
       "pendingReview": true
     }
   }

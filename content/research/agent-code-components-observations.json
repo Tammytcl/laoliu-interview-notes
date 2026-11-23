@@ -1,22 +1,22 @@
 {
   "version": 1,
   "topicId": "agent-code-components",
-  "checkedAt": "2026-11-16T09:42:11.846Z",
+  "checkedAt": "2026-11-23T10:45:11.259Z",
   "observations": {
     "agent-code-components-03": {
-      "checkedAt": "2026-11-16T09:42:11.846Z",
-      "lastSuccessAt": "2026-11-16T09:42:11.846Z",
+      "checkedAt": "2026-11-23T10:45:11.259Z",
+      "lastSuccessAt": "2026-11-23T10:45:11.259Z",
       "status": "ok",
       "revision": "04d809ceab9df28f9adaed044884180159172930",
       "sha256": "9982d90b7566f2f3fa5e9811b475d5e8e2a84e2df80cf3f1e4be6e820b129835",
       "pendingReview": false
     },
     "agent-code-components-02": {
-      "checkedAt": "2026-11-16T09:42:11.846Z",
-      "lastSuccessAt": "2026-11-16T09:42:11.846Z",
+      "checkedAt": "2026-11-23T10:45:11.259Z",
+      "lastSuccessAt": "2026-11-23T10:45:11.259Z",
       "status": "ok",
-      "revision": "6dc8d5a10aa5db8dc8cf9c4d95fc769d886197fd",
-      "sha256": "50de3e8052abee69cbd52ead818035b0eb23da71611569bafcb009395358f9d8",
+      "revision": "08c4eeba6d08413779ec3fa5e7ac0edf3f608b33",
+      "sha256": "f14554f56fab1b11d74bf8530256765d34592c8105b31e730d5deb4185c41d7a",
       "pendingReview": true
     }
   }

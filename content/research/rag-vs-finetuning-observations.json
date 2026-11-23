@@ -1,11 +1,11 @@
 {
   "version": 1,
   "topicId": "rag-vs-finetuning",
-  "checkedAt": "2026-11-16T09:42:16.217Z",
+  "checkedAt": "2026-11-23T10:45:15.438Z",
   "observations": {
     "rag-vs-finetuning-01": {
-      "checkedAt": "2026-11-16T09:42:16.217Z",
-      "lastSuccessAt": "2026-11-16T09:42:16.217Z",
+      "checkedAt": "2026-11-23T10:45:15.438Z",
+      "lastSuccessAt": "2026-11-23T10:45:15.438Z",
       "status": "ok",
       "sha256": "7026686674a3227a2f730dbb5766b33754c13d46f3e05f7675e424243cfff3d0",
       "pendingReview": false
